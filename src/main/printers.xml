@@ -1,7 +1,7 @@
 # pseudo-XML description of printers known to the Print plugin
 # This file was originally generated.  It should be edited by hand.
 
-# "$Id: printers.xml,v 1.42 2001/11/22 12:39:18 rlk Exp $"
+# "$Id: printers.xml,v 1.9.4.9 2001/11/26 03:26:25 sharkey Exp $"
 
 <printer name="PostScript Level 1" driver="ps">
 <color>

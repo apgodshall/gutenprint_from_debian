@@ -1,5 +1,5 @@
 /*
- * "$Id: ran.509.131.h,v 1.2 2001/02/25 01:58:36 rlk Exp $"
+ * "$Id: ran.509.131.h,v 1.1.4.1 2001/03/05 17:44:23 sharkey Exp $"
  *
  *   Square dither matrix file for the gimp-print plugin.
  *

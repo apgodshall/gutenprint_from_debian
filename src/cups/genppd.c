@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.36 2001/11/11 21:25:36 rlk Exp $"
+ * "$Id: genppd.c,v 1.7.2.8 2001/11/23 18:25:35 sharkey Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -854,5 +854,5 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 }
 
 /*
- * End of "$Id: genppd.c,v 1.36 2001/11/11 21:25:36 rlk Exp $".
+ * End of "$Id: genppd.c,v 1.7.2.8 2001/11/23 18:25:35 sharkey Exp $".
  */

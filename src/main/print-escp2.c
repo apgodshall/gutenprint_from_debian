@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.147 2001/11/17 14:12:56 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.24.2.10 2001/11/26 03:26:24 sharkey Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *

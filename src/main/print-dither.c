@@ -1,5 +1,5 @@
 /*
- * "$Id: print-dither.c,v 1.44 2001/09/14 02:12:34 rlk Exp $"
+ * "$Id: print-dither.c,v 1.10.4.8 2001/10/27 21:50:38 sharkey Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *

@@ -1,5 +1,5 @@
 /*
- * $Id: libprintut.h,v 1.6 2001/08/28 17:37:04 rleigh Exp $
+ * $Id: libprintut.h,v 1.2.4.3 2001/09/14 01:26:34 sharkey Exp $
  * Header for utility library functions.
  * Copyright (C) 1999,2000  Roger Leigh
  *

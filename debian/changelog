@@ -1,71 +1,105 @@
+gimp-print (4.2.0-4) unstable; urgency=low
+
+  * Apply Roger's user's guide Makefile.am patch, Closes: #128421
+  * Work around bug #130756 by building docs with EPS1 figures.
+
+ -- Eric Sharkey <sharkey@debian.org>  Sat, 16 Feb 2002 22:46:29 -0500
+
+gimp-print (4.2.0-3) unstable; urgency=low
+
+  * Fix locales package description, Closes: #123796
+  * Change conflicts to replaces, Closes: #123811
+
+ -- Eric Sharkey <sharkey@debian.org>  Mon, 31 Dec 2001 12:02:42 -0500
+
+gimp-print (4.2.0-2) unstable; urgency=low
+
+  * Fix build dependencies, Closes: #121597
+  * Fix broken gimpprint-doc.doc-base pointing to old index filename
+  * Fix libgimpprint.postinst to use 'if' instead of 'case', removing a
+    lintian warning. (Roger Leigh)
+  * Split out the message catalogues from the libgimpprint package into
+    a new gimpprint-locales package to avoid filename conflicts when
+    multiple libgimpprint versions are installed concurrently. (RL)
+  * Add libgimpprint-doc.doc-base (existed for six months, but was never
+    added to CVS!) (RL)
+
+ -- Eric Sharkey <sharkey@debian.org>  Sun,  9 Dec 2001 09:47:05 -0500
+
 gimp-print (4.2.0-1) unstable; urgency=low
-
-  * New upstream stable release (4.2.0)
-  * Disable PostScript level 3 PPD files, because there are some
-    level 3 constructs that gs 6.51 does not understand.
-
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Sat, 24 Nov 2001 13:45:33 +0000
-
-gimp-print (4.1.99-rc1-2) unstable; urgency=low
-
-  * New upstream release
-  * Update to new Standards-Version 3.5.6.0 (no changes)
-  * Disable building of translated PPD files
-  * Enable PostScript level 3 PPD files, and add a Recommends to
-    cupsys-driver-gimpprint for gs (>= 6.51) as earlier versions
-    have problems with level 3.
-
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Mon, 12 Nov 2001 18:29:21 +0000
-
-gimp-print (4.1.99-b4-6) unstable; urgency=low
 
   * New upstream release
   * cupsys-driver-gimpprint only includes the basic `C' POSIX locale
-    ppd files due to the size of the ppd files
-  * New package gimpprint-doc contains the new user guide
-  * escputil depends on libgimpprint1, as the new i18n code needs
-    the translations it provides
-  * Provide the PS version of the Programmer's Manual instead of PDF
-    format in libgimpprint-doc
-  * Update to new Standards-Version 3.5.2 (no changes)
-  * Update package descriptions for stable release
-  * gimpprint-doc Suggests libgimpprint1
-
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Tue, 30 Oct 2001 09:16:08 +0000
-
-gimp-print (4.1.99-b2-5) unstable; urgency=low
-
-  * New upstream release
-  * Changed library version names to reflect upstream library
-    versioning change to ABI versioning
-  * Enable i18n
+    ppd files due to the size of the ppd files (Roger Leigh)
+  * New package gimpprint-doc contains the new user guide. (RL)
+  * Enable i18n (RL)
   * Add Build-Depends for gettext (>= 0.10.36-1), because
     'make install' fails with earlier versions due to absent
-    DESTDIR support.
+    DESTDIR support. (RL)
   * libgimpprint-doc uses ps instead of dvi manual, due to inclusion
-    of graphics
+    of graphics (RL)
   * gimp1.2-print no longer registers documentation with doc-base, as
-    the manual is provided in libgimpprint-doc
+    the manual is provided in libgimpprint-doc (RL)
+  * Disable building of translated PPD files (RL)
+  
+ -- Eric Sharkey <sharkey@debian.org>  Sun, 25 Nov 2001 22:20:33 -0500
 
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Tue, 18 Sep 2001 14:15:37 +0100
+gimp-print (4.1.99-b1-1) unstable; urgency=low
 
-gimp-print (4.1.99-a3-1) unstable; urgency=low
+  * New upstream release, Closes: #110066
+  * Remove README.dither from libgimpprint-dev.docs (Roger Leigh)
+  * Add image samples to gimp1.2-print and cupsys-driver-gimpprint (RL)
+  * Change rules and control to use ABI library versioning (RL)
+  * Changed library version names to reflect upstream library
+    versioning change to ABI versioning. (RL)
+
+ -- Eric Sharkey <sharkey@debian.org>  Mon, 23 Jul 2001 10:49:04 -0400
+
+gimp-print (4.1.99-a2-1) unstable; urgency=low
 
   * New upstream release
-  * Remove README.dither from libgimpprint-dev.docs
-  * Add image samples to gimp1.2-print and cupsys-driver-gimpprint
-  * Change rules and control to use ABI library versioning
 
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Thu,  9 Aug 2001 11:15:38 +0100
+ -- Eric Sharkey <sharkey@debian.org>  Mon, 23 Jul 2001 10:49:04 -0400
+
+gimp-print (4.1.99-a1-1) unstable; urgency=low
+
+  * New upstream release  (first 4.2 pre-release)
+
+ -- Eric Sharkey <sharkey@debian.org>  Tue, 10 Jul 2001 16:19:03 -0400
+
+gimp-print (4.1.10-1) unstable; urgency=low
+
+  * New upstream release  (4.1.8 and 4.1.9 were buggy)
+
+ -- Eric Sharkey <sharkey@debian.org>  Fri, 29 Jun 2001 23:08:27 -0400
 
 gimp-print (4.1.7-1) unstable; urgency=low
 
-  * libgimpprint-doc is in section `doc'.
-  * New package libgimpprint-doc for Info, dvi and HTML docs.
+  * New package libgimpprint-doc for Info and dvi docs. (Roger Leigh)
   * Change debian/rules to use separate binary-arch and binary-indep
-    targets
+    targets (Roger Leigh)
+  * New upstream release
 
- -- Roger Leigh <roger@whinlatter.uklinux.net>  Fri, 11 May 2001 23:34:22 +0100
+ -- Eric Sharkey <sharkey@debian.org>  Wed,  9 May 2001 12:19:43 -0400
+
+gimp-print (4.1.6-2) unstable; urgency=low
+
+  * Fix build dependencies to include flex, Closes: #96401
+
+ -- Eric Sharkey <sharkey@debian.org>  Tue,  8 May 2001 20:09:30 -0400
+
+gimp-print (4.1.6-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Eric Sharkey <sharkey@debian.org>  Mon, 30 Apr 2001 13:45:56 -0400
+
+gimp-print (4.1.5-2.01) unstable; urgency=low
+
+  * Recompile 4.1.5-2 with updated debhelper to fix dependencies
+  * Closes #90741
+
+ -- Eric Sharkey <sharkey@debian.org>  Fri,  6 Apr 2001 21:11:15 -0400
 
 gimp-print (4.1.5-2) unstable; urgency=low
 

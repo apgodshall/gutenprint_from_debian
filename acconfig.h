@@ -1,6 +1,6 @@
 /*
  * acconfig.h:
- * $Id: acconfig.h,v 1.16 2001/11/06 00:08:51 rlk Exp $
+ * $Id: acconfig.h,v 1.8.2.6 2001/11/18 15:40:34 sharkey Exp $
  * Extra definitions for autoheader
  * Copyright (C) 2000  Roger Leigh
  *

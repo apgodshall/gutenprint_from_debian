@@ -1,5 +1,5 @@
 /*
- * "$Id: print-ps.c,v 1.26 2001/11/09 12:16:53 rlk Exp $"
+ * "$Id: print-ps.c,v 1.5.4.8 2001/11/18 15:40:38 sharkey Exp $"
  *
  *   Print plug-in Adobe PostScript driver for the GIMP.
  *

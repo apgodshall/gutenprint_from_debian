@@ -1,5 +1,5 @@
 /*
- * "$Id: gimp_color_window.c,v 1.19 2001/09/24 17:30:07 mitsch Exp $"
+ * "$Id: gimp_color_window.c,v 1.2.4.7 2001/10/27 21:50:38 sharkey Exp $"
  *
  *   Main window code for Print plug-in for the GIMP.
  *

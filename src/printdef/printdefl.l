@@ -1,5 +1,5 @@
 /*
- * "$Id: printdefl.l,v 1.2 2001/06/03 20:53:24 rlk Exp $"
+ * "$Id: printdefl.l,v 1.1.4.1 2001/06/30 03:20:00 sharkey Exp $"
  *
  *   Parse printer definition pseudo-XML
  *

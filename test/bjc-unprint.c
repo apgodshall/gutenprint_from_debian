@@ -1,4 +1,4 @@
-/* $Id: bjc-unprint.c,v 1.6 2001/08/13 23:59:13 rlk Exp $ */
+/* $Id: bjc-unprint.c,v 1.2.2.4 2001/09/14 01:26:37 sharkey Exp $ */
 /*
  * Convert BJC-printjobs to xbm files, one for each color channel
  *

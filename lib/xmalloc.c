@@ -1,5 +1,5 @@
 /*
- * $Id: xmalloc.c,v 1.4 2001/08/13 23:59:12 rlk Exp $
+ * $Id: xmalloc.c,v 1.2.4.2 2001/09/14 01:26:34 sharkey Exp $
  * gimp-print memory allocation functions.
  * Copyright (C) 1999,2000  Roger Leigh
  *

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.71 2001/10/27 17:16:39 rlk Exp $"
+ * "$Id: print-canon.c,v 1.10.4.9 2001/11/18 15:40:36 sharkey Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *

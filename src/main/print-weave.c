@@ -1,5 +1,5 @@
 /*
- * "$Id: print-weave.c,v 1.36 2001/09/08 17:13:48 rleigh Exp $"
+ * "$Id: print-weave.c,v 1.12.4.7 2001/10/27 21:50:40 sharkey Exp $"
  *
  *   Softweave calculator for gimp-print.
  *

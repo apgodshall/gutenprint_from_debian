@@ -1,5 +1,5 @@
 /*
- * "$Id: print-util.c,v 1.53 2001/11/10 00:12:20 rlk Exp $"
+ * "$Id: print-util.c,v 1.8.4.8 2001/11/18 15:40:38 sharkey Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *

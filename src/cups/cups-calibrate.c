@@ -1,5 +1,5 @@
 /*
- * "$Id: cups-calibrate.c,v 1.2 2001/08/13 23:59:12 rlk Exp $"
+ * "$Id: cups-calibrate.c,v 1.1.4.1 2001/09/14 01:26:35 sharkey Exp $"
  *
  *   Super simple color calibration program for the Common UNIX
  *   Printing System.

@@ -11,7 +11,7 @@ Depends: ${shlibs:Depends}, gimp1.2
 Recommends: gimpprint-locales (>= ${Source-Version})
 Suggests: libgimpprint-doc (= ${Source-Version}), gimpprint-doc (= ${Source-Version})
 Description: print plugin for the GIMP
- This is Gimp-Print version #UPSTREAM_VERSION#, a stable release in the 4.2
+ This is Gimp-Print version 4.2.0, a stable release in the 4.2
  line.  Gimp-print is the print facility for the Gimp, and in addition
  a suite of drivers that may be used with common UNIX spooling systems
  using GhostScript or CUPS.  These drivers provide printing quality for
@@ -26,7 +26,7 @@ Depends: ${shlibs:Depends}, cupsys (>= 1.1.4) | cups (>= 1.1.4)
 Recommends: gs (>= 6.51), gimpprint-locales (>= ${Source-Version})
 Suggests: gimpprint-doc (= ${Source-Version})
 Description: gimp-print printer driver for CUPS
- This is Gimp-Print version #UPSTREAM_VERSION#, a stable release in the 4.2
+ This is Gimp-Print version 4.2.0, a stable release in the 4.2
  line.  Gimp-print is the print facility for the Gimp, and in addition
  a suite of drivers that may be used with common UNIX spooling systems
  using GhostScript or CUPS.  These drivers provide printing quality for

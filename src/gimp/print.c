@@ -1,5 +1,5 @@
 /*
- * "$Id: print.c,v 1.22 2001/09/08 17:17:34 rleigh Exp $"
+ * "$Id: print.c,v 1.4.4.8 2001/10/27 21:50:38 sharkey Exp $"
  *
  *   Print plug-in for the GIMP.
  *
@@ -1315,5 +1315,5 @@ get_system_printers(void)
 }
 
 /*
- * End of "$Id: print.c,v 1.22 2001/09/08 17:17:34 rleigh Exp $".
+ * End of "$Id: print.c,v 1.4.4.8 2001/10/27 21:50:38 sharkey Exp $".
  */

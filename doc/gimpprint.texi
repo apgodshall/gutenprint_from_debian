@@ -1,6 +1,6 @@
 \input texinfo @c -*-texinfo-*-
 @c %**start of header
-@c $Id: gimpprint.texi,v 1.2.2.4 2001/11/18 15:40:34 sharkey Exp $
+@c $Id: gimpprint.texi,v 1.6 2001/10/27 17:16:37 rlk Exp $
 @setfilename gimpprint.info
 @settitle GIMP-Print
 @finalout

@@ -1,5 +1,5 @@
 /*
- * "$Id: print.c,v 1.4.4.8 2001/10/27 21:50:38 sharkey Exp $"
+ * "$Id: print.c,v 1.22.4.4 2003/01/24 02:52:18 rlk Exp $"
  *
  *   Print plug-in for the GIMP.
  *
@@ -764,7 +764,6 @@ add_printer(const gp_plist_t *key, int add_only)
 	  plist_count++;
 	  memcpy(p, key, sizeof(gp_plist_t));
 	  p->v = stp_allocate_copy(key->v);
-	  p->active = 0;
 	}
       else
 	{
@@ -1147,8 +1146,6 @@ compare_printers(gp_plist_t *p1,	/* I - First printer to compare */
 #define PRINTERS_LPC	1
 #define PRINTERS_LPSTAT	2
 
-extern int asprintf (char **result, const char *format, ...);
-
 static void
 get_system_printers(void)
 {
@@ -1182,6 +1179,7 @@ get_system_printers(void)
   plist_count = 1;
   initialize_printer(&plist[0]);
   strcpy(plist[0].name, _("File"));
+  plist[0].active = 1;
   stp_set_driver(plist[0].v, "ps2");
   stp_set_output_type(plist[0].v, OUTPUT_COLOR);
 
@@ -1240,8 +1238,21 @@ get_system_printers(void)
 	      if ((ptr = strchr(line, ':')) != NULL &&
 	          line[0] != ' ' && line[0] != '\t')
               {
-		check_plist(plist_count + 1);
+		int printer_exists = 0;
 		*ptr = '\0';
+                /* check for duplicate printers--yes, they can happen,
+                 * and it makes gimp-print forget everything about the
+                 * printer */
+                for (i = 1; i < plist_count; i++)
+                  if (strcmp(line, plist[i].name) == 0)
+		    {
+		      printer_exists = 1;
+		      break;
+		    }
+		if (printer_exists)
+		  break;
+
+		check_plist(plist_count + 1);
 		initialize_printer(&plist[plist_count]);
 		strncpy(plist[plist_count].name, line,
 			sizeof(plist[plist_count].name) - 1);
@@ -1249,10 +1260,11 @@ get_system_printers(void)
                 fprintf(stderr, "Adding new printer from lpc: <%s>\n",
                   line);
 #endif
-		asprintf(&result, "lpr -P%s -l", line);
+		result = g_strdup_printf("lpr -P%s -l", line);
 		stp_set_output_to(plist[plist_count].v, result);
 		free(result);
 		stp_set_driver(plist[plist_count].v, "ps2");
+		plist[plist_count].active = 1;
 		plist_count ++;
 	      }
 	      break;
@@ -1261,6 +1273,18 @@ get_system_printers(void)
 	      if ((sscanf(line, "printer %127s", name) == 1) ||
 		  (sscanf(line, "Printer: %127s", name) == 1))
 	      {
+		int printer_exists = 0;
+                /* check for duplicate printers--yes, they can happen,
+                 * and it makes gimp-print forget everything about the
+                 * printer */
+                for (i = 1; i < plist_count; i++)
+                  if (strcmp(name, plist[i].name) == 0)
+		    {
+		      printer_exists = 1;
+		      break;
+		    }
+		if (printer_exists)
+		  break;
 		check_plist(plist_count + 1);
 		initialize_printer(&plist[plist_count]);
 		strncpy(plist[plist_count].name, name,
@@ -1269,10 +1293,11 @@ get_system_printers(void)
                 fprintf(stderr, "Adding new printer from lpc: <%s>\n",
                   name);
 #endif
-		asprintf(&result, "lp -s -d%s -oraw", name);
+		result = g_strdup_printf("lp -s -d%s -oraw", name);
 		stp_set_output_to(plist[plist_count].v, result);
 		free(result);
 		stp_set_driver(plist[plist_count].v, "ps2");
+		plist[plist_count].active = 1;
         	plist_count ++;
 	      }
 	      else
@@ -1315,5 +1340,5 @@ get_system_printers(void)
 }
 
 /*
- * End of "$Id: print.c,v 1.4.4.8 2001/10/27 21:50:38 sharkey Exp $".
+ * End of "$Id: print.c,v 1.22.4.4 2003/01/24 02:52:18 rlk Exp $".
  */

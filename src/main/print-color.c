@@ -1,5 +1,5 @@
 /*
- * "$Id: print-color.c,v 1.5.4.7 2001/10/27 21:50:38 sharkey Exp $"
+ * "$Id: print-color.c,v 1.26.2.3 2003/08/25 17:04:13 rleigh Exp $"
  *
  *   Print plug-in color management for the GIMP.
  *
@@ -33,6 +33,7 @@
 #include "gimp-print-internal.h"
 #include <gimp-print/gimp-print-intl-internal.h>
 #include <math.h>
+#include <string.h>
 #include <limits.h>
 
 #ifdef __GNUC__
@@ -1754,7 +1755,7 @@ cmyk_8_to_cmyk(const stp_vars_t vars,
   static double density = -1.0;
   static double print_gamma = -1.0;
 
-
+  memset(nz, 0, sizeof(nz));
   if (density != stp_get_density(vars) ||
       print_gamma != stp_get_gamma(vars))
   {
@@ -1809,6 +1810,7 @@ cmyk_to_cmyk(const stp_vars_t vars,
   int nz[4];
   const unsigned short *scmykin = (const unsigned short *) cmykin;
 
+  memset(nz, 0, sizeof(nz));
   for (i = 0; i < width; i++)
     {
       for (j = 0; j < 4; j++)
@@ -1834,10 +1836,10 @@ allocate_lut(size_t steps)
   int i;
   lut_t *ret = stp_malloc(sizeof(lut_t));
   ret->steps = steps;
-  ret->composite = stp_malloc(sizeof(unsigned short) * steps);
-  ret->red = stp_malloc(sizeof(unsigned short) * steps);
-  ret->green = stp_malloc(sizeof(unsigned short) * steps);
-  ret->blue = stp_malloc(sizeof(unsigned short) * steps);
+  ret->composite = stp_zalloc(sizeof(unsigned short) * steps);
+  ret->red = stp_zalloc(sizeof(unsigned short) * steps);
+  ret->green = stp_zalloc(sizeof(unsigned short) * steps);
+  ret->blue = stp_zalloc(sizeof(unsigned short) * steps);
   ret->shiftval = 0;
   for (i = 1; i < steps; i += i)
     ret->shiftval++;

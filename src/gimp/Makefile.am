@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.9.2.5 2001/10/27 21:50:38 sharkey Exp $
+## $Id: Makefile.am,v 1.18.4.5 2002/11/30 23:17:24 rleigh Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -28,7 +28,8 @@ MAINT_CHARSET = latin1
 
 AM_CFLAGS = $(GNUCFLAGS)
 INCLUDES = @INCLUDES@ $(GIMP_CFLAGS) $(LIBGIMPPRINT_CFLAGS)
-LIBS = @LIBS@ ../../lib/libprintut.la $(INTLLIBS) ../../lib/libprintut.la
+LIBS = $(INTLLIBS) @LIBS@
+LIBPRINTUT = $(top_builddir)/lib/libprintut.la
 
 libexecdir = $(gimptool_prefix)/plug-ins
 
@@ -37,7 +38,7 @@ libexecdir = $(gimptool_prefix)/plug-ins
 
 GIMP_BIN = print
 
-libexec_PROGRAMS = @GIMP_BIN@
+gimp_plug_in_PROGRAMS = @GIMP_BIN@
 
 EXTRA_PROGRAMS = print
 
@@ -48,37 +49,8 @@ print_SOURCES = \
 	gimp_color_window.c \
 	gimp_main_window.c \
 	print_gimp.h
-print_LDADD = $(GIMP_LIBS) $(LIBGIMPPRINT_LIBS) ../../lib/libprintut.la
+print_LDADD = $(LIBPRINTUT) $(GIMP_LIBS) $(LIBGIMPPRINT_LIBS)
 print_DEPENDENCIES = $(LIBGIMPPRINT_LIBS)
-
-
-## Rules
-
-install-libexecPROGRAMS: $(libexec_PROGRAMS)
-	@DESTDIR='$(DESTDIR)'; export DESTDIR;\
-	list='$(libexec_PROGRAMS)'; for p in $$list; do \
-	  if test -f $$p; then \
-	    if test -f .libs/$$p; then \
-	      cd .libs; \
-	    fi; \
-	    echo $(GIMPTOOL) --install-@PLUG_IN_PATH@ $$p; \
-            $(GIMPTOOL) --install-@PLUG_IN_PATH@ $$p; \
-	  else :; fi; \
-	done
-
-uninstall-libexecPROGRAMS:
-	@DESTDIR='$(DESTDIR)'; export DESTDIR;\
-	list='$(libexec_PROGRAMS)'; for p in $$list; do \
-	    echo $(GIMPTOOL) --uninstall-@PLUG_IN_PATH@ "$$p"; \
-            $(GIMPTOOL) --uninstall-@PLUG_IN_PATH@ "$$p"; \
-	    echo $(GIMPTOOL) --uninstall-admin-bin "$$p"; \
-	    $(GIMPTOOL) --uninstall-admin-bin "$$p"; \
-	done; \
-	exit 0
-
-$(LIBGIMPPRINT_LIBS):
-	cd ../main ; \
-	$(MAKE)
 
 
 ## Clean

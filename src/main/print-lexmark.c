@@ -1,5 +1,5 @@
 /*
- * "$Id: print-lexmark.c,v 1.15.4.8 2001/11/18 15:40:37 sharkey Exp $"
+ * "$Id: print-lexmark.c,v 1.65.2.9 2003/10/16 11:51:10 rlk Exp $"
  *
  *   Print plug-in Lexmark driver for the GIMP.
  *
@@ -76,6 +76,33 @@
 
 typedef enum Lex_model { m_lex7500,   m_z52=10052, m_z42=10042, m_3200=3200 } Lex_model;
 
+#define NCHANNELS (7)
+
+typedef union {			/* Offsets from the start of each line */
+  unsigned long v[NCHANNELS];		/* (really pass) */
+  struct {   /* IMPORTANT: order corresponds to ECOLOR_* */
+    unsigned long k;
+    unsigned long c;
+    unsigned long m;
+    unsigned long y;
+    unsigned long C;
+    unsigned long M;
+    unsigned long Y;
+  } p;
+} lexmark_lineoff_t;
+
+typedef union {			/* Base pointers for each pass */
+  unsigned char *v[NCHANNELS];
+  struct {   /* IMPORTANT: order corresponds to ECOLOR_* */
+    unsigned char *k;
+    unsigned char *c;
+    unsigned char *m;
+    unsigned char *y;
+    unsigned char *C;
+    unsigned char *M;
+    unsigned char *Y;
+  } p;
+} lexmark_linebufs_t;
 
 
 
@@ -93,7 +120,7 @@ int  lex_show_lcount, lex_show_length;
 const stp_vars_t lex_open_tmp_file();
 const stp_vars_t lex_write_tmp_file(const stp_vars_t ofile, void *data,int length);
 static void testprint(testdata *td);
-static void readtestprintline(testdata *td, stp_linebufs_t *linebufs);
+static void readtestprintline(testdata *td, lexmark_linebufs_t *linebufs);
 #endif
 
 static void
@@ -449,12 +476,12 @@ static int get_lr_shift(int mode)
  */
 
 static const int head_offset_cmyk[] =
-{70, 184, 368, 0, 184, 368, 0};  /* k, m, c, y, M, C, Y */
+{70, 368, 184, 0, 368, 184, 0};  /* k, m, c, y, M, C, Y */
 /* the head_offset_cmy is needed because the dithering code is going into troubles if there is an offset different from 0 for the unused black color */
 static const int head_offset_cmy[] =
-{0, 184, 368, 0, 184, 368, 0};  /* k, m, c, y, M, C, Y */
+{0, 368, 184, 0, 368, 184, 0};  /* k, m, c, y, M, C, Y */
 static const int head_offset_cCmMyk[] =
-{0, 184, 368, 0, 184, 368, 0};  /* k, m, c, y, M, C, Y */
+{0, 368, 184, 0, 368, 184, 0};  /* k, m, c, y, M, C, Y */
 
 
 
@@ -755,7 +782,7 @@ static const lexmark_cap_t lexmark_model_capabilities[] =
     618, 936,         /* max paper size *//* 8.58" x 13 " */
     INCH(2), INCH(4), /* min paper size */
     2400, 1200, 2, /* max resolution */
-    0, 0, 5, 15, /* 15 36 border l,r,t,b    unit is 1/72 DPI */
+    0, 0, 5, 41, /* border l,r,t,b    unit is 1/72 DPI */
     LEXMARK_INK_CMY | LEXMARK_INK_CMYK | LEXMARK_INK_CcMmYK,
     LEXMARK_SLOT_ASF1 | LEXMARK_SLOT_MAN1,
     LEXMARK_CAP_DMT,
@@ -978,12 +1005,12 @@ lexmark_source_type(const char *name, const lexmark_cap_t * caps)
 /*******************************
 lexmark_head_offset
 *******************************/
-static const stp_lineoff_t *
+static const lexmark_lineoff_t *
 lexmark_head_offset(int ydpi,                       /* i */
 		    const char *ink_type,           /* i */
 		    const lexmark_cap_t * caps,     /* i */
 		    const lexmark_inkparam_t *ink_parameter, /* i */
-		    stp_lineoff_t *lineoff_buffer)  /* o */
+		    lexmark_lineoff_t *lineoff_buffer)  /* o */
 {
   int i;
 
@@ -1070,9 +1097,9 @@ static const lexmark_res_t
 
   while (res->hres)
     {
-      if (res->vres <= caps->max_ydpi != -1 &&
-	  res->hres <= caps->max_xdpi != -1 &&
-	  !strcmp(resolution, res->name))
+      if ((res->vres <= caps->max_ydpi) && (caps->max_ydpi != -1) &&
+	  (res->hres <= caps->max_xdpi) && (caps->max_xdpi != -1) &&
+	  (!strcmp(resolution, res->name)))
 	{
 	  return res;
 	}
@@ -1165,7 +1192,7 @@ lexmark_parameters(const stp_printer_t printer,	/* I - Printer model */
     unsigned int height_limit, width_limit;
     unsigned int min_height_limit, min_width_limit;
     int papersizes = stp_known_papersizes();
-    valptrs = stp_malloc(sizeof(stp_param_t) * papersizes);
+    valptrs = stp_zalloc(sizeof(stp_param_t) * papersizes);
     *count = 0;
 
     width_limit  = caps->max_paper_width;
@@ -1196,7 +1223,7 @@ lexmark_parameters(const stp_printer_t printer,	/* I - Printer model */
 
     res =  *(caps->res_parameters); /* get resolution specific parameters of printer */
     for (i=0; res[i].hres; i++); /* get number of entries */
-    valptrs = stp_malloc(sizeof(stp_param_t) * i);
+    valptrs = stp_zalloc(sizeof(stp_param_t) * i);
 
     /* check for allowed resolutions */
     while (res->hres)
@@ -1211,7 +1238,7 @@ lexmark_parameters(const stp_printer_t printer,	/* I - Printer model */
   else if (strcmp(name, "InkType") == 0)
   {
     for (i = 0; caps->ink_types[i].name != NULL; i++); /* get number of entries */
-    valptrs = stp_malloc(sizeof(stp_param_t) * i);
+    valptrs = stp_zalloc(sizeof(stp_param_t) * i);
 
     *count = 0;
     for (i = 0; caps->ink_types[i].name != NULL; i++)
@@ -1225,7 +1252,7 @@ lexmark_parameters(const stp_printer_t printer,	/* I - Printer model */
   else if (strcmp(name, "MediaType") == 0)
   {
     int nmediatypes = paper_type_count;
-    valptrs = stp_malloc(sizeof(stp_param_t) * nmediatypes);
+    valptrs = stp_zalloc(sizeof(stp_param_t) * nmediatypes);
     for (i = 0; i < nmediatypes; i++)
     {
       valptrs[i].name = c_strdup(lexmark_paper_list[i].name);
@@ -1242,7 +1269,7 @@ lexmark_parameters(const stp_printer_t printer,	/* I - Printer model */
   else
     return (NULL);
 
-  valptrs = stp_malloc(*count * sizeof(stp_param_t));
+  valptrs = stp_zalloc(*count * sizeof(stp_param_t));
   for (i = 0; i < *count; i ++)
   {
     /* translate media_types and media_sources */
@@ -1551,18 +1578,6 @@ static void paper_shift(const stp_vars_t v, int offset, const lexmark_cap_t * ca
 #endif
 }
 
-
-/*
- *  'alloc_buffer()' allocates buffer and fills it with 0
- */
-static unsigned char *
-lexmark_alloc_buffer(int size)
-{
-  unsigned char *buf= stp_malloc(size);
-  if (buf) memset(buf,0,size);
-  return buf;
-}
-
 /*
  * 'advance_buffer()' - Move (num) lines of length (len) down one line
  *                      and sets first line to 0s
@@ -1649,14 +1664,15 @@ lexmark_print(const stp_printer_t printer,		/* I - Model */
   double lum_adjustment[49], sat_adjustment[49], hue_adjustment[49];
 
   /* weave parameters */
-  stp_linebufs_t cols;
+  lexmark_linebufs_t cols;
   int  nozzle_separation;
   int  horizontal_passes;
   int  ncolors;
   lexm_privdata_weave privdata;
   void *	weave = NULL;
+  stp_dither_data_t *dt;
 
-  stp_lineoff_t lineoff_buffer;  /* holds the line offsets of each color */
+  lexmark_lineoff_t lineoff_buffer;  /* holds the line offsets of each color */
   int doTestPrint = 0;
 #ifdef DEBUG
   testdata td;
@@ -1901,25 +1917,25 @@ densityDivisor /= 1.2;
 
 
   if ((printMode & COLOR_MODE_C) == COLOR_MODE_C) {
-    cols.p.c = lexmark_alloc_buffer(buf_length+10);
+    cols.p.c = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_Y) == COLOR_MODE_Y) {
-    cols.p.y = lexmark_alloc_buffer(buf_length+10);
+    cols.p.y = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_M) == COLOR_MODE_M) {
-    cols.p.m = lexmark_alloc_buffer(buf_length+10);
+    cols.p.m = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_K) == COLOR_MODE_K) {
-    cols.p.k = lexmark_alloc_buffer(buf_length+10);
+    cols.p.k = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_LC) == COLOR_MODE_LC) {
-    cols.p.C = lexmark_alloc_buffer(buf_length+10);
+    cols.p.C = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_LY) == COLOR_MODE_LY) {
-    cols.p.Y = lexmark_alloc_buffer(buf_length+10);
+    cols.p.Y = stp_zalloc(buf_length+10);
   }
   if ((printMode & COLOR_MODE_LM) == COLOR_MODE_LM) {
-    cols.p.M = lexmark_alloc_buffer(buf_length+10);
+    cols.p.M = stp_zalloc(buf_length+10);
   }
 
 
@@ -1950,7 +1966,7 @@ densityDivisor /= 1.2;
 			       ncolors,                            /* colors */
 			       1,                                  /* bits/pixel */
 			       out_width,                          /* line width */
-			       out_height, 0,
+			       out_height,
 			       ((top * ydpi) / 72)+(((caps->offset_top_border+add_top_offset)*ydpi)
 						     /caps->y_raster_res),
 			       (page_height * ydpi) / 72,
@@ -2062,8 +2078,8 @@ densityDivisor /= 1.2;
   */
 
 
-  in  = stp_malloc(image_width * image_bpp);
-  out = stp_malloc(image_width * out_bpp * 2);
+  in  = stp_zalloc(image_width * image_bpp);
+  out = stp_zalloc(image_width * out_bpp * 2);
 
   /* calculate the memory we need for one line of the printer image (hopefully we are right) */
 #ifdef DEBUG
@@ -2106,6 +2122,14 @@ densityDivisor /= 1.2;
     }
 
 
+  dt = stp_create_dither_data();
+  stp_add_channel(dt, cols.p.k, ECOLOR_K, 0);
+  stp_add_channel(dt, cols.p.c, ECOLOR_C, 0);
+  stp_add_channel(dt, cols.p.C, ECOLOR_C, 1);
+  stp_add_channel(dt, cols.p.m, ECOLOR_M, 0);
+  stp_add_channel(dt, cols.p.M, ECOLOR_M, 1);
+  stp_add_channel(dt, cols.p.y, ECOLOR_Y, 0);
+  stp_add_channel(dt, cols.p.Y, ECOLOR_Y, 1);
 
   for (y = 0; y < out_height; y ++)   /* go through every pixle line of image */
     {
@@ -2135,8 +2159,7 @@ densityDivisor /= 1.2;
 	}
       /*      stp_erprintf("Let's dither   %d    %d  %d\n", ((y)), buf_length, length);*/
       if (doTestPrint == 0) {
-	stp_dither(out, y, dither, cols.p.c, cols.p.C, cols.p.m, cols.p.M,
-		   cols.p.y, cols.p.Y, cols.p.k, duplicate_line, zero_mask);
+	stp_dither(out, y, dither, dt, duplicate_line, zero_mask);
       } else {
 #ifdef DEBUG
 	readtestprintline(&td, &cols);
@@ -2153,7 +2176,7 @@ densityDivisor /= 1.2;
 #endif
 
       stp_write_weave(weave, length, ydpi, model, out_width, left,
-		      xdpi, physical_xdpi, (const unsigned char **)cols.v);
+		      xdpi, physical_xdpi, (unsigned char **)cols.v);
 
       errval += errmod;
       errline += errdiv;
@@ -2173,6 +2196,7 @@ densityDivisor /= 1.2;
 
   lexmark_deinit_printer(nv, caps);
 
+  stp_free_dither_data(dt);
 
   if (doTestPrint == 0) {
     stp_free_dither(dither);
@@ -2217,9 +2241,10 @@ const stp_printfuncs_t stp_lexmark_printfuncs =
   lexmark_print,
   lexmark_default_parameters,
   lexmark_describe_resolution,
-  stp_verify_printer_params
+  stp_verify_printer_params,
+  stp_start_job,
+  stp_end_job
 };
-
 
 
 /* lexmark_init_line
@@ -2329,8 +2354,11 @@ lexmark_init_line(int mode, unsigned char *prnBuf,
 		hend = (width-1)*(2400/2400);
 		break;
 	}
+	hend += offset;
 	prnBuf[17] = (unsigned char)(hend >> 8);
         prnBuf[18] = (unsigned char)(hend & 0xFF);
+
+ 	prnBuf[10] = (pass_length==208 ? 0x1A : 0x18);
     }
 
     return prnBuf + header_size;  /* return the position where the pixels have to be written */
@@ -2734,7 +2762,6 @@ const stp_vars_t lex_write_tmp_file(const stp_vars_t ofile, void *data,int lengt
 #endif
 
 
-
 static void
 flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	   int hoffset, int ydpi, int xdpi, int physical_xdpi,
@@ -2763,7 +2790,8 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 
 #ifdef DEBUG
   stp_erprintf("Lexmark: flush_pass, here we are !\n");
-  stp_erprintf("  passno %i, sw->ncolors %i, width %d, lwidth %d, linecount k %d, linecount m %d, bitwidth %d, separation_rows  %d\n", passno, sw->ncolors, width, lwidth, linecount[0].p.k, linecount[0].p.m, sw->bitwidth, sw->separation_rows);
+  stp_erprintf("  passno %i, sw->ncolors %i, width %d, lwidth %d, linecount k % d, linecount m % d, bitwidth %d\n", 
+	       passno, sw->ncolors, width, lwidth, /*linecount[0].p.k, linecount[0].p.m,*/ sw->bitwidth);
   stp_erprintf("microoffset %d, vertical_subpass %d, sw->horizontal_weave %d\n", microoffset,vertical_subpass, sw->horizontal_weave);
 
   stp_erprintf("Lexmark: last_pass_offset %d, last_pass %d, logicalpassstart %d\n", sw->last_pass_offset, sw->last_pass, pass->logicalpassstart);
@@ -2801,13 +2829,12 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
   /* calculate paper shift and adapt actual resoution to physical positioning resolution */
   paperShift = (pass->logicalpassstart - sw->last_pass_offset) * (caps->y_raster_res/ydpi);
 
-  /*** do we have to print something with the color cartridge ? ***/
-  if (lineactive[0].p.c || lineactive[0].p.m || lineactive[0].p.y)
-    {
-      if (lineactive[0].p.c)
+      
+      /*** do we have to print something with the color cartridge ? ***/
+      if ((ECOLOR_C < sw->ncolors) && (lineactive[0].v[ECOLOR_C] > 0))
 	{
-	  head_colors[0].line = bufs[0].p.c;
-	  head_colors[0].used_jets = linecount[0].p.c;
+	  head_colors[0].line = bufs[0].v[ECOLOR_C];
+	  head_colors[0].used_jets = linecount[0].v[ECOLOR_C];
 	}
       else
 	{
@@ -2815,10 +2842,10 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	  head_colors[0].used_jets = 0;
 	}
 
-      if (lineactive[0].p.m)
+      if ((ECOLOR_M < sw->ncolors) && (lineactive[0].v[ECOLOR_M] > 0))
 	{
-	  head_colors[1].line = bufs[0].p.m;
-	  head_colors[1].used_jets = linecount[0].p.m;
+	  head_colors[1].line = bufs[0].v[ECOLOR_M];
+	  head_colors[1].used_jets = linecount[0].v[ECOLOR_M];
 	}
       else
 	{
@@ -2826,10 +2853,10 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	  head_colors[1].used_jets = 0;
 	}
 
-      if (lineactive[0].p.y)
+      if ((ECOLOR_Y < sw->ncolors) && (lineactive[0].v[ECOLOR_Y] > 0))
 	{
-	  head_colors[2].line = bufs[0].p.y;
-	  head_colors[2].used_jets = linecount[0].p.y;
+	  head_colors[2].line = bufs[0].v[ECOLOR_Y];
+	  head_colors[2].used_jets = linecount[0].v[ECOLOR_Y];
 	}
       else
 	{
@@ -2837,44 +2864,44 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	  head_colors[2].used_jets = 0;
 	}
 
+      if ((head_colors[0].line != 0) || (head_colors[1].line != 0) || (head_colors[2].line != 0)) {
 
 
 
 #ifdef DEBUG
-      stp_erprintf("lexmark_write: lwidth %d\n", lwidth);
+	stp_erprintf("lexmark_write: lwidth %d\n", lwidth);
 #endif
-      lexmark_write(nv,		/* I - Print file or command */
-		    privdata_weave->outbuf,/*unsigned char *prnBuf,   mem block to buffer output */
-		    &paperShift,           /* int *paperShift, */
-		    privdata_weave->direction,                     /* int direction, */
-		    sw->jets,       /* num of inks to print */
-		    caps,                  /* const lexmark_cap_t *   caps,	    I - Printer model */
-		    privdata_weave->ink_parameter,
-		    xdpi,                  /* int xresolution, */
-		    2,                     /* yCount,*/
-		    head_colors,           /* Lexmark_head_colors *head_colors, */
-		    (lwidth+7)/8, /* length,	 I - Length of bitmap data of one line in bytes */
-		    prn_mode | COLOR_MODE_C | COLOR_MODE_Y | COLOR_MODE_M,       /* mode,	 I - Which color */
-		    ydpi,                  /* ydpi,	 I - Vertical resolution */
-		    lwidth,      /* width, 	 I - Printed width in pixles*/
-		    hoffset+microoffset,   /* offset  I - Offset from left side in x_raster_res DPI */
-		    0                      /* dmt */);
-      if (privdata_weave->bidirectional)
-	privdata_weave->direction = (privdata_weave->direction +1) & 1;
-    }
+	lexmark_write(nv,		/* I - Print file or command */
+		      privdata_weave->outbuf,/*unsigned char *prnBuf,   mem block to buffer output */
+		      &paperShift,           /* int *paperShift, */
+		      privdata_weave->direction,                     /* int direction, */
+		      sw->jets,       /* num of inks to print */
+		      caps,                  /* const lexmark_cap_t *   caps,	    I - Printer model */
+		      privdata_weave->ink_parameter,
+		      xdpi,                  /* int xresolution, */
+		      2,                     /* yCount,*/
+		      head_colors,           /* Lexmark_head_colors *head_colors, */
+		      (lwidth+7)/8, /* length,	 I - Length of bitmap data of one line in bytes */
+		      prn_mode | COLOR_MODE_C | COLOR_MODE_Y | COLOR_MODE_M,       /* mode,	 I - Which color */
+		      ydpi,                  /* ydpi,	 I - Vertical resolution */
+		      lwidth,      /* width, 	 I - Printed width in pixles*/
+		      hoffset+microoffset,   /* offset  I - Offset from left side in x_raster_res DPI */
+		      0                      /* dmt */);
+	if (privdata_weave->bidirectional)
+	  privdata_weave->direction = (privdata_weave->direction +1) & 1;
+      }
+      
 
-  /*** do we have to print somthing with black or photo cartridge ? ***/
-  if (lineactive[0].p.C || lineactive[0].p.M || lineactive[0].p.k)
-    {
+      /*** do we have to print somthing with black or photo cartridge ? ***/
       /* we print with the photo or black cartidge */
 
     if (sw->jets != 208)
       {
 	/* we have photo or black cartridge */
-	if (lineactive[0].p.C)
+	if ((ECOLOR_LC < sw->ncolors) && (lineactive[0].v[ECOLOR_LC] > 0))
 	  {
-	    head_colors[0].line = bufs[0].p.C;
-	    head_colors[0].used_jets = linecount[0].p.C;
+	    head_colors[0].line = bufs[0].v[ECOLOR_LC];
+	    head_colors[0].used_jets = linecount[0].v[ECOLOR_LC];
 	  }
 	else
 	  {
@@ -2882,10 +2909,10 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	    head_colors[0].used_jets = 0;
 	  }
 
-	if (lineactive[0].p.M)
+	    if ((ECOLOR_LM < sw->ncolors) && (lineactive[0].v[ECOLOR_LM] > 0))
 	  {
-	    head_colors[1].line = bufs[0].p.M;
-	    head_colors[1].used_jets = linecount[0].p.M;
+	    head_colors[1].line = bufs[0].v[ECOLOR_LM];
+	    head_colors[1].used_jets = linecount[0].v[ECOLOR_LM];
 	  }
 	else
 	  {
@@ -2893,10 +2920,10 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 	    head_colors[1].used_jets = 0;
 	  }
 
-	if (lineactive[0].p.k)
+	    if ((ECOLOR_K < sw->ncolors) && (lineactive[0].v[ECOLOR_K] > 0))
 	  {
-	    head_colors[2].line = bufs[0].p.k;
-	    head_colors[2].used_jets = linecount[0].p.k;
+	    head_colors[2].line = bufs[0].v[ECOLOR_K];
+	    head_colors[2].used_jets = linecount[0].v[ECOLOR_K];
 	  }
 	else
 	  {
@@ -2906,23 +2933,41 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
       }
     else
       {
-	/* we have black cartridge; we have to print with all 208 jets at once */
-	head_colors[0].line = bufs[0].p.k;
-	head_colors[0].used_jets = linecount[0].p.k;
-	head_colors[0].head_nozzle_start = 0;
-	head_colors[0].head_nozzle_end = sw->jets/2;
-	head_colors[2].line = NULL;
-	head_colors[2].used_jets = 0;
-	head_colors[2].head_nozzle_start = 0;
-	head_colors[2].head_nozzle_end = 0;
-	head_colors[1].line = NULL;
-	head_colors[1].used_jets = 0;
-	head_colors[1].head_nozzle_start = 0;
-	head_colors[1].head_nozzle_end = 0;
+	if ((ECOLOR_K < sw->ncolors) && (lineactive[0].v[ECOLOR_K] > 0)) 
+	  {
+	    /* we have black cartridge; we have to print with all 208 jets at once */
+	    head_colors[0].line = bufs[0].v[ECOLOR_K];
+	    head_colors[0].used_jets = linecount[0].v[ECOLOR_K];
+	    head_colors[0].head_nozzle_start = 0;
+	    head_colors[0].head_nozzle_end = sw->jets/2;
+	    head_colors[2].line = NULL;
+	    head_colors[2].used_jets = 0;
+	    head_colors[2].head_nozzle_start = 0;
+	    head_colors[2].head_nozzle_end = 0;
+	    head_colors[1].line = NULL;
+	    head_colors[1].used_jets = 0;
+	    head_colors[1].head_nozzle_start = 0;
+	    head_colors[1].head_nozzle_end = 0;
+	  }
+	else 
+	  {
+	    head_colors[2].line = NULL;
+	    head_colors[2].used_jets = 0;
+	    head_colors[2].head_nozzle_start = 0;
+	    head_colors[2].head_nozzle_end = 0;
+	    head_colors[1].line = NULL;
+	    head_colors[1].used_jets = 0;
+	    head_colors[1].head_nozzle_start = 0;
+	    head_colors[1].head_nozzle_end = 0;
+	    head_colors[0].line = NULL;
+	    head_colors[0].used_jets = 0;
+	    head_colors[0].head_nozzle_start = 0;
+	    head_colors[0].head_nozzle_end = 0;
+	  }
       }
 
-
-
+     if ((head_colors[0].line != 0) || (head_colors[1].line != 0) || (head_colors[2].line != 0)) {
+       
     lexmark_write(nv,		/* I - Print file or command */
 		  privdata_weave->outbuf,/*unsigned char *prnBuf,   mem block to buffer output */
 		  &paperShift,           /* int *paperShift, */
@@ -2964,13 +3009,15 @@ flush_pass(stp_softweave_t *sw, int passno, int model, int width,
 
 
 
+
+
 #ifdef DEBUG
 
 static void testprint(testdata *td)
 {
   int icol, i;
   char dummy1[256], dummy2[256];
-  stp_linebufs_t linebufs;
+  lexmark_linebufs_t linebufs;
 
   /* init */
   for (i=0; i < (sizeof(linebufs.v)/sizeof(linebufs.v[0])); i++) {
@@ -3019,7 +3066,7 @@ static void testprint(testdata *td)
 }
 
 
-static void readtestprintline(testdata *td, stp_linebufs_t *linebufs)
+static void readtestprintline(testdata *td, lexmark_linebufs_t *linebufs)
 {
   char dummy1[256];
   int icol, ix;

@@ -1,3 +1,12 @@
+gimp-print (4.2.7-7) unstable; urgency=low
+
+  * debian/control.in:
+    - Prefer gs-esp as gs interpreter.  Patch from Colin Watson.
+    - Recommend gnome-gv as default postscript-viewer.  Patch
+      from Sebastien Bacher.
+
+ -- Roger Leigh <rleigh@debian.org>  Tue, 22 Mar 2005 00:20:09 +0000
+
 gimp-print (4.2.7-6) unstable; urgency=low
 
   * Allow A4 printing on HP DesignJet printers.  Patch from

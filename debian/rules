@@ -115,7 +115,6 @@ binary-indep: build install ChangeLog
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
-	dh_perl -i
 	dh_gencontrol -i
 	dh_md5sums -i
 	dh_builddeb -i
@@ -134,7 +133,6 @@ binary-arch: build install ChangeLog
 	dh_fixperms -a
 	dh_makeshlibs -a -V
 	dh_installdeb -a
-	dh_perl -a
 	dh_shlibdeps -a -l`pwd`/debian/libgimpprint$(LIBRARY_VERSION)/usr/lib
 	dh_gencontrol -a
 	dh_md5sums -a

@@ -3,12 +3,12 @@ Section: graphics
 Priority: optional
 Maintainer: Roger Leigh <rleigh@debian.org>
 Standards-Version: 3.6.1
-Build-Depends: libcupsys2-dev, libcupsimage2-dev, libreadline4-dev, libijs-dev (>= 0.35-1), debhelper (>= 4.0.2), flex, gettext, zlib1g-dev, foomatic-db-engine (>= 3.0.1-1)
+Build-Depends: libcupsys2-dev, libcupsimage2-dev, libreadline5-dev, libijs-dev (>= 0.35-1), debhelper (>= 4.0.2), flex, gettext, zlib1g-dev, foomatic-db-engine (>= 3.0.1-1)
 
 Package: cupsys-driver-gimpprint
 Architecture: any
 Section: graphics
-Depends: ${shlibs:Depends}, ${perl:Depends}, cupsys-driver-gimpprint-data (= ${Source-Version}), cupsys (>= 1.1.23) | cups (>= 1.1.23)
+Depends: ${shlibs:Depends}, perl (>= 5.8.0), cupsys-driver-gimpprint-data (= ${Source-Version}), cupsys (>= 1.1.23) | cups (>= 1.1.23)
 Recommends: gnome-gv | postscript-viewer
 Suggests: gimpprint-doc (>= ${Source-Version}), gimpprint-locales (>= ${Source-Version})
 Description: Gimp-Print printer drivers for CUPS

@@ -1,3 +1,49 @@
+gutenprint (4.3.99+cvs20050702-1) experimental; urgency=low
+
+  * New upstream release candidate (Closes: #293890).
+  * Renamed package to gutenprint.  The following packages were
+    renamed in consequence:
+    - cupsys-driver-gimpprint renamed to cupsys-driver-gutenprint
+    - foomatic-db-gimp-print renamed to foomatic-db-gutenprint
+    - gimpprint-doc renamed to gutenprint-doc
+    - gimpprint-locales renamed to gutenprint-locales
+    - ijsgimpprint renamed to ijsgutenprint
+    - libgimpprint renamed to libgutenprint
+    - libgimpprint-dev renamed to libgutenprint-dev
+    - libgimpprint-doc renamed to libgutenprint-doc
+  * New packages:
+    - libgimpprintui1-1 (GTK+ 1.2 UI library)
+    - libgimpprintui1-dev (GTK+ 1.2 UI library headers)
+    - libgimpprintui2-1 (GTK+ 2.0 UI library)
+    - libgimpprintui2-dev (GTK+ 2.0 UI library headers)
+  * Upgrade to Standards-Version 3.6.2
+  * Build-Depends:
+    - replace libreadline4-dev with libreadline5-dev
+    - add libcupsimage2-dev
+    - remove libtool
+  * debian/rules: add LIBRARYUI_VERSION, required to support
+    separate sonames for libgutenprint and libgutenprintui*.
+  * cupsys-driver-gutenprint:
+    - add cups-genppdupdate
+    - generates the PPDs in postinst, and removes them in prerm
+    - use new versioned CUPS executables
+  * libgutenprint: add modules and XML data.
+  * libgutenprint-doc:
+    - fix documentation installation for new API reference and
+      developer's reference.
+    - distribute gutenprint.pdf; gutenprint.ps is no longer created.
+  * Remove old and outdated manual pages.
+  * Provide versioned ijsgutenprint manual page, and unversioned
+    symlinks for the binary and manpage.
+  * Create a dummy cupsys-driver-gimpprint package to enable
+    upgrades from stable.
+  * Create a dummy ijsgimpprint package to enable upgrades from stable.
+  * Remove symlinks in debian directory.
+  * Don't autogenerate files in debian directory for anything but the
+    libgutenprintui package.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat,  2 Jul 2005 10:12:46 +0100
+
 gimp-print (4.2.7-10) unstable; urgency=high
 
   * cupsys-driver-gimpprint: Depend on a perl >= 5.8.0, otherwise
@@ -12,7 +58,7 @@ gimp-print (4.2.7-9) unstable; urgency=low
 
   * debian/cups-genppdupdate: Fix grepping of PPDs to work with PPD
     file names with shell metacharacters in them.  Patch from Martin
-    Pitt (Closes: #302434). 
+    Pitt (Closes: #302434).
 
  -- Roger Leigh <rleigh@debian.org>  Thu, 31 Mar 2005 22:10:41 +0100
 

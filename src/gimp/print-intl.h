@@ -1,7 +1,7 @@
 /*
- * "$Id: print-intl.h,v 1.2 2001/09/08 17:17:34 rleigh Exp $"
+ * "$Id: print-intl.h,v 1.6 2004/09/17 18:38:13 rleigh Exp $"
  *
- *   I18N header file for the gimp-print plugin.
+ *   I18N header file for the GIMP Print plugin.
  *
  *   Copyright 1997-2000 Michael Sweet (mike@easysw.com),
  *	Robert Krawitz (rlk@alum.mit.edu) and Michael Natterer (mitch@gimp.org)
@@ -20,17 +20,20 @@
  *   along with this program; if not, write to the Free Software
  *   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
-#ifndef __PRINT_INTL_H__
-#define __PRINT_INTL_H__
+
+#ifndef GIMP_PRINT_INTL_H
+#define GIMP_PRINT_INTL_H
 
 #include <glib.h>
-#include <gimp-print/gimp-print-intl.h>
+#include <gutenprint/gutenprint-intl.h>
 
-#define INIT_LOCALE(domain)   G_STMT_START{ \
-        gtk_set_locale ();                  \
-        setlocale (LC_NUMERIC, "C");        \
-        bindtextdomain (domain, PACKAGE_LOCALE_DIR); \
-        textdomain (domain);                \
-                                }G_STMT_END
+#define INIT_LOCALE(domain)   					\
+do								\
+{								\
+        gtk_set_locale ();					\
+        setlocale (LC_NUMERIC, "C");				\
+        bindtextdomain (domain, PACKAGE_LOCALE_DIR);		\
+        textdomain (domain);					\
+} while (0)
 
-#endif /* __PRINT_INTL_H__ */
+#endif /* GIMP_PRINT_INTL_H */

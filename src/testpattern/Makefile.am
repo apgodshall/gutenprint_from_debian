@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.5.4.3 2002/06/05 23:52:05 rlk Exp $
+## $Id: Makefile.am,v 1.22 2004/09/17 18:38:27 rleigh Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -23,45 +23,43 @@ AUTOMAKE_OPTIONS = 1.4 gnu
 
 MAINT_CHARSET = latin1
 
+include $(top_srcdir)/scripts/global.mk
+
 
 ## Variables
 
-AM_CFLAGS = $(GNUCFLAGS)
-INCLUDES = @INCLUDES@ $(LIBGIMPPRINT_CFLAGS)
-LIBPRINTUT = $(top_builddir)/lib/libprintut.la
-LIBS = @LIBS@ $(INTLLIBS)
+pkgdatadir = $(datadir)/$(PACKAGE)/samples
+
+TESTS = run-testpattern run-testpattern-1
+
 
 ## Programs
 
-TESTPATTERN_BIN = testpattern
+if BUILD_TESTPATTERN
+bin_PROGRAMS = testpattern
+noinst_PROGRAMS = printers
+endif
 
-bin_PROGRAMS = @TESTPATTERN_BIN@
-
-EXTRA_PROGRAMS = testpattern
-
-LFLAGS = -i
-YFLAGS = -d
+AM_LFLAGS = -i
+AM_YFLAGS = -d
 
 testpattern_SOURCES = testpattern.c testpatterny.y testpatternl.l testpattern.h
-testpattern_LDADD = $(LIBPRINTUT) $(LIBGIMPPRINT_LIBS)
-testpattern_DEPENDENCIES = $(LIBGIMPPRINT_LIBS)
+testpattern_LDADD = $(GUTENPRINT_LIBS)
 
 testpatternl.o: testpatterny.o
 testpattern.o: testpatterny.o
 
-$(LIBGIMPPRINT_LIBS):
-	cd ../main ; \
-	$(MAKE)
+printers_LDADD = $(GUTENPRINT_LIBS)
 
-SAMPLE_IMAGES = testpattern.sample
 
-pkgdatadir = $(datadir)/$(PACKAGE)/samples
+## Data
 
-pkgdata_DATA = @SAMPLE_IMAGES@
+pkgdata_DATA = testpattern.sample extended.sample
+
 
 ## Clean
 
-MAINTAINERCLEANFILES = Makefile.in
+MAINTAINERCLEANFILES = Makefile.in testpatternl.c testpatterny.c testpatterny.h
 
-DISTCLEANFILES = testpatternl.c testpatterny.c testpatterny.h
-EXTRA_DIST =  testpatterny.h testpattern.sample
+EXTRA_DIST =  testpatterny.h $(pkgdata_DATA) run-testpattern run-testpattern-1
+

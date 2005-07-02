@@ -1,18 +1,19 @@
-Building the gimp-print Debian packages	                 -*- mode: text -*-
+Building the gutenprint Debian packages	                 -*- mode: text -*-
 =======================================
 
 
 Prerequisites
 -------------
 
-The packages that must be installed to build the gimp-print packages
+The packages that must be installed to build the gutenprint packages
 are listed in the Build-Depends field of the control file
 debian/control[.in].  However, these are the prerequisites to build
-the Debianised source.  Other things may be needed if building
+the Debianised source.  Other packages may be needed if building
 directly from CVS; it is less likely other tools will be needed if
 building from a distributed tarball.  Other tools that might
-potentially be needed are the latest versions of gettext and
-texi2html.
+potentially be needed are the latest versions of gettext, texi2html,
+docbook-utils and imagemagick.  build-essential and devscripts should
+also be installed in order to build Debian packages.
 
 
 General
@@ -56,12 +57,12 @@ Now proceed as for building from a tarball, below.
 Building this package from a tarball
 ------------------------------------
 
-Take the tarball gimp-print-VERSION.tar.gz, and copy it to an empty
-build directory.  Rename it to gimp-print_VERSION.orig.tar.gz.  This
+Take the tarball gutenprint-VERSION.tar.gz, and copy it to an empty
+build directory.  Rename it to gutenprint_VERSION.orig.tar.gz.  This
 is the `upstream' source.  Then extract this with:
 
-$ tar xfvz gimp-print_VERSION.orig.tar.gz
-$ cd gimp-print-VERSION
+$ tar xfvz gutenprint_VERSION.orig.tar.gz
+$ cd gutenprint-VERSION
 
 If needed, modify debian/changelog to change the version
 numbering. The version number should be the same as the package
@@ -80,13 +81,11 @@ $ dpkg-buildpackage -rfakeroot -us -uc
 or
 $ debuild -us -uc -L -i
 
-It should build without problems on Debian 3.0 (woody), but will no
-longer build on Debian 2.2 (potato) and current testing (sarge) and
-unstable distributions (sid).  For sarge or sid, please use the
-official Debian packages, or apply the Debian patch (.diff.gz).
+It should build without problems on Debian 3.0 (woody) and unstable,
+but will no longer build on Debian 2.2 (potato) current testing and
+unstable distributions.
 
 
 I hope you like it!
 
-Roger Leigh <roger@whinlatter.uklinux.net> -- Sat, 06 Dec 2003 16:47:46 +0000
-
+Roger Leigh <rleigh@debian.org> -- Sun, 12 Sep 2004 10:51:39 +0100

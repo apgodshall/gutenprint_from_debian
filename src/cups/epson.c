@@ -1,5 +1,5 @@
 /*
- * "$Id: epson.c,v 1.3.2.5 2003/01/25 00:51:41 rlk Exp $"
+ * "$Id: epson.c,v 1.6 2002/12/22 21:03:32 rleigh Exp $"
  *
  *   EPSON backend for the Common UNIX Printing System.
  *
@@ -765,5 +765,5 @@ list_devices(void)
 
 
 /*
- * End of "$Id: epson.c,v 1.3.2.5 2003/01/25 00:51:41 rlk Exp $".
+ * End of "$Id: epson.c,v 1.6 2002/12/22 21:03:32 rleigh Exp $".
  */

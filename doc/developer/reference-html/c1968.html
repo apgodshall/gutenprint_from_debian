@@ -1,27 +1,24 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Dithering</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="PREVIOUS"
 TITLE="Weaving algorithms"
 HREF="x1734.html"><LINK
 REL="NEXT"
 TITLE="GNU General Public License"
-HREF="a2122.html"></HEAD
+HREF="gpl.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="chapter"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -56,7 +53,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="a2122.html"
+HREF="gpl.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -105,9 +102,9 @@ CLASS="filename"
 CLASS="variablelist"
 ><DL
 ><DT
-><TT
+><VAR
 CLASS="literal"
->dither_fastblack</TT
+>dither_fastblack</VAR
 ></DT
 ><DD
 ><P
@@ -119,9 +116,9 @@ CLASS="literal"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->dither_black</TT
+>dither_black</VAR
 ></DT
 ><DD
 ><P
@@ -132,9 +129,9 @@ CLASS="literal"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->dither_cmyk</TT
+>dither_cmyk</VAR
 ></DT
 ><DD
 ><P
@@ -149,7 +146,7 @@ CLASS="literal"
 ><P
 >&#13;    There is a choice of dithering algorithms.  Four of them are
     based on a basic error diffusion, with a few tweaks of my own.
-    The other one is &#8216;ordered&#8217;.  However, they all share
+    The other one is ‘ordered’.  However, they all share
     the basic operation in common.  First, the algorithm picks what
     kind of dot (if there are multiple dot sizes and/or tones that
     may be picked) is the candidate to be printed.  This decision is
@@ -186,7 +183,7 @@ CLASS="literal"
   </P
 ><P
 >&#13;    Error diffusion works by taking the output error at a given
-    pixel and &#8220;diffusing&#8221; it into surrounding pixels.
+    pixel and “diffusing” it into surrounding pixels.
     Output error is the difference between the amount of ink output
     and the input level at each pixel.  For simple printers, with
     one or four ink colors and only one dot size, the amount of ink
@@ -208,7 +205,7 @@ CLASS="literal"
   </P
 ><P
 >&#13;    There are two sub-classes of error diffusion that we use here,
-    &#8216;random&#8217; and &#8216;hybrid&#8217;.  One of the
+    ‘random’ and ‘hybrid’.  One of the
     techniques that we use to ameliorate the artifacts is to use a
     fuzzy threshold rather than the hard threshold of half of the
     output level.  Random error diffusion uses a pseudo-random
@@ -219,7 +216,7 @@ CLASS="literal"
   </P
 ><P
 >&#13;    There is one additional variant (on both sub-classes), called
-    &#8216;adaptive hybrid&#8217; and &#8216;adaptive random&#8217;.
+    ‘adaptive hybrid’ and ‘adaptive random’.
     The adaptive variant takes advantage of the fact that the
     patterns that ordered dithering create are less visible at very
     low densities, while the artifacts created by error diffusion
@@ -240,7 +237,7 @@ CLASS="literal"
 >&#13;    The next question: how do we handle black when printing in
     color?  Black ink is much darker than colored inks.  It's
     possible to produce black by adding some mixture of cyan,
-    magenta, and yellow&#8212;in principle.  In practice, the black
+    magenta, and yellow—in principle.  In practice, the black
     really isn't very black, and different inks and different papers
     will produce different color casts.  However, by using CMY to
     produce gray, we can output a lot more dots!  This makes for a
@@ -325,7 +322,7 @@ TYPE="1"
 ></LI
 ><LI
 ><P
->&#13;        Compute the &#8220;virtual value&#8221;.  The virtual value
+>&#13;        Compute the “virtual value”.  The virtual value
         is the distance between the value of the lighter and the
         value of the darker ink.  So if the value of the light ink
         is 32768 and the dark ink is 65536, we compute a virtual
@@ -366,7 +363,7 @@ HREF="mailto:ttonino@bio.vu.nl"
     requires careful selection of initial points to achieve good
     results, and is very time consuming.  For best results, a
     different matrix must be used for modes with 2:1 aspect ratio
-    (e.g. 1440�720) than for 1:1 (e. g. 720�720).  It is
+    (e.g. 1440×720) than for 1:1 (e. g. 720×720).  It is
     essential with any of these matrices that every point be used.
     Skipping points generates low-frequency noise.
   </P
@@ -485,16 +482,16 @@ CLASS="emphasis"
 ></LI
 ><LI
 ><P
->&#13;        Oversampling.  This is how to print 1440�720 with Epson
-        Stylus printers.  Printing full density at 1440�720 will
+>&#13;        Oversampling.  This is how to print 1440×720 with Epson
+        Stylus printers.  Printing full density at 1440×720 will
         result in excess ink being laid down.  The trick is to print
         only every other dot.  We still compute the error as though we
         printed every dot.  It turns out that randomizing which dots
         are printed results in very speckled output.  This can be
-        taken too far; oversampling at 1440�1440 or
-        1440�2880 virtual resolution results in other problems.
-        However, at present 1440�1440 (which is more accurately
-        called "1440�720 enhanced", as the Epson printers cannot
+        taken too far; oversampling at 1440×1440 or
+        1440×2880 virtual resolution results in other problems.
+        However, at present 1440×1440 (which is more accurately
+        called "1440×720 enhanced", as the Epson printers cannot
         print 1440 rows per inch) does quite well, although it's slow.
       </P
 ></LI
@@ -819,23 +816,23 @@ CLASS="function"
 CLASS="function"
 >dither_set_X_ranges_simple</CODE
 >
-        (<TT
+        (<VAR
 CLASS="literal"
->X</TT
-> = <TT
+>X</VAR
+> = <VAR
 CLASS="literal"
->c</TT
+>c</VAR
 >,
-        <TT
+        <VAR
 CLASS="literal"
->m</TT
->, <TT
+>m</VAR
+>, <VAR
 CLASS="literal"
->y</TT
+>y</VAR
 > or
-        <TT
+        <VAR
 CLASS="literal"
->k</TT
+>k</VAR
 >) describes the ink choices available
         for each color.  This is useful in typical cases where a
         four color printer with variable dot sizes is in use.  It is
@@ -864,23 +861,23 @@ CLASS="function"
 CLASS="function"
 >dither_set_X_ranges</CODE
 >
-        (<TT
+        (<VAR
 CLASS="literal"
->X</TT
-> = <TT
+>X</VAR
+> = <VAR
 CLASS="literal"
->c</TT
+>c</VAR
 >,
-        <TT
+        <VAR
 CLASS="literal"
->m</TT
->, <TT
+>m</VAR
+>, <VAR
 CLASS="literal"
->y</TT
+>y</VAR
 > or
-        <TT
+        <VAR
 CLASS="literal"
->k</TT
+>k</VAR
 >) describes in a more general way the
         ink choices available for each color.  For each possible ink
         choice, a bit pattern, dot size, value (i. e. relative
@@ -915,7 +912,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD
@@ -924,7 +921,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="a2122.html"
+HREF="gpl.html"
 ACCESSKEY="N"
 >Next</A
 ></TD

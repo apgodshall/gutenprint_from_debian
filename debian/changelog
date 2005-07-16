@@ -1,3 +1,13 @@
+gutenprint (4.3.99+cvs20050715-1) unstable; urgency=low
+
+  * New upstream release candidate.
+  * debian/control.in: Change Maintainer to Debian Printing Group
+    <debian-printing@lists.debian.org>.
+  * debian/rules: Don't build translated PPDs.  They may be generated
+    after installation by the user.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 16 Jul 2005 22:45:28 +0100
+
 gutenprint (4.3.99+cvs20050702-1) experimental; urgency=low
 
   * New upstream release candidate (Closes: #293890).

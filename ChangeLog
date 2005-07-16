@@ -1,3 +1,98 @@
+2005-07-15	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.225) (+13 -8)
+		README (1.150) (+76 -71)
+
+	Minor updates
+
+2005-07-15	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.128) (+5 -3)
+
+	Turn on PPD file translation.
+
+2005-07-15	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.224) (+12 -8)
+
+	Note bug fix for boundary condition with 6-color printing.
+
+2005-07-14	<rlk@sourceforge.net>
+
+	Files:	src/main/channel.c (1.29) (+3 -1)
+
+	Fix boundary condition identified by Stephen Tweedie.
+
+2005-07-13	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.223) (+282 -483)
+		README (1.149) (+30 -36)
+
+	Prep for 5.0.0-rc1
+
+2005-07-13	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.9) (+1 -1)
+
+	Properly identify branch lists in comments.
+
+2005-07-04	<rleigh@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.20) (+2 -3)
+
+	Relax PPD permissions and ownership checks.
+
+2005-07-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.222) (+1 -1)
+
+	Advance release.
+
+2005-07-04	<rlk@sourceforge.net>
+
+	Files:	src/main/color-conversion.h (1.10) (+1 -2)
+		src/main/color-conversions.c (1.20) (+1 -106)
+		src/main/print-color.c (1.131) (+1 -3)
+
+	Remove dead code
+
+2005-07-04	<rlk@sourceforge.net>
+
+	Files:	src/main/channel.c (1.28) (+35 -22)
+
+	Fix all known combinations of split output, GCR, extra color channels,
+	and gloss.
+
+2005-07-03	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/channel.h (1.6) (+3 -1)
+		src/main/channel.c (1.27) (+113 -5)
+		src/main/color-conversions.c (1.19) (+27 -23)
+		src/main/escp2-channels.c (1.56) (+5 -5)
+		src/main/escp2-papers.c (1.77) (+35 -35)
+		src/main/print-canon.c (1.156) (+9 -9)
+		src/main/print-color.c (1.130) (+44 -21)
+		src/main/print-escp2.c (1.341) (+25 -25)
+		src/main/print-lexmark.c (1.150) (+9 -9)
+		src/main/print-pcl.c (1.139) (+9 -9)
+
+	Do the composite generation in GCR by adding the composite component
+	back in rather than subtracting the black ink component out.  This
+	enables us to adjust the grayscale without changing the channel
+	densities, which permits us to get more gamut out of inksets
+	with radically unbalanced colors.
+
+	***NOTE*** At present, gloss generation is broken (segfaults).
+	This does not appear to be a new problem; I still need to identify
+	where this broke.
+
+2005-07-02	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.55) (+3 -3)
+		src/main/escp2-papers.c (1.76) (+20 -20)
+
+	Improvements for the R300.
+
 2005-07-01	<rleigh@sourceforge.net>
 
 	Files:	Makefile.am (1.143) (+2 -19)
@@ -196,32 +291,11 @@
 
 2005-06-07	<rlk@sourceforge.net>
 
-	Files:	src/main/print-escp2.h (1.93) (+5 -2)
-
-	branches:  1.93.2;  1.93.4;
-	New formulation of DuraBrite inks on C82, C84, and C86 permit using
-	black ink with glossy paper.
-
-2005-06-07	<rlk@sourceforge.net>
-
-	Files:	src/main/escp2-papers.c (1.68) (+89 -1)
-
-	branches:  1.68.2;  1.68.4;
-	New formulation of DuraBrite inks on C82, C84, and C86 permit using
-	black ink with glossy paper.
-
-2005-06-07	<rlk@sourceforge.net>
-
-	Files:	src/main/print-escp2-data.c (1.175) (+4 -4)
-
-	New formulation of DuraBrite inks on C82, C84, and C86 permit using
-	black ink with glossy paper.
-
-2005-06-07	<rlk@sourceforge.net>
-
 	Files:	src/main/escp2-channels.c (1.51) (+15 -4)
+		src/main/escp2-papers.c (1.68) (+89 -1)
+		src/main/print-escp2-data.c (1.175) (+4 -4)
+		src/main/print-escp2.h (1.93) (+5 -2)
 
-	branches:  1.51.2;  1.51.4;
 	New formulation of DuraBrite inks on C82, C84, and C86 permit using
 	black ink with glossy paper.
 
@@ -286,27 +360,14 @@
 
 2005-05-08	<rlk@sourceforge.net>
 
-	Files:	src/main/color-conversions.c (1.16) (+43 -42)
+	Files:	src/main/channel.c (1.25) (+17 -8)
+		src/main/color-conversions.c (1.16) (+43 -42)
 		src/main/escp2-channels.c (1.49) (+3 -3)
 		src/main/escp2-papers.c (1.67) (+102 -102)
 		src/main/print-canon.c (1.155) (+7 -7)
 		src/main/print-lexmark.c (1.149) (+7 -7)
 		src/main/print-pcl.c (1.138) (+7 -7)
 
-	Simplify and improve luminosity correction by performing the luminosity
-	adjustment on the color component only, ignoring the gray component.
-	This solves some problems with dark cyans and greens, whereby they
-	improperly lose some gray component.  This requires retuning all
-	printers, which has been approximated here.
-
-	Improve tunings of R800.  In particular, use much less yellow ink.
-	The yellow ink on the R800 appears to be very strong indeed.
-
-2005-05-08	<rlk@sourceforge.net>
-
-	Files:	src/main/channel.c (1.25) (+17 -8)
-
-	branches:  1.25.2;  1.25.4;
 	Simplify and improve luminosity correction by performing the luminosity
 	adjustment on the color component only, ignoring the gray component.
 	This solves some problems with dark cyans and greens, whereby they
@@ -378,7 +439,6 @@
 
 	Files:	src/escputil/escputil.c (1.74) (+1 -2)
 
-	branches:  1.74.2;  1.74.4;
 	Remove inappropriate close call.
 
 2005-04-25	<rlk@sourceforge.net>
@@ -646,13 +706,7 @@
 2005-04-15	<rlk@sourceforge.net>
 
 	Files:	src/main/escp2-inks.c (1.37) (+4 -2)
-
-	branches:  1.37.2;  1.37.4;
-	Use only the smallest drop size at 2880x2880 on R800
-
-2005-04-15	<rlk@sourceforge.net>
-
-	Files:	src/main/print-escp2-data.c (1.171) (+2 -2)
+		src/main/print-escp2-data.c (1.171) (+2 -2)
 
 	Use only the smallest drop size at 2880x2880 on R800
 
@@ -765,7 +819,6 @@
 
 	Files:	src/gutenprintui2/plist.c (1.4) (+3 -3)
 
-	branches:  1.4.2;  1.4.4;
 	Quote printer queue names (from Sven Neumann)
 
 2005-04-09	<rlk@sourceforge.net>
@@ -835,23 +888,10 @@
 
 2005-04-05	<rlk@sourceforge.net>
 
-	Files:	src/main/print-escp2.h (1.91) (+10 -2)
-
-	Autodetect printer, and print ink colors in escputil appropriate
-	for the printer.
-
-2005-04-05	<rlk@sourceforge.net>
-
-	Files:	src/main/print-escp2.c (1.335) (+19 -1)
-
-	branches:  1.335.2;  1.335.4;
-	Autodetect printer, and print ink colors in escputil appropriate
-	for the printer.
-
-2005-04-05	<rlk@sourceforge.net>
-
 	Files:	src/escputil/escputil.c (1.66) (+113 -64)
 		src/main/print-escp2-data.c (1.170) (+152 -70)
+		src/main/print-escp2.c (1.335) (+19 -1)
+		src/main/print-escp2.h (1.91) (+10 -2)
 
 	Autodetect printer, and print ink colors in escputil appropriate
 	for the printer.
@@ -933,21 +973,10 @@
 
 2005-03-28	<rlk@sourceforge.net>
 
-	Files:	src/main/print-escp2.c (1.332) (+16 -4)
-
-	Add support for gloss enhancer
-
-2005-03-28	<rlk@sourceforge.net>
-
 	Files:	include/gutenprint/channel.h (1.4) (+3 -1)
-
-	branches:  1.4.2;  1.4.4;
-	Add support for gloss enhancer
-
-2005-03-28	<rlk@sourceforge.net>
-
-	Files:	src/main/channel.c (1.22) (+104 -21)
+		src/main/channel.c (1.22) (+104 -21)
 		src/main/escp2-channels.c (1.42) (+11 -11)
+		src/main/print-escp2.c (1.332) (+16 -4)
 
 	Add support for gloss enhancer
 
@@ -6086,7 +6115,6 @@
 
 	Files:	src/main/print-util.c (1.99) (+1 -21)
 
-	branches:  1.99.2;  1.99.6;
 	Finish getting rid of xio.
 
 2003-07-24	<rlk@sourceforge.net>
@@ -7426,7 +7454,6 @@
 
 	Files:	NEWS (1.102) (+15 -16)
 
-	branches:  1.102.2;  1.102.4;
 	Prep for 4.3.14
 
 2003-05-11	<rlk@sourceforge.net>
@@ -7649,7 +7676,6 @@
 
 	Files:	po/cs.po (1.1) ( )
 
-	branches:  1.1.2;  1.1.4;
 	file cs.po was initially added on branch gimp-print-4_2_branch.
 
 2003-04-28	<rlk@sourceforge.net>
@@ -7899,19 +7925,10 @@
 
 2003-04-10	<rlk@sourceforge.net>
 
-	Files:	src/main/printers.xml (1.71) (+33 -1)
-
-	branches:  1.71.4;  1.71.6;
-	Add support for Japanese Epson printers CL-760, PM-740C, PM-870C,
-	PM-930C, and PM-3700C.  I'm confident about all of these printers
-	except for the PM-930C (the spacing may be wrong) and the PM-870C
-	(may be equivalent to the Stylus Photo 925 rather than the 915).
-
-2003-04-10	<rlk@sourceforge.net>
-
 	Files:	NEWS (1.96) (+10 -0)
 		src/foomatic/foomatic-printermap (1.53) (+5 -0)
 		src/main/print-escp2-data.c (1.104) (+17 -1)
+		src/main/printers.xml (1.71) (+33 -1)
 
 	Add support for Japanese Epson printers CL-760, PM-740C, PM-870C,
 	PM-930C, and PM-3700C.  I'm confident about all of these printers
@@ -8317,7 +8334,6 @@
 
 	Files:	src/main/module.c (1.11) (+3 -2)
 
-	branches:  1.11.4;  1.11.6;
 	Check that a module exists before attempting to close it.
 
 2003-03-19	<rleigh@sourceforge.net>
@@ -8991,7 +9007,19 @@
 
 2003-01-20	<rlk@sourceforge.net>
 
-	Files:	src/main/module.c (1.7) (+90 -90)
+	Files:	src/main/Makefile.am (1.62) (+1 -2)
+		src/main/bit-ops.c (1.2) (+29 -29)
+		src/main/curve.c (1.22) (+77 -77)
+		src/main/dither-ed.c (1.3) (+33 -33)
+		src/main/dither-eventone.c (1.4) (+40 -40)
+		src/main/dither-impl.h (1.3) (+32 -32)
+		src/main/dither-inks.c (1.2) (+58 -58)
+		src/main/dither-inlined-functions.h (1.2) (+4 -4)
+		src/main/dither-main.c (1.4) (+82 -82)
+		src/main/dither-ordered.c (1.3) (+14 -14)
+		src/main/dither-very-fast.c (1.3) (+13 -13)
+		src/main/image.c (1.3) (+18 -18)
+		src/main/module.c (1.7) (+90 -90)
 		src/main/path.c (1.6) (+26 -26)
 		src/main/print-canon.c (1.106) (+121 -121)
 		src/main/print-color.c (1.52) (+60 -60)
@@ -9014,29 +9042,6 @@
 		src/main/xml.c (1.9) (+68 -68)
 		test/escp2-weavetest.c (1.24) (+8 -8)
 		test/testdither.c (1.28) (+64 -64)
-
-	Rename all internal stp_ things to stpi_
-
-2003-01-20	<rlk@sourceforge.net>
-
-	Files:	src/main/image.c (1.3) (+18 -18)
-
-	branches:  1.3.12;  1.3.16;
-	Rename all internal stp_ things to stpi_
-
-2003-01-20	<rlk@sourceforge.net>
-
-	Files:	src/main/Makefile.am (1.62) (+1 -2)
-		src/main/bit-ops.c (1.2) (+29 -29)
-		src/main/curve.c (1.22) (+77 -77)
-		src/main/dither-ed.c (1.3) (+33 -33)
-		src/main/dither-eventone.c (1.4) (+40 -40)
-		src/main/dither-impl.h (1.3) (+32 -32)
-		src/main/dither-inks.c (1.2) (+58 -58)
-		src/main/dither-inlined-functions.h (1.2) (+4 -4)
-		src/main/dither-main.c (1.4) (+82 -82)
-		src/main/dither-ordered.c (1.3) (+14 -14)
-		src/main/dither-very-fast.c (1.3) (+13 -13)
 
 	Rename all internal stp_ things to stpi_
 
@@ -11667,24 +11672,6 @@
 
 2002-08-21	<rlk@sourceforge.net>
 
-	Files:	src/testpattern/testpattern.c (1.8) (+197 -22)
-		src/testpattern/testpattern.h (1.4) (+23 -1)
-		src/testpattern/testpatternl.l (1.4) (+10 -1)
-		src/testpattern/testpatterny.y (1.5) (+76 -4)
-		test/testdither.c (1.16) (+8 -3)
-		test/unprint.c (1.24) (+35 -5)
-
-	Allow specification of individual physical input channels
-
-2002-08-21	<rlk@sourceforge.net>
-
-	Files:	src/testpattern/extended.sample (1.2) (+117 -0)
-
-	branches:  1.2.2;  1.2.6;
-	Allow specification of individual physical input channels
-
-2002-08-21	<rlk@sourceforge.net>
-
 	Files:	NEWS (1.74) (+15 -1)
 		configure.ac (1.18) (+30 -16)
 		po/POTFILES.in (1.13) (+1 -0)
@@ -11700,6 +11687,13 @@
 		src/main/print-pcl.c (1.55) (+5 -3)
 		src/main/print-util.c (1.68) (+2 -2)
 		src/main/printers.xml (1.51) (+85 -4)
+		src/testpattern/extended.sample (1.2) (+117 -0)
+		src/testpattern/testpattern.c (1.8) (+197 -22)
+		src/testpattern/testpattern.h (1.4) (+23 -1)
+		src/testpattern/testpatternl.l (1.4) (+10 -1)
+		src/testpattern/testpatterny.y (1.5) (+76 -4)
+		test/testdither.c (1.16) (+8 -3)
+		test/unprint.c (1.24) (+35 -5)
 
 	Allow specification of individual physical input channels
 
@@ -12406,7 +12400,6 @@
 
 	Files:	po/es.po (1.1) ( )
 
-	branches:  1.1.2;  1.1.4;
 	Spanish translation
 
 2002-04-28	<rlk@sourceforge.net>
@@ -12495,7 +12488,6 @@
 
 	Files:	src/main/print-escp2-data.c (1.15) (+2 -2)
 
-	branches:  1.15.2;  1.15.4;  1.15.6;
 	Change settings for Matte paper and 4 color printers.
 
 2002-04-09	<rleigh@sourceforge.net>
@@ -12565,30 +12557,10 @@
 
 2002-04-07	<andystewart@sourceforge.net>
 
-	Files:	doc/users_guide/history.sgml (1.1) ( )
-
-	branches:  1.1.2;  1.1.4;
-
-
-	Renamed files to make it easier to deal with multiple versions
-	of the manual.  Fixed (I think) the make dist problem in Makefile.am.
-	Updated users-guide.sgml to use new file names for chapter files.
-
-2002-04-07	<andystewart@sourceforge.net>
-
-	Files:	doc/users_guide/gimp.sgml (1.1) ( )
-
-	branches:  1.1.2;  1.1.4;  1.1.34;
-
-
-	Renamed files to make it easier to deal with multiple versions
-	of the manual.  Fixed (I think) the make dist problem in Makefile.am.
-	Updated users-guide.sgml to use new file names for chapter files.
-
-2002-04-07	<andystewart@sourceforge.net>
-
 	Files:	doc/users_guide/Makefile.am (1.33) (+6 -6)
 		doc/users_guide/cups.sgml (1.1) ( )
+		doc/users_guide/gimp.sgml (1.1) ( )
+		doc/users_guide/history.sgml (1.1) ( )
 		doc/users_guide/title.sgml (1.1) ( )
 		doc/users_guide/users-guide.sgml (1.6) (+10 -10)
 		doc/users_guide/utils.sgml (1.1) ( )
@@ -12636,18 +12608,8 @@
 
 2002-04-06	<andystewart@sourceforge.net>
 
-	Files:	doc/users_guide/gfdl.sgml (1.1) ( )
-
-	branches:  1.1.2;  1.1.4;
-
-
-	Added chapter 4, the description of the escputil utility.  Chapters now
-	have their own separate files and the entire document is pulled together
-	via the users-guide.sgml file.  This necessitated a few Makefile changes.
-
-2002-04-06	<andystewart@sourceforge.net>
-
 	Files:	doc/users_guide/Makefile.am (1.31) (+21 -6)
+		doc/users_guide/gfdl.sgml (1.1) ( )
 		doc/users_guide/users-guide.sgml (1.5) (+15 -1869)
 
 
@@ -12898,16 +12860,9 @@
 
 2002-03-17	<rlk@sourceforge.net>
 
-	Files:	src/main/print-escp2.h (1.7) (+17 -1)
-
-	branches:  1.7.2;  1.7.4;  1.7.6;
-	Put inkname list (three color CMY, six color photo, etc.) into
-	printer list.
-
-2002-03-17	<rlk@sourceforge.net>
-
 	Files:	src/main/print-escp2-data.c (1.12) (+100 -47)
 		src/main/print-escp2.c (1.157) (+20 -56)
+		src/main/print-escp2.h (1.7) (+17 -1)
 
 	Put inkname list (three color CMY, six color photo, etc.) into
 	printer list.
@@ -13273,13 +13228,7 @@
 2001-12-23	<rlk@sourceforge.net>
 
 	Files:	test/run-testdither (1.3) (+6 -3)
-
-	branches:  1.3.2;  1.3.4;  1.3.6;
-	A bit more cleanup work on the dither code.
-
-2001-12-23	<rlk@sourceforge.net>
-
-	Files:	test/testdither.c (1.14) (+4 -4)
+		test/testdither.c (1.14) (+4 -4)
 
 	A bit more cleanup work on the dither code.
 
@@ -13718,7 +13667,6 @@
 
 	Files:	src/main/print-ps.c (1.26) (+10 -4)
 
-	branches:  1.26.2;  1.26.4;
 	Correct comments from Russell Lang <gsview@ghostgum.com.au>.  Reviewed
 	by Mike Sweet.
 
@@ -14013,20 +13961,6 @@
 
 2001-10-27	<rlk@sourceforge.net>
 
-	Files:	test/parse-escp2 (1.5) (+1 -1)
-
-	branches:  1.5.2;  1.5.6;
-	Strip trailing whitespace
-
-2001-10-27	<rlk@sourceforge.net>
-
-	Files:	src/testpattern/testpatterny.y (1.3) (+6 -6)
-
-	branches:  1.3.2;  1.3.6;
-	Strip trailing whitespace
-
-2001-10-27	<rlk@sourceforge.net>
-
 	Files:	Makefile.am (1.119) (+2 -2)
 		doc/FAQ.html (1.7) (+3 -3)
 		doc/Makefile.am (1.24) (+2 -2)
@@ -14040,7 +13974,9 @@
 		src/main/print-canon.c (1.71) (+2 -2)
 		src/main/print-escp2.c (1.138) (+2 -2)
 		src/main/print-lexmark.c (1.61) (+90 -90)
+		src/testpattern/testpatterny.y (1.3) (+6 -6)
 		test/parse-bjc (1.3) (+3 -3)
+		test/parse-escp2 (1.5) (+1 -1)
 
 	Strip trailing whitespace
 
@@ -14192,7 +14128,6 @@
 
 	Files:	src/main/print-color.c (1.26) (+8 -2)
 
-	branches:  1.26.2;  1.26.4;
 	473849 Indexed images print incorrectly in color
 
 2001-10-20	<rlk@sourceforge.net>
@@ -14845,7 +14780,6 @@
 
 	Files:	src/testpattern/testpattern.c (1.6) (+5 -1)
 
-	branches:  1.6.4;  1.6.8;
 	Set a reasonable default resolution for use with Postscript driver.
 
 2001-10-01	<rlk@sourceforge.net>
@@ -14915,7 +14849,6 @@
 
 	Files:	test/unprint.c (1.22) (+64 -61)
 
-	branches:  1.22.4;  1.22.8;
 	More cleanup
 
 2001-09-28	<rlk@sourceforge.net>
@@ -15097,13 +15030,6 @@
 
 2001-09-17	<rleigh@sourceforge.net>
 
-	Files:	src/main/Makefile.am (1.27) (+3 -2)
-
-	branches:  1.27.2;  1.27.4;  1.27.6;
-	Remove non-portable 'make -C' usage.
-
-2001-09-17	<rleigh@sourceforge.net>
-
 	Files:	.cvsignore (1.15) (+1 -0)
 		Makefile.am (1.111) (+11 -6)
 		po/en_GB.po (1.49) (+99 -143)
@@ -15111,6 +15037,7 @@
 		src/foomatic/Makefile.am (1.13) (+3 -2)
 		src/ghost/Makefile.am (1.15) (+3 -2)
 		src/gimp/Makefile.am (1.17) (+3 -2)
+		src/main/Makefile.am (1.27) (+3 -2)
 		src/testpattern/Makefile.am (1.5) (+3 -2)
 		test/Makefile.am (1.27) (+3 -2)
 
@@ -15293,29 +15220,17 @@
 
 2001-09-08	<rleigh@sourceforge.net>
 
-	Files:	src/main/print-dither-matrices.c (1.4) (+2 -2)
-
-	branches:  1.4.4;  1.4.6;
-	All source uses the new i18n header in include/gimp-print
-
-2001-09-08	<rleigh@sourceforge.net>
-
-	Files:	src/main/print-weave.c (1.36) (+3 -3)
-
-	branches:  1.36.4;  1.36.6;
-	All source uses the new i18n header in include/gimp-print
-
-2001-09-08	<rleigh@sourceforge.net>
-
 	Files:	src/main/Makefile.am (1.26) (+1 -2)
 		src/main/print-canon.c (1.67) (+3 -3)
 		src/main/print-color.c (1.24) (+3 -3)
+		src/main/print-dither-matrices.c (1.4) (+2 -2)
 		src/main/print-escp2.c (1.111) (+3 -3)
 		src/main/print-lexmark.c (1.53) (+3 -3)
 		src/main/print-pcl.c (1.44) (+3 -3)
 		src/main/print-ps.c (1.25) (+3 -3)
 		src/main/print-util.c (1.47) (+3 -3)
 		src/main/print-version.c (1.6) (+3 -3)
+		src/main/print-weave.c (1.36) (+3 -3)
 
 	All source uses the new i18n header in include/gimp-print
 
@@ -15405,22 +15320,6 @@
 
 2001-09-02	<rlk@sourceforge.net>
 
-	Files:	test/escp2-weavetest.c (1.19) (+2 -2)
-
-	branches:  1.19.4;  1.19.6;
-	Move gimp-print.h such that <gimp-print/gimp-print.h> works both
-	within the source tree and outside it.
-
-2001-09-02	<rlk@sourceforge.net>
-
-	Files:	test/testdither.c (1.11) (+3 -3)
-
-	branches:  1.11.4;  1.11.6;
-	Move gimp-print.h such that <gimp-print/gimp-print.h> works both
-	within the source tree and outside it.
-
-2001-09-02	<rlk@sourceforge.net>
-
 	Files:	Makefile.am (1.108) (+2 -2)
 		include/.cvsignore (1.1) ( )
 		include/Makefile.am (1.1) ( )
@@ -15443,6 +15342,8 @@
 		src/main/print-version.c (1.5) (+2 -2)
 		src/main/print-weave.c (1.35) (+2 -2)
 		src/testpattern/testpattern.c (1.4) (+62 -51)
+		test/escp2-weavetest.c (1.19) (+2 -2)
+		test/testdither.c (1.11) (+3 -3)
 
 	Move gimp-print.h such that <gimp-print/gimp-print.h> works both
 	within the source tree and outside it.
@@ -15463,14 +15364,8 @@
 
 2001-09-01	<rlk@sourceforge.net>
 
-	Files:	src/testpattern/testpattern.sample (1.4) (+114 -3)
-
-	branches:  1.4.2;  1.4.14;  1.4.18;
-	Cleanup and comment.
-
-2001-09-01	<rlk@sourceforge.net>
-
 	Files:	src/testpattern/testpattern.c (1.3) (+1 -51)
+		src/testpattern/testpattern.sample (1.4) (+114 -3)
 
 	Cleanup and comment.
 
@@ -15703,16 +15598,10 @@
 
 2001-08-14	<rlk@sourceforge.net>
 
-	Files:	src/testpattern/testpattern.h (1.2) (+1 -5)
-		src/testpattern/testpatternl.l (1.2) (+5 -1)
-
-	branches:  1.2.2;  1.2.6;  1.2.10;
-	Putting config.h in the header doesn't seem to work...
-
-2001-08-14	<rlk@sourceforge.net>
-
 	Files:	src/testpattern/Makefile.am (1.3) (+2 -2)
 		src/testpattern/testpattern.c (1.2) (+5 -1)
+		src/testpattern/testpattern.h (1.2) (+1 -5)
+		src/testpattern/testpatternl.l (1.2) (+5 -1)
 		src/testpattern/testpatterny.y (1.2) (+5 -1)
 
 	Putting config.h in the header doesn't seem to work...
@@ -16903,16 +16792,10 @@
 
 2001-06-04	<rleigh@sourceforge.net>
 
-	Files:	src/main/.cvsignore (1.4) (+1 -0)
-
-	branches:  1.4.6;  1.4.8;
-	Update .cvsignore
-
-2001-06-04	<rleigh@sourceforge.net>
-
 	Files:	.cvsignore (1.14) (+1 -0)
 		debian/.cvsignore (1.5) (+1 -0)
 		doc/.cvsignore (1.2) (+3 -0)
+		src/main/.cvsignore (1.4) (+1 -0)
 
 	Update .cvsignore
 
@@ -16935,15 +16818,6 @@
 
 2001-06-03	<rlk@sourceforge.net>
 
-	Files:	test/pcl-unprint.c (1.5) (+35 -35)
-
-	branches:  1.5.6;  1.5.8;
-	Fix a lot of warnings.
-
-	Improve color quality on plain paper with Epson printers.
-
-2001-06-03	<rlk@sourceforge.net>
-
 	Files:	src/cups/canon.c (1.2) (+1 -1)
 		src/cups/commandtoepson.c (1.2) (+3 -3)
 		src/cups/epson.c (1.2) (+3 -3)
@@ -16962,6 +16836,7 @@
 		src/main/print-util.c (1.28) (+39 -39)
 		src/main/print-weave.c (1.24) (+3 -3)
 		test/bjc-unprint.c (1.5) (+4 -4)
+		test/pcl-unprint.c (1.5) (+35 -35)
 		test/testdither.c (1.10) (+4 -4)
 
 	Fix a lot of warnings.
@@ -17571,15 +17446,8 @@
 
 2001-04-21	<rlk@sourceforge.net>
 
-	Files:	src/foomatic/foomatic-generator.in (1.3) (+10 -10)
-
-	branches:  1.3.2;  1.3.4;
-	Extract data correctly from the library rather than trying to parse
-	source files.
-
-2001-04-21	<rlk@sourceforge.net>
-
 	Files:	src/foomatic/Makefile.am (1.4) (+11 -3)
+		src/foomatic/foomatic-generator.in (1.3) (+10 -10)
 		src/foomatic/paper_sizes.c (1.1) ( )
 
 	Extract data correctly from the library rather than trying to parse
@@ -18139,7 +18007,6 @@
 
 	Files:	test/bjc-unprint.c (1.2) (+21 -0)
 
-	branches:  1.2.2;  1.2.4;
 	Added copyright information
 
 2001-03-01	<gandy@sourceforge.net>
@@ -18445,21 +18312,14 @@
 
 	Files:	src/main/Makefile.am (1.13) (+2 -2)
 
-	branches:  1.13.2;  1.13.4;
 	Enable --disable-libgimpprint (link with previously installed version)
 	Update gimppprint.m4 (help message alignment fixed)
 
 2001-02-18	<rlk@sourceforge.net>
 
-	Files:	src/main/printers.xml (1.9) (+9 -0)
-
-	branches:  1.9.2;  1.9.4;
-	Stylus Photo 780 is US name for 790.
-
-2001-02-18	<rlk@sourceforge.net>
-
 	Files:	src/escputil/escputil.c (1.8) (+2 -1)
 		src/main/print-escp2.c (1.24) (+2 -2)
+		src/main/printers.xml (1.9) (+9 -0)
 
 	Stylus Photo 780 is US name for 790.
 
@@ -18493,7 +18353,6 @@
 
 	Files:	src/main/print-util.c (1.8) (+92 -1)
 
-	branches:  1.8.2;  1.8.4;
 	Embed vasprintf when compiling Ghostscript
 
 2001-02-18	<rlk@sourceforge.net>
@@ -18505,15 +18364,9 @@
 2001-02-18	<wollvieh@sourceforge.net>
 
 	Files:	src/main/print-escp2.c (1.21) (+39 -6)
+		src/main/print-weave.c (1.12) (+21 -26)
 		test/escp2-weavetest.c (1.9) (+13 -2)
 
-	changed head-offset initialization
-
-2001-02-18	<wollvieh@sourceforge.net>
-
-	Files:	src/main/print-weave.c (1.12) (+21 -26)
-
-	branches:  1.12.2;  1.12.4;
 	changed head-offset initialization
 
 2001-02-18	<rlk@sourceforge.net>
@@ -18545,7 +18398,6 @@
 
 	Files:	src/main/print-canon.c (1.10) (+14 -1)
 
-	branches:  1.10.2;  1.10.4;
 	Add nominal support for Canon BJC6500
 
 2001-02-17	<rlk@sourceforge.net>
@@ -18559,7 +18411,6 @@
 
 	Files:	src/gimp/print.c (1.4) (+2 -26)
 
-	branches:  1.4.2;  1.4.4;
 	Remove dead support for wrting old printrc format
 
 2001-02-17	<rlk@sourceforge.net>
@@ -18601,21 +18452,10 @@
 
 2001-02-14	<rlk@sourceforge.net>
 
-	Files:	src/main/print-lexmark.c (1.15) (+2 -2)
-
-	branches:  1.15.2;  1.15.4;
-	Improve printing quality for variable dot size, 4 color printers.
-	This may be particularly noticeable at highly asymmetric resolutions,
-	such as 2880x720.
-
-	Add 1440x360 modes to Epson printers.  These are only enabled if
-	maintainer mode is enabled.
-
-2001-02-14	<rlk@sourceforge.net>
-
 	Files:	acconfig.h (1.7) (+3 -1)
 		src/main/print-canon.c (1.9) (+2 -2)
 		src/main/print-escp2.c (1.18) (+10 -3)
+		src/main/print-lexmark.c (1.15) (+2 -2)
 
 	Improve printing quality for variable dot size, 4 color printers.
 	This may be particularly noticeable at highly asymmetric resolutions,
@@ -18677,17 +18517,10 @@
 
 2001-02-11	<rlk@sourceforge.net>
 
-	Files:	src/main/print-pcl.c (1.8) (+3 -12)
-
-	branches:  1.8.2;  1.8.4;
-	Create a single dither function that decides what to do, rather than
-	each driver having to make the same decision.
-
-2001-02-11	<rlk@sourceforge.net>
-
 	Files:	src/main/print-canon.c (1.8) (+3 -8)
 		src/main/print-escp2.c (1.15) (+3 -8)
 		src/main/print-lexmark.c (1.14) (+3 -15)
+		src/main/print-pcl.c (1.8) (+3 -12)
 
 	Create a single dither function that decides what to do, rather than
 	each driver having to make the same decision.
@@ -18802,16 +18635,9 @@
 
 2001-02-03	<rleigh@sourceforge.net>
 
-	Files:	src/main/print-color.c (1.5) (+1 -5)
-
-	branches:  1.5.2;  1.5.4;
-	Updated makefiles to properly link with libintl and libprintut.la
-	Removed inline checks from src/main/*.c
-
-2001-02-03	<rleigh@sourceforge.net>
-
 	Files:	src/cups/Makefile.am (1.15) (+4 -4)
 		src/escputil/Makefile.am (1.5) (+2 -2)
+		src/main/print-color.c (1.5) (+1 -5)
 		src/main/print-escp2.c (1.9) (+1 -5)
 		src/main/print-util.c (1.6) (+1 -5)
 		src/main/print-weave.c (1.8) (+1 -5)
@@ -18848,28 +18674,15 @@
 
 2001-02-03	<rlk@sourceforge.net>
 
-	Files:	src/main/print-weave.c (1.7) (+18 -18)
-
-	Convert direct printing to a file descriptor to print to an output
-	object passed in from the application.
-
-2001-02-03	<rlk@sourceforge.net>
-
-	Files:	src/main/print-ps.c (1.5) (+58 -59)
-
-	branches:  1.5.2;  1.5.4;
-	Convert direct printing to a file descriptor to print to an output
-	object passed in from the application.
-
-2001-02-03	<rlk@sourceforge.net>
-
 	Files:	src/cups/rastertoprinter.c (1.7) (+14 -3)
 		src/gimp/print.c (1.3) (+14 -3)
 		src/main/print-canon.c (1.6) (+58 -60)
 		src/main/print-escp2.c (1.8) (+102 -105)
 		src/main/print-lexmark.c (1.10) (+47 -51)
 		src/main/print-pcl.c (1.6) (+109 -110)
+		src/main/print-ps.c (1.5) (+58 -59)
 		src/main/print-util.c (1.5) (+75 -19)
+		src/main/print-weave.c (1.7) (+18 -18)
 
 	Convert direct printing to a file descriptor to print to an output
 	object passed in from the application.
@@ -19231,13 +19044,6 @@
 
 2001-01-23	<rleigh@sourceforge.net>
 
-	Files:	test/.cvsignore (1.1) ( )
-
-	branches:  1.1.4;  1.1.8;
-	Added .cvsignore
-
-2001-01-23	<rleigh@sourceforge.net>
-
 	Files:	.cvsignore (1.12) (+3 -0)
 		man/.cvsignore (1.1) ( )
 		po/.cvsignore (1.1) ( )
@@ -19250,6 +19056,7 @@
 		src/ghost/.cvsignore (1.2) (+14 -0)
 		src/gimp/.cvsignore (1.1) ( )
 		src/main/.cvsignore (1.1) ( )
+		test/.cvsignore (1.1) ( )
 
 	Added .cvsignore
 

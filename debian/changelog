@@ -1,3 +1,13 @@
+gutenprint (4.3.99+cvs20050715-2) unstable; urgency=low
+
+  * debian/control.in:
+    - ijsgimpprint depends on ijsgutenprint, not
+      cupsys-driver-gutenprint (Closes: #318911).
+    - ijsgimpprint is in section text, not graphics
+      (correction of override disparity).
+
+ -- Roger Leigh <rleigh@debian.org>  Mon, 18 Jul 2005 18:39:47 +0100
+
 gutenprint (4.3.99+cvs20050715-1) unstable; urgency=low
 
   * New upstream release candidate.

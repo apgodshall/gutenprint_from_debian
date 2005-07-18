@@ -276,8 +276,8 @@ Description: maintenance utility for Epson Stylus printers
 
 Package: ijsgimpprint
 Architecture: any
-Section: graphics
-Depends: cupsys-driver-gutenprint (>= ${Source-Version})
+Section: text
+Depends: ijsgutenprint (>= ${Source-Version})
 Description: printer drivers for CUPS
  This is a transitional package to migrate existing users of
  ijsgimpprint to ijsgutenprint (its successor).  It may be

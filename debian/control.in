@@ -302,6 +302,15 @@ Description: inkjet server - Ghostscript driver for Gutenprint
  many cases, and can be used for many of the most demanding printing
  tasks.  Gutenprint was formerly known as Gimp-Print.
 
+Package: foomatic-db-gimp-print
+Architecture: all
+Section: text
+Depends: foomatic-db-gutenprint (>= ${Source-Version})
+Description: linuxprinting.org printer support - database for Gimp-Print printer drivers
+ This is a transitional package to migrate existing users of
+ foomatic-db-gimp-print to foomatic-db-gutenprint (its successor).  It
+ may be safely removed after upgrading.
+
 Package: foomatic-db-gutenprint
 Architecture: all
 Section: text

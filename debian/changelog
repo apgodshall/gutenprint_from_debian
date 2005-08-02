@@ -1,3 +1,12 @@
+gutenprint (4.3.99+cvs20050801-1) unstable; urgency=low
+
+  * New upstream release candidate.
+  * src/cups/cups-genppdconfig.in: Remove "use Locale::gettext" to
+    drop missing dependency on liblocale-gettext-perl
+    (Closes: #320745).
+
+ -- Roger Leigh <rleigh@debian.org>  Tue,  2 Aug 2005 21:06:08 +0100
+
 gutenprint (4.3.99+cvs20050715-4) unstable; urgency=low
 
   * debian/rules: Correct the names of the ijsgutenprint

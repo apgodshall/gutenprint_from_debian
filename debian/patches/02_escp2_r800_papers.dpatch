@@ -1,0 +1,40 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 02_escp2_r800_papers.dpatch by  <rleigh@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Add missing paper types for the Epson R800
+
+@DPATCH@
+
+diff -urN gutenprint-4.3.99+cvs20050813.original/src/main/escp2-papers.c gutenprint-4.3.99+cvs20050813/src/main/escp2-papers.c
+--- gutenprint-4.3.99+cvs20050813.original/src/main/escp2-papers.c	2005-08-13 21:29:29.000000000 +0100
++++ gutenprint-4.3.99+cvs20050813/src/main/escp2-papers.c	2005-08-14 11:51:36.536611840 +0100
+@@ -786,6 +786,10 @@
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "BackFilm", 0.83, .75, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
++  { "Matte", 0.92, .4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
++    r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
++  { "MatteHeavy", 0.92, .4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
++    r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "Glossy", 0.92, 0.4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "GlossyHeavy", 0.92, 0.4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+@@ -806,6 +810,8 @@
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "WaterColorRadiant", 0.92, .4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
++  { "ArchivalMatte", 0.92, .4, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
++    r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "GlossyPaper", 0.83, 1.0, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "Ilford", 0.83, 1.0, 1, .02, 1.4, .882, 1, .300, 1, 1, 1.0,
+@@ -850,6 +856,8 @@
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
+   { "Luster", 0.72, .8, .5, .025, .5, .882, 1, .300, .6, 1, 0.92,
+     r800_glossy_hue_adj, r800_glossy_lum_adj, r800_glossy_sat_adj },
++  { "ArchivalMatte", 0.92, 0.4, .5, .025, .5, .882, 1, .300, .6, 1, 1.0,
++    r800_matte_hue_adj, r800_matte_lum_adj, r800_matte_sat_adj },
+   { "WaterColorRadiant", 0.92, 0.4, .5, .025, .5, .882, 1, .300, .6, 1, 1.0,
+     r800_matte_hue_adj, r800_matte_lum_adj, r800_matte_sat_adj },
+   { "GlossyPaper", 0.83, 0.5, .5, .025, .5, .882, 1, .300, .6, 1, 1.0,

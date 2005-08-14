@@ -1,0 +1,38 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 03_escp2_colour_adjust_segfault.dpatch by  <rleigh@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Make sure colour adjustments are valid before performing them
+
+@DPATCH@
+
+diff -urN gutenprint-4.3.99+cvs20050813.original/src/main/print-escp2.c gutenprint-4.3.99+cvs20050813/src/main/print-escp2.c
+--- gutenprint-4.3.99+cvs20050813.original/src/main/print-escp2.c	2005-08-07 22:21:09.000000000 +0100
++++ gutenprint-4.3.99+cvs20050813/src/main/print-escp2.c	2005-08-14 11:51:43.447561216 +0100
+@@ -2140,7 +2140,7 @@
+ 
+ 
+   if (!stp_check_curve_parameter(v, "HueMap", STP_PARAMETER_ACTIVE) &&
+-      pt->hue_adjustment)
++      pt && pt->hue_adjustment)
+     {
+       adjustment = stp_curve_create_from_string(pt->hue_adjustment);
+       stp_set_curve_parameter(v, "HueMap", adjustment);
+@@ -2148,7 +2148,7 @@
+       stp_curve_destroy(adjustment);
+     }
+   if (!stp_check_curve_parameter(v, "SatMap", STP_PARAMETER_ACTIVE) &&
+-      pt->sat_adjustment)
++      pt && pt->sat_adjustment)
+     {
+       adjustment = stp_curve_create_from_string(pt->sat_adjustment);
+       stp_set_curve_parameter(v, "SatMap", adjustment);
+@@ -2156,7 +2156,7 @@
+       stp_curve_destroy(adjustment);
+     }
+   if (!stp_check_curve_parameter(v, "LumMap", STP_PARAMETER_ACTIVE) &&
+-      pt->lum_adjustment)
++      pt && pt->lum_adjustment)
+     {
+       adjustment = stp_curve_create_from_string(pt->lum_adjustment);
+       stp_set_curve_parameter(v, "LumMap", adjustment);

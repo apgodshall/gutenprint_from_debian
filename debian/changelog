@@ -1,3 +1,22 @@
+gutenprint (4.3.99+cvs20050813-1) unstable; urgency=low
+
+  * New upstream release candidate.
+  * src/cups/cups-genppdconfig.in: drop Locale::gettext patch,
+    which is now incorporated upstream.
+  * debian/control.in, debian/rules: Use dpatch.
+  * Added cups-genppdupdate patch as
+    01_cups_genppdupdate_filename_metacharacters.dpatch
+  * Don't segfault when using certain paper types with an Epson R800.
+    Applied patch from Dan Torop as 02_escp2_r800_papers.dpatch
+    and 03_escp2_colour_adjust_segfault.dpatch (Closes: #321603).
+  * Don't corrupt print settings under certain conditions, due to
+    using uninitialised global variables.  Applied patch from upstream
+    based on a patch contributed by Dan Torop as
+    04_print_settings_corruption.dpatch (Closes: #321599).
+  * debian/debian/cupsys-driver-gutenprint.postinst: Remove bashisms.
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 14 Aug 2005 22:20:52 +0100
+
 gutenprint (4.3.99+cvs20050801-1) unstable; urgency=low
 
   * New upstream release candidate.

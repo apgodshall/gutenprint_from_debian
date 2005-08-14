@@ -8,6 +8,9 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
+# Use dpatch.
+include /usr/share/dpatch/dpatch.make
+
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE       ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -52,7 +55,7 @@ autoconfigure-stamp: debian/control $(GENERATED_FILES)
 
 
 build: build-stamp debian/control
-build-stamp: autoconfigure-stamp
+build-stamp: patch-stamp autoconfigure-stamp
 	dh_testdir
 
 	cd debian/build; \
@@ -60,7 +63,8 @@ build-stamp: autoconfigure-stamp
 
 	touch build-stamp
 
-clean: debian/control
+clean: realclean unpatch
+realclean: debian/control
 	dh_testdir
 	rm -f build-stamp autoconfigure-stamp
 
@@ -143,4 +147,4 @@ debian/control: debian/control.in debian/changelog debian/rules
 debian/libgutenprint2.install: debian/libgutenprint2.install.in debian/changelog
 	sed $(SEDPATTERN) <$< >$@
 
-.PHONY: build clean binary-indep binary-arch binary install autoconfigure
+.PHONY: build clean binary-indep binary-arch binary install autoconfigure patch unpatch

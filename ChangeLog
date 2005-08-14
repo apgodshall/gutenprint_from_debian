@@ -1,3 +1,85 @@
+2005-08-13	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.79) (+4 -4)
+
+	Reduce density on premium glossy slightly on R800.
+
+2005-08-13	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.75) (+57 -26)
+
+	Handle printers that return status but don't respond to @EJL ID.
+
+2005-08-13	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.78) (+22 -22)
+
+	Improve grayscale and density on R800.
+
+2005-08-11	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.229) (+3 -1)
+
+	Note Traditional Chinese translation added.
+
+2005-08-11	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.130) (+4 -2)
+
+	Remove cups-genppdconfig.5.0 prior to renaming cups-genppdconfig to
+	cups-genppdconfig.5.0 to prevent problems of mv refusing to overwrite
+	file in some cases.
+
+2005-08-10	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/printer_options.c (1.48) (+3 -3)
+		src/ghost/ijsgutenprint.c (1.10) (+11 -4)
+
+	Change option values for boolean options from 0/1 to false/true.
+	For some reason, 0/1 seems to result in the options always being
+	set true, whatever the defaults in the PPD files.  This resulted
+	in full bleed always being enabled.
+
+	ijsgutenprint still accepts 0 and 1 in addition to false and true.
+
+2005-08-10	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.124) (+187 -187)
+
+	Darken images slightly
+
+2005-08-10	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.129) (+3 -3)
+		po/zh_TW.po (1.1) ( )
+
+	Add zh_TW support
+
+2005-08-02	<rleigh@sourceforge.net>
+
+	Files:	src/cups/cups-genppdconfig.in (1.12) (+1 -2)
+
+	Don't include the Locale::gettext module, which isn't actually used.
+
+2005-08-02	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.28) (+352 -343)
+		po/da.po (1.56) (+351 -343)
+		po/de.po (1.42) (+352 -343)
+		po/el.po (1.43) (+352 -343)
+		po/en_GB.po (1.134) (+353 -343)
+		po/es.po (1.41) (+352 -343)
+		po/fr.po (1.63) (+352 -343)
+		po/ja.po (1.37) (+352 -343)
+		po/nb.po (1.4) (+352 -343)
+		po/nl.po (1.43) (+352 -343)
+		po/pl.po (1.47) (+352 -343)
+		po/pt.po (1.41) (+352 -343)
+		po/sk.po (1.46) (+352 -343)
+		po/sv.po (1.73) (+353 -344)
+
+	Gutenprint 20050801 snapshot
+
 2005-08-02	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.228) (+15 -11)

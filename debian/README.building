@@ -15,65 +15,53 @@ potentially be needed are the latest versions of gettext, texi2html,
 docbook-utils and imagemagick.  build-essential and devscripts should
 also be installed in order to build Debian packages.
 
+# apt-get build-dep gutenprint
 
-General
--------
-
-Please note the Build-Depends line in debian/control, which lists the
-packages needed to be installed in order to build the packages, in
-addition to the standard package building tools.  In particular,
-libijs is not available in Debian stable; you will need to build or
-install libijs from unstable first.
-
-The simplest way to build the packages is the `deb' target:
-
-$ make deb
-
-This must be done after running `configure' (or `autogen.sh' if
-building from CVS).  This target makes a tarball, unpacks it, then
-builds packages from it with `debuild'.  The output is placed in the
-directory `debian-build'.  If you wish to change the version number,
-edit debian/changelog first.
-
-If this is not flexible enough, the more detailed instructions below
-may be of help.
+should do this automatically, if the gutenprint sources are available
+in your APT sources.list.
 
 
-Building this package from CVS
-------------------------------
+Getting the source
+------------------
 
-If you have changed any of the build scripts, run ./autogen.sh first.
+Since 5.0.0 (and its prereleases), building from upstream CVS or
+the release tarball is no longer supported (and in fact, not even
+possible).  The Debian packaging is only provided in the Debian
+diff.
 
-It is best to not build directly from your checked out CVS sources,
-but first run:
+To get the source, run
 
-$ ./configure
-$ touch .noupdate [prevent updating the ChangeLog, if this causes problems]
-$ make dist
+$ apt-get source gutenprint
 
-Now proceed as for building from a tarball, below.
+or download it from your nearest Debian mirror.
 
 
-Building this package from a tarball
-------------------------------------
-
-Take the tarball gutenprint-VERSION.tar.gz, and copy it to an empty
-build directory.  Rename it to gutenprint_VERSION.orig.tar.gz.  This
-is the `upstream' source.  Then extract this with:
-
-$ tar xfvz gutenprint_VERSION.orig.tar.gz
-$ cd gutenprint-VERSION
+Making changes
+--------------
 
 If needed, modify debian/changelog to change the version
 numbering. The version number should be the same as the package
 version number, followed by a hyphen and a Debian package revision
-number e.g. 4.2.0-1 for release 4.2.0, Debian revision 1.  If you use
-`dpkg-buildpackage', run
+number e.g. 4.2.0-1 for release 4.2.0, Debian revision 1.  Run
 
 $ debian/rules debian/control
 
-after changing the version number.  This is done automatically if
-using `debuild'.
+after changing the version number, to ensure the control file is
+up-to-date.
+
+
+If any source changes are required, please use dpatch, and place
+the patch under debian/patches.  Once you have created a diff,
+create a dpatch as follows:
+
+dpatch patch-template -p '0n_patch_name' "Patch description" \
+< mypatch.diff > debian/patches/0n_patch_name.dpatch
+
+and add "0n_patch_name.dpatch" to debian/patches/00list
+
+
+Building
+--------
 
 To build the packages:
 
@@ -81,11 +69,10 @@ $ dpkg-buildpackage -rfakeroot -us -uc
 or
 $ debuild -us -uc -L -i
 
-It should build without problems on Debian 3.0 (woody) and unstable,
-but will no longer build on Debian 2.2 (potato) current testing and
-unstable distributions.
+It should build without problems on Debian 3.1 (sarge) and unstable,
+but will no longer build on Debian 3.0 (woody) and earlier distributions.
 
 
 I hope you like it!
 
-Roger Leigh <rleigh@debian.org> -- Sun, 12 Sep 2004 10:51:39 +0100
+Roger Leigh <rleigh@debian.org> -- Sun, 14 Aug 2005 13:11:35 +0100

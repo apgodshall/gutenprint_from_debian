@@ -1,0 +1,4 @@
+01_cups_genppdupdate_filename_metacharacters.dpatch
+02_escp2_r800_papers.dpatch
+03_escp2_colour_adjust_segfault.dpatch
+04_print_settings_corruption.dpatch

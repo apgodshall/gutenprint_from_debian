@@ -1,0 +1,80 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 04_print_settings_corruption.dpatch by  <rleigh@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Correctly initialise printable area variables before using them
+
+@DPATCH@
+
+diff -urN gutenprint-4.3.99+cvs20050813/src/gutenprintui/panel.c gutenprint-4.3.99+cvs20050813.original/src/gutenprintui/panel.c
+--- gutenprint-4.3.99+cvs20050813/src/gutenprintui/panel.c	2005-08-14 16:11:39.274887408 +0100
++++ gutenprint-4.3.99+cvs20050813.original/src/gutenprintui/panel.c	2005-08-14 16:12:13.729649488 +0100
+@@ -2617,8 +2617,18 @@
+ }
+ 
+ static void
++compute_printable_region(void)
++{
++  stp_get_media_size(pv->v, &paper_width, &paper_height);
++  stp_get_imageable_area(pv->v, &left, &right, &bottom, &top);
++  printable_width  = right - left;
++  printable_height = bottom - top;
++}  
++
++static void
+ set_orientation(int orientation)
+ {
++  compute_printable_region();
+   pv->orientation = orientation;
+   if (orientation == ORIENT_AUTO)
+     orientation = stpui_compute_orientation();
+@@ -4424,12 +4434,7 @@
+   gdouble min_ppi_scaling;   /* Minimum PPI for current page size */
+ 
+   suppress_preview_update++;
+-  stp_get_media_size(pv->v, &paper_width, &paper_height);
+-
+-  stp_get_imageable_area(pv->v, &left, &right, &bottom, &top);
+-
+-  printable_width  = right - left;
+-  printable_height = bottom - top;
++  compute_printable_region();
+ 
+   if (pv->scaling < 0)
+     {
+diff -urN gutenprint-4.3.99+cvs20050813/src/gutenprintui2/panel.c gutenprint-4.3.99+cvs20050813.original/src/gutenprintui2/panel.c
+--- gutenprint-4.3.99+cvs20050813/src/gutenprintui2/panel.c	2005-08-14 16:11:39.297883912 +0100
++++ gutenprint-4.3.99+cvs20050813.original/src/gutenprintui2/panel.c	2005-08-14 16:12:13.732649032 +0100
+@@ -2641,8 +2641,18 @@
+ }
+ 
+ static void
++compute_printable_region(void)
++{
++  stp_get_media_size(pv->v, &paper_width, &paper_height);
++  stp_get_imageable_area(pv->v, &left, &right, &bottom, &top);
++  printable_width  = right - left;
++  printable_height = bottom - top;
++}  
++
++static void
+ set_orientation(int orientation)
+ {
++  compute_printable_region();
+   pv->orientation = orientation;
+   if (orientation == ORIENT_AUTO)
+     orientation = stpui_compute_orientation();
+@@ -4463,12 +4473,7 @@
+   gdouble min_ppi_scaling;   /* Minimum PPI for current page size */
+ 
+   suppress_preview_update++;
+-  stp_get_media_size(pv->v, &paper_width, &paper_height);
+-
+-  stp_get_imageable_area(pv->v, &left, &right, &bottom, &top);
+-
+-  printable_width  = right - left;
+-  printable_height = bottom - top;
++  compute_printable_region();
+ 
+   if (pv->scaling < 0)
+     {

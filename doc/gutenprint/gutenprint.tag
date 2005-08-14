@@ -2,7 +2,7 @@
 <tagfile>
   <compound kind="file">
     <name>array.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>array_8h</filename>
     <includes id="sequence_8h" name="sequence.h" local="no" imported="no">gutenprint/sequence.h</includes>
     <member kind="typedef">
@@ -92,7 +92,7 @@
   </compound>
   <compound kind="file">
     <name>bit-ops.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>bit-ops_8h</filename>
     <member kind="function">
       <type>void</type>
@@ -146,7 +146,7 @@
   </compound>
   <compound kind="file">
     <name>channel.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>channel_8h</filename>
     <member kind="function">
       <type>void</type>
@@ -319,7 +319,7 @@
   </compound>
   <compound kind="file">
     <name>color.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>color_8h</filename>
     <class kind="struct">stp_colorfuncs_t</class>
     <class kind="struct">stp_color</class>
@@ -327,97 +327,97 @@
       <type>stp_color</type>
       <name>stp_color_t</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga0</anchor>
+      <anchor>ga5</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_init</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga1</anchor>
+      <anchor>ga6</anchor>
       <arglist>(stp_vars_t *v, stp_image_t *image, size_t steps)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_get_row</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga2</anchor>
+      <anchor>ga7</anchor>
       <arglist>(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
     </member>
     <member kind="function">
       <type>stp_parameter_list_t</type>
       <name>stp_color_list_parameters</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga3</anchor>
+      <anchor>ga8</anchor>
       <arglist>(const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_color_describe_parameter</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga4</anchor>
+      <anchor>ga9</anchor>
       <arglist>(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_register</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga5</anchor>
+      <anchor>ga10</anchor>
       <arglist>(const stp_color_t *color)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_unregister</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga6</anchor>
+      <anchor>ga11</anchor>
       <arglist>(const stp_color_t *color)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_count</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga7</anchor>
+      <anchor>ga12</anchor>
       <arglist>(void)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga8</anchor>
+      <anchor>ga13</anchor>
       <arglist>(const char *name)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_index</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga9</anchor>
+      <anchor>ga14</anchor>
       <arglist>(int idx)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_colorfuncs</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga10</anchor>
+      <anchor>ga15</anchor>
       <arglist>(stp_colorfuncs_t *colorfuncs)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_color_get_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga11</anchor>
+      <anchor>ga16</anchor>
       <arglist>(const stp_color_t *c)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_color_get_long_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga12</anchor>
+      <anchor>ga17</anchor>
       <arglist>(const stp_color_t *c)</arglist>
     </member>
   </compound>
   <compound kind="file">
     <name>curve-cache.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>curve-cache_8h</filename>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
     <class kind="struct">stp_cached_curve_t</class>
@@ -515,7 +515,7 @@
   </compound>
   <compound kind="file">
     <name>curve.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>curve_8h</filename>
     <includes id="sequence_8h" name="sequence.h" local="no" imported="no">gutenprint/sequence.h</includes>
     <class kind="struct">stp_curve_point_t</class>
@@ -921,7 +921,7 @@
   </compound>
   <compound kind="file">
     <name>dither.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>dither_8h</filename>
     <class kind="struct">stp_dither_matrix_short</class>
     <class kind="struct">stp_dither_matrix_normal</class>
@@ -1226,7 +1226,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-intl-internal.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>gutenprint-intl-internal_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1280,7 +1280,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-intl.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>gutenprint-intl_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1334,7 +1334,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-module.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>gutenprint-module_8h</filename>
     <includes id="gutenprint_8h" name="gutenprint.h" local="no" imported="no">gutenprint/gutenprint.h</includes>
     <includes id="bit-ops_8h" name="bit-ops.h" local="no" imported="no">gutenprint/bit-ops.h</includes>
@@ -1356,7 +1356,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-version.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>gutenprint-version_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1407,10 +1407,59 @@
       <anchor>ga13</anchor>
       <arglist>(major, minor, micro)</arglist>
     </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_check_version</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga6</anchor>
+      <arglist>(unsigned int required_major, unsigned int required_minor, unsigned int required_micro)</arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_major_version</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_minor_version</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_micro_version</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_current_interface</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_binary_age</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned int</type>
+      <name>stp_interface_age</name>
+      <anchorfile>group__version.html</anchorfile>
+      <anchor>ga5</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="file">
     <name>gutenprint.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>gutenprint_8h</filename>
     <includes id="array_8h" name="array.h" local="no" imported="no">gutenprint/array.h</includes>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
@@ -1425,91 +1474,91 @@
   </compound>
   <compound kind="file">
     <name>image.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>image_8h</filename>
     <class kind="struct">stp_image</class>
     <member kind="define">
       <type>#define</type>
       <name>STP_CHANNEL_LIMIT</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga8</anchor>
+      <anchor>ga16</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
       <type>stp_image</type>
       <name>stp_image_t</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga0</anchor>
+      <anchor>ga7</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
       <name>stp_image_status_t</name>
-      <anchor>ga9</anchor>
+      <anchor>ga17</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STP_IMAGE_STATUS_OK</name>
-      <anchor>gga9a2</anchor>
+      <anchor>gga17a2</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STP_IMAGE_STATUS_ABORT</name>
-      <anchor>gga9a3</anchor>
+      <anchor>gga17a8</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga1</anchor>
+      <anchor>ga9</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_reset</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga2</anchor>
+      <anchor>ga10</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_image_width</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga3</anchor>
+      <anchor>ga11</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_image_height</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga4</anchor>
+      <anchor>ga12</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>stp_image_status_t</type>
       <name>stp_image_get_row</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga5</anchor>
+      <anchor>ga13</anchor>
       <arglist>(stp_image_t *image, unsigned char *data, size_t limit, int row)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_image_get_appname</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga6</anchor>
+      <anchor>ga14</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_conclude</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga7</anchor>
+      <anchor>ga15</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
   </compound>
   <compound kind="file">
     <name>list.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>list_8h</filename>
     <member kind="typedef">
       <type>stp_list_item</type>
@@ -1738,7 +1787,7 @@
   </compound>
   <compound kind="file">
     <name>module.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>module_8h</filename>
     <includes id="list_8h" name="list.h" local="no" imported="no">gutenprint/list.h</includes>
     <class kind="struct">stp_module_version</class>
@@ -1832,7 +1881,7 @@
   </compound>
   <compound kind="file">
     <name>mxml.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>mxml_8h</filename>
     <class kind="struct">stp_mxml_attr_s</class>
     <class kind="struct">stp_mxml_value_s</class>
@@ -2138,7 +2187,7 @@
   </compound>
   <compound kind="file">
     <name>paper.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>paper_8h</filename>
     <includes id="vars_8h" name="vars.h" local="no" imported="no">gutenprint/vars.h</includes>
     <class kind="struct">stp_papersize_t</class>
@@ -2205,7 +2254,7 @@
   </compound>
   <compound kind="file">
     <name>path.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>path_8h</filename>
     <member kind="function">
       <type>stp_list_t *</type>
@@ -2224,7 +2273,7 @@
   </compound>
   <compound kind="file">
     <name>printers.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>printers_8h</filename>
     <includes id="list_8h" name="list.h" local="no" imported="no">gutenprint/list.h</includes>
     <includes id="vars_8h" name="vars.h" local="no" imported="no">gutenprint/vars.h</includes>
@@ -2415,7 +2464,7 @@
   </compound>
   <compound kind="file">
     <name>sequence.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>sequence_8h</filename>
     <member kind="typedef">
       <type>stp_sequence</type>
@@ -2623,7 +2672,7 @@
   </compound>
   <compound kind="file">
     <name>string-list.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>string-list_8h</filename>
     <class kind="struct">stp_param_string_t</class>
     <member kind="typedef">
@@ -2706,7 +2755,7 @@
   </compound>
   <compound kind="file">
     <name>util.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>util_8h</filename>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
     <includes id="vars_8h" name="vars.h" local="no" imported="no">gutenprint/vars.h</includes>
@@ -3098,7 +3147,7 @@
   </compound>
   <compound kind="file">
     <name>vars.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>vars_8h</filename>
     <includes id="array_8h" name="array.h" local="no" imported="no">gutenprint/array.h</includes>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
@@ -4204,7 +4253,7 @@
   </compound>
   <compound kind="file">
     <name>weave.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>weave_8h</filename>
     <class kind="struct">stp_weave_t</class>
     <class kind="struct">stp_pass_t</class>
@@ -4391,7 +4440,7 @@
   </compound>
   <compound kind="file">
     <name>xml.h</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>xml_8h</filename>
     <includes id="mxml_8h" name="mxml.h" local="no" imported="no">gutenprint/mxml.h</includes>
     <member kind="typedef">
@@ -4703,15 +4752,15 @@
     <member kind="variable">
       <type>const char *</type>
       <name>long_name</name>
-      <anchorfile>structstp__color.html</anchorfile>
-      <anchor>o1</anchor>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga3</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
       <type>const stp_colorfuncs_t *</type>
       <name>colorfuncs</name>
-      <anchorfile>structstp__color.html</anchorfile>
-      <anchor>o2</anchor>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga4</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4728,22 +4777,22 @@
     <member kind="variable">
       <type>int(*</type>
       <name>get_row</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>o1</anchor>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga0</anchor>
       <arglist>)(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
     </member>
     <member kind="variable">
       <type>stp_parameter_list_t(*</type>
       <name>list_parameters</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>o2</anchor>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga1</anchor>
       <arglist>)(const stp_vars_t *v)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>describe_parameter</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>o3</anchor>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga2</anchor>
       <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
     </member>
   </compound>
@@ -4949,50 +4998,50 @@
     <member kind="variable">
       <type>void(*</type>
       <name>reset</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o1</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga0</anchor>
       <arglist>)(struct stp_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>width</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o2</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga1</anchor>
       <arglist>)(struct stp_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>height</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o3</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga2</anchor>
       <arglist>)(struct stp_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>stp_image_status_t(*</type>
       <name>get_row</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o4</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga3</anchor>
       <arglist>)(struct stp_image *image, unsigned char *data, size_t byte_limit, int row)</arglist>
     </member>
     <member kind="variable">
       <type>const char *(*</type>
       <name>get_appname</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o5</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga4</anchor>
       <arglist>)(struct stp_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>conclude</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o6</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga5</anchor>
       <arglist>)(struct stp_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void *</type>
       <name>rep</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>o7</anchor>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga6</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5949,92 +5998,127 @@
       <type>stp_color</type>
       <name>stp_color_t</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga0</anchor>
+      <anchor>ga5</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_init</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga1</anchor>
+      <anchor>ga6</anchor>
       <arglist>(stp_vars_t *v, stp_image_t *image, size_t steps)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_get_row</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga2</anchor>
+      <anchor>ga7</anchor>
       <arglist>(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
     </member>
     <member kind="function">
       <type>stp_parameter_list_t</type>
       <name>stp_color_list_parameters</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga3</anchor>
+      <anchor>ga8</anchor>
       <arglist>(const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_color_describe_parameter</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga4</anchor>
+      <anchor>ga9</anchor>
       <arglist>(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_register</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga5</anchor>
+      <anchor>ga10</anchor>
       <arglist>(const stp_color_t *color)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_unregister</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga6</anchor>
+      <anchor>ga11</anchor>
       <arglist>(const stp_color_t *color)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_color_count</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga7</anchor>
+      <anchor>ga12</anchor>
       <arglist>(void)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga8</anchor>
+      <anchor>ga13</anchor>
       <arglist>(const char *name)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_index</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga9</anchor>
+      <anchor>ga14</anchor>
       <arglist>(int idx)</arglist>
     </member>
     <member kind="function">
       <type>const stp_color_t *</type>
       <name>stp_get_color_by_colorfuncs</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga10</anchor>
+      <anchor>ga15</anchor>
       <arglist>(stp_colorfuncs_t *colorfuncs)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_color_get_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga11</anchor>
+      <anchor>ga16</anchor>
       <arglist>(const stp_color_t *c)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_color_get_long_name</name>
       <anchorfile>group__color.html</anchorfile>
-      <anchor>ga12</anchor>
+      <anchor>ga17</anchor>
       <arglist>(const stp_color_t *c)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>get_row</name>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga0</anchor>
+      <arglist>)(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_parameter_list_t(*</type>
+      <name>list_parameters</name>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga1</anchor>
+      <arglist>)(const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>describe_parameter</name>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga2</anchor>
+      <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>long_name</name>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const stp_colorfuncs_t *</type>
+      <name>colorfuncs</name>
+      <anchorfile>group__color.html</anchorfile>
+      <anchor>ga4</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -6662,79 +6746,128 @@
       <type>#define</type>
       <name>STP_CHANNEL_LIMIT</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga8</anchor>
+      <anchor>ga16</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
       <type>stp_image</type>
       <name>stp_image_t</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga0</anchor>
+      <anchor>ga7</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
       <name>stp_image_status_t</name>
-      <anchor>ga9</anchor>
+      <anchor>ga17</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STP_IMAGE_STATUS_OK</name>
-      <anchor>gga9a2</anchor>
+      <anchor>gga17a2</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STP_IMAGE_STATUS_ABORT</name>
-      <anchor>gga9a3</anchor>
+      <anchor>gga17a8</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga1</anchor>
+      <anchor>ga9</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_reset</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga2</anchor>
+      <anchor>ga10</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_image_width</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga3</anchor>
+      <anchor>ga11</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_image_height</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga4</anchor>
+      <anchor>ga12</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>stp_image_status_t</type>
       <name>stp_image_get_row</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga5</anchor>
+      <anchor>ga13</anchor>
       <arglist>(stp_image_t *image, unsigned char *data, size_t limit, int row)</arglist>
     </member>
     <member kind="function">
       <type>const char *</type>
       <name>stp_image_get_appname</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga6</anchor>
+      <anchor>ga14</anchor>
       <arglist>(stp_image_t *image)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_conclude</name>
       <anchorfile>group__image.html</anchorfile>
-      <anchor>ga7</anchor>
+      <anchor>ga15</anchor>
       <arglist>(stp_image_t *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>reset</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga0</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>width</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga1</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>height</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga2</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_image_status_t(*</type>
+      <name>get_row</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga3</anchor>
+      <arglist>)(struct stp_image *image, unsigned char *data, size_t byte_limit, int row)</arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *(*</type>
+      <name>get_appname</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga4</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>conclude</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga5</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void *</type>
+      <name>rep</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>ga6</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -8924,7 +9057,7 @@
   </compound>
   <compound kind="dir">
     <name>include/gutenprint/</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/gutenprint/</path>
     <filename>dir_000001.html</filename>
     <file>array.h</file>
     <file>bit-ops.h</file>
@@ -8954,7 +9087,7 @@
   </compound>
   <compound kind="dir">
     <name>include/</name>
-    <path>/home/rlk/sandbox/print-4.3.x/include/</path>
+    <path>/home/rlk/sandbox/print-4.3.new/include/</path>
     <filename>dir_000000.html</filename>
     <dir>include/gutenprint/</dir>
   </compound>

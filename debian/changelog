@@ -1,3 +1,11 @@
+gutenprint (4.3.99+cvs20050813-2) unstable; urgency=low
+
+  * src/main/print-canon.c: Change "Plain PIXMA" paper name to
+    "PlainPIXMA" in order to avoid illegal whitespace in
+    generated PPD files (Closes: #322397).
+
+ -- Roger Leigh <rleigh@debian.org>  Wed, 31 Aug 2005 21:16:10 +0100
+
 gutenprint (4.3.99+cvs20050813-1) unstable; urgency=low
 
   * New upstream release candidate.

@@ -1,3 +1,24 @@
+gutenprint (4.3.99+cvs20050901-1) unstable; urgency=low
+
+  * New upstream release candidate.
+  * Drop patches which have been incorporated upstream:
+    - 01_cups_genppdupdate_filename_metacharacters.dpatch
+    - 02_escp2_r800_papers.dpatch
+    - 03_escp2_colour_adjust_segfault.dpatch
+    - 04_print_settings_corruption.dpatch
+  * debian/control:
+    - cupsys-driver-gutenprint: Drop libperlmenu-perl dependency.
+    - gimp-print: Add an "Enhances: gimp" to reinforce the fact this is a
+      useful part of gimp (Closes: #322066).  This does not entirely fix the
+      upgrade issues, but without a strict dependency in gimp (which the
+      author does not want), this is the best that can be done.
+  * src/cups/cups-genppdconfig.in: Remove support for perlmenu in favour
+    of dialog(1).  This prevents a number of warnings on startup, and also
+    removes a lot of dead code (Closes: #323450).  Applied as
+    05_genppdconfig_remove_perlmenu.dpatch.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat,  3 Sep 2005 20:46:06 +0100
+
 gutenprint (4.3.99+cvs20050813-2) unstable; urgency=low
 
   * src/main/print-canon.c: Change "Plain PIXMA" paper name to
@@ -629,6 +650,4 @@ gimp-print (3.1.4-1) unstable; urgency=low
 
  -- Charles Briscoe-Smith <cpbs@debian.org>  Wed, 24 May 2000 00:39:54 +0100
 
-Local variables:
-mode: debian-changelog
-End:
+

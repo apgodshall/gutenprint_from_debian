@@ -1,4 +1,4 @@
-Welcome to Gutenprint 5.0.0-rc1!  Please read these release notes
+Welcome to Gutenprint 5.0.0-rc2!  Please read these release notes
 carefully.
 
 Gutenprint, formerly named Gimp-Print, is a suite of printer drivers
@@ -75,7 +75,7 @@ on building and installing Gutenprint.
 
 These release notes contain the following sections:
 
-1) Changes from 5.0.0-beta4 to 5.0.0-rc1
+1) Changes from 5.0.0-rc1 to 5.0.0-rc2
 2) Overall changes from 4.2 to 5.0.
 3) Known build/installation issues
 4) List of supported printers
@@ -83,148 +83,79 @@ These release notes contain the following sections:
 
 ================================================================
 
-* Major changes between Gutenprint 5.0.0 beta 4 and Gutenprint 5.0.0
-  release candidate 1:
+* Major changes between Gutenprint 5.0.0 release candidate 1 and
+  Gutenprint 5.0.0 release candidate 2:
 
-  1) Color correction is greatly improved, particularly for Epson
-     printers.  The following general and specific improvements have
-     been made:
+  1) The Postscript driver now produces more accurate colors.
+     Previous releases produced overly pale colors with the default
+     settings.
 
-     * The default gamma for all Epson printers has been increased to
-       resolve long-standing issues with overly dark prints.  The user
-       gamma adjustment is specified as a correction, so the default
-       value of 1.0 will yield correct results.
+  2) The Postscript driver now accepts red, green, and blue rather
+     than cyan, magenta, and yellow options in the GIMP plugin.
 
-     * Luminosity (darkness) correction has been simplified and
-       improved by performing correction only on the color component,
-       without adjusting the gray component.  This improves dark cyans
-       and greens in particular, and generally yields smoother tonal
-       changes.
+  3) The Postscript driver now prints correctly regardless of image
+     size.  Previously it corrupted the output if the width of the
+     image was not a multiple of 4 pixels.
 
-     * Red and blue generation for the Epson Stylus R800 and R1800
-       (and for any future printers) has been completely revamped.  It
-       is now done by using per-channel curves.  This improves control
-       over the output and allows ink combinations that could not be
-       generated with the previous code.  The most notable effect is
-       improved magenta.
+  4) The GIMP plugin now loads the printrc file correctly in all
+     locales.  Previously it did not load floating point numbers
+     correctly in locales that don't use the `.' character as the
+     decimal point.
 
-     * Greens have been improved on all Epson printers and are now
-       considerably more saturated and less yellow.
+  5) The GIMP plugin now offers improved choices in the color
+     adjustment window for viewing individual channels of the output.
+     It now offers red/green/blue, cyan/magenta/yellow, or
+     cyan/magenta/yellow/black as appropriate.
 
-     * Black generation has been improved on all printers,
-       particularly Epson printers using Ultrachrome (R) inks.
+  6) The GIMP plugin is now considerably more responsive; many
+     unnecessary screen redraws have been removed.
 
-     * Photo (light cyan and light magenta) ink generation has been
-       improved on many Epson printers.
+  7) The Epson printer utility escputil now reports ink information
+     more consistently across a wider range of printers.  In
+     particular, the extended ink information command (escputil -e)
+     should now work correctly on all models from the Stylus Color 740
+     through the present.
 
-     * Composite gray generation is now done by adding in CMY inks
-       rather than subtracting out the gray component.  This separates
-       the gray balance from the per-channel ink density, permitting
-       much better color saturation for certain printers with
-       unbalanced inks.  In particular, the Epson R-series printers
-       can now generate much better orange, yellow, and green without
-       sacrificing neutrality of grayscale.
+  8) Preliminary support for the Epson Stylus C68, C87, C88, CX3700,
+     CX3800, CX3810, CX4200, CX4700, CX4800, CX5800, CX7700, CX7800,
+     D68, D88, DX3800, DX3850, DX4200, DX4800, and Stylus Photo R220,
+     R320, and R340.  These printers are expected to be fully
+     functional (for the multi-function devices, this package supports
+     only the printer function).
 
-     * The operation of the Bright Colors color correction mode has
-       been changed, and is now much closer to the operation of High
-       Accuracy.  The main difference is that highly saturated colors
-       now clip rather than taper off toward full saturation.  This
-       will yield improved color brilliance with some loss of detail
-       in certain cases (particularly bright greens).
+  9) Preliminary support for the Epson Stylus Photo R2400.  This
+     printer has been partially tuned, but there will likely be
+     further changes to this driver.
 
-     * A new Correct Hue Only mode has been added that corrects ink
-       hue without adjusting darkness.  This permits achieving greater
-       color saturation without losing hue accuracy, although many
-       colors will be too dark in this mode.
+  10) Experimental support for the Epson Stylus Photo RX700.  This
+     printer may or may not function correctly, and is not likely to
+     be properly tuned.
 
-  2) PrintoutMode has been fixed in the Foomatic data generator so
-     that it now generates correct options in all cases.
+  11) Initial support for Canon S200, SELPHY CP-510 and SELPHY CP-710;
+     Sony UP-DR150, and Olympus P-11 has been added.
 
-  3) CUPS PPD files are now built with translations enabled.  If you
-     do not want translated PPD files, configure the package with
+  12) The Canon PIXMA iP4000 printers can now print to cds.  Duplex
+     printing with binding on the short side is now supported, too.
 
-     ./configure --disable-translated-cups-ppds
+  13) The Epson Stylus Photo R200 and related printers have been
+     retuned to give improved detail in the shadows, reduced ink
+     usage, more accurate grayscale, and more accurate colors.
+     Affected printers are the R200, R210, R220, R300, R310, R320,
+     R340, RX400, RX420, RX425, RX430, RX500, RX510, RX600, RX620,
+     RX630, PM-D750, PM-D770, PM-G700, and, PM-G720.
 
-  4) The Canon SELPHY CP-600 dye sublimation printer has been added.
+     Any profiles generated against these printers will have to be
+     re-created.
 
-  5) Preliminary support for the Canon Pixma i4000 printer has been
-     added.  The Canon BubbleJet and Pixma driver is likely to undergo
-     considerable revision and may not be fully stabilized at release.
+  14) New "transposed" resolutions (1440x720 and 2880x1440) have been
+     added for some Epson printers.  These resolutions are actually
+     equivalent to 720x1440 and 1440x2880 DPI respectively.  In some
+     cases these may yield better results (specifically, less
+     microbanding) than the normal 1440x720 and 2880x1440 DPI
+     resolutions.
 
-  6) The Epson Stylus C82, C84, and C86 now use black ink with glossy
-     paper.  The ink in these printers has been reformulated and is
-     now compatible with glossy paper.
-
-  7) The Epson Stylus CX3650 now prints correctly (previously there
-     were minor vertical offset problems, yielding slightly blurry
-     prints).
-
-  8) The Ghostscript driver (ijsgutenprint) now generates correct
-     output (previously it generated output that was much too dark
-     unless the gamma setting was enabled explicitly).
-
-  9) New printing resolutions have been added for certain Epson
-     printers:
-
-     * 720 DPI high quality has been added for all but the very oldest
-       Epson printers, and 1440x720 DPI highest quality has been added
-       for all Epson printers with an upper resolution limit of
-       2880x720 DPI.  We have received reports that 1440x720 highest
-       quality, which was present in Gimp-Print 4.2, often produces
-       better output than 2880x720 while requiring less computation.
-
-     * 2880x2880 DPI resolution has been added for the Epson Stylus
-       C86 and similar printers, such as the CX6600.  While this is
-       not likely to yield a great improvement over 2880x1440 DPI,
-       this may yield some improvement for certain kinds of line art
-       with very fine detail.  In general, there is little advantage
-       to be had from any resolution above 1440x1440 DPI with this
-       printer.
-
-     * 5760x2880 DPI has been added for the Epson Stylus Photo R800
-       and R1800.  Tests indicate that this resolution does offer a
-       small degree of improvement over 2880x2880; the most noticeable
-       improvement is smoother tonality.  This enhancement may be
-       desirable for particularly critical printing.
-
-  10) The Epson Stylus RX425 is now explicitly supported.
-
-  11) Some problems with PPD file generation using cups-genppdconfig
-     have been fixed.  In particular, PPD permission and ownership
-     checks have been relaxed to permit operation on more systems.
-
-  12) A problem that could on rare occasions cause blank areas on photo
-     printers has been fixed.  The problem was more likely to be
-     observed when printing in 16-bit mode.
-
-  13) Debian packaging has been removed from this release.  Debian
-     packaging will be handled by the maintainer outside of the
-     release.
-
-  14) On systems supporting shared library versioning, the shared
-     library is labeled with the correct release version rather than a
-     development version.
-
-  15) It is now possible to specify variable drop sizes with
-     predithered mode.  Values of 0, 1, 2, or 3 will cause the
-     appropriate drop size to be printed.  Previously only the
-     smallest or largest drop size could be printed with this dither
-     mode.
-
-  16) Traditional Chinese (zh_TW) translation has been added.
-
-  17) A problem whereby attempting to use certain paper types with
-     certain Epson printers would cause a failure is fixed.
-
-  18) A problem whereby the image height and width were not properly
-     preserved across uses of the GIMP plugin is fixed.
-
-  19) In the Foomatic data the options "STP_InputSlot" and
-     "STP_MediaType" were renamed to "InputSlot" and "MediaType". This
-     way the names are Adobe-compliant and so PPD-aware applications
-     understand for what they are used for and treat them
-     appropriately (for example appear on first page of printer
-     options dialog of kprinter and XPP).
+  15) Quadtone printing now works correctly regardless of whether
+     color or grayscale mode is selected.
 
 
 ================================================================
@@ -1373,6 +1304,7 @@ Canon BJC 7100
 Canon BJC 8200
 Canon CP-100 series
 Canon CP-220 series
+Canon S200            (Experimental)
 Canon S400
 Canon S450
 Canon S800
@@ -1392,6 +1324,7 @@ EPSON Stylus C44SX
 EPSON Stylus C44UX
 EPSON Stylus C45
 EPSON Stylus C46
+EPSON Stylus C48
 EPSON Stylus C50
 EPSON Stylus C60
 EPSON Stylus C61
@@ -1400,6 +1333,7 @@ EPSON Stylus C63
 EPSON Stylus C64
 EPSON Stylus C65
 EPSON Stylus C66
+EPSON Stylus C68
 EPSON Stylus C70
 EPSON Stylus C80
 EPSON Stylus C82
@@ -1407,6 +1341,8 @@ EPSON Stylus C83
 EPSON Stylus C84
 EPSON Stylus C85
 EPSON Stylus C86
+EPSON Stylus C87
+EPSON Stylus C88
 EPSON Stylus Color
 EPSON Stylus Color Pro
 EPSON Stylus Color Pro XL
@@ -1459,8 +1395,11 @@ EPSON Stylus Photo 2100
 EPSON Stylus Photo 2200
 EPSON Stylus Photo R200
 EPSON Stylus Photo R210
+EPSON Stylus Photo R220
 EPSON Stylus Photo R300
 EPSON Stylus Photo R310
+EPSON Stylus Photo R320
+EPSON Stylus Photo R340
 EPSON Stylus Photo RX400
 EPSON Stylus Photo RX420
 EPSON Stylus Photo RX425
@@ -1470,8 +1409,10 @@ EPSON Stylus Photo RX510
 EPSON Stylus Photo RX600
 EPSON Stylus Photo RX620
 EPSON Stylus Photo RX630
+EPSON Stylus Photo RX700 (Experimental)
 EPSON Stylus Photo R800
 EPSON Stylus Photo R1800
+EPSON Stylus Photo R2400 (Experimental)
 EPSON Stylus Pro 5000
 EPSON Stylus Pro 5500
 EPSON Stylus Pro 7000
@@ -1489,17 +1430,32 @@ EPSON Stylus CX-3200
 EPSON Stylus CX-3500
 EPSON Stylus CX-3600
 EPSON Stylus CX-3650
+EPSON Stylus CX-3700
+EPSON Stylus CX-3800
+EPSON Stylus CX-3810
+EPSON Stylus CX-4200
 EPSON Stylus CX-4600
+EPSON Stylus CX-4700
+EPSON Stylus CX-4800
 EPSON Stylus CX-5100
 EPSON Stylus CX-5200
 EPSON Stylus CX-5300
 EPSON Stylus CX-5400
+EPSON Stylus CX-5800
 EPSON Stylus CX-6300
 EPSON Stylus CX-6400
 EPSON Stylus CX-6500
 EPSON Stylus CX-6600
+EPSON Stylus CX-7700
+EPSON Stylus CX-7800
 EPSON Stylus CX-8300
 EPSON Stylus CX-8400
+EPSON Stylus D68
+EPSON Stylus D88
+EPSON Stylus DX-3800
+EPSON Stylus DX-3850
+EPSON Stylus DX-4200
+EPSON Stylus DX-4800
 EPSON CL-700
 EPSON CL-750
 EPSON CL-760    (Experimental)
@@ -1611,12 +1567,13 @@ Lexmark Z42
 Lexmark Z43
 Lexmark Z52
 Lexmark Z53
-Olympus P-10
+Olympus P-10 series
 Olympus P-200
 Olympus P-300 series
 Olympus P-400
 Olympus P-440
 Sony UP-DP10    (Experimental)
+Sony UP-DR150   (Experimental)
 
 The following is the complete list of printers believed to be
 compatible with Gutenprint, along with recommended drivers.  Some of
@@ -1692,7 +1649,9 @@ Canon CP-220                   canon-cp220     Canon CP220
 Canon CP-330                   canon-cp220     Canon CP220
 Canon SELPHY CP-400            canon-cp220     Canon SELPHY CP400
 Canon SELPHY CP-500            canon-cp220     Canon SELPHY CP500
+Canon SELPHY CP-510            canon-cp220     Canon SELPHY CP510
 Canon SELPHY CP-600            canon-cp220     Canon SELPHY CP600
+Canon SELPHY CP-710            canon-cp220     Canon SELPHY CP710
 Canon GP 335                   pcl-4           HP LaserJet 4 series
 Canon LBP-4sx                  pcl-3           HP LaserJet III series
 Canon LBP-430                  pcl-4l          HP LaserJet 4L
@@ -1746,6 +1705,7 @@ Epson Stylus C44SX             escp2-c44sx     EPSON Stylus C44SX
 Epson Stylus C44UX             escp2-c44ux     EPSON Stylus C44UX
 Epson Stylus C45               escp2-c45       EPSON Stylus C45
 Epson Stylus C46               escp2-c46       EPSON Stylus C46
+Epson Stylus C48               escp2-c48       EPSON Stylus C48
 Epson Stylus C50               escp2-c50       EPSON Stylus C50
 Epson Stylus C60               escp2-c60       EPSON Stylus C60
 Epson Stylus C61               escp2-c61       EPSON Stylus C61
@@ -1754,6 +1714,7 @@ Epson Stylus C63               escp2-c63       EPSON Stylus C63
 Epson Stylus C64               escp2-c64       EPSON Stylus C64
 Epson Stylus C65               escp2-c65       EPSON Stylus C65
 Epson Stylus C66               escp2-c66       EPSON Stylus C66
+Epson Stylus C68               escp2-c68       EPSON Stylus C68
 Epson Stylus C70               escp2-c70       EPSON Stylus C70
 Epson Stylus C80               escp2-c80       EPSON Stylus C80
 Epson Stylus C82               escp2-c82       EPSON Stylus C82
@@ -1761,6 +1722,7 @@ Epson Stylus C83               escp2-c83       EPSON Stylus C83
 Epson Stylus C84               escp2-c84       EPSON Stylus C84
 Epson Stylus C85               escp2-c85       EPSON Stylus C85
 Epson Stylus C86               escp2-c86       EPSON Stylus C86
+Epson Stylus C88               escp2-c88       EPSON Stylus C88
 Epson Stylus Color             escp2           EPSON Stylus Color
 Epson Stylus Color I           escp2           EPSON Stylus Color
 Epson Stylus Color II          escp2           EPSON Stylus Color
@@ -1823,15 +1785,23 @@ Epson Stylus Photo 2200        escp2-2200      EPSON Stylus Photo 2200
 Epson Stylus Photo EX          escp2-ex        EPSON Stylus Photo EX
 Epson Stylus Photo EX3         escp2-ex3       EPSON Stylus Photo EX3
 Epson Stylus Photo R200        escp2-r200      EPSON Stylus Photo R200
+Epson Stylus Photo R210        escp2-r210      EPSON Stylus Photo R210
+Epson Stylus Photo R220        escp2-r220      EPSON Stylus Photo R220
 Epson Stylus Photo R300        escp2-r300      EPSON Stylus Photo R300
+Epson Stylus Photo R310        escp2-r310      EPSON Stylus Photo R310
+Epson Stylus Photo R320        escp2-r320      EPSON Stylus Photo R320
+Epson Stylus Photo R340        escp2-r340      EPSON Stylus Photo R340
 Epson Stylus Photo RX400       escp2-rx400     EPSON Stylus Photo RX400
 Epson Stylus Photo RX420       escp2-rx420     EPSON Stylus Photo RX420
 Epson Stylus Photo RX425       escp2-rx425     EPSON Stylus Photo RX425
 Epson Stylus Photo RX500       escp2-rx500     EPSON Stylus Photo RX500
 Epson Stylus Photo RX600       escp2-rx600     EPSON Stylus Photo RX600
 Epson Stylus Photo RX620       escp2-rx620     EPSON Stylus Photo RX620
+Epson Stylus Photo RX630       escp2-rx630     EPSON Stylus Photo RX630
+Epson Stylus Photo RX700       escp2-rx700     EPSON Stylus Photo RX700
 Epson Stylus Photo R800        escp2-r800      EPSON Stylus Photo R800
 Epson Stylus Photo R1800       escp2-r1800     EPSON Stylus Photo R1800
+Epson Stylus Photo R2400       escp2-r2400     EPSON Stylus Photo R2400
 Epson Stylus Pro 5000          escp2-5000      EPSON Stylus Pro 5000
 Epson Stylus Pro 5500          escp2-5500      EPSON Stylus Pro 5500
 Epson Stylus Pro 7000          escp2-7000      EPSON Stylus Pro 7000
@@ -1848,16 +1818,30 @@ Epson Stylus CX3200            escp2-cx3200    EPSON Stylus CX-3200
 Epson Stylus CX3500            escp2-cx3500    EPSON Stylus CX-3500
 Epson Stylus CX3600            escp2-cx3600    EPSON Stylus CX-3600
 Epson Stylus CX3650            escp2-cx3650    EPSON Stylus CX-3650
+Epson Stylus CX3700            escp2-cx3700    EPSON Stylus CX-3700
+Epson Stylus CX3800            escp2-cx3800    EPSON Stylus CX-3800
+Epson Stylus CX4200            escp2-cx4200    EPSON Stylus CX-4200
 Epson Stylus CX4600            escp2-cx4600    EPSON Stylus CX-4600
+Epson Stylus CX4700            escp2-cx4700    EPSON Stylus CX-4700
+Epson Stylus CX4800            escp2-cx4800    EPSON Stylus CX-4800
 Epson Stylus CX5100            escp2-cx5100    EPSON Stylus CX-5100
 Epson Stylus CX5200            escp2-cx5200    EPSON Stylus CX-5200
 Epson Stylus CX5300            escp2-cx5300    EPSON Stylus CX-5300
 Epson Stylus CX5400            escp2-cx5400    EPSON Stylus CX-5400
+Epson Stylus CX5800            escp2-cx5800    EPSON Stylus CX-5800
 Epson Stylus CX6300            escp2-cx6300    EPSON Stylus CX-6300
 Epson Stylus CX6400            escp2-cx6400    EPSON Stylus CX-6400
 Epson Stylus CX6600            escp2-cx6600    EPSON Stylus CX-6600
+Epson Stylus CX7700            escp2-cx7700    EPSON Stylus CX-7700
+Epson Stylus CX7800            escp2-cx7800    EPSON Stylus CX-7800
 Epson Stylus CX8300            escp2-cx8300    EPSON Stylus CX-8300
 Epson Stylus CX8400            escp2-cx8400    EPSON Stylus CX-8400
+Epson Stylus D68               escp2-d68       EPSON Stylus D68
+Epson Stylus D88               escp2-d88       EPSON Stylus D88
+Epson Stylus DX3800            escp2-dx3800    EPSON Stylus DX-3800
+Epson Stylus DX3850            escp2-dx3850    EPSON Stylus DX-3850
+Epson Stylus DX4200            escp2-dx4200    EPSON Stylus DX-4200
+Epson Stylus DX4800            escp2-dx4800    EPSON Stylus DX-4800
 Epson CL-700                   escp2-cl700     EPSON CL-700
 Epson CL-750                   escp2-cl750     EPSON CL-750
 Epson CL-760                   escp2-cl760     EPSON CL-760
@@ -2259,6 +2243,7 @@ Okidata Super 6e               pcl-4l          HP LaserJet 4L
 Olivetti JP350S                pcl-2           HP LaserJet II series
 Olivetti PG 306                pcl-2           HP LaserJet II series
 Olympus P-10                   olympus-p10     Olympus P10 
+Olympus P-11                   olympus-p10     Olympus P11 
 Olympus P-200                  olympus-p200    Olympus P200
 Olympus P-300E                 olympus-p300    Olympus P300
 Olympus P-300U                 olympus-p300    Olympus P300
@@ -2290,6 +2275,7 @@ Seiko SpeedJET 200             pcl-2           HP LaserJet II series
 Sharp AR-161                   pcl-6           HP LaserJet 6 series
 Sony IJP-V100                  pcl-601         HP DeskJet 600 series
 Sony UP-DP10                   sony-updp10     Sony UP-DP10
+Sony UP-DR150                  sony-updr150    Sony UP-DR150
 Star LS-04                     pcl-2           HP LaserJet II series
 Star LaserPrinter 8            pcl-2           HP LaserJet II series
 Tally MT908                    pcl-3           HP LaserJet III series
@@ -2312,30 +2298,13 @@ Generic PCL 6/PCL XL Printer   pcl-6           HP LaserJet 6 series
 Printer-Specific Notes:
 
     * It is strongly recommended that four color mode not be used on
-      the Epson Stylus C63, C64, C65, C66, C70, C80, C82, C83, C84,
-      C85, C86, and CX-5200, and the PX-V500 and PX-V600 when printing
-      to glossy papers, as the black ink is formulated differently
-      from the color ink and does not adhere properly to these papers.
-      Epson Photo Paper, Premium Glossy Photo Paper, Premium Luster
-      Photo Paper, and Premium Semigloss Photo Paper are known to be
-      affected.  If you use the Standard ink type, this will be
-      handled automatically.
-
-    * The Epson Stylus C70, C80, and C82 appear to support resolutions
-      of 1440x1440 and 2880x1440, but these resolutions may not yield
-      any improvement over 2880x720 or even 1440x720 DPI.  Due to
-      improvements in the driver, these extremely high resolutions
-      will offer very little if any improvement when printing
-      photographs or other continuous-tone images.  For printing line
-      art with extremely fine detail these resolutions may offer some
-      improvement due to the nature of the printed image.  We expect
-      that 1440x1440 would yield maximum improvement over 2880x720 on
-      line art with very fine detail.  It is unlikely that 2880x1440
-      would yield any significant additional improvement.
-
-      Note that these resolutions are not officially supported by
-      Epson on the C70 and C80, and may not work on all C70 and C80
-      printers.
+      the Epson Stylus C63, C64, C65, C66, C70, C80, and CX-5200, and
+      the PX-V500 and PX-V600 when printing to glossy papers, as the
+      black ink is formulated differently from the color ink and does
+      not adhere properly to these papers.  Epson Photo Paper, Premium
+      Glossy Photo Paper, Premium Luster Photo Paper, and Premium
+      Semigloss Photo Paper are known to be affected.  If you use the
+      Standard ink type, this will be handled automatically.
 
     * The Gutenprint driver does not in all cases offer the same set
       of resolutions offered by the printer manufacturer's drivers.

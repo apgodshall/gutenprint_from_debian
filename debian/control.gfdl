@@ -1,0 +1,23 @@
+Package: gutenprint-doc
+Architecture: all
+Section: doc
+Suggests: cupsys-driver-gutenprint (>= ${Source-Version}), foomatic-db-gutenprint (>= ${Source-Version}), gimp-print (>= ${Source-Version}), ijsgutenprint (>= ${Source-Version})
+Description: users' guide for Gutenprint and CUPS
+ This package contains a user guide for programs using the
+ Gutenprint library for photographic quality printing.  Currently
+ this covers using the Print plugin for the GIMP and the Common Unix
+ Printing System (CUPS).
+ .
+ The documentation is available in both HTML and PDF formats for
+ on-line viewing and hardcopy.
+ .
+ This is Gutenprint version #UPSTREAM_VERSION#, a beta release
+ in the 5.0 series.
+ .
+ Gutenprint is the print facility for the GIMP, and in addition a
+ suite of drivers that may be used with common UNIX spooling systems
+ using GhostScript or CUPS.  These drivers provide printing quality
+ for UNIX/Linux on a par with proprietary vendor-supplied drivers in
+ many cases, and can be used for many of the most demanding printing
+ tasks.  Gutenprint was formerly known as Gimp-Print.
+

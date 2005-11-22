@@ -233,29 +233,6 @@ Description: locale data files for Gutenprint
  many cases, and can be used for many of the most demanding printing
  tasks.  Gutenprint was formerly known as Gimp-Print.
 
-Package: gutenprint-doc
-Architecture: all
-Section: doc
-Suggests: cupsys-driver-gutenprint (>= ${Source-Version}), foomatic-db-gutenprint (>= ${Source-Version}), gimp-print (>= ${Source-Version}), ijsgutenprint (>= ${Source-Version})
-Description: users' guide for Gutenprint and CUPS
- This package contains a user guide for programs using the
- Gutenprint library for photographic quality printing.  Currently
- this covers using the Print plugin for the GIMP and the Common Unix
- Printing System (CUPS).
- .
- The documentation is available in both HTML and PDF formats for
- on-line viewing and hardcopy.
- .
- This is Gutenprint version #UPSTREAM_VERSION#, a beta release
- in the 5.0 series.
- .
- Gutenprint is the print facility for the GIMP, and in addition a
- suite of drivers that may be used with common UNIX spooling systems
- using GhostScript or CUPS.  These drivers provide printing quality
- for UNIX/Linux on a par with proprietary vendor-supplied drivers in
- many cases, and can be used for many of the most demanding printing
- tasks.  Gutenprint was formerly known as Gimp-Print.
-
 Package: escputil
 Architecture: any
 Section: utils
@@ -291,7 +268,17 @@ Depends: ${shlibs:Depends}, gs-esp (>= 6.53) | gs-gpl (>= 8.01-1) | gs (>= 6.53)
 Description: inkjet server - Ghostscript driver for Gutenprint
  This package contains the ijsgutenprint binary which provides
  Ghostscript with a Gutenprint driver, including all printers
- supported by Gutenprint.
+ supported by Gutenprint.  ijsgutenprint is an IJS server (driver),
+ which communicates with Ghostscript (an IJS client) using the IJS
+ (InkJet Server) communications protocol.  IJS is a method for
+ separating ghostscript drivers from ghostscript, to allow
+ ghostscript to be more extensible.
+ .
+ If you wish to print using Ghostscript and the Gutenprint drivers,
+ install this package.  This is typical for LPRng setups.  If you
+ are using CUPS, cupsys-driver-gutenprint is a better choice, but
+ this package will still work with the appropriate foomatic setup
+ if you wish to make use of foomatic.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a beta release
  in the 5.0 series.

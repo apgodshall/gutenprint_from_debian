@@ -1,24 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >ESC/P2</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="book1.html"><LINK
+HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="The driver file"
 HREF="x271.html"><LINK
 REL="NEXT"
 TITLE="Remote Mode Commands"
-HREF="x955.html"><META
-http-equiv="Content-Type"
-content="text/html; charset=UTF-8"></HEAD
+HREF="x955.html"></HEAD
 ><BODY
 CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -69,30 +72,6 @@ CLASS="chapter"
 NAME="AEN464"
 ></A
 >Chapter 5. ESC/P2</H1
-><DIV
-CLASS="TOC"
-><DL
-><DT
-><B
->Table of Contents</B
-></DT
-><DT
-><A
-HREF="c464.html#AEN477"
->Standard commands</A
-></DT
-><DT
-><A
-HREF="x955.html"
->Remote Mode Commands</A
-></DT
-><DT
-><A
-HREF="x1669.html"
->Appropriate Remote Commands</A
-></DT
-></DL
-></DIV
 ><P
 >&#13;    This is a description of the ESC/P2 raster commands used by the
     Gutenprint printer driver, which is a subset of the complete
@@ -114,29 +93,29 @@ CLASS="emphasis"
     are certainly not complete.
   </P
 ><P
->&#13;    All ESCP/2 raster commands begin with the <VAR
+>&#13;    All ESCP/2 raster commands begin with the <TT
 CLASS="literal"
->ESC</VAR
+>ESC</TT
 >
     character (0x1b), followed by either one or two command characters
     and arguments where applicable.  Older commands generally have one
     command character.  Newer commands usually have a
-    ‘<VAR
+    &#8216;<TT
 CLASS="literal"
->(</VAR
->’ (left parenthesis) followed by
+>(</TT
+>&#8217; (left parenthesis) followed by
     a command character and a byte count for the arguments that
     follow.  The byte count is a 16-bit (2 byte) binary integer, in
     little endian order.
   </P
 ><P
 >&#13;    All arguments listed here are of the form
-    <VAR
+    <TT
 CLASS="literal"
->name[bytes]</VAR
-> where <VAR
+>name[bytes]</TT
+> where <TT
 CLASS="literal"
->[bytes]</VAR
+>[bytes]</TT
 > is
     the number of bytes that comprise the argument.  The arguments
     themselves are usually one, two, or four byte integers, always
@@ -154,7 +133,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN477"
->Standard commands</A
+>5.1. Standard commands</A
 ></H1
 ><P
 ></P
@@ -166,9 +145,9 @@ CLASS="variablelist"
 ></P
 ><DL
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC @</VAR
+>ESC @</TT
 ></DT
 ><DD
 ><P
@@ -178,22 +157,22 @@ CLASS="literal"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (G <VAR
+>ESC (G <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=1
-            <VAR
+            <CODE
 CLASS="varname"
->ON1</VAR
-></VAR
+>ON1</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Turn on graphics mode.  <VAR
+>&#13;            Turn on graphics mode.  <CODE
 CLASS="varname"
->ON</VAR
+>ON</CODE
 > should be
             <CODE
 CLASS="constant"
@@ -202,31 +181,31 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (U <VAR
+>ESC (U <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=1
-            <VAR
+            <CODE
 CLASS="varname"
->UNIT1</VAR
-></VAR
+>UNIT1</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            Set basic unit of measurement used by printer.  This is
             expressed in multiples of 1/3600".  At 720 DPI,
-            <VAR
+            <CODE
 CLASS="varname"
->UNIT</VAR
+>UNIT</CODE
 > is <CODE
 CLASS="constant"
 >5</CODE
 >; at
-            360 DPI, <VAR
+            360 DPI, <CODE
 CLASS="varname"
->UNIT</VAR
+>UNIT</CODE
 > is
             <CODE
 CLASS="constant"
@@ -235,88 +214,88 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (U <VAR
+>ESC (U <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=5
-            <VAR
+            <CODE
 CLASS="varname"
->PAGEUNITS1</VAR
-> <VAR
+>PAGEUNITS1</CODE
+> <CODE
 CLASS="varname"
->VUNIT1</VAR
+>VUNIT1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->HUNIT1</VAR
+>HUNIT1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->BASEUNIT2</VAR
-></VAR
+>BASEUNIT2</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            Set basic units of measurement used by the printer.
-            <VAR
+            <CODE
 CLASS="varname"
->PAGEUNIT</VAR
+>PAGEUNIT</CODE
 > is the unit of page
             measurement (for commands that set page dimensions and
-            the like).  <VAR
+            the like).  <CODE
 CLASS="varname"
->VUNIT</VAR
+>VUNIT</CODE
 > is the unit of
             vertical measurement (for vertical movement commands).
-            <VAR
+            <CODE
 CLASS="varname"
->HUNIT</VAR
+>HUNIT</CODE
 > is the unit of horizontal
             movement (for horizontal positioning commands).  All of
             these units are expressed in
-            <VAR
+            <CODE
 CLASS="varname"
->BASEUNIT</VAR
+>BASEUNIT</CODE
 >, which is in reciprocal
-            inches.  Typically, <VAR
+            inches.  Typically, <CODE
 CLASS="varname"
->BASEUNIT</VAR
+>BASEUNIT</CODE
 > is
             <CODE
 CLASS="constant"
 >1440</CODE
 >.  In 720 DPI mode,
-            <VAR
+            <CODE
 CLASS="varname"
->PAGEUNIT</VAR
->, <VAR
+>PAGEUNIT</CODE
+>, <CODE
 CLASS="varname"
->VUNIT</VAR
+>VUNIT</CODE
 >,
-            and <VAR
+            and <CODE
 CLASS="varname"
->HUNIT</VAR
+>HUNIT</CODE
 > are all
             <CODE
 CLASS="constant"
 >2</CODE
->; in 1440×720 DPI mode,
-            <VAR
+>; in 1440�720 DPI mode,
+            <CODE
 CLASS="varname"
->PAGEUNIT</VAR
-> and <VAR
+>PAGEUNIT</CODE
+> and <CODE
 CLASS="varname"
->VUNIT</VAR
+>VUNIT</CODE
 >
             are normally set to <CODE
 CLASS="constant"
 >2</CODE
 >;
-            <VAR
+            <CODE
 CLASS="varname"
->HUNIT</VAR
+>HUNIT</CODE
 > is set to
             <CODE
 CLASS="constant"
@@ -325,20 +304,20 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (K <VAR
+>ESC (K <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->ZERO1</VAR
+>ZERO1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->GRAYMODE1</VAR
-></VAR
+>GRAYMODE1</CODE
+></TT
 ></DT
 ><DD
 ><P
@@ -347,9 +326,9 @@ CLASS="varname"
             identified because they are advertised as having more
             black nozzles than nozzles of individual colors.
             Setting grayscale mode allows use of these extra nozzles
-            for faster printing.  <VAR
+            for faster printing.  <CODE
 CLASS="varname"
->GRAYMODE</VAR
+>GRAYMODE</CODE
 > should
             be <CODE
 CLASS="constant"
@@ -362,9 +341,9 @@ CLASS="constant"
 CLASS="constant"
 >1</CODE
 > for grayscale.
-            <VAR
+            <CODE
 CLASS="varname"
->ZERO</VAR
+>ZERO</CODE
 > should always be
             <CODE
 CLASS="constant"
@@ -373,22 +352,22 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (i <VAR
+>ESC (i <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=1
-            <VAR
+            <CODE
 CLASS="varname"
->MICROWEAVE1</VAR
-></VAR
+>MICROWEAVE1</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            If <VAR
+>&#13;            If <CODE
 CLASS="varname"
->MICROWEAVE</VAR
+>MICROWEAVE</CODE
 > is
             <CODE
 CLASS="constant"
@@ -397,7 +376,7 @@ CLASS="constant"
             printers, this is used to turn on microweave; on newer
             printers, it prints one row at a time.  All printers
             support this mode.  It should only be used at 720 (or
-            1440×720) DPI.  The Epson Stylus Pro series
+            1440�720) DPI.  The Epson Stylus Pro series
             indicates additional modes:
           </P
 ><P
@@ -412,7 +391,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  “Full-overlap”
+>&#13;                  &#8220;Full-overlap&#8221;
                 </P
 ></DD
 ><DT
@@ -422,7 +401,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  “Four-pass”
+>&#13;                  &#8220;Four-pass&#8221;
                 </P
 ></DD
 ><DT
@@ -432,7 +411,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  “Full-overlap 2”
+>&#13;                  &#8220;Full-overlap 2&#8221;
                 </P
 ></DD
 ></DL
@@ -450,19 +429,19 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
 >ESC U
-            <VAR
+            <CODE
 CLASS="varname"
->DIRECTION1</VAR
-></VAR
+>DIRECTION1</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            If <VAR
+>&#13;            If <CODE
 CLASS="varname"
->DIRECTION</VAR
+>DIRECTION</CODE
 > is
             <CODE
 CLASS="constant"
@@ -475,31 +454,31 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (s <VAR
+>ESC (s <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=1
-            <VAR
+            <CODE
 CLASS="varname"
->SPEED1</VAR
-></VAR
+>SPEED1</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            On some older printers, this controls the print head
-            speed.  <VAR
+            speed.  <CODE
 CLASS="varname"
->SPEED</VAR
+>SPEED</CODE
 > of
             <CODE
 CLASS="constant"
 >2</CODE
 > is 10 inches/sec;
-            <VAR
+            <CODE
 CLASS="varname"
->SPEED</VAR
+>SPEED</CODE
 > of <CODE
 CLASS="constant"
 >0</CODE
@@ -508,26 +487,26 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (e <VAR
+>ESC (e <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->ZERO1</VAR
+>ZERO1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->DOTSIZE1</VAR
-></VAR
+>DOTSIZE1</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Choose print dotsize.  <VAR
+>&#13;            Choose print dotsize.  <CODE
 CLASS="varname"
->DOTSIZE</VAR
+>DOTSIZE</CODE
 > can
             take on various values, depending upon the printer.
             Almost all printers support <CODE
@@ -538,45 +517,45 @@ CLASS="constant"
 CLASS="constant"
 >2</CODE
 >.  Variable dot size printers
-            allow a value of <VAR
+            allow a value of <CODE
 CLASS="varname"
->16</VAR
+>16</CODE
 >.  Other than the
-            value of <VAR
+            value of <CODE
 CLASS="varname"
->16</VAR
+>16</CODE
 >, this appears to be
             ignored at resolutions of 720 DPI and above.
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (C <VAR
+>ESC (C <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->PAGELENGTH2</VAR
-></VAR
->, <VAR
+>PAGELENGTH2</CODE
+></TT
+>, <TT
 CLASS="literal"
->ESC (C <VAR
+>ESC (C <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->PAGELENGTH4</VAR
-></VAR
+>PAGELENGTH4</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set the length of the page in “pageunits”
-            (see <VAR
+>&#13;            Set the length of the page in &#8220;pageunits&#8221;
+            (see <TT
 CLASS="literal"
->ESC (U</VAR
+>ESC (U</TT
 > above).  The second form
             of the command allows setting of longer page lengths on
             new printers (these happen to be the printers that
@@ -584,41 +563,41 @@ CLASS="literal"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (c <VAR
+>ESC (c <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->TOP2</VAR
+>TOP2</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->LENGTH2</VAR
-></VAR
->, <VAR
+>LENGTH2</CODE
+></TT
+>, <TT
 CLASS="literal"
->ESC (c <VAR
+>ESC (c <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=8
-            <VAR
+            <CODE
 CLASS="varname"
->TOP4</VAR
+>TOP4</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->LENGTH4</VAR
-></VAR
+>LENGTH4</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            Set the vertical page margins of the page in
-            “pageunits” (see <VAR
+            &#8220;pageunits&#8221; (see <TT
 CLASS="literal"
->ESC (U</VAR
+>ESC (U</TT
 >
             above).  The margins are specified as the top of the
             page and the length of the page.  The second form of the
@@ -628,119 +607,119 @@ CLASS="literal"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (S <VAR
+>ESC (S <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=8
-            <VAR
+            <CODE
 CLASS="varname"
->WIDTH4</VAR
+>WIDTH4</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->LENGTH4</VAR
-></VAR
+>LENGTH4</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            Set the width and length of the printed page region in
-            “pageunits” (see <VAR
+            &#8220;pageunits&#8221; (see <TT
 CLASS="literal"
->ESC (U</VAR
+>ESC (U</TT
 >
             above).
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (v <VAR
+>ESC (v <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->ADVANCE2</VAR
-></VAR
->, <VAR
+>ADVANCE2</CODE
+></TT
+>, <TT
 CLASS="literal"
->ESC (v <VAR
+>ESC (v <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->ADVANCE4</VAR
-></VAR
+>ADVANCE4</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Feed vertically <VAR
+>&#13;            Feed vertically <CODE
 CLASS="varname"
->ADVANCE</VAR
+>ADVANCE</CODE
 >
-            “vertical units” (see <VAR
+            &#8220;vertical units&#8221; (see <TT
 CLASS="literal"
 >ESC
-            (U</VAR
+            (U</TT
 > above) from the current print head
             position.
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (V <VAR
+>ESC (V <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->ADVANCE2</VAR
-></VAR
->, <VAR
+>ADVANCE2</CODE
+></TT
+>, <TT
 CLASS="literal"
->ESC (V <VAR
+>ESC (V <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->ADVANCE4</VAR
-></VAR
+>ADVANCE4</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Feed vertically <VAR
+>&#13;            Feed vertically <CODE
 CLASS="varname"
->ADVANCE</VAR
+>ADVANCE</CODE
 >
-            “vertical units” (see <VAR
+            &#8220;vertical units&#8221; (see <TT
 CLASS="literal"
 >ESC
-            (U</VAR
+            (U</TT
 > above) from the top margin.
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC ($ <VAR
+>ESC ($ <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET4</VAR
-></VAR
+>OFFSET4</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set horizontal position to <VAR
+>&#13;            Set horizontal position to <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 >
             from the left margin.  This command operates on printers
             of the 740 class and newer (all printers with variable
@@ -748,19 +727,19 @@ CLASS="varname"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
 >ESC $
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET2</VAR
-></VAR
+>OFFSET2</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set horizontal position to <VAR
+>&#13;            Set horizontal position to <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 >
             from the left margin.  This command operates on printers
             of the 740 class and newer (all printers with variable
@@ -768,34 +747,34 @@ CLASS="varname"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (\ <VAR
+>ESC (\ <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->UNITS2</VAR
+>UNITS2</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET2</VAR
-></VAR
+>OFFSET2</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set horizontal position to <VAR
+>&#13;            Set horizontal position to <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 >
             from the previous print head position, measured in
-            <VAR
+            <CODE
 CLASS="varname"
->UNITS</VAR
->.  <VAR
+>UNITS</CODE
+>.  <CODE
 CLASS="varname"
->UNITS</VAR
+>UNITS</CODE
 > is
             measured in inverse inches, and should be set to 1440 in
             all cases.  This operates on all 1440 dpi printers that
@@ -803,58 +782,58 @@ CLASS="varname"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (/ <VAR
+>ESC (/ <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET4</VAR
-></VAR
+>OFFSET4</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set horizontal position to <VAR
+>&#13;            Set horizontal position to <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 >
             from the previous print head position, measured in
-            “horizontal units” (see <VAR
+            &#8220;horizontal units&#8221; (see <TT
 CLASS="literal"
 >ESC
-            (U</VAR
+            (U</TT
 > above).  This operates on all variable dot
             size printers.
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
 >ESC \
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET2</VAR
-></VAR
+>OFFSET2</CODE
+></TT
 ></DT
 ><DD
 ><P
->&#13;            Set horizontal position to <VAR
+>&#13;            Set horizontal position to <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 >
             from the previous print head position, measured in basic
-            unit of measurement (see <VAR
+            unit of measurement (see <TT
 CLASS="literal"
->ESC (U</VAR
+>ESC (U</TT
 >
             above). This is used on all 720 dpi printers, and can
             also be used on 1440 dpi printers in lower resolutions
             to save a few bytes.  Note that
-            <VAR
+            <CODE
 CLASS="varname"
->OFFSET</VAR
+>OFFSET</CODE
 > may be negative.  The range of
             values for this command is between
             <CODE
@@ -868,35 +847,35 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
 >ESC r
-            <VAR
+            <CODE
 CLASS="varname"
->COLOR1</VAR
-></VAR
->, <VAR
+>COLOR1</CODE
+></TT
+>, <TT
 CLASS="literal"
->ESC (r <VAR
+>ESC (r <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=2
-            <VAR
+            <CODE
 CLASS="varname"
->DENSITY1</VAR
+>DENSITY1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->COLOR1</VAR
-></VAR
+>COLOR1</CODE
+></TT
 ></DT
 ><DD
 ><P
 >&#13;            Set the ink color.  The first form is used on four-color
             printers; the second on six-color printers.
-            <VAR
+            <CODE
 CLASS="varname"
->DENSITY</VAR
+>DENSITY</CODE
 > is <CODE
 CLASS="constant"
 >0</CODE
@@ -905,9 +884,9 @@ CLASS="constant"
 CLASS="constant"
 >1</CODE
 > for light.
-            <VAR
+            <CODE
 CLASS="varname"
->COLOR</VAR
+>COLOR</CODE
 > is
           </P
 ><DIV
@@ -929,9 +908,9 @@ WIDTH="1*"
 TITLE="color"><THEAD
 ><TR
 ><TH
-><VAR
+><CODE
 CLASS="varname"
->COLOR</VAR
+>COLOR</CODE
 ></TH
 ><TH
 >Color name</TH
@@ -983,33 +962,33 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC . <VAR
+>ESC . <CODE
 CLASS="varname"
->COMPRESS1</VAR
+>COMPRESS1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->VSEP1</VAR
-> <VAR
+>VSEP1</CODE
+> <CODE
 CLASS="varname"
->HSEP1</VAR
+>HSEP1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->LINES1</VAR
-> <VAR
+>LINES1</CODE
+> <CODE
 CLASS="varname"
->WIDTH2</VAR
+>WIDTH2</CODE
 >
-            data...</VAR
+            data...</TT
 ></DT
 ><DD
 ><P
->&#13;            Print data.  <VAR
+>&#13;            Print data.  <CODE
 CLASS="varname"
->COMPRESS</VAR
+>COMPRESS</CODE
 > signifies the
             compression mode.
           </P
@@ -1032,9 +1011,9 @@ WIDTH="1*"
 TITLE="compression"><THEAD
 ><TR
 ><TH
-><VAR
+><CODE
 CLASS="varname"
->COMPRESS</VAR
+>COMPRESS</CODE
 ></TH
 ><TH
 >Compression mode</TH
@@ -1058,7 +1037,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression (incorrectly documented as
-                    “run length encoded”)
+                    &#8220;run length encoded&#8221;)
                   </TD
 ></TR
 ><TR
@@ -1075,9 +1054,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->VSEP</VAR
+>VSEP</CODE
 > depends upon resolution and
             printer type.  At 360 DPI, it is always
             <CODE
@@ -1091,13 +1070,13 @@ CLASS="constant"
             <CODE
 CLASS="constant"
 >40</CODE
-> (8 × 5}).  On some other
+> (8 � 5}).  On some other
             printers, it varies.
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->HSEP1</VAR
+>HSEP1</CODE
 > is <CODE
 CLASS="constant"
 >10</CODE
@@ -1111,9 +1090,9 @@ CLASS="constant"
             1/720").
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->LINES</VAR
+>LINES</CODE
 > is the number of lines to be
             printed.  It should be <CODE
 CLASS="constant"
@@ -1123,18 +1102,18 @@ CLASS="constant"
             be the number of lines to be actually printed.
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->WIDTH</VAR
+>WIDTH</CODE
 > is the number of pixels to be
             printed in each row.  Following this command, a carriage
             return (<CODE
 CLASS="constant"
 >13</CODE
 > decimal,
-            <VAR
+            <TT
 CLASS="literal"
->0A</VAR
+>0A</TT
 > hex) should be output to return
             the print head position to the left margin.
           </P
@@ -1184,35 +1163,35 @@ CLASS="constant"
 ></OL
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC i <VAR
+>ESC i <CODE
 CLASS="varname"
->COLOR1</VAR
+>COLOR1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->COMPRESS1</VAR
-> <VAR
+>COMPRESS1</CODE
+> <CODE
 CLASS="varname"
->BITS1</VAR
+>BITS1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->BYTES2</VAR
-> <VAR
+>BYTES2</CODE
+> <CODE
 CLASS="varname"
->LINES2</VAR
+>LINES2</CODE
 >
-            data...</VAR
+            data...</TT
 ></DT
 ><DD
 ><P
 >&#13;            Print data in the newer printers (that support variable
             dot size), and Stylus Pro models.
-            <VAR
+            <CODE
 CLASS="varname"
->COLOR</VAR
+>COLOR</CODE
 > is the color.
           </P
 ><DIV
@@ -1234,9 +1213,9 @@ WIDTH="1*"
 TITLE="color"><THEAD
 ><TR
 ><TH
-><VAR
+><CODE
 CLASS="varname"
->COLOR</VAR
+>COLOR</CODE
 ></TH
 ><TH
 >Color name</TH
@@ -1304,7 +1283,7 @@ CLASS="constant"
 >16</CODE
 ></TD
 ><TD
->Gray (“light black”)</TD
+>Gray (&#8220;light black&#8221;)</TD
 ></TR
 ><TR
 ><TD
@@ -1328,9 +1307,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->COMPRESS</VAR
+>COMPRESS</CODE
 > signifies the compression
             mode:
           </P
@@ -1353,9 +1332,9 @@ WIDTH="1*"
 TITLE="compression"><THEAD
 ><TR
 ><TH
-><VAR
+><CODE
 CLASS="varname"
->COMPRESS</VAR
+>COMPRESS</CODE
 ></TH
 ><TH
 >Compression mode</TH
@@ -1379,7 +1358,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression (incorrectly documented as
-                    “run length encoded”)
+                    &#8220;run length encoded&#8221;)
                   </TD
 ></TR
 ><TR
@@ -1390,7 +1369,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression with a special command set, or
-                    “run length encoding 2” on some
+                    &#8220;run length encoding 2&#8221; on some
                     printers.
                   </TD
 ></TR
@@ -1398,27 +1377,27 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->BITS</VAR
+>BITS</CODE
 > is the number of bits per pixel.
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->BYTES</VAR
+>BYTES</CODE
 > is the number of bytes wide for
-            each row (ceiling(BITS × width_of_row, 8)}). Note
-            that this is different from the <VAR
+            each row (ceiling(BITS � width_of_row, 8)}). Note
+            that this is different from the <TT
 CLASS="literal"
->ESC .</VAR
+>ESC .</TT
 >
             command above.
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->LINES</VAR
+>LINES</CODE
 > is the number of lines to be
             printed.  This command is the only way to get variable
             dot size printing.  In variable dot mode, the size of
@@ -1437,23 +1416,23 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (D <VAR
+>ESC (D <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=4
-            <VAR
+            <CODE
 CLASS="varname"
->BASE2</VAR
-> <VAR
+>BASE2</CODE
+> <CODE
 CLASS="varname"
->VERTICAL1</VAR
+>VERTICAL1</CODE
 >
-            <VAR
+            <CODE
 CLASS="varname"
->HORIZONTAL1</VAR
-></VAR
+>HORIZONTAL1</CODE
+></TT
 ></DT
 ><DD
 ><P
@@ -1462,9 +1441,9 @@ CLASS="varname"
             (and possibly other high end printers).
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->BASE</VAR
+>BASE</CODE
 > is the base unit for this
             command; it must be <CODE
 CLASS="constant"
@@ -1472,42 +1451,42 @@ CLASS="constant"
 >.
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->VERTICAL</VAR
+>VERTICAL</CODE
 > is the distance in these
             units between printed rows; it should be
-            ((separation_in_nozzles × <VAR
+            ((separation_in_nozzles � <CODE
 CLASS="varname"
->BASE</VAR
+>BASE</CODE
 >
-            ÷ 720).
+            � 720).
           </P
 ><P
->&#13;            <VAR
+>&#13;            <CODE
 CLASS="varname"
->HORIZONTAL</VAR
+>HORIZONTAL</CODE
 > is the horizontal
             separation between dots in a row.  Depending upon the
-            printer, this should be either (14400 ÷ 720) or
-            (14400 ÷ 360).  The Stylus Pro 9000 manual
+            printer, this should be either (14400 � 720) or
+            (14400 � 360).  The Stylus Pro 9000 manual
             suggests that the settings should match the chosen
             resolution, but that is apparently not the case (or not
             always the case) on other printers.
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC (R <VAR
+>ESC (R <CODE
 CLASS="varname"
->BC</VAR
+>BC</CODE
 >=8 00 R E M O T E
-            1</VAR
+            1</TT
 ></DT
 ><DD
 ><P
->&#13;            Enters “remote mode”.  This is a special,
+>&#13;            Enters &#8220;remote mode&#8221;.  This is a special,
             undocumented command set that is used to set up various
             printer options, such as paper feed tray, and perform
             utility functions such as head cleaning and alignment.
@@ -1518,9 +1497,9 @@ CLASS="varname"
           </P
 ></DD
 ><DT
-><VAR
+><TT
 CLASS="literal"
->ESC 01 @EJL [sp] ID\r\n</VAR
+>ESC 01 @EJL [sp] ID\r\n</TT
 ></DT
 ><DD
 ><P
@@ -1535,12 +1514,6 @@ CLASS="informalexample"
 ><A
 NAME="AEN937"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >@EJL ID\r
@@ -1550,9 +1523,6 @@ MDL:[printer model];
 CLS:PRINTER;
 DES:EPSON [printer model];
 \f</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1578,19 +1548,10 @@ CLASS="informalexample"
 ><A
 NAME="AEN941"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >ESC 01@EJL[space]1284.4[newline]@EJL[space][space][space][space]
 [space][newline]ESC@</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1604,12 +1565,6 @@ CLASS="informalexample"
 ><A
 NAME="AEN944"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >magic command
@@ -1627,9 +1582,6 @@ ESC (c
 ESC (S
 ESC (D (if needed)
 ESC (V (optional -- this can be accomplished with ESC (v)</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1643,18 +1595,9 @@ CLASS="informalexample"
 ><A
 NAME="AEN947"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >ESC (v</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1668,21 +1611,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN950"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >ESC ($ or ESC (\ or ESC \
 ESC (r or ESC r (if needed---not used with "ESC i" and not needed if the color
 has not changed from the previous printed line)
 ESC . or ESC i  ...data... [return] (0A hex)</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1696,19 +1630,10 @@ CLASS="informalexample"
 ><A
 NAME="AEN953"
 ></A
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="screen"
 >[formfeed] (0C hex)
 ESC @</PRE
-></TD
-></TR
-></TABLE
 ><P
 ></P
 ></DIV
@@ -1739,7 +1664,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="book1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

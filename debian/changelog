@@ -1,3 +1,23 @@
+gutenprint (4.3.99+cvs20051122.dfsg.1-1) unstable; urgency=low
+
+  * New upstream CVS snapshot (Closes: #340155).
+  * The GFDL licensed user's guide has been removed from the
+    upstream tarball to create a DFSG-free .orig.tar.gz.
+  * Several Epson Stylus Photo printers have been retuned since the
+    last version (Closes: #335789).
+  * The Epson Stylus C88 is now supported (Closes: #338961).
+  * debian/control.in:
+    - Improve the ijsgutenprint package description (Closes: #337845).
+    - Remove 'Suggests: gutenprint-doc (>= ${Source-Version})' from
+      gimp-print and cupsys-driver-gutenprint.
+    - Remove the gutenprint-doc package, which was GFDL licensed.
+      The control data is kept in debian/control.gfdl.
+  * debian/rules: Update UPSTREAM_VERSION to 5.0.0-rc2.
+  * debian/copyright: Remove the GFDL manual paragraph, and document
+    its removal due to DFSG incompatibility.
+
+ -- Roger Leigh <rleigh@debian.org>  Tue, 22 Nov 2005 15:44:02 +0000
+
 gutenprint (4.3.99+cvs20050901-1) unstable; urgency=low
 
   * New upstream release candidate.

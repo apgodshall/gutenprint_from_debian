@@ -22,6 +22,9 @@ Version 4.3 is being developed by essentially the same team.
 The list of contributors, in alphabetical order, is as follows.  The
 principal areas that each contributed to are listed in addition.
 
+Andreas Kemnade         <akemnade@tzi.de>
+        Cd printing support for Canon PIXMA printers
+
 Andy Stewart            <andystewart@attbi.com>
         User manual
 
@@ -64,6 +67,9 @@ Jean-Marc Verbavatz	<verbavatz@ifrance.fr>
 Karl Heinz Kremer	<khk@khk.net>
 	Liaison with Epson
 	Engineering and design
+
+Karsten Festag		<karsten.festag@gmx.de>
+	Canon S200 support
 
 Mark Tomlinson		<mark.tomlinson@xtra.co.nz>
 	Implementation of Raph Levien's EvenTone dither

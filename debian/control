@@ -14,7 +14,7 @@ Enhances: gimp
 Description: print plugin for the GIMP
  This package includes the Print plugin for the GIMP.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -50,7 +50,7 @@ Description: printer drivers for CUPS
  .
    http://www.cups.org
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -72,7 +72,7 @@ Description: development files for the Gutenprint printer driver library
  Install this package if you wish to develop programs that use
  libgutenprint.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -94,7 +94,7 @@ Description: documentation for the Gutenprint printer driver library
  Install this package if you want to have lots of info about the
  Gutenprint library when you're programming.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -113,7 +113,7 @@ Description: runtime for the Gutenprint printer driver library
  This package includes the Gutenprint shared library, needed to
  run programs using Gutenprint drivers.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -138,7 +138,7 @@ Description: development files for the Gutenprint printer driver user interface 
  libgutenprintui.  This package is intended for use only by cinepaint
  and gimp-1.2.
  .
- This is Gutenprint version 5.0.0-rc1, a beta
+ This is Gutenprint version 5.0.0-rc2, a beta
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -158,7 +158,7 @@ Description: runtime for the Gutenprint printer driver user interface library
  contains GTK+ widgets which may be used for print dialogs etc. for
  use with libgutenprint.
  .
- This is Gutenprint version 5.0.0-rc1, a beta
+ This is Gutenprint version 5.0.0-rc2, a beta
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -182,7 +182,7 @@ Description: development files for the Gutenprint printer driver user interface 
  Install this package if you wish to develop packages that use
  libgutenprintui.
  .
- This is Gutenprint version 5.0.0-rc1, a beta
+ This is Gutenprint version 5.0.0-rc2, a beta
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -202,7 +202,7 @@ Description: runtime for the Gutenprint printer driver user interface library
  gimp-print.  libgutenprintui contains GTK+ widgets which may be
  used for print dialogs etc. for use with libgutenprint.
  .
- This is Gutenprint version 5.0.0-rc1, a beta
+ This is Gutenprint version 5.0.0-rc2, a beta
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -223,30 +223,7 @@ Description: locale data files for Gutenprint
  They are needed when you want the programs in Gutenprint to print
  their messages in other languages than US English.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
- in the 5.0 series.
- .
- Gutenprint is the print facility for the GIMP, and in addition a
- suite of drivers that may be used with common UNIX spooling systems
- using GhostScript or CUPS.  These drivers provide printing quality
- for UNIX/Linux on a par with proprietary vendor-supplied drivers in
- many cases, and can be used for many of the most demanding printing
- tasks.  Gutenprint was formerly known as Gimp-Print.
-
-Package: gutenprint-doc
-Architecture: all
-Section: doc
-Suggests: cupsys-driver-gutenprint (>= ${Source-Version}), foomatic-db-gutenprint (>= ${Source-Version}), gimp-print (>= ${Source-Version}), ijsgutenprint (>= ${Source-Version})
-Description: users' guide for Gutenprint and CUPS
- This package contains a user guide for programs using the
- Gutenprint library for photographic quality printing.  Currently
- this covers using the Print plugin for the GIMP and the Common Unix
- Printing System (CUPS).
- .
- The documentation is available in both HTML and PDF formats for
- on-line viewing and hardcopy.
- .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -265,7 +242,7 @@ Description: maintenance utility for Epson Stylus printers
  escputil is a utility to clean and align the heads of Epson Stylus
  printers.  It can also check the current ink levels in the printer.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
   .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -291,9 +268,19 @@ Depends: ${shlibs:Depends}, gs-esp (>= 6.53) | gs-gpl (>= 8.01-1) | gs (>= 6.53)
 Description: inkjet server - Ghostscript driver for Gutenprint
  This package contains the ijsgutenprint binary which provides
  Ghostscript with a Gutenprint driver, including all printers
- supported by Gutenprint.
+ supported by Gutenprint.  ijsgutenprint is an IJS server (driver),
+ which communicates with Ghostscript (an IJS client) using the IJS
+ (InkJet Server) communications protocol.  IJS is a method for
+ separating ghostscript drivers from ghostscript, to allow
+ ghostscript to be more extensible.
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ If you wish to print using Ghostscript and the Gutenprint drivers,
+ install this package.  This is typical for LPRng setups.  If you
+ are using CUPS, cupsys-driver-gutenprint is a better choice, but
+ this package will still work with the appropriate foomatic setup
+ if you wish to make use of foomatic.
+ .
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -329,7 +316,7 @@ Description: linuxprinting.org printer support - database for Gutenprint printer
  .
  Home Page: http://www.linuxprinting.org/
  .
- This is Gutenprint version 5.0.0-rc1, a beta release
+ This is Gutenprint version 5.0.0-rc2, a beta release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a

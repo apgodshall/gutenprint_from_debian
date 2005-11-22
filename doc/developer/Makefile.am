@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.16 2005/01/30 16:01:52 rleigh Exp $
+## $Id: Makefile.am,v 1.18 2005/11/22 14:43:04 rleigh Exp $
 ## Copyright (C) 2001 Andy Stewart and Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -17,11 +17,7 @@
 
 ## Process this file with automake to produce Makefile.in.
 
-AUTOMAKE_OPTIONS = 1.4 gnu
-
 @SET_MAKE@
-
-MAINT_CHARSET = latin1
 
 include $(top_srcdir)/scripts/global.mk
 
@@ -128,7 +124,7 @@ html-stamp: $(MANUAL_SRC_FILES)
 
 install-data-local: $(STANDARD_TARGETS)
 	if test -n '$(STANDARD_TARGETS)' ; then \
-	  $(mkinstalldirs) $(DESTDIR)$(datadir)/$(PACKAGE)/doc/$(HTMLDIR) ; \
+	  $(mkdir_p) $(DESTDIR)$(datadir)/$(PACKAGE)/doc/$(HTMLDIR) ; \
 	  if test -f gutenprint.pdf ; then \
 	    $(INSTALL_DATA) gutenprint.pdf $(DESTDIR)$(datadir)/$(PACKAGE)/doc ; \
 	  elif test -f $(srcdir)/gutenprint.pdf ; then \

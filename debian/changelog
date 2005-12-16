@@ -1,3 +1,10 @@
+gutenprint (4.3.99+cvs20051122.dfsg.1-2) unstable; urgency=low
+
+  * debian/control.in: Remove xlibs-dev from Build-Depends, in
+    anticipation of its removal from unstable.
+
+ -- Roger Leigh <rleigh@debian.org>  Fri, 16 Dec 2005 10:53:04 +0000
+
 gutenprint (4.3.99+cvs20051122.dfsg.1-1) unstable; urgency=low
 
   * New upstream CVS snapshot (Closes: #340155).

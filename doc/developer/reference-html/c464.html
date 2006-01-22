@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -8,20 +8,17 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="PREVIOUS"
 TITLE="The driver file"
 HREF="x271.html"><LINK
 REL="NEXT"
 TITLE="Remote Mode Commands"
-HREF="x955.html"></HEAD
+HREF="x955.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="chapter"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -72,6 +69,30 @@ CLASS="chapter"
 NAME="AEN464"
 ></A
 >Chapter 5. ESC/P2</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="c464.html#AEN477"
+>Standard commands</A
+></DT
+><DT
+><A
+HREF="x955.html"
+>Remote Mode Commands</A
+></DT
+><DT
+><A
+HREF="x1669.html"
+>Appropriate Remote Commands</A
+></DT
+></DL
+></DIV
 ><P
 >&#13;    This is a description of the ESC/P2 raster commands used by the
     Gutenprint printer driver, which is a subset of the complete
@@ -100,10 +121,10 @@ CLASS="literal"
     character (0x1b), followed by either one or two command characters
     and arguments where applicable.  Older commands generally have one
     command character.  Newer commands usually have a
-    &#8216;<TT
+    ‘<TT
 CLASS="literal"
 >(</TT
->&#8217; (left parenthesis) followed by
+>’ (left parenthesis) followed by
     a command character and a byte count for the arguments that
     follow.  The byte count is a 16-bit (2 byte) binary integer, in
     little endian order.
@@ -133,7 +154,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN477"
->5.1. Standard commands</A
+>Standard commands</A
 ></H1
 ><P
 ></P
@@ -281,7 +302,7 @@ CLASS="varname"
             <CODE
 CLASS="constant"
 >2</CODE
->; in 1440�720 DPI mode,
+>; in 1440×720 DPI mode,
             <CODE
 CLASS="varname"
 >PAGEUNIT</CODE
@@ -376,7 +397,7 @@ CLASS="constant"
             printers, this is used to turn on microweave; on newer
             printers, it prints one row at a time.  All printers
             support this mode.  It should only be used at 720 (or
-            1440�720) DPI.  The Epson Stylus Pro series
+            1440×720) DPI.  The Epson Stylus Pro series
             indicates additional modes:
           </P
 ><P
@@ -391,7 +412,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  &#8220;Full-overlap&#8221;
+>&#13;                  “Full-overlap”
                 </P
 ></DD
 ><DT
@@ -401,7 +422,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  &#8220;Four-pass&#8221;
+>&#13;                  “Four-pass”
                 </P
 ></DD
 ><DT
@@ -411,7 +432,7 @@ CLASS="constant"
 ></DT
 ><DD
 ><P
->&#13;                  &#8220;Full-overlap 2&#8221;
+>&#13;                  “Full-overlap 2”
                 </P
 ></DD
 ></DL
@@ -552,7 +573,7 @@ CLASS="varname"
 ></DT
 ><DD
 ><P
->&#13;            Set the length of the page in &#8220;pageunits&#8221;
+>&#13;            Set the length of the page in “pageunits”
             (see <TT
 CLASS="literal"
 >ESC (U</TT
@@ -595,7 +616,7 @@ CLASS="varname"
 ><DD
 ><P
 >&#13;            Set the vertical page margins of the page in
-            &#8220;pageunits&#8221; (see <TT
+            “pageunits” (see <TT
 CLASS="literal"
 >ESC (U</TT
 >
@@ -625,7 +646,7 @@ CLASS="varname"
 ><DD
 ><P
 >&#13;            Set the width and length of the printed page region in
-            &#8220;pageunits&#8221; (see <TT
+            “pageunits” (see <TT
 CLASS="literal"
 >ESC (U</TT
 >
@@ -660,7 +681,7 @@ CLASS="varname"
 CLASS="varname"
 >ADVANCE</CODE
 >
-            &#8220;vertical units&#8221; (see <TT
+            “vertical units” (see <TT
 CLASS="literal"
 >ESC
             (U</TT
@@ -696,7 +717,7 @@ CLASS="varname"
 CLASS="varname"
 >ADVANCE</CODE
 >
-            &#8220;vertical units&#8221; (see <TT
+            “vertical units” (see <TT
 CLASS="literal"
 >ESC
             (U</TT
@@ -800,7 +821,7 @@ CLASS="varname"
 >OFFSET</CODE
 >
             from the previous print head position, measured in
-            &#8220;horizontal units&#8221; (see <TT
+            “horizontal units” (see <TT
 CLASS="literal"
 >ESC
             (U</TT
@@ -1037,7 +1058,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression (incorrectly documented as
-                    &#8220;run length encoded&#8221;)
+                    “run length encoded”)
                   </TD
 ></TR
 ><TR
@@ -1070,7 +1091,7 @@ CLASS="constant"
             <CODE
 CLASS="constant"
 >40</CODE
-> (8 � 5}).  On some other
+> (8 × 5}).  On some other
             printers, it varies.
           </P
 ><P
@@ -1283,7 +1304,7 @@ CLASS="constant"
 >16</CODE
 ></TD
 ><TD
->Gray (&#8220;light black&#8221;)</TD
+>Gray (“light black”)</TD
 ></TR
 ><TR
 ><TD
@@ -1358,7 +1379,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression (incorrectly documented as
-                    &#8220;run length encoded&#8221;)
+                    “run length encoded”)
                   </TD
 ></TR
 ><TR
@@ -1369,7 +1390,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    TIFF compression with a special command set, or
-                    &#8220;run length encoding 2&#8221; on some
+                    “run length encoding 2” on some
                     printers.
                   </TD
 ></TR
@@ -1387,7 +1408,7 @@ CLASS="varname"
 CLASS="varname"
 >BYTES</CODE
 > is the number of bytes wide for
-            each row (ceiling(BITS � width_of_row, 8)}). Note
+            each row (ceiling(BITS × width_of_row, 8)}). Note
             that this is different from the <TT
 CLASS="literal"
 >ESC .</TT
@@ -1456,11 +1477,11 @@ CLASS="varname"
 >VERTICAL</CODE
 > is the distance in these
             units between printed rows; it should be
-            ((separation_in_nozzles � <CODE
+            ((separation_in_nozzles × <CODE
 CLASS="varname"
 >BASE</CODE
 >
-            � 720).
+            ÷ 720).
           </P
 ><P
 >&#13;            <CODE
@@ -1468,8 +1489,8 @@ CLASS="varname"
 >HORIZONTAL</CODE
 > is the horizontal
             separation between dots in a row.  Depending upon the
-            printer, this should be either (14400 � 720) or
-            (14400 � 360).  The Stylus Pro 9000 manual
+            printer, this should be either (14400 ÷ 720) or
+            (14400 ÷ 360).  The Stylus Pro 9000 manual
             suggests that the settings should match the chosen
             resolution, but that is apparently not the case (or not
             always the case) on other printers.
@@ -1486,7 +1507,7 @@ CLASS="varname"
 ></DT
 ><DD
 ><P
->&#13;            Enters &#8220;remote mode&#8221;.  This is a special,
+>&#13;            Enters “remote mode”.  This is a special,
             undocumented command set that is used to set up various
             printer options, such as paper feed tray, and perform
             utility functions such as head cleaning and alignment.
@@ -1514,6 +1535,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN937"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >@EJL ID\r
@@ -1523,6 +1550,9 @@ MDL:[printer model];
 CLS:PRINTER;
 DES:EPSON [printer model];
 \f</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1548,10 +1578,19 @@ CLASS="informalexample"
 ><A
 NAME="AEN941"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >ESC 01@EJL[space]1284.4[newline]@EJL[space][space][space][space]
 [space][newline]ESC@</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1565,6 +1604,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN944"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >magic command
@@ -1582,6 +1627,9 @@ ESC (c
 ESC (S
 ESC (D (if needed)
 ESC (V (optional -- this can be accomplished with ESC (v)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1595,9 +1643,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN947"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >ESC (v</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1611,12 +1668,21 @@ CLASS="informalexample"
 ><A
 NAME="AEN950"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >ESC ($ or ESC (\ or ESC \
 ESC (r or ESC r (if needed---not used with "ESC i" and not needed if the color
 has not changed from the previous printed line)
 ESC . or ESC i  ...data... [return] (0A hex)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1630,10 +1696,19 @@ CLASS="informalexample"
 ><A
 NAME="AEN953"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >[formfeed] (0C hex)
 ESC @</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1664,7 +1739,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

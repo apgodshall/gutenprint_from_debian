@@ -39,7 +39,7 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/scripts/global.mk compile config.guess \
-	config.rpath config.sub install-sh ltmain.sh missing \
+	config.rpath config.sub depcomp install-sh ltmain.sh missing \
 	mkinstalldirs
 subdir = scripts
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -273,10 +273,13 @@ exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
 gimp_plug_indir = @gimp_plug_indir@
 gutenprint_cflags = @gutenprint_cflags@
+gutenprint_libdeps = @gutenprint_libdeps@
 gutenprint_libs = @gutenprint_libs@
 gutenprintui2_cflags = @gutenprintui2_cflags@
+gutenprintui2_libdeps = @gutenprintui2_libdeps@
 gutenprintui2_libs = @gutenprintui2_libs@
 gutenprintui_cflags = @gutenprintui_cflags@
+gutenprintui_libdeps = @gutenprintui_libdeps@
 gutenprintui_libs = @gutenprintui_libs@
 host = @host@
 host_alias = @host_alias@

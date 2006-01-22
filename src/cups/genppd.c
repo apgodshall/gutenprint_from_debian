@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.109 2005/10/18 02:08:16 rlk Exp $"
+ * "$Id: genppd.c,v 1.113 2005/12/31 21:27:29 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -1234,10 +1234,17 @@ write_ppd(const stp_printer_t *p,	/* I - Printer driver */
 	  stp_set_string_parameter(v, "Quality", opt->name);
 	  stp_describe_resolution(v, &xdpi, &ydpi);
 	  if (xdpi == -1 || ydpi == -1)
-	    gzprintf(fp, "*StpQuality %s/%s: \"\"\n", opt->name, opt->text);
-	  else
-	    gzprintf(fp, "*StpQuality %s/%s:\t\"<</HWResolution[%d %d]>>setpagedevice\"\n",
-		     opt->name, opt->text, xdpi, ydpi);
+	    {
+	      stp_parameter_t res_desc;
+	      stp_clear_string_parameter(v, "Quality");
+	      stp_describe_parameter(v, "Resolution", &res_desc);
+	      stp_set_string_parameter(v, "Resolution", res_desc.deflt.str);
+	      stp_describe_resolution(v, &xdpi, &ydpi);
+	      stp_clear_string_parameter(v, "Resolution");
+	      stp_parameter_description_destroy(&res_desc);
+	    }
+	  gzprintf(fp, "*StpQuality %s/%s:\t\"<</HWResolution[%d %d]/cupsRowFeed %d>>setpagedevice\"\n",
+		   opt->name, opt->text, xdpi, ydpi, i + 1);
 	}
       gzputs(fp, "*CloseUI: *StpQuality\n\n");
     }
@@ -1300,7 +1307,7 @@ write_ppd(const stp_printer_t *p,	/* I - Printer driver */
     */
 
     gzprintf(fp, "*Resolution %s/%s:\t\"<</HWResolution[%d %d]/cupsCompression %d>>setpagedevice\"\n",
-             opt->name, opt->text, xdpi, ydpi, i);
+             opt->name, opt->text, xdpi, ydpi, i + 1);
   }
 
   stp_parameter_description_destroy(&desc);
@@ -1488,169 +1495,6 @@ write_ppd(const stp_printer_t *p,	/* I - Printer driver */
 	    print_group_close(fp, j, k);
 	}
     }
-  if (has_quality_parameter)
-    {
-      stp_parameter_t qdesc;
-      const char *tname = NULL;
-      stp_describe_parameter(v, "Quality", &qdesc);
-      if (qdesc.p_type == STP_PARAMETER_TYPE_STRING_LIST &&
-	  stp_string_list_count(qdesc.bounds.str) > 1)
-	{
-	  for (l = 0; l < stp_string_list_count(qdesc.bounds.str); l++)
-	    {
-	      opt = stp_string_list_param(qdesc.bounds.str, l);
-	      if (opt && strcmp(opt->name, "None") != 0)
-		{
-		  tname = opt->name;
-		  break;
-		}
-	    }
-	}
-      for (l = 0; l < stp_parameter_list_count(param_list); l++)
-	{
-	  const stp_parameter_t *lparam =
-	    stp_parameter_list_param(param_list, l);
-	  if (lparam->p_class > STP_PARAMETER_CLASS_OUTPUT ||
-	      lparam->p_level > STP_PARAMETER_LEVEL_ADVANCED4 ||
-	      strcmp(lparam->name, "Quality") == 0 ||
-	      (lparam->p_type != STP_PARAMETER_TYPE_STRING_LIST &&
-	       lparam->p_type != STP_PARAMETER_TYPE_BOOLEAN &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DIMENSION &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DOUBLE))
-	    continue;
-	  stp_clear_string_parameter(v, "Quality");
-	  stp_describe_parameter(v, lparam->name, &desc);
-	  if (desc.is_active)
-	    {
-	      stp_parameter_description_destroy(&desc);
-	      stp_set_string_parameter(v, "Quality", tname);
-	      stp_describe_parameter(v, lparam->name, &desc);
-	      if (!desc.is_active)
-		{
-		  gzprintf(fp, "*UIConstraints: *StpQuality *Stp%s\n",
-			   lparam->name);
-		  gzprintf(fp, "*UIConstraints: *Stp%s *StpQuality\n\n",
-			   lparam->name);
-		  if (desc.p_type == STP_PARAMETER_TYPE_DOUBLE)
-		    {
-		      gzprintf(fp, "*UIConstraints: *StpQuality *StpFine%s\n",
-			       lparam->name);
-		      gzprintf(fp, "*UIConstraints: *StpFine%s *StpQuality\n\n",
-			       lparam->name);
-		    }		      
-		}
-	    }
-	  stp_clear_string_parameter(v, "Quality");
-	  stp_parameter_description_destroy(&desc);
-	}
-      stp_parameter_description_destroy(&qdesc);
-    }
-  if (has_image_type_parameter)
-    {
-      stp_parameter_t qdesc;
-      const char *tname = NULL;
-      stp_describe_parameter(v, "ImageType", &qdesc);
-      if (qdesc.p_type == STP_PARAMETER_TYPE_STRING_LIST &&
-	  stp_string_list_count(qdesc.bounds.str) > 1)
-	{
-	  for (l = 0; l < stp_string_list_count(qdesc.bounds.str); l++)
-	    {
-	      opt = stp_string_list_param(qdesc.bounds.str, l);
-	      if (opt && strcmp(opt->name, "None") != 0)
-		{
-		  tname = opt->name;
-		  break;
-		}
-	    }
-	}
-      for (l = 0; l < stp_parameter_list_count(param_list); l++)
-	{
-	  const stp_parameter_t *lparam =
-	    stp_parameter_list_param(param_list, l);
-	  if (lparam->p_class > STP_PARAMETER_CLASS_OUTPUT ||
-	      lparam->p_level > STP_PARAMETER_LEVEL_ADVANCED4 ||
-	      strcmp(lparam->name, "ImageType") == 0 ||
-	      (lparam->p_type != STP_PARAMETER_TYPE_STRING_LIST &&
-	       lparam->p_type != STP_PARAMETER_TYPE_BOOLEAN &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DIMENSION &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DOUBLE))
-	    continue;
-	  stp_clear_string_parameter(v, "ImageType");
-	  stp_describe_parameter(v, lparam->name, &desc);
-	  if (desc.is_active)
-	    {
-	      stp_parameter_description_destroy(&desc);
-	      stp_set_string_parameter(v, "ImageType", tname);
-	      stp_describe_parameter(v, lparam->name, &desc);
-	      if (!desc.is_active)
-		{
-		  gzprintf(fp, "*UIConstraints: *StpImageType *Stp%s\n",
-			   lparam->name);
-		  gzprintf(fp, "*UIConstraints: *Stp%s *StpImageType\n\n",
-			   lparam->name);
-		  if (desc.p_type == STP_PARAMETER_TYPE_DOUBLE)
-		    {
-		      gzprintf(fp, "*UIConstraints: *StpImageType *StpFine%s\n",
-			       lparam->name);
-		      gzprintf(fp, "*UIConstraints: *StpFine%s *StpImageType\n\n",
-			       lparam->name);
-		    }		      
-		}
-	    }
-	  stp_clear_string_parameter(v, "ImageType");
-	  stp_parameter_description_destroy(&desc);
-	}
-      stp_parameter_description_destroy(&qdesc);
-    }
-  if (printer_is_color)
-    {
-      for (l = 0; l < stp_parameter_list_count(param_list); l++)
-	{
-	  const stp_parameter_t *lparam =
-	    stp_parameter_list_param(param_list, l);
-	  if (lparam->p_class > STP_PARAMETER_CLASS_OUTPUT ||
-	      lparam->p_level > STP_PARAMETER_LEVEL_ADVANCED4 ||
-	      strcmp(lparam->name, "Quality") == 0 ||
-	      is_special_option(lparam->name) ||
-	      (lparam->p_type != STP_PARAMETER_TYPE_STRING_LIST &&
-	       lparam->p_type != STP_PARAMETER_TYPE_BOOLEAN &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DIMENSION &&
-	       lparam->p_type != STP_PARAMETER_TYPE_DOUBLE))
-	    continue;
-	  stp_set_string_parameter(v, "PrintingMode", "Color");
-	  stp_describe_parameter(v, lparam->name, &desc);
-	  if (desc.is_active)
-	    {
-	      stp_parameter_description_destroy(&desc);
-	      stp_set_string_parameter(v, "PrintingMode", "BW");
-	      stp_describe_parameter(v, lparam->name, &desc);
-	      if (!desc.is_active)
-		{
-		  gzprintf(fp, "*UIConstraints: *ColorModel Gray *Stp%s\n",
-			   lparam->name);
-		  gzprintf(fp, "*UIConstraints: *ColorModel Black *Stp%s\n",
-			   lparam->name);
-		  gzprintf(fp, "*UIConstraints: *Stp%s *ColorModel Gray\n",
-			   lparam->name);
-		  gzprintf(fp, "*UIConstraints: *Stp%s *ColorModel Black\n\n",
-			   lparam->name);
-		  if (desc.p_type == STP_PARAMETER_TYPE_DOUBLE)
-		    {
-		      gzprintf(fp, "*UIConstraints: *ColorModel Gray *StpFine%s\n",
-			       lparam->name);
-		      gzprintf(fp, "*UIConstraints: *ColorModel Black *StpFine%s\n",
-			       lparam->name);
-		      gzprintf(fp, "*UIConstraints: *StpFine%s *ColorModel Gray\n",
-			       lparam->name);
-		      gzprintf(fp, "*UIConstraints: *StpFine%s *ColorModel Black\n\n",
-			       lparam->name);
-		    }
-		}
-	    }
-	  stp_parameter_description_destroy(&desc);
-	}
-      stp_set_string_parameter(v, "PrintingMode", "Color");
-    }
   stp_parameter_list_destroy(param_list);
 
  /*
@@ -1707,5 +1551,5 @@ write_ppd(const stp_printer_t *p,	/* I - Printer driver */
 
 
 /*
- * End of "$Id: genppd.c,v 1.109 2005/10/18 02:08:16 rlk Exp $".
+ * End of "$Id: genppd.c,v 1.113 2005/12/31 21:27:29 rlk Exp $".
  */

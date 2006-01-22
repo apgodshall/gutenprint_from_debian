@@ -281,10 +281,13 @@ exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
 gimp_plug_indir = @gimp_plug_indir@
 gutenprint_cflags = @gutenprint_cflags@
+gutenprint_libdeps = @gutenprint_libdeps@
 gutenprint_libs = @gutenprint_libs@
 gutenprintui2_cflags = @gutenprintui2_cflags@
+gutenprintui2_libdeps = @gutenprintui2_libdeps@
 gutenprintui2_libs = @gutenprintui2_libs@
 gutenprintui_cflags = @gutenprintui_cflags@
+gutenprintui_libdeps = @gutenprintui_libdeps@
 gutenprintui_libs = @gutenprintui_libs@
 host = @host@
 host_alias = @host_alias@
@@ -321,7 +324,8 @@ EXTRA_DIST = \
 	gutenprint \
 	gutenprintui2 \
 	gutenprint-stamp \
-	gutenprintui2-stamp
+	gutenprintui2-stamp \
+	gutenprint-options
 
 all: all-recursive
 
@@ -592,7 +596,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am:
+install-data-am: install-data-local
 
 install-exec-am:
 
@@ -624,10 +628,10 @@ uninstall-info: uninstall-info-recursive
 	ctags ctags-recursive distclean distclean-generic \
 	distclean-libtool distclean-recursive distclean-tags distdir \
 	dvi dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-exec install-exec-am \
-	install-info install-info-am install-man install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	maintainer-clean maintainer-clean-generic \
+	install-data install-data-am install-data-local install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
 	maintainer-clean-local maintainer-clean-recursive mostlyclean \
 	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
 	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
@@ -671,19 +675,19 @@ gutenprint-stamp: gutenprint.dox $(top_srcdir)/configure
 
 docs: gutenprint-stamp
 	cd developer; $(MAKE)
-	cd users_guide; $(MAKE)
 
 ps: $(MANUAL).ps
 	cd developer; $(MAKE) ps
-	cd users_guide; $(MAKE) ps
 
 pdf: $(MANUAL).pdf
 	cd developer; $(MAKE) pdf
-	cd users_guide; $(MAKE) pdf
 
 html: 
 	cd developer; $(MAKE) html
-	cd users_guide; $(MAKE) html
+
+install-data-local: $(srcdir)/gutenprint-options
+	$(mkdir_p) $(DESTDIR)$(datadir)/$(PACKAGE)/doc
+	$(INSTALL_DATA) $(srcdir)/gutenprint-options $(DESTDIR)$(datadir)/$(PACKAGE)/doc
 
 maintainer-clean-local:
 	$(RM) -r gutenprint

@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -8,20 +8,17 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="PREVIOUS"
 TITLE="Reporting Bugs"
 HREF="c194.html"><LINK
 REL="NEXT"
 TITLE="The driver file"
-HREF="x271.html"></HEAD
+HREF="x271.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="chapter"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -72,6 +69,28 @@ CLASS="chapter"
 NAME="AEN200"
 ></A
 >Chapter 4. Adding a new printer</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="c200.html#AEN217"
+><TT
+CLASS="filename"
+>printers.xml</TT
+></A
+></DT
+><DT
+><A
+HREF="x271.html"
+>The driver file</A
+></DT
+></DL
+></DIV
 ><P
 >&#13;    This chapter covers adding a new ESCP/2, PCL, or Canon printer.
     Writing a new driver module is not covered.
@@ -131,7 +150,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN217"
->4.1. <TT
+><TT
 CLASS="filename"
 >printers.xml</TT
 ></A
@@ -155,6 +174,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN223"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >&#60;printer name="EPSON Stylus Color 1500" driver="escp2-1500"&#62;
@@ -163,6 +188,9 @@ CLASS="programlisting"
 &#60;gamma value="0.597"/&#62;
 &#60;density value="1.0"/&#62;
 &#60;/printer&#62;</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -325,7 +353,7 @@ CLASS="literal"
 > attribute may be
             set to a positive integer.  This is passed into the
             driver, which may do whatever it cares to with
-            it&#8212;index into a table, compute on, or whatever.
+            it—index into a table, compute on, or whatever.
             This need not be unique.
           </P
 ></DD
@@ -358,7 +386,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

@@ -1,3 +1,19 @@
+gutenprint (4.3.99+cvs20060121.dfsg.1-1) unstable; urgency=low
+
+  * New upstream release candidate (5.0.0-rc2).
+  * The many options provided by Gutenprint are now documented, and this
+    documentation (gutenprint-options) is now provided for the
+    cupsys-driver-gutenprint, ijsgimpprint and gimp-print packages in their
+    documentation directories (Closes: #323172).
+  * Revert accidental conversion to a debian-native source package in the last
+    release.
+  * debian/cupsys-driver-gimpprint.postinst,
+    debian/cupsys-driver-gimpprint.postrm: Use invoke-rc.d when reloading
+    cupsys, and don't fail if cupsys fails to reload.  Patches pulled from
+    the Ubuntu patch repository for gimp-print.
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 22 Jan 2006 14:21:19 +0000
+
 gutenprint (4.3.99+cvs20051122.dfsg.1-2) unstable; urgency=low
 
   * debian/control.in: Remove xlibs-dev from Build-Depends, in

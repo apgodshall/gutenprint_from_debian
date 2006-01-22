@@ -1,6 +1,378 @@
+2006-01-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.266) (+9 -0)
+
+	Add list of bugs fixed.
+
+2006-01-16	<rlk@sourceforge.net>
+
+	Files:	doc/gutenprint-options (1.2) (+731 -729)
+
+	Update description of Laminate Pattern.
+
+2006-01-16	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-1 (1.6) (+4 -3)
+
+	Update this script also.
+
+2006-01-15	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern (1.20) (+2 -1)
+		src/testpattern/testpattern.c (1.43) (+11 -5)
+
+	Return error status correctly, and do not error out unnecessarily
+
+2006-01-14	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.265) (+32 -23)
+		doc/Makefile.am (1.43) (+7 -2)
+		doc/gutenprint-options (1.1) ( )
+
+	Add gutenprint-options documentation
+
+2006-01-13	<rleigh@sourceforge.net>
+
+	Files:	configure.ac (1.133) (+21 -2)
+		src/main/util.h (1.33) (+2 -8)
+
+	Add a feature test for GCC __attribute__ syntax.
+
+2006-01-10	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.264) (+8 -4)
+		src/foomatic/foomatic-printermap (1.109) (+2 -0)
+		src/main/print-escp2-data.c (1.190) (+41 -9)
+		src/main/print-escp2.h (1.100) (+3 -2)
+		src/main/printers.xml (1.140) (+9 -1)
+
+	Change quality settings for some newer printers that need higher
+	resolutions (1.5 pl and PictureMate).
+
+	Add higher resolutions for RX700 (up to 5760x2880).
+
+	Add Japanese equivalents of RX700 and R2400.
+
+2006-01-09	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.347) (+1 -14)
+
+	Remove unused MultiChannelLimit option
+
+2006-01-09	<rleigh@sourceforge.net>
+
+	Files:	m4extra/gettext.m4 (1.2) (+510 -276)
+		m4extra/gtk.m4 (1.1) ( )
+		m4extra/lcmessage.m4 (1.2) (+28 -17)
+		m4extra/libtool.m4 (1.2) (+6333 -338)
+		m4extra/progtest.m4 (1.2) (+71 -26)
+
+	Add GTK-1.2 m4 macro to m4extra.
+	Update existing m4extra m4 macros.
+
+2006-01-08	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.91) (+4 -4)
+
+	More tweaks for R800.
+
+2006-01-08	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.263) (+9 -2)
+
+	Improve R800 tuning.
+
+2006-01-08	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.90) (+46 -46)
+
+	Improve tuning of R800.
+
+2006-01-08	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.89) (+4 -4)
+
+	More improvement for the R300.
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.262) (+10 -9)
+		README (1.156) (+64 -66)
+
+	Increase the prominence of CUPS
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.261) (+4 -5)
+
+	Upgrade status of Epson PictureMate
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.189) (+2 -2)
+
+	Went a bit too far last time...
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.88) (+3 -3)
+		src/main/print-escp2-data.c (1.188) (+2 -2)
+
+	Improve the PictureMate some more
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-inks.c (1.46) (+7 -7)
+		src/main/escp2-papers.c (1.87) (+3 -3)
+		src/main/escp2-resolutions.c (1.31) (+7 -1)
+		src/main/print-escp2-data.c (1.187) (+5 -5)
+
+	Further improvements for PictureMate
+
+2006-01-07	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.57) (+2 -0)
+
+	Add a few more suffixes used by Epson printers.
+
+2006-01-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.260) (+2 -1)
+		src/main/escp2-channels.c (1.60) (+2 -2)
+		src/main/escp2-driver.c (1.27) (+2 -2)
+		src/main/escp2-inks.c (1.45) (+4 -4)
+		src/main/escp2-resolutions.c (1.30) (+26 -1)
+		src/main/print-escp2-data.c (1.186) (+5 -5)
+		src/main/print-escp2.h (1.99) (+3 -2)
+
+	Initial cut at PictureMate tuning.
+
+2006-01-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.259) (+3 -3)
+
+	Update RX700 status
+
+2006-01-05	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.185) (+4 -4)
+
+	Fixes for RX700 from Chuck McCrobie.
+
+2006-01-01	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.258) (+53 -46)
+
+	Minor tweaks
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.257) (+6 -4)
+		src/foomatic/foomatic-printermap (1.108) (+1 -0)
+		src/main/printers.xml (1.139) (+8 -1)
+
+	Add Epson Stylus CX4500
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.113) (+2 -51)
+
+	Don't create UI constraints for color options in black and white mode,
+	since there aren't actually any conflicts.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.79) (+4 -1)
+
+	Warn if printer is not known
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.107) (+1 -0)
+		src/main/printers.xml (1.138) (+5 -1)
+
+	Add Epson PictureMake Deluxe
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.78) (+154 -57)
+
+	Respond more reasonably to unknown printer:
+
+	1) If identify is requested, always print the printer name whether we
+	   know about it or not.
+
+	2) If ink level is requested and the ink cartridge ID is 0x40, use an
+	   auxiliary set of color names.
+
+	3) If extended ink level is requested, first get ink color names and
+	   then attempt to use those to read ink names.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.256) (+12 -6)
+		src/foomatic/foomatic-printermap (1.106) (+2 -0)
+		src/main/escp2-channels.c (1.59) (+163 -1)
+		src/main/escp2-inks.c (1.44) (+22 -1)
+		src/main/escp2-papers.c (1.86) (+21 -1)
+		src/main/print-escp2-data.c (1.184) (+37 -2)
+		src/main/print-escp2.h (1.98) (+6 -2)
+		src/main/printers.xml (1.137) (+9 -1)
+
+	Preliminary support for the Epson E-100/PictureMate.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.112) (+2 -116)
+
+	Don't generate UI constraints for the quality and image type
+	parameters, since they don't disable anything any more.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.255) (+12 -3)
+
+	Update printer list
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.105) (+8 -8)
+
+	Add a few more printers.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/main/papers.xml (1.19) (+2 -2)
+
+	4x6 photo paper has become very common.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.254) (+11 -5)
+		src/foomatic/foomatic-printermap (1.104) (+5 -0)
+		src/main/print-escp2-data.c (1.183) (+52 -3)
+		src/main/printers.xml (1.136) (+49 -8)
+
+	Add a few more Epson multi-function printers.
+
+	Fix up escputil -e output on multi-function printers.
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	README (1.155) (+1 -1)
+
+	Minor wording change
+
+2005-12-31	<rlk@sourceforge.net>
+
+	Files:	src/escputil/d4lib.c (1.5) (+8 -8)
+		src/escputil/escputil.c (1.77) (+2 -2)
+
+	Improve performance
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	src/gutenprintui/panel.c (1.7) (+12 -10)
+		src/gutenprintui2/panel.c (1.9) (+12 -10)
+
+	Minor fix to option group separators
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	src/main/print-color.c (1.134) (+2 -2)
+
+	Move GCR curve to advanced 4, since other GCR parameters are in advanced4.
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	README (1.154) (+3 -3)
+
+	Minor wording change.
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.253) (+8 -7)
+		README (1.153) (+9 -9)
+
+	Bump version
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.252) (+6 -4)
+		src/gutenprintui/panel.c (1.6) (+14 -5)
+		src/gutenprintui2/panel.c (1.8) (+14 -4)
+
+	Eliminate spurious horizontal lines drawn through some options in
+	the GIMP plugin in some cases.
+
+2005-12-30	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.85) (+4 -4)
+
+	Improve tuning of premium papers.
+
+2005-12-29	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-inks.c (1.43) (+3 -3)
+
+	Correct names of a few sets of drop sizes.
+
+2005-12-29	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.251) (+29 -14)
+
+	Note latest round of updates.
+
+2005-12-29	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.111) (+4 -7)
+		src/main/dither-main.c (1.51) (+32 -51)
+		src/main/escp2-driver.c (1.26) (+3 -1)
+		src/main/print-color.c (1.133) (+4 -11)
+		src/main/print-escp2-data.c (1.182) (+15 -15)
+		src/main/print-escp2.c (1.346) (+151 -112)
+
+	Allow specification of all options along with Quality and Image Type.
+	This improves the user interface by making it more apparent that the
+	other options are available.
+
+2005-12-29	<rleigh@sourceforge.net>
+
+	Files:	configure.ac (1.132) (+5 -2)
+		doc/README.maintaining (1.21) (+2 -2)
+		src/gutenprintui/gutenprintui.pc.in (1.2) (+2 -1)
+		src/gutenprintui2/gutenprintui2.pc.in (1.2) (+2 -1)
+		src/main/gutenprint.pc.in (1.2) (+2 -1)
+
+	Use the pkg-config Libs.private feature to separate out inter-library
+	dependencies which are only required when linking statically.  This
+	simplifies the dependencies for dynamic linking and package management.
+	For packages depending upon the .pc files, pkg-config 0.18 or above is
+	required to use this feature (but not for building gutenprint).
+
+2005-12-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.110) (+16 -6)
+		src/cups/rastertoprinter.c (1.97) (+12 -5)
+
+	1389787 CUPS driver does not set Quality correctly
+
+2005-12-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.22) (+4 -5)
+
+	1389785 cups-genppdupdate sets PPD file owners incorrectly
+
+2005-11-22	<rleigh@sourceforge.net>
+
+	Files:	doc/.cvsignore (1.11) (+3 -0)
+
+	Ignore generated gutenprintui2 files.
+
 2005-11-22	<rleigh@sourceforge.net>
 
 	Files:	doc/developer/Makefile.am (1.18) (+2 -2)
+		doc/users_guide/Makefile.am (1.44) (+3 -3)
 		src/cups/Makefile.am (1.83) (+3 -3)
 		src/foomatic/Makefile.am (1.47) (+2 -2)
 
@@ -27,6 +399,7 @@
 		doc/Makefile.am (1.42) (+1 -5)
 		doc/developer/Makefile.am (1.17) (+1 -5)
 		doc/developer/using.xml (1.3) (+1 -4)
+		doc/users_guide/Makefile.am (1.43) (+1 -5)
 		include/Makefile.am (1.7) (+1 -5)
 		include/gutenprint/Makefile.am (1.2) (+1 -5)
 		include/gutenprintui/Makefile.am (1.3) (+1 -5)
@@ -940,6 +1313,14 @@
 
 2005-05-17	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/history.sgml (1.4) (+7 -7)
+		doc/users_guide/users-guide.sgml (1.9) (+2 -2)
+
+	Fix project name in the project history chapter.
+	Fix the manual title.
+
+2005-05-17	<rleigh@sourceforge.net>
+
 	Files:	configure.ac (1.124) (+3 -3)
 		po/nb.po (1.2) (+5746 -0)
 
@@ -1779,6 +2160,7 @@
 
 	Files:	.cvsignore (1.24) (+1 -0)
 		doc/developer/Makefile.am (1.16) (+3 -3)
+		doc/users_guide/Makefile.am (1.42) (+9 -9)
 		scripts/.cvsignore (1.4) (+2 -0)
 		scripts/autogen.sh (1.33) (+1 -1)
 
@@ -2044,6 +2426,16 @@
 		doc/developer/using.xml (1.2) (+34 -34)
 		doc/developer/weave.xml (1.2) (+1 -1)
 		doc/gutenprint.dox.in (1.1) ( )
+		doc/users_guide/README (1.7) (+1 -1)
+		doc/users_guide/cups-edition.sgml (1.2) (+5 -5)
+		doc/users_guide/cups.sgml (1.4) (+15 -15)
+		doc/users_guide/gimp-edition.sgml (1.2) (+5 -5)
+		doc/users_guide/gimp.sgml (1.3) (+5 -5)
+		doc/users_guide/history.sgml (1.3) (+10 -10)
+		doc/users_guide/title.sgml (1.3) (+8 -8)
+		doc/users_guide/users-guide.sgml (1.8) (+2 -2)
+		doc/users_guide/util-edition.sgml (1.2) (+5 -5)
+		doc/users_guide/utils.sgml (1.6) (+3 -3)
 		include/Makefile.am (1.6) (+3 -3)
 		include/gutenprint/.cvsignore (1.1) ( )
 		include/gutenprint/Makefile.am (1.1) ( )
@@ -3171,6 +3563,12 @@
 
 2004-05-22	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.41) (+13 -13)
+
+	Fix VPATH build.
+
+2004-05-22	<rleigh@sourceforge.net>
+
 	Files:	m4/gimp.m4 (1.5) (+41 -41)
 		m4/stp_gimp.m4 (1.7) (+5 -4)
 
@@ -3874,6 +4272,7 @@
 	Files:	Makefile.am (1.139) (+1 -1)
 		configure.ac (1.97) (+9 -20)
 		doc/developer/Makefile.am (1.13) (+1 -1)
+		doc/users_guide/Makefile.am (1.40) (+1 -1)
 		m4/stp_option.m4 (1.4) (+42 -0)
 		scripts/autogen.sh (1.30) (+1 -0)
 		src/cups/cups-genppdconfig.in (1.8) (+1 -1)
@@ -4163,6 +4562,14 @@
 
 2004-02-27	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.39) (+28 -22)
+
+	Don't distribute the Postscript user's guide and .eps files (saves
+	about 500K in the bz2ball).  Also don't distribute two copies of the
+	.pnd files (saves another 200K or so).
+
+2004-02-27	<rlk@sourceforge.net>
+
 	Files:	Makefile.am (1.137) (+12 -3)
 
 	Don't rebuild the change log if it isn't needed
@@ -4330,6 +4737,12 @@
 	Include "dither.h" to correctly prototype all functions.
 	Rename stpi_dither_matrix_iterated_init() argument name "exp" to "exponent"
 	to quell compiler warnings.
+
+2004-01-21	<rleigh@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.38) (+12 -12)
+
+	Fix install error when using the provided install-sh.
 
 2004-01-11	<rlk@sourceforge.net>
 
@@ -4624,6 +5037,7 @@
 2003-12-02	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.142) (+1 -1)
+		doc/users_guide/gimp.sgml (1.2) (+0 -12)
 		po/cs.po (1.15) (+87 -272)
 		po/da.po (1.43) (+86 -80)
 		po/de.po (1.29) (+87 -265)
@@ -4708,6 +5122,8 @@
 
 	Files:	Makefile.am (1.136) (+2 -2)
 		README (1.131) (+1 -1)
+		doc/users_guide/cups.sgml (1.3) (+2 -2)
+		doc/users_guide/history.sgml (1.2) (+1 -1)
 		m4/stp.m4 (1.5) (+3 -3)
 		m4/stp_cups.m4 (1.8) (+1 -1)
 		m4/stp_gimp.m4 (1.4) (+1 -1)
@@ -10226,6 +10642,7 @@
 2003-01-06	<rleigh@sourceforge.net>
 
 	Files:	doc/developer/Makefile.am (1.8) (+3 -2)
+		doc/users_guide/Makefile.am (1.37) (+4 -2)
 
 	EPSLEVEL may be used to specify the EPS level to use
 
@@ -10418,6 +10835,7 @@
 		configure.ac (1.38) (+52 -41)
 		doc/Makefile.am (1.32) (+2 -0)
 		doc/developer/Makefile.am (1.7) (+3 -1)
+		doc/users_guide/Makefile.am (1.36) (+3 -1)
 		include/Makefile.am (1.3) (+3 -1)
 		m4/stp.m4 (1.4) (+0 -21)
 		m4/stp_cups.m4 (1.6) (+0 -1)
@@ -11853,13 +12271,6 @@
 
 	Update .cvsignore
 
-2002-10-09	<rleigh@sourceforge.net>
-
-	Files:	debian/.cvsignore (1.7) (+2 -2)
-
-	Add ijsgimpprint package
-	Miscellaneous other small updates
-
 2002-10-07	<rlk@sourceforge.net>
 
 	Files:	po/ja.po (1.1) ( )
@@ -12529,6 +12940,13 @@
 
 2002-06-30	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.35) (+14 -9)
+
+	Distribute the cups-edition.sgml, gimp-edition.sgml, and
+	util-edition.sgml files.
+
+2002-06-30	<rlk@sourceforge.net>
+
 	Files:	src/main/print-escp2-data.c (1.35) (+43 -337)
 
 	Improve readability
@@ -13056,6 +13474,28 @@
 
 	Use AC_LIBOBJ instead of the deprecated direct LIBOJBS usage
 
+2002-04-08	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/utils.sgml (1.5) (+1 -1)
+
+
+
+	Changed kernel config option from CONFIG_PRINTER_READBACK to CONFIG_PARPORT_1284.
+
+2002-04-08	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.34) (+256 -9)
+		doc/users_guide/cups-edition.sgml (1.1) ( )
+		doc/users_guide/cups.sgml (1.2) (+6 -2)
+		doc/users_guide/gimp-edition.sgml (1.1) ( )
+		doc/users_guide/title.sgml (1.2) (+0 -16)
+		doc/users_guide/users-guide.sgml (1.7) (+18 -0)
+		doc/users_guide/util-edition.sgml (1.1) ( )
+
+
+
+	Created new top level files for separate editions of the User's Guide.
+
 2002-04-08	<davehill@sourceforge.net>
 
 	Files:	src/main/print-pcl.c (1.52) (+2 -2)
@@ -13076,6 +13516,47 @@
 
 
 	Added descriptions for -o, -s, -l, -M options.  Updated description for -u option.
+
+2002-04-07	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/utils.sgml (1.3) (+9 -5)
+		doc/users_guide/utils.sgml (1.4) (+6 -12)
+
+	*** empty log message ***
+
+2002-04-07	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/utils.sgml (1.2) (+57 -51)
+
+
+
+	Reformatting of the escputil examples.  I thought they looked ugly on the
+	right margin when printed.
+
+2002-04-07	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.33) (+6 -6)
+		doc/users_guide/cups.sgml (1.1) ( )
+		doc/users_guide/gimp.sgml (1.1) ( )
+		doc/users_guide/history.sgml (1.1) ( )
+		doc/users_guide/title.sgml (1.1) ( )
+		doc/users_guide/users-guide.sgml (1.6) (+10 -10)
+		doc/users_guide/utils.sgml (1.1) ( )
+
+
+
+	Renamed files to make it easier to deal with multiple versions
+	of the manual.  Fixed (I think) the make dist problem in Makefile.am.
+	Updated users-guide.sgml to use new file names for chapter files.
+
+2002-04-07	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.32) (+2 -2)
+
+
+
+	Updates include minor textual fixes to ch_0 and ch_4.  Makefile.am repaired to
+	allow make dist to include more than users-guide.sgml.
 
 2002-04-06	<rleigh@sourceforge.net>
 
@@ -13102,6 +13583,18 @@
 		src/foomatic/foomatic-generator.in (1.19) (+13 -10)
 
 	Let Foomatic data for GhostScript and IJS drivers go into separate directories (to simplify Debian packaging).
+
+2002-04-06	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.31) (+21 -6)
+		doc/users_guide/gfdl.sgml (1.1) ( )
+		doc/users_guide/users-guide.sgml (1.5) (+15 -1869)
+
+
+
+	Added chapter 4, the description of the escputil utility.  Chapters now
+	have their own separate files and the entire document is pulled together
+	via the users-guide.sgml file.  This necessitated a few Makefile changes.
 
 2002-04-06	<rlk@sourceforge.net>
 
@@ -13288,6 +13781,7 @@
 	Files:	Makefile.am (1.127) (+9 -20)
 		doc/Makefile.am (1.31) (+6 -6)
 		doc/developer/Makefile.am (1.6) (+6 -5)
+		doc/users_guide/Makefile.am (1.30) (+4 -2)
 		man/Makefile.am (1.7) (+16 -2)
 		samples/Makefile.am (1.4) (+6 -6)
 		src/Makefile.am (1.12) (+2 -3)
@@ -13615,6 +14109,12 @@
 
 2002-01-26	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.29) (+3 -3)
+
+	Fix manual.sgml dependencies to use $(srcdir) to create correct symlinks
+
+2002-01-26	<rleigh@sourceforge.net>
+
 	Files:	Makefile.am (1.124) (+1 -5)
 		doc/Makefile.am (1.30) (+2 -2)
 		doc/README.maintaining (1.10) (+1 -1)
@@ -13884,13 +14384,6 @@
 
 2001-12-01	<rleigh@sourceforge.net>
 
-	Files:	debian/.cvsignore (1.6) (+0 -1)
-
-	Update package descriptions for 4.3
-	Packages depends on libgimpprint-locales >= the Source-Version
-
-2001-12-01	<rleigh@sourceforge.net>
-
 	Files:	doc/developer/.cvsignore (1.2) (+1 -1)
 		doc/developer/Makefile.am (1.2) (+2 -2)
 
@@ -13931,6 +14424,14 @@
 
 	Set release date.
 
+2001-11-23	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/figures/cups_admin_model.png (1.2) (+49 -62)
+		doc/users_guide/figures/cups_my_printer.png (1.2) (+33 -68)
+		doc/users_guide/users-guide.sgml (1.4) (+96 -91)
+
+	Updates for rev 4.2.0 release
+
 2001-11-23	<rlk@sourceforge.net>
 
 	Files:	Makefile.am (1.120) (+3 -1)
@@ -13943,6 +14444,12 @@
 		README (1.91) (+11 -9)
 
 	Correct lists of translations.
+
+2001-11-22	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/users-guide.sgml (1.3) (+46 -9)
+
+	Insert warning for connecting USB printers with CUPS.
 
 2001-11-22	<rlk@sourceforge.net>
 
@@ -14087,6 +14594,12 @@
 
 2001-11-10	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/users-guide.sgml (1.2) (+1 -1)
+
+	Update release date
+
+2001-11-10	<rlk@sourceforge.net>
+
 	Files:	src/escputil/Makefile.am (1.10) (+2 -2)
 		src/foomatic/Makefile.am (1.15) (+2 -2)
 		test/Makefile.am (1.30) (+2 -2)
@@ -14131,6 +14644,7 @@
 2001-11-08	<rlk@sourceforge.net>
 
 	Files:	doc/Makefile.am (1.27) (+10 -10)
+		doc/users_guide/Makefile.am (1.28) (+11 -11)
 
 	Clean up rm use (many places need either -rm file or rm -f file):
 
@@ -14324,6 +14838,20 @@
 
 2001-10-30	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.27) (+2 -2)
+
+	Minor typo, to fix VPATH build
+
+2001-10-30	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/.cvsignore (1.4) (+8 -8)
+		doc/users_guide/Makefile.am (1.26) (+6 -6)
+		doc/users_guide/users-guide.sgml (1.1) ( )
+
+	Removed underscores from linkend, ids, and filename per Eric
+
+2001-10-30	<rlk@sourceforge.net>
+
 	Files:	src/main/printers.xml (1.37) (+7 -7)
 
 	Tweak C70/80 a bit more
@@ -14359,6 +14887,7 @@
 2001-10-28	<rleigh@sourceforge.net>
 
 	Files:	doc/Makefile.am (1.26) (+36 -12)
+		doc/users_guide/Makefile.am (1.25) (+50 -15)
 
 	Fix VPATH build.  Don't build gimpprint.pdf by default.
 
@@ -14407,6 +14936,8 @@
 		doc/FAQ.html (1.7) (+3 -3)
 		doc/Makefile.am (1.24) (+2 -2)
 		doc/README.maintaining (1.8) (+16 -16)
+		doc/users_guide/README (1.6) (+9 -10)
+		doc/users_guide/figures/README (1.3) (+1 -1)
 		scripts/autogen.sh (1.14) (+2 -2)
 		src/cups/command.txt (1.2) (+1 -1)
 		src/cups/genppd.c (1.31) (+5 -5)
@@ -14580,6 +15111,12 @@
 
 2001-10-19	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.24) (+4 -3)
+
+	Remove incorrect html-stamp usage
+
+2001-10-19	<rleigh@sourceforge.net>
+
 	Files:	test/Makefile.am (1.29) (+2 -2)
 
 	Disable run-weavetest dependency which breaks make dist
@@ -14690,6 +15227,7 @@
 2001-10-16	<rleigh@sourceforge.net>
 
 	Files:	doc/Makefile.am (1.20) (+31 -30)
+		doc/users_guide/Makefile.am (1.23) (+26 -13)
 
 	Make clean works fully in maintainer mode
 	VPATH builds create symlinks to docs correctly
@@ -14816,6 +15354,13 @@
 
 	Translate papersize (text) names before returning them to the user.
 
+2001-10-13	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.22) (+7 -7)
+		doc/users_guide/README (1.5) (+3 -8)
+
+	Fixed spacing...updated README
+
 2001-10-13	<rleigh@sourceforge.net>
 
 	Files:	Makefile.am (1.116) (+10 -10)
@@ -14826,9 +15371,32 @@
 	Use more portable $(RM) instead of 'rm -f'
 	Add reference to SGML users guide to Texinfo manual
 
+2001-10-13	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.21) (+21 -19)
+
+	Clean should not remove the pdf or ps version of the manual, to be
+	consistent with how it treats the html manual.  It also can't remove
+	the .eps files, unfortunately.
+
+	New veryclean target does remove all of the above.
+
+	Distribute the html timestamp to inhibit rebuilding in the field.
+
+	Add phony targets.
+
+	Remove unused ps.gz target.
+
+2001-10-13	<rleigh@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.20) (+14 -8)
+
+	Add DESTDIR support to install-data-local and uninstall-local
+
 2001-10-12	<rlk@sourceforge.net>
 
-	Files:	src/ghost/.cvsignore (1.6) (+1 -0)
+	Files:	doc/users_guide/.cvsignore (1.3) (+1 -0)
+		src/ghost/.cvsignore (1.6) (+1 -0)
 
 	Updates
 
@@ -14852,6 +15420,25 @@
 	our bug 470240).  The symptoms are that when the number of paper
 	sizes exceeds 94 in the DesignJet 750 PPD file CUPS loses
 	track of all printers in the administrative interface.
+
+2001-10-11	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/.cvsignore (1.2) (+1 -0)
+
+	Ignore html directory
+
+2001-10-11	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.19) (+11 -31)
+
+	Eliminate dependency on specific Linux (much less UNIX) distribution.
+	Preprocess source rather than intermediate file.
+
+2001-10-11	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.18) (+21 -16)
+
+	PDF users guide builds independently of PS docs.  Also, XREF and IMAGEDATA errors are gone.
 
 2001-10-10	<rlk@sourceforge.net>
 
@@ -14889,9 +15476,21 @@
 
 2001-10-07	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.17) (+2 -2)
+
+	Need to remove the doc directory on uninstall.
+
+2001-10-07	<rlk@sourceforge.net>
+
 	Files:	README (1.74) (+6 -6)
 
 	A few very minor updates.
+
+2001-10-07	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.16) (+12 -6)
+
+	Assorted minor cleanup and bug fixing.
 
 2001-10-07	<rlk@sourceforge.net>
 
@@ -14926,9 +15525,31 @@
 
 2001-10-06	<andystewart@sourceforge.net>
 
-	Files:	scripts/autogen.sh (1.9) (+27 -11)
+	Files:	doc/users_guide/Makefile.am (1.15) (+1 -7)
+
+	Removed creation of figures directory in users_guide pdf and eps targets
+
+2001-10-06	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.14) (+6 -21)
+		doc/users_guide/README (1.4) (+2 -2)
+		scripts/autogen.sh (1.9) (+27 -11)
 
 	Tweaked doc/users_guide/Makefile.am and added checks for convert and docbook_4 to scripts/autogen.sh
+
+2001-10-06	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/.cvsignore (1.1) ( )
+		doc/users_guide/Makefile.am (1.13) (+6 -1)
+		doc/users_guide/figures/.cvsignore (1.1) ( )
+
+	Updates
+
+2001-10-06	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.12) (+31 -24)
+
+	Add -without-user-guide.
 
 2001-10-06	<rlk@sourceforge.net>
 
@@ -14962,6 +15583,33 @@
 
 2001-10-06	<rlk@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.11) (+3 -3)
+
+	We do need to distribute the .ps file.  Sigh.
+
+2001-10-06	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.10) (+36 -23)
+
+	* List all of the figures explicitly rather than wildcarding
+
+	* Build and distribute HTML and PDF by default
+
+	* Don't export SGML_CATALOG_FILES (especially not incorrect hardcoded
+	  path)
+
+	* Create make install
+
+	* Fix directory permissions botched by the toolchain
+
+2001-10-06	<rlk@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.9) (+2 -2)
+
+	maintainer-clean should clear the html stamp
+
+2001-10-06	<rlk@sourceforge.net>
+
 	Files:	src/foomatic/foomatic-printermap (1.16) (+3 -0)
 
 	Add BJC-210, 240, and 250.
@@ -14974,8 +15622,15 @@
 
 2001-10-05	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.8) (+8 -2)
+
+	Distribute the PDF manual
+
+2001-10-05	<rleigh@sourceforge.net>
+
 	Files:	Makefile.am (1.114) (+9 -1)
 		doc/Makefile.am (1.18) (+25 -4)
+		doc/users_guide/Makefile.am (1.7) (+87 -44)
 
 	Add new make targets: pdf and docs
 	Distribute user_guide html manual by default
@@ -14990,6 +15645,27 @@
 	Allow softweave printing on first generation printers that should
 	support it.
 
+2001-10-04	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.6) (+2 -3)
+
+	Removing Makefile as it is now built by automake
+
+2001-10-04	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.5) (+3 -3)
+		doc/users_guide/README (1.3) (+8 -0)
+
+	*** empty log message ***
+
+2001-10-04	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/Makefile.am (1.4) (+13 -28)
+		doc/users_guide/README (1.2) (+12 -14)
+		doc/users_guide/figures/README (1.2) (+5 -7)
+
+	Updates to Makefile.am, READMEs, and rename orig source file to remove rev
+
 2001-10-03	<rlk@sourceforge.net>
 
 	Files:	src/foomatic/foomatic-generator.in (1.13) (+1 -1)
@@ -15000,12 +15676,14 @@
 
 	Files:	Makefile.am (1.113) (+6 -6)
 		doc/Makefile.am (1.17) (+4 -4)
+		doc/users_guide/Makefile.am (1.3) (+4 -4)
 
 	Correct program naming, use variables for perl invocation
 
 2001-10-03	<rleigh@sourceforge.net>
 
 	Files:	doc/Makefile.am (1.16) (+3 -1)
+		doc/users_guide/Makefile.am (1.2) (+54 -13)
 
 	Add users_guide to doc/Makefile.am SUBDIRS
 	Automatically generate EPS and PDF images from PNG source
@@ -15020,9 +15698,38 @@
 
 2001-10-02	<rleigh@sourceforge.net>
 
+	Files:	doc/users_guide/Makefile.am (1.1) ( )
+
+	Add preliminary support for the new SGML user guide
+
+2001-10-02	<rleigh@sourceforge.net>
+
 	Files:	Makefile.am (1.112) (+10 -1)
 
 	Use standard Makefile formatting
+
+2001-10-02	<andystewart@sourceforge.net>
+
+	Files:	doc/users_guide/README (1.1) ( )
+		doc/users_guide/figures/README (1.1) ( )
+		doc/users_guide/figures/cups_admin.png (1.1) ( )
+		doc/users_guide/figures/cups_admin_device.png (1.1) ( )
+		doc/users_guide/figures/cups_admin_make.png (1.1) ( )
+		doc/users_guide/figures/cups_admin_model.png (1.1) ( )
+		doc/users_guide/figures/cups_admin_success.png (1.1) ( )
+		doc/users_guide/figures/cups_config_printer.png (1.1) ( )
+		doc/users_guide/figures/cups_my_printer.png (1.1) ( )
+		doc/users_guide/figures/cups_printers.png (1.1) ( )
+		doc/users_guide/figures/cups_startup.png (1.1) ( )
+		doc/users_guide/figures/gimp-print-gui-1.png (1.1) ( )
+		doc/users_guide/figures/gimp-print-gui.png (1.1) ( )
+		doc/users_guide/figures/gimp-print-new-printer.png (1.1) ( )
+		doc/users_guide/figures/gimp-print-print-color-adjust.png (1.1) ( )
+		doc/users_guide/figures/gimp-print-setup.png (1.1) ( )
+		doc/users_guide/figures/gimp_image.png (1.1) ( )
+		doc/users_guide/figures/gimp_startup.png (1.1) ( )
+
+	Initial checkin of user's guide
 
 2001-10-02	<rlk@sourceforge.net>
 
@@ -17057,7 +17764,6 @@
 2001-06-04	<rleigh@sourceforge.net>
 
 	Files:	.cvsignore (1.14) (+1 -0)
-		debian/.cvsignore (1.5) (+1 -0)
 		doc/.cvsignore (1.2) (+3 -0)
 		src/main/.cvsignore (1.4) (+1 -0)
 
@@ -18022,15 +18728,6 @@
 	it this way.
 	Fixed minor bugs in bjc-unprint.
 
-2001-03-20	<sharkey@sourceforge.net>
-
-	Files:	debian/.cvsignore (1.4) (+9 -0)
-
-	Resurrect .cvsignore, and add a few more entries, too.
-
-	This should have been resurrected a log time ago, but I missed it because
-	is began with a ".".
-
 2001-03-19	<gandy@sourceforge.net>
 
 	Files:	src/main/print-canon.c (1.26) (+2 -2)
@@ -18468,12 +19165,6 @@
 
 	Fix the page dimensions of some older Epson printers.
 
-2001-02-22	<sharkey@sourceforge.net>
-
-	Files:	debian/.cvsignore (1.3) (+0 -0)
-
-	Really, I mean it now, remove this file from the main trunk!
-
 2001-02-21	<rleigh@sourceforge.net>
 
 	Files:	Makefile.am (1.90) (+15 -2)
@@ -18752,14 +19443,6 @@
 		src/escputil/escputil.c (1.3) (+42 -7)
 
 	Speed up escputil by using poll if available.
-
-2001-02-12	<rleigh@sourceforge.net>
-
-	Files:	debian/.cvsignore (1.2) (+0 -2)
-
-	Add debian/rules, debian/control and update debian/.cvsignore
-	Add error message to cups library checks in configure.in.in
-	Remove redundant cups/.cvsignore
 
 2001-02-12	<rlk@sourceforge.net>
 
@@ -22330,12 +23013,6 @@
 	Files:	print-escp2.c (1.192) (+28 -25)
 
 	More constant tuning
-
-2000-07-24	<cpbs@sourceforge.net>
-
-	Files:	debian/.cvsignore (1.1) ( )
-
-	*** empty log message ***
 
 2000-07-23	<rlk@sourceforge.net>
 

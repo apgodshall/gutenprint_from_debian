@@ -29,7 +29,7 @@ if [ "$1" = "configure" ]; then
   /usr/sbin/cups-genppdconfig.5.0 -u
   /usr/sbin/cups-genppdupdate.5.0
 # Restart CUPSys (to register new and updated PPDs)
-  [ -x /etc/init.d/cupsys ] && /etc/init.d/cupsys force-reload
+  [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 elif [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] || [ "$1" = "abort-deconfigure" ]; then
   :
 else

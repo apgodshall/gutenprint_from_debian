@@ -19,7 +19,7 @@ set -e
 if [ "$1" = remove ]; then
     # Remove generated PPDs
     rm -rf /usr/share/cups/model/gutenprint/5.0
-    [ -x /etc/init.d/cupsys ] && /etc/init.d/cupsys force-reload
+    [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 fi
 
 if [ "$1" = purge ]; then

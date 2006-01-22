@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -8,7 +8,7 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="ESC/P2"
 HREF="c464.html"><LINK
@@ -17,14 +17,11 @@ TITLE="Remote Mode Commands"
 HREF="x955.html"><LINK
 REL="NEXT"
 TITLE="Weaving for inkjet printers"
-HREF="c1717.html"></HEAD
+HREF="c1717.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,7 +71,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN1669"
->5.3. Appropriate Remote Commands</A
+>Appropriate Remote Commands</A
 ></H1
 ><P
 >&#13;        All of the remote commands described above are wrapped up with
@@ -82,7 +79,7 @@ NAME="AEN1669"
         <TT
 CLASS="literal"
 >00 00 00</TT
-> and the &#8220;magic&#8221;
+> and the “magic”
         command described above, then two <TT
 CLASS="literal"
 >ESC @</TT
@@ -135,7 +132,7 @@ CLASS="literal"
 ></LI
 ><LI
 ><P
->&#13;            If the user said &#8220;realign&#8221;, meaning he isn't
+>&#13;            If the user said “realign”, meaning he isn't
             done yet, go to step 1.
           </P
 ></LI
@@ -160,6 +157,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1693"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >PM 00 00
@@ -167,6 +170,9 @@ SN 00 00 00
 EX 00 00 00 00 05 01
 ST 00 01
 SM 00 02</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -180,6 +186,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1696"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >PM 00 00
@@ -189,6 +201,9 @@ SN 00 01 00
 SN 00 02 01
 EX 00 00 00 00 05 00
 FP 00 00 00</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -202,10 +217,19 @@ CLASS="informalexample"
 ><A
 NAME="AEN1699"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >IR 00 02
 LD</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -223,13 +247,13 @@ CLASS="literal"
 CLASS="literal"
 >SN</TT
 > command above;
-        the arguments to the second (&#8220;platen gap&#8221;) are
+        the arguments to the second (“platen gap”) are
         <TT
 CLASS="literal"
 >00 01 01</TT
-> for thick papers (&#8220;matte
-        paper&#8212;heavyweight&#8221;, &#8220;photo paper&#8221; and
-        &#8220;premium glossy photo paper&#8221;) and <TT
+> for thick papers (“matte
+        paper—heavyweight”, “photo paper” and
+        “premium glossy photo paper”) and <TT
 CLASS="literal"
 >00 01
         00</TT
@@ -306,7 +330,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

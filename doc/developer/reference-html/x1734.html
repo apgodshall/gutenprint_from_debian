@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -8,7 +8,7 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="Weaving for inkjet printers"
 HREF="c1717.html"><LINK
@@ -17,14 +17,11 @@ TITLE="Weaving for inkjet printers"
 HREF="c1717.html"><LINK
 REL="NEXT"
 TITLE="Dithering"
-HREF="c1968.html"></HEAD
+HREF="c1968.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,11 +71,11 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN1734"
->6.2. Weaving algorithms</A
+>Weaving algorithms</A
 ></H1
 ><P
 >&#13;      I considered a few algorithms to perform the weave.  The first
-      one I devised let me use only (jets &#8722;
+      one I devised let me use only (jets −
       distance_between_jets + 1) nozzles, or 25.  This is OK in
       principle, but it's slower than using all nozzles.  By playing
       around with it some more, I came up with an algorithm that lets
@@ -88,13 +85,13 @@ NAME="AEN1734"
 ><P
 >&#13;      This still produces some banding, though.  Even better quality
       can be achieved by using multiple nozzles on the same line.  How
-      do we do this?  In 1440�720 mode, we're printing two
+      do we do this?  In 1440×720 mode, we're printing two
       output lines at the same vertical position.  However, if we want
       four passes, we have to effectively print each line twice.
       Actually doing this would increase the density, so what we do is
       print half the dots on each pass.  This produces near-perfect
       output, and it's far faster than using (pseudo)
-      &#8220;MicroWeave&#8221;.
+      “MicroWeave”.
     </P
 ><P
 >&#13;      Yet another complication is how to get near the top and bottom
@@ -128,7 +125,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN1740"
->6.2.1. Simple weaving algorithms</A
+>Simple weaving algorithms</A
 ></H2
 ><P
 >&#13;        The initial problem is to calculate the starting position of
@@ -141,12 +138,12 @@ NAME="AEN1740"
       </P
 ><P
 >&#13;        Once we have a formula for the starting row of each pass, we
-        then turn that &#8220;inside out&#8221; to get a formula for
+        then turn that “inside out” to get a formula for
         the pass number containing each row.
       </P
 ><P
 >&#13;        First, let's define how our printer works.  We measure
-        vertical position on the paper in &#8220;rows&#8221;; the
+        vertical position on the paper in “rows”; the
         resolution with which the printer can position the paper
         vertically.  The print head contains J ink jets, which are
         spaced S rows apart.
@@ -160,7 +157,7 @@ NAME="AEN1740"
 >&#13;        It's pretty obvious how to do this.  We make one pass with
         the print head, printing J lines of data, each line S rows
         after the previous one.  We then advance the paper by S
-        � J rows and print the next row.  For example, if J =
+        × J rows and print the next row.  For example, if J =
         7 and S = 4, this method can be illustrated like this:
       </P
 ><DIV
@@ -170,6 +167,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1747"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >pass number
@@ -183,6 +186,9 @@ CLASS="screen"
                             4 rows offset from one jet to the next
 \---------------------------/
    7*4=28 rows offset from one pass to the next</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -204,7 +210,7 @@ CLASS="computeroutput"
 CLASS="computeroutput"
 >0</SAMP
 > and starts at row 0.  Each
-        subsequent pass p starts at row p � S � J.  Each
+        subsequent pass p starts at row p × S × J.  Each
         pass prints J lines, each line being S rows after the previous
         one.  (For ease of viewing this file on a standard terminal,
         I'm clipping the examples at column 80.)
@@ -215,7 +221,7 @@ CLASS="computeroutput"
         rows with printing to get a full-density page (we're
         ignoring oversampling at this stage).  Where we have
         previously printed a single pass, we'll now print a
-        &#8220;pass block&#8221;: we print extra passes to fill in
+        “pass block”: we print extra passes to fill in
         the empty rows.  A naive implementation might look like
         this:
       </P
@@ -226,6 +232,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1754"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *---*---*---*---*---*---*
@@ -240,12 +252,15 @@ CLASS="screen"
 9                                                          *---*---*---*---*---*
 10                                                          *---*---*---*---*---
 11                                                           *---*---*---*---*--</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
 >&#13;        (Now you can see why this process is called
-        &#8220;weaving&#8221;!)
+        “weaving”!)
       </P
 ></DIV
 ><DIV
@@ -254,7 +269,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN1757"
->6.2.2. Perfect weaving</A
+>Perfect weaving</A
 ></H2
 ><P
 >&#13;        This simple weave pattern prints every row, but will give
@@ -271,15 +286,15 @@ NAME="AEN1757"
         each pass as possible.
       </P
 ><P
->&#13;        Each pass block prints S � J lines in S passes.  The
-        first line printed in each pass block is S � J rows
+>&#13;        Each pass block prints S × J lines in S passes.  The
+        first line printed in each pass block is S × J rows
         lower on the page than the first line printed in the
         previous pass block.  Therefore, if we advance the paper by
         J rows between each pass, we can print the right number of
         passes in each block and advance the paper perfectly evenly.
       </P
 ><P
->&#13;        Here's what this &#8220;perfect&#8221; weave looks like:
+>&#13;        Here's what this “perfect” weave looks like:
       </P
 ><DIV
 CLASS="informalexample"
@@ -288,6 +303,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1763"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                    start of full weave
@@ -304,13 +325,16 @@ CLASS="screen"
 9                                                                *---*---*---*--
 10                                                                      *---*---
 11                                                                             *</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
 >&#13;        You'll notice that, for the first few rows, this weave is
-        too sparse.  It is not until the row marked &#8220;start of
-        full weave&#8221; that every subsequent row is printed.  We
+        too sparse.  It is not until the row marked “start of
+        full weave” that every subsequent row is printed.  We
         can calculate this start position as follows:
       </P
 ><DIV
@@ -320,9 +344,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN1766"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
->start = (S &#8722; 1) � (J &#8722; 1)</PRE
+>start = (S − 1) × (J − 1)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -341,8 +374,14 @@ CLASS="informalexample"
 NAME="AEN1770"
 ></A
 ><P
->&#13;          S = 2, J = 7, start = (2&#8722;1) � (7&#8722;1) = 6:
+>&#13;          S = 2, J = 7, start = (2−1) × (7−1) = 6:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >        starting row of full weave
@@ -355,6 +394,9 @@ CLASS="screen"
 5                                    *-*-*-*-*-*-*
 6                                           *-*-*-*-*-*-*
 7                                                  *-*-*-*-*-*-*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -368,6 +410,12 @@ NAME="AEN1773"
 ><P
 >&#13;          S = 7, J = 2, start = 6:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >        start
@@ -382,6 +430,9 @@ CLASS="screen"
 7               *------*
 8                 *------*
 9                   *------*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -395,6 +446,12 @@ NAME="AEN1776"
 ><P
 >&#13;          S = 4, J = 13, start = 36:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                                      start
@@ -405,6 +462,9 @@ CLASS="screen"
 3                                        *---*---*---*---*---*---*---*---*---*--
 4                                                     *---*---*---*---*---*---*-
 5                                                                  *---*---*---*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -418,6 +478,12 @@ NAME="AEN1779"
 ><P
 >&#13;          S = 13, J = 4, start = 36:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                                      start
@@ -442,6 +508,9 @@ CLASS="screen"
 17                                                                    *---------
 18                                                                        *-----
 19                                                                            *-</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -455,6 +524,12 @@ NAME="AEN1782"
 ><P
 >&#13;          S = 8, J = 5, start = 28:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                              start
@@ -475,6 +550,9 @@ CLASS="screen"
 13                                                                 *-------*----
 14                                                                      *-------
 15                                                                           *--</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -488,6 +566,12 @@ NAME="AEN1785"
 ><P
 >&#13;          S = 9, J = 5, start = 32:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                                  start
@@ -508,6 +592,9 @@ CLASS="screen"
 13                                                                 *--------*---
 14                                                                      *-------
 15                                                                           *--</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -521,6 +608,12 @@ NAME="AEN1788"
 ><P
 >&#13;          S = 6, J = 7, start = 30:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >                                start
@@ -537,6 +630,9 @@ CLASS="screen"
 9                                                                *-----*-----*--
 10                                                                      *-----*-
 11                                                                             *</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -547,7 +643,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN1791"
->6.2.3. Weaving collisions</A
+>Weaving collisions</A
 ></H2
 ><P
 >&#13;        A perfect weave is not possible in all cases.  Let's look at
@@ -563,6 +659,12 @@ NAME="AEN1794"
 ><P
 >&#13;          S = 6, J = 4:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*
@@ -573,6 +675,9 @@ CLASS="screen"
 5             |   ^ | *-^---*-----*-----*
               OUCH!   ^ |   ^
                       |     |</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -589,9 +694,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN1798"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
->row(p, j) = (p � J) + (j � S)</PRE
+>row(p, j) = (p × J) + (j × S)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -606,10 +720,19 @@ CLASS="informalexample"
 ><A
 NAME="AEN1801"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
->row(0, 2) = (0 � 4) + (2 � 6) = 12
-row(3, 0) = (3 � 4) + (0 � 6) = 12</PRE
+>row(0, 2) = (0 × 4) + (2 × 6) = 12
+row(3, 0) = (3 × 4) + (0 × 6) = 12</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -636,6 +759,12 @@ NAME="AEN1806"
 ><P
 >&#13;          S = 6, J = 4:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*
@@ -644,6 +773,9 @@ CLASS="screen"
 3             ^-----^-----*-----*
 4                 ^-----^-----*-----*
 5                     ^-----^-----*-----*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -654,7 +786,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN1809"
->6.2.4. What makes a &#8220;perfect&#8221; weave?</A
+>What makes a “perfect” weave?</A
 ></H2
 ><P
 >&#13;        So what causes the perfect weave cases to be perfect, and
@@ -743,6 +875,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1836"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >unsigned int
@@ -757,6 +895,9 @@ gcd(unsigned int x, unsigned int y)
   }
   return y;
 }</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -768,7 +909,7 @@ CLASS="literal"
         weaving algorithm.
       </P
 ><P
->&#13;        If 0 &#8804; j &#60; J, there should only be a single pair (p, j)
+>&#13;        If 0 ≤ j &#60; J, there should only be a single pair (p, j)
         for any given row number.  If S and J are not relatively
         prime, this assumption breaks down.  (For conciseness, let G
         = GCD(S,J).)
@@ -783,6 +924,12 @@ NAME="AEN1841"
 ><P
 >&#13;          S = 8, J = 6, G = 2:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-------*-------*-------*-------*-------*
@@ -791,6 +938,9 @@ CLASS="screen"
 3                   *-------*-------*-------*-------*-------*
 4                         ^-------^-------^-------*-------*-------*
 5                               ^-------^-------^-------*-------*-------*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -812,6 +962,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1846"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-------*-------*       -       -       -
@@ -820,6 +976,9 @@ CLASS="screen"
 3          *-------*-------*       -       -       -
 4             *-------*-------*       -       -       -
 5                *-------*-------*       -       -       -</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -834,6 +993,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1849"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-------*-------*       -       -       -
@@ -844,6 +1009,9 @@ CLASS="screen"
 5                               *-------*-------*       -       -       -
              ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
             These rows need filling in.</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -857,19 +1025,19 @@ CLASS="computeroutput"
       </P
 ><P
 >&#13;        Let's analyse this.  Consider how a pass p could collide
-        with pass 0.  Pass p starts at offset p � J.  Pass 0
-        prints at rows which are multiples of S.  If p � J is
+        with pass 0.  Pass p starts at offset p × J.  Pass 0
+        prints at rows which are multiples of S.  If p × J is
         exactly divisible by S, a collision has occurred, unless (p
-        �J) &#8805; J � S (which will happen when we
+        ×J) ≥ J × S (which will happen when we
         finish a pass block).
       </P
 ><P
->&#13;        So, we want to find p and q such that p � J = q
-        � S and p is minimised.  Then p is the number of rows
+>&#13;        So, we want to find p and q such that p × J = q
+        × S and p is minimised.  Then p is the number of rows
         before a collision, and q is the number of jets in pass 0
         which are not involved in the collision.  To do this, we
         find the lowest common multiple of J and S, which is L = (J
-        � S) / G.  L / J is the number of rows before a
+        × S) / G.  L / J is the number of rows before a
         collision, and L / S is the number of jets in the first pass
         not involved in the collision.
       </P
@@ -877,7 +1045,7 @@ CLASS="computeroutput"
 >&#13;        Thus, we see that the first J / G rows printed by a given
         pass are not overprinted by any later pass.  However, the
         rest of the rows printed by pass p are overprinted by the
-        first J &#8722; (J / G) jets of pass p + (S / G).  We will
+        first J − (J / G) jets of pass p + (S / G).  We will
         use C to refer to S / G, the number of rows after which a
         collision occurs.
       </P
@@ -894,6 +1062,12 @@ NAME="AEN1857"
 ><P
 >&#13;          S = 6, J = 9, G = 3, C = S / G = 2:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*-----*-----*-----*-----*-----*
@@ -904,11 +1078,14 @@ CLASS="screen"
 5                                              ^-----^-----^-----^-----^-----^--
        ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^ ^^
             These rows need filling in.</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;        In this case, the first J &#8722; (J / G) = 9 &#8722; (9 /
+>&#13;        In this case, the first J − (J / G) = 9 − (9 /
         3) = 6 jets of pass p + (6 / 3) = p + 2 collide with the
         last 6 jets of pass p.  Only one row in every G = 2 rows is
         printed by this weave.
@@ -923,6 +1100,12 @@ NAME="AEN1861"
 ><P
 >&#13;          S = 9, J = 6, G = 3, C = 3:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >&#13;0 *--------*--------*--------*--------*--------*
@@ -931,6 +1114,9 @@ CLASS="screen"
 3                   ^--------^--------^--------^--------*--------*
 4                         ^--------^--------^--------^--------*--------*
 5                               ^--------^--------^--------^--------*--------*</PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;          Here, the first J - (J / G) = 6 - (6 / 3) = 4 jets of pass
           p + (9 / 3) = p + 3 collide with the last 4 jets of pass
@@ -967,6 +1153,12 @@ NAME="AEN1868"
 ><P
 >&#13;            S = 7, J = 2, G = 1:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >              imaginary extra jet
@@ -982,25 +1174,28 @@ CLASS="screen"
 7               *------*  &#60;--start of pass block 1
 8                 *------*
 9                   *------*</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
 >&#13;          We can now calculate the start of a given pass by
           reference to its pass block.  The first pass of pass block
-          b always starts at row (b � S � J).  The start
+          b always starts at row (b × S × J).  The start
           row of each of the other passes in the block are
           calculated using offsets from this row.
         </P
 ><P
 >&#13;          For the example above, there are 7 passes in each pass
           block, and their offsets are 0, 2, 4, 6, 8, 10 and 12.
-          The next pass block is offset S � J = 14 rows from
+          The next pass block is offset S × J = 14 rows from
           the start of the current pass block.
         </P
 ><P
->&#13;          The simplest way to modify the &#8220;perfect&#8221; weave
-          pattern to give a correct weave in cases where G &#8800; 1
+>&#13;          The simplest way to modify the “perfect” weave
+          pattern to give a correct weave in cases where G ≠ 1
           is to simply change any offsets which would result in a
           collision, until the collision disappears.  Every printed
           row in the weave, as we have shown it up to now, is
@@ -1029,7 +1224,7 @@ CLASS="screen"
           The passes in the second subblock each have 1 added to
           their offset, the passes in the third subblock have 2
           added, and so on.  Thus, the offset of pass p (numbered
-          relative to the start of its pass block) is p � J +
+          relative to the start of its pass block) is p × J +
           floor(p / B).
         </P
 ><P
@@ -1045,6 +1240,12 @@ NAME="AEN1878"
 ><P
 >&#13;            S = 6, J = 9, G = 3, B = 2:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*-----*-----*-----*-----*-----*
@@ -1060,6 +1261,9 @@ CLASS="screen"
   |              |                  start of subblock 2 (offset 2 rows)
   |              start of subblock 1 (following passes offset by 1 row)
 start of passblock 0, subblock 0 (pass start calculated as p*J)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1073,6 +1277,12 @@ NAME="AEN1881"
 ><P
 >&#13;            S = 9,  J = 6,  G = 3,  B = 3:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *--------*--------*--------*--------*--------*
@@ -1088,6 +1298,9 @@ CLASS="screen"
 10                                                  \---/     *--------*--------
 11                                               small offset       *--------*--
 12                                                                         *----</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1107,6 +1320,12 @@ NAME="AEN1885"
 ><P
 >&#13;            S = 8, J = 4, G = 4, B = 2:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-------*-------*-------*
@@ -1120,6 +1339,9 @@ CLASS="screen"
 8                                 *-------*-------*-------*
 9                                \/   *-------*-------*-------*
                             very small offset!</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1134,6 +1356,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1889"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >subblock number
@@ -1148,6 +1376,9 @@ CLASS="screen"
 1  *
 2   *
 3    *</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1168,10 +1399,19 @@ CLASS="informalexample"
 ><A
 NAME="AEN1893"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >offset(b) = 2*b             , if b &#60; ceiling(G/2)
           = 2*(G-b)-1       , otherwise</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1185,6 +1425,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1896"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0123456789
@@ -1208,6 +1454,9 @@ CLASS="screen"
 7      *
 8    *
 9  *</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1221,6 +1470,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1899"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >           1
@@ -1247,6 +1502,9 @@ CLASS="screen"
  8      *
  9    *
 10  *</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1263,6 +1521,12 @@ NAME="AEN1902"
 ><P
 >&#13;            S = 12, J = 6, G = 6, B = 2:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----------*-----------*-----------*-----------*-----------*
@@ -1278,6 +1542,9 @@ CLASS="screen"
 10                                                             *-----------*----
 11                                                                   *----------
 12                                                                        *-----</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1289,7 +1556,7 @@ CLASS="screen"
 >&#13;          (This might seem odd, but it occurs to me that a good
           weave pattern might also make a good score for bell
           ringers.  When church bells are rung, a list of
-          &#8220;changes&#8221; are used.  For example, if 8 bells
+          “changes” are used.  For example, if 8 bells
           are being used, they will, at first, be rung in order:
           12345678.  If the first change is for bells 5 and 6, the
           bells will then be rung in the order 12346578.  If the
@@ -1317,6 +1584,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1909"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >passesperblock = S
@@ -1330,6 +1603,9 @@ if subpassblock &#60; ceiling(subblocksperblock/2)
 else
   subblockoffset = 2*(subblocksperblock-subpassblock)-1
 startingrow = passblock * S * J + offsetinpassblock * J + subblockoffset</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1345,6 +1621,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1912"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >subblocksperblock = gcd(S, J)
@@ -1354,6 +1636,9 @@ if subpassblock * 2 &#60; subblocksperblock
 else
   subblockoffset = 2*(subblocksperblock-subpassblock)-1
 startingrow = p * J + subblockoffset</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1367,6 +1652,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1915"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >subblocksperblock = gcd(S, J)
@@ -1378,11 +1669,14 @@ subblockoffset(p)
     subpassblock = floor((p % S) * subblocksperblock / S)
 
 row(j, p) = p * J + subblockoffset(p) + j * S</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;          Together with the inequality 0 &#8804; j &#60; J, we can use
+>&#13;          Together with the inequality 0 ≤ j &#60; J, we can use
           this definition in reverse to calculate the pass number
           containing a given row, r.  Working out the inverse
           definition involves a little guesswork, but one possible
@@ -1397,11 +1691,20 @@ CLASS="informalexample"
 ><A
 NAME="AEN1918"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >subblocksperblock = gcd(S, J)
 subblockoffset = r % subblocksperblock
 pass = (r - subblockoffset) / J</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1416,6 +1719,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1921"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >offset = r % J
@@ -1426,6 +1735,9 @@ pass--
 offset += J
 }
 jet = offset / S</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1440,6 +1752,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1924"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >G = gcd(S, J)
@@ -1459,6 +1777,9 @@ subblockretreat = floor(pass / passespersubblock) % G
 pass -= subblockretreat * passespersubblock
 pass += subpassblock * passespersubblock
 jet = (r - subblockoffset - pass * J) / S</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1478,6 +1799,12 @@ NAME="AEN1927"
             passesperblock = S = 6,
             passespersubblock = S / G = 6 / 2 = 3:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*
@@ -1500,6 +1827,9 @@ CLASS="screen"
 17                                                                     *-----*--
 18                                                                        *-----
 19                                                                            *-</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1515,6 +1845,12 @@ NAME="AEN1930"
             passesperblock = S = 8,
             passespersubblock= S / G = 8 / 2 = 4:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-------*-------*-------*-------*-------*
@@ -1530,6 +1866,9 @@ CLASS="screen"
 10                                                            *-------*-------*-
 11                                                                  *-------*---
 12                                                                         *----</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1545,6 +1884,12 @@ NAME="AEN1933"
             passesperblock = S = 6,
             passespersubblock= S / G = 6 / 6 = 1:
           </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *-----*-----*-----*-----*-----*-----*-----*-----*-----*-----*-----*
@@ -1554,6 +1899,9 @@ CLASS="screen"
 4                                                    *-----*-----*-----*-----*--
 5                                                              *-----*-----*----
 6                                                                         *-----</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1572,7 +1920,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN1937"
->6.2.5. Oversampling</A
+>Oversampling</A
 ></H2
 ><P
 >&#13;        By oversampling, we mean printing on the same row more than
@@ -1589,7 +1937,7 @@ NAME="AEN1937"
         necessary to get a 1/1440" horizontal resolution.  If it can
         only print two drops 1/360" apart, 4x oversampling will be
         necessary for a 1/1440" horizontal resolution.  The printer
-        enforces this &#8220;drop spacing&#8221; by only accepting
+        enforces this “drop spacing” by only accepting
         raster passes with a horizontal resolution matching the
         spacing with which it can print dots, so we must print
         passes at different horizontal positions if we are to obtain
@@ -1600,18 +1948,18 @@ NAME="AEN1937"
 ><P
 >&#13;        Oversampling can also be done to decrease the banding
         apparent in an image.  By splitting a row into two or more
-        sets of dots (&#8220;lines&#8221;) and printing each line on
+        sets of dots (“lines”) and printing each line on
         the same row, but with a different nozzle for each line, we
         can get a smoother print.
       </P
 ><P
 >&#13;        To quantify these two kinds of oversampling, we'll introduce
         two new constants: H shows how many different horizontal
-        offsets we want to print at (the &#8220;horizontal
-        oversampling&#8221;) while O shows how many times we want to
+        offsets we want to print at (the “horizontal
+        oversampling”) while O shows how many times we want to
         print each row, over and above the number of times necessary
-        for horizontal oversampling (the &#8220;extra
-        oversampling&#8221;).
+        for horizontal oversampling (the “extra
+        oversampling”).
       </P
 ><P
 >&#13;        It is necessary for all the lines printed by a given pass to
@@ -1629,10 +1977,10 @@ NAME="AEN1937"
         advance the paper between passes.  Previously, we'd have
         defined A = J; we now let A = J / H.  This also affects our
         pass blocks.  Printing one pass block used to involve
-        advancing the paper S � J rows; it now advances the
-        paper (S�J) / H rows.  We therefore name a group of H
-        pass blocks a &#8220;band&#8221;.  Printing one band
-        involves advancing the paper S�J rows, as a pass
+        advancing the paper S × J rows; it now advances the
+        paper (S×J) / H rows.  We therefore name a group of H
+        pass blocks a “band”.  Printing one band
+        involves advancing the paper S×J rows, as a pass
         block did before.
       </P
 ><P
@@ -1654,6 +2002,12 @@ NAME="AEN1946"
           passesperblock = S = 4,
           passespersubblock = S/G = 4/1 = 4:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 *---*---*---*---*---*---*---*---*---*
@@ -1672,6 +2026,9 @@ CLASS="screen"
 13                                                                 *---*---*---*
 14                                                                      *---*---
 15                                                                           *--</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1683,7 +2040,7 @@ CLASS="screen"
 CLASS="computeroutput"
 >*</SAMP
 >s
-        with integers in the range [0&#8230;H&#8722;1].
+        with integers in the range [0…H−1].
       </P
 ><P
 >&#13;        Overprinting occurs once per pass block, so we can simply
@@ -1698,6 +2055,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1952"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 0---0---0---0---0---0---0---0---0---0
@@ -1716,6 +2079,9 @@ CLASS="screen"
 13                                                                 1---1---1---1
 14                                                                      1---1---
 15                                                                           1--</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1732,6 +2098,12 @@ NAME="AEN1954"
           passesperblock= S = 4,
           passespersubblock= S/G = 4/2 = 2:
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >0 0---0---0---0---0---0---0---0---0---0---0---0
@@ -1747,6 +2119,9 @@ CLASS="screen"
 10                                                             0---0---0---0---0
 11                                                                   0---0---0--
 12                                                                        1---1-</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1770,6 +2145,12 @@ NAME="AEN1958"
           passesperblock = S = 4,
           passespersubblock = S/G = 4/1 = 4
         </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >Band 0:
@@ -1790,6 +2171,9 @@ Band 1:
 12                                                                1---1---1---1-
 13                                                                     1---1---1
 14                                                                          1---</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1804,6 +2188,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1962"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >A = floor(J / H)
@@ -1817,6 +2207,9 @@ band = floor(P / (S * H))
 passinband = P % (S * H)
 startingrow = band * S * J + passinband * A + subblockoffset
 subpass = passinband / S</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1829,6 +2222,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1965"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >A = floor(J / H)
@@ -1845,8 +2244,11 @@ passinband(p) = p % (S * H)
 
 row(j, p) = band(p) * S * J + passinband(p) * A + subblockoffset(p) + j * S
 row(j, p) = p * J + subblockoffset(p) + j * S</PRE
+></TD
+></TR
+></TABLE
 ><P
->&#13;            To be continued&#8230;
+>&#13;            To be continued…
           </P
 ><P
 ></P
@@ -1880,7 +2282,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

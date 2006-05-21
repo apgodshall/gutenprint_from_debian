@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.133 2006/01/13 16:09:14 rleigh Exp $
+dnl $Id: configure.ac,v 1.139 2006/05/12 01:10:19 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,7 @@ pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [0])
 pushdef([GUTENPRINT_MICRO_VERSION],     [0])
-pushdef([GUTENPRINT_EXTRA_VERSION],     [-rc2])
+pushdef([GUTENPRINT_EXTRA_VERSION],     [-rc3])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
 pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
 pushdef([GUTENPRINT_BINARY_AGE],        [0])
@@ -52,7 +52,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.133 $)
+AC_REVISION($Revision: 1.139 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -147,7 +147,7 @@ dnl Specify a configuration file.
 AM_CONFIG_HEADER([config.h])
 
 dnl Available languages (translations)
-ALL_LINGUAS="cs da de el en_GB es fr ja nb nl pl pt sk sv zh_TW"
+ALL_LINGUAS="cs da de el en_GB es fr hu ja nb nl pl pt sk sv zh_TW"
 AC_SUBST(ALL_LINGUAS)
 
 dnl Set up libtool scripts.
@@ -226,6 +226,19 @@ STP_ARG_ENABLE([translated-cups-ppds],
                [build translated CUPS PPD files],
                [BUILD_TRANSLATED_CUPS_PPDS],
                [yes])
+
+STP_ARG_ENABLE_DETAILED([simplified-cups-ppds],
+			[],
+			[build simplified CUPS PPD files],
+			[(options: yes, no, only)],
+			[BUILD_SIMPLIFIED_CUPS_PPDS],
+			[no],
+			[
+    yes) [WHICH_PPDS]="-a"; BUILD_SIMPLIFIED_CUPS_PPDS=yes; AC_MSG_RESULT([yes]) ;;
+    no) [WHICH_PPDS]=""; BUILD_SIMPLIFIED_CUPS_PPDS=no; AC_MSG_RESULT([no]) ;;
+    only) [WHICH_PPDS]="-s"; BUILD_SIMPLIFIED_CUPS_PPDS=only; AC_MSG_RESULT([only]) ;;
+    *) AC_MSG_ERROR([${enableval}: not a valid option ('yes', 'no', or 'only')]) ;;
+				   ])
 
 USE_LEVEL3_PS=no
 if test -n "${CUPS_CONFIG}" -a "${BUILD_CUPS}" = "yes" ; then
@@ -747,7 +760,7 @@ AC_TYPE_SIGNAL
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS([nanosleep poll usleep])
-AC_CHECK_FUNC([getopt_long])
+AC_CHECK_FUNCS([getopt_long])
 
 
 dnl Define what has to be built
@@ -930,6 +943,7 @@ AC_SUBST(gutenprintui2_libdeps)
 AC_SUBST(LIBREADLINE_DEPS)
 AC_SUBST(MAINTAINER_CFLAGS)
 AC_SUBST(PLUG_IN_PATH)
+AC_SUBST(WHICH_PPDS)
 
 dnl Output files
 
@@ -938,6 +952,7 @@ AC_CONFIG_FILES([doc/Makefile])
 AC_CONFIG_FILES([doc/gutenprint.dox])
 AC_CONFIG_FILES([doc/gutenprintui2.dox])
 AC_CONFIG_FILES([doc/developer/Makefile])
+AC_CONFIG_FILES([doc/users_guide/Makefile])
 AC_CONFIG_FILES([include/Makefile])
 AC_CONFIG_FILES([include/gutenprint/Makefile])
 AC_CONFIG_FILES([include/gutenprintui/Makefile])
@@ -968,6 +983,8 @@ AC_CONFIG_FILES([src/foomatic/foomatic-generator],
                 [chmod +x src/foomatic/foomatic-generator])
 AC_CONFIG_FILES([src/foomatic/mk_printerlist],
                 [chmod +x src/foomatic/mk_printerlist])
+AC_CONFIG_FILES([src/testpattern/run-testpattern-2],
+                [chmod +x src/testpattern/run-testpattern-2])
 AC_CONFIG_FILES([src/ghost/Makefile])
 AC_CONFIG_FILES([src/testpattern/Makefile])
 AC_CONFIG_FILES([src/gimp/Makefile])
@@ -982,11 +999,77 @@ AC_CONFIG_FILES([cups-gutenprint.list])
 AC_CONFIG_FILES([test/Makefile])
 AC_CONFIG_FILES([scripts/Makefile])
 AC_CONFIG_COMMANDS([default], [
-echo "Finished configuring."
-echo "Type 'make' to build the package"
-echo "then 'make install' to install it."
+echo
 ],
 [GUTENPRINT_RELEASE_VERSION=${GUTENPRINT_RELEASE_VERSION}]
 )
 
 AC_OUTPUT
+
+echo
+echo "Build Summary:"
+echo "----- --------"
+echo
+echo "If you have any problems, please report the information below to"
+echo "$PACKAGE_BUGREPORT"
+echo
+echo "  Release: $PACKAGE_STRING generated on $RELEASE_DATE"
+echo
+echo "  Features:"
+echo "    Build CUPS:                                 $BUILD_CUPS, installing in $cups_prefix"
+if test "$BUILD_CUPS" != "no" ; then
+    echo "        Build CUPS PPD files:                   $BUILD_CUPS_PPDS"
+    echo "            Build translated CUPS PPD files:    $BUILD_TRANSLATED_CUPS_PPDS"
+    echo "            Build simplified CUPS PPD files:    $BUILD_SIMPLIFIED_CUPS_PPDS"
+    echo "            Generate PS level 3 CUPS PPD files: $USE_LEVEL3_PS"
+    echo "        Install CUPS PPD files at top level:    $CUPS_PPDS_AT_TOP_LEVEL"
+    if test "$STATIC_GENPPD" = "no" -a "$enable_shared" = "yes" ; then
+        echo "        Build genppd statically:                $STATIC_GENPPD (please read the release notes!)"
+    else
+        echo "        Build genppd statically:                $STATIC_GENPPD"
+    fi
+fi
+echo "    Build Ghostscript IJS driver:               $BUILD_GHOSTSCRIPT"
+echo "    Build Foomatic data:                        $BUILD_FOOMATIC"
+if test "$BUILD_FOOMATIC" != "no" ; then
+    echo "        Build Foomatic 3.x data:                $BUILD_FOOMATIC_3"
+fi
+echo "    Build GIMP 1.2 plugin:                      $BUILD_GIMP"
+echo "    Build GIMP 2.0 plugin:                      $BUILD_GIMP2"
+if test "$BUILD_GIMP" != "no" -o "$BUILD_GIMP2" != no ; then
+    echo "        Install plugin in home directory:       $USER_INSTALL"
+fi
+echo "    Build EPSON Stylus utility:                 $BUILD_ESCPUTIL"
+echo "    Build test programs:                        $BUILD_TEST"
+echo "    Build testpattern generator:                $BUILD_TESTPATTERN"
+echo
+echo "Installation summary:"
+echo "    Installation prefix:                        $prefix"
+echo "    Data directory:                             $PACKAGE_DATA_DIR"
+echo "    Library directory:                          $PACKAGE_LIB_DIR"
+echo "    XML data directory:                         $PKGXMLDATADIR"
+echo "    Module directory:                           $PKGMODULEDIR"
+echo "    Install user guide:                         $INSTALL_USER_GUIDE"
+echo "    Install sample images:                      $INSTALL_SAMPLES"
+echo
+echo "Configuration:"
+if test x$ac_compiler_gnu = "xyes"; then
+    echo "    Compiler options:                           $CFLAGS $GNUCFLAGS"
+else
+    echo "    Compiler options:                           $CFLAGS"
+fi
+echo "    Build static libraries:                     $enable_static"
+echo "    Build shared libraries:                     $enable_shared"
+echo "    Maintainer mode:                            $USE_MAINTAINER_MODE"
+echo "    Generate profiling information:             $ENABLE_PROFILE"
+echo "    Generate debugging symbols:                 $ENABLE_DEBUG"
+echo "    Use modules:                                $WITH_MODULES"
+if test -n "$EXTRA_LIBREADLINE_DEPS" ; then
+    echo "    Use readline libraries:                     $USE_READLINE, extra arguments: $EXTRA_LIBREADLINE_DEPS"
+else
+    echo "    Use readline libraries:                     $USE_READLINE"
+fi
+echo
+echo "Finished configuring."
+echo "Type 'make' to build the package"
+echo "then 'make install' to install it."

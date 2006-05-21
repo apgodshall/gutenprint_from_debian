@@ -16,6 +16,9 @@
 
 # Variables
 
+#export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
+#export STP_DATA_PATH = $(top_srcdir)/src/main
+
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -283,6 +286,7 @@ USE_NLS = @USE_NLS@
 USE_NLS_FALSE = @USE_NLS_FALSE@
 USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
+WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
@@ -723,9 +727,6 @@ uninstall-am: uninstall-info-am uninstall-libLTLIBRARIES \
 
 
 @SET_MAKE@
-
-export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
-export STP_DATA_PATH = $(top_srcdir)/src/main
 
 # Rules
 

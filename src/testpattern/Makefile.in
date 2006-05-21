@@ -16,6 +16,9 @@
 
 # Variables
 
+#export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
+#export STP_DATA_PATH = $(top_srcdir)/src/main
+
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -39,10 +42,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/scripts/global.mk testpatternl.c testpatterny.c \
-	testpatterny.h
+	$(srcdir)/run-testpattern-2.in $(top_srcdir)/scripts/global.mk \
+	testpatternl.c testpatterny.c testpatterny.h
 @BUILD_TESTPATTERN_TRUE@bin_PROGRAMS = testpattern$(EXEEXT)
-@BUILD_TESTPATTERN_TRUE@noinst_PROGRAMS = printers$(EXEEXT)
+@BUILD_TESTPATTERN_TRUE@noinst_PROGRAMS = printers$(EXEEXT) \
+@BUILD_TESTPATTERN_TRUE@	printer_options$(EXEEXT)
 subdir = src/testpattern
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
@@ -56,13 +60,16 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = run-testpattern-2
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgdatadir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
+printer_options_SOURCES = printer_options.c
+printer_options_OBJECTS = printer_options.$(OBJEXT)
+am__DEPENDENCIES_1 = $(top_builddir)/src/main/libgutenprint.la
+printer_options_DEPENDENCIES = $(am__DEPENDENCIES_1)
 printers_SOURCES = printers.c
 printers_OBJECTS = printers.$(OBJEXT)
-am__DEPENDENCIES_1 = $(top_builddir)/src/main/libgutenprint.la
 printers_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_testpattern_OBJECTS = testpattern.$(OBJEXT) testpatterny.$(OBJEXT) \
 	testpatternl.$(OBJEXT)
@@ -84,8 +91,8 @@ LTLEXCOMPILE = $(LIBTOOL) --mode=compile $(LEX) $(LFLAGS) $(AM_LFLAGS)
 YACCCOMPILE = $(YACC) $(YFLAGS) $(AM_YFLAGS)
 LTYACCCOMPILE = $(LIBTOOL) --mode=compile $(YACC) $(YFLAGS) \
 	$(AM_YFLAGS)
-SOURCES = printers.c $(testpattern_SOURCES)
-DIST_SOURCES = printers.c $(testpattern_SOURCES)
+SOURCES = printer_options.c printers.c $(testpattern_SOURCES)
+DIST_SOURCES = printer_options.c printers.c $(testpattern_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -281,6 +288,7 @@ USE_NLS = @USE_NLS@
 USE_NLS_FALSE = @USE_NLS_FALSE@
 USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
+WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
@@ -340,12 +348,13 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
-TESTS = run-testpattern run-testpattern-1
+TESTS = run-testpattern run-testpattern-1 run-testpattern-2
 AM_LFLAGS = -i
 AM_YFLAGS = -d
 testpattern_SOURCES = testpattern.c testpatterny.y testpatternl.l testpattern.h
 testpattern_LDADD = $(GUTENPRINT_LIBS)
 printers_LDADD = $(GUTENPRINT_LIBS)
+printer_options_LDADD = $(GUTENPRINT_LIBS)
 pkgdata_DATA = testpattern.sample extended.sample
 MAINTAINERCLEANFILES = Makefile.in testpatternl.c testpatterny.c testpatterny.h
 EXTRA_DIST = testpatterny.h $(pkgdata_DATA) run-testpattern run-testpattern-1
@@ -382,6 +391,8 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
+run-testpattern-2: $(top_builddir)/config.status $(srcdir)/run-testpattern-2.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	test -z "$(bindir)" || $(mkdir_p) "$(DESTDIR)$(bindir)"
@@ -417,6 +428,9 @@ clean-noinstPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
+printer_options$(EXEEXT): $(printer_options_OBJECTS) $(printer_options_DEPENDENCIES) 
+	@rm -f printer_options$(EXEEXT)
+	$(LINK) $(printer_options_LDFLAGS) $(printer_options_OBJECTS) $(printer_options_LDADD) $(LIBS)
 printers$(EXEEXT): $(printers_OBJECTS) $(printers_DEPENDENCIES) 
 	@rm -f printers$(EXEEXT)
 	$(LINK) $(printers_LDFLAGS) $(printers_OBJECTS) $(printers_LDADD) $(LIBS)
@@ -748,9 +762,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
 
 
 @SET_MAKE@
-
-export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
-export STP_DATA_PATH = $(top_srcdir)/src/main
 
 # Rules
 

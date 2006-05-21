@@ -15,6 +15,9 @@
 @SET_MAKE@
 
 # Variables
+
+#export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
+#export STP_DATA_PATH = $(top_srcdir)/src/main
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -251,6 +254,7 @@ USE_NLS = @USE_NLS@
 USE_NLS_FALSE = @USE_NLS_FALSE@
 USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
+WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
@@ -309,7 +313,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-SUBDIRS = developer
+SUBDIRS = developer users_guide
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
 docdir = $(datadir)/doc/$(PACKAGE)
 MAINTAINERCLEANFILES = \
@@ -324,8 +328,7 @@ EXTRA_DIST = \
 	gutenprint \
 	gutenprintui2 \
 	gutenprint-stamp \
-	gutenprintui2-stamp \
-	gutenprint-options
+	gutenprintui2-stamp
 
 all: all-recursive
 
@@ -596,7 +599,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-data-local
+install-data-am:
 
 install-exec-am:
 
@@ -628,10 +631,10 @@ uninstall-info: uninstall-info-recursive
 	ctags ctags-recursive distclean distclean-generic \
 	distclean-libtool distclean-recursive distclean-tags distdir \
 	dvi dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-data-local install-exec \
-	install-exec-am install-info install-info-am install-man \
-	install-strip installcheck installcheck-am installdirs \
-	installdirs-am maintainer-clean maintainer-clean-generic \
+	install-data install-data-am install-exec install-exec-am \
+	install-info install-info-am install-man install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic \
 	maintainer-clean-local maintainer-clean-recursive mostlyclean \
 	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
 	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
@@ -639,9 +642,6 @@ uninstall-info: uninstall-info-recursive
 
 
 @SET_MAKE@
-
-export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
-export STP_DATA_PATH = $(top_srcdir)/src/main
 
 # Rules
 
@@ -675,19 +675,19 @@ gutenprint-stamp: gutenprint.dox $(top_srcdir)/configure
 
 docs: gutenprint-stamp
 	cd developer; $(MAKE)
+	cd users_guide; $(MAKE)
 
 ps: $(MANUAL).ps
 	cd developer; $(MAKE) ps
+	cd users_guide; $(MAKE) ps
 
 pdf: $(MANUAL).pdf
 	cd developer; $(MAKE) pdf
+	cd users_guide; $(MAKE) pdf
 
 html: 
 	cd developer; $(MAKE) html
-
-install-data-local: $(srcdir)/gutenprint-options
-	$(mkdir_p) $(DESTDIR)$(datadir)/$(PACKAGE)/doc
-	$(INSTALL_DATA) $(srcdir)/gutenprint-options $(DESTDIR)$(datadir)/$(PACKAGE)/doc
+	cd users_guide; $(MAKE) html
 
 maintainer-clean-local:
 	$(RM) -r gutenprint

@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.43 2006/01/14 20:03:39 rlk Exp $
+## $Id: Makefile.am,v 1.45 2006/03/21 01:42:58 rlk Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 
 @SET_MAKE@
 
-SUBDIRS = developer
+SUBDIRS = developer users_guide
 
 include $(top_srcdir)/scripts/global.mk
 
@@ -51,19 +51,19 @@ gutenprint-stamp: gutenprint.dox $(top_srcdir)/configure
 
 docs: gutenprint-stamp
 	cd developer; $(MAKE)
+	cd users_guide; $(MAKE)
 
 ps: $(MANUAL).ps
 	cd developer; $(MAKE) ps
+	cd users_guide; $(MAKE) ps
 
 pdf: $(MANUAL).pdf
 	cd developer; $(MAKE) pdf
+	cd users_guide; $(MAKE) pdf
 
 html: 
 	cd developer; $(MAKE) html
-
-install-data-local: $(srcdir)/gutenprint-options
-	$(mkdir_p) $(DESTDIR)$(datadir)/$(PACKAGE)/doc
-	$(INSTALL_DATA) $(srcdir)/gutenprint-options $(DESTDIR)$(datadir)/$(PACKAGE)/doc
+	cd users_guide; $(MAKE) html
 
 
 ## Clean
@@ -83,7 +83,6 @@ EXTRA_DIST = \
 	gutenprint \
 	gutenprintui2 \
 	gutenprint-stamp \
-	gutenprintui2-stamp \
-	gutenprint-options
+	gutenprintui2-stamp
 
 .PHONY: html ps pdf docs

@@ -177,10 +177,88 @@ static errorMessage_t errorMessage[] =
                                 sig = signal(SIGALRM, sigAlarm); \
                               }
 
+/*******************************************************************/
+/* Function printHexValues                                         */
+/*                                                                 */
+/* Print hex code contained in the passed buffer                   */
+/*                                                                 */
+/*******************************************************************/
+
+static void printHexValues(const char *dir, const unsigned char *buf, int len)
+{
+   int i, j;
+   int printable_count = 0;
+   int longest_printable_run = 0;
+   int current_printable_run = 0;
+   int print_strings = 0;
+   int blocks = (len + 15) / 16;
+#if 0
+   len = len > 30 ? 30 : len;
+#endif
+   fprintf(stderr,"%s\n",dir);
+   for (i = 0; i < len; i++)
+     {
+       if (isprint(buf[i]))
+	 {
+	   if (!isspace(buf[i]))
+	     printable_count++;
+	   current_printable_run++;
+	 }
+       else
+	 {
+	   if (current_printable_run > longest_printable_run)
+	     longest_printable_run = current_printable_run;
+	 }
+     }
+   if (current_printable_run > longest_printable_run)
+     longest_printable_run = current_printable_run;
+   if (longest_printable_run >= 8 ||
+       ((float) printable_count / (float) len > .75))
+     print_strings = 1;
+   if (print_strings)
+     {
+       for (i = 0; i < len; i++)
+	 {
+	   fprintf(stderr,"%c",isprint(buf[i])||isspace(buf[i])?buf[i]:'*');
+	   if (buf[i] == ';' && i < len - 1)
+	     fprintf(stderr, "\n");
+	 }
+       fprintf(stderr, "\n");
+     }
+   for (j = 0; j < blocks; j++)
+     {
+       int baseidx = j * 16;
+       int count = len;
+       if (count > baseidx + 16)
+	 count =  baseidx + 16;
+       fprintf(stderr, "%4d: ", baseidx);
+       for ( i = baseidx; i < count;i++)
+	 {
+	   if (i % 4 == 0)
+	     fprintf(stderr, " ");
+	   fprintf(stderr," %02x",buf[i]);
+	 }
+       if (print_strings)
+	 {
+	   fprintf(stderr,"\n      ");
+	   for ( i = baseidx; i < count;i++)
+	     {
+	       if (i % 4 == 0)
+		 fprintf(stderr, " ");
+	       fprintf(stderr,"  %c",
+		       isprint(buf[i]) && !isspace(buf[i]) ? buf[i] : ' ');
+	     }
+	 }
+       fprintf(stderr, "\n");
+     }
+}
+
 int SafeWrite(int fd, const void *data, int len)
 {
   int status;
   int retries=30;
+  if (debugD4)
+    printHexValues("SafeWrite: ", data, len);
   do
     {
       status = write(fd, data, len);
@@ -190,29 +268,6 @@ int SafeWrite(int fd, const void *data, int len)
     }
   while ((status < len) && (retries > 0));
   return(status);
-}
-
-/*******************************************************************/
-/* Function printHexValues                                         */
-/*                                                                 */
-/* Print hex code contained in the passed buffer                   */
-/*                                                                 */
-/*******************************************************************/
-
-static void printHexValues(const char *dir, unsigned char *buf, int len)
-{
-   int i;
-#if 0
-   len = len > 30 ? 30 : len;
-#endif
-   fprintf(stderr,"%s",dir);
-   for ( i = 0; i < len;i++)
-      fprintf(stderr,"%02x ",buf[i]);
-   fprintf(stderr,"\n");
-   fprintf(stderr,"      ");
-   for ( i = 0; i < len;i++)
-      fprintf(stderr,"%c  ",isprint(buf[i])&&!isspace(buf[i])?buf[i]:' ');
-   fprintf(stderr,"\n");
 }
 
 /*******************************************************************/
@@ -233,7 +288,7 @@ static void sigAlarm(int code)
 /* Function printError()                                           */
 /*    print an error message on stderr                             */
 /*                                                                 */
-/* Input:  unsigned char errorNb the error number                             */
+/* Input:  unsigned char errorNb the error number                  */
 /*                                                                 */
 /* Return: fatal = 1 or recoverable = 0                            */
 /*                                                                 */
@@ -324,11 +379,11 @@ static int writeCmd(int fd, unsigned char *cmd, int len)
 # endif
       if ( cmd[0] == 0 && cmd[1] == 0 )
       {
-         printHexValues("Send: ", (unsigned char*)cmd, len);
+         printHexValues("Send: ", cmd, len);
       }
       else
       {
-         printHexValues("Send: ", (unsigned char*)cmd, 6);
+         printHexValues("Send: ", cmd, 6);
       }
    }
 
@@ -389,6 +444,7 @@ int readAnswer(int fd, unsigned char *buf, int len)
    struct itimerval ti, oti;
    long dt;
    int count = 0;
+   int first_read = 1;
    /* wait a little bit before reading an answer */
    usleep(d4RdTimeout);
 
@@ -408,8 +464,20 @@ int readAnswer(int fd, unsigned char *buf, int len)
       SET_TIMER(ti,oti, d4RdTimeout);
       rd = read(fd, buf+total, len-total);
       if (debugD4)
-	fprintf(stderr, "read: %i %s\n", rd,
-		rd < 0 && errno != 0 ?strerror(errno) : "");
+	{
+	  if (first_read)
+	    {
+	      fprintf(stderr, "read: ");
+	      first_read = 0;
+	    }
+	  if (rd < 0)
+	    {
+	      fprintf(stderr, "%i %s\n", rd, errno != 0 ?strerror(errno) : "");
+	      first_read = 1;
+	    }
+	  else
+	    fprintf(stderr, "%i ", rd);
+	}
       RESET_TIMER(ti,oti);
       if ( rd <= 0 )
       {

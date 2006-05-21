@@ -1,5 +1,5 @@
 /*
- * "$Id: printer_margins.c,v 1.15 2004/09/17 18:38:12 rleigh Exp $"
+ * "$Id: printer_margins.c,v 1.17 2006/04/17 02:06:18 rlk Exp $"
  *
  *   Dump the per-printer margins for Grant Taylor's *-omatic database
  *
@@ -31,6 +31,9 @@
 int
 main(int argc, char **argv) {
   int i, k;
+  int use_all_page_sizes = 1;
+  if (argc > 1 && !strcmp(argv[1], "-s"))
+    use_all_page_sizes = 0;
 
   stp_init();
   for (i = 0; i < stp_printer_model_count(); i++) {
@@ -71,6 +74,10 @@ main(int argc, char **argv) {
 	printf("Unable to lookup size %s!\n", opt->name);
 	continue;
       }
+      if (!use_all_page_sizes && num_opts >= 10 &&
+	  (papersize->paper_unit == PAPERSIZE_ENGLISH_EXTENDED ||
+	   papersize->paper_unit == PAPERSIZE_METRIC_EXTENDED))
+	continue;
       
       width  = papersize->width;
       height = papersize->height;
@@ -78,7 +85,17 @@ main(int argc, char **argv) {
       stp_set_string_parameter(pv, "PageSize", opt->name);
       
       stp_get_media_size(pv, &width, &height);
-      stp_get_imageable_area(pv, &left, &right, &bottom, &top);
+      stp_get_maximum_imageable_area(pv, &left, &right, &bottom, &top);
+
+      if (left < 0)
+	left = 0;
+      if (right > width)
+	right = width;
+      if (bottom > height)
+	bottom = height;
+      if (top < 0)
+	top = 0;
+      
       bottom = height - bottom;
       top    = height - top;
 

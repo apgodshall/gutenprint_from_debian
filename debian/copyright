@@ -1,23 +1,33 @@
 This package was debianized by Roger Leigh <rleigh@debian.org> on
 Fri, 26 Jan 2001 17:42:06 +0000.
 
-It was downloaded from cvs.sourceforge.net:/cvsroot/gimp-print
+It was downloaded from CVS:
+  gimp-print.cvs.sourceforge.net:/cvsroot/gimp-print (module print)
+See http://sourceforge.net/cvs/?group_id=1537 for full instructions.
+
+The official release tarballs are available from:
+  http://sourceforge.net/project/showfiles.php?group_id=1537
+
+See also http://gimp-print.sourceforge.net/.
+
 
 Upstream Authors: Michael Sweet (mike@easysw.com)
                   Robert Krawitz (rlk@alum.mit.edu)
 		  and the rest of the Gutenprint development team.
 
+
 Copyright:
 
-This software is Copyright © 1997-2005 Michael Sweet and Robert Krawitz
+This software is Copyright © 1997-2006 Michael Sweet and Robert Krawitz
 
 You are free to distribute this software under the terms of
 the GNU General Public License.
 On Debian systems, the complete text of the GNU General Public
 License can be found in /usr/share/common-licenses/GPL file.
 
-This Debian release of Gutenprint has removed the GFDL-licensed User's
-Guide.  It will be added back to the release once a new version of the
-GFDL, fully compatible with the DFSG, exists.
+Additionally, this release of Gutenprint has restored the GFDL-licensed
+User's Guide, but this is due to be dropped upstream and is no longer
+packaged.
 
- -- Roger Leigh <rleigh@debian.org>  Tue, 22 Nov 2005 15:14:30 +0000
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 21 May 2006 12:38:27 +0100

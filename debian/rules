@@ -26,7 +26,7 @@ endif
 
 # Get upstream version, and define libgutenprint suffix
 #UPSTREAM_VERSION = $(shell dpkg-parsechangelog | grep ^Version | sed "s/.* //" | sed "s/-[^-]*$$//")
-UPSTREAM_VERSION = 5.0.0-rc2
+UPSTREAM_VERSION = 5.0.0-rc3
 UPSTREAM_VERSION_COMPACT = $(shell echo '$(UPSTREAM_VERSION)' | sed "s/\(.*\..*\)\..*/\1/"
 #LIBRARY_VERSION =  -$(UPSTREAM_VERSION)
 LIBRARY_VERSION = 2

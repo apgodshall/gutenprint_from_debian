@@ -1,1 +1,2 @@
 05_genppdconfig_remove_perlmenu.dpatch
+06_genppdupdate_egrep_stdin_freeze.dpatch

@@ -1,3 +1,14 @@
+gutenprint (4.3.99+cvs20060521-2) unstable; urgency=low
+
+  * debian/rules: Unconditionally set DIALOG when running configure.
+  * src/cups/cups-genppdupdate.in: Don't freeze waiting on stdin when
+    running egrep.  Patch installed as
+    debian/patches/06_genppdupdate_egrep_stdin_freeze.dpatch; thanks to
+    Felix C. Stegerman for identifying the fault and providing the patch
+    (Closes: #368446).
+
+ -- Roger Leigh <rleigh@debian.org>  Mon, 22 May 2006 19:21:50 +0100
+
 gutenprint (4.3.99+cvs20060521-1) unstable; urgency=low
 
   * New upstream release candidate.

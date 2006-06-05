@@ -1,2 +1,3 @@
 05_genppdconfig_remove_perlmenu.dpatch
 06_genppdupdate_egrep_stdin_freeze.dpatch
+07_print_ps_imageable_area_rounding.dpatch

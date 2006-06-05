@@ -1,3 +1,11 @@
+gutenprint (4.3.99+cvs20060521-3) unstable; urgency=low
+
+  * src/main/print-ps.c: Round ImageableArea dimensions towards the centre
+    of the page, and preserve locales recursively.  Patch installed as
+    debian/07_print_ps_imageable_area_rounding.dpatch (Closes: #329027).
+
+ -- Roger Leigh <rleigh@debian.org>  Mon,  5 Jun 2006 10:43:30 +0100
+
 gutenprint (4.3.99+cvs20060521-2) unstable; urgency=low
 
   * debian/rules: Unconditionally set DIALOG when running configure.

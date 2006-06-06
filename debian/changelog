@@ -1,3 +1,11 @@
+gutenprint (4.3.99+cvs20060521-4) unstable; urgency=low
+
+  * src/escputil/escputil.c: When a raw device cannot be opened, display
+    a more informative error message.  Patch installed as
+    debian/patches/08_escputil_raw_device_open.dpatch (Closes: #352106).
+
+ -- Roger Leigh <rleigh@debian.org>  Tue,  6 Jun 2006 21:06:56 +0100
+
 gutenprint (4.3.99+cvs20060521-3) unstable; urgency=low
 
   * src/main/print-ps.c: Round ImageableArea dimensions towards the centre

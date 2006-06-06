@@ -1,0 +1,94 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 08_escputil_raw_device_open.dpatch by  <rleigh@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Fail with an informative error if opening a raw device fails
+
+@DPATCH@
+
+diff -urN gutenprint-4.3.99+cvs20060521.original/src/escputil/escputil.c gutenprint-4.3.99+cvs20060521/src/escputil/escputil.c
+--- gutenprint-4.3.99+cvs20060521.original/src/escputil/escputil.c	2006-04-16 02:01:10.000000000 +0100
++++ gutenprint-4.3.99+cvs20060521/src/escputil/escputil.c	2006-06-06 20:08:53.675580025 +0100
+@@ -424,7 +424,7 @@
+   exit(0);
+ }
+ 
+-void
++static void
+ print_debug_data(const char *buf, size_t count)
+ {
+   int i;
+@@ -737,6 +737,28 @@
+   alarm_interrupt = 1;
+ }
+ 
++static int
++open_raw_device(void)
++{
++  int fd;
++
++  if (!raw_device)
++   {
++      fprintf(stderr, _("Please specify a raw device\n"));
++      exit(1);
++    }
++
++  fd = open(raw_device, O_RDWR, 0666);
++  if (fd == -1)
++    {
++      fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
++              strerror(errno));
++      exit(1);
++    }
++
++  return fd;
++}
++
+ static const stp_printer_t *
+ initialize_printer(int quiet, int fail_if_not_found)
+ {
+@@ -757,13 +779,7 @@
+ 
+   quiet = 0;
+ 
+-  fd = open(raw_device, O_RDWR, 0666);
+-  if (fd == -1)
+-    {
+-      fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
+-              strerror(errno));
+-      exit(1);
+-    }
++  fd = open_raw_device();
+ 
+   if (!printer_model)
+     {
+@@ -1349,13 +1365,7 @@
+ 		      printer_model,
+ 		      printer ? "" : "(Unknown model)"));
+ 
+-  fd = open(raw_device, O_RDWR, 0666);
+-  if (fd == -1)
+-    {
+-      fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
+-              strerror(errno));
+-      exit(1);
+-    }
++  fd = open_raw_device();
+ 
+   if (isnew)
+     {
+@@ -1463,13 +1473,7 @@
+ 	    "Warning! Printer %s is not known; information may be incomplete or incorrect\n",
+ 	    printer_model);
+ 
+-  fd = open(raw_device, O_RDWR, 0666);
+-  if (fd == -1)
+-    {
+-      fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
+-              strerror(errno));
+-      exit(1);
+-    }
++  fd = open_raw_device();
+ 
+   if (isnew)
+     {

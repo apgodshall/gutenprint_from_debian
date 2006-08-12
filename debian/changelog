@@ -1,3 +1,31 @@
+gutenprint (5.0.0-1) unstable; urgency=low
+
+  * New upstream stable release.
+  * debian/compat: Switch to debhelper compatibility level 5.
+  * debian/control.in:
+    - Replace "beta" with "stable" in package descriptions.
+    - Add gutenprint-doc package now that GFDL licensed material with no
+      invariant sections is allowed in main.
+    - Build-Depend on debhelper >= 5.0.0.
+  * debian/copyright: Include full GFDL text.
+  * debian/rules:
+    - Update upstream version; compute from changelog revision number.
+    - Don't compress .pdf and .odt files.
+  * debian/gutenprint-doc.doc-base.in: Use new PDF manual rather than old
+    (removed) HTML user's guide.
+  * debian/gutenprint-doc.install: Install new PDF manual (and ODT source)
+    instead of old (removed) HTML user's guide.
+  * debian/patches: Drop patches applied upstream:
+    - 05_genppdconfig_remove_perlmenu.dpatch
+    - 06_genppdupdate_egrep_stdin_freeze.dpatch
+    - 07_print_ps_imageable_area_rounding.dpatch
+    - 08_escputil_raw_device_open.dpatch
+  * configure.ac: Teach PACKAGE_DATA_DIR about $datarootdir.
+  * doc/Makefile.am: install-data-local: Install files from $(srcdir), to
+    fix VPATH build. 
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 12 Aug 2006 18:31:14 +0100
+
 gutenprint (4.3.99+cvs20060521-4) unstable; urgency=low
 
   * src/escputil/escputil.c: When a raw device cannot be opened, display

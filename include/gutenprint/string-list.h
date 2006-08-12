@@ -1,5 +1,5 @@
 /*
- * "$Id: string-list.h,v 1.1 2004/09/17 18:38:01 rleigh Exp $"
+ * "$Id: string-list.h,v 1.3 2006/07/07 22:49:14 rleigh Exp $"
  *
  *   libgimpprint string list functions.
  *
@@ -96,5 +96,5 @@ stp_string_list_is_present(const stp_string_list_t *list,
 
 #endif /* GUTENPRINT_STRING_LIST_H */
 /*
- * End of "$Id: string-list.h,v 1.1 2004/09/17 18:38:01 rleigh Exp $".
+ * End of "$Id: string-list.h,v 1.3 2006/07/07 22:49:14 rleigh Exp $".
  */

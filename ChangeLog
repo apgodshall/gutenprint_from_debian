@@ -1,3 +1,511 @@
+2006-07-22	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305) (+3 -0)
+		src/main/escp2-driver.c (1.30) (+4 -2)
+		src/main/print-escp2-data.c (1.202) (+79 -79)
+		src/main/print-escp2.c (1.354) (+11 -1)
+		src/main/print-escp2.h (1.105) (+5 -2)
+
+	Fix bottom margin for Epson R800 and R1800.
+
+2006-07-22	<rlk@sourceforge.net>
+
+	Files:	README (1.165) (+1 -2)
+
+	Minor update to README.
+
+2006-07-20	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.72) (+5 -9)
+
+	Another da.po update
+
+2006-07-20	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.71) (+16 -12)
+
+	Updated Danish translation
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	src/gutenprintui/plist.c (1.3) (+3 -3)
+
+	Fix problem with g_strconcat and remove one last Gimp-Print nit.
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	doc/Makefile.am (1.48) (+2 -2)
+
+	Make install-data-local depend on the installed documentation.
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.145) (+2 -3)
+
+	Don't print out install user's manual in config summary
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.144) (+7 -12)
+		doc/developer/Makefile.am (1.19) (+1 -3)
+
+	Remove configure option for user guide
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.304) (+17 -1973)
+		README (1.164) (+12 -306)
+		configure.ac (1.143) (+2 -3)
+		doc/Makefile.am (1.47) (+10 -11)
+		doc/gutenprint-users-manual.odt (1.1) (added)
+		doc/gutenprint-users-manual.pdf (1.1) (added)
+
+	1260142 User documentation needs updating for 5.0.0
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.303) (+2 -1)
+
+	Clean up duplication.
+
+2006-07-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.302) (+19 -4)
+		src/gutenprintui/panel.c (1.9) (+69 -59)
+
+	Fix a problem with image rotation in the GIMP 1.2/Cinepaint plugin.
+
+2006-07-11	<rleigh@sourceforge.net>
+
+	Files:	doc/developer/gutenprint.xml (1.2) (+1 -1)
+
+	doc/developer/gutenprint.xml: Use URI in DOCTYPE in place of absolute
+	filename.  This is much more portable, and XML catalogues are now
+	supported on current systems.
+
+2006-07-08	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/Makefile.am (1.50) (+7 -3)
+
+	1033007 Foomatic XML data generation is locale-dependent
+
+2006-07-07	<rleigh@sourceforge.net>
+
+	Files:	include/gutenprint/string-list.h (1.3) (+4 -4)
+
+	include/gutenprint/string-list.h: The name and text members of the
+	  stp_param_string_t structure should be const for use in static
+	  initialisers.
+
+2006-07-07	<rleigh@sourceforge.net>
+
+	Files:	src/main/print-weave.c (1.65) (+13 -14)
+
+	src/main/print-weave.c: stpi_softweave_t is not "logically const".
+
+2006-07-07	<rleigh@sourceforge.net>
+
+	Files:	include/gutenprint/string-list.h (1.2) (+4 -4)
+		src/main/path.c (1.19) (+3 -3)
+		src/main/print-list.c (1.24) (+2 -2)
+		src/main/sequence.c (1.22) (+2 -2)
+
+	src/main/sequence.c: deconst_sequence is inlined.
+	src/main/print-list.c: deconst_list is inlined.
+	src/main/path.c: Fix the constness of the struct dirent pointers
+	  passed to strcoll.
+	include/gutenprint/string-list.h: The name and text members of the
+	  stp_param_string_t structure should not be const.
+
+2006-07-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.301) (+3 -0)
+		src/main/print-pcl.c (1.144) (+41 -1)
+		src/main/printers.xml (1.146) (+47 -47)
+
+	1518131 Kyocera KM-2530 CUPS+Gutenprint PPD - A4 paper
+
+2006-07-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.300) (+1 -4)
+
+	Remove prerelease wording.
+
+2006-07-05	<rlk@sourceforge.net>
+
+	Files:	doc/5.0-release-plan.txt (1.10) (+37 -8)
+
+	Update on what has been accomplished in 5.0.
+
+2006-07-05	<rlk@sourceforge.net>
+
+	Files:	README (1.163) (+10 -3)
+
+	Clarify development libraries a bit more.
+
+2006-07-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.299) (+3 -0)
+
+	In the GIMP 2.4 and above (forthcoming as of Gutenprint 5.0 release),
+	the enhanced Print plugin will be named "Print with Gutenprint" so as
+	not to collide with the GtkPrint-based plugin bundled with that
+	version of the GIMP.  The Print plugin bundled with GIMP 2.0 and 2.2
+	is based on Gimp-Print 4.2; the Print plugin in this package simply
+	replaces the Print plugin in those versions of the GIMP.
+
+2006-07-04	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.70) (+249 -345)
+
+	Updated da.po
+
+2006-07-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.298) (+42 -28)
+		README (1.162) (+76 -58)
+		configure.ac (1.142) (+36 -11)
+		src/gimp2/Makefile.am (1.7) (+14 -3)
+		src/gimp2/print-gutenprint.c (1.1) (added)
+		src/gimp2/print-print.c (1.1) (added)
+		src/gimp2/print.c (1.8) (+6 -24)
+		src/gimp2/print_gimp.h (1.5) (+14 -1)
+
+	In the GIMP 2.4 and above (forthcoming as of Gutenprint 5.0 release),
+	the enhanced Print plugin will be named "Print with Gutenprint" so as
+	not to collide with the GtkPrint-based plugin bundled with that
+	version of the GIMP.  The Print plugin bundled with GIMP 2.0 and 2.2
+	is based on Gimp-Print 4.2; the Print plugin in this package simply
+	replaces the Print plugin in those versions of the GIMP.
+
+2006-07-04	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.104) (+4 -4)
+		src/ghost/ijsgutenprint.c (1.18) (+3 -3)
+
+	Be a bit more defensive about printing things out.
+
+2006-07-01	<rlk@sourceforge.net>
+
+	Files:	src/ghost/ijsgutenprint.c (1.17) (+2 -2)
+
+	Use safe_get_string_parameter rather than stp_get_string_parameter
+	when calling fprintf.
+
+2006-06-26	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.297) (+13 -9)
+
+	Add note that color laser printers are supported in grayscale only.
+
+2006-06-25	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.103) (+7 -4)
+
+	Another spot we attempted to print a null pointer.
+
+2006-06-25	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.102) (+4 -3)
+
+	Don't attempt to printf a null pointer (not all versions of libc will
+	handle this gracefully).
+
+2006-06-25	<rlk@sourceforge.net>
+
+	Files:	src/main/print-vars.c (1.75) (+9 -3)
+
+	Don't attempt to copy zero bytes from a null pointer.
+
+2006-06-25	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.141) (+3 -3)
+
+	Slight improvement in wording of warning message.
+
+2006-06-22	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.296) (+3 -2)
+		po/hu.po (1.8) (+996 -1676)
+
+	Update Hungarian translation
+
+2006-06-22	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.295) (+10 -5)
+		src/ghost/ijsgutenprint.c (1.16) (+25 -17)
+
+	1501816 ijsgutenprint/foomatic only prints first page
+
+2006-06-04	<rleigh@sourceforge.net>
+
+	Files:	NEWS (1.294) (+367 -8)
+
+	NEWS: Add changes between previous 5.0.0 release candidates.
+
+2006-06-04	<rleigh@sourceforge.net>
+
+	Files:	src/main/print-ps.c (1.87) (+29 -25)
+
+	print-ps.c: The Postscript driver now handles PPD files with non-integer
+	imageable areas correctly in all locales (the PPD files certain HP inkjet
+	printers using the HPIJS driver have non-integer imageable areas for some
+	paper sizes).  In 5.0.0-rc3, this was handled incorrectly in locales that
+	do not use the decimal point (".") for separating fractions from integers.
+
+2006-06-01	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.62) (+3 -3)
+		src/main/print-escp2.c (1.353) (+12 -3)
+
+	Make gray transitions work on R2400
+
+2006-05-31	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.201) (+17 -17)
+
+	Use unidirectional mode by default above 1440x720 on R2400 and above
+	1440x1440 on R800 (yields better smoothness).
+
+2006-05-31	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.99) (+21 -21)
+
+	Improve matte black on R2400.
+
+2006-05-31	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.98) (+22 -22)
+
+	Improve matte black ink on R800.
+
+2006-05-31	<rleigh@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.87) (+27 -23)
+
+	src/escputil/escputil.c: Print a proper error message when a raw device
+	was not specified when needed.
+
+2006-05-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.101) (+14 -6)
+
+	Fix printers without borderless capability.
+
+2006-05-30	<rleigh@sourceforge.net>
+
+	Files:	src/cups/cups-genppdconfig.in (1.13) (+18 -153)
+
+	src/cups/cups-genppdconfig.in: Remove perlmenu support.
+
+2006-05-30	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.100) (+6 -6)
+
+	Use the imageable area to define the margins, not the bounding box
+	from CUPS.
+
+2006-05-30	<rlk@sourceforge.net>
+
+	Files:	src/main/print-ps.c (1.86) (+3 -1)
+
+	Don't disable PPDFile parameter when the PPD file is set.
+
+2006-05-29	<rleigh@sourceforge.net>
+
+	Files:	m4extra/pkg.m4 (1.1) (added)
+
+	m4extra/pkg.m4: Add pkg-config macros.
+
+2006-05-29	<rleigh@sourceforge.net>
+
+	Files:	po/en_GB.po (1.143) (+997 -1691)
+
+	Update British English translation.
+
+2006-05-29	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.37) (+182 -175)
+		po/da.po (1.69) (+344 -248)
+		po/de.po (1.50) (+182 -175)
+		po/el.po (1.51) (+182 -175)
+		po/en_GB.po (1.142) (+181 -174)
+		po/es.po (1.49) (+182 -175)
+		po/fr.po (1.75) (+916 -1395)
+		po/hu.po (1.7) (+181 -174)
+		po/ja.po (1.45) (+182 -175)
+		po/nb.po (1.12) (+182 -175)
+		po/nl.po (1.51) (+182 -175)
+		po/pl.po (1.55) (+182 -175)
+		po/pt.po (1.50) (+182 -175)
+		po/sk.po (1.54) (+182 -175)
+		po/sv.po (1.82) (+361 -254)
+		po/zh_TW.po (1.11) (+181 -174)
+
+	20060528 snapshot
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.293) (+39 -351)
+		README (1.161) (+264 -83)
+		configure.ac (1.140) (+18 -14)
+
+	Start prep for 5.0.0 release
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.145) (+5 -5)
+
+	Reorder some printers.
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	doc/Makefile.am (1.46) (+6 -1)
+
+	Install the FAQ.
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.29) (+23 -4)
+		src/main/print-escp2-data.c (1.200) (+82 -81)
+		src/main/print-escp2.c (1.352) (+116 -45)
+		src/main/print-escp2.h (1.104) (+6 -2)
+
+	1) In the Epson driver, make the cutoff for deciding whether to print
+	   unidirectional vs. bidirectional printer-dependent rather than
+	   always 720 DPI.  Many of the newer printers do just fine printing
+	   bidirectionally even at very high resolutions, and some actually do
+	   better in bidirectional mode.
+
+	2) For determining which quality modes to make available, factor in
+	   the extra passes as well as the horizontal and vertical
+	   resolutions.  This is because some of the newer printers can't
+	   print at higher than 1440 DPI horizontally without slowing down by
+	   about an order of magnitude, so we're offering high quality
+	   (2-pass) and highest quality (4-pass) mode at 1440x2880 DPI.  For
+	   this purpose, 1440x2880 high quality would be treated as equivalent
+	   to 2880x2880 and 1440x2880 highest quality would be treated as
+	   equivalent to 5760x2880.  This allows us to offer "super photo" and
+	   "ultra photo" modes on the R800 and friends.
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/Makefile.am (1.25) (+2 -1)
+
+	Rebuild run-testpattern-2 if it changes.
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.118) (+15 -17)
+		src/escputil/escputil.c (1.86) (+19 -19)
+		src/foomatic/printer_options.c (1.50) (+10 -10)
+		src/ghost/ijsgutenprint.c (1.15) (+3 -3)
+		src/gutenprintui/panel.c (1.8) (+12 -12)
+		src/gutenprintui/ui-utils.c (1.2) (+5 -5)
+		src/gutenprintui2/panel.c (1.11) (+12 -12)
+		src/gutenprintui2/ui-utils.c (1.3) (+5 -5)
+		src/main/dither-main.c (1.52) (+6 -7)
+		src/main/generic-options.c (1.10) (+4 -4)
+		src/main/print-canon.c (1.174) (+7 -7)
+		src/main/print-color.c (1.135) (+5 -5)
+		src/main/print-escp2.c (1.351) (+10 -10)
+		src/main/print-lexmark.c (1.154) (+6 -6)
+		src/main/print-olympus.c (1.59) (+5 -5)
+		src/main/print-pcl.c (1.143) (+6 -6)
+		src/main/print-ps.c (1.85) (+2 -2)
+		src/testpattern/printer_options.c (1.2) (+10 -10)
+
+	Various i18n fixes.
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	po/zh_TW.po (1.10) (+2 -2)
+
+	Fix up name of language
+
+2006-05-28	<rlk@sourceforge.net>
+
+	Files:	po/fr.po (1.74) (+2 -2)
+		po/zh_TW.po (1.9) (+2 -2)
+
+	Fix up name of language
+
+2006-05-27	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.68) (+92 -196)
+
+	Updated Danish translation
+
+2006-05-27	<rlk@sourceforge.net>
+
+	Files:	po/fr.po (1.73) (+2529 -3263)
+
+	Updated French translation from Regis.
+
+2006-05-24	<rlk@sourceforge.net>
+
+	Files:	man/ijsgutenprint.1.in (1.4) (+14 -207)
+
+	Remove all Gutenprint options from the man page.
+
+2006-05-24	<rleigh@sourceforge.net>
+
+	Files:	man/ijsgutenprint.1.in (1.3) (+17 -7)
+
+	ijsgutenprint.1.in: Document that ijsgutenprint must be invoked via
+	Foomatic, and that the options documented here are not complete.
+
+2006-05-24	<rlk@sourceforge.net>
+
+	Files:	po/sv.po (1.81) (+1633 -2132)
+
+	Updated Swedish translation
+
+2006-05-22	<rleigh@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.25) (+9 -7)
+
+	cups-genppdupdate.in: Make sure egrep always has input files, otherwise
+	it will freeze waiting on stdin.
+
+2006-05-22	<tillkamppeter@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.60) (+21 -5)
+
+	Assigned order parameter to the options in the Foomatic data. This way
+	the options can be presented in a more user-friendly order, especially
+	inside each group non-numerical options come first, then each
+	numerical option preceeded by its "Enable" option (foomatic-db-engine
+	CVS of May 22 2006 needed that order parameter is taken into account
+	in PPD build).
+
+2006-05-21	<rlk@sourceforge.net>
+
+	Files:	README (1.160) (+721 -450)
+
+	First draft of Gutenprint 5.0 README.
+
+2006-05-18	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.36) (+42 -27)
+		po/da.po (1.67) (+42 -27)
+		po/de.po (1.49) (+42 -27)
+		po/el.po (1.50) (+42 -27)
+		po/en_GB.po (1.141) (+42 -27)
+		po/es.po (1.48) (+42 -27)
+		po/fr.po (1.72) (+42 -27)
+		po/hu.po (1.6) (+42 -27)
+		po/ja.po (1.44) (+42 -27)
+		po/nb.po (1.11) (+42 -27)
+		po/nl.po (1.50) (+42 -27)
+		po/pl.po (1.54) (+42 -27)
+		po/pt.po (1.49) (+42 -27)
+		po/sk.po (1.53) (+42 -27)
+		po/sv.po (1.80) (+43 -28)
+		po/zh_TW.po (1.8) (+42 -27)
+
+	Gutenprint 5.0.0-rc3 release
+
 2006-05-15	<rlk@sourceforge.net>
 
 	Files:	po/fr.po (1.71) (+17 -17)

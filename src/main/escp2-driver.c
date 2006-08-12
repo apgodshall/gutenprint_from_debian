@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-driver.c,v 1.28 2006/04/30 21:29:52 rlk Exp $"
+ * "$Id: escp2-driver.c,v 1.30 2006/07/22 20:28:13 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -113,6 +113,7 @@ print_debug_params(stp_vars_t *v)
   print_remote_int_param(v, "Page_width", pd->page_width);
   print_remote_int_param(v, "Page_height", pd->page_height);
   print_remote_int_param(v, "Page_true_height", pd->page_true_height);
+  print_remote_int_param(v, "Page_extra_height", pd->page_extra_height);
   print_remote_int_param(v, "Image_left", pd->image_left);
   print_remote_int_param(v, "Image_top", pd->image_top);
   print_remote_int_param(v, "Image_width", pd->image_width);
@@ -340,10 +341,29 @@ escp2_set_printhead_speed(stp_vars_t *v)
     unidirectional = 1;
   else if (direction && strcmp(direction, "Bidirectional") == 0)
     unidirectional = 0;
-  else if (pd->res->hres >= 720 && pd->res->vres >= 720)
-    unidirectional = 1;
+  else if (pd->res->printed_hres * pd->res->printed_vres *
+	   pd->res->vertical_passes >= pd->bidirectional_upper_limit)
+    {
+      stp_dprintf(STP_DBG_ESCP2, v,
+		  "Setting unidirectional: hres %d vres %d passes %d total %d limit %d\n",
+		  pd->res->printed_hres, pd->res->printed_vres,
+		  pd->res->vertical_passes,
+		  (pd->res->printed_hres * pd->res->printed_vres *
+		   pd->res->vertical_passes),
+		  pd->bidirectional_upper_limit);
+      unidirectional = 1;
+    }
   else
-    unidirectional = 0;
+    {
+      stp_dprintf(STP_DBG_ESCP2, v,
+		  "Setting bidirectional: hres %d vres %d passes %d total %d limit %d\n",
+		  pd->res->printed_hres, pd->res->printed_vres,
+		  pd->res->vertical_passes,
+		  (pd->res->printed_hres * pd->res->printed_vres *
+		   pd->res->vertical_passes),
+		  pd->bidirectional_upper_limit);
+      unidirectional = 0;
+    }
   if (unidirectional)
     {
       stp_send_command(v, "\033U", "c", 1);
@@ -397,7 +417,8 @@ escp2_set_form_factor(stp_vars_t *v)
   if (pd->advanced_command_set)
     {
       int w = pd->page_width * pd->page_management_units / 72;
-      int h = pd->page_true_height * pd->page_management_units / 72;
+      int h = (pd->page_true_height + pd->page_extra_height) *
+	pd->page_management_units / 72;
 
       if (stp_get_boolean_parameter(v, "FullBleed"))
 	/* Make the page 160/360" wider for full bleed printing. */

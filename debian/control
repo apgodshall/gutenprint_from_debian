@@ -37,7 +37,6 @@ Package: cupsys-driver-gutenprint
 Architecture: any
 Section: graphics
 Depends: ${shlibs:Depends}, perl (>= 5.8.0), cupsys (>= 1.1.23) | cups (>= 1.1.23)
-Recommends: gnome-gv | postscript-viewer
 Suggests: gutenprint-doc (>= ${Source-Version}), gutenprint-locales (>= ${Source-Version})
 Replaces: cupsys-driver-gimpprint, cupsys-driver-gimpprint-data
 Description: printer drivers for CUPS

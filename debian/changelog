@@ -1,3 +1,11 @@
+gutenprint (5.0.0-2) unstable; urgency=low
+
+  * debian/control.in: cupsys-driver-gutenprint does not recommend
+    gnome-gv | postscript-viewer (Closes: #384232).  It is doubtful this
+    was of any useful value.  Thanks to Christian Hammers.
+
+ -- Roger Leigh <rleigh@debian.org>  Tue, 22 Aug 2006 23:00:04 +0100
+
 gutenprint (5.0.0-1) unstable; urgency=low
 
   * New upstream stable release.

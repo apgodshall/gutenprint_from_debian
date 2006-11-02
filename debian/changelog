@@ -1,3 +1,17 @@
+gutenprint (5.0.0-3) unstable; urgency=low
+
+  * cupsys-driver-gutenprint: Move PPD files from
+    /usr/share/cups/model/gutenprint/5.0 to /usr/share/ppd/gutenprint/5.0, to
+    comply with the Debian PPD File Structure Specification
+    (http://wiki.debian.org/PpdFileStructureSpecification).  The postinst and
+    postrm scripts have been updated to remove the old PPDs, generate new PPDs
+    in the new location, and to upgrade PPDs using the new location.
+    Closes: #396642.
+  * debian/control: cupsys-driver-gutenprint Depends upon cupsys or cups >=
+    1.2.5, so CUPS is guaranteed to find the PPDs in the new location.
+
+ -- Roger Leigh <rleigh@debian.org>  Thu,  2 Nov 2006 22:42:04 +0000
+
 gutenprint (5.0.0-2) unstable; urgency=low
 
   * debian/control.in: cupsys-driver-gutenprint does not recommend

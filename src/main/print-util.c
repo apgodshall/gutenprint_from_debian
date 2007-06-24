@@ -1,5 +1,5 @@
 /*
- * "$Id: print-util.c,v 1.108 2004/09/17 18:38:26 rleigh Exp $"
+ * "$Id: print-util.c,v 1.109.4.3 2007/06/04 00:25:16 rlk Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -172,12 +172,19 @@ stp_puts(const char *s, const stp_vars_t *v)
 }
 
 void
+stp_putraw(const stp_raw_t *r, const stp_vars_t *v)
+{
+  (stp_get_outfunc(v))((void *)(stp_get_outdata(v)), r->data, r->bytes);
+}
+
+void
 stp_send_command(const stp_vars_t *v, const char *command,
 		 const char *format, ...)
 {
   int i = 0;
   char fchar;
   const char *out_str;
+  const stp_raw_t *out_raw;
   unsigned short byte_count = 0;
   va_list args;
 
@@ -207,6 +214,10 @@ stp_send_command(const stp_vars_t *v, const char *command,
 	    case 'L':
 	      (void) va_arg(args, unsigned int);
 	      byte_count += 4;
+	      break;
+	    case 'r':
+	      out_raw = va_arg(args, const stp_raw_t *);
+	      byte_count += out_raw->bytes;
 	      break;
 	    case 's':
 	      out_str = va_arg(args, const char *);
@@ -256,6 +267,9 @@ stp_send_command(const stp_vars_t *v, const char *command,
 	  break;
 	case 's':
 	  stp_puts(va_arg(args, const char *), v);
+	  break;
+	case 'r':
+	  stp_putraw(va_arg(args, const stp_raw_t *), v);
 	  break;
 	}
       format++;
@@ -445,9 +459,15 @@ stp_init(void)
     {
       /* Things that are only initialised once */
       /* Set up gettext */
+#ifdef HAVE_LOCALE_H
+      char *locale = stp_strdup(setlocale (LC_ALL, ""));
+#endif
 #ifdef ENABLE_NLS
-      setlocale (LC_ALL, "");
       bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+#endif
+#ifdef HAVE_LOCALE_H
+      setlocale(LC_ALL, locale);
+      stp_free(locale);
 #endif
       stpi_init_debug();
       stp_xml_preinit();
@@ -549,7 +569,8 @@ stp_read_and_compose_curves(const char *s1, const char *s2,
     }
   else if (t1)
     {
-      stp_curve_destroy(t2);
+      if(t2)
+        stp_curve_destroy(t2);
       return t1;
     }
   else
@@ -562,6 +583,8 @@ stp_merge_printvars(stp_vars_t *user, const stp_vars_t *print)
   int i;
   stp_parameter_list_t params = stp_get_parameter_list(print);
   int count = stp_parameter_list_count(params);
+  stp_deprintf(STP_DBG_VARS, "Merging printvars from %s\n",
+	       stp_get_driver(print));
   for (i = 0; i < count; i++)
     {
       const stp_parameter_t *p = stp_parameter_list_param(params, i);
@@ -595,6 +618,7 @@ stp_merge_printvars(stp_vars_t *user, const stp_vars_t *print)
 	  stp_parameter_description_destroy(&desc);
 	}
     }
+  stp_deprintf(STP_DBG_VARS, "Exiting merge printvars\n");
   stp_parameter_list_destroy(params);
 }
 

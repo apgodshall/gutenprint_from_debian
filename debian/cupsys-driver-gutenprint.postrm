@@ -18,13 +18,19 @@ set -e
 
 if [ "$1" = remove ]; then
     # Remove generated PPDs
-    rm -rf /usr/share/ppd/gutenprint
+    # (note: user-generated now we no longer generate them automatically)
+    rm -rf /usr/share/cups/model/gutenprint/5.0
+    rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
+    rm -rf /usr/share/ppd/gutenprint/5.0
+    rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
     [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 fi
 
 if [ "$1" = purge ]; then
-    # Remove /etc/cups if it is empty
-    rmdir --ignore-fail-on-non-empty /etc/cups
+    # Remove directories if empty
+    rmdir /etc/cups 2>/dev/null || true
+    rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
+    rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
 fi
 
 # dh_installdeb will replace this with shell code automatically

@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-papers.c,v 1.99 2006/05/31 23:15:22 rlk Exp $"
+ * "$Id: escp2-papers.c,v 1.99.8.2 2007/05/29 01:47:28 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -159,6 +159,53 @@ static const char photo3_hue_adj[] =
 /* C */  "0.00 -.01 -.03 -.06 -.10 -.15 -.20 -.25 "  /* B */
 /* B */  "-.28 -.30 -.34 -.35 -.35 -.34 -.33 -.33 "  /* M */
 /* M */  "-.36 -.40 -.44 -.48 -.50 -.45 -.40 -.30 "  /* R */
+/* R */  "-.12 -.07 -.04 -.02 0.00 0.00 0.00 0.00 "  /* Y */
+/* Y */  "0.00 -.00 -.00 -.00 -.02 -.04 -.08 -.13 "  /* G */
+/* G */  "-.18 -.18 -.19 -.16 -.13 -.10 -.07 -.03 "  /* C */
+"</sequence>\n"
+"</curve>\n"
+"</gutenprint>\n";
+
+
+
+static const char claria_sat_adj[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+"<gutenprint>\n"
+"<curve wrap=\"wrap\" type=\"linear\" gamma=\"0\">\n"
+"<sequence count=\"48\" lower-bound=\"0\" upper-bound=\"4\">\n"
+/* C */  "1.00 1.05 1.15 1.25 1.35 1.45 1.50 1.50 "  /* B */
+/* B */  "1.50 1.50 1.50 1.50 1.50 1.50 1.50 1.50 "  /* M */
+/* M */  "1.50 1.40 1.30 1.20 1.10 1.00 1.00 1.00 "  /* R */
+/* R */  "1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 "  /* Y */
+/* Y */  "1.00 1.10 1.30 1.55 1.80 1.95 2.00 2.00 "  /* G */
+/* G */  "2.00 2.00 2.00 1.95 1.80 1.55 1.30 1.10 "  /* C */
+"</sequence>\n"
+"</curve>\n"
+"</gutenprint>\n";
+
+static const char claria_lum_adj[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+"<gutenprint>\n"
+"<curve wrap=\"wrap\" type=\"linear\" gamma=\"0\">\n"
+"<sequence count=\"48\" lower-bound=\"0\" upper-bound=\"4\">\n"
+/* C */  "0.66 0.67 0.69 0.73 0.77 0.83 0.87 0.89 "  /* B */
+/* B */  "0.91 0.88 0.84 0.78 0.78 0.80 0.82 0.85 "  /* M */
+/* M */  "0.87 0.90 0.94 0.97 1.00 1.00 1.00 1.00 "  /* R */
+/* R */  "1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 "  /* Y */
+/* Y */  "1.00 1.00 0.99 0.98 0.96 0.94 0.92 0.88 "  /* G */
+/* G */  "0.84 0.72 0.69 0.67 0.66 0.66 0.66 0.66 "  /* C */
+"</sequence>\n"
+"</curve>\n"
+"</gutenprint>\n";
+
+static const char claria_hue_adj[] =
+"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+"<gutenprint>\n"
+"<curve wrap=\"wrap\" type=\"linear\" gamma=\"0\">\n"
+"<sequence count=\"48\" lower-bound=\"-6\" upper-bound=\"6\">\n"
+/* C */  "0.00 -.01 -.03 -.06 -.10 -.15 -.20 -.25 "  /* B */
+/* B */  "-.30 -.35 -.38 -.40 -.42 -.46 -.49 -.52 "  /* M */
+/* M */  "-.55 -.57 -.57 -.55 -.52 -.48 -.40 -.30 "  /* R */
 /* R */  "-.12 -.07 -.04 -.02 0.00 0.00 0.00 0.00 "  /* Y */
 /* Y */  "0.00 -.00 -.00 -.00 -.02 -.04 -.08 -.13 "  /* G */
 /* G */  "-.18 -.18 -.19 -.16 -.13 -.10 -.07 -.03 "  /* C */
@@ -531,20 +578,20 @@ static const char r800_glossy_hue_adj[] =
 "</curve>\n"
 "</gutenprint>\n";
 
-#define DECLARE_PAPERS(name)				\
-const paperlist_t stpi_escp2_##name##_paper_list =	\
-{							\
-  #name,						\
-  sizeof(name##_papers) / sizeof(paper_t),		\
-  name##_papers						\
+#define DECLARE_PAPERS(name)			\
+static const paperlist_t name##_paper_list =	\
+{						\
+  #name,					\
+  sizeof(name##_papers) / sizeof(paper_t),	\
+  name##_papers					\
 }
 
-#define DECLARE_PAPER_ADJUSTMENTS(name)					  \
-const paper_adjustment_list_t stpi_escp2_##name##_paper_adjustment_list = \
-{									  \
-  #name,								  \
-  sizeof(name##_adjustments) / sizeof(paper_adjustment_t),		  \
-  name##_adjustments							  \
+#define DECLARE_PAPER_ADJUSTMENTS(name)					\
+static const paper_adjustment_list_t name##_paper_adjustment_list =	\
+{									\
+  #name,								\
+  sizeof(name##_adjustments) / sizeof(paper_adjustment_t),		\
+  name##_adjustments							\
 }
 
 static const paper_adjustment_t standard_adjustments[] =
@@ -722,6 +769,50 @@ static const paper_adjustment_t photo3_adjustments[] =
 };
 
 DECLARE_PAPER_ADJUSTMENTS(photo3);
+
+static const paper_adjustment_t claria_adjustments[] =
+{
+  { "Plain",        0.540, .25, 0.75, .1, .5, 1, .7, .7, 1, 1, 1.0,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "PlainFast",    0.540, .25, 0.75, .1, .5, 1, .7, .7, 1, 1, 1.0,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Postcard",     0.692, .25, 0.5, .1, .5, 1, .7, .7, 1, 1, 1.0,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "GlossyFilm",   0.833, .25, 0.75, .2, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Transparency", 0.833, .25, 0.75, .2, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Envelope",     0.540, .25, 0.75, .1, .5, 1, .7, .7, 1, 1, 1.0,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "BackFilm",     0.833, .25, 0.75, .2, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Matte",        0.833, .25, 0.6, .15, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "MatteHeavy",   0.833, .25, 0.5, .25, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Inkjet",       0.709, .25, 0.75, .15, .75, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Coated",       0.833, .25, 0.5, .25, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Photo",        0.833, .25, 0.5, .25, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "GlossyPhoto",  0.75, .25, 0.3, .25, .999, 1, .7, .7, 1, 1, 0.92,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Semigloss",    0.75, .25, 0.3, .25, .999, 1, .7, .7, 1, 1, 0.92,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Luster",       0.75, .25, 0.3, .25, .999, 1, .7, .7, 1, 1, 0.92,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "GlossyPaper",  0.833, .25, 0.75, .2, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Ilford",       0.833, .25, 0.75, .2, .999, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj  },
+  { "ColorLife",    0.833, .25, 0.75, .2, .9, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+  { "Other",        0.540, .25, 0.5, .1, .5, 1, .7, .7, 1, 1, 1,
+    claria_hue_adj, claria_lum_adj, claria_sat_adj },
+};
+
+DECLARE_PAPER_ADJUSTMENTS(claria);
 
 static const paper_adjustment_t sp960_adjustments[] =
 {
@@ -1440,3 +1531,471 @@ static const paper_t picturemate_papers[] =
 };
 
 DECLARE_PAPERS(picturemate);
+
+typedef struct
+{
+  const char *name;
+  const paperlist_t *paper_list;
+} paperl_t;
+
+static const paperl_t the_papers[] =
+{
+  { "standard", &standard_paper_list },
+  { "durabrite", &durabrite_paper_list },
+  { "durabrite2", &durabrite2_paper_list },
+  { "ultrachrome", &ultrachrome_paper_list },
+  { "ultrachrome_k3", &ultrachrome_k3_paper_list },
+  { "r800", &r800_paper_list },
+  { "picturemate", &picturemate_paper_list },
+};
+
+const paperlist_t *
+stpi_escp2_get_paperlist_named(const char *n)
+{
+  int i;
+  if (n)
+    for (i = 0; i < sizeof(the_papers) / sizeof(paperl_t); i++)
+      {
+	if (strcmp(n, the_papers[i].name) == 0)
+	  return the_papers[i].paper_list;
+      }
+  return NULL;
+}
+
+typedef struct
+{
+  const char *name;
+  const paper_adjustment_list_t *paper_list;
+} paperadj_t;
+
+static const paperadj_t the_adjustments[] =
+{
+  { "standard", &standard_paper_adjustment_list },
+  { "durabrite", &durabrite_paper_adjustment_list },
+  { "durabrite2", &durabrite2_paper_adjustment_list },
+  { "photo", &photo_paper_adjustment_list },
+  { "photo2", &photo2_paper_adjustment_list },
+  { "photo3", &photo3_paper_adjustment_list },
+  { "sp960", &sp960_paper_adjustment_list },
+  { "ultrachrome_photo", &ultrachrome_photo_paper_adjustment_list },
+  { "ultrachrome_matte", &ultrachrome_matte_paper_adjustment_list },
+  { "ultrachrome_k3_photo", &ultrachrome_k3_photo_paper_adjustment_list },
+  { "ultrachrome_k3_matte", &ultrachrome_k3_matte_paper_adjustment_list },
+  { "r800_photo", &r800_photo_paper_adjustment_list },
+  { "r800_matte", &r800_matte_paper_adjustment_list },
+  { "picturemate", &picturemate_paper_adjustment_list },
+  { "claria", &claria_paper_adjustment_list },
+};
+
+const paper_adjustment_list_t *
+stpi_escp2_get_paper_adjustment_list_named(const char *n)
+{
+  int i;
+  if (n)
+    for (i = 0; i < sizeof(the_adjustments) / sizeof(paperadj_t); i++)
+      {
+	if (strcmp(n, the_adjustments[i].name) == 0)
+	  return the_adjustments[i].paper_list;
+      }
+  return NULL;
+}
+
+
+#define DECLARE_INPUT_SLOT(name)				\
+static const input_slot_list_t name##_input_slot_list =		\
+{								\
+  #name,							\
+  name##_input_slots,						\
+  sizeof(name##_input_slots) / sizeof(const input_slot_t),	\
+}
+
+static const input_slot_t standard_roll_feed_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 16, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Roll",
+    N_("Roll Feed"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 16, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001" },
+    { 6, "IR\002\000\000\002" }
+  }
+};
+
+DECLARE_INPUT_SLOT(standard_roll_feed);
+
+static const input_slot_t cutter_roll_feed_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 16, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "RollCutPage",
+    N_("Roll Feed (cut each page)"),
+    0,
+    1,
+    ROLL_FEED_CUT_ALL,
+    { 16, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001" },
+    { 6, "IR\002\000\000\002" }
+  },
+  {
+    "RollCutNone",
+    N_("Roll Feed (do not cut)"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 16, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001" },
+    { 6, "IR\002\000\000\002" }
+  }
+};
+
+DECLARE_INPUT_SLOT(cutter_roll_feed);
+
+static const input_slot_t cd_cutter_roll_feed_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Manual",
+    N_("Manual Feed"),
+    0,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "CD",
+    N_("Print to CD"),
+    1,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "RollCutPage",
+    N_("Roll Feed (cut each page)"),
+    0,
+    1,
+    ROLL_FEED_CUT_ALL,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\002" }
+  },
+  {
+    "RollCutNone",
+    N_("Roll Feed (do not cut)"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\002" }
+  }
+};
+
+DECLARE_INPUT_SLOT(cd_cutter_roll_feed);
+
+static const input_slot_t cd_roll_feed_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Manual",
+    N_("Manual Feed"),
+    0,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "CD",
+    N_("Print to CD"),
+    1,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Roll",
+    N_("Roll Feed"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\002" }
+  }
+};
+
+DECLARE_INPUT_SLOT(cd_roll_feed);
+
+static const input_slot_t r2400_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Velvet",
+    N_("Manual Sheet Guide"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\003\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Matte",
+    N_("Manual Feed (Front)"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\002\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Roll",
+    N_("Roll Feed"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001PP\003\000\000\003\001" },
+    { 6, "IR\002\000\000\002" }
+  }
+};
+
+DECLARE_INPUT_SLOT(r2400);
+
+static const input_slot_t r1800_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\377" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Velvet",
+    N_("Manual Sheet Guide"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\003\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Matte",
+    N_("Manual Feed (Front)"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\002\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Roll",
+    N_("Roll Feed"),
+    0,
+    1,
+    ROLL_FEED_DONT_EJECT,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\001PP\003\000\000\003\001" },
+    { 6, "IR\002\000\000\002" }
+  },
+  {
+    "CD",
+    N_("Print to CD"),
+    1,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+};
+
+DECLARE_INPUT_SLOT(r1800);
+
+static const input_slot_t rx700_input_slots[] =
+{
+  {
+    "Rear",
+    N_("Rear Tray"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "Front",
+    N_("Front Tray"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\001\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "CD",
+    N_("Print to CD"),
+    1,
+    0,
+    0,
+    { 36, "PM\002\000\000\000IR\002\000\000\001EX\006\000\000\000\000\000\005\000FP\003\000\000\000\000PP\003\000\000\002\001" },
+    { 6, "IR\002\000\000\000"}
+  },
+  {
+    "PhotoBoard",
+    N_("Photo Board"),
+    0,
+    0,
+    0,
+    { 23, "IR\002\000\000\001EX\006\000\000\000\000\000\005\000PP\003\000\000\002\000" },
+    { 6, "IR\002\000\000\000"}
+  },
+};
+
+DECLARE_INPUT_SLOT(rx700);
+
+static const input_slot_t pro_roll_feed_input_slots[] =
+{
+  {
+    "Standard",
+    N_("Standard"),
+    0,
+    0,
+    0,
+    { 7, "PP\003\000\000\002\000" },
+    { 0, "" }
+  },
+  {
+    "Roll",
+    N_("Roll Feed"),
+    0,
+    1,
+    0,
+    { 7, "PP\003\000\000\003\000" },
+    { 0, "" }
+  }
+};
+
+DECLARE_INPUT_SLOT(pro_roll_feed);
+
+static const input_slot_t spro5000_input_slots[] =
+{
+  {
+    "CutSheet1",
+    N_("Cut Sheet Bin 1"),
+    0,
+    0,
+    0,
+    { 7, "PP\003\000\000\001\001" },
+    { 0, "" }
+  },
+  {
+    "CutSheet2",
+    N_("Cut Sheet Bin 2"),
+    0,
+    0,
+    0,
+    { 7, "PP\003\000\000\002\001" },
+    { 0, "" }
+  },
+  {
+    "CutSheetAuto",
+    N_("Cut Sheet Autoselect"),
+    0,
+    0,
+    0,
+    { 7, "PP\003\000\000\001\377" },
+    { 0, "" }
+  },
+  {
+    "ManualSelect",
+    N_("Manual Selection"),
+    0,
+    0,
+    0,
+    { 7, "PP\003\000\000\002\001" },
+    { 0, "" }
+  }
+};
+
+DECLARE_INPUT_SLOT(spro5000);
+
+static const input_slot_list_t default_input_slot_list =
+{
+  "Standard",
+  NULL,
+  0,
+};
+
+typedef struct
+{
+  const char *name;
+  const input_slot_list_t *input_slots;
+} inslot_t;
+
+static const inslot_t the_slots[] =
+{
+  { "cd_cutter_roll_feed", &cd_cutter_roll_feed_input_slot_list },
+  { "cd_roll_feed", &cd_roll_feed_input_slot_list },
+  { "cutter_roll_feed", &cutter_roll_feed_input_slot_list },
+  { "default", &default_input_slot_list },
+  { "pro_roll_feed", &pro_roll_feed_input_slot_list },
+  { "r1800", &r1800_input_slot_list },
+  { "r2400", &r2400_input_slot_list },
+  { "rx700", &rx700_input_slot_list },
+  { "spro5000", &spro5000_input_slot_list },
+  { "standard_roll_feed", &standard_roll_feed_input_slot_list },
+};
+
+const input_slot_list_t *
+stpi_escp2_get_input_slot_list_named(const char *n)
+{
+  int i;
+  if (n)
+    for (i = 0; i < sizeof(the_slots) / sizeof(inslot_t); i++)
+      {
+	if (strcmp(n, the_slots[i].name) == 0)
+	  return the_slots[i].input_slots;
+      }
+  return NULL;
+}

@@ -46,18 +46,17 @@ subdir = include/gutenprintui
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
-	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
-	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
+	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
+	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-depcomp =
-am__depfiles_maybe =
 SOURCES =
 DIST_SOURCES =
 am__pkginclude_HEADERS_DIST = gutenprintui.h
@@ -76,13 +75,18 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 pkgincludedir = $(includedir)/gutenprintui
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
+AMDEP_FALSE = @AMDEP_FALSE@
+AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_CUPS_1_2_FALSE = @BUILD_CUPS_1_2_FALSE@
+BUILD_CUPS_1_2_TRUE = @BUILD_CUPS_1_2_TRUE@
 BUILD_CUPS_FALSE = @BUILD_CUPS_FALSE@
+BUILD_CUPS_PPDS = @BUILD_CUPS_PPDS@
 BUILD_CUPS_PPDS_FALSE = @BUILD_CUPS_PPDS_FALSE@
 BUILD_CUPS_PPDS_TRUE = @BUILD_CUPS_PPDS_TRUE@
 BUILD_CUPS_TRUE = @BUILD_CUPS_TRUE@
@@ -108,6 +112,8 @@ BUILD_LIBGUTENPRINTUI_FALSE = @BUILD_LIBGUTENPRINTUI_FALSE@
 BUILD_LIBGUTENPRINTUI_TRUE = @BUILD_LIBGUTENPRINTUI_TRUE@
 BUILD_MODULES_FALSE = @BUILD_MODULES_FALSE@
 BUILD_MODULES_TRUE = @BUILD_MODULES_TRUE@
+BUILD_SIMPLIFIED_CUPS_PPDS_FALSE = @BUILD_SIMPLIFIED_CUPS_PPDS_FALSE@
+BUILD_SIMPLIFIED_CUPS_PPDS_TRUE = @BUILD_SIMPLIFIED_CUPS_PPDS_TRUE@
 BUILD_TESTPATTERN_FALSE = @BUILD_TESTPATTERN_FALSE@
 BUILD_TESTPATTERN_TRUE = @BUILD_TESTPATTERN_TRUE@
 BUILD_TEST_FALSE = @BUILD_TEST_FALSE@
@@ -115,6 +121,7 @@ BUILD_TEST_TRUE = @BUILD_TEST_TRUE@
 BUILD_TRANSLATED_CUPS_PPDS_FALSE = @BUILD_TRANSLATED_CUPS_PPDS_FALSE@
 BUILD_TRANSLATED_CUPS_PPDS_TRUE = @BUILD_TRANSLATED_CUPS_PPDS_TRUE@
 CC = @CC@
+CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CONVERT = @CONVERT@
 CPP = @CPP@
@@ -127,12 +134,14 @@ CUPS_PPDS_AT_TOP_LEVEL_TRUE = @CUPS_PPDS_AT_TOP_LEVEL_TRUE@
 CUPS_PPD_PS_LEVEL = @CUPS_PPD_PS_LEVEL@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DB2HTML = @DB2HTML@
 DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
+DEPDIR = @DEPDIR@
 DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DVIPDF = @DVIPDF@
@@ -267,7 +276,13 @@ YFLAGS = @YFLAGS@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
+am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
+am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
+am__include = @am__include@
 am__leading_dot = @am__leading_dot@
+am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
@@ -340,9 +355,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  --ignore-deps include/gutenprintui/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  include/gutenprintui/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  --ignore-deps include/gutenprintui/Makefile
+	  $(AUTOMAKE) --gnu  include/gutenprintui/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

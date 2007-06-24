@@ -32,7 +32,7 @@
 /* Define to 1 if GCC special attributes are supported */
 #undef HAVE_GCC_ATTRIBUTES
 
-#ifndef HAVE_GCC_ATTRIBUTES
+#if !defined(HAVE_GCC_ATTRIBUTES) && !defined(__attribute__)
 /* This should really be a C99 anonymous variadic macro. */
 #define __attribute__(attr)
 #endif

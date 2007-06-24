@@ -1,3 +1,908 @@
+2007-06-17	<rlk@sourceforge.net>
+
+	Files:	doc/gutenprint.dox.in (1.4.18.1) (+263 -84)
+
+	Update doxygen input
+
+2007-06-17	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305.6.8) (+1 -1)
+
+	Note that there "may be" issues with support for newer Canon
+	printers.
+
+2007-06-17	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.4.4.3) (+0 -10)
+		src/main/canon-printers.h (1.13.4.3) (+6 -6)
+		src/main/printers.xml (1.157.4.6) (+9 -2)
+
+	fix printing of black ink for the iP4300
+
+2007-06-10	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.157.4.5) (+11 -11)
+
+	A number of Epson R-series printers do borderless better with the
+	RX400 settings than with the R300 settings.
+
+2007-06-04	<rlk@sourceforge.net>
+
+	Files:	src/main/print-util.c (1.109.4.3) (+2 -2)
+
+	Fix an overly enthusiastic conversion from ENABLE_NLS to HAVE_LOCALE_H
+
+2007-05-29	<rlk@sourceforge.net>
+
+	Files:	AUTHORS (1.21.10.2) (+0 -1)
+		NEWS (1.305.6.7) (+84 -22)
+		configure.ac (1.151.2.2) (+6 -5)
+		src/cups/Makefile.am (1.87.8.2) (+3 -3)
+		src/cups/cups-genppdconfig.in (1.13.8.1) (+2 -2)
+		src/cups/cups-genppdupdate.in (1.25.8.2) (+102 -48)
+		src/cups/genppd.c (1.119.2.3) (+6 -5)
+		src/escputil/escputil.c (1.87.8.1) (+2 -2)
+		src/foomatic/foomatic-generator.in (1.60.8.2) (+32 -28)
+		src/foomatic/foomatic-printermap (1.122.4.3) (+31 -1)
+		src/foomatic/printer_margins.c (1.17.8.2) (+9 -9)
+		src/foomatic/printer_options.c (1.50.8.2) (+135 -88)
+		src/gutenprintui2/panel.c (1.11.8.2) (+5 -4)
+		src/gutenprintui2/plist.c (1.6.10.3) (+41 -13)
+		src/main/escp2-channels.c (1.62.8.2) (+211 -1)
+		src/main/escp2-inks.c (1.46.10.2) (+87 -1)
+		src/main/escp2-papers.c (1.99.8.2) (+93 -1)
+		src/main/escp2-resolutions.c (1.33.8.2) (+85 -43)
+		src/main/print-canon.c (1.190.2.3) (+2 -2)
+		src/main/print-color.c (1.135.8.1) (+3 -1)
+		src/main/print-escp2-data.c (1.202.6.2) (+91 -4)
+		src/main/print-escp2.c (1.355.2.2) (+54 -23)
+		src/main/print-escp2.h (1.105.6.2) (+4 -2)
+		src/main/print-ps.c (1.87.8.1) (+136 -41)
+		src/main/print-util.c (1.109.4.2) (+12 -3)
+		src/main/print-vars.c (1.75.8.1) (+196 -119)
+		src/main/printers.c (1.79.2.1) (+46 -12)
+		src/main/printers.xml (1.157.4.4) (+44 -10)
+		src/main/xml.c (1.33.18.1) (+17 -10)
+		src/testpattern/testpatterny.y (1.26.18.2) (+2 -2)
+		test/parse-escp2 (1.11.8.2) (+22 -10)
+		test/pixma_parse.c (1.8.2.3) (+75 -8)
+		test/pixma_parse.h (1.3.2.3) (+9 -1)
+
+	Merge changes from 5.1.1 and 5.1.2
+
+2007-05-20	<rlk@sourceforge.net>
+
+	Files:	src/main/ppd.c (1.3) (+8 -8)
+
+	Fix handling of locale.
+
+	Remove unnecessary and inappropriate copyright notice from Postsript output.
+
+	Use stp_strdup consistently.
+
+2007-05-13	<rlk@sourceforge.net>
+
+	Files:	doc/gutenprint-users-manual.odt (1.1.6.2) (+284 -303)
+		doc/gutenprint-users-manual.pdf (1.1.6.1) (+5390 -7465)
+		po/cs.po (1.38.4.2) (+359 -371)
+		po/da.po (1.73.4.2) (+348 -362)
+		po/de.po (1.51.4.2) (+660 -674)
+		po/el.po (1.52.4.2) (+722 -733)
+		po/en_GB.po (1.144.4.2) (+348 -362)
+		po/es.po (1.50.4.2) (+761 -773)
+		po/fr.po (1.76.4.2) (+774 -788)
+		po/hu.po (1.9.4.2) (+349 -363)
+		po/ja.po (1.46.4.2) (+1108 -1120)
+		po/nb.po (1.13.4.2) (+392 -404)
+		po/nl.po (1.52.4.3) (+263 -277)
+		po/pl.po (1.56.4.2) (+415 -427)
+		po/pt.po (1.51.4.2) (+705 -717)
+		po/sk.po (1.55.4.2) (+1076 -1088)
+		po/sv.po (1.83.4.2) (+375 -389)
+		po/zh_TW.po (1.12.4.2) (+322 -337)
+
+	Merge from 5.1.1
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	NEWS (1.305.6.6) (+11 -0)
+
+	added Canon fixes
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	src/cups/canon.c (1.5.56.1) (+136 -19)
+		src/cups/epson.c (1.7.8.1) (+138 -21)
+
+	Make canon and epson backends work on newer kernels
+	(gutenprint-5.0.0-sysfs.patch from SUSE)
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	src/testpattern/testpatterny.y (1.26.18.1) (+6 -6)
+
+	add format arguments to fprintf()
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	src/gutenprintui2/plist.c (1.6.10.2) (+3 -3)
+
+	add format argument to g_message
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.6.4.2) (+229 -116)
+		src/main/canon-media.h (1.4.4.2) (+3 -2)
+		src/main/canon-modes.h (1.8.4.2) (+63 -59)
+		src/main/canon-printers.h (1.13.4.2) (+22 -9)
+		src/main/print-canon.c (1.190.2.2) (+304 -305)
+		src/main/printers.xml (1.157.4.3) (+12 -12)
+
+	Backport Canon fixes from 5.1 to 5.0 branch:
+	- fixed CD printing for PIXMA class printers
+	- reenabled CD tray for PIXMA iP4200
+	- added CD fine adjustment controls
+	- fixed resolutions for S300 (https://bugs.launchpad.net/ubuntu/+source/gutenprint/+bug/110945)
+	- fixed printing with PIXMA printers connected to windows hosts (#1625202)
+	- renamed MULTIPASS printers to PIXMA
+
+2007-05-12	<faust3@sourceforge.net>
+
+	Files:	include/gutenprint/bit-ops.h (1.2.14.1) (+11 -2)
+		src/main/bit-ops.c (1.9.8.2) (+196 -1)
+
+	backport bit-ops changes (added 3 and 4 bit fold code) from 5.1 to 5.0 branch
+
+2007-03-20	<tillkamppeter@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.119.2.2) (+6 -2)
+
+	Added forgotten "#ifdef ENABLE_NLS ... #endif". This prevented from compiling with "--disable-nls".
+
+2007-03-04	<tillkamppeter@sourceforge.net>
+
+	Files:	AUTHORS (1.21.10.1) (+1 -1)
+		NEWS (1.305.6.5) (+2 -2)
+		README (1.165.6.2) (+1 -1)
+		doc/gutenprint-users-manual.odt (1.1.6.1) (+402 -360)
+		doc/users_guide/title.sgml (1.3.18.1) (+1 -1)
+		src/foomatic/gutenprint-version.c (1.2.18.1) (+2 -2)
+		src/foomatic/mk_printerlist.in (1.1.54.1) (+1 -1)
+		src/foomatic/paper_sizes.c (1.8.18.1) (+2 -2)
+		src/foomatic/printer_margins.c (1.17.8.1) (+3 -3)
+		src/foomatic/printer_options.c (1.50.8.1) (+2 -2)
+		src/foomatic/printers.c (1.10.18.1) (+2 -2)
+		src/testpattern/printer_options.c (1.2.8.2) (+2 -2)
+		src/testpattern/printers.c (1.6.18.1) (+2 -2)
+
+	Updated linuxprinting.org -> openprinting.org
+
+2007-03-03	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.38.4.1) (+2083 -1921)
+		po/da.po (1.73.4.1) (+1986 -1792)
+		po/de.po (1.51.4.1) (+2006 -1844)
+		po/el.po (1.52.4.1) (+1995 -1868)
+		po/en_GB.po (1.144.4.1) (+1987 -1792)
+		po/es.po (1.50.4.1) (+2060 -1892)
+		po/fr.po (1.76.4.1) (+1990 -1795)
+		po/hu.po (1.9.4.1) (+1988 -1795)
+		po/ja.po (1.46.4.1) (+2055 -1892)
+		po/nb.po (1.13.4.1) (+1984 -1863)
+		po/nl.po (1.52.4.2) (+2354 -2040)
+		po/pl.po (1.56.4.1) (+1934 -1844)
+		po/pt.po (1.51.4.1) (+2003 -1839)
+		po/sk.po (1.55.4.1) (+2048 -1888)
+		po/sv.po (1.83.4.1) (+2030 -1835)
+		po/zh_TW.po (1.12.4.1) (+1952 -1793)
+
+	Gutenprint 5.0.0.99.1 release
+
+2007-03-03	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305.6.4) (+7 -0)
+		src/foomatic/foomatic-printermap (1.122.4.2) (+4 -0)
+		src/main/printers.xml (1.157.4.2) (+5 -1)
+
+	Added support for some new Epson derivatives
+
+2007-03-03	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.52.4.1) (+1963 -2874)
+
+	Updated Dutch translation
+
+2007-03-03	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305.6.3) (+28 -29)
+
+	Minor release note updates
+
+2007-03-03	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305.6.2) (+3 -3)
+
+	Satisfy make dist.
+
+2007-03-02	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.305.6.1) (+126 -411)
+		README (1.165.6.1) (+22 -22)
+		configure.ac (1.151.2.1) (+44 -23)
+		doc/README.maintaining (1.22.8.1) (+7 -7)
+		doc/developer/Makefile.am (1.19.6.1) (+2 -2)
+		doc/users_guide/Makefile.am (1.44.10.1) (+2 -2)
+		include/gutenprint/util.h (1.3.2.1) (+3 -2)
+		include/gutenprint/vars.h (1.3.8.1) (+4 -1)
+		scripts/autogen.sh (1.33.18.1) (+1 -1)
+		src/cups/Makefile.am (1.87.8.1) (+27 -7)
+		src/cups/cups-genppdupdate.in (1.25.8.1) (+82 -39)
+		src/cups/genppd.c (1.119.2.1) (+738 -453)
+		src/cups/rastertoprinter.c (1.105.2.1) (+99 -22)
+		src/foomatic/foomatic-generator.in (1.60.8.1) (+2 -2)
+		src/foomatic/foomatic-printermap (1.122.4.1) (+12 -1)
+		src/ghost/.cvsignore (1.12.10.1) (+0 -2)
+		src/gutenprintui/gutenprintui-internal.h (1.2.12.1) (+2 -2)
+		src/gutenprintui/panel.c (1.9.6.1) (+86 -13)
+		src/gutenprintui/plist.c (1.3.6.1) (+30 -19)
+		src/gutenprintui/printrcy.y (1.1.18.1) (+129 -80)
+		src/gutenprintui2/panel.c (1.11.8.1) (+86 -13)
+		src/gutenprintui2/plist.c (1.6.10.1) (+10 -3)
+		src/gutenprintui2/printrcy.y (1.1.18.1) (+129 -80)
+		src/main/Makefile.am (1.92.10.1) (+10 -2)
+		src/main/bit-ops.c (1.9.8.1) (+24 -21)
+		src/main/buffer-image.c (1.1.2.2) (+153 -0)
+		src/main/canon-inks.h (1.6.4.1) (+23 -0)
+		src/main/canon-media.h (1.4.4.1) (+55 -0)
+		src/main/canon-modes.h (1.8.4.1) (+91 -57)
+		src/main/canon-printers.h (1.13.4.1) (+62 -96)
+		src/main/escp2-channels.c (1.62.8.1) (+231 -7)
+		src/main/escp2-driver.c (1.30.6.1) (+16 -29)
+		src/main/escp2-inks.c (1.46.10.1) (+57 -17)
+		src/main/escp2-papers.c (1.99.8.1) (+480 -13)
+		src/main/escp2-resolutions.c (1.33.8.1) (+157 -84)
+		src/main/papers.xml (1.21.8.1) (+11 -4)
+		src/main/print-canon.c (1.190.2.1) (+364 -366)
+		src/main/print-canon.h (1.2.4.1) (+1 -1)
+		src/main/print-escp2-data.c (1.202.6.1) (+730 -1105)
+		src/main/print-escp2.c (1.355.2.1) (+271 -84)
+		src/main/print-escp2.h (1.105.6.1) (+54 -119)
+		src/main/print-olympus.c (1.61.2.1) (+1065 -839)
+		src/main/print-util.c (1.109.4.1) (+15 -1)
+		src/main/print-weave.c (1.65.8.1) (+3 -3)
+		src/main/printers.xml (1.157.4.1) (+23 -11)
+		src/main/util.h (1.33.10.1) (+5 -2)
+		src/testpattern/printer_options.c (1.2.8.1) (+16 -2)
+		src/testpattern/run-testpattern-2.in (1.2.4.1) (+75 -40)
+		test/.cvsignore (1.7.28.1) (+1 -0)
+		test/Makefile.am (1.46.8.1) (+4 -2)
+		test/parse-escp2 (1.11.8.1) (+261 -18)
+		test/pixma_parse.c (1.8.2.2) (+607 -0)
+		test/pixma_parse.h (1.3.2.2) (+256 -0)
+		test/unprint.c (1.37.8.1) (+5 -3)
+
+	Backport mainline 5.1.0 (release candidate) to 5.0 branch.  Omitted
+	changes to Postscript driver, and kept the name of the Olympus driver
+	the same (did not rename it to dyesub).
+
+2007-02-24	<rlk@sourceforge.net>
+
+	Files:	src/main/buffer-image.c (1.1.2.1) (removed)
+
+	file buffer-image.c was added on branch gutenprint-5_0-branch on 2007-03-02 12:01:21 +0000
+
+2007-02-24	<faust3@sourceforge.net>
+
+	Files:	src/main/buffer-image.c (1.1) (added)
+
+	add an internal function to buffer and rotate stp_images
+
+2007-02-24	<rlk@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.8.2.1) (removed)
+
+	file pixma_parse.c was added on branch gutenprint-5_0-branch on 2007-03-02 12:01:35 +0000
+
+2007-02-24	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.8) (+3 -0)
+
+	ESC ($ enables duplex printing
+
+2007-02-24	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.7) (+4 -0)
+
+	dump argument buffer for unknown bytes
+
+2007-02-23	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.6) (+4 -1)
+
+	avoid endless loop
+
+2007-02-23	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.5) (+17 -3)
+
+	add -y parameter to limit the height of the generated ppm
+
+2007-02-23	<rlk@sourceforge.net>
+
+	Files:	test/pixma_parse.h (1.3.2.1) (removed)
+
+	file pixma_parse.h was added on branch gutenprint-5_0-branch on 2007-03-02 12:01:36 +0000
+
+2007-02-23	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.4) (+3 -1)
+		test/pixma_parse.h (1.3) (+2 -1)
+
+	print total number of dots
+
+2007-02-20	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.3) (+1 -0)
+
+	fix handling of non extended ESC t) commands
+
+2006-11-01	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.2) (+34 -8)
+		test/pixma_parse.h (1.2) (+5 -4)
+
+	Warning FIXES
+	support for the PIXMA iP6700:
+	ESC t) color order for this printer is CMYKcmk and not CMYKcmyk
+	a colorshift may happen when small and large dots of the same color get
+	printed to the same position => clip values for now
+	Thanks to Karl Günter Wünsch <kgw at mineralien-verkauf.de> for debugging
+	these issues
+
+2006-09-30	<faust3@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.1) (added)
+		test/pixma_parse.h (1.1) (added)
+
+	add pixma_parse a parser for canon bjl printjobs that can also generate ppm images from the raster data
+
+2006-09-18	<rlk@sourceforge.net>
+
+	Files:	m4/stp_option.m4 (1.7.2.1) (+3 -2)
+
+	Fix STP_ADD_COMPILER_ARG correctly.
+
+2006-09-18	<rlk@sourceforge.net>
+
+	Files:	src/main/mark.c (1.2) (+442 -0)
+		src/main/page.c (1.2) (+191 -0)
+		src/main/ppd.c (1.2) (+2644 -0)
+		src/main/ppd.h (1.2) (+345 -0)
+
+	First cut at new Postscript driver and changes to the UI code.
+
+	This code provided by David Suffield of HP.
+
+	This driver parses PPD files for options and dynamically creates
+	options based on the PPD files.
+
+2006-09-18	<rlk@sourceforge.net>
+
+	Files:	src/main/ppd.c (1.1) (added)
+
+	file ppd.c was initially added on branch new-ps-driver-branch.
+
+2006-09-14	<easysw@sourceforge.net>
+
+	Files:	Makefile.am (1.146) (+1 -26)
+
+	Remove EPM commands/targets from top-level makefile.
+
+2006-09-14	<easysw@sourceforge.net>
+
+	Files:	packaging/cups-gutenprint.gif (1.2) (removed)
+		packaging/cups-gutenprint.list.in (1.2) (removed)
+
+	Remove EPM packaging files.
+
+2006-09-14	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.151) (+2 -3)
+
+	Remove packaging/cups-gutenprint.list from the list of output files.
+
+2006-09-14	<easysw@sourceforge.net>
+
+	Files:	m4/stp_option.m4 (1.7) (+1 -1)
+
+	Fix duplicate optimizer option bug in STP_ADD_COMPILER_ARG - since
+	CFLAGS already contains the option, we don't need to add it a second
+	time.
+
+2006-09-14	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.c (1.79) (+9 -4)
+
+	A few minor fixes.
+
+2006-09-13	<easysw@sourceforge.net>
+
+	Files:	Makefile.am (1.145) (+27 -1)
+		configure.ac (1.150) (+3 -3)
+		cups-gutenprint.list.in (1.2) (removed)
+		packaging/cups-gutenprint.gif (1.1) (added)
+		packaging/cups-gutenprint.list.in (1.1) (added)
+
+	Prepare CUPS driver packaging changes, and move all of the
+	packaging files under a subdirectory.
+
+	Add new logo image from Martin Owens.
+
+2006-09-13	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.149) (+9 -2)
+
+	Initialize common compiler options from the environment, otherwise
+	certain versions of autoconf will erroneously add "-g -O2" to the
+	compiler options.
+
+	Still need to figure out why we are getting double optimizer options
+	from the STP_FIRST_COMPILER_ARG macro...
+
+2006-09-12	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.148) (+6 -3)
+		src/cups/rastertoprinter.c (1.105) (+4 -4)
+		src/main/curve.c (1.52) (+6 -6)
+		src/main/print-canon.c (1.190) (+7 -3)
+		src/main/print-escp2.c (1.355) (+4 -2)
+		src/main/print-olympus.c (1.61) (+7 -3)
+		src/main/print-pcl.c (1.145) (+5 -2)
+		src/main/sequence.c (1.23) (+4 -4)
+
+	More portability fixes...
+
+	configure.ac:
+	    - Add explicit check for "finite" math function, and define
+	      isfinite to finite if it exists.
+	    - Define __attribute__ conditionally, since it may have already
+	      been defined in util.h...
+
+	src/cups/rastertoprinter.c:
+	    - Mark all static functions as static.
+
+	src/main/curve.c src/main/print-canon.c src/main/print-escp2.c
+	src/main/print-olympus.c src/main/print-pcl.c
+	src/main/sequence.c:
+	    - Use isfinite() instead of finite(), since isfinite() is part
+	      of the ISO C standard and finite() is not.
+
+2006-09-12	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.147) (+8 -3)
+		include/gutenprint/util.h (1.3) (+6 -2)
+		src/cups/genppd.c (1.119) (+6 -17)
+
+	Fix some non-portable stuff...
+
+	configure.ac:
+	    - If CC is GCC, we never set the optimization flags.
+	    - If CC is not GCC, we tried optimization flags that were not
+	      supported by commercial compilers (-O6 in particular) which
+	      produced warnings but not errors. Changed to only try -O...
+
+	include/gutenprint/util.h:
+	    - __attribute__ is primarily only available on GCC and with a
+	      few GCC-compatible commercial compilers.  Since the autoheader
+	      stuff isn't available here, and since util.h is a public header,
+	      added a GCC check and definition to allow it to be used with
+	      commercial compilers that don't implement __attribute__.
+
+	src/cups/genppd.c:
+	    - setenv() and unsetenv() are not portable.
+	    - Changed to just call setlocale() with the language that was
+	      passed.
+
+2006-09-10	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/ppd.h (1.1) (added)
+		src/main/ppd.h (1.1) (added)
+
+	file ppd.h was initially added on branch new-ps-driver-branch.
+
+2006-09-10	<rlk@sourceforge.net>
+
+	Files:	src/main/page.c (1.1) (added)
+
+	file page.c was initially added on branch new-ps-driver-branch.
+
+2006-09-10	<rlk@sourceforge.net>
+
+	Files:	src/main/mark.c (1.1) (added)
+
+	file mark.c was initially added on branch new-ps-driver-branch.
+
+2006-09-10	<m0m@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.122) (+1 -0)
+		src/main/print-olympus.c (1.60) (+84 -1)
+		src/main/printers.xml (1.157) (+2 -1)
+
+	add support for Olympus PS-100 (untested - see Feature Request 1527186)
+	https://sourceforge.net/tracker/?func=detail&aid=1527186&group_id=1537&atid=351537
+
+2006-09-10	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.189) (+3 -1)
+
+	don't send the A) command for empty lines, got broken when I commited the F) command support
+
+2006-09-10	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.188) (+18 -6)
+
+	fix K only printing when using the F) raster command
+
+2006-09-10	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.187) (+14 -7)
+
+	make number of rasterlines in every F) command #definable
+
+2006-09-09	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.13) (+2 -2)
+		src/main/print-canon.c (1.186) (+93 -22)
+
+	Attempt to implement the F) raster command
+	probably the MP150 does not support the A) raster command
+
+	Not tested very well. I run out of ink ;(
+
+2006-09-09	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.185) (+47 -30)
+
+	get rid of static comp_buf size, prepare for I) J) L) F) raster sequence
+
+2006-09-09	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.12) (+1 -1)
+
+	the MP150 needs the r) command, too
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.4) (+1 -1)
+		src/main/print-canon.c (1.184) (+9 -16)
+
+	always use the first paper as default when the type is not set
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.183) (+1 -17)
+
+	remove unused lum adjustment curve
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.121) (+1 -0)
+		src/main/canon-inks.h (1.6) (+12 -0)
+		src/main/canon-modes.h (1.8) (+6 -0)
+		src/main/canon-printers.h (1.11) (+12 -0)
+		src/main/printers.xml (1.156) (+2 -1)
+
+	add support for the Canon PIXMA iP2000 (untested)
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.120) (+1 -0)
+		src/main/printers.xml (1.155) (+2 -1)
+
+	Add support for CANON MP500 which is according to
+	http://gentoo-wiki.com/Canon_pixma_series similar to the iP4200
+	(untested)
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.119) (+6 -0)
+		src/main/printers.xml (1.154) (+7 -1)
+
+	add support for Canon PIXUS iP3100, i560/865, PIXMA ip3100 mp700/730
+	printers that are, according to http://gentoo-wiki.com/Canon_pixma_series,
+	compatible to the PIXMA iP3000
+	(all untested)
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.118) (+9 -0)
+		src/main/printers.xml (1.153) (+10 -1)
+
+	add support for PIXUS iP4100, i860/865, PIXMA ip4100 mp750/760/770/780/790
+	printers that are, according to http://gentoo-wiki.com/Canon_pixma_series,
+	compatible to the PIXMA iP4000
+	(all untested)
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.117) (+1 -0)
+		src/main/canon-modes.h (1.7) (+6 -0)
+		src/main/canon-printers.h (1.10) (+12 -0)
+		src/main/printers.xml (1.152) (+2 -1)
+
+	add support for MULITPASS MP830 (untested)
+
+2006-09-08	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.9) (+7 -1)
+
+	the MP150 seems to require AckTime=Short, too
+
+2006-08-31	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.8) (+28 -27)
+		src/main/print-canon.c (1.182) (+2 -3)
+
+	different printers require different args for the ESC r) command
+
+2006-08-31	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.7) (+41 -26)
+		src/main/print-canon.c (1.181) (+8 -6)
+
+	per printer control command list
+
+2006-08-31	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.180) (+1 -28)
+
+	Remove workaround that I added to emulate the old modesetting code
+	The old set_ink_ranges returned when it did not find a matching ink
+	This was the case when printing Monochrome with DMT
+	The old code would then configure the printer to do DMT without feeding the correct dot_sizes to the dither engine
+
+2006-08-31	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.3) (+1 -1)
+		src/main/canon-printers.h (1.6) (+168 -78)
+		src/main/print-canon.c (1.179) (+31 -98)
+		src/main/printers.xml (1.151) (+10 -7)
+
+	Attempt to improve the color correction for the PIXMA and MULTIPASS printers
+	a bit. Hopefully the colors are a bit better now (at least blue looks more
+	like blue ;)). The darker colors probably contain to much black.
+	The HSL adjustment curves were moved to canon-printers.h
+	The standard curves were removed from all other printers because the hsl
+	adjustment code seemed to be blindly copyed from the epson driver. It was never
+	used.
+
+2006-08-31	<faust3@sourceforge.net>
+
+	Files:	src/main/print-util.c (1.109) (+3 -2)
+
+	avoid crash when t2 is NULL
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.6) (+3 -1)
+
+	Reenable 300x300dpi mode for PIXMA iP4000 add 600x600dpi draft mode
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.116) (+2 -0)
+		src/main/canon-inks.h (1.5) (+13 -0)
+		src/main/canon-modes.h (1.5) (+6 -0)
+		src/main/canon-printers.h (1.5) (+12 -0)
+		src/main/printers.xml (1.150) (+3 -1)
+
+	basic support for PIXMA iP3000 and PIXMA iP5000 (untested)
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.115) (+1 -0)
+		src/main/canon-inks.h (1.4) (+21 -0)
+		src/main/canon-modes.h (1.4) (+6 -0)
+		src/main/canon-printers.h (1.4) (+12 -0)
+		src/main/printers.xml (1.149) (+2 -1)
+
+	basic support for MULTIPASS MP150 (untested)
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.114) (+2 -0)
+		src/main/canon-inks.h (1.3) (+26 -0)
+		src/main/canon-modes.h (1.3) (+5 -0)
+		src/main/canon-printers.h (1.3) (+12 -0)
+		src/main/printers.xml (1.148) (+3 -1)
+
+	basic PIXMA iP4200 and iP5200 support (untested), the iP4200 support is based on a patch by Michael Thayer
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.178) (+11 -13)
+
+	warning fixes
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.147) (+2 -2)
+
+	Rename Canon iP4000 to Canon PIXMA iP4000
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.2) (+29 -16)
+
+	Add -m switch to print the md5sum for every generated printjob
+
+2006-08-29	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.2) (+212 -0)
+		src/main/canon-media.h (1.2) (+31 -3)
+		src/main/canon-modes.h (1.2) (+216 -0)
+		src/main/canon-printers.h (1.2) (+368 -0)
+		src/main/print-canon.c (1.177) (+313 -1700)
+		src/main/print-canon.h (1.2) (+34 -25)
+
+	- new mode setting code
+	- remove EXPERIMENTAL_STUFF
+	- remove supported resolutions array - every printer can now support an  
+	unlimited amount of modes
+	- modedefintions can be found in canon-modes.h
+	- ink definitons can be found in canon-inks.h
+	- printer caps can be found in canon-printers.h
+	- the inklist can be used to generate the values for the extended ESC (t
+	command
+	- WEAVE and 5Pixelin1byte flags are now possible for every mode
+	- move paper definition from print-canon.h to canon-media.h
+
+	Although this looks like a complete rewrite all printers still support all
+	modes they supported before
+	The md5sums for every parameter combination testable with run-testpattern-2
+	are identical.
+	Exceptions:
+	bjc-6000,bjc-6100,bjc-6200,bjc-6500:
+	CMYK+BW+360x360dmt
+	bjc-7000:
+	CMYK+BW+300x300dpi
+	Reason:
+	Before the change the printer was configured to print CMYK when we only used
+	the K channel.
+	Now we configure the printer to print CcMmYK.
+
+	bjc-s200:
+	Gray+BW+360x360dpi
+	Reason:
+	Before the change BW+360x360dpi and Gray+BW+360x360dpi produced different
+	outputs.
+	Now they are the same.
+
+	bjc-PIXMA-iP4000:
+	BW+600x600dpi
+	Reason:
+	Before the change the driver has been using uninitialized memory in this mode.
+
+	Also fixes
+	http://sourceforge.net/tracker/index.php?func=detail&aid=1487718&group_id=1537&atid=101537
+
+2006-08-28	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.1) (added)
+
+	file canon-modes.h was initially added on branch canon_experimental.
+
+2006-08-25	<faust3@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.1.4.1) (+29 -16)
+
+	add -m switch to print md5sum
+
+2006-08-24	<m0m@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.59.2.1) (+76 -1)
+
+	changes:
+	- olympus_read_image now read whole image at once
+	- olympus_get_cached_output is no more used
+
+2006-08-09	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.175.2.3) (+3 -3)
+
+	rename papercount->count move media related structs to canon_media.h
+
+2006-08-07	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.175.2.2) (+2 -158)
+
+	move ink defintions to canon-inks.h
+
+2006-08-07	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.1) (added)
+
+	file canon-inks.h was initially added on branch canon_experimental.
+
+2006-08-07	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.113.4.1) (+1 -1)
+		src/main/printers.xml (1.146.4.1) (+2 -2)
+
+	rename iP4000 to PIXMA-iP4000 to avoid confusion with the japanese PIXUS models
+
+2006-08-07	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.176) (+1 -5)
+
+	Remove bogus default settings
+
+2006-08-07	<rleigh@sourceforge.net>
+
+	Files:	include/gutenprint/xml.h (1.2) (+6 -2)
+
+	Add missing closing brace for 'extern "C"' when using a C++ compiler.
+
+2006-08-07	<rleigh@sourceforge.net>
+
+	Files:	configure.ac (1.146) (+12 -2)
+
+	configure.ac: Teach PACKAGE_DATA_DIR about $datarootdir, used in new
+	versions of autoconf, so that it is correctly defined with all new and
+	old autoconf versions.
+
+2006-07-30	<rleigh@sourceforge.net>
+
+	Files:	doc/Makefile.am (1.49) (+4 -4)
+
+	doc/Makefile.am: Install documentation correctly when building in a VPATH.
+
+2006-07-30	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.38) (+287 -285)
+		po/da.po (1.73) (+569 -468)
+		po/de.po (1.51) (+288 -287)
+		po/el.po (1.52) (+287 -282)
+		po/en_GB.po (1.144) (+307 -302)
+		po/es.po (1.50) (+287 -286)
+		po/fr.po (1.76) (+287 -282)
+		po/hu.po (1.9) (+550 -458)
+		po/ja.po (1.46) (+287 -285)
+		po/nb.po (1.13) (+287 -285)
+		po/nl.po (1.52) (+287 -282)
+		po/pl.po (1.56) (+287 -282)
+		po/pt.po (1.51) (+287 -285)
+		po/sk.po (1.55) (+287 -285)
+		po/sv.po (1.83) (+288 -286)
+		po/zh_TW.po (1.12) (+287 -282)
+
+	Gutenprint 5.0.0 release
+
+2006-07-23	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.1) (added)
+
+	file canon-printers.h was initially added on branch canon_experimental.
+
+2006-07-23	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.175.2.1) (+2 -486)
+
+	Move printer capabilities to canon-printers.h
+
+2006-07-22	<faust3@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.1) (added)
+		src/main/print-canon.c (1.175) (+43 -121)
+		src/main/print-canon.h (1.1) (added)
+
+	Cleanup Step 1
+	create a header for the canon driver
+	move paper definitions to canon-media.h
+	make it possible to select different paper definitions for different papers
+	preparations for quality selection
+	remove a now obsolete hack for CD printing
+
 2006-07-22	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.305) (+3 -0)
@@ -1934,6 +2839,12 @@
 
 2005-10-01	<rlk@sourceforge.net>
 
+	Files:	test/unprint.c (1.35.8.1) (+7 -2)
+
+	Start work on the R2400
+
+2005-10-01	<rlk@sourceforge.net>
+
 	Files:	NEWS (1.241) (+7 -24)
 
 	Correct the list of printers for which four color mode is incompatible
@@ -2652,6 +3563,14 @@
 
 	Improve black generation on Ultrachrome printers, and green on 2200.
 
+2005-06-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.335.2.2) (+2 -2)
+
+	Add Stylus RX425.
+
+	Clean up a few minor glitches.
+
 2005-06-15	<rlk@sourceforge.net>
 
 	Files:	src/main/string-list.c (1.19) (+13 -5)
@@ -2689,6 +3608,12 @@
 	Files:	src/main/sequence.c (1.20) (+16 -15)
 
 	Fix unnecessary warnings.
+
+2005-06-13	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.335.2.1) (+254 -9)
+
+	Attempt to improve red and blue generation on the R800
 
 2005-06-07	<rlk@sourceforge.net>
 
@@ -4841,6 +5766,13 @@
 
 	Support for Olympus P-200
 
+2004-07-22	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.322.2.1) (+3 -3)
+		src/main/print-olympus.c (1.50.2.1) (+3 -3)
+
+	Intermediate state
+
 2004-07-09	<m0m@sourceforge.net>
 
 	Files:	NEWS (1.175) (+4 -1)
@@ -5205,6 +6137,12 @@
 	Files:	include/gimp-print-ui2/Makefile.am (1.1) (added)
 
 	file Makefile.am was initially added on branch gtk2-20040615-branch.
+
+2004-06-15	<rleigh@sourceforge.net>
+
+	Files:	configure.ac (1.106.2.1) (+7 -3)
+
+	Add initial GTK+ 2.0 work on a separate branch.
 
 2004-06-13	<rlk@sourceforge.net>
 
@@ -6573,6 +7511,31 @@
 	Add support for generating API documentation with doxygen.
 	Document the sequence and array modules as examples.
 
+2004-03-28	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.89.2.2) (+15 -5)
+
+	Add KCMY, inverted grayscale, and CMY color spaces.
+
+	Improve wording in PPD files.
+
+2004-03-26	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.89.2.1) (+31 -16)
+
+	Intermediate state, lots of things compile, genppd works
+
+2004-03-24	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.95.2.1) (+9 -20)
+		m4/stp_option.m4 (1.3.2.1) (+42 -0)
+
+	Add autoconf macro to safely add compiler options to command line.
+
+	Ensure that aclocal.m4 is correctly rebuilt by autogen.sh.
+
+	Reviewed by Roger Leigh.
+
 2004-03-22	<rlk@sourceforge.net>
 
 	Files:	src/main/print-escp2-data.c (1.154) (+66 -66)
@@ -6746,6 +7709,12 @@
 	Per Mike Sweet, logged page numbers should be 1-based rather than
 	0-based.
 
+2004-03-01	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.140.2.3) (+23 -9)
+
+	Intermediate state
+
 2004-02-28	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.156) (+5 -5)
@@ -6858,6 +7827,22 @@
 	Files:	test/testdither.c (1.40) (+3 -3)
 
 	Increase size of band printed
+
+2004-02-22	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.140.2.2) (+26 -30)
+		src/main/print-escp2.c (1.308.2.2) (+40 -33)
+		src/main/printers.c (1.61.2.1) (+16 -8)
+
+	Intermediate state
+
+2004-02-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.79.2.1) (+10 -2)
+		src/main/print-canon.c (1.140.2.1) (+2 -4)
+		src/main/print-escp2.c (1.308.2.1) (+3 -3)
+
+	Branch for new API for color conversion
 
 2004-02-16	<rlk@sourceforge.net>
 
@@ -7402,6 +8387,12 @@
 	Files:	src/main/printers.xml (1.90) (+3 -3)
 
 	The CX-6300 and 6400 appear to actually be based on the C84, not the C64.
+
+2003-11-27	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.305.2.1) (+56 -66)
+
+	Eliminate the use of the term 'Microweave'
 
 2003-11-25	<rlk@sourceforge.net>
 
@@ -9215,6 +10206,13 @@
 
 2003-08-31	<rlk@sourceforge.net>
 
+	Files:	src/main/print-canon.c (1.129.2.2) (+6 -14)
+		src/main/print-escp2.c (1.285.2.2) (+8 -23)
+
+	Intermediate state
+
+2003-08-31	<rlk@sourceforge.net>
+
 	Files:	src/main/escp2-inks.c (1.20) (+2 -2)
 		src/main/print-escp2-data.c (1.124) (+3 -3)
 
@@ -9402,6 +10400,15 @@
 		src/main/printers.xml (1.76) (+2 -2)
 
 	code update
+
+2003-08-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.129.2.1) (+10 -8)
+		src/main/print-escp2.c (1.285.2.1) (+16 -11)
+		src/main/print-olympus.c (1.7.2.1) (+17 -20)
+		src/main/printers.c (1.59.2.1) (+3 -9)
+
+	Some new color stuff
 
 2003-08-08	<rlk@sourceforge.net>
 
@@ -10090,6 +11097,12 @@
 
 2003-06-19	<rlk@sourceforge.net>
 
+	Files:	configure.ac (1.68.2.1) (+2 -8)
+
+	Eliminate the rest of libxml except for sequence.c so far
+
+2003-06-19	<rlk@sourceforge.net>
+
 	Files:	src/main/mxml.h (1.1) (added)
 
 	file mxml.h was initially added on branch mxml-branch.
@@ -10117,6 +11130,12 @@
 	Files:	src/main/mxml-attr.c (1.1) (added)
 
 	file mxml-attr.c was initially added on branch mxml-branch.
+
+2003-06-19	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.c (1.55.2.1) (+69 -64)
+
+	Use mxml rather than libxml2 for XML parser
 
 2003-06-17	<davehill@sourceforge.net>
 
@@ -10972,6 +11991,12 @@
 
 	Note order dependency on module loading for future fix.
 
+2003-05-25	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.120.2.3) (+12 -12)
+
+	Tested more things
+
 2003-05-23	<rlk@sourceforge.net>
 
 	Files:	po/cs.po (1.4) (+25 -66)
@@ -10998,6 +12023,14 @@
 
 	A few minor fixes for the Olympus driver
 
+2003-05-23	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.62.2.1) (+7 -6)
+		src/main/print-olympus.c (1.2.2.1) (+14 -13)
+		src/main/printers.xml (1.71.4.1) (+7 -1)
+
+	Merge changes in from mainline
+
 2003-05-22	<m0m@sourceforge.net>
 
 	Files:	NEWS (1.103) (+4 -0)
@@ -11009,11 +12042,24 @@
 
 	Merge with olympus driver
 
+2003-05-22	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.120.2.2) (+22 -81)
+		src/main/print-escp2.c (1.259.2.2) (+3 -6)
+
+	Compiles
+
 2003-05-21	<m0m@sourceforge.net>
 
 	Files:	src/main/print-olympus.c (1.1) (added)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
+
+2003-05-21	<m0m@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.1.2.1) (+546 -0)
+
+	Initial version of olympus driver added
 
 2003-05-20	<rleigh@sourceforge.net>
 
@@ -11050,6 +12096,13 @@
 	Files:	src/foomatic/foomatic-printermap (1.57) (+1 -1)
 
 	Over-zealously changed HP LJII to a IIP.
+
+2003-05-12	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.120.2.1) (+4 -9)
+		src/main/print-escp2.c (1.259.2.1) (+6 -10)
+
+	Start work on new channel architecture
 
 2003-05-11	<rlk@sourceforge.net>
 
@@ -11353,9 +12406,41 @@
 
 2003-05-04	<rlk@sourceforge.net>
 
+	Files:	po/cs.po (1.1.4.1) (+3348 -0)
+
+	Add Czech translation
+
+2003-05-04	<rlk@sourceforge.net>
+
 	Files:	po/cs.po (1.1) (added)
 
 	file cs.po was initially added on branch gimp-print-4_2_branch.
+
+2003-05-03	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.60.2.2) (+3 -3)
+
+	Bump the version number
+
+2003-05-01	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.60.2.1) (+2 -3)
+
+	Don't try to generate printdef Makefile
+
+2003-05-01	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.255.2.2) (+276 -250)
+
+	More code cleanup
+
+2003-04-28	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.66.2.1) (+11 -11)
+		src/main/print-escp2.c (1.255.2.1) (+356 -407)
+		src/main/printers.c (1.49.2.1) (+4 -4)
+
+	Start another thorny phase of cleanup
 
 2003-04-28	<rlk@sourceforge.net>
 
@@ -12680,9 +13765,33 @@
 
 2003-02-09	<rlk@sourceforge.net>
 
+	Files:	src/main/print-canon.c (1.107.2.2) (+5 -3)
+
+	Able to enable and disable individual options
+
+2003-02-09	<rlk@sourceforge.net>
+
 	Files:	src/libgimpprintui/printrc.h (1.1) (added)
 
 	file printrc.h was initially added on branch ui-20030201-branch.
+
+2003-02-09	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.229.2.2) (+3 -3)
+
+	UI stubs for optional parameters
+
+2003-02-08	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.107.2.1) (+4 -4)
+		src/main/print-escp2.c (1.229.2.1) (+24 -24)
+		src/main/printers.c (1.38.2.1) (+9 -5)
+
+	Allow UI to turn options on and off.
+
+	Fix a few bugs in the UI.
+
+	Valgrind the UI.
 
 2003-02-08	<rlk@sourceforge.net>
 
@@ -13358,6 +14467,12 @@
 	(for shaping the GCR curve), and for individual CMYK densities.
 	This should simplify gray tuning.
 
+2003-01-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-util.c (1.85.4.1) (+52 -1)
+
+	New color code appears to work more or less correctly.
+
 2003-01-18	<mtomlinson@sourceforge.net>
 
 	Files:	src/main/print-dither.c (1.116) (+15 -3)
@@ -13370,6 +14485,13 @@
 
 	Make compute_a_curve work for steps != 256.
 
+2003-01-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.101.2.3) (+29 -35)
+		src/main/print-escp2.c (1.220.2.2) (+18 -34)
+
+	Compiles now
+
 2003-01-17	<davehill@sourceforge.net>
 
 	Files:	test/pcl-unprint.c (1.7) (+62 -19)
@@ -13377,11 +14499,24 @@
 	Added parsing of more parameters. Updated "PJL" parsing to handle (but not
 	act on) HPGL commands.
 
+2003-01-17	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.101.2.2) (+5 -8)
+		src/main/print-escp2.c (1.220.2.1) (+74 -75)
+
+	More work
+
 2003-01-15	<tillkamppeter@sourceforge.net>
 
 	Files:	src/foomatic/foomatic-printermap (1.47) (+68 -5)
 
 	Added missing HP DeskJet and OfficeJet printers (DJ6xx, DJ8xx, and DJ9xx series).
+
+2003-01-15	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.101.2.1) (+20 -26)
+
+	Minor progress
 
 2003-01-14	<rlk@sourceforge.net>
 
@@ -13405,6 +14540,14 @@
 	Files:	src/main/print-dither.c (1.114) (+84 -116)
 
 	Implemented new EvenTone raw CMYK (untested).
+
+2003-01-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.41.2.1) (+4 -3)
+		src/main/print-canon.c (1.100.2.1) (+7 -9)
+		src/main/print-escp2.c (1.219.2.1) (+3 -5)
+
+	Remove monochrome mode to simplify color modifications
 
 2003-01-12	<rlk@sourceforge.net>
 
@@ -13901,6 +15044,13 @@
 
 2003-01-05	<rlk@sourceforge.net>
 
+	Files:	src/main/print-canon.c (1.94.2.2) (+22 -20)
+		src/main/print-escp2.c (1.212.2.2) (+2 -2)
+
+	More code changes
+
+2003-01-05	<rlk@sourceforge.net>
+
 	Files:	po/da.po (1.25) (+1246 -1094)
 		po/de.po (1.10) (+1687 -1574)
 		po/el.po (1.12) (+1446 -1300)
@@ -13972,6 +15122,14 @@
 	instead_of_gimp_main.c is now changed to omit print.c usage.
 	Link instead_of_main.o with everything except print.o, libgimp.so and libgimpui.so
 	to create gimpprint-panel executable. dpace Jan 4, 2003.
+
+2003-01-04	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.94.2.1) (+64 -2)
+		src/main/print-escp2.c (1.212.2.1) (+126 -10)
+		src/main/printers.c (1.17.2.1) (+9 -1)
+
+	Work in progress
 
 2003-01-03	<rleigh@sourceforge.net>
 
@@ -14607,6 +15765,13 @@
 		test/curve.c (1.8) (+5 -7)
 
 	Use curves for HSL mapping
+
+2002-12-21	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.84.2.1) (+67 -262)
+		src/main/print-escp2.c (1.197.2.1) (+22 -48)
+
+	Use curves for HSL transformations
 
 2002-12-18	<tillkamppeter@sourceforge.net>
 
@@ -15385,11 +16550,42 @@
 
 	Fix list function prototypes and header name
 
+2002-11-17	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.23.4.1) (+923 -1331)
+		po/de.po (1.8.4.1) (+942 -1165)
+		po/el.po (1.10.4.1) (+1077 -1362)
+		po/en_GB.po (1.90.4.1) (+969 -1125)
+		po/es.po (1.8.4.1) (+988 -1144)
+		po/fr.po (1.30.4.1) (+968 -1125)
+		po/ja.po (1.3.4.1) (+967 -1124)
+		po/nl.po (1.10.4.1) (+937 -1118)
+		po/pl.po (1.14.4.1) (+994 -1333)
+		po/pt.po (1.8.4.1) (+984 -1128)
+		po/sk.po (1.13.4.1) (+968 -1126)
+		po/sv.po (1.39.4.1) (+968 -1130)
+		src/main/printers.xml (1.56.4.1) (+9 -9)
+
+	Bring over some mimnor changes from the mainline
+
 2002-11-16	<rlk@sourceforge.net>
 
 	Files:	src/main/string-list.c (1.1) (added)
 
 	file string-list.c was initially added on branch parameter-reorg-20021109-branch.
+
+2002-11-16	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.83.2.3) (+2 -10)
+
+	Cleanup
+
+2002-11-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.29.2.1) (+71 -123)
+		src/main/print-canon.c (1.83.2.2) (+51 -132)
+
+	Revamp the API again, everything compiles, at least some things work
 
 2002-11-16	<rlk@sourceforge.net>
 
@@ -15402,6 +16598,12 @@
 	Files:	src/cups/gimp-print-cups.c (1.1) (added)
 
 	file gimp-print-cups.c was initially added on branch parameter-reorg-20021109-branch.
+
+2002-11-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.49.2.2) (+50 -138)
+
+	Revamp the API again, everything compiles, at least some things work
 
 2002-11-16	<davehill@sourceforge.net>
 
@@ -15416,6 +16618,12 @@
 	Files:	doc/developer/functions.texi (1.5) (+185 -2)
 
 	Document the new stp_list_t list type
+
+2002-11-15	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.193.2.2) (+2 -1)
+
+	Basic operation of the print plugin
 
 2002-11-14	<tillkamppeter@sourceforge.net>
 
@@ -15440,6 +16648,20 @@
 	Files:	man/gimpprint.3.in (1.4) (+10 -0)
 
 	Add SEE ALSO references to the libgimpprint man pages
+
+2002-11-10	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.49.2.1) (+3 -4)
+		src/main/print-canon.c (1.83.2.1) (+112 -98)
+		src/main/print-escp2.c (1.193.2.1) (+135 -113)
+
+	The core library now compiles
+
+2002-11-10	<rlk@sourceforge.net>
+
+	Files:	src/main/printers.c (1.7.2.1) (+31 -95)
+
+	Starting work on second phase of parameter reorganization
 
 2002-11-09	<rleigh@sourceforge.net>
 
@@ -15598,6 +16820,12 @@
 	Files:	src/foomatic/foomatic-templates-ijs/DitherAlgorithm.xml (1.1) (added)
 
 	file DitherAlgorithm.xml was initially added on branch parameter-reorg-20021102-branch.
+
+2002-11-03	<rlk@sourceforge.net>
+
+	Files:	src/main/print-util.c (1.75.4.1) (+8 -1)
+
+	Test patternn generator now works
 
 2002-11-02	<rlk@sourceforge.net>
 
@@ -16062,11 +17290,37 @@
 
 	Remove Ghostscript stp driver.
 
+2002-10-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.43.2.1) (+5 -5)
+
+	Fix up a lot of the width vs. height stuff
+
+2002-10-24	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.27.2.1) (+11 -20)
+
+	Remove the old-style Ghostscript stp driver
+
+2002-10-22	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.25.2.1) (+4 -57)
+		src/main/print-canon.c (1.77.2.3) (+12 -4)
+
+	Clean up the API, still need to fix the GIMP plugin
+
 2002-10-21	<rlk@sourceforge.net>
 
 	Files:	src/main/vars.h (1.1) (added)
 
 	file vars.h was initially added on branch reorg-20021020-branch.
+
+2002-10-21	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.77.2.2) (+3 -3)
+		src/main/print-escp2.c (1.188.2.2) (+3 -3)
+
+	A bit more cleanup
 
 2002-10-21	<rlk@sourceforge.net>
 
@@ -16091,6 +17345,14 @@
 	Files:	src/main/print-papers.c (1.1) (added)
 
 	file print-papers.c was initially added on branch reorg-20021020-branch.
+
+2002-10-21	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.77.2.1) (+17 -39)
+		src/main/print-escp2.c (1.188.2.1) (+81 -68)
+		src/main/printers.c (1.1.2.1) (+142 -0)
+
+	Start working on some reorganization
 
 2002-10-19	<tillkamppeter@sourceforge.net>
 
@@ -16795,6 +18057,12 @@
 
 	Update en_GB translation (all fuzzy and unstranslated strings)
 
+2002-07-22	<rlk@sourceforge.net>
+
+	Files:	test/unprint.c (1.22.8.1) (+16 -5)
+
+	Merge mainline into 4.2 branch
+
 2002-07-21	<rlk@sourceforge.net>
 
 	Files:	src/main/print-color.c (1.28) (+3 -2)
@@ -16809,6 +18077,18 @@
 
 2002-07-21	<rlk@sourceforge.net>
 
+	Files:	src/main/print-escp2.c (1.180.2.2) (+56 -12)
+
+	Make raw mode work!
+
+2002-07-21	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.17.2.2) (+3 -3)
+
+	Don't use -ansi; it causes problems with getopt.
+
+2002-07-21	<rlk@sourceforge.net>
+
 	Files:	man/escputil.1.in (1.6) (+1 -2)
 		man/gimpprint-config.1.in (1.3) (+1 -2)
 
@@ -16819,6 +18099,14 @@
 	Files:	src/main/print-escp2-data.c (1.50) (+2 -2)
 
 	Updates from Thorsten.
+
+2002-07-21	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.17.2.1) (+3 -3)
+		src/main/print-canon.c (1.75.2.1) (+5 -3)
+		src/main/print-escp2.c (1.180.2.1) (+10 -6)
+
+	Start working on n-color support
 
 2002-07-21	<rlk@sourceforge.net>
 
@@ -17361,6 +18649,12 @@
 
 	Small GPL amendments (year 2000 date fixes)
 
+2002-06-06	<sharkey@sourceforge.net>
+
+	Files:	po/es.po (1.1.4.2) (+19 -14)
+
+	Merge with 4.2.2-pre2.
+
 2002-06-05	<rlk@sourceforge.net>
 
 	Files:	src/testpattern/testpattern.c (1.7) (+64 -41)
@@ -17428,6 +18722,14 @@
 
 	Fix off-by-one error in VASPRINTF
 
+2002-05-25	<sharkey@sourceforge.net>
+
+	Files:	po/es.po (1.1.4.1) (+857 -647)
+		src/main/print-escp2-data.c (1.15.6.1) (+1 -1)
+		src/main/print-escp2.h (1.7.6.1) (+1 -1)
+
+	Sync debian-branch with 4.2.2-pre1.
+
 2002-05-19	<rleigh@sourceforge.net>
 
 	Files:	src/cups/Makefile.am (1.52) (+2 -2)
@@ -17439,6 +18741,12 @@
 	Files:	src/main/print-dither.c (1.85) (+16 -32)
 
 	Change non-square error-diffusion for eventone dither.
+
+2002-05-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.71.2.3) (+2 -2)
+
+	media_sources should be const
 
 2002-05-18	<rlk@sourceforge.net>
 
@@ -17560,6 +18868,13 @@
 
 	Move config.h back to the root; it fixes a gettext bug
 
+2002-05-03	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.71.2.2) (+56 -62)
+
+	Merge libgimpprint from the mainline to bring in Even Tone dither
+	and better channel architecture.
+
 2002-05-02	<rleigh@sourceforge.net>
 
 	Files:	debian/changelog (1.45) (+6 -0)
@@ -17652,6 +18967,12 @@
 
 	Prep for 4.3.0
 
+2002-04-27	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.36.2.3) (+29 -48)
+
+	BSD portability issue.
+
 2002-04-26	<mtomlinson@sourceforge.net>
 
 	Files:	src/main/print-dither.c (1.83) (+4 -3)
@@ -17715,6 +19036,7 @@
 2002-04-14	<rlk@sourceforge.net>
 
 	Files:	lib/vasprintf.c (1.4) (+4 -4)
+		src/cups/genppd.c (1.36.2.2) (+4 -2)
 		src/cups/genppd.c (1.38) (+4 -2)
 		src/main/print-util.c (1.59) (+8 -17)
 
@@ -17847,6 +19169,12 @@
 2002-04-06	<rlk@sourceforge.net>
 
 	Files:	src/cups/genppd.c (1.37) (+3 -3)
+
+	540307 Syntax error in CloseUI in PPD files
+
+2002-04-06	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.36.2.1) (+3 -3)
 
 	540307 Syntax error in CloseUI in PPD files
 
@@ -18588,6 +19916,12 @@
 
 2002-03-02	<rlk@sourceforge.net>
 
+	Files:	src/main/print-canon.c (1.71.2.1) (+33 -9)
+
+	Latest updates from Peter Missel, should fix a lot of the Canon problems
+
+2002-03-02	<rlk@sourceforge.net>
+
 	Files:	src/main/print-canon.c (1.75) (+33 -9)
 
 	Latest update from Peter Missel
@@ -18987,6 +20321,12 @@
 
 2002-01-23	<rlk@sourceforge.net>
 
+	Files:	src/main/print-escp2.c (1.147.2.2) (+6 -6)
+
+	Fix margins per manuals for old printers
+
+2002-01-23	<rlk@sourceforge.net>
+
 	Files:	src/main/print-escp2-data.c (1.8) (+6 -6)
 
 	Fix margins
@@ -19099,6 +20439,13 @@
 
 	499200 ESP 1280/1290 need special deinit code
 	499203 ESP 780/820 have different paper codes
+
+2002-01-04	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.147.2.1) (+173 -58)
+
+	499203 ESP 780/820 have different paper codes
+	499200 ESP 1280/1290 need special deinit code
 
 2002-01-03	<mtomlinson@sourceforge.net>
 
@@ -20639,6 +21986,12 @@
 
 2001-10-17	<rlk@sourceforge.net>
 
+	Files:	src/main/print-escp2.c (1.129.2.1) (+35 -2824)
+
+	Split print-escp2.c into two.
+
+2001-10-17	<rlk@sourceforge.net>
+
 	Files:	po/en_GB.po (1.61) (+876 -3)
 		po/fr.po (1.4) (+1058 -156)
 		po/no.po (1.4) (+1054 -154)
@@ -21750,6 +23103,13 @@
 	Preliminary support for Epson Stylus C60
 
 	Some reorg of Epson densities/drop sizes (mostly to make it easier to read)
+
+2001-09-14	<sharkey@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.9.4.6) (+33 -5)
+
+	Merge in main trunk changes to bring the debian branch up to the beta1
+	release.
 
 2001-09-11	<rlk@sourceforge.net>
 
@@ -22985,6 +24345,12 @@
 	Stylus Photo 1270 (and very likely every printer using the 1999
 	command set) can print more than 44" long.
 
+2001-07-23	<sharkey@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.9.4.5) (+56 -2)
+
+	Merge in alpha 2 from the mainline.
+
 2001-07-22	<rlk@sourceforge.net>
 
 	Files:	test/.cvsignore (1.3) (+1 -0)
@@ -23418,6 +24784,12 @@
 	made the source code being read), and second, the way how the lines were
 	evaluated didn't support option names with spaces.
 
+2001-07-10	<sharkey@sourceforge.net>
+
+	Files:	src/main/printers.xml (1.9.4.4) (+3 -3)
+
+	Merging 4.1.99-a1 into the debian branch.
+
 2001-07-10	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.29) (+27 -2)
@@ -23703,6 +25075,13 @@
 	Files:	src/main/print-version.c (1.4) (+1 -3)
 
 	No need for unistd.h here.
+
+2001-06-30	<sharkey@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.7.2.3) (+84 -97)
+		src/main/printers.xml (1.9.4.3) (+50 -0)
+
+	Merge in 4.1.10 for the 4.1.10-1 debian release.
 
 2001-06-24	<rleigh@sourceforge.net>
 
@@ -24298,6 +25677,19 @@
 
 	file print-dither-matrices.c was initially added on branch stylus-pro-branch.
 
+2001-05-28	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.43.2.2) (+7 -1)
+
+	Verify in the drivers that the parameters have been checked prior to
+	attempting to print.
+
+2001-05-27	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.43.2.1) (+2 -2)
+
+	Use stp_free rather than free everywhere.
+
 2001-05-27	<rleigh@sourceforge.net>
 
 	Files:	Makefile.am (1.98) (+5 -1)
@@ -24307,6 +25699,27 @@
 		po/en_TEST.po (1.17) (+407 -383)
 
 	Automatically generate debian/changelog during 'make dist'
+
+2001-05-27	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.14.2.1) (+83 -94)
+
+	Much better support for roll-feed paper.
+
+	The Gimp plugin now grays out page width & height boxes when they
+	can't be modified.
+
+2001-05-25	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.68.2.2) (+13 -7)
+
+	Some fixes
+
+2001-05-25	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.68.2.1) (+165 -58)
+
+	Stylus Pro mods
 
 2001-05-22	<rlk@sourceforge.net>
 
@@ -24522,6 +25935,13 @@
 
 2001-05-09	<sharkey@sourceforge.net>
 
+	Files:	src/cups/genppd.c (1.7.2.2) (+49 -16)
+		src/main/print-util.c (1.8.4.3) (+207 -7)
+
+	Merge 4.1.7, prepare for 4.1.7-1 debs.
+
+2001-05-09	<sharkey@sourceforge.net>
+
 	Files:	debian/control.in (1.4) (+1 -1)
 
 	Add flex to build depends on the mainline too.
@@ -24726,6 +26146,15 @@
 
 	Changed PCL_STP_PRINTER_TIFF back to PCL_PRINTER_TIFF (over zealous
 	search and destroy!).
+
+2001-04-30	<sharkey@sourceforge.net>
+
+	Files:	po/en_GB.po (1.3.4.2) (+287 -262)
+		src/main/print-escp2.c (1.24.2.2) (+508 -492)
+		src/main/print-util.c (1.8.4.2) (+191 -157)
+		src/main/printers.xml (1.9.4.2) (+0 -10)
+
+	Finally get around to syncing debian-branch with 4.1.6.
 
 2001-04-29	<rlk@sourceforge.net>
 
@@ -25180,6 +26609,20 @@
 	CMYK computation (black generation) out of the dither code, and
 	neither does it allow raw CMYK input.
 
+2001-03-31	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.29.2.2) (+6 -5)
+		src/main/print-escp2.c (1.42.2.2) (+6 -5)
+
+	Intermediate step
+
+2001-03-31	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.29.2.1) (+2 -1)
+		src/main/print-escp2.c (1.42.2.1) (+2 -1)
+
+	Let's try again with CMY(K)...
+
 2001-03-26	<rlk@sourceforge.net>
 
 	Files:	src/main/gimp-print-internal.h (1.24) (+14 -4)
@@ -25251,6 +26694,12 @@
 		test/printer_options.c (1.7) (removed)
 
 	Start adding foomatic back in.
+
+2001-03-24	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.18.2.2) (+549 -78)
+
+	Merge up from mainline
 
 2001-03-24	<rlk@sourceforge.net>
 
@@ -25406,6 +26855,12 @@
 
 	Switch the color mode to monochrome when printing to a black & white printer.
 
+2001-03-10	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.18.2.1) (+348 -288)
+
+	Intermediate merge up with mainline
+
 2001-03-09	<rleigh@sourceforge.net>
 
 	Files:	acconfig.h (1.10) (+2 -1)
@@ -25464,6 +26919,18 @@
 	Added feature "CANON_CAP_ACKSHORT"
 	BJC8200: Uses new feature, try to use 3 bit for drop sizes instead of 2
 
+2001-03-06	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.37.2.2) (+107 -107)
+
+	More intermediate work on cmyk-ification.
+
+2001-03-05	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.37.2.1) (+240 -241)
+
+	Ongoing work on CMYK
+
 2001-03-05	<rleigh@sourceforge.net>
 
 	Files:	debian/control (1.10) (removed)
@@ -25481,6 +26948,17 @@
 	Files:	src/main/print-lexmark.c (1.19) (+6 -16)
 
 	Removed dead code ("empty" variable).
+
+2001-03-05	<sharkey@sourceforge.net>
+
+	Files:	po/en_GB.po (1.3.4.1) (+274 -256)
+		src/cups/genppd.c (1.7.2.1) (+48 -37)
+		src/cups/rastertoprinter.c (1.8.2.1) (+50 -47)
+		src/main/print-escp2.c (1.24.2.1) (+548 -577)
+		src/main/print-util.c (1.8.4.1) (+456 -112)
+		src/main/printers.xml (1.9.4.1) (+1 -1)
+
+	Update the debian branch to the 4.1.5 release.
 
 2001-03-05	<gandy@sourceforge.net>
 
@@ -25951,6 +27429,20 @@
 
 	Ignore a few new generated files.
 
+2001-02-21	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.10.2.3) (+16 -14)
+
+	Clean up paper sizes in the same way.
+
+2001-02-21	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.8.2.2) (+35 -32)
+		src/main/print-canon.c (1.10.2.2) (+12 -12)
+		src/main/print-escp2.c (1.25.2.2) (+48 -39)
+
+	Hide stp_printer_t in the same way we hid stp_vars_t.
+
 2001-02-21	<rleigh@sourceforge.net>
 
 	Files:	debian/changelog (1.7) (+6 -0)
@@ -25960,6 +27452,24 @@
 
 	Bump debian version
 	Make scripts/autogen.sh aclocal magic portable
+
+2001-02-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.8.2.1) (+23 -19)
+		src/cups/rastertoprinter.c (1.9.2.1) (+43 -44)
+
+	Bump binary version info.
+
+	Fix a few bugs.
+
+	Convert CUPS programs, run genppd to smoke test.
+
+2001-02-20	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.10.2.1) (+54 -52)
+		src/main/print-escp2.c (1.25.2.1) (+132 -133)
+
+	New print variable setup, on temporary branch
 
 2001-02-19	<rleigh@sourceforge.net>
 

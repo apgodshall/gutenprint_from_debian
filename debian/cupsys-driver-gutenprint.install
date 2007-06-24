@@ -1,4 +1,4 @@
-debian/install/etc/cups                                etc
+debian/install/etc/cups/command.types                  usr/share/cups/mime
 debian/install/usr/bin/cups-calibrate                  usr/bin
 debian/install/usr/sbin/cups-genppd.5.0                usr/sbin
 debian/install/usr/sbin/cups-genppdconfig.5.0          usr/sbin

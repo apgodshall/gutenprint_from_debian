@@ -1,3 +1,36 @@
+gutenprint (5.0.1-1) unstable; urgency=low
+
+  * New upstream stable release.
+  * debian/control.in:
+    - Remove cupsys-driver-gimpprint (cupsys-driver-gutenprint now
+      Conflicts and Replaces this transitional package from Etch).
+    - Remove foomatic-db-gimp-print (foomatic-db-gutenprint now
+      Conflicts and Replaces this transitional package from Etch).
+    - Remove ijsgimpprint (ijsgutenprint now Conflicts and Replaces this
+      transitional package from Etch).
+    - Replace linuxprinting.org with OpenPrinting in package descriptions
+      (merge from Ubuntu).
+  * debian/cupsys-driver-gutenprint.install: Move /etc/cups/command.types
+    to /usr/share/cups/mime.
+  * debian/cupsys-driver-gutenprint.preinst:
+    - If upgrading from a version less than or equal to 5.0.0-2, remove
+      /usr/share/cups/model/gutenprint/5.0.
+    - If upgrading from a version less than or equal to 5.0.1-1, remove
+      /usr/share/ppd/gutenprint/5.0.
+  * debian/cupsys-driver-gutenprint.postinst:
+    - Don't call cups-genppdconfig.5.0 now that PPD files are generated on
+      the fly.
+    - cups-genppdupdate.5.0 no longer needs any arguments.
+  * debian/cupsys-driver-gutenprint.postrm:
+    - No longer remove PPD files on purge, since PPD files are no longer provided.
+  * debian/patches/10_cups_modeldir.dpatch: Patch from Ubuntu.  Fix up PPD
+    directory location.  (Not actually used yet--the patch needs some
+    work.)
+  * debian/patches/20_fix_gimpprint_menu_entry.dpatch: Patch from Ubuntu.
+    Place the Print option in a better position in the GIMP File menu.
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 24 Jun 2007 23:22:03 +0100
+
 gutenprint (5.0.0-3) unstable; urgency=low
 
   * cupsys-driver-gutenprint: Move PPD files from

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-22 16:42-0400\n"
+"POT-Creation-Date: 2007-06-17 11:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. TRANSLATORS: "EvenTone" is the proper name, rather than a
 #. descriptive name, of this algorithm.
 #: src/main/dither-main.c:46 src/main/print-color.c:49
-#: src/main/print-escp2.c:1609
+#: src/main/print-escp2.c:1737
 msgid "Default"
 msgstr ""
 
@@ -78,18 +78,18 @@ msgstr ""
 msgid "Density"
 msgstr ""
 
-#: src/main/dither-main.c:88 src/main/print-canon.c:1534
-#: src/main/print-canon.c:1542 src/main/print-canon.c:1550
-#: src/main/print-canon.c:1558 src/main/print-escp2.c:415
-#: src/main/print-escp2.c:423 src/main/print-escp2.c:431
-#: src/main/print-escp2.c:439 src/main/print-escp2.c:447
-#: src/main/print-escp2.c:455 src/main/print-escp2.c:463
+#: src/main/dither-main.c:88 src/main/print-canon.c:293
+#: src/main/print-canon.c:301 src/main/print-canon.c:309
+#: src/main/print-canon.c:317 src/main/print-escp2.c:432
+#: src/main/print-escp2.c:440 src/main/print-escp2.c:448
+#: src/main/print-escp2.c:456 src/main/print-escp2.c:464
+#: src/main/print-escp2.c:472 src/main/print-escp2.c:480
 #: src/main/print-lexmark.c:325 src/main/print-lexmark.c:333
 #: src/main/print-lexmark.c:341 src/main/print-lexmark.c:349
-#: src/main/print-olympus.c:1330 src/main/print-olympus.c:1338
-#: src/main/print-olympus.c:1346 src/main/print-olympus.c:1354
-#: src/main/print-pcl.c:1258 src/main/print-pcl.c:1266
-#: src/main/print-pcl.c:1274 src/main/print-pcl.c:1282
+#: src/main/print-olympus.c:1626 src/main/print-olympus.c:1634
+#: src/main/print-olympus.c:1642 src/main/print-olympus.c:1650
+#: src/main/print-pcl.c:1261 src/main/print-pcl.c:1269
+#: src/main/print-pcl.c:1277 src/main/print-pcl.c:1285
 msgid "Output Level Adjustment"
 msgstr ""
 
@@ -136,459 +136,296 @@ msgstr ""
 msgid "Dither algorithm"
 msgstr ""
 
-#: src/main/print-canon.c:1382
-msgid "90x90 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1382
-msgid "90x90 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1383
-msgid "180x180 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1383
-msgid "180x180 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1384
-msgid "360x360 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1384
-msgid "360x360 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1385
-msgid "720x360 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1385
-msgid "720x360 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1386
-msgid "720x720 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1386
-msgid "720x720 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1387
-msgid "1440x720 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1387
-msgid "1440x720 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1388
-msgid "1440x1440 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1388
-msgid "1440x1440 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1389
-msgid "2880x2880 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1389
-msgid "2880x2880 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1390 src/main/print-pcl.c:253
-msgid "150x150 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1390
-msgid "150x150 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1391 src/main/print-pcl.c:254
-msgid "300x300 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1391
-msgid "300x300 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1392 src/main/print-pcl.c:255
-msgid "600x300 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1392
-msgid "600x300 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1393 src/main/print-pcl.c:257
-msgid "600x600 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1393
-msgid "600x600 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1394 src/main/print-pcl.c:258
-msgid "1200x600 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1394
-msgid "1200x600 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1395
-msgid "1200x1200 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1395
-msgid "1200x1200 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1396
-msgid "2400x2400 DPI"
-msgstr ""
-
-#: src/main/print-canon.c:1396
-msgid "2400x2400 DPI DMT"
-msgstr ""
-
-#: src/main/print-canon.c:1447 src/main/print-lexmark.c:856
-#: src/main/escp2-papers.c:1160 src/main/escp2-papers.c:1204
-#: src/main/escp2-papers.c:1248 src/main/escp2-papers.c:1296
-#: src/main/escp2-papers.c:1344 src/main/escp2-papers.c:1388
-msgid "Plain Paper"
-msgstr ""
-
-#: src/main/print-canon.c:1448
-msgid "Plain Paper PIXMA"
-msgstr ""
-
-#: src/main/print-canon.c:1449 src/main/print-lexmark.c:864
-#: src/main/escp2-papers.c:1168 src/main/escp2-papers.c:1212
-#: src/main/escp2-papers.c:1256 src/main/escp2-papers.c:1304
-#: src/main/escp2-papers.c:1352 src/main/escp2-papers.c:1396
-msgid "Transparencies"
-msgstr ""
-
-#: src/main/print-canon.c:1450
-msgid "Back Print Film"
-msgstr ""
-
-#: src/main/print-canon.c:1451
-msgid "Fabric Sheets"
-msgstr ""
-
-#: src/main/print-canon.c:1452
-msgid "Envelope"
-msgstr ""
-
-#: src/main/print-canon.c:1453
-msgid "High Resolution Paper"
-msgstr ""
-
-#: src/main/print-canon.c:1454
-msgid "T-Shirt Transfers"
-msgstr ""
-
-#: src/main/print-canon.c:1455
-msgid "High Gloss Film"
-msgstr ""
-
-#: src/main/print-canon.c:1456
-msgid "Glossy Photo Paper"
-msgstr ""
-
-#: src/main/print-canon.c:1457
-msgid "Glossy Photo Cards"
-msgstr ""
-
-#: src/main/print-canon.c:1458
-msgid "Photo Paper Pro"
-msgstr ""
-
-#: src/main/print-canon.c:1459 src/main/print-lexmark.c:904
-#: src/main/escp2-papers.c:1196 src/main/escp2-papers.c:1240
-#: src/main/escp2-papers.c:1288 src/main/escp2-papers.c:1336
-#: src/main/escp2-papers.c:1380 src/main/escp2-papers.c:1428
-#: src/main/escp2-papers.c:1438
-msgid "Other"
-msgstr ""
-
-#: src/main/print-canon.c:1469 src/main/print-escp2.c:177
-#: src/main/print-lexmark.c:266 src/main/print-olympus.c:1265
-#: src/main/print-pcl.c:1193 src/main/print-ps.c:67
+#: src/main/print-canon.c:198 src/main/print-escp2.c:179
+#: src/main/print-lexmark.c:266 src/main/print-olympus.c:1561
+#: src/main/print-pcl.c:1196 src/main/print-ps.c:67
 msgid "Page Size"
 msgstr ""
 
-#: src/main/print-canon.c:1469 src/main/print-canon.c:1475
-#: src/main/print-canon.c:1481 src/main/print-canon.c:1487
-#: src/main/print-canon.c:1511 src/main/print-escp2.c:177
-#: src/main/print-escp2.c:183 src/main/print-escp2.c:189
-#: src/main/print-escp2.c:195 src/main/print-escp2.c:213
-#: src/main/print-escp2.c:230 src/main/print-escp2.c:236
-#: src/main/print-escp2.c:248 src/main/print-escp2.c:266
-#: src/main/print-lexmark.c:266 src/main/print-lexmark.c:272
-#: src/main/print-lexmark.c:278 src/main/print-lexmark.c:284
-#: src/main/print-olympus.c:1265 src/main/print-olympus.c:1271
-#: src/main/print-olympus.c:1277 src/main/print-olympus.c:1283
-#: src/main/print-pcl.c:1193 src/main/print-pcl.c:1199
-#: src/main/print-pcl.c:1205 src/main/print-pcl.c:1211
-#: src/main/print-pcl.c:1235 src/main/print-ps.c:67 src/main/print-ps.c:73
-#: src/main/print-ps.c:79 src/main/print-ps.c:85 src/main/print-ps.c:97
+#: src/main/print-canon.c:198 src/main/print-canon.c:204
+#: src/main/print-canon.c:210 src/main/print-canon.c:216
+#: src/main/print-canon.c:222 src/main/print-canon.c:228
+#: src/main/print-canon.c:246 src/main/print-canon.c:270
+#: src/main/print-escp2.c:179 src/main/print-escp2.c:185
+#: src/main/print-escp2.c:191 src/main/print-escp2.c:197
+#: src/main/print-escp2.c:203 src/main/print-escp2.c:209
+#: src/main/print-escp2.c:227 src/main/print-escp2.c:244
+#: src/main/print-escp2.c:250 src/main/print-escp2.c:262
+#: src/main/print-escp2.c:280 src/main/print-lexmark.c:266
+#: src/main/print-lexmark.c:272 src/main/print-lexmark.c:278
+#: src/main/print-lexmark.c:284 src/main/print-olympus.c:1561
+#: src/main/print-olympus.c:1567 src/main/print-olympus.c:1573
+#: src/main/print-olympus.c:1579 src/main/print-pcl.c:1196
+#: src/main/print-pcl.c:1202 src/main/print-pcl.c:1208
+#: src/main/print-pcl.c:1214 src/main/print-pcl.c:1238 src/main/print-ps.c:67
+#: src/main/print-ps.c:73 src/main/print-ps.c:79 src/main/print-ps.c:85
+#: src/main/print-ps.c:97
 msgid "Basic Printer Setup"
 msgstr ""
 
-#: src/main/print-canon.c:1470 src/main/print-escp2.c:178
-#: src/main/print-lexmark.c:267 src/main/print-olympus.c:1266
-#: src/main/print-pcl.c:1194 src/main/print-ps.c:68
+#: src/main/print-canon.c:199 src/main/print-escp2.c:180
+#: src/main/print-lexmark.c:267 src/main/print-olympus.c:1562
+#: src/main/print-pcl.c:1197 src/main/print-ps.c:68
 msgid "Size of the paper being printed to"
 msgstr ""
 
-#: src/main/print-canon.c:1475 src/main/print-escp2.c:183
-#: src/main/print-lexmark.c:272 src/main/print-olympus.c:1271
-#: src/main/print-pcl.c:1199 src/main/print-ps.c:73 src/cups/genppd.c:1238
+#: src/main/print-canon.c:204 src/main/print-escp2.c:185
+#: src/main/print-lexmark.c:272 src/main/print-olympus.c:1567
+#: src/main/print-pcl.c:1202 src/main/print-ps.c:73 src/cups/genppd.c:1410
 msgid "Media Type"
 msgstr ""
 
-#: src/main/print-canon.c:1476 src/main/print-escp2.c:184
-#: src/main/print-lexmark.c:273 src/main/print-olympus.c:1272
-#: src/main/print-pcl.c:1200 src/main/print-ps.c:74
+#: src/main/print-canon.c:205 src/main/print-escp2.c:186
+#: src/main/print-lexmark.c:273 src/main/print-olympus.c:1568
+#: src/main/print-pcl.c:1203 src/main/print-ps.c:74
 msgid "Type of media (plain paper, photo paper, etc.)"
 msgstr ""
 
-#: src/main/print-canon.c:1481 src/main/print-escp2.c:189
-#: src/main/print-lexmark.c:278 src/main/print-olympus.c:1277
-#: src/main/print-pcl.c:1205 src/main/print-ps.c:79 src/cups/genppd.c:1262
+#: src/main/print-canon.c:210 src/main/print-escp2.c:191
+#: src/main/print-lexmark.c:278 src/main/print-olympus.c:1573
+#: src/main/print-pcl.c:1208 src/main/print-ps.c:79 src/cups/genppd.c:1435
 msgid "Media Source"
 msgstr ""
 
-#: src/main/print-canon.c:1482 src/main/print-escp2.c:190
-#: src/main/print-lexmark.c:279 src/main/print-olympus.c:1278
-#: src/main/print-pcl.c:1206 src/main/print-ps.c:80
+#: src/main/print-canon.c:211 src/main/print-escp2.c:192
+#: src/main/print-lexmark.c:279 src/main/print-olympus.c:1574
+#: src/main/print-pcl.c:1209 src/main/print-ps.c:80
 msgid "Source (input slot) of the media"
 msgstr ""
 
-#: src/main/print-canon.c:1487 src/main/print-escp2.c:213
-#: src/main/print-lexmark.c:284 src/main/print-olympus.c:1283
-#: src/main/print-pcl.c:1211 src/main/print-ps.c:85 src/cups/genppd.c:1322
-msgid "Resolution"
+#: src/main/print-canon.c:216 src/main/print-escp2.c:197
+msgid "CD Hub Size"
 msgstr ""
 
-#: src/main/print-canon.c:1488 src/main/print-lexmark.c:285
-#: src/main/print-olympus.c:1284 src/main/print-pcl.c:1212
-#: src/main/print-ps.c:86
-msgid "Resolution and quality of the print"
+#: src/main/print-canon.c:217 src/main/print-escp2.c:198
+msgid "Print only outside of the hub of the CD, or all the way to the hole"
 msgstr ""
 
-#: src/main/print-canon.c:1493 src/main/print-escp2.c:224
-#: src/main/print-lexmark.c:290 src/main/print-olympus.c:1289
-#: src/main/print-pcl.c:1217 src/main/print-ps.c:91 src/main/print-raw.c:80
-msgid "Ink Type"
+#: src/main/print-canon.c:222 src/main/print-escp2.c:203
+msgid "CD Size (Custom)"
 msgstr ""
 
-#: src/main/print-canon.c:1493 src/main/print-escp2.c:201
-#: src/main/print-escp2.c:207 src/main/print-escp2.c:224
-#: src/main/print-escp2.c:260 src/main/print-lexmark.c:290
-#: src/main/print-olympus.c:1289 src/main/print-olympus.c:1295
-#: src/main/print-olympus.c:1301 src/main/print-pcl.c:1217
+#: src/main/print-canon.c:223 src/main/print-escp2.c:204
+msgid "Variable adjustment for the outer diameter of CD"
+msgstr ""
+
+#: src/main/print-canon.c:228 src/main/print-escp2.c:209
+msgid "CD Hub Size (Custom)"
+msgstr ""
+
+#: src/main/print-canon.c:229 src/main/print-escp2.c:210
+msgid "Variable adjustment to the inner hub of the CD"
+msgstr ""
+
+#: src/main/print-canon.c:234 src/main/print-escp2.c:215
+msgid "CD Horizontal Fine Adjustment"
+msgstr ""
+
+#: src/main/print-canon.c:234 src/main/print-canon.c:240
+#: src/main/print-canon.c:252 src/main/print-escp2.c:215
+#: src/main/print-escp2.c:221 src/main/print-escp2.c:238
+#: src/main/print-escp2.c:274 src/main/print-lexmark.c:290
+#: src/main/print-olympus.c:1585 src/main/print-olympus.c:1591
+#: src/main/print-olympus.c:1597 src/main/print-pcl.c:1220
 #: src/main/print-ps.c:91 src/main/print-raw.c:80
 msgid "Advanced Printer Setup"
 msgstr ""
 
-#: src/main/print-canon.c:1494 src/main/print-escp2.c:225
-#: src/main/print-escp2.c:237 src/main/print-lexmark.c:291
-#: src/main/print-olympus.c:1290 src/main/print-pcl.c:1218
+#: src/main/print-canon.c:235 src/main/print-canon.c:241
+#: src/main/print-escp2.c:216 src/main/print-escp2.c:222
+msgid "Fine adjustment to horizontal position for CD printing"
+msgstr ""
+
+#: src/main/print-canon.c:240 src/main/print-escp2.c:221
+msgid "CD Vertical Fine Adjustment"
+msgstr ""
+
+#: src/main/print-canon.c:246 src/main/print-escp2.c:227
+#: src/main/print-lexmark.c:284 src/main/print-olympus.c:1579
+#: src/main/print-pcl.c:1214 src/main/print-ps.c:85 src/cups/genppd.c:1504
+msgid "Resolution"
+msgstr ""
+
+#: src/main/print-canon.c:247 src/main/print-lexmark.c:285
+#: src/main/print-olympus.c:1580 src/main/print-pcl.c:1215
+#: src/main/print-ps.c:86
+msgid "Resolution and quality of the print"
+msgstr ""
+
+#: src/main/print-canon.c:252 src/main/print-escp2.c:238
+#: src/main/print-lexmark.c:290 src/main/print-olympus.c:1585
+#: src/main/print-pcl.c:1220 src/main/print-ps.c:91 src/main/print-raw.c:80
+msgid "Ink Type"
+msgstr ""
+
+#: src/main/print-canon.c:253 src/main/print-escp2.c:239
+#: src/main/print-escp2.c:251 src/main/print-lexmark.c:291
+#: src/main/print-olympus.c:1586 src/main/print-pcl.c:1221
 #: src/main/print-ps.c:92 src/main/print-raw.c:81
 msgid "Type of ink in the printer"
 msgstr ""
 
-#: src/main/print-canon.c:1499 src/main/print-canon.c:1500
-#: src/main/print-escp2.c:308 src/main/print-escp2.c:309
+#: src/main/print-canon.c:258 src/main/print-canon.c:259
+#: src/main/print-escp2.c:322 src/main/print-escp2.c:323
 #: src/main/print-lexmark.c:296 src/main/print-lexmark.c:297
-#: src/main/print-pcl.c:1223 src/main/print-pcl.c:1224
+#: src/main/print-pcl.c:1226 src/main/print-pcl.c:1227
 msgid "Ink Channels"
 msgstr ""
 
-#: src/main/print-canon.c:1499 src/main/print-escp2.c:127
-#: src/main/print-escp2.c:134 src/main/print-escp2.c:141
-#: src/main/print-escp2.c:272 src/main/print-escp2.c:278
-#: src/main/print-escp2.c:284 src/main/print-escp2.c:290
-#: src/main/print-escp2.c:296 src/main/print-escp2.c:302
-#: src/main/print-escp2.c:308 src/main/print-escp2.c:314
-#: src/main/print-lexmark.c:296 src/main/print-pcl.c:1223
+#: src/main/print-canon.c:258 src/main/print-escp2.c:129
+#: src/main/print-escp2.c:136 src/main/print-escp2.c:143
+#: src/main/print-escp2.c:286 src/main/print-escp2.c:292
+#: src/main/print-escp2.c:298 src/main/print-escp2.c:304
+#: src/main/print-escp2.c:310 src/main/print-escp2.c:316
+#: src/main/print-escp2.c:322 src/main/print-escp2.c:328
+#: src/main/print-lexmark.c:296 src/main/print-pcl.c:1226
 msgid "Advanced Printer Functionality"
 msgstr ""
 
-#: src/main/print-canon.c:1505 src/main/print-escp2.c:320
-#: src/main/print-lexmark.c:302 src/main/print-olympus.c:1307
-#: src/main/print-pcl.c:1229 src/main/print-ps.c:103 src/main/print-raw.c:86
+#: src/main/print-canon.c:264 src/main/print-escp2.c:334
+#: src/main/print-lexmark.c:302 src/main/print-olympus.c:1603
+#: src/main/print-pcl.c:1232 src/main/print-ps.c:103 src/main/print-raw.c:86
 msgid "Printing Mode"
 msgstr ""
 
-#: src/main/print-canon.c:1505 src/main/print-color.c:184
+#: src/main/print-canon.c:264 src/main/print-color.c:184
 #: src/main/print-color.c:192 src/main/print-color.c:200
-#: src/main/print-color.c:208 src/main/print-escp2.c:320
-#: src/main/print-escp2.c:326 src/main/print-lexmark.c:302
-#: src/main/print-olympus.c:1307 src/main/print-pcl.c:1229
+#: src/main/print-color.c:208 src/main/print-escp2.c:334
+#: src/main/print-escp2.c:340 src/main/print-lexmark.c:302
+#: src/main/print-olympus.c:1603 src/main/print-pcl.c:1232
 #: src/main/print-ps.c:103 src/main/print-raw.c:86
 msgid "Core Parameter"
 msgstr ""
 
-#: src/main/print-canon.c:1506 src/main/print-escp2.c:321
-#: src/main/print-lexmark.c:303 src/main/print-olympus.c:1308
-#: src/main/print-pcl.c:1230 src/main/print-ps.c:104 src/main/print-raw.c:87
+#: src/main/print-canon.c:265 src/main/print-escp2.c:335
+#: src/main/print-lexmark.c:303 src/main/print-olympus.c:1604
+#: src/main/print-pcl.c:1233 src/main/print-ps.c:104 src/main/print-raw.c:87
 msgid "Printing Output Mode"
 msgstr ""
 
-#: src/main/print-canon.c:1511 src/main/print-pcl.c:1235
+#: src/main/print-canon.c:270 src/main/print-pcl.c:1238
 msgid "Double-Sided Printing"
 msgstr ""
 
-#: src/main/print-canon.c:1512 src/main/print-pcl.c:1236
+#: src/main/print-canon.c:271 src/main/print-pcl.c:1239
 msgid "Duplex/Tumble Setting"
 msgstr ""
 
-#: src/main/print-canon.c:1534 src/main/print-escp2.c:415
-#: src/main/print-lexmark.c:325 src/main/print-pcl.c:1258
+#: src/main/print-canon.c:293 src/main/print-escp2.c:432
+#: src/main/print-lexmark.c:325 src/main/print-pcl.c:1261
 msgid "Cyan Density"
 msgstr ""
 
-#: src/main/print-canon.c:1535 src/main/print-escp2.c:416
-#: src/main/print-lexmark.c:326 src/main/print-pcl.c:1259
+#: src/main/print-canon.c:294 src/main/print-escp2.c:433
+#: src/main/print-lexmark.c:326 src/main/print-pcl.c:1262
 msgid "Adjust the cyan density"
 msgstr ""
 
-#: src/main/print-canon.c:1542 src/main/print-escp2.c:423
-#: src/main/print-lexmark.c:333 src/main/print-pcl.c:1266
+#: src/main/print-canon.c:301 src/main/print-escp2.c:440
+#: src/main/print-lexmark.c:333 src/main/print-pcl.c:1269
 msgid "Magenta Density"
 msgstr ""
 
-#: src/main/print-canon.c:1543 src/main/print-escp2.c:424
-#: src/main/print-lexmark.c:334 src/main/print-pcl.c:1267
+#: src/main/print-canon.c:302 src/main/print-escp2.c:441
+#: src/main/print-lexmark.c:334 src/main/print-pcl.c:1270
 msgid "Adjust the magenta density"
 msgstr ""
 
-#: src/main/print-canon.c:1550 src/main/print-escp2.c:431
-#: src/main/print-lexmark.c:341 src/main/print-pcl.c:1274
+#: src/main/print-canon.c:309 src/main/print-escp2.c:448
+#: src/main/print-lexmark.c:341 src/main/print-pcl.c:1277
 msgid "Yellow Density"
 msgstr ""
 
-#: src/main/print-canon.c:1551 src/main/print-escp2.c:432
-#: src/main/print-lexmark.c:342 src/main/print-pcl.c:1275
+#: src/main/print-canon.c:310 src/main/print-escp2.c:449
+#: src/main/print-lexmark.c:342 src/main/print-pcl.c:1278
 msgid "Adjust the yellow density"
 msgstr ""
 
-#: src/main/print-canon.c:1558 src/main/print-escp2.c:439
-#: src/main/print-lexmark.c:349 src/main/print-pcl.c:1282
+#: src/main/print-canon.c:317 src/main/print-escp2.c:456
+#: src/main/print-lexmark.c:349 src/main/print-pcl.c:1285
 msgid "Black Density"
 msgstr ""
 
-#: src/main/print-canon.c:1559 src/main/print-escp2.c:440
-#: src/main/print-lexmark.c:350 src/main/print-pcl.c:1283
+#: src/main/print-canon.c:318 src/main/print-escp2.c:457
+#: src/main/print-lexmark.c:350 src/main/print-pcl.c:1286
 msgid "Adjust the black density"
 msgstr ""
 
-#: src/main/print-canon.c:1566 src/main/print-canon.c:1567
-#: src/main/print-escp2.c:471 src/main/print-escp2.c:472
+#: src/main/print-canon.c:325 src/main/print-canon.c:326
+#: src/main/print-escp2.c:488 src/main/print-escp2.c:489
 #: src/main/print-lexmark.c:357 src/main/print-lexmark.c:358
-#: src/main/print-pcl.c:1290 src/main/print-pcl.c:1291
+#: src/main/print-pcl.c:1293 src/main/print-pcl.c:1294
 msgid "Light Cyan Transition"
 msgstr ""
 
-#: src/main/print-canon.c:1566 src/main/print-canon.c:1574
-#: src/main/print-canon.c:1582 src/main/print-escp2.c:471
-#: src/main/print-escp2.c:479 src/main/print-escp2.c:487
-#: src/main/print-escp2.c:495 src/main/print-escp2.c:503
-#: src/main/print-escp2.c:511 src/main/print-escp2.c:519
-#: src/main/print-escp2.c:527 src/main/print-escp2.c:535
+#: src/main/print-canon.c:325 src/main/print-canon.c:333
+#: src/main/print-canon.c:341 src/main/print-escp2.c:488
+#: src/main/print-escp2.c:496 src/main/print-escp2.c:504
+#: src/main/print-escp2.c:512 src/main/print-escp2.c:520
+#: src/main/print-escp2.c:528 src/main/print-escp2.c:536
+#: src/main/print-escp2.c:544 src/main/print-escp2.c:552
 #: src/main/print-lexmark.c:357 src/main/print-lexmark.c:365
-#: src/main/print-pcl.c:1290 src/main/print-pcl.c:1298
+#: src/main/print-pcl.c:1293 src/main/print-pcl.c:1301
 msgid "Advanced Ink Adjustment"
 msgstr ""
 
-#: src/main/print-canon.c:1574 src/main/print-canon.c:1575
-#: src/main/print-escp2.c:479 src/main/print-escp2.c:480
+#: src/main/print-canon.c:333 src/main/print-canon.c:334
+#: src/main/print-escp2.c:496 src/main/print-escp2.c:497
 #: src/main/print-lexmark.c:365 src/main/print-lexmark.c:366
-#: src/main/print-pcl.c:1298 src/main/print-pcl.c:1299
+#: src/main/print-pcl.c:1301 src/main/print-pcl.c:1302
 msgid "Light Magenta Transition"
 msgstr ""
 
-#: src/main/print-canon.c:1582 src/main/print-canon.c:1583
+#: src/main/print-canon.c:341 src/main/print-canon.c:342
 msgid "Light Yellow Transition"
 msgstr ""
 
-#: src/main/print-canon.c:1604 src/main/print-pcl.c:1479
-#: src/main/escp2-resolutions.c:547 src/main/escp2-resolutions.c:555
-#: src/main/escp2-resolutions.c:566 src/main/escp2-resolutions.c:578
+#: src/main/print-canon.c:361 src/main/print-pcl.c:1482
+#: src/main/escp2-resolutions.c:557 src/main/escp2-resolutions.c:565
+#: src/main/escp2-resolutions.c:576 src/main/escp2-resolutions.c:588
 msgid "Off"
 msgstr ""
 
-#: src/main/print-canon.c:1606 src/main/print-pcl.c:1481
+#: src/main/print-canon.c:362 src/main/print-pcl.c:1483
+msgid "Long Edge (Standard)"
+msgstr ""
+
+#: src/main/print-canon.c:363 src/main/print-pcl.c:1484
 msgid "Short Edge (Flip)"
 msgstr ""
 
-#: src/main/print-canon.c:1920 src/main/print-lexmark.c:1113
-msgid "Auto Sheet Feeder"
+#: src/main/print-canon.c:588 src/main/print-escp2.c:1633
+#: src/main/xmli18n-tmp.h:6
+msgid "CD - 5 inch"
 msgstr ""
 
-#: src/main/print-canon.c:1921 src/main/print-lexmark.c:1114
-msgid "Manual with Pause"
+#: src/main/print-canon.c:590 src/main/print-escp2.c:1635
+#: src/main/xmli18n-tmp.h:7
+msgid "CD - 3 inch"
 msgstr ""
 
-#: src/main/print-canon.c:1922 src/main/print-lexmark.c:1115
-msgid "Manual without Pause"
+#: src/main/print-canon.c:592 src/main/print-escp2.c:1637
+#: src/main/xmli18n-tmp.h:8
+msgid "CD - Custom"
 msgstr ""
 
-#: src/main/print-canon.c:1923
-msgid "Cassette"
+#: src/main/print-canon.c:615 src/main/print-escp2.c:1662
+msgid "Normal"
 msgstr ""
 
-#: src/main/print-canon.c:1924
-msgid "CD tray"
+#: src/main/print-canon.c:617 src/main/print-escp2.c:1664
+msgid "Print To Hub"
 msgstr ""
 
-#: src/main/print-canon.c:2049
-msgid "Photo CcMmYK Color"
-msgstr ""
-
-#: src/main/print-canon.c:2052
-msgid "Photo CcMmY Color"
-msgstr ""
-
-#: src/main/print-canon.c:2055
-msgid "CMYK Color"
-msgstr ""
-
-#: src/main/print-canon.c:2058
-msgid "CMY Color"
-msgstr ""
-
-#: src/main/print-canon.c:2061 src/main/print-color.c:314
-#: src/main/print-escp2-data.c:738 src/main/print-escp2-data.c:751
-#: src/main/print-escp2-data.c:761 src/main/print-escp2-data.c:768
-#: src/main/print-escp2-data.c:780 src/main/print-escp2-data.c:792
-#: src/main/print-escp2-data.c:805 src/main/print-escp2-data.c:818
-#: src/main/print-escp2-data.c:824 src/main/print-escp2-data.c:848
-#: src/main/print-escp2-data.c:861 src/main/print-lexmark.c:613
-#: src/gutenprintui/panel.c:2143 src/gutenprintui2/panel.c:2144
-#: src/escputil/escputil.c:981 src/escputil/escputil.c:1002
-#: src/escputil/escputil.c:1206
-msgid "Black"
-msgstr ""
-
-#: src/main/print-canon.c:2106 src/main/print-escp2.c:1868
-#: src/main/print-lexmark.c:1279 src/main/print-olympus.c:1562
-#: src/main/print-pcl.c:1773 src/main/print-ps.c:170 src/main/print-raw.c:135
-#: src/gutenprintui/panel.c:285 src/gutenprintui2/panel.c:285
+#: src/main/print-canon.c:732 src/main/print-escp2.c:1996
+#: src/main/print-lexmark.c:1279 src/main/print-olympus.c:1858
+#: src/main/print-pcl.c:1776 src/main/print-ps.c:170 src/main/print-raw.c:135
+#: src/gutenprintui/panel.c:288 src/gutenprintui2/panel.c:288
 msgid "Color"
 msgstr ""
 
-#: src/main/print-canon.c:2108 src/main/print-escp2.c:1870
-#: src/main/print-lexmark.c:1281 src/main/print-pcl.c:1775
+#: src/main/print-canon.c:734 src/main/print-escp2.c:1998
+#: src/main/print-lexmark.c:1281 src/main/print-pcl.c:1778
 #: src/main/print-ps.c:172 src/main/print-raw.c:137
 msgid "Black and White"
 msgstr ""
@@ -625,9 +462,9 @@ msgstr ""
 msgid "Pre-Dithered"
 msgstr ""
 
-#: src/main/print-color.c:121 src/main/escp2-channels.c:820
-#: src/main/escp2-channels.c:833 src/main/escp2-channels.c:847
-#: src/gutenprintui/panel.c:286 src/gutenprintui2/panel.c:286
+#: src/main/print-color.c:121 src/main/escp2-channels.c:878
+#: src/main/escp2-channels.c:891 src/main/escp2-channels.c:905
+#: src/gutenprintui/panel.c:289 src/gutenprintui2/panel.c:289
 msgid "Grayscale"
 msgstr ""
 
@@ -653,10 +490,6 @@ msgstr ""
 
 #: src/main/print-color.c:165 src/main/print-color.c:446
 msgid "Channel "
-msgstr ""
-
-#: src/main/print-color.c:165
-msgid " Gamma"
 msgstr ""
 
 #: src/main/print-color.c:165 src/main/print-color.c:216
@@ -711,7 +544,7 @@ msgid "Output image type"
 msgstr ""
 
 #: src/main/print-color.c:208 src/main/print-color.c:209
-#: src/main/print-escp2.c:326
+#: src/main/print-escp2.c:340
 msgid "Raw Channels"
 msgstr ""
 
@@ -769,13 +602,13 @@ msgstr ""
 msgid "Gamma value assumed by application"
 msgstr ""
 
-#: src/main/print-color.c:266 src/main/print-escp2-data.c:739
-#: src/main/print-escp2-data.c:748 src/main/print-escp2-data.c:758
-#: src/main/print-escp2-data.c:769 src/main/print-escp2-data.c:781
-#: src/main/print-escp2-data.c:793 src/main/print-escp2-data.c:806
-#: src/main/print-escp2-data.c:819 src/main/print-escp2-data.c:833
-#: src/main/print-escp2-data.c:847 src/main/print-escp2-data.c:862
-#: src/gutenprintui/panel.c:2122 src/gutenprintui2/panel.c:2123
+#: src/main/print-color.c:266 src/main/escp2-channels.c:2909
+#: src/main/escp2-channels.c:2918 src/main/escp2-channels.c:2928
+#: src/main/escp2-channels.c:2939 src/main/escp2-channels.c:2951
+#: src/main/escp2-channels.c:2963 src/main/escp2-channels.c:2976
+#: src/main/escp2-channels.c:2989 src/main/escp2-channels.c:3003
+#: src/main/escp2-channels.c:3017 src/main/escp2-channels.c:3032
+#: src/gutenprintui/panel.c:2140 src/gutenprintui2/panel.c:2141
 #: src/escputil/escputil.c:984 src/escputil/escputil.c:1003
 #: src/escputil/escputil.c:1207
 msgid "Cyan"
@@ -785,13 +618,13 @@ msgstr ""
 msgid "Adjust the cyan gamma"
 msgstr ""
 
-#: src/main/print-color.c:274 src/main/print-escp2-data.c:740
-#: src/main/print-escp2-data.c:750 src/main/print-escp2-data.c:759
-#: src/main/print-escp2-data.c:770 src/main/print-escp2-data.c:783
-#: src/main/print-escp2-data.c:794 src/main/print-escp2-data.c:807
-#: src/main/print-escp2-data.c:820 src/main/print-escp2-data.c:832
-#: src/main/print-escp2-data.c:846 src/main/print-escp2-data.c:863
-#: src/gutenprintui/panel.c:2129 src/gutenprintui2/panel.c:2130
+#: src/main/print-color.c:274 src/main/escp2-channels.c:2910
+#: src/main/escp2-channels.c:2920 src/main/escp2-channels.c:2929
+#: src/main/escp2-channels.c:2940 src/main/escp2-channels.c:2953
+#: src/main/escp2-channels.c:2964 src/main/escp2-channels.c:2977
+#: src/main/escp2-channels.c:2990 src/main/escp2-channels.c:3002
+#: src/main/escp2-channels.c:3016 src/main/escp2-channels.c:3033
+#: src/gutenprintui/panel.c:2147 src/gutenprintui2/panel.c:2148
 #: src/escputil/escputil.c:985 src/escputil/escputil.c:1004
 #: src/escputil/escputil.c:1208
 msgid "Magenta"
@@ -801,13 +634,13 @@ msgstr ""
 msgid "Adjust the magenta gamma"
 msgstr ""
 
-#: src/main/print-color.c:282 src/main/print-escp2-data.c:741
-#: src/main/print-escp2-data.c:749 src/main/print-escp2-data.c:760
-#: src/main/print-escp2-data.c:771 src/main/print-escp2-data.c:785
-#: src/main/print-escp2-data.c:795 src/main/print-escp2-data.c:808
-#: src/main/print-escp2-data.c:821 src/main/print-escp2-data.c:831
-#: src/main/print-escp2-data.c:845 src/main/print-escp2-data.c:864
-#: src/gutenprintui/panel.c:2136 src/gutenprintui2/panel.c:2137
+#: src/main/print-color.c:282 src/main/escp2-channels.c:2911
+#: src/main/escp2-channels.c:2919 src/main/escp2-channels.c:2930
+#: src/main/escp2-channels.c:2941 src/main/escp2-channels.c:2955
+#: src/main/escp2-channels.c:2965 src/main/escp2-channels.c:2978
+#: src/main/escp2-channels.c:2991 src/main/escp2-channels.c:3001
+#: src/main/escp2-channels.c:3015 src/main/escp2-channels.c:3034
+#: src/gutenprintui/panel.c:2154 src/gutenprintui2/panel.c:2155
 #: src/escputil/escputil.c:986 src/escputil/escputil.c:1005
 #: src/escputil/escputil.c:1209
 msgid "Yellow"
@@ -817,9 +650,9 @@ msgstr ""
 msgid "Adjust the yellow gamma"
 msgstr ""
 
-#: src/main/print-color.c:290 src/main/print-escp2-data.c:836
-#: src/main/print-escp2-data.c:849 src/gutenprintui/panel.c:2150
-#: src/gutenprintui2/panel.c:2151 src/escputil/escputil.c:993
+#: src/main/print-color.c:290 src/main/escp2-channels.c:3006
+#: src/main/escp2-channels.c:3019 src/gutenprintui/panel.c:2168
+#: src/gutenprintui2/panel.c:2169 src/escputil/escputil.c:993
 #: src/escputil/escputil.c:1011
 msgid "Red"
 msgstr ""
@@ -828,8 +661,8 @@ msgstr ""
 msgid "Adjust the red gamma"
 msgstr ""
 
-#: src/main/print-color.c:298 src/gutenprintui/panel.c:2157
-#: src/gutenprintui2/panel.c:2158
+#: src/main/print-color.c:298 src/gutenprintui/panel.c:2175
+#: src/gutenprintui2/panel.c:2176
 msgid "Green"
 msgstr ""
 
@@ -837,9 +670,9 @@ msgstr ""
 msgid "Adjust the green gamma"
 msgstr ""
 
-#: src/main/print-color.c:306 src/main/print-escp2-data.c:837
-#: src/main/print-escp2-data.c:850 src/gutenprintui/panel.c:2164
-#: src/gutenprintui2/panel.c:2165 src/escputil/escputil.c:994
+#: src/main/print-color.c:306 src/main/escp2-channels.c:3007
+#: src/main/escp2-channels.c:3020 src/gutenprintui/panel.c:2182
+#: src/gutenprintui2/panel.c:2183 src/escputil/escputil.c:994
 #: src/escputil/escputil.c:1012
 msgid "Blue"
 msgstr ""
@@ -848,11 +681,23 @@ msgstr ""
 msgid "Adjust the blue gamma"
 msgstr ""
 
+#: src/main/print-color.c:314 src/main/print-lexmark.c:613
+#: src/main/escp2-channels.c:2908 src/main/escp2-channels.c:2921
+#: src/main/escp2-channels.c:2931 src/main/escp2-channels.c:2938
+#: src/main/escp2-channels.c:2950 src/main/escp2-channels.c:2962
+#: src/main/escp2-channels.c:2975 src/main/escp2-channels.c:2988
+#: src/main/escp2-channels.c:2994 src/main/escp2-channels.c:3018
+#: src/main/escp2-channels.c:3031 src/gutenprintui/panel.c:2161
+#: src/gutenprintui2/panel.c:2162 src/escputil/escputil.c:981
+#: src/escputil/escputil.c:1002 src/escputil/escputil.c:1206
+msgid "Black"
+msgstr ""
+
 #: src/main/print-color.c:315
 msgid "Adjust the black gamma"
 msgstr ""
 
-#: src/main/print-color.c:322 src/main/print-olympus.c:1330
+#: src/main/print-color.c:322 src/main/print-olympus.c:1626
 msgid "Cyan Balance"
 msgstr ""
 
@@ -865,7 +710,7 @@ msgstr ""
 msgid "Adjust the cyan gray balance"
 msgstr ""
 
-#: src/main/print-color.c:330 src/main/print-olympus.c:1338
+#: src/main/print-color.c:330 src/main/print-olympus.c:1634
 msgid "Magenta Balance"
 msgstr ""
 
@@ -873,7 +718,7 @@ msgstr ""
 msgid "Adjust the magenta gray balance"
 msgstr ""
 
-#: src/main/print-color.c:338 src/main/print-olympus.c:1346
+#: src/main/print-color.c:338 src/main/print-olympus.c:1642
 msgid "Yellow Balance"
 msgstr ""
 
@@ -897,9 +742,9 @@ msgstr ""
 
 #: src/main/print-color.c:357 src/main/print-color.c:365
 #: src/main/print-color.c:373 src/main/print-color.c:381
-#: src/main/print-color.c:545 src/main/print-escp2.c:332
-#: src/main/print-escp2.c:338 src/main/print-escp2.c:344
-#: src/main/print-escp2.c:350 src/main/print-escp2.c:356
+#: src/main/print-color.c:545 src/main/print-escp2.c:346
+#: src/main/print-escp2.c:352 src/main/print-escp2.c:358
+#: src/main/print-escp2.c:364 src/main/print-escp2.c:370
 msgid "Advanced Output Control"
 msgstr ""
 
@@ -929,10 +774,6 @@ msgstr ""
 
 #: src/main/print-color.c:382
 msgid "Upper bound of gray component reduction"
-msgstr ""
-
-#: src/main/print-color.c:446
-msgid " Curve"
 msgstr ""
 
 #: src/main/print-color.c:447 src/main/print-color.c:457
@@ -1048,530 +889,354 @@ msgstr ""
 msgid "Gray component reduction curve"
 msgstr ""
 
-#: src/main/print-color.c:1668
+#: src/main/print-color.c:1670
 msgid "Traditional Gutenprint color conversion"
 msgstr ""
 
-#: src/main/printers.c:503
+#: src/main/printers.c:506
 #, c-format
 msgid "Value must be set for %s\n"
 msgstr ""
 
-#: src/main/printers.c:516 src/main/printers.c:521
+#: src/main/printers.c:519 src/main/printers.c:524
 #, c-format
 msgid "`%s' is not a valid %s\n"
 msgstr ""
 
-#: src/main/printers.c:540
+#: src/main/printers.c:543
 #, c-format
 msgid "%s must be between %f and %f (is %f)\n"
 msgstr ""
 
-#: src/main/printers.c:562 src/main/printers.c:586
+#: src/main/printers.c:565 src/main/printers.c:589
 #, c-format
 msgid "%s must be between %d and %d (is %d)\n"
 msgstr ""
 
-#: src/main/printers.c:617
+#: src/main/printers.c:620
 #, c-format
 msgid "%s bounds must be between %f and %f\n"
 msgstr ""
 
-#: src/main/printers.c:625
+#: src/main/printers.c:628
 #, c-format
 msgid "%s wrap mode must be %s\n"
 msgstr ""
 
-#: src/main/printers.c:629
+#: src/main/printers.c:632
 msgid "no wrap"
 msgstr ""
 
-#: src/main/printers.c:629
+#: src/main/printers.c:632
 msgid "wrap around"
 msgstr ""
 
-#: src/main/printers.c:673
+#: src/main/printers.c:676
 #, c-format
 msgid "Unknown type parameter %s (%d)\n"
 msgstr ""
 
-#: src/main/printers.c:686 src/main/printers.c:697
+#: src/main/printers.c:689 src/main/printers.c:700
 #, c-format
 msgid "%s out of range (value %d, min %d, max %d)\n"
 msgstr ""
 
-#: src/main/printers.c:755
+#: src/main/printers.c:761
 msgid "Page size is not valid\n"
-msgstr ""
-
-#: src/main/printers.c:776
-#, c-format
-msgid "Top margin must not be less than %d\n"
 msgstr ""
 
 #: src/main/printers.c:782
 #, c-format
-msgid "Left margin must not be less than %d\n"
+msgid "Top margin must not be less than %d\n"
 msgstr ""
 
 #: src/main/printers.c:788
-msgid "Height must be greater than zero\n"
+#, c-format
+msgid "Left margin must not be less than %d\n"
 msgstr ""
 
 #: src/main/printers.c:794
-msgid "Width must be greater than zero\n"
+msgid "Height must be greater than zero\n"
 msgstr ""
 
 #: src/main/printers.c:800
+msgid "Width must be greater than zero\n"
+msgstr ""
+
+#: src/main/printers.c:806
 #, c-format
 msgid ""
 "Image is too wide for the page: left margin is %d, width %d, right edge is %"
 "d\n"
 msgstr ""
 
-#: src/main/printers.c:807
+#: src/main/printers.c:813
 #, c-format
 msgid ""
 "Image is too long for the page: top margin is %d, height %d, bottom edge is %"
 "d\n"
 msgstr ""
 
-#: src/main/print-escp2-data.c:311 src/main/print-escp2-data.c:335
-#: src/main/print-escp2-data.c:368 src/main/print-escp2-data.c:419
-#: src/main/print-escp2-data.c:461 src/main/print-escp2-data.c:503
-#: src/main/print-escp2-data.c:596 src/main/print-escp2-data.c:690
-#: src/main/print-escp2-data.c:705 src/main/print-escp2-data.c:718
-#: src/main/print-escp2.c:1628 src/main/print-escp2.c:1720
-#: src/main/print-escp2.c:1732 src/main/print-pcl.c:227
-#: src/main/escp2-channels.c:2482 src/main/generic-options.c:36
-#: src/gutenprintui/panel.c:2583 src/gutenprintui2/panel.c:2609
-msgid "Standard"
-msgstr ""
-
-#: src/main/print-escp2-data.c:320 src/main/print-escp2-data.c:446
-#: src/main/print-escp2-data.c:488 src/main/print-escp2-data.c:530
-#: src/main/print-escp2-data.c:605
-msgid "Roll Feed"
-msgstr ""
-
-#: src/main/print-escp2-data.c:344 src/main/print-escp2-data.c:395
-msgid "Roll Feed (cut each page)"
-msgstr ""
-
-#: src/main/print-escp2-data.c:353 src/main/print-escp2-data.c:404
-msgid "Roll Feed (do not cut)"
-msgstr ""
-
-#: src/main/print-escp2-data.c:377 src/main/print-escp2-data.c:428
-msgid "Manual Feed"
-msgstr ""
-
-#: src/main/print-escp2-data.c:386 src/main/print-escp2-data.c:437
-#: src/main/print-escp2-data.c:539 src/main/print-escp2-data.c:572
-msgid "Print to CD"
-msgstr ""
-
-#: src/main/print-escp2-data.c:470 src/main/print-escp2-data.c:512
-msgid "Manual Sheet Guide"
-msgstr ""
-
-#: src/main/print-escp2-data.c:479 src/main/print-escp2-data.c:521
-msgid "Manual Feed (Front)"
-msgstr ""
-
-#: src/main/print-escp2-data.c:554
-msgid "Rear Tray"
-msgstr ""
-
-#: src/main/print-escp2-data.c:563
-msgid "Front Tray"
-msgstr ""
-
-#: src/main/print-escp2-data.c:581
-msgid "Photo Board"
-msgstr ""
-
-#: src/main/print-escp2-data.c:620
-msgid "Cut Sheet Bin 1"
-msgstr ""
-
-#: src/main/print-escp2-data.c:629
-msgid "Cut Sheet Bin 2"
-msgstr ""
-
-#: src/main/print-escp2-data.c:638
-msgid "Cut Sheet Autoselect"
-msgstr ""
-
-#: src/main/print-escp2-data.c:647
-msgid "Manual Selection"
-msgstr ""
-
-#: src/main/print-escp2-data.c:687 src/main/print-escp2-data.c:702
-#: src/main/generic-options.c:33
-msgid "Fast Economy"
-msgstr ""
-
-#: src/main/print-escp2-data.c:688 src/main/print-escp2-data.c:703
-#: src/main/generic-options.c:34
-msgid "Economy"
-msgstr ""
-
-#: src/main/print-escp2-data.c:689 src/main/print-escp2-data.c:704
-#: src/main/print-escp2-data.c:717 src/main/generic-options.c:35
-msgid "Draft"
-msgstr ""
-
-#: src/main/print-escp2-data.c:691 src/main/print-escp2-data.c:706
-#: src/main/print-escp2-data.c:720 src/main/generic-options.c:37
-msgid "High"
-msgstr ""
-
-#: src/main/print-escp2-data.c:692 src/main/print-escp2-data.c:707
-#: src/main/print-escp2-data.c:719 src/main/generic-options.c:38
-msgid "Photo"
-msgstr ""
-
-#: src/main/print-escp2-data.c:693 src/main/print-escp2-data.c:708
-#: src/main/print-escp2-data.c:721 src/main/generic-options.c:39
-msgid "Super Photo"
-msgstr ""
-
-#: src/main/print-escp2-data.c:694 src/main/print-escp2-data.c:709
-#: src/main/print-escp2-data.c:722 src/main/generic-options.c:40
-msgid "Ultra Photo"
-msgstr ""
-
-#: src/main/print-escp2-data.c:695 src/main/print-escp2-data.c:710
-#: src/main/print-escp2-data.c:723 src/main/generic-options.c:41
-msgid "Best"
-msgstr ""
-
-#: src/main/print-escp2-data.c:772 src/main/print-escp2-data.c:782
-#: src/main/print-escp2-data.c:796 src/main/print-escp2-data.c:809
-#: src/main/print-escp2-data.c:822 src/main/print-escp2-data.c:859
-#: src/escputil/escputil.c:987 src/escputil/escputil.c:1210
-msgid "Light Cyan"
-msgstr ""
-
-#: src/main/print-escp2-data.c:773 src/main/print-escp2-data.c:784
-#: src/main/print-escp2-data.c:797 src/main/print-escp2-data.c:810
-#: src/main/print-escp2-data.c:823 src/main/print-escp2-data.c:858
-#: src/escputil/escputil.c:988 src/escputil/escputil.c:1211
-msgid "Light Magenta"
-msgstr ""
-
-#: src/main/print-escp2-data.c:798 src/main/print-escp2-data.c:860
-#: src/escputil/escputil.c:991
-msgid "Light Black"
-msgstr ""
-
-#: src/main/print-escp2-data.c:811
-msgid "Dark Yellow"
-msgstr ""
-
-#: src/main/print-escp2-data.c:834 src/main/escp2-channels.c:2439
-#: src/main/escp2-channels.c:2455 src/escputil/escputil.c:992
-msgid "Matte Black"
-msgstr ""
-
-#: src/main/print-escp2-data.c:835 src/main/escp2-channels.c:2435
-#: src/main/escp2-channels.c:2473 src/escputil/escputil.c:982
-msgid "Photo Black"
-msgstr ""
-
-#: src/main/print-escp2-data.c:838 src/escputil/escputil.c:995
-msgid "Gloss Optimizer"
-msgstr ""
-
-#: src/main/print-escp2-data.c:857 src/escputil/escputil.c:996
-msgid "Light Light Black"
-msgstr ""
-
-#: src/main/print-escp2.c:159
+#: src/main/print-escp2.c:161
 msgid "Automatic Printing Mode"
 msgstr ""
 
-#: src/main/print-escp2.c:159 src/main/print-escp2.c:171
+#: src/main/print-escp2.c:161 src/main/print-escp2.c:173
 #: src/main/generic-options.c:62
 msgid "Basic Output Adjustment"
 msgstr ""
 
-#: src/main/print-escp2.c:160
+#: src/main/print-escp2.c:162
 msgid "Automatic printing mode"
 msgstr ""
 
-#: src/main/print-escp2.c:171 src/main/print-escp2.c:172
+#: src/main/print-escp2.c:173 src/main/print-escp2.c:174
 #: src/main/generic-options.c:62 src/main/generic-options.c:63
 msgid "Print Quality"
 msgstr ""
 
-#: src/main/print-escp2.c:195
-msgid "CD Hub Size"
-msgstr ""
-
-#: src/main/print-escp2.c:196
-msgid "Print only outside of the hub of the CD, or all the way to the hole"
-msgstr ""
-
-#: src/main/print-escp2.c:201
-msgid "CD Horizontal Fine Adjustment"
-msgstr ""
-
-#: src/main/print-escp2.c:202 src/main/print-escp2.c:208
-msgid "Fine adjustment to horizontal position for CD printing"
-msgstr ""
-
-#: src/main/print-escp2.c:207
-msgid "CD Vertical Fine Adjustment"
-msgstr ""
-
-#: src/main/print-escp2.c:214
+#: src/main/print-escp2.c:228
 msgid "Resolution of the print"
 msgstr ""
 
-#: src/main/print-escp2.c:230
+#: src/main/print-escp2.c:244
 msgid "Enhanced Gloss"
 msgstr ""
 
-#: src/main/print-escp2.c:231
+#: src/main/print-escp2.c:245
 msgid "Add gloss enhancement"
 msgstr ""
 
-#: src/main/print-escp2.c:236
+#: src/main/print-escp2.c:250
 msgid "Ink Set"
 msgstr ""
 
-#: src/main/print-escp2.c:242
+#: src/main/print-escp2.c:256
 msgid "Printing Direction"
 msgstr ""
 
-#: src/main/print-escp2.c:242 src/main/print-escp2.c:254
+#: src/main/print-escp2.c:256 src/main/print-escp2.c:268
 msgid "Advanced Output Adjustment"
 msgstr ""
 
-#: src/main/print-escp2.c:243
+#: src/main/print-escp2.c:257
 msgid "Printing direction (unidirectional is higher quality, but slower)"
 msgstr ""
 
-#: src/main/print-escp2.c:248 src/main/print-olympus.c:1301
+#: src/main/print-escp2.c:262 src/main/print-olympus.c:1597
 msgid "Borderless"
 msgstr ""
 
-#: src/main/print-escp2.c:249 src/main/print-olympus.c:1302
+#: src/main/print-escp2.c:263 src/main/print-olympus.c:1598
 msgid "Print without borders"
 msgstr ""
 
-#: src/main/print-escp2.c:254
+#: src/main/print-escp2.c:268
 msgid "Interleave Method"
 msgstr ""
 
-#: src/main/print-escp2.c:255
+#: src/main/print-escp2.c:269
 msgid "Interleave pattern to use"
 msgstr ""
 
-#: src/main/print-escp2.c:260
+#: src/main/print-escp2.c:274
 msgid "Adjust dot size as necessary"
 msgstr ""
 
-#: src/main/print-escp2.c:261
+#: src/main/print-escp2.c:275
 msgid "Adjust dot size as necessary to achieve desired density"
 msgstr ""
 
-#: src/main/print-escp2.c:266 src/main/print-escp2.c:267
+#: src/main/print-escp2.c:280 src/main/print-escp2.c:281
 msgid "Output Order"
 msgstr ""
 
-#: src/main/print-escp2.c:272 src/main/print-escp2.c:273
+#: src/main/print-escp2.c:286 src/main/print-escp2.c:287
 msgid "Alignment Passes"
 msgstr ""
 
-#: src/main/print-escp2.c:278 src/main/print-escp2.c:279
+#: src/main/print-escp2.c:292 src/main/print-escp2.c:293
 msgid "Alignment Choices"
 msgstr ""
 
-#: src/main/print-escp2.c:284 src/main/print-escp2.c:285
+#: src/main/print-escp2.c:298 src/main/print-escp2.c:299
 msgid "Ink change command"
 msgstr ""
 
-#: src/main/print-escp2.c:290 src/main/print-escp2.c:291
+#: src/main/print-escp2.c:304 src/main/print-escp2.c:305
 msgid "Alternate Alignment Passes"
 msgstr ""
 
-#: src/main/print-escp2.c:296 src/main/print-escp2.c:297
-#: src/main/print-escp2.c:303
+#: src/main/print-escp2.c:310 src/main/print-escp2.c:311
+#: src/main/print-escp2.c:317
 msgid "Alternate Alignment Choices"
 msgstr ""
 
-#: src/main/print-escp2.c:302
+#: src/main/print-escp2.c:316
 msgid "Supports Packet Mode"
 msgstr ""
 
-#: src/main/print-escp2.c:314 src/main/print-escp2.c:315
+#: src/main/print-escp2.c:328 src/main/print-escp2.c:329
 msgid "Channel Names"
 msgstr ""
 
-#: src/main/print-escp2.c:327
+#: src/main/print-escp2.c:341
 msgid "Raw Channel Count"
 msgstr ""
 
-#: src/main/print-escp2.c:332
+#: src/main/print-escp2.c:346
 msgid "Cyan Map"
 msgstr ""
 
-#: src/main/print-escp2.c:333
+#: src/main/print-escp2.c:347
 msgid "Adjust the cyan map"
 msgstr ""
 
-#: src/main/print-escp2.c:338
+#: src/main/print-escp2.c:352
 msgid "Magenta Map"
 msgstr ""
 
-#: src/main/print-escp2.c:339
+#: src/main/print-escp2.c:353
 msgid "Adjust the magenta map"
 msgstr ""
 
-#: src/main/print-escp2.c:344
+#: src/main/print-escp2.c:358
 msgid "Yellow Map"
 msgstr ""
 
-#: src/main/print-escp2.c:345
+#: src/main/print-escp2.c:359
 msgid "Adjust the yellow map"
 msgstr ""
 
-#: src/main/print-escp2.c:350
+#: src/main/print-escp2.c:364
 msgid "Blue Map"
 msgstr ""
 
-#: src/main/print-escp2.c:351
+#: src/main/print-escp2.c:365
 msgid "Adjust the blue map"
 msgstr ""
 
-#: src/main/print-escp2.c:356
+#: src/main/print-escp2.c:370
 msgid "Red Map"
 msgstr ""
 
-#: src/main/print-escp2.c:357
+#: src/main/print-escp2.c:371
 msgid "Adjust the red map"
 msgstr ""
 
-#: src/main/print-escp2.c:447
+#: src/main/print-escp2.c:464
 msgid "Red Density"
 msgstr ""
 
-#: src/main/print-escp2.c:448
+#: src/main/print-escp2.c:465
 msgid "Adjust the red density"
 msgstr ""
 
-#: src/main/print-escp2.c:455
+#: src/main/print-escp2.c:472
 msgid "Blue Density"
 msgstr ""
 
-#: src/main/print-escp2.c:456
+#: src/main/print-escp2.c:473
 msgid "Adjust the blue density"
 msgstr ""
 
-#: src/main/print-escp2.c:463
+#: src/main/print-escp2.c:480
 msgid "Gloss Level"
 msgstr ""
 
-#: src/main/print-escp2.c:464
+#: src/main/print-escp2.c:481
 msgid "Adjust the gloss level"
 msgstr ""
 
-#: src/main/print-escp2.c:487 src/main/print-escp2.c:488
+#: src/main/print-escp2.c:504 src/main/print-escp2.c:505
 msgid "Dark Yellow Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:495 src/main/print-escp2.c:496
-#: src/main/print-escp2.c:503 src/main/print-escp2.c:504
+#: src/main/print-escp2.c:512 src/main/print-escp2.c:513
+#: src/main/print-escp2.c:520 src/main/print-escp2.c:521
 msgid "Gray Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:511 src/main/print-escp2.c:512
-#: src/main/print-escp2.c:535 src/main/print-escp2.c:536
+#: src/main/print-escp2.c:528 src/main/print-escp2.c:529
+#: src/main/print-escp2.c:552 src/main/print-escp2.c:553
 msgid "Light Gray Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:519 src/main/print-escp2.c:520
+#: src/main/print-escp2.c:536 src/main/print-escp2.c:537
 msgid "Dark Gray Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:527
+#: src/main/print-escp2.c:544
 msgid "Mid Gray Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:528
+#: src/main/print-escp2.c:545
 msgid "Medium Gray Transition"
 msgstr ""
 
-#: src/main/print-escp2.c:1525
+#: src/main/print-escp2.c:1620
 msgid "Full Manual Control"
 msgstr ""
 
-#: src/main/print-escp2.c:1527
+#: src/main/print-escp2.c:1622
 msgid "Automatic Setting Control"
 msgstr ""
 
-#: src/main/print-escp2.c:1538 src/main/xmli18n-tmp.h:6
-msgid "CD - 5 inch"
-msgstr ""
-
-#: src/main/print-escp2.c:1540 src/main/xmli18n-tmp.h:7
-msgid "CD - 3 inch"
-msgstr ""
-
-#: src/main/print-escp2.c:1562
-msgid "Normal"
-msgstr ""
-
-#: src/main/print-escp2.c:1564
-msgid "Print To Hub"
-msgstr ""
-
-#: src/main/print-escp2.c:1589 src/main/generic-options.c:213
+#: src/main/print-escp2.c:1717 src/main/generic-options.c:213
 #: src/main/generic-options.c:230
 msgid "Manual Control"
 msgstr ""
 
-#: src/main/print-escp2.c:1699 src/cups/genppd.c:1331
+#: src/main/print-escp2.c:1756 src/main/print-escp2.c:1848
+#: src/main/print-escp2.c:1860 src/main/print-pcl.c:230
+#: src/main/escp2-channels.c:2675 src/main/escp2-papers.c:1616
+#: src/main/escp2-papers.c:1640 src/main/escp2-papers.c:1673
+#: src/main/escp2-papers.c:1724 src/main/escp2-papers.c:1766
+#: src/main/escp2-papers.c:1808 src/main/escp2-papers.c:1901
+#: src/main/escp2-resolutions.c:640 src/main/escp2-resolutions.c:655
+#: src/main/escp2-resolutions.c:668 src/main/generic-options.c:36
+#: src/gutenprintui/panel.c:2601 src/gutenprintui2/panel.c:2627
+msgid "Standard"
+msgstr ""
+
+#: src/main/print-escp2.c:1827 src/cups/genppd.c:1537
 msgid "Automatic"
 msgstr ""
 
-#: src/main/print-escp2.c:1701
+#: src/main/print-escp2.c:1829
 msgid "Bidirectional"
 msgstr ""
 
-#: src/main/print-escp2.c:1703
+#: src/main/print-escp2.c:1831
 msgid "Unidirectional"
 msgstr ""
 
-#: src/main/print-escp2.c:1734
+#: src/main/print-escp2.c:1862
 msgid "Alternate Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1736
+#: src/main/print-escp2.c:1864
 msgid "Ascending Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1738
+#: src/main/print-escp2.c:1866
 msgid "Descending Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1740
+#: src/main/print-escp2.c:1868
 msgid "Ascending Double"
 msgstr ""
 
-#: src/main/print-escp2.c:1742
+#: src/main/print-escp2.c:1870
 msgid "Nearest Neighbor Avoidance"
 msgstr ""
 
-#: src/main/print-escp2.c:2168
+#: src/main/print-escp2.c:2313
 #, c-format
 msgid "This printer does not support raw printer output at depth %d\n"
 msgstr ""
 
-#: src/main/print-escp2.c:3141 src/main/print-olympus.c:1774
+#: src/main/print-escp2.c:3360 src/main/print-olympus.c:2310
 #: src/main/print-raw.c:217
 msgid "Print options not verified; cannot print.\n"
 msgstr ""
@@ -1625,247 +1290,300 @@ msgid "test print"
 msgstr ""
 
 #: src/main/print-lexmark.c:601 src/main/print-lexmark.c:671
-#: src/main/escp2-channels.c:1151 src/main/escp2-channels.c:1165
-#: src/main/escp2-channels.c:1179 src/main/escp2-channels.c:1193
-#: src/main/escp2-channels.c:1217 src/main/escp2-channels.c:1231
-#: src/main/escp2-channels.c:1245 src/main/escp2-channels.c:1259
-#: src/main/escp2-channels.c:1273 src/main/escp2-channels.c:1287
+#: src/main/escp2-channels.c:1223 src/main/escp2-channels.c:1237
+#: src/main/escp2-channels.c:1251 src/main/escp2-channels.c:1265
+#: src/main/escp2-channels.c:1289 src/main/escp2-channels.c:1303
+#: src/main/escp2-channels.c:1317 src/main/escp2-channels.c:1331
+#: src/main/escp2-channels.c:1345 src/main/escp2-channels.c:1359
+#: src/main/escp2-channels.c:1373
 msgid "Four Color Standard"
 msgstr ""
 
 #: src/main/print-lexmark.c:604 src/main/print-lexmark.c:674
-#: src/main/escp2-channels.c:1015 src/main/escp2-channels.c:1029
-#: src/main/escp2-channels.c:1043 src/main/escp2-channels.c:1057
-#: src/main/escp2-channels.c:1071 src/main/escp2-channels.c:1085
-#: src/main/escp2-channels.c:1109 src/main/escp2-channels.c:1115
-#: src/main/escp2-channels.c:1129
+#: src/main/escp2-channels.c:1073 src/main/escp2-channels.c:1087
+#: src/main/escp2-channels.c:1101 src/main/escp2-channels.c:1115
+#: src/main/escp2-channels.c:1129 src/main/escp2-channels.c:1143
+#: src/main/escp2-channels.c:1167 src/main/escp2-channels.c:1173
+#: src/main/escp2-channels.c:1187 src/main/escp2-channels.c:1201
 msgid "Three Color Composite"
 msgstr ""
 
 #: src/main/print-lexmark.c:607 src/main/print-lexmark.c:677
-#: src/main/escp2-channels.c:1361 src/main/escp2-channels.c:1375
-#: src/main/escp2-channels.c:1389 src/main/escp2-channels.c:1615
-#: src/main/escp2-channels.c:1630 src/main/escp2-channels.c:1645
-#: src/main/escp2-channels.c:1662
+#: src/main/escp2-channels.c:1461 src/main/escp2-channels.c:1475
+#: src/main/escp2-channels.c:1489 src/main/escp2-channels.c:1503
+#: src/main/escp2-channels.c:1729 src/main/escp2-channels.c:1744
+#: src/main/escp2-channels.c:1759 src/main/escp2-channels.c:1776
 msgid "Six Color Photo"
 msgstr ""
 
 #: src/main/print-lexmark.c:610 src/main/print-lexmark.c:680
-#: src/main/escp2-channels.c:1310 src/main/escp2-channels.c:1324
-#: src/main/escp2-channels.c:1338 src/main/escp2-channels.c:1559
-#: src/main/escp2-channels.c:1574 src/main/escp2-channels.c:1591
+#: src/main/escp2-channels.c:1396 src/main/escp2-channels.c:1410
+#: src/main/escp2-channels.c:1424 src/main/escp2-channels.c:1438
+#: src/main/escp2-channels.c:1673 src/main/escp2-channels.c:1688
+#: src/main/escp2-channels.c:1705
 msgid "Five Color Photo Composite"
 msgstr ""
 
-#: src/main/print-lexmark.c:860 src/main/escp2-papers.c:1166
-#: src/main/escp2-papers.c:1210 src/main/escp2-papers.c:1254
-#: src/main/escp2-papers.c:1302 src/main/escp2-papers.c:1350
-#: src/main/escp2-papers.c:1394
+#: src/main/print-lexmark.c:856 src/main/escp2-papers.c:1251
+#: src/main/escp2-papers.c:1295 src/main/escp2-papers.c:1339
+#: src/main/escp2-papers.c:1387 src/main/escp2-papers.c:1435
+#: src/main/escp2-papers.c:1479
+msgid "Plain Paper"
+msgstr ""
+
+#: src/main/print-lexmark.c:860 src/main/escp2-papers.c:1257
+#: src/main/escp2-papers.c:1301 src/main/escp2-papers.c:1345
+#: src/main/escp2-papers.c:1393 src/main/escp2-papers.c:1441
+#: src/main/escp2-papers.c:1485
 msgid "Glossy Film"
 msgstr ""
 
-#: src/main/print-lexmark.c:868 src/main/escp2-papers.c:1170
-#: src/main/escp2-papers.c:1214 src/main/escp2-papers.c:1258
-#: src/main/escp2-papers.c:1306 src/main/escp2-papers.c:1354
-#: src/main/escp2-papers.c:1398
+#: src/main/print-lexmark.c:864 src/main/escp2-papers.c:1259
+#: src/main/escp2-papers.c:1303 src/main/escp2-papers.c:1347
+#: src/main/escp2-papers.c:1395 src/main/escp2-papers.c:1443
+#: src/main/escp2-papers.c:1487
+msgid "Transparencies"
+msgstr ""
+
+#: src/main/print-lexmark.c:868 src/main/escp2-papers.c:1261
+#: src/main/escp2-papers.c:1305 src/main/escp2-papers.c:1349
+#: src/main/escp2-papers.c:1397 src/main/escp2-papers.c:1445
+#: src/main/escp2-papers.c:1489
 msgid "Envelopes"
 msgstr ""
 
-#: src/main/print-lexmark.c:872 src/main/escp2-papers.c:1174
-#: src/main/escp2-papers.c:1218 src/main/escp2-papers.c:1262
-#: src/main/escp2-papers.c:1310 src/main/escp2-papers.c:1358
-#: src/main/escp2-papers.c:1402
+#: src/main/print-lexmark.c:872 src/main/escp2-papers.c:1265
+#: src/main/escp2-papers.c:1309 src/main/escp2-papers.c:1353
+#: src/main/escp2-papers.c:1401 src/main/escp2-papers.c:1449
+#: src/main/escp2-papers.c:1493
 msgid "Matte Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:876 src/main/escp2-papers.c:1178
-#: src/main/escp2-papers.c:1222 src/main/escp2-papers.c:1266
-#: src/main/escp2-papers.c:1314 src/main/escp2-papers.c:1362
-#: src/main/escp2-papers.c:1406
+#: src/main/print-lexmark.c:876 src/main/escp2-papers.c:1269
+#: src/main/escp2-papers.c:1313 src/main/escp2-papers.c:1357
+#: src/main/escp2-papers.c:1405 src/main/escp2-papers.c:1453
+#: src/main/escp2-papers.c:1497
 msgid "Inkjet Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:880 src/main/escp2-papers.c:1180
-#: src/main/escp2-papers.c:1224 src/main/escp2-papers.c:1268
-#: src/main/escp2-papers.c:1316 src/main/escp2-papers.c:1364
-#: src/main/escp2-papers.c:1408
+#: src/main/print-lexmark.c:880 src/main/escp2-papers.c:1271
+#: src/main/escp2-papers.c:1315 src/main/escp2-papers.c:1359
+#: src/main/escp2-papers.c:1407 src/main/escp2-papers.c:1455
+#: src/main/escp2-papers.c:1499
 msgid "Photo Quality Inkjet Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:884 src/main/escp2-papers.c:1182
-#: src/main/escp2-papers.c:1226 src/main/escp2-papers.c:1270
-#: src/main/escp2-papers.c:1318 src/main/escp2-papers.c:1366
-#: src/main/escp2-papers.c:1410
+#: src/main/print-lexmark.c:884 src/main/escp2-papers.c:1273
+#: src/main/escp2-papers.c:1317 src/main/escp2-papers.c:1361
+#: src/main/escp2-papers.c:1409 src/main/escp2-papers.c:1457
+#: src/main/escp2-papers.c:1501
 msgid "Photo Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:888 src/main/escp2-papers.c:1184
-#: src/main/escp2-papers.c:1228 src/main/escp2-papers.c:1272
-#: src/main/escp2-papers.c:1320 src/main/escp2-papers.c:1368
-#: src/main/escp2-papers.c:1412 src/main/escp2-papers.c:1436
+#: src/main/print-lexmark.c:888 src/main/escp2-papers.c:1275
+#: src/main/escp2-papers.c:1319 src/main/escp2-papers.c:1363
+#: src/main/escp2-papers.c:1411 src/main/escp2-papers.c:1459
+#: src/main/escp2-papers.c:1503 src/main/escp2-papers.c:1527
 msgid "Premium Glossy Photo Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:892 src/main/escp2-papers.c:1188
-#: src/main/escp2-papers.c:1232 src/main/escp2-papers.c:1276
-#: src/main/escp2-papers.c:1324 src/main/escp2-papers.c:1372
-#: src/main/escp2-papers.c:1416
+#: src/main/print-lexmark.c:892 src/main/escp2-papers.c:1279
+#: src/main/escp2-papers.c:1323 src/main/escp2-papers.c:1367
+#: src/main/escp2-papers.c:1415 src/main/escp2-papers.c:1463
+#: src/main/escp2-papers.c:1507
 msgid "Premium Luster Photo Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:896 src/main/escp2-papers.c:1190
-#: src/main/escp2-papers.c:1234 src/main/escp2-papers.c:1282
-#: src/main/escp2-papers.c:1330 src/main/escp2-papers.c:1374
-#: src/main/escp2-papers.c:1422
+#: src/main/print-lexmark.c:896 src/main/escp2-papers.c:1281
+#: src/main/escp2-papers.c:1325 src/main/escp2-papers.c:1373
+#: src/main/escp2-papers.c:1421 src/main/escp2-papers.c:1465
+#: src/main/escp2-papers.c:1513
 msgid "Photo Quality Glossy Paper"
 msgstr ""
 
-#: src/main/print-lexmark.c:900 src/main/escp2-papers.c:1192
-#: src/main/escp2-papers.c:1236 src/main/escp2-papers.c:1284
-#: src/main/escp2-papers.c:1332 src/main/escp2-papers.c:1376
-#: src/main/escp2-papers.c:1424
+#: src/main/print-lexmark.c:900 src/main/escp2-papers.c:1283
+#: src/main/escp2-papers.c:1327 src/main/escp2-papers.c:1375
+#: src/main/escp2-papers.c:1423 src/main/escp2-papers.c:1467
+#: src/main/escp2-papers.c:1515
 msgid "Ilford Heavy Paper"
 msgstr ""
 
-#: src/main/print-olympus.c:265
+#: src/main/print-lexmark.c:904 src/main/escp2-papers.c:1287
+#: src/main/escp2-papers.c:1331 src/main/escp2-papers.c:1379
+#: src/main/escp2-papers.c:1427 src/main/escp2-papers.c:1471
+#: src/main/escp2-papers.c:1519 src/main/escp2-papers.c:1529
+msgid "Other"
+msgstr ""
+
+#: src/main/print-lexmark.c:1113
+msgid "Auto Sheet Feeder"
+msgstr ""
+
+#: src/main/print-lexmark.c:1114
+msgid "Manual with Pause"
+msgstr ""
+
+#: src/main/print-lexmark.c:1115
+msgid "Manual without Pause"
+msgstr ""
+
+#: src/main/print-olympus.c:276
 msgid "Coated"
 msgstr ""
 
-#: src/main/print-olympus.c:266 src/cups/genppd.c:1448 src/cups/genppd.c:1463
-#: src/cups/genppd.c:1514
+#: src/main/print-olympus.c:277 src/cups/genppd.c:1691 src/cups/genppd.c:1714
+#: src/cups/genppd.c:1781
 msgid "None"
 msgstr ""
 
-#: src/main/print-olympus.c:859
+#: src/main/print-olympus.c:922 src/main/print-olympus.c:980
+#: src/main/print-olympus.c:1080
 msgid "Glossy"
 msgstr ""
 
-#: src/main/print-olympus.c:860
+#: src/main/print-olympus.c:923 src/main/print-olympus.c:981
+#: src/main/print-olympus.c:1081
 msgid "Texture"
 msgstr ""
 
-#: src/main/print-olympus.c:861
+#: src/main/print-olympus.c:982 src/main/print-olympus.c:1082
 msgid "Matte"
 msgstr ""
 
-#: src/main/print-olympus.c:1295 src/main/print-olympus.c:1296
+#: src/main/print-olympus.c:1591 src/main/print-olympus.c:1592
 msgid "Laminate Pattern"
 msgstr ""
 
-#: src/main/print-olympus.c:1331
+#: src/main/print-olympus.c:1627
 msgid "Adjust the cyan balance"
 msgstr ""
 
-#: src/main/print-olympus.c:1339
+#: src/main/print-olympus.c:1635
 msgid "Adjust the magenta balance"
 msgstr ""
 
-#: src/main/print-olympus.c:1347
+#: src/main/print-olympus.c:1643
 msgid "Adjust the yellow balance"
 msgstr ""
 
-#: src/main/print-olympus.c:1354
+#: src/main/print-olympus.c:1650
 msgid "Black Balance"
 msgstr ""
 
-#: src/main/print-olympus.c:1355
+#: src/main/print-olympus.c:1651
 msgid "Adjust the black balance"
 msgstr ""
 
-#: src/main/print-pcl.c:182
+#: src/main/print-pcl.c:185
 msgid "Plain"
 msgstr ""
 
-#: src/main/print-pcl.c:183
+#: src/main/print-pcl.c:186
 msgid "Bond"
 msgstr ""
 
-#: src/main/print-pcl.c:184
+#: src/main/print-pcl.c:187
 msgid "Premium"
 msgstr ""
 
-#: src/main/print-pcl.c:185
+#: src/main/print-pcl.c:188
 msgid "Glossy Photo"
 msgstr ""
 
-#: src/main/print-pcl.c:186
+#: src/main/print-pcl.c:189
 msgid "Transparency"
 msgstr ""
 
-#: src/main/print-pcl.c:187
+#: src/main/print-pcl.c:190
 msgid "Quick-dry Photo"
 msgstr ""
 
-#: src/main/print-pcl.c:188
+#: src/main/print-pcl.c:191
 msgid "Quick-dry Transparency"
 msgstr ""
 
-#: src/main/print-pcl.c:228 src/main/xmli18n-tmp.h:15
+#: src/main/print-pcl.c:231 src/main/xmli18n-tmp.h:16
 msgid "Manual"
 msgstr ""
 
-#: src/main/print-pcl.c:230
+#: src/main/print-pcl.c:233
 msgid "Tray 1"
 msgstr ""
 
-#: src/main/print-pcl.c:231 src/main/print-pcl.c:237
+#: src/main/print-pcl.c:234 src/main/print-pcl.c:240
 msgid "Tray 2"
 msgstr ""
 
-#: src/main/print-pcl.c:232
+#: src/main/print-pcl.c:235
 msgid "Tray 3"
 msgstr ""
 
-#: src/main/print-pcl.c:233
+#: src/main/print-pcl.c:236
 msgid "Tray 4"
 msgstr ""
 
-#: src/main/print-pcl.c:234
+#: src/main/print-pcl.c:237
 msgid "Portable Sheet Feeder"
 msgstr ""
 
-#: src/main/print-pcl.c:235
+#: src/main/print-pcl.c:238
 msgid "Desktop Sheet Feeder"
 msgstr ""
 
-#: src/main/print-pcl.c:236
+#: src/main/print-pcl.c:239
 msgid "Tray"
 msgstr ""
 
-#: src/main/print-pcl.c:238
+#: src/main/print-pcl.c:241
 msgid "Optional Source"
 msgstr ""
 
-#: src/main/print-pcl.c:239
+#: src/main/print-pcl.c:242
 msgid "Autoselect"
 msgstr ""
 
 #: src/main/print-pcl.c:256
-msgid "600x600 DPI monochrome"
+msgid "150x150 DPI"
+msgstr ""
+
+#: src/main/print-pcl.c:257
+msgid "300x300 DPI"
+msgstr ""
+
+#: src/main/print-pcl.c:258
+msgid "600x300 DPI"
 msgstr ""
 
 #: src/main/print-pcl.c:259
+msgid "600x600 DPI monochrome"
+msgstr ""
+
+#: src/main/print-pcl.c:260
+msgid "600x600 DPI"
+msgstr ""
+
+#: src/main/print-pcl.c:261
+msgid "1200x600 DPI"
+msgstr ""
+
+#: src/main/print-pcl.c:262
 msgid "2400x600 DPI"
 msgstr ""
 
-#: src/main/print-pcl.c:1467
+#: src/main/print-pcl.c:1470
 msgid "Color + Black Cartridges"
 msgstr ""
 
-#: src/main/print-pcl.c:1468
+#: src/main/print-pcl.c:1471
 msgid "Color + Photo Cartridges"
-msgstr ""
-
-#: src/main/print-pcl.c:1480
-msgid "Long Edge (Standard)"
 msgstr ""
 
 #: src/main/print-ps.c:97
 msgid "PPDFile"
 msgstr ""
 
-#: src/main/print-ps.c:98 src/gutenprintui/panel.c:1749
-#: src/gutenprintui2/panel.c:1749
+#: src/main/print-ps.c:98 src/gutenprintui/panel.c:1767
+#: src/gutenprintui2/panel.c:1767
 msgid "PPD File"
 msgstr ""
 
@@ -1873,162 +1591,265 @@ msgstr ""
 msgid "Image dimensions must match paper dimensions"
 msgstr ""
 
-#: src/main/escp2-channels.c:869 src/main/escp2-channels.c:882
+#: src/main/escp2-channels.c:927 src/main/escp2-channels.c:940
 msgid "Two Level Grayscale"
 msgstr ""
 
-#: src/main/escp2-channels.c:904 src/main/escp2-channels.c:917
+#: src/main/escp2-channels.c:962 src/main/escp2-channels.c:975
 msgid "Three Level Grayscale"
 msgstr ""
 
-#: src/main/escp2-channels.c:939 src/main/escp2-channels.c:952
-#: src/main/escp2-channels.c:965 src/main/escp2-channels.c:978
-#: src/main/escp2-channels.c:991 src/main/escp2-channels.c:2218
-#: src/main/escp2-channels.c:2241 src/main/escp2-channels.c:2261
-#: src/main/escp2-channels.c:2281 src/main/escp2-channels.c:2301
+#: src/main/escp2-channels.c:997 src/main/escp2-channels.c:1010
+#: src/main/escp2-channels.c:1023 src/main/escp2-channels.c:1036
+#: src/main/escp2-channels.c:1049 src/main/escp2-channels.c:2395
+#: src/main/escp2-channels.c:2418 src/main/escp2-channels.c:2438
+#: src/main/escp2-channels.c:2458 src/main/escp2-channels.c:2478
 msgid "Quadtone"
 msgstr ""
 
-#: src/main/escp2-channels.c:1411 src/main/escp2-channels.c:1425
+#: src/main/escp2-channels.c:1525 src/main/escp2-channels.c:1539
 msgid "Six Color Enhanced Composite"
 msgstr ""
 
-#: src/main/escp2-channels.c:1448 src/main/escp2-channels.c:1462
-#: src/main/escp2-channels.c:1476 src/main/escp2-channels.c:1512
+#: src/main/escp2-channels.c:1562 src/main/escp2-channels.c:1576
+#: src/main/escp2-channels.c:1590 src/main/escp2-channels.c:1626
 msgid "Seven Color Photo"
 msgstr ""
 
-#: src/main/escp2-channels.c:1498
+#: src/main/escp2-channels.c:1612
 msgid "Seven Color Enhanced"
 msgstr ""
 
-#: src/main/escp2-channels.c:1535
+#: src/main/escp2-channels.c:1649
 msgid "Eight Color Photo"
 msgstr ""
 
-#: src/main/escp2-channels.c:1683 src/main/escp2-channels.c:1689
+#: src/main/escp2-channels.c:1797 src/main/escp2-channels.c:1803
 msgid "One Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1695
+#: src/main/escp2-channels.c:1809
 msgid "One Color Raw Enhanced Gloss"
 msgstr ""
 
-#: src/main/escp2-channels.c:1708 src/main/escp2-channels.c:1720
+#: src/main/escp2-channels.c:1822 src/main/escp2-channels.c:1834
 msgid "Two Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1734 src/main/escp2-channels.c:1748
-#: src/main/escp2-channels.c:1775 src/main/escp2-channels.c:1788
-#: src/main/escp2-channels.c:1801 src/main/escp2-channels.c:1815
-#: src/main/escp2-channels.c:1829
+#: src/main/escp2-channels.c:1848 src/main/escp2-channels.c:1862
+#: src/main/escp2-channels.c:1889 src/main/escp2-channels.c:1902
+#: src/main/escp2-channels.c:1915 src/main/escp2-channels.c:1929
+#: src/main/escp2-channels.c:1943 src/main/escp2-channels.c:1956
 msgid "Three Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1762
+#: src/main/escp2-channels.c:1876
 msgid "Three Color Raw Gloss"
 msgstr ""
 
-#: src/main/escp2-channels.c:1836 src/main/escp2-channels.c:1842
-#: src/main/escp2-channels.c:1848 src/main/escp2-channels.c:1854
-#: src/main/escp2-channels.c:1860 src/main/escp2-channels.c:1866
-#: src/main/escp2-channels.c:1872 src/main/escp2-channels.c:1878
+#: src/main/escp2-channels.c:1963 src/main/escp2-channels.c:1969
+#: src/main/escp2-channels.c:1975 src/main/escp2-channels.c:1981
+#: src/main/escp2-channels.c:1987 src/main/escp2-channels.c:1993
+#: src/main/escp2-channels.c:1999 src/main/escp2-channels.c:2005
+#: src/main/escp2-channels.c:2011
 msgid "Four Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1884
+#: src/main/escp2-channels.c:2017
 msgid "Four Color Raw Gloss"
 msgstr ""
 
-#: src/main/escp2-channels.c:1899 src/main/escp2-channels.c:1913
+#: src/main/escp2-channels.c:2032 src/main/escp2-channels.c:2046
 msgid "Five Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1929 src/main/escp2-channels.c:1935
-#: src/main/escp2-channels.c:1941 src/main/escp2-channels.c:1956
+#: src/main/escp2-channels.c:2060 src/main/escp2-channels.c:2076
+#: src/main/escp2-channels.c:2082 src/main/escp2-channels.c:2088
+#: src/main/escp2-channels.c:2103 src/main/escp2-channels.c:2124
 msgid "Six Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1962
+#: src/main/escp2-channels.c:2109
 msgid "Six Color Enhanced Gloss Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:1977 src/main/escp2-channels.c:1992
-#: src/main/escp2-channels.c:2007
+#: src/main/escp2-channels.c:2140 src/main/escp2-channels.c:2155
+#: src/main/escp2-channels.c:2170
 msgid "Seven Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:2024
+#: src/main/escp2-channels.c:2187
 msgid "Seven Color Enhanced Gloss Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:2042
+#: src/main/escp2-channels.c:2205
 msgid "Eight Color Raw"
 msgstr ""
 
-#: src/main/escp2-channels.c:2197 src/main/escp2-channels.c:2210
-#: src/main/escp2-channels.c:2230 src/main/escp2-channels.c:2233
-#: src/main/escp2-channels.c:2253 src/main/escp2-channels.c:2273
-#: src/main/escp2-channels.c:2293 src/main/escp2-channels.c:2313
-#: src/main/escp2-channels.c:2329 src/main/escp2-channels.c:2331
-#: src/main/escp2-channels.c:2333 src/main/escp2-channels.c:2335
-#: src/main/escp2-channels.c:2351 src/main/escp2-channels.c:2371
+#: src/main/escp2-channels.c:2372 src/main/escp2-channels.c:2385
+#: src/main/escp2-channels.c:2387 src/main/escp2-channels.c:2407
+#: src/main/escp2-channels.c:2410 src/main/escp2-channels.c:2430
+#: src/main/escp2-channels.c:2450 src/main/escp2-channels.c:2470
+#: src/main/escp2-channels.c:2490 src/main/escp2-channels.c:2506
+#: src/main/escp2-channels.c:2508 src/main/escp2-channels.c:2510
+#: src/main/escp2-channels.c:2512 src/main/escp2-channels.c:2528
+#: src/main/escp2-channels.c:2544 src/main/escp2-channels.c:2564
 msgid "EPSON Standard Inks"
 msgstr ""
 
-#: src/main/escp2-channels.c:2391 src/main/escp2-channels.c:2416
+#: src/main/escp2-channels.c:2584 src/main/escp2-channels.c:2609
 msgid "UltraChrome Photo Black"
 msgstr ""
 
-#: src/main/escp2-channels.c:2395 src/main/escp2-channels.c:2420
+#: src/main/escp2-channels.c:2588 src/main/escp2-channels.c:2613
 msgid "UltraChrome Matte Black"
 msgstr ""
 
-#: src/main/escp2-papers.c:1162 src/main/escp2-papers.c:1206
-#: src/main/escp2-papers.c:1250 src/main/escp2-papers.c:1298
-#: src/main/escp2-papers.c:1346 src/main/escp2-papers.c:1390
+#: src/main/escp2-channels.c:2628 src/main/escp2-channels.c:2666
+#: src/main/escp2-channels.c:3005 src/escputil/escputil.c:982
+msgid "Photo Black"
+msgstr ""
+
+#: src/main/escp2-channels.c:2632 src/main/escp2-channels.c:2648
+#: src/main/escp2-channels.c:3004 src/escputil/escputil.c:992
+msgid "Matte Black"
+msgstr ""
+
+#: src/main/escp2-channels.c:2942 src/main/escp2-channels.c:2952
+#: src/main/escp2-channels.c:2966 src/main/escp2-channels.c:2979
+#: src/main/escp2-channels.c:2992 src/main/escp2-channels.c:3029
+#: src/escputil/escputil.c:987 src/escputil/escputil.c:1210
+msgid "Light Cyan"
+msgstr ""
+
+#: src/main/escp2-channels.c:2943 src/main/escp2-channels.c:2954
+#: src/main/escp2-channels.c:2967 src/main/escp2-channels.c:2980
+#: src/main/escp2-channels.c:2993 src/main/escp2-channels.c:3028
+#: src/escputil/escputil.c:988 src/escputil/escputil.c:1211
+msgid "Light Magenta"
+msgstr ""
+
+#: src/main/escp2-channels.c:2968 src/main/escp2-channels.c:3030
+#: src/escputil/escputil.c:991
+msgid "Light Black"
+msgstr ""
+
+#: src/main/escp2-channels.c:2981
+msgid "Dark Yellow"
+msgstr ""
+
+#: src/main/escp2-channels.c:3008 src/escputil/escputil.c:995
+msgid "Gloss Optimizer"
+msgstr ""
+
+#: src/main/escp2-channels.c:3027 src/escputil/escputil.c:996
+msgid "Light Light Black"
+msgstr ""
+
+#: src/main/escp2-papers.c:1253 src/main/escp2-papers.c:1297
+#: src/main/escp2-papers.c:1341 src/main/escp2-papers.c:1389
+#: src/main/escp2-papers.c:1437 src/main/escp2-papers.c:1481
 msgid "Plain Paper Fast Load"
 msgstr ""
 
-#: src/main/escp2-papers.c:1164 src/main/escp2-papers.c:1208
-#: src/main/escp2-papers.c:1252 src/main/escp2-papers.c:1300
-#: src/main/escp2-papers.c:1348 src/main/escp2-papers.c:1392
+#: src/main/escp2-papers.c:1255 src/main/escp2-papers.c:1299
+#: src/main/escp2-papers.c:1343 src/main/escp2-papers.c:1391
+#: src/main/escp2-papers.c:1439 src/main/escp2-papers.c:1483
 #: src/main/xmli18n-tmp.h:5
 msgid "Postcard"
 msgstr ""
 
-#: src/main/escp2-papers.c:1172 src/main/escp2-papers.c:1216
-#: src/main/escp2-papers.c:1260 src/main/escp2-papers.c:1308
-#: src/main/escp2-papers.c:1356 src/main/escp2-papers.c:1400
+#: src/main/escp2-papers.c:1263 src/main/escp2-papers.c:1307
+#: src/main/escp2-papers.c:1351 src/main/escp2-papers.c:1399
+#: src/main/escp2-papers.c:1447 src/main/escp2-papers.c:1491
 msgid "Back Light Film"
 msgstr ""
 
-#: src/main/escp2-papers.c:1176 src/main/escp2-papers.c:1220
-#: src/main/escp2-papers.c:1264 src/main/escp2-papers.c:1312
-#: src/main/escp2-papers.c:1360 src/main/escp2-papers.c:1404
+#: src/main/escp2-papers.c:1267 src/main/escp2-papers.c:1311
+#: src/main/escp2-papers.c:1355 src/main/escp2-papers.c:1403
+#: src/main/escp2-papers.c:1451 src/main/escp2-papers.c:1495
 msgid "Matte Paper Heavyweight"
 msgstr ""
 
-#: src/main/escp2-papers.c:1186 src/main/escp2-papers.c:1230
-#: src/main/escp2-papers.c:1274 src/main/escp2-papers.c:1322
-#: src/main/escp2-papers.c:1370 src/main/escp2-papers.c:1414
+#: src/main/escp2-papers.c:1277 src/main/escp2-papers.c:1321
+#: src/main/escp2-papers.c:1365 src/main/escp2-papers.c:1413
+#: src/main/escp2-papers.c:1461 src/main/escp2-papers.c:1505
 msgid "Premium Semigloss Photo Paper"
 msgstr ""
 
-#: src/main/escp2-papers.c:1194 src/main/escp2-papers.c:1238
-#: src/main/escp2-papers.c:1286 src/main/escp2-papers.c:1334
-#: src/main/escp2-papers.c:1378 src/main/escp2-papers.c:1426
+#: src/main/escp2-papers.c:1285 src/main/escp2-papers.c:1329
+#: src/main/escp2-papers.c:1377 src/main/escp2-papers.c:1425
+#: src/main/escp2-papers.c:1469 src/main/escp2-papers.c:1517
 msgid "ColorLife Paper"
 msgstr ""
 
-#: src/main/escp2-papers.c:1278 src/main/escp2-papers.c:1326
-#: src/main/escp2-papers.c:1418
+#: src/main/escp2-papers.c:1369 src/main/escp2-papers.c:1417
+#: src/main/escp2-papers.c:1509
 msgid "Archival Matte Paper"
 msgstr ""
 
-#: src/main/escp2-papers.c:1280 src/main/escp2-papers.c:1328
-#: src/main/escp2-papers.c:1420
+#: src/main/escp2-papers.c:1371 src/main/escp2-papers.c:1419
+#: src/main/escp2-papers.c:1511
 msgid "Watercolor Paper - Radiant White"
+msgstr ""
+
+#: src/main/escp2-papers.c:1625 src/main/escp2-papers.c:1751
+#: src/main/escp2-papers.c:1793 src/main/escp2-papers.c:1835
+#: src/main/escp2-papers.c:1910
+msgid "Roll Feed"
+msgstr ""
+
+#: src/main/escp2-papers.c:1649 src/main/escp2-papers.c:1700
+msgid "Roll Feed (cut each page)"
+msgstr ""
+
+#: src/main/escp2-papers.c:1658 src/main/escp2-papers.c:1709
+msgid "Roll Feed (do not cut)"
+msgstr ""
+
+#: src/main/escp2-papers.c:1682 src/main/escp2-papers.c:1733
+msgid "Manual Feed"
+msgstr ""
+
+#: src/main/escp2-papers.c:1691 src/main/escp2-papers.c:1742
+#: src/main/escp2-papers.c:1844 src/main/escp2-papers.c:1877
+msgid "Print to CD"
+msgstr ""
+
+#: src/main/escp2-papers.c:1775 src/main/escp2-papers.c:1817
+msgid "Manual Sheet Guide"
+msgstr ""
+
+#: src/main/escp2-papers.c:1784 src/main/escp2-papers.c:1826
+msgid "Manual Feed (Front)"
+msgstr ""
+
+#: src/main/escp2-papers.c:1859
+msgid "Rear Tray"
+msgstr ""
+
+#: src/main/escp2-papers.c:1868
+msgid "Front Tray"
+msgstr ""
+
+#: src/main/escp2-papers.c:1886
+msgid "Photo Board"
+msgstr ""
+
+#: src/main/escp2-papers.c:1925
+msgid "Cut Sheet Bin 1"
+msgstr ""
+
+#: src/main/escp2-papers.c:1934
+msgid "Cut Sheet Bin 2"
+msgstr ""
+
+#: src/main/escp2-papers.c:1943
+msgid "Cut Sheet Autoselect"
+msgstr ""
+
+#: src/main/escp2-papers.c:1952
+msgid "Manual Selection"
 msgstr ""
 
 #: src/main/escp2-resolutions.c:33 src/main/escp2-resolutions.c:36
@@ -2064,119 +1885,143 @@ msgstr ""
 msgid "720 x 360 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:88 src/main/escp2-resolutions.c:91
+#: src/main/escp2-resolutions.c:87
+msgid "720 x 360 DPI Enhanced"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:91 src/main/escp2-resolutions.c:94
 msgid "720 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:94
+#: src/main/escp2-resolutions.c:97 src/main/escp2-resolutions.c:100
 msgid "720 DPI High Quality"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:97
+#: src/main/escp2-resolutions.c:103
 msgid "720 DPI Highest Quality"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:100
+#: src/main/escp2-resolutions.c:106
 msgid "720 x 720 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:104 src/main/escp2-resolutions.c:107
-#: src/main/escp2-resolutions.c:119
+#: src/main/escp2-resolutions.c:110 src/main/escp2-resolutions.c:113
+#: src/main/escp2-resolutions.c:125
 msgid "1440 x 720 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:110
+#: src/main/escp2-resolutions.c:116
 msgid "1440 x 720 DPI Highest Quality"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:113 src/main/escp2-resolutions.c:116
+#: src/main/escp2-resolutions.c:119 src/main/escp2-resolutions.c:122
 msgid "1440 x 720 DPI Transposed"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:123 src/main/escp2-resolutions.c:126
+#: src/main/escp2-resolutions.c:129 src/main/escp2-resolutions.c:132
 msgid "2880 x 720 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:129
+#: src/main/escp2-resolutions.c:135
 msgid "2880 x 720 DPI Highest Quality"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:133 src/main/escp2-resolutions.c:136
-#: src/main/escp2-resolutions.c:139
+#: src/main/escp2-resolutions.c:139 src/main/escp2-resolutions.c:142
+#: src/main/escp2-resolutions.c:145
 msgid "1440 x 1440 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:142
-msgid "1440 x 1440"
-msgstr ""
-
-#: src/main/escp2-resolutions.c:145
-msgid "1440 x 1440 DPI High Quality"
-msgstr ""
-
-#: src/main/escp2-resolutions.c:148
-msgid "1440 x 1440 DPI Highest Quality"
-msgstr ""
-
-#: src/main/escp2-resolutions.c:152 src/main/escp2-resolutions.c:155
-#: src/main/escp2-resolutions.c:161
+#: src/main/escp2-resolutions.c:149 src/main/escp2-resolutions.c:152
+#: src/main/escp2-resolutions.c:158
 msgid "2880 x 1440 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:158
+#: src/main/escp2-resolutions.c:155
 msgid "2880 x 1440 DPI Transposed"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:164
-msgid "2880 x 1440 DPI High Quality"
-msgstr ""
-
-#: src/main/escp2-resolutions.c:167
-msgid "2880 x 1440 DPI Highest Quality"
-msgstr ""
-
-#: src/main/escp2-resolutions.c:171
+#: src/main/escp2-resolutions.c:162
 msgid "5760 x 1440 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:175 src/main/escp2-resolutions.c:178
+#: src/main/escp2-resolutions.c:166 src/main/escp2-resolutions.c:169
 msgid "2880 x 2880 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:182 src/main/escp2-resolutions.c:185
+#: src/main/escp2-resolutions.c:173 src/main/escp2-resolutions.c:176
 msgid "5760 x 2880 DPI"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:548
+#: src/main/escp2-resolutions.c:558
 msgid "On"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:556 src/main/escp2-resolutions.c:567
-#: src/main/escp2-resolutions.c:579
+#: src/main/escp2-resolutions.c:566 src/main/escp2-resolutions.c:577
+#: src/main/escp2-resolutions.c:589
 msgid "Interleave"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:557 src/main/escp2-resolutions.c:568
-#: src/main/escp2-resolutions.c:580
+#: src/main/escp2-resolutions.c:567 src/main/escp2-resolutions.c:578
+#: src/main/escp2-resolutions.c:590
 msgid "Full Overlap"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:558 src/main/escp2-resolutions.c:569
-#: src/main/escp2-resolutions.c:581
+#: src/main/escp2-resolutions.c:568 src/main/escp2-resolutions.c:579
+#: src/main/escp2-resolutions.c:591
 msgid "Four Pass"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:559 src/main/escp2-resolutions.c:570
-#: src/main/escp2-resolutions.c:582
+#: src/main/escp2-resolutions.c:569 src/main/escp2-resolutions.c:580
+#: src/main/escp2-resolutions.c:592
 msgid "Full Overlap 2"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:571 src/main/escp2-resolutions.c:583
+#: src/main/escp2-resolutions.c:581 src/main/escp2-resolutions.c:593
 msgid "Interleave 2"
 msgstr ""
 
-#: src/main/escp2-resolutions.c:584
+#: src/main/escp2-resolutions.c:594
 msgid "Eight Pass"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:637 src/main/escp2-resolutions.c:652
+#: src/main/generic-options.c:33
+msgid "Fast Economy"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:638 src/main/escp2-resolutions.c:653
+#: src/main/generic-options.c:34
+msgid "Economy"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:639 src/main/escp2-resolutions.c:654
+#: src/main/escp2-resolutions.c:667 src/main/generic-options.c:35
+msgid "Draft"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:641 src/main/escp2-resolutions.c:656
+#: src/main/escp2-resolutions.c:670 src/main/generic-options.c:37
+msgid "High"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:642 src/main/escp2-resolutions.c:657
+#: src/main/escp2-resolutions.c:669 src/main/generic-options.c:38
+msgid "Photo"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:643 src/main/escp2-resolutions.c:658
+#: src/main/escp2-resolutions.c:671 src/main/generic-options.c:39
+msgid "Super Photo"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:644 src/main/escp2-resolutions.c:659
+#: src/main/escp2-resolutions.c:672 src/main/generic-options.c:40
+msgid "Ultra Photo"
+msgstr ""
+
+#: src/main/escp2-resolutions.c:645 src/main/escp2-resolutions.c:660
+#: src/main/escp2-resolutions.c:673 src/main/generic-options.c:41
+msgid "Best"
 msgstr ""
 
 #: src/main/generic-options.c:46
@@ -2247,3672 +2092,3952 @@ msgstr ""
 msgid "Executive"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:8
+#: src/main/xmli18n-tmp.h:9
 msgid "3x5"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:9
+#: src/main/xmli18n-tmp.h:10
 msgid "4x6"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:10
+#: src/main/xmli18n-tmp.h:11
 msgid "Epson 4x6 Photo Paper (tear-off borders)"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:11
+#: src/main/xmli18n-tmp.h:12
 msgid "5x7"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:12
+#: src/main/xmli18n-tmp.h:13
 msgid "5x8"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:13
+#: src/main/xmli18n-tmp.h:14
 msgid "6x8"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:14
+#: src/main/xmli18n-tmp.h:15
 msgid "8x10"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:16
+#: src/main/xmli18n-tmp.h:17
 msgid "12x18"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:17
+#: src/main/xmli18n-tmp.h:18
 msgid "Super B 13x19"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:18
+#: src/main/xmli18n-tmp.h:19
 msgid "Engineering C 17x22"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:19
+#: src/main/xmli18n-tmp.h:20
 msgid "8x12"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:20
+#: src/main/xmli18n-tmp.h:21
 msgid "11x14"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:21
+#: src/main/xmli18n-tmp.h:22
 msgid "16x20"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:22
+#: src/main/xmli18n-tmp.h:23
 msgid "16x24"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:23
+#: src/main/xmli18n-tmp.h:24
 msgid "20x24"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:24
+#: src/main/xmli18n-tmp.h:25
 msgid "20x30"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:25
+#: src/main/xmli18n-tmp.h:26
 msgid "22x30"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:26
+#: src/main/xmli18n-tmp.h:27
 msgid "24x30"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:27
+#: src/main/xmli18n-tmp.h:28
 msgid "Super A1 24x36"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:28
+#: src/main/xmli18n-tmp.h:29
 msgid "30x40"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:29
+#: src/main/xmli18n-tmp.h:30
 msgid "4A"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:30
+#: src/main/xmli18n-tmp.h:31
 msgid "2A"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:31
+#: src/main/xmli18n-tmp.h:32
 msgid "Super A0"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:32
+#: src/main/xmli18n-tmp.h:33
 msgid "A0"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:33
+#: src/main/xmli18n-tmp.h:34
 msgid "A1"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:34
+#: src/main/xmli18n-tmp.h:35
 msgid "A2"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:35
+#: src/main/xmli18n-tmp.h:36
 msgid "A3"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:36
+#: src/main/xmli18n-tmp.h:37
 msgid "A4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:37
+#: src/main/xmli18n-tmp.h:38
 msgid "A5"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:38
+#: src/main/xmli18n-tmp.h:39
 msgid "A6"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:39
+#: src/main/xmli18n-tmp.h:40
 msgid "A7"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:40
+#: src/main/xmli18n-tmp.h:41
 msgid "A8"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:41
+#: src/main/xmli18n-tmp.h:42
 msgid "A9"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:42
+#: src/main/xmli18n-tmp.h:43
 msgid "A10"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:43
+#: src/main/xmli18n-tmp.h:44
 msgid "RA0"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:44
+#: src/main/xmli18n-tmp.h:45
 msgid "RA1"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:45
+#: src/main/xmli18n-tmp.h:46
 msgid "RA2"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:46
+#: src/main/xmli18n-tmp.h:47
 msgid "RA3"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:47
+#: src/main/xmli18n-tmp.h:48
 msgid "RA4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:48
+#: src/main/xmli18n-tmp.h:49
 msgid "SRA0"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:49
+#: src/main/xmli18n-tmp.h:50
 msgid "SRA1"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:50
+#: src/main/xmli18n-tmp.h:51
 msgid "SRA2"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:51
+#: src/main/xmli18n-tmp.h:52
 msgid "SRA3"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:52
+#: src/main/xmli18n-tmp.h:53
 msgid "SRA4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:53
+#: src/main/xmli18n-tmp.h:54
 msgid "4B ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:54
+#: src/main/xmli18n-tmp.h:55
 msgid "2B ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:55
+#: src/main/xmli18n-tmp.h:56
 msgid "B0 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:56
+#: src/main/xmli18n-tmp.h:57
 msgid "B1 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:57
+#: src/main/xmli18n-tmp.h:58
 msgid "B2 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:58
+#: src/main/xmli18n-tmp.h:59
 msgid "B3 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:59
+#: src/main/xmli18n-tmp.h:60
 msgid "B4 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:60
+#: src/main/xmli18n-tmp.h:61
 msgid "B5 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:61
+#: src/main/xmli18n-tmp.h:62
 msgid "B6 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:62
+#: src/main/xmli18n-tmp.h:63
 msgid "B7 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:63
+#: src/main/xmli18n-tmp.h:64
 msgid "B8 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:64
+#: src/main/xmli18n-tmp.h:65
 msgid "B9 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:65
+#: src/main/xmli18n-tmp.h:66
 msgid "B10 ISO"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:66
+#: src/main/xmli18n-tmp.h:67
 msgid "Super B0 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:67
+#: src/main/xmli18n-tmp.h:68
 msgid "B0 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:68
+#: src/main/xmli18n-tmp.h:69
 msgid "B1 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:69
+#: src/main/xmli18n-tmp.h:70
 msgid "B2 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:70
+#: src/main/xmli18n-tmp.h:71
 msgid "B3 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:71
+#: src/main/xmli18n-tmp.h:72
 msgid "B4 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:72
+#: src/main/xmli18n-tmp.h:73
 msgid "B5 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:73
+#: src/main/xmli18n-tmp.h:74
 msgid "B6 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:74
+#: src/main/xmli18n-tmp.h:75
 msgid "B7 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:75
+#: src/main/xmli18n-tmp.h:76
 msgid "B8 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:76
+#: src/main/xmli18n-tmp.h:77
 msgid "B9 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:77
+#: src/main/xmli18n-tmp.h:78
 msgid "B10 JIS"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:78
+#: src/main/xmli18n-tmp.h:79
 msgid "C0"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:79
+#: src/main/xmli18n-tmp.h:80
 msgid "C1"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:80
+#: src/main/xmli18n-tmp.h:81
 msgid "C2"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:81
+#: src/main/xmli18n-tmp.h:82
 msgid "C3"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:82
+#: src/main/xmli18n-tmp.h:83
 msgid "C4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:83
+#: src/main/xmli18n-tmp.h:84
 msgid "C5"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:84
+#: src/main/xmli18n-tmp.h:85
 msgid "B6-C4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:85
+#: src/main/xmli18n-tmp.h:86
 msgid "C6"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:86
+#: src/main/xmli18n-tmp.h:87
 msgid "DL"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:87
+#: src/main/xmli18n-tmp.h:88
 msgid "C7-6"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:88
+#: src/main/xmli18n-tmp.h:89
 msgid "C7"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:89
+#: src/main/xmli18n-tmp.h:90
 msgid "C8"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:90
+#: src/main/xmli18n-tmp.h:91
 msgid "C9"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:91
+#: src/main/xmli18n-tmp.h:92
 msgid "C10"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:92
+#: src/main/xmli18n-tmp.h:93
 msgid "ArchA"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:93
+#: src/main/xmli18n-tmp.h:94
 msgid "ArchA transposed"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:94
+#: src/main/xmli18n-tmp.h:95
 msgid "ArchB"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:95
+#: src/main/xmli18n-tmp.h:96
 msgid "ArchB transposed"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:96
+#: src/main/xmli18n-tmp.h:97
 msgid "ArchC"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:97
+#: src/main/xmli18n-tmp.h:98
 msgid "ArchC transposed"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:98
+#: src/main/xmli18n-tmp.h:99
 msgid "ArchD"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:99
+#: src/main/xmli18n-tmp.h:100
 msgid "ArchD transposed"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:100
+#: src/main/xmli18n-tmp.h:101
 msgid "ArchE"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:101
+#: src/main/xmli18n-tmp.h:102
 msgid "ArchE transposed"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:102
+#: src/main/xmli18n-tmp.h:103
 msgid "American foolscap"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:103
+#: src/main/xmli18n-tmp.h:104
 msgid "European foolscap"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:104
+#: src/main/xmli18n-tmp.h:105
 msgid "Crown Quarto"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:105
+#: src/main/xmli18n-tmp.h:106
 msgid "Large Crown Quarto"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:106
+#: src/main/xmli18n-tmp.h:107
 msgid "Demy Quarto"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:107
+#: src/main/xmli18n-tmp.h:108
 msgid "Royal Quarto"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:108
+#: src/main/xmli18n-tmp.h:109
 msgid "ISO A4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:109
+#: src/main/xmli18n-tmp.h:110
 msgid "Crown Octavo"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:110
+#: src/main/xmli18n-tmp.h:111
 msgid "Large Crown Octavo"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:111
+#: src/main/xmli18n-tmp.h:112
 msgid "Demy Octavo"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:112
+#: src/main/xmli18n-tmp.h:113
 msgid "Royal Octavo"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:113
+#: src/main/xmli18n-tmp.h:114
 msgid "ISO A5"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:114
+#: src/main/xmli18n-tmp.h:115
 msgid "Small paperback"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:115
+#: src/main/xmli18n-tmp.h:116
 msgid "Penguin small paperback"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:116
+#: src/main/xmli18n-tmp.h:117
 msgid "Penguin large paperback"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:117
+#: src/main/xmli18n-tmp.h:118
 msgid "10cm x 15cm"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:118
+#: src/main/xmli18n-tmp.h:119
 msgid "Hagaki Card"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:119
+#: src/main/xmli18n-tmp.h:120
 msgid "Oufuku Card"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:120
+#: src/main/xmli18n-tmp.h:121
 msgid "Japanese long envelope #3"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:121
+#: src/main/xmli18n-tmp.h:122
 msgid "Japanese long envelope #4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:122
+#: src/main/xmli18n-tmp.h:123
 msgid "Japanese Kaku envelope #4"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:123
+#: src/main/xmli18n-tmp.h:124
 msgid "Commercial 10"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:124
+#: src/main/xmli18n-tmp.h:125
 msgid "A2 Invitation"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:125
+#: src/main/xmli18n-tmp.h:126
 msgid "Monarch Envelope"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:126
+#: src/main/xmli18n-tmp.h:127
 msgid "4x5 3/8"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:127
+#: src/main/xmli18n-tmp.h:128
 msgid "4x7"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:128
+#: src/main/xmli18n-tmp.h:129
 msgid "CP_L"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:129
+#: src/main/xmli18n-tmp.h:130
 msgid "Card"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:130
+#: src/main/xmli18n-tmp.h:131
 msgid "Wide Postcard"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:131
+#: src/main/xmli18n-tmp.h:132
 msgid "Chilean Office"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:132
+#: src/main/xmli18n-tmp.h:133
 msgid "Chilean Double Letter"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:133
+#: src/main/xmli18n-tmp.h:134
 msgid "Chilean Double Office"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:134
+#: src/main/xmli18n-tmp.h:135
 msgid "Custom"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:135
+#: src/main/xmli18n-tmp.h:136
 msgid "89 mm Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:136
+#: src/main/xmli18n-tmp.h:137
 msgid "4 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:137
+#: src/main/xmli18n-tmp.h:138
 msgid "5 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:138
+#: src/main/xmli18n-tmp.h:139
 msgid "210 mm Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:139
+#: src/main/xmli18n-tmp.h:140
 msgid "13 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:140
+#: src/main/xmli18n-tmp.h:141
 msgid "22 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:141
+#: src/main/xmli18n-tmp.h:142
 msgid "24 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:142
+#: src/main/xmli18n-tmp.h:143
 msgid "36 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:143
+#: src/main/xmli18n-tmp.h:144
 msgid "44 Inch Roll Paper"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:144
+#: src/main/xmli18n-tmp.h:145
 msgid "PostScript Level 1"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:145
+#: src/main/xmli18n-tmp.h:146
 msgid "PostScript Level 2"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:146
+#: src/main/xmli18n-tmp.h:147
 msgid "Canon BJ-30"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:147
+#: src/main/xmli18n-tmp.h:148
 msgid "Canon BJC-50"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:148
+#: src/main/xmli18n-tmp.h:149
 msgid "Canon BJC-55"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:149
+#: src/main/xmli18n-tmp.h:150
 msgid "Canon BJC-80"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:150
+#: src/main/xmli18n-tmp.h:151
 msgid "Canon BJC-85"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:151
+#: src/main/xmli18n-tmp.h:152
 msgid "Canon BJC-210"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:152
+#: src/main/xmli18n-tmp.h:153
 msgid "Canon BJC-240"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:153
+#: src/main/xmli18n-tmp.h:154
 msgid "Canon BJC-250"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:154
+#: src/main/xmli18n-tmp.h:155
 msgid "Canon BJC-1000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:155
+#: src/main/xmli18n-tmp.h:156
 msgid "Canon BJC-2000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:156
+#: src/main/xmli18n-tmp.h:157
 msgid "Canon BJC-2010"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:157
+#: src/main/xmli18n-tmp.h:158
 msgid "Canon BJC-2100"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:158
+#: src/main/xmli18n-tmp.h:159
 msgid "Canon BJC-2110"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:159
+#: src/main/xmli18n-tmp.h:160
 msgid "Canon BJC-3000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:160
+#: src/main/xmli18n-tmp.h:161
 msgid "Canon BJC-4000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:161
+#: src/main/xmli18n-tmp.h:162
 msgid "Canon BJC-4300"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:162
+#: src/main/xmli18n-tmp.h:163
 msgid "Canon BJC-4400"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:163
+#: src/main/xmli18n-tmp.h:164
 msgid "Canon BJC-6000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:164
+#: src/main/xmli18n-tmp.h:165
 msgid "Canon BJC-6100"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:165
+#: src/main/xmli18n-tmp.h:166
 msgid "Canon BJC-6200"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:166
+#: src/main/xmli18n-tmp.h:167
 msgid "Canon BJC-6500"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:167
+#: src/main/xmli18n-tmp.h:168
 msgid "Canon BJC-7000"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:168
+#: src/main/xmli18n-tmp.h:169
 msgid "Canon BJC-7100"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:169
+#: src/main/xmli18n-tmp.h:170
 msgid "Canon BJC-8200"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:170
+#: src/main/xmli18n-tmp.h:171
 msgid "Canon S100"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:171
+#: src/main/xmli18n-tmp.h:172
 msgid "Canon S200"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:172
+#: src/main/xmli18n-tmp.h:173
 msgid "Canon S300"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:173
+#: src/main/xmli18n-tmp.h:174
 msgid "Canon S400"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:174
+#: src/main/xmli18n-tmp.h:175
 msgid "Canon S450"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:175
+#: src/main/xmli18n-tmp.h:176
 msgid "Canon S500"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:176
+#: src/main/xmli18n-tmp.h:177
 msgid "Canon S600"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:177
+#: src/main/xmli18n-tmp.h:178
 msgid "Canon S630"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:178
+#: src/main/xmli18n-tmp.h:179
 msgid "Canon S800"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:179
+#: src/main/xmli18n-tmp.h:180
 msgid "Canon S4500"
 msgstr ""
 
-#: src/main/xmli18n-tmp.h:180
-msgid "Canon iP4000"
-msgstr ""
-
 #: src/main/xmli18n-tmp.h:181
-msgid "Epson Stylus C20"
+msgid "Canon PIXMA iP2000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:182
-msgid "Epson Stylus C20SX"
+msgid "Canon PIXMA iP3000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:183
-msgid "Epson Stylus C20UX"
+msgid "Canon PIXMA iP3100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:184
-msgid "Epson Stylus C40"
+msgid "Canon PIXMA iP4000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:185
-msgid "Epson Stylus C40SX"
+msgid "Canon PIXMA iP4100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:186
-msgid "Epson Stylus C40UX"
+msgid "Canon PIXMA iP4200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:187
-msgid "Epson Stylus C41"
+msgid "Canon PIXMA iP4300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:188
-msgid "Epson Stylus C41SX"
+msgid "Canon PIXMA iP5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:189
-msgid "Epson Stylus C41UX"
+msgid "Canon PIXMA iP5200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:190
-msgid "Epson Stylus C42"
+msgid "Canon PIXMA iP6700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:191
-msgid "Epson Stylus C42SX"
+msgid "Canon PIXMA MP150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:192
-msgid "Epson Stylus C42UX"
+msgid "Canon PIXMA MP500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:193
-msgid "Epson Stylus C43"
+msgid "Canon PIXMA MP700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:194
-msgid "Epson Stylus C43SX"
+msgid "Canon PIXMA MP730"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:195
-msgid "Epson Stylus C43UX"
+msgid "Canon PIXMA MP750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:196
-msgid "Epson Stylus C44"
+msgid "Canon PIXMA MP760"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:197
-msgid "Epson Stylus C44SX"
+msgid "Canon PIXMA MP770"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:198
-msgid "Epson Stylus C44UX"
+msgid "Canon PIXMA MP780"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:199
-msgid "Epson Stylus C45"
+msgid "Canon PIXMA MP790"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:200
-msgid "Epson Stylus C46"
+msgid "Canon PIXMA MP830"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:201
-msgid "Epson Stylus C48"
+msgid "Canon PIXUS iP3100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:202
-msgid "Epson Stylus C50"
+msgid "Canon PIXUS iP4100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:203
-msgid "Epson Stylus C60"
+msgid "Canon i560"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:204
-msgid "Epson Stylus C61"
+msgid "Canon i850"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:205
-msgid "Epson Stylus C62"
+msgid "Canon i860"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:206
-msgid "Epson Stylus C63"
+msgid "Canon i865"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:207
-msgid "Epson Stylus C64"
+msgid "Epson Stylus C20"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:208
-msgid "Epson Stylus C65"
+msgid "Epson Stylus C20SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:209
-msgid "Epson Stylus C66"
+msgid "Epson Stylus C20UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:210
-msgid "Epson Stylus C68"
+msgid "Epson Stylus C40"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:211
-msgid "Epson Stylus C70"
+msgid "Epson Stylus C40SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:212
-msgid "Epson Stylus C80"
+msgid "Epson Stylus C40UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:213
-msgid "Epson Stylus C82"
+msgid "Epson Stylus C41"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:214
-msgid "Epson Stylus C83"
+msgid "Epson Stylus C41SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:215
-msgid "Epson Stylus C84"
+msgid "Epson Stylus C41UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:216
-msgid "Epson Stylus C85"
+msgid "Epson Stylus C42"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:217
-msgid "Epson Stylus C86"
+msgid "Epson Stylus C42SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:218
-msgid "Epson Stylus C88"
+msgid "Epson Stylus C42UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:219
-msgid "Epson Stylus Color"
+msgid "Epson Stylus C43"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:220
-msgid "Epson Stylus Color I"
+msgid "Epson Stylus C43SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:221
-msgid "Epson Stylus Color II"
+msgid "Epson Stylus C43UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:222
-msgid "Epson Stylus Color IIs"
+msgid "Epson Stylus C44"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:223
-msgid "Epson Stylus Color PRO"
+msgid "Epson Stylus C44SX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:224
-msgid "Epson Stylus Pro XL"
+msgid "Epson Stylus C44UX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:225
-msgid "Epson Stylus Color 400"
+msgid "Epson Stylus C45"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:226
-msgid "Epson Stylus Color 440"
+msgid "Epson Stylus C46"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:227
-msgid "Epson Stylus Color 460"
+msgid "Epson Stylus C48"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:228
-msgid "Epson Stylus Color 480"
+msgid "Epson Stylus C50"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:229
-msgid "Epson Stylus Color 500"
+msgid "Epson Stylus C60"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:230
-msgid "Epson Stylus Color 580"
+msgid "Epson Stylus C61"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:231
-msgid "Epson Stylus Color 600"
+msgid "Epson Stylus C62"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:232
-msgid "Epson Stylus Color 640"
+msgid "Epson Stylus C63"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:233
-msgid "Epson Stylus Color 660"
+msgid "Epson Stylus C64"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:234
-msgid "Epson Stylus Color 670"
+msgid "Epson Stylus C65"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:235
-msgid "Epson Stylus Color 680"
+msgid "Epson Stylus C66"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:236
-msgid "Epson Stylus Color 740"
+msgid "Epson Stylus C68"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:237
-msgid "Epson Stylus Color 760"
+msgid "Epson Stylus C70"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:238
-msgid "Epson Stylus Color 777"
+msgid "Epson Stylus C79"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:239
-msgid "Epson Stylus Color 800"
+msgid "Epson Stylus C80"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:240
-msgid "Epson Stylus Color 850"
+msgid "Epson Stylus C82"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:241
-msgid "Epson Stylus Color 860"
+msgid "Epson Stylus C83"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:242
-msgid "Epson Stylus Color 880"
+msgid "Epson Stylus C84"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:243
-msgid "Epson Stylus Color 8 3"
+msgid "Epson Stylus C85"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:244
-msgid "Epson Stylus Color 900"
+msgid "Epson Stylus C86"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:245
-msgid "Epson Stylus Color 980"
+msgid "Epson Stylus C87"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:246
-msgid "Epson Stylus Color 1160"
+msgid "Epson Stylus C88"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:247
-msgid "Epson Stylus Color 1500"
+msgid "Epson Stylus Color"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:248
-msgid "Epson Stylus Color 1520"
+msgid "Epson Stylus Color I"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:249
-msgid "Epson Stylus Color 3000"
+msgid "Epson Stylus Color II"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:250
-msgid "Epson Stylus Photo"
+msgid "Epson Stylus Color IIs"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:251
-msgid "Epson Stylus Photo 700"
+msgid "Epson Stylus Color PRO"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:252
-msgid "Epson Stylus Photo EX"
+msgid "Epson Stylus Pro XL"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:253
-msgid "Epson Stylus Photo EX3"
+msgid "Epson Stylus Color 400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:254
-msgid "Epson Stylus Photo 720"
+msgid "Epson Stylus Color 440"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:255
-msgid "Epson Stylus Photo 750"
+msgid "Epson Stylus Color 460"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:256
-msgid "Epson Stylus Photo 780"
+msgid "Epson Stylus Color 480"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:257
-msgid "Epson Stylus Photo 785"
+msgid "Epson Stylus Color 500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:258
-msgid "Epson Stylus Photo 790"
+msgid "Epson Stylus Color 580"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:259
-msgid "Epson Stylus Photo 810"
+msgid "Epson Stylus Color 600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:260
-msgid "Epson Stylus Photo 820"
+msgid "Epson Stylus Color 640"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:261
-msgid "Epson Stylus Photo 825"
+msgid "Epson Stylus Color 660"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:262
-msgid "Epson Stylus Photo 830"
+msgid "Epson Stylus Color 670"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:263
-msgid "Epson Stylus Photo 830U"
+msgid "Epson Stylus Color 680"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:264
-msgid "Epson Stylus Photo 870"
+msgid "Epson Stylus Color 740"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:265
-msgid "Epson Stylus Photo 875"
+msgid "Epson Stylus Color 760"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:266
-msgid "Epson Stylus Photo 890"
+msgid "Epson Stylus Color 777"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:267
-msgid "Epson Stylus Photo 895"
+msgid "Epson Stylus Color 800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:268
-msgid "Epson Stylus Photo 900"
+msgid "Epson Stylus Color 850"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:269
-msgid "Epson Stylus Photo 915"
+msgid "Epson Stylus Color 860"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:270
-msgid "Epson Stylus Photo 925"
+msgid "Epson Stylus Color 880"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:271
-msgid "Epson Stylus Photo 935"
+msgid "Epson Stylus Color 8 3"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:272
-msgid "Epson Stylus Photo 950"
+msgid "Epson Stylus Color 900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:273
-msgid "Epson Stylus Photo 960"
+msgid "Epson Stylus Color 980"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:274
-msgid "Epson Stylus Photo 1200"
+msgid "Epson Stylus Color 1160"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:275
-msgid "Epson Stylus Photo 1270"
+msgid "Epson Stylus Color 1500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:276
-msgid "Epson Stylus Photo 1280"
+msgid "Epson Stylus Color 1520"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:277
-msgid "Epson Stylus Photo 1290"
+msgid "Epson Stylus Color 3000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:278
-msgid "Epson Stylus Photo 2000P"
+msgid "Epson Stylus Photo"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:279
-msgid "Epson Stylus Photo 2100"
+msgid "Epson Stylus Photo 700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:280
-msgid "Epson Stylus Photo 2200"
+msgid "Epson Stylus Photo EX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:281
-msgid "Epson Stylus Photo R200"
+msgid "Epson Stylus Photo EX3"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:282
-msgid "Epson Stylus Photo R210"
+msgid "Epson Stylus Photo 720"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:283
-msgid "Epson Stylus Photo R220"
+msgid "Epson Stylus Photo 750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:284
-msgid "Epson Stylus Photo R300"
+msgid "Epson Stylus Photo 780"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:285
-msgid "Epson Stylus Photo R310"
+msgid "Epson Stylus Photo 785"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:286
-msgid "Epson Stylus Photo R320"
+msgid "Epson Stylus Photo 790"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:287
-msgid "Epson Stylus Photo R340"
+msgid "Epson Stylus Photo 810"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:288
-msgid "Epson Stylus Photo RX400"
+msgid "Epson Stylus Photo 820"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:289
-msgid "Epson Stylus Photo RX420"
+msgid "Epson Stylus Photo 825"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:290
-msgid "Epson Stylus Photo RX425"
+msgid "Epson Stylus Photo 830"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:291
-msgid "Epson Stylus Photo RX430"
+msgid "Epson Stylus Photo 830U"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:292
-msgid "Epson Stylus Photo RX500"
+msgid "Epson Stylus Photo 870"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:293
-msgid "Epson Stylus Photo RX510"
+msgid "Epson Stylus Photo 875"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:294
-msgid "Epson Stylus Photo RX600"
+msgid "Epson Stylus Photo 890"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:295
-msgid "Epson Stylus Photo RX620"
+msgid "Epson Stylus Photo 895"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:296
-msgid "Epson Stylus Photo RX630"
+msgid "Epson Stylus Photo 900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:297
-msgid "Epson Stylus Photo RX700"
+msgid "Epson Stylus Photo 915"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:298
-msgid "Epson Stylus Photo R800"
+msgid "Epson Stylus Photo 925"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:299
-msgid "Epson Stylus Photo R1800"
+msgid "Epson Stylus Photo 935"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:300
-msgid "Epson Stylus Photo R2400"
+msgid "Epson Stylus Photo 950"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:301
-msgid "Epson Stylus Pro 5000"
+msgid "Epson Stylus Photo 960"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:302
-msgid "Epson Stylus Pro 5500"
+msgid "Epson Stylus Photo 1200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:303
-msgid "Epson Stylus Pro 7000"
+msgid "Epson Stylus Photo 1270"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:304
-msgid "Epson Stylus Pro 7500"
+msgid "Epson Stylus Photo 1280"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:305
-msgid "Epson Stylus Pro 7600"
+msgid "Epson Stylus Photo 1290"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:306
-msgid "Epson Stylus Pro 9000"
+msgid "Epson Stylus Photo 1400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:307
-msgid "Epson Stylus Pro 9500"
+msgid "Epson Stylus Photo 1410"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:308
-msgid "Epson Stylus Pro 9600"
+msgid "Epson Stylus Photo 2000P"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:309
-msgid "Epson Stylus Pro 10000"
+msgid "Epson Stylus Photo 2100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:310
-msgid "Epson Stylus Scan 2000"
+msgid "Epson Stylus Photo 2200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:311
-msgid "Epson Stylus Scan 2500"
+msgid "Epson Stylus Photo R200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:312
-msgid "Epson Stylus CX1500"
+msgid "Epson Stylus Photo R210"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:313
-msgid "Epson Stylus CX3100"
+msgid "Epson Stylus Photo R220"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:314
-msgid "Epson Stylus CX3200"
+msgid "Epson Stylus Photo R230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:315
-msgid "Epson Stylus CX3500"
+msgid "Epson Stylus Photo R240"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:316
-msgid "Epson Stylus CX3600"
+msgid "Epson Stylus Photo R245"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:317
-msgid "Epson Stylus CX3650"
+msgid "Epson Stylus Photo R260"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:318
-msgid "Epson Stylus CX3700"
+msgid "Epson Stylus Photo R265"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:319
-msgid "Epson Stylus CX3800"
+msgid "Epson Stylus Photo R270"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:320
-msgid "Epson Stylus CX3805"
+msgid "Epson Stylus Photo R300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:321
-msgid "Epson Stylus CX3810"
+msgid "Epson Stylus Photo R310"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:322
-msgid "Epson Stylus CX4100"
+msgid "Epson Stylus Photo R320"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:323
-msgid "Epson Stylus CX4200"
+msgid "Epson Stylus Photo R340"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:324
-msgid "Epson Stylus CX4500"
+msgid "Epson Stylus Photo R350"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:325
-msgid "Epson Stylus CX4600"
+msgid "Epson Stylus Photo R360"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:326
-msgid "Epson Stylus CX4700"
+msgid "Epson Stylus Photo R380"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:327
-msgid "Epson Stylus CX4800"
+msgid "Epson Stylus Photo R390"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:328
-msgid "Epson Stylus CX5100"
+msgid "Epson Stylus Photo RX400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:329
-msgid "Epson Stylus CX5200"
+msgid "Epson Stylus Photo RX420"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:330
-msgid "Epson Stylus CX5300"
+msgid "Epson Stylus Photo RX425"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:331
-msgid "Epson Stylus CX5400"
+msgid "Epson Stylus Photo RX430"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:332
-msgid "Epson Stylus CX5700"
+msgid "Epson Stylus Photo RX500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:333
-msgid "Epson Stylus CX5800"
+msgid "Epson Stylus Photo RX510"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:334
-msgid "Epson Stylus CX6300"
+msgid "Epson Stylus Photo RX560"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:335
-msgid "Epson Stylus CX6400"
+msgid "Epson Stylus Photo RX580"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:336
-msgid "Epson Stylus CX6500"
+msgid "Epson Stylus Photo RX590"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:337
-msgid "Epson Stylus CX6600"
+msgid "Epson Stylus Photo RX600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:338
-msgid "Epson Stylus CX7700"
+msgid "Epson Stylus Photo RX620"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:339
-msgid "Epson Stylus CX7800"
+msgid "Epson Stylus Photo RX630"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:340
-msgid "Epson Stylus CX8300"
+msgid "Epson Stylus Photo RX640"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:341
-msgid "Epson Stylus CX8400"
+msgid "Epson Stylus Photo RX700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:342
-msgid "Epson Stylus D68"
+msgid "Epson Stylus Photo R800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:343
-msgid "Epson Stylus D88"
+msgid "Epson Stylus Photo R1800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:344
-msgid "Epson Stylus DX3800"
+msgid "Epson Stylus Photo R2400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:345
-msgid "Epson Stylus DX3850"
+msgid "Epson Stylus Pro 5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:346
-msgid "Epson Stylus DX4200"
+msgid "Epson Stylus Pro 5500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:347
-msgid "Epson Stylus DX4250"
+msgid "Epson Stylus Pro 7000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:348
-msgid "Epson Stylus DX4800"
+msgid "Epson Stylus Pro 7500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:349
-msgid "Epson PictureMate"
+msgid "Epson Stylus Pro 7600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:350
-msgid "Epson PictureMate Deluxe"
+msgid "Epson Stylus Pro 9000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:351
-msgid "Epson CL 700"
+msgid "Epson Stylus Pro 9500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:352
-msgid "Epson CL 750"
+msgid "Epson Stylus Pro 9600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:353
-msgid "Epson CL 760"
+msgid "Epson Stylus Pro 10000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:354
-msgid "Epson E 100"
+msgid "Epson Stylus Scan 2000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:355
-msgid "Epson E 150"
+msgid "Epson Stylus Scan 2500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:356
-msgid "Epson E 200"
+msgid "Epson Stylus CX1500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:357
-msgid "Epson EM 900C"
+msgid "Epson Stylus CX3100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:358
-msgid "Epson EM 930C"
+msgid "Epson Stylus CX3200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:359
-msgid "Epson MC 2000"
+msgid "Epson Stylus CX3500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:360
-msgid "Epson MC 5000"
+msgid "Epson Stylus CX3600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:361
-msgid "Epson MC 7000"
+msgid "Epson Stylus CX3650"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:362
-msgid "Epson MC 9000"
+msgid "Epson Stylus CX3700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:363
-msgid "Epson MC 10000"
+msgid "Epson Stylus CX3800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:364
-msgid "Epson MJ 930C"
+msgid "Epson Stylus CX3805"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:365
-msgid "Epson MJ 5100C"
+msgid "Epson Stylus CX3810"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:366
-msgid "Epson MJ 6000C"
+msgid "Epson Stylus CX4100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:367
-msgid "Epson MJ 8000C"
+msgid "Epson Stylus CX4200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:368
-msgid "Epson PM 700C"
+msgid "Epson Stylus CX4500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:369
-msgid "Epson PM 730C"
+msgid "Epson Stylus CX4600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:370
-msgid "Epson PM 740C"
+msgid "Epson Stylus CX4700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:371
-msgid "Epson PM 750C"
+msgid "Epson Stylus CX4800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:372
-msgid "Epson PM 760C"
+msgid "Epson Stylus CX5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:373
-msgid "Epson PM 770C"
+msgid "Epson Stylus CX5000F"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:374
-msgid "Epson PM 780C"
+msgid "Epson Stylus CX5100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:375
-msgid "Epson PM 790PT"
+msgid "Epson Stylus CX5200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:376
-msgid "Epson PM 800C"
+msgid "Epson Stylus CX5300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:377
-msgid "Epson PM 850PT"
+msgid "Epson Stylus CX5400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:378
-msgid "Epson PM 870C"
+msgid "Epson Stylus CX5700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:379
-msgid "Epson PM 880C"
+msgid "Epson Stylus CX5800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:380
-msgid "Epson PM 930C"
+msgid "Epson Stylus CX6000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:381
-msgid "Epson PM 940C"
+msgid "Epson Stylus CX6300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:382
-msgid "Epson PM 950C"
+msgid "Epson Stylus CX6400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:383
-msgid "Epson PM 970C"
+msgid "Epson Stylus CX6500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:384
-msgid "Epson PM 980C"
+msgid "Epson Stylus CX6600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:385
-msgid "Epson PM 2000C"
+msgid "Epson Stylus CX7000F"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:386
-msgid "Epson PM 2200C"
+msgid "Epson Stylus CX7700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:387
-msgid "Epson PM 3000C"
+msgid "Epson Stylus CX7800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:388
-msgid "Epson PM 3300C"
+msgid "Epson Stylus CX8300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:389
-msgid "Epson PM 3500C"
+msgid "Epson Stylus CX8400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:390
-msgid "Epson PM 3700C"
+msgid "Epson Stylus D68"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:391
-msgid "Epson PM 4000PX"
+msgid "Epson Stylus D88"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:392
-msgid "Epson PM 5000C"
+msgid "Epson Stylus DX3800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:393
-msgid "Epson PM 7000C"
+msgid "Epson Stylus DX3850"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:394
-msgid "Epson PM 9000C"
+msgid "Epson Stylus DX4200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:395
-msgid "Epson PM 10000"
+msgid "Epson Stylus DX4250"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:396
-msgid "Epson PM A650"
+msgid "Epson Stylus DX4800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:397
-msgid "Epson PM A750"
+msgid "Epson PictureMate"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:398
-msgid "Epson PM A890"
+msgid "Epson PictureMate Deluxe"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:399
-msgid "Epson PM A900"
+msgid "Epson PictureMate Flash"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:400
-msgid "Epson PM A950"
+msgid "Epson PictureMate Pal"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:401
-msgid "Epson PM D600"
+msgid "Epson PictureMate Snap"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:402
-msgid "Epson PM D750"
+msgid "Epson PictureMate 200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:403
-msgid "Epson PM D770"
+msgid "Epson PictureMate 210"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:404
-msgid "Epson PM D800"
+msgid "Epson PictureMate 240"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:405
-msgid "Epson PM D1000"
+msgid "Epson PictureMate 250"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:406
-msgid "Epson PM G700"
+msgid "Epson PictureMate 280"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:407
-msgid "Epson PM G720"
+msgid "Epson CL 700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:408
-msgid "Epson PM G730"
+msgid "Epson CL 750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:409
-msgid "Epson PM G800"
+msgid "Epson CL 760"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:410
-msgid "Epson PM G820"
+msgid "Epson E 100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:411
-msgid "Epson PX A650"
+msgid "Epson E 150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:412
-msgid "Epson PX G900"
+msgid "Epson E 200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:413
-msgid "Epson PX G920"
+msgid "Epson EM 900C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:414
-msgid "Epson PX G5000"
+msgid "Epson EM 930C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:415
-msgid "Epson PX V500"
+msgid "Epson MC 2000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:416
-msgid "Epson PX V600"
+msgid "Epson MC 5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:417
-msgid "Epson PX V630"
+msgid "Epson MC 7000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:418
-msgid "Epson PX 5500"
+msgid "Epson MC 9000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:419
-msgid "Epson PX 7000"
+msgid "Epson MC 10000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:420
-msgid "Epson PX 9000"
+msgid "Epson MJ 930C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:421
-msgid "Apollo P-2100"
+msgid "Epson MJ 5100C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:422
-msgid "Apollo P-2150"
+msgid "Epson MJ 6000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:423
-msgid "Apollo P-2200"
+msgid "Epson MJ 8000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:424
-msgid "Apollo P-2250"
+msgid "Epson PM 700C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:425
-msgid "Apollo P-2500"
+msgid "Epson PM 730C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:426
-msgid "Apollo P-2550"
+msgid "Epson PM 740C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:427
-msgid "Apollo P-2600"
+msgid "Epson PM 750C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:428
-msgid "Apollo P-2650"
+msgid "Epson PM 760C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:429
-msgid "Apple Color StyleWriter 4100"
+msgid "Epson PM 770C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:430
-msgid "Apple Color StyleWriter 4500"
+msgid "Epson PM 780C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:431
-msgid "Apple Color StyleWriter 6500"
+msgid "Epson PM 790PT"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:432
-msgid "Apple LaserWriter Select 360"
+msgid "Epson PM 800C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:433
-msgid "Brother DCP-1200"
+msgid "Epson PM 850PT"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:434
-msgid "Brother HL-4Ve"
+msgid "Epson PM 870C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:435
-msgid "Brother HL-10V"
+msgid "Epson PM 880C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:436
-msgid "Brother HL-10h"
+msgid "Epson PM 930C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:437
-msgid "Brother HL-630"
+msgid "Epson PM 940C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:438
-msgid "Brother HL-660"
+msgid "Epson PM 950C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:439
-msgid "Brother HL-760"
+msgid "Epson PM 970C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:440
-msgid "Brother HL-960"
+msgid "Epson PM 980C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:441
-msgid "Brother HL-1040"
+msgid "Epson PM 2000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:442
-msgid "Brother HL-1050"
+msgid "Epson PM 2200C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:443
-msgid "Brother HL-1060"
+msgid "Epson PM 3000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:444
-msgid "Brother HL-1070"
+msgid "Epson PM 3300C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:445
-msgid "Brother HL-1240"
+msgid "Epson PM 3500C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:446
-msgid "Brother HL-1250"
+msgid "Epson PM 3700C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:447
-msgid "Brother HL-1260"
+msgid "Epson PM 4000PX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:448
-msgid "Brother HL-1270N"
+msgid "Epson PM 5000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:449
-msgid "Brother HL-1440"
+msgid "Epson PM 7000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:450
-msgid "Brother HL-1660e"
+msgid "Epson PM 9000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:451
-msgid "Brother HL-2060"
+msgid "Epson PM 10000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:452
-msgid "Brother MFC-6550MC"
+msgid "Epson PM A650"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:453
-msgid "Brother MFC-8300"
+msgid "Epson PM A750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:454
-msgid "Brother MFC-9500"
+msgid "Epson PM A820"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:455
-msgid "Brother MFC-9600"
+msgid "Epson PM A890"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:456
-msgid "Canon GP 335"
+msgid "Epson PM A900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:457
-msgid "Canon LBP-4sx"
+msgid "Epson PM A950"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:458
-msgid "Canon LBP-430"
+msgid "Epson PM D600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:459
-msgid "Canon LBP-1000"
+msgid "Epson PM D750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:460
-msgid "Canon LBP-1260"
+msgid "Epson PM D770"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:461
-msgid "Canon LBP-1760"
+msgid "Epson PM D800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:462
-msgid "Canon imageRunner 330s"
+msgid "Epson PM D870"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:463
-msgid "Citizen ProJet II"
+msgid "Epson PM D1000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:464
-msgid "DEC 1800"
+msgid "Epson PM G700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:465
-msgid "DEC LN17"
+msgid "Epson PM G720"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:466
-msgid "Epson ActionLaser 1100"
+msgid "Epson PM G730"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:467
-msgid "Epson ActionLaser II"
+msgid "Epson PM G800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:468
-msgid "Epson AcuLaser C2000"
+msgid "Epson PM G820"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:469
-msgid "Epson AcuLaser C2000PS"
+msgid "Epson PM G850"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:470
-msgid "Epson AcuLaser C8500"
+msgid "Epson PM G4500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:471
-msgid "Epson AcuLaser C8500PS"
+msgid "Epson PX A650"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:472
-msgid "Epson AcuLaser C8600"
+msgid "Epson PX G900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:473
-msgid "Epson AcuLaser C8600PS"
+msgid "Epson PX G920"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:474
-msgid "Epson EPL-5200"
+msgid "Epson PX G5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:475
-msgid "Epson EPL-5200+"
+msgid "Epson PX V500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:476
-msgid "Epson EPL-5700"
+msgid "Epson PX V600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:477
-msgid "Epson EPL-5700PS"
+msgid "Epson PX V630"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:478
-msgid "Epson EPL-5800"
+msgid "Epson PX 5500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:479
-msgid "Epson EPL-5800PS"
+msgid "Epson PX 7000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:480
-msgid "Epson EPL-5900"
+msgid "Epson PX 9000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:481
-msgid "Epson EPL-5900PS"
+msgid "Apollo P-2100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:482
-msgid "Epson EPL-6100"
+msgid "Apollo P-2150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:483
-msgid "Epson EPL-6100PS"
+msgid "Apollo P-2200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:484
-msgid "Epson EPL-7100"
+msgid "Apollo P-2250"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:485
-msgid "Fujitsu PrintPartner 10V"
+msgid "Apollo P-2500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:486
-msgid "Fujitsu PrintPartner 16DV"
+msgid "Apollo P-2550"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:487
-msgid "Fujitsu PrintPartner 20W"
+msgid "Apollo P-2600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:488
-msgid "Fujitsu PrintPartner 8000"
+msgid "Apollo P-2650"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:489
-msgid "Generic PCL 4 Printer"
+msgid "Apple Color StyleWriter 4100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:490
-msgid "Generic PCL 5 Printer"
+msgid "Apple Color StyleWriter 4500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:491
-msgid "Generic PCL 5c Printer"
+msgid "Apple Color StyleWriter 6500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:492
-msgid "Generic PCL 5e Printer"
+msgid "Apple LaserWriter Select 360"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:493
-msgid "Generic PCL 6/PCL XL Printer"
+msgid "Brother DCP-1200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:494
-msgid "HP Business Inkjet 2200"
+msgid "Brother HL-4Ve"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:495
-msgid "HP Business Inkjet 2230"
+msgid "Brother HL-10V"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:496
-msgid "HP Business Inkjet 2250"
+msgid "Brother HL-10h"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:497
-msgid "HP Business Inkjet 2250TN"
+msgid "Brother HL-630"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:498
-msgid "HP Business Inkjet 2280"
+msgid "Brother HL-660"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:499
-msgid "HP Color Inkjet Printer CP1160"
+msgid "Brother HL-760"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:500
-msgid "HP Color Inkjet Printer CP1700"
+msgid "Brother HL-960"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:501
-msgid "HP Color LaserJet 2500"
+msgid "Brother HL-1040"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:502
-msgid "HP Color LaserJet 4500"
+msgid "Brother HL-1050"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:503
-msgid "HP Color LaserJet 4550"
+msgid "Brother HL-1060"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:504
-msgid "HP Color LaserJet 4600"
+msgid "Brother HL-1070"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:505
-msgid "HP Color LaserJet 5"
+msgid "Brother HL-1240"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:506
-msgid "HP Color LaserJet 5000"
+msgid "Brother HL-1250"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:507
-msgid "HP Color LaserJet 5500"
+msgid "Brother HL-1260"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:508
-msgid "HP Color LaserJet 8550GN"
+msgid "Brother HL-1270N"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:509
-msgid "HP DesignJet 230"
+msgid "Brother HL-1440"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:510
-msgid "HP DesignJet 250C"
+msgid "Brother HL-1660e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:511
-msgid "HP DesignJet 430"
+msgid "Brother HL-2060"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:512
-msgid "HP DesignJet 450C"
+msgid "Brother MFC-6550MC"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:513
-msgid "HP DesignJet 455CA"
+msgid "Brother MFC-8300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:514
-msgid "HP DesignJet 488CA"
+msgid "Brother MFC-9500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:515
-msgid "HP DesignJet 700"
+msgid "Brother MFC-9600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:516
-msgid "HP DesignJet 750C Plus"
+msgid "Canon GP 335"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:517
-msgid "HP DesignJet 750C"
+msgid "Canon LBP-4sx"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:518
-msgid "HP DesignJet 2500CP"
+msgid "Canon LBP-430"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:519
-msgid "HP DesignJet 3500CP"
+msgid "Canon LBP-1000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:520
-msgid "HP DesignJet ColorPro CAD"
+msgid "Canon LBP-1260"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:521
-msgid "HP DeskJet 400"
+msgid "Canon LBP-1760"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:522
-msgid "HP DeskJet 420C"
+msgid "Canon imageRunner 330s"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:523
-msgid "HP DeskJet 450"
+msgid "Citizen ProJet II"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:524
-msgid "HP DeskJet 500"
+msgid "DEC 1800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:525
-msgid "HP DeskJet 500C"
+msgid "DEC LN17"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:526
-msgid "HP DeskJet 505J Plus"
+msgid "Epson ActionLaser 1100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:527
-msgid "HP DeskJet 510"
+msgid "Epson ActionLaser II"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:528
-msgid "HP DeskJet 520"
+msgid "Epson AcuLaser C2000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:529
-msgid "HP DeskJet 540C"
+msgid "Epson AcuLaser C2000PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:530
-msgid "HP DeskJet 550C"
+msgid "Epson AcuLaser C8500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:531
-msgid "HP DeskJet 5550"
+msgid "Epson AcuLaser C8500PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:532
-msgid "HP DeskJet 5551"
+msgid "Epson AcuLaser C8600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:533
-msgid "HP DeskJet 560C"
+msgid "Epson AcuLaser C8600PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:534
-msgid "HP DeskJet 600"
+msgid "Epson EPL-5200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:535
-msgid "HP DeskJet 600C"
+msgid "Epson EPL-5200+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:536
-msgid "HP DeskJet 610C"
+msgid "Epson EPL-5700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:537
-msgid "HP DeskJet 610CL"
+msgid "Epson EPL-5700PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:538
-msgid "HP DeskJet 6122"
+msgid "Epson EPL-5800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:539
-msgid "HP DeskJet 6127"
+msgid "Epson EPL-5800PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:540
-msgid "HP DeskJet 612C"
+msgid "Epson EPL-5900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:541
-msgid "HP DeskJet 640C"
+msgid "Epson EPL-5900PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:542
-msgid "HP DeskJet 648C"
+msgid "Epson EPL-6100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:543
-msgid "HP DeskJet 660C"
+msgid "Epson EPL-6100PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:544
-msgid "HP DeskJet 670C"
+msgid "Epson EPL-7100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:545
-msgid "HP DeskJet 670TV"
+msgid "Fujitsu PrintPartner 10V"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:546
-msgid "HP DeskJet 672C"
+msgid "Fujitsu PrintPartner 16DV"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:547
-msgid "HP DeskJet 680C"
+msgid "Fujitsu PrintPartner 20W"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:548
-msgid "HP DeskJet 682C"
+msgid "Fujitsu PrintPartner 8000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:549
-msgid "HP DeskJet 690C"
+msgid "Generic PCL 4 Printer"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:550
-msgid "HP DeskJet 692C"
+msgid "Generic PCL 5 Printer"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:551
-msgid "HP DeskJet 693C"
+msgid "Generic PCL 5c Printer"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:552
-msgid "HP DeskJet 694C"
+msgid "Generic PCL 5e Printer"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:553
-msgid "HP DeskJet 695C"
+msgid "Generic PCL 6/PCL XL Printer"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:554
-msgid "HP DeskJet 697C"
+msgid "HP Business Inkjet 2200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:555
-msgid "HP DeskJet 810C"
+msgid "HP Business Inkjet 2230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:556
-msgid "HP DeskJet 812C"
+msgid "HP Business Inkjet 2250"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:557
-msgid "HP DeskJet 815C"
+msgid "HP Business Inkjet 2250TN"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:558
-msgid "HP DeskJet 816C"
+msgid "HP Business Inkjet 2280"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:559
-msgid "HP DeskJet 825C"
+msgid "HP Color Inkjet Printer CP1160"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:560
-msgid "HP DeskJet 830C"
+msgid "HP Color Inkjet Printer CP1700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:561
-msgid "HP DeskJet 832C"
+msgid "HP Color LaserJet 2500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:562
-msgid "HP DeskJet 840C"
+msgid "HP Color LaserJet 4500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:563
-msgid "HP DeskJet 841C"
+msgid "HP Color LaserJet 4550"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:564
-msgid "HP DeskJet 842C"
+msgid "HP Color LaserJet 4600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:565
-msgid "HP DeskJet 843C"
+msgid "HP Color LaserJet 5"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:566
-msgid "HP DeskJet 845C"
+msgid "HP Color LaserJet 5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:567
-msgid "HP DeskJet 850C"
+msgid "HP Color LaserJet 5500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:568
-msgid "HP DeskJet 855C"
+msgid "HP Color LaserJet 8550GN"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:569
-msgid "HP DeskJet 870C"
+msgid "HP DesignJet 230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:570
-msgid "HP DeskJet 880C"
+msgid "HP DesignJet 250C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:571
-msgid "HP DeskJet 882C"
+msgid "HP DesignJet 430"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:572
-msgid "HP DeskJet 890C"
+msgid "HP DesignJet 450C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:573
-msgid "HP DeskJet 895C"
+msgid "HP DesignJet 455CA"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:574
-msgid "HP DeskJet 916C"
+msgid "HP DesignJet 488CA"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:575
-msgid "HP DeskJet 920C"
+msgid "HP DesignJet 700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:576
-msgid "HP DeskJet 9300"
+msgid "HP DesignJet 750C Plus"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:577
-msgid "HP DeskJet 930C"
+msgid "HP DesignJet 750C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:578
-msgid "HP DeskJet 932C"
+msgid "HP DesignJet 2500CP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:579
-msgid "HP DeskJet 933C"
+msgid "HP DesignJet 3500CP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:580
-msgid "HP DeskJet 934C"
+msgid "HP DesignJet ColorPro CAD"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:581
-msgid "HP DeskJet 935C"
+msgid "HP DeskJet 400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:582
-msgid "HP DeskJet 940C"
+msgid "HP DeskJet 420C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:583
-msgid "HP DeskJet 948C"
+msgid "HP DeskJet 450"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:584
-msgid "HP DeskJet 950C"
+msgid "HP DeskJet 500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:585
-msgid "HP DeskJet 952C"
+msgid "HP DeskJet 500C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:586
-msgid "HP DeskJet 955C"
+msgid "HP DeskJet 505J Plus"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:587
-msgid "HP DeskJet 957C"
+msgid "HP DeskJet 510"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:588
-msgid "HP DeskJet 959C"
+msgid "HP DeskJet 520"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:589
-msgid "HP DeskJet 960C"
+msgid "HP DeskJet 540C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:590
-msgid "HP DeskJet 970C"
+msgid "HP DeskJet 550C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:591
-msgid "HP DeskJet 975C"
+msgid "HP DeskJet 5550"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:592
-msgid "HP DeskJet 980C"
+msgid "HP DeskJet 5551"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:593
-msgid "HP DeskJet 990C"
+msgid "HP DeskJet 560C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:594
-msgid "HP DeskJet 995C"
+msgid "HP DeskJet 600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:595
-msgid "HP DeskJet 1100C"
+msgid "HP DeskJet 600C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:596
-msgid "HP DeskJet 1120C"
+msgid "HP DeskJet 610C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:597
-msgid "HP DeskJet 1125C"
+msgid "HP DeskJet 610CL"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:598
-msgid "HP DeskJet 1200C"
+msgid "HP DeskJet 6122"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:599
-msgid "HP DeskJet 1220C"
+msgid "HP DeskJet 6127"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:600
-msgid "HP DeskJet 1600C"
+msgid "HP DeskJet 612C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:601
-msgid "HP DeskJet 1600CM"
+msgid "HP DeskJet 640C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:602
-msgid "HP DeskJet 2000"
+msgid "HP DeskJet 648C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:603
-msgid "HP DeskJet 2500"
+msgid "HP DeskJet 660C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:604
-msgid "HP DeskJet 2500CM"
+msgid "HP DeskJet 670C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:605
-msgid "HP DeskJet 340C"
+msgid "HP DeskJet 670TV"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:606
-msgid "HP DeskJet 3810"
+msgid "HP DeskJet 672C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:607
-msgid "HP DeskJet 3816"
+msgid "HP DeskJet 680C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:608
-msgid "HP DeskJet 3820"
+msgid "HP DeskJet 682C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:609
-msgid "HP DeskJet 3822"
+msgid "HP DeskJet 690C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:610
-msgid "HP LaserJet 2"
+msgid "HP DeskJet 692C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:611
-msgid "HP LaserJet 2D"
+msgid "HP DeskJet 693C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:612
-msgid "HP LaserJet 2P Plus"
+msgid "HP DeskJet 694C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:613
-msgid "HP LaserJet 2P"
+msgid "HP DeskJet 695C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:614
-msgid "HP LaserJet 3"
+msgid "HP DeskJet 697C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:615
-msgid "HP LaserJet 3D"
+msgid "HP DeskJet 810C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:616
-msgid "HP LaserJet 3P w/ PCL5"
+msgid "HP DeskJet 812C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:617
-msgid "HP LaserJet 3P w/PS"
+msgid "HP DeskJet 815C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:618
-msgid "HP LaserJet 4 Plus"
+msgid "HP DeskJet 816C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:619
-msgid "HP LaserJet 4"
+msgid "HP DeskJet 825C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:620
-msgid "HP LaserJet 4L"
+msgid "HP DeskJet 830C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:621
-msgid "HP LaserJet 4M"
+msgid "HP DeskJet 832C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:622
-msgid "HP LaserJet 4ML"
+msgid "HP DeskJet 840C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:623
-msgid "HP LaserJet 4P"
+msgid "HP DeskJet 841C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:624
-msgid "HP LaserJet 4Si"
+msgid "HP DeskJet 842C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:625
-msgid "HP LaserJet 4V"
+msgid "HP DeskJet 843C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:626
-msgid "HP LaserJet 5"
+msgid "HP DeskJet 845C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:627
-msgid "HP LaserJet 5L"
+msgid "HP DeskJet 850C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:628
-msgid "HP LaserJet 5M"
+msgid "HP DeskJet 855C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:629
-msgid "HP LaserJet 5MP"
+msgid "HP DeskJet 870C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:630
-msgid "HP LaserJet 5P"
+msgid "HP DeskJet 880C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:631
-msgid "HP LaserJet 5Si"
+msgid "HP DeskJet 882C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:632
-msgid "HP LaserJet 6"
+msgid "HP DeskJet 890C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:633
-msgid "HP LaserJet 6L"
+msgid "HP DeskJet 895C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:634
-msgid "HP LaserJet 6MP"
+msgid "HP DeskJet 916C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:635
-msgid "HP LaserJet 6P"
+msgid "HP DeskJet 920C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:636
-msgid "HP LaserJet 1010"
+msgid "HP DeskJet 9300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:637
-msgid "HP LaserJet 1012"
+msgid "HP DeskJet 930C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:638
-msgid "HP LaserJet 1015"
+msgid "HP DeskJet 932C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:639
-msgid "HP LaserJet 1100"
+msgid "HP DeskJet 933C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:640
-msgid "HP LaserJet 1100A"
+msgid "HP DeskJet 934C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:641
-msgid "HP LaserJet 1150"
+msgid "HP DeskJet 935C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:642
-msgid "HP LaserJet 1200"
+msgid "HP DeskJet 940C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:643
-msgid "HP LaserJet 1220"
+msgid "HP DeskJet 948C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:644
-msgid "HP LaserJet 1300"
+msgid "HP DeskJet 950C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:645
-msgid "HP LaserJet 2100"
+msgid "HP DeskJet 952C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:646
-msgid "HP LaserJet 2100M"
+msgid "HP DeskJet 955C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:647
-msgid "HP LaserJet 2200"
+msgid "HP DeskJet 957C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:648
-msgid "HP LaserJet 2300"
+msgid "HP DeskJet 959C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:649
-msgid "HP LaserJet 3200"
+msgid "HP DeskJet 960C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:650
-msgid "HP LaserJet 3200m"
+msgid "HP DeskJet 970C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:651
-msgid "HP LaserJet 3200se"
+msgid "HP DeskJet 975C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:652
-msgid "HP LaserJet 3300 MFP"
+msgid "HP DeskJet 980C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:653
-msgid "HP LaserJet 3310 MFP"
+msgid "HP DeskJet 990C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:654
-msgid "HP LaserJet 3320 MFP"
+msgid "HP DeskJet 995C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:655
-msgid "HP LaserJet 3320N MFP"
+msgid "HP DeskJet 1100C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:656
-msgid "HP LaserJet 3330 MFP"
+msgid "HP DeskJet 1120C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:657
-msgid "HP LaserJet 4000"
+msgid "HP DeskJet 1125C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:658
-msgid "HP LaserJet 4050"
+msgid "HP DeskJet 1200C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:659
-msgid "HP LaserJet 4100"
+msgid "HP DeskJet 1220C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:660
-msgid "HP LaserJet 4200"
+msgid "HP DeskJet 1600C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:661
-msgid "HP LaserJet 4300"
+msgid "HP DeskJet 1600CM"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:662
-msgid "HP LaserJet 5000"
+msgid "HP DeskJet 2000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:663
-msgid "HP LaserJet 5100"
+msgid "HP DeskJet 2500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:664
-msgid "HP LaserJet 8000"
+msgid "HP DeskJet 2500CM"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:665
-msgid "HP LaserJet 8100"
+msgid "HP DeskJet 340C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:666
-msgid "HP LaserJet 8150"
+msgid "HP DeskJet 3810"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:667
-msgid "HP LaserJet 9000"
+msgid "HP DeskJet 3816"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:668
-msgid "HP Mopier 240"
+msgid "HP DeskJet 3820"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:669
-msgid "HP Mopier 320"
+msgid "HP DeskJet 3822"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:670
-msgid "HP OfficeJet 300"
+msgid "HP LaserJet 2"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:671
-msgid "HP OfficeJet 330"
+msgid "HP LaserJet 2D"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:672
-msgid "HP OfficeJet 350"
+msgid "HP LaserJet 2P Plus"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:673
-msgid "HP OfficeJet 500"
+msgid "HP LaserJet 2P"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:674
-msgid "HP OfficeJet 520"
+msgid "HP LaserJet 3"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:675
-msgid "HP OfficeJet 570"
+msgid "HP LaserJet 3D"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:676
-msgid "HP OfficeJet 580"
+msgid "HP LaserJet 3P w/ PCL5"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:677
-msgid "HP OfficeJet 590"
+msgid "HP LaserJet 3P w/PS"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:678
-msgid "HP OfficeJet 600"
+msgid "HP LaserJet 4 Plus"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:679
-msgid "HP OfficeJet 610"
+msgid "HP LaserJet 4"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:680
-msgid "HP OfficeJet 625"
+msgid "HP LaserJet 4L"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:681
-msgid "HP OfficeJet 630"
+msgid "HP LaserJet 4M"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:682
-msgid "HP OfficeJet 635"
+msgid "HP LaserJet 4ML"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:683
-msgid "HP OfficeJet 700"
+msgid "HP LaserJet 4P"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:684
-msgid "HP OfficeJet 710"
+msgid "HP LaserJet 4Si"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:685
-msgid "HP OfficeJet 720"
+msgid "HP LaserJet 4V"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:686
-msgid "HP OfficeJet 725"
+msgid "HP LaserJet 5"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:687
-msgid "HP OfficeJet 5105"
+msgid "HP LaserJet 5L"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:688
-msgid "HP OfficeJet 5110"
+msgid "HP LaserJet 5M"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:689
-msgid "HP OfficeJet 5110xi"
+msgid "HP LaserJet 5MP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:690
-msgid "HP OfficeJet 6105"
+msgid "HP LaserJet 5P"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:691
-msgid "HP OfficeJet 6110"
+msgid "HP LaserJet 5Si"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:692
-msgid "HP OfficeJet 7110"
+msgid "HP LaserJet 6"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:693
-msgid "HP OfficeJet 7130"
+msgid "HP LaserJet 6L"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:694
-msgid "HP OfficeJet 7140"
+msgid "HP LaserJet 6MP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:695
-msgid "HP OfficeJet D125"
+msgid "HP LaserJet 6P"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:696
-msgid "HP OfficeJet D135"
+msgid "HP LaserJet 1010"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:697
-msgid "HP OfficeJet D145"
+msgid "HP LaserJet 1012"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:698
-msgid "HP OfficeJet D155"
+msgid "HP LaserJet 1015"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:699
-msgid "HP OfficeJet G55"
+msgid "HP LaserJet 1100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:700
-msgid "HP OfficeJet G85"
+msgid "HP LaserJet 1100A"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:701
-msgid "HP OfficeJet G95"
+msgid "HP LaserJet 1150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:702
-msgid "HP OfficeJet K60"
+msgid "HP LaserJet 1200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:703
-msgid "HP OfficeJet K60xi"
+msgid "HP LaserJet 1220"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:704
-msgid "HP OfficeJet K80"
+msgid "HP LaserJet 1300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:705
-msgid "HP OfficeJet K80xi"
+msgid "HP LaserJet 2100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:706
-msgid "HP OfficeJet LX"
+msgid "HP LaserJet 2100M"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:707
-msgid "HP OfficeJet Pro 1150C"
+msgid "HP LaserJet 2200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:708
-msgid "HP OfficeJet Pro 1170C"
+msgid "HP LaserJet 2300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:709
-msgid "HP OfficeJet Pro 1175C"
+msgid "HP LaserJet 3200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:710
-msgid "HP OfficeJet R40"
+msgid "HP LaserJet 3200m"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:711
-msgid "HP OfficeJet R45"
+msgid "HP LaserJet 3200se"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:712
-msgid "HP OfficeJet R60"
+msgid "HP LaserJet 3300 MFP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:713
-msgid "HP OfficeJet R65"
+msgid "HP LaserJet 3310 MFP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:714
-msgid "HP OfficeJet R80"
+msgid "HP LaserJet 3320 MFP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:715
-msgid "HP OfficeJet T45"
+msgid "HP LaserJet 3320N MFP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:716
-msgid "HP OfficeJet T65"
+msgid "HP LaserJet 3330 MFP"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:717
-msgid "HP OfficeJet V40"
+msgid "HP LaserJet 4000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:718
-msgid "HP OfficeJet V40xi"
+msgid "HP LaserJet 4050"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:719
-msgid "HP OfficeJet"
+msgid "HP LaserJet 4100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:720
-msgid "HP PSC 370"
+msgid "HP LaserJet 4200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:721
-msgid "HP PSC 380"
+msgid "HP LaserJet 4300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:722
-msgid "HP PSC 500"
+msgid "HP LaserJet 5000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:723
-msgid "HP PSC 750"
+msgid "HP LaserJet 5100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:724
-msgid "HP PSC 950"
+msgid "HP LaserJet 8000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:725
-msgid "HP PSC 950xi"
+msgid "HP LaserJet 8100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:726
-msgid "HP PSC 2110"
+msgid "HP LaserJet 8150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:727
-msgid "HP PSC 2150"
+msgid "HP LaserJet 9000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:728
-msgid "HP PSC 2210"
+msgid "HP Mopier 240"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:729
-msgid "HP PhotoSmart 7150"
+msgid "HP Mopier 320"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:730
-msgid "HP PhotoSmart 7345"
+msgid "HP OfficeJet 300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:731
-msgid "HP PhotoSmart 7350"
+msgid "HP OfficeJet 330"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:732
-msgid "HP PhotoSmart 7550"
+msgid "HP OfficeJet 350"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:733
-msgid "HP PhotoSmart P100"
+msgid "HP OfficeJet 500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:734
-msgid "HP PhotoSmart P130"
+msgid "HP OfficeJet 520"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:735
-msgid "HP PhotoSmart P230"
+msgid "HP OfficeJet 570"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:736
-msgid "HP PhotoSmart P1000"
+msgid "HP OfficeJet 580"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:737
-msgid "HP PhotoSmart P1100"
+msgid "HP OfficeJet 590"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:738
-msgid "HP PhotoSmart P1115"
+msgid "HP OfficeJet 600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:739
-msgid "HP PhotoSmart P1215"
+msgid "HP OfficeJet 610"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:740
-msgid "HP PhotoSmart P1218"
+msgid "HP OfficeJet 625"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:741
-msgid "HP PhotoSmart P1315"
+msgid "HP OfficeJet 630"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:742
-msgid "HP e-printer e20"
+msgid "HP OfficeJet 635"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:743
-msgid "IBM 4019"
+msgid "HP OfficeJet 700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:744
-msgid "IBM 4029 030 LaserPrinter 10"
+msgid "HP OfficeJet 710"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:745
-msgid "IBM 4312"
+msgid "HP OfficeJet 720"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:746
-msgid "IBM Infoprint 12"
+msgid "HP OfficeJet 725"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:747
-msgid "IBM Page Printer 3112"
+msgid "HP OfficeJet 5105"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:748
-msgid "Infotec 4651 MF"
+msgid "HP OfficeJet 5110"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:749
-msgid "Kyocera F-1010"
+msgid "HP OfficeJet 5110xi"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:750
-msgid "Kyocera FS-600 - KPDL-2"
+msgid "HP OfficeJet 6105"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:751
-msgid "Kyocera FS-600"
+msgid "HP OfficeJet 6110"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:752
-msgid "Kyocera FS-680"
+msgid "HP OfficeJet 7110"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:753
-msgid "Kyocera FS-800"
+msgid "HP OfficeJet 7130"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:754
-msgid "Kyocera FS-1000"
+msgid "HP OfficeJet 7140"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:755
-msgid "Kyocera FS-1000+"
+msgid "HP OfficeJet D125"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:756
-msgid "Kyocera FS-1010"
+msgid "HP OfficeJet D135"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:757
-msgid "Kyocera FS-1050"
+msgid "HP OfficeJet D145"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:758
-msgid "Kyocera FS-1200"
+msgid "HP OfficeJet D155"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:759
-msgid "Kyocera FS-1600"
+msgid "HP OfficeJet G55"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:760
-msgid "Kyocera FS-1600+"
+msgid "HP OfficeJet G85"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:761
-msgid "Kyocera FS-1700"
+msgid "HP OfficeJet G95"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:762
-msgid "Kyocera FS-1700+"
+msgid "HP OfficeJet K60"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:763
-msgid "Kyocera FS-1750"
+msgid "HP OfficeJet K60xi"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:764
-msgid "Kyocera FS-1800"
+msgid "HP OfficeJet K80"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:765
-msgid "Kyocera FS-1800+"
+msgid "HP OfficeJet K80xi"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:766
-msgid "Kyocera FS-1900"
+msgid "HP OfficeJet LX"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:767
-msgid "Kyocera FS-3500"
+msgid "HP OfficeJet Pro 1150C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:768
-msgid "Kyocera FS-3600"
+msgid "HP OfficeJet Pro 1170C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:769
-msgid "Kyocera FS-3600+"
+msgid "HP OfficeJet Pro 1175C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:770
-msgid "Kyocera FS-3700"
+msgid "HP OfficeJet R40"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:771
-msgid "Kyocera FS-3700+"
+msgid "HP OfficeJet R45"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:772
-msgid "Kyocera FS-3750"
+msgid "HP OfficeJet R60"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:773
-msgid "Kyocera FS-3800"
+msgid "HP OfficeJet R65"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:774
-msgid "Kyocera FS-5800C"
+msgid "HP OfficeJet R80"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:775
-msgid "Kyocera FS-5900C"
+msgid "HP OfficeJet T45"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:776
-msgid "Kyocera FS-6500"
+msgid "HP OfficeJet T65"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:777
-msgid "Kyocera FS-6500+"
+msgid "HP OfficeJet V40"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:778
-msgid "Kyocera FS-6700"
+msgid "HP OfficeJet V40xi"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:779
-msgid "Kyocera FS-7000"
+msgid "HP OfficeJet"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:780
-msgid "Kyocera FS-7000+"
+msgid "HP PSC 370"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:781
-msgid "Kyocera FS-8000C"
+msgid "HP PSC 380"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:782
-msgid "Kyocera FS-9000"
+msgid "HP PSC 500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:783
-msgid "Kyocera FS-9100DN"
+msgid "HP PSC 750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:784
-msgid "Kyocera FS-9500DN"
+msgid "HP PSC 950"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:785
-msgid "Kyocera KM-1530"
+msgid "HP PSC 950xi"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:786
-msgid "Kyocera KM-1810"
+msgid "HP PSC 2110"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:787
-msgid "Kyocera KM-2030"
+msgid "HP PSC 2150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:788
-msgid "Kyocera KM-2530"
+msgid "HP PSC 2210"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:789
-msgid "Kyocera KM-3530"
+msgid "HP PhotoSmart 7150"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:790
-msgid "Kyocera KM-4230"
+msgid "HP PhotoSmart 7345"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:791
-msgid "Kyocera KM-4530"
+msgid "HP PhotoSmart 7350"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:792
-msgid "Kyocera KM-5230"
+msgid "HP PhotoSmart 7550"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:793
-msgid "Kyocera KM-5530"
+msgid "HP PhotoSmart P100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:794
-msgid "Kyocera KM-6230"
+msgid "HP PhotoSmart P130"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:795
-msgid "Lexmark 4076"
+msgid "HP PhotoSmart P230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:796
-msgid "Lexmark Optra E"
+msgid "HP PhotoSmart P1000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:797
-msgid "Lexmark Optra E+"
+msgid "HP PhotoSmart P1100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:798
-msgid "Lexmark Valuewriter 300"
+msgid "HP PhotoSmart P1115"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:799
-msgid "Minolta PagePro 6"
+msgid "HP PhotoSmart P1215"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:800
-msgid "Minolta PagePro 6e"
+msgid "HP PhotoSmart P1218"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:801
-msgid "Minolta PagePro 6ex"
+msgid "HP PhotoSmart P1315"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:802
-msgid "Minolta PagePro 8"
+msgid "HP e-printer e20"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:803
-msgid "Minolta PagePro 8L"
+msgid "IBM 4019"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:804
-msgid "Minolta PagePro 1100"
+msgid "IBM 4029 030 LaserPrinter 10"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:805
-msgid "NEC SuperScript 660i"
+msgid "IBM 4312"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:806
-msgid "NEC SuperScript 860"
+msgid "IBM Infoprint 12"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:807
-msgid "NEC SuperScript 870"
+msgid "IBM Page Printer 3112"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:808
-msgid "NEC SuperScript 1260"
+msgid "Infotec 4651 MF"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:809
-msgid "NEC SuperScript 1400"
+msgid "Kyocera F-1010"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:810
-msgid "NEC SuperScript 1800"
+msgid "Kyocera FS-600 - KPDL-2"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:811
-msgid "Okidata OL400"
+msgid "Kyocera FS-600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:812
-msgid "Okidata OL400e"
+msgid "Kyocera FS-680"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:813
-msgid "Okidata OL400ex"
+msgid "Kyocera FS-800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:814
-msgid "Okidata OL410e"
+msgid "Kyocera FS-1000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:815
-msgid "Okidata OL600e"
+msgid "Kyocera FS-1000+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:816
-msgid "Okidata OL610e/S"
+msgid "Kyocera FS-1010"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:817
-msgid "Okidata OL800"
+msgid "Kyocera FS-1050"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:818
-msgid "Okidata OL810ex"
+msgid "Kyocera FS-1200"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:819
-msgid "Okidata Okipage 6e"
+msgid "Kyocera FS-1600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:820
-msgid "Okidata Okipage 6ex"
+msgid "Kyocera FS-1600+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:821
-msgid "Okidata Okipage 8p"
+msgid "Kyocera FS-1700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:822
-msgid "Okidata Okipage 10e"
+msgid "Kyocera FS-1700+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:823
-msgid "Okidata Okipage 10ex"
+msgid "Kyocera FS-1750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:824
-msgid "Okidata Okipage 14ex"
+msgid "Kyocera FS-1800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:825
-msgid "Okidata Super 6e"
+msgid "Kyocera FS-1800+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:826
-msgid "Olivetti JP350S"
+msgid "Kyocera FS-1900"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:827
-msgid "Olivetti PG 306"
+msgid "Kyocera FS-3500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:828
-msgid "PCPI 1030"
+msgid "Kyocera FS-3600"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:829
-msgid "Panasonic KX-P4410"
+msgid "Kyocera FS-3600+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:830
-msgid "Panasonic KX-P4450"
+msgid "Kyocera FS-3700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:831
-msgid "Panasonic KX-P6150"
+msgid "Kyocera FS-3700+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:832
-msgid "Panasonic KX-P6500"
+msgid "Kyocera FS-3750"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:833
-msgid "Raven LP-410"
+msgid "Kyocera FS-3800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:834
-msgid "Ricoh Aficio 220"
+msgid "Kyocera FS-5800C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:835
-msgid "Ricoh Aficio 401"
+msgid "Kyocera FS-5900C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:836
-msgid "Ricoh Aficio 700"
+msgid "Kyocera FS-6500"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:837
-msgid "Samsung ML-85"
+msgid "Kyocera FS-6500+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:838
-msgid "Samsung ML-4600"
+msgid "Kyocera FS-6700"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:839
-msgid "Samsung ML-5000a"
+msgid "Kyocera FS-7000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:840
-msgid "Samsung ML-6000"
+msgid "Kyocera FS-7000+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:841
-msgid "Samsung ML-6100"
+msgid "Kyocera FS-8000C"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:842
-msgid "Samsung ML-7000"
+msgid "Kyocera FS-9000"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:843
-msgid "Samsung ML-7000N"
+msgid "Kyocera FS-9100DN"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:844
-msgid "Samsung ML-7000P"
+msgid "Kyocera FS-9500DN"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:845
-msgid "Samsung ML-7050"
+msgid "Kyocera KM-1530"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:846
-msgid "Samsung QL-5100A"
+msgid "Kyocera KM-1810"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:847
-msgid "Samsung QL-6050"
+msgid "Kyocera KM-2030"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:848
-msgid "Seiko SpeedJET 200"
+msgid "Kyocera KM-2530"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:849
-msgid "Sharp AR-161"
+msgid "Kyocera KM-3530"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:850
-msgid "Sony IJP-V100"
+msgid "Kyocera KM-4230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:851
-msgid "Star LS-04"
+msgid "Kyocera KM-4530"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:852
-msgid "Star LaserPrinter 8"
+msgid "Kyocera KM-5230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:853
-msgid "Tally MT908"
+msgid "Kyocera KM-5530"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:854
-msgid "Xerox Able 1406"
+msgid "Kyocera KM-6230"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:855
-msgid "Xerox DocuPrint 4508"
+msgid "Lexmark 4076"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:856
-msgid "Xerox DocuPrint C20"
+msgid "Lexmark Optra E"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:857
-msgid "Xerox DocuPrint N4512"
+msgid "Lexmark Optra E+"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:858
-msgid "Xerox DocuPrint N4512PS"
+msgid "Lexmark Optra E220"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:859
-msgid "Xerox DocuPrint P12"
+msgid "Lexmark Valuewriter 300"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:860
-msgid "Xerox DocuPrint P1202"
+msgid "Minolta PagePro 6"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:861
-msgid "Xerox DocuPrint P8e"
+msgid "Minolta PagePro 6e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:862
-msgid "Xerox Document Centre 400"
+msgid "Minolta PagePro 6ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:863
-msgid "Lexmark Z42"
+msgid "Minolta PagePro 8"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:864
-msgid "Lexmark Z43"
+msgid "Minolta PagePro 8L"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:865
-msgid "Lexmark Z52"
+msgid "Minolta PagePro 1100"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:866
-msgid "Lexmark Z53"
+msgid "NEC SuperScript 660i"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:867
-msgid "Olympus P-10"
+msgid "NEC SuperScript 860"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:868
-msgid "Olympus P-11"
+msgid "NEC SuperScript 870"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:869
-msgid "Olympus P-200"
+msgid "NEC SuperScript 1260"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:870
-msgid "Olympus P-300"
+msgid "NEC SuperScript 1400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:871
-msgid "Olympus P-300E"
+msgid "NEC SuperScript 1800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:872
-msgid "Olympus P-300U"
+msgid "Okidata OL400"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:873
-msgid "Olympus P-330E"
+msgid "Okidata OL400e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:874
-msgid "Olympus P-330NE"
+msgid "Okidata OL400ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:875
-msgid "Olympus P-400"
+msgid "Okidata OL410e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:876
-msgid "Olympus P-440"
+msgid "Okidata OL600e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:877
-msgid "Canon CP-100"
+msgid "Okidata OL610e/S"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:878
-msgid "Canon CP-200"
+msgid "Okidata OL800"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:879
-msgid "Canon CP-220"
+msgid "Okidata OL810ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:880
-msgid "Canon CP-300"
+msgid "Okidata Okipage 6e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:881
-msgid "Canon CP-330"
+msgid "Okidata Okipage 6ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:882
-msgid "Canon SELPHY-CP-400"
+msgid "Okidata Okipage 8p"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:883
-msgid "Canon SELPHY-CP-500"
+msgid "Okidata Okipage 10e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:884
-msgid "Canon SELPHY-CP-510"
+msgid "Okidata Okipage 10ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:885
-msgid "Canon SELPHY-CP-600"
+msgid "Okidata Okipage 14ex"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:886
-msgid "Canon SELPHY-CP-710"
+msgid "Okidata Super 6e"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:887
-msgid "Sony UP-DP10"
+msgid "Olivetti JP350S"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:888
-msgid "Sony UP-DR150"
+msgid "Olivetti PG 306"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:889
-msgid "Fujifilm Printpix-CX-400"
+msgid "PCPI 1030"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:890
-msgid "Fujifilm Printpix-CX-550"
+msgid "Panasonic KX-P4410"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:891
-msgid "RAW DATA 16 bit"
+msgid "Panasonic KX-P4450"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:892
+msgid "Panasonic KX-P6150"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:893
+msgid "Panasonic KX-P6500"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:894
+msgid "Raven LP-410"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:895
+msgid "Ricoh Aficio 220"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:896
+msgid "Ricoh Aficio 401"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:897
+msgid "Ricoh Aficio 700"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:898
+msgid "Samsung ML-85"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:899
+msgid "Samsung ML-4600"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:900
+msgid "Samsung ML-5000a"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:901
+msgid "Samsung ML-6000"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:902
+msgid "Samsung ML-6100"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:903
+msgid "Samsung ML-7000"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:904
+msgid "Samsung ML-7000N"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:905
+msgid "Samsung ML-7000P"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:906
+msgid "Samsung ML-7050"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:907
+msgid "Samsung QL-5100A"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:908
+msgid "Samsung QL-6050"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:909
+msgid "Seiko SpeedJET 200"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:910
+msgid "Sharp AR-161"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:911
+msgid "Sony IJP-V100"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:912
+msgid "Star LS-04"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:913
+msgid "Star LaserPrinter 8"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:914
+msgid "Tally MT908"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:915
+msgid "Xerox Able 1406"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:916
+msgid "Xerox DocuPrint 4508"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:917
+msgid "Xerox DocuPrint C20"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:918
+msgid "Xerox DocuPrint N4512"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:919
+msgid "Xerox DocuPrint N4512PS"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:920
+msgid "Xerox DocuPrint P12"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:921
+msgid "Xerox DocuPrint P1202"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:922
+msgid "Xerox DocuPrint P8e"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:923
+msgid "Xerox Document Centre 400"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:924
+msgid "Xerox WorkCentre M118"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:925
+msgid "Compaq IJ1200"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:926
+msgid "Lexmark X73"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:927
+msgid "Lexmark Z42"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:928
+msgid "Lexmark Z43"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:929
+msgid "Lexmark Z52"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:930
+msgid "Lexmark Z53"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:931
+msgid "Olympus P-10"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:932
+msgid "Olympus P-11"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:933
+msgid "Olympus P-200"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:934
+msgid "Olympus P-300"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:935
+msgid "Olympus P-300E"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:936
+msgid "Olympus P-300U"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:937
+msgid "Olympus P-330E"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:938
+msgid "Olympus P-330NE"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:939
+msgid "Olympus P-400"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:940
+msgid "Olympus P-440"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:941
+msgid "Olympus P-S100"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:942
+msgid "Canon CP-10"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:943
+msgid "Canon CP-100"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:944
+msgid "Canon CP-200"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:945
+msgid "Canon CP-220"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:946
+msgid "Canon CP-300"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:947
+msgid "Canon CP-330"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:948
+msgid "Canon SELPHY-CP-400"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:949
+msgid "Canon SELPHY-CP-500"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:950
+msgid "Canon SELPHY-CP-510"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:951
+msgid "Canon SELPHY-CP-600"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:952
+msgid "Canon SELPHY-CP-710"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:953
+msgid "Sony DPP-EX5"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:954
+msgid "Sony DPP-EX7"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:955
+msgid "Sony UP-DP10"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:956
+msgid "Sony UP-DR100"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:957
+msgid "Sony UP-DR150"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:958
+msgid "Fujifilm Printpix-CX-400"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:959
+msgid "Fujifilm Printpix-CX-550"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:960
+msgid "Fujifilm FinePix-NX-500"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:961
+msgid "Kodak Easyshare-Printer-Dock"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:962
+msgid "RAW DATA 16 bit"
+msgstr ""
+
+#: src/main/xmli18n-tmp.h:963
 msgid "RAW DATA 8 bit"
 msgstr ""
 
-#: src/gutenprintui/panel.c:270 src/gutenprintui2/panel.c:270
+#: src/gutenprintui/panel.c:273 src/gutenprintui2/panel.c:273
 msgid "Inch"
 msgstr ""
 
-#: src/gutenprintui/panel.c:270 src/gutenprintui2/panel.c:270
+#: src/gutenprintui/panel.c:273 src/gutenprintui2/panel.c:273
 msgid "Set the base unit of measurement to inches"
 msgstr ""
 
-#: src/gutenprintui/panel.c:272 src/gutenprintui2/panel.c:272
+#: src/gutenprintui/panel.c:275 src/gutenprintui2/panel.c:275
 msgid "cm"
 msgstr ""
 
-#: src/gutenprintui/panel.c:272 src/gutenprintui2/panel.c:272
+#: src/gutenprintui/panel.c:275 src/gutenprintui2/panel.c:275
 msgid "Set the base unit of measurement to centimetres"
 msgstr ""
 
-#: src/gutenprintui/panel.c:274 src/gutenprintui2/panel.c:274
+#: src/gutenprintui/panel.c:277 src/gutenprintui2/panel.c:277
 msgid "Points"
 msgstr ""
 
-#: src/gutenprintui/panel.c:274 src/gutenprintui2/panel.c:274
+#: src/gutenprintui/panel.c:277 src/gutenprintui2/panel.c:277
 msgid "Set the base unit of measurement to points (1/72\")"
 msgstr ""
 
-#: src/gutenprintui/panel.c:276 src/gutenprintui2/panel.c:276
+#: src/gutenprintui/panel.c:279 src/gutenprintui2/panel.c:279
 msgid "mm"
 msgstr ""
 
-#: src/gutenprintui/panel.c:276 src/gutenprintui2/panel.c:276
+#: src/gutenprintui/panel.c:279 src/gutenprintui2/panel.c:279
 msgid "Set the base unit of measurement to millimetres"
 msgstr ""
 
-#: src/gutenprintui/panel.c:278 src/gutenprintui2/panel.c:278
+#: src/gutenprintui/panel.c:281 src/gutenprintui2/panel.c:281
 msgid "Pica"
 msgstr ""
 
-#: src/gutenprintui/panel.c:278 src/gutenprintui2/panel.c:278
+#: src/gutenprintui/panel.c:281 src/gutenprintui2/panel.c:281
 msgid "Set the base unit of measurement to picas (1/12\")"
 msgstr ""
 
-#: src/gutenprintui/panel.c:285 src/gutenprintui2/panel.c:285
+#: src/gutenprintui/panel.c:288 src/gutenprintui2/panel.c:288
 msgid "Color output"
 msgstr ""
 
-#: src/gutenprintui/panel.c:287 src/gutenprintui2/panel.c:287
+#: src/gutenprintui/panel.c:290 src/gutenprintui2/panel.c:290
 msgid "Print in shades of gray using black ink"
 msgstr ""
 
-#: src/gutenprintui/panel.c:299 src/gutenprintui2/panel.c:299
+#: src/gutenprintui/panel.c:302 src/gutenprintui2/panel.c:302
 msgid "Standard Command"
 msgstr ""
 
-#: src/gutenprintui/panel.c:299 src/gutenprintui2/panel.c:299
+#: src/gutenprintui/panel.c:302 src/gutenprintui2/panel.c:302
 msgid "Use standard print command"
 msgstr ""
 
-#: src/gutenprintui/panel.c:300 src/gutenprintui2/panel.c:300
+#: src/gutenprintui/panel.c:303 src/gutenprintui2/panel.c:303
 msgid "Custom Command"
 msgstr ""
 
-#: src/gutenprintui/panel.c:300 src/gutenprintui2/panel.c:300
+#: src/gutenprintui/panel.c:303 src/gutenprintui2/panel.c:303
 msgid "Use custom print command"
 msgstr ""
 
-#: src/gutenprintui/panel.c:301 src/gutenprintui/plist.c:660
-#: src/gutenprintui/plist.c:743 src/gutenprintui2/panel.c:301
-#: src/gutenprintui2/plist.c:671 src/gutenprintui2/plist.c:754
+#: src/gutenprintui/panel.c:304 src/gutenprintui/plist.c:682
+#: src/gutenprintui/plist.c:765 src/gutenprintui2/panel.c:304
+#: src/gutenprintui2/plist.c:682 src/gutenprintui2/plist.c:765
 msgid "File"
 msgstr ""
 
-#: src/gutenprintui/panel.c:301 src/gutenprintui2/panel.c:301
+#: src/gutenprintui/panel.c:304 src/gutenprintui2/panel.c:304
 msgid "Print to a file"
 msgstr ""
 
-#: src/gutenprintui/panel.c:517 src/gutenprintui2/panel.c:517
+#: src/gutenprintui/panel.c:520 src/gutenprintui2/panel.c:520
 msgid "Edit Curve..."
 msgstr ""
 
-#: src/gutenprintui/panel.c:528 src/gutenprintui2/panel.c:528
+#: src/gutenprintui/panel.c:531 src/gutenprintui2/panel.c:531
 msgid "Set Default"
 msgstr ""
 
-#: src/gutenprintui/panel.c:530 src/gutenprintui2/panel.c:530
+#: src/gutenprintui/panel.c:533 src/gutenprintui2/panel.c:533
 msgid "Restore Previous"
 msgstr ""
 
-#: src/gutenprintui/panel.c:532 src/gutenprintui/panel.c:1528
-#: src/gutenprintui/panel.c:1768 src/gutenprintui/panel.c:1800
-#: src/gutenprintui2/panel.c:532 src/gutenprintui2/panel.c:1529
-#: src/gutenprintui2/panel.c:1768 src/gutenprintui2/panel.c:1800
+#: src/gutenprintui/panel.c:535 src/gutenprintui/panel.c:1531
+#: src/gutenprintui/panel.c:1786 src/gutenprintui/panel.c:1818
+#: src/gutenprintui2/panel.c:535 src/gutenprintui2/panel.c:1532
+#: src/gutenprintui2/panel.c:1786 src/gutenprintui2/panel.c:1818
 msgid "OK"
 msgstr ""
 
-#: src/gutenprintui/panel.c:534 src/gutenprintui/panel.c:1193
-#: src/gutenprintui/panel.c:1530 src/gutenprintui/panel.c:1770
-#: src/gutenprintui2/panel.c:534 src/gutenprintui2/panel.c:1194
-#: src/gutenprintui2/panel.c:1531 src/gutenprintui2/panel.c:1770
+#: src/gutenprintui/panel.c:537 src/gutenprintui/panel.c:1196
+#: src/gutenprintui/panel.c:1533 src/gutenprintui/panel.c:1788
+#: src/gutenprintui2/panel.c:537 src/gutenprintui2/panel.c:1197
+#: src/gutenprintui2/panel.c:1534 src/gutenprintui2/panel.c:1788
 msgid "Cancel"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1176 src/gutenprintui2/panel.c:1177
+#: src/gutenprintui/panel.c:1179 src/gutenprintui2/panel.c:1180
 #, c-format
 msgid "%s -- Print v%s"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1185 src/gutenprintui2/panel.c:1186
+#: src/gutenprintui/panel.c:1188 src/gutenprintui2/panel.c:1189
 msgid "About"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1187 src/gutenprintui2/panel.c:1188
+#: src/gutenprintui/panel.c:1190 src/gutenprintui2/panel.c:1191
 msgid ""
 "Print and\n"
 "Save Settings"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1189 src/gutenprintui2/panel.c:1190
+#: src/gutenprintui/panel.c:1192 src/gutenprintui2/panel.c:1193
 msgid ""
 "Save\n"
 "Settings"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1191 src/gutenprintui2/panel.c:1192
+#: src/gutenprintui/panel.c:1194 src/gutenprintui2/panel.c:1195
 msgid "Print"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1243 src/gutenprintui2/panel.c:1244
+#: src/gutenprintui/panel.c:1246 src/gutenprintui2/panel.c:1247
 msgid "Preview"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1268 src/gutenprintui2/panel.c:1269
+#: src/gutenprintui/panel.c:1271 src/gutenprintui2/panel.c:1272
 msgid ""
 "Position the image on the page.\n"
 "Click and drag with the primary button to position the image.\n"
@@ -5926,438 +6051,415 @@ msgid ""
 "to its original position."
 msgstr ""
 
-#: src/gutenprintui/panel.c:1315 src/gutenprintui2/panel.c:1316
+#: src/gutenprintui/panel.c:1318 src/gutenprintui2/panel.c:1319
 msgid "Paper Size"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1338 src/gutenprintui2/panel.c:1339
+#: src/gutenprintui/panel.c:1341 src/gutenprintui2/panel.c:1342
 msgid "Show All Paper Sizes"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1354 src/gutenprintui2/panel.c:1355
+#: src/gutenprintui/panel.c:1357 src/gutenprintui2/panel.c:1358
 msgid "Dimensions:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1359 src/gutenprintui/panel.c:2033
-#: src/gutenprintui2/panel.c:1360 src/gutenprintui2/panel.c:2033
+#: src/gutenprintui/panel.c:1362 src/gutenprintui/panel.c:2051
+#: src/gutenprintui2/panel.c:1363 src/gutenprintui2/panel.c:2051
 msgid "Width:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1360 src/gutenprintui2/panel.c:1361
+#: src/gutenprintui/panel.c:1363 src/gutenprintui2/panel.c:1364
 msgid "Width of the paper that you wish to print to"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1364 src/gutenprintui/panel.c:2035
-#: src/gutenprintui2/panel.c:1365 src/gutenprintui2/panel.c:2035
+#: src/gutenprintui/panel.c:1367 src/gutenprintui/panel.c:2053
+#: src/gutenprintui2/panel.c:1368 src/gutenprintui2/panel.c:2053
 msgid "Height:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1365 src/gutenprintui2/panel.c:1366
+#: src/gutenprintui/panel.c:1368 src/gutenprintui2/panel.c:1369
 msgid "Height of the paper that you wish to print to"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1370 src/gutenprintui2/panel.c:1371
+#: src/gutenprintui/panel.c:1373 src/gutenprintui2/panel.c:1374
 msgid "Automatic Paper Size"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1387 src/gutenprintui2/panel.c:1388
+#: src/gutenprintui/panel.c:1390 src/gutenprintui2/panel.c:1391
 msgid "Number of Copies"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1399 src/gutenprintui2/panel.c:1400
+#: src/gutenprintui/panel.c:1402 src/gutenprintui2/panel.c:1403
 msgid "Select the number of copies to print; a value between 1 and 100"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1431 src/gutenprintui2/panel.c:1432
+#: src/gutenprintui/panel.c:1434 src/gutenprintui2/panel.c:1435
 msgid "Image Position"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1448 src/gutenprintui2/panel.c:1449
+#: src/gutenprintui/panel.c:1451 src/gutenprintui2/panel.c:1452
 msgid "Auto"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1450 src/gutenprintui2/panel.c:1451
+#: src/gutenprintui/panel.c:1453 src/gutenprintui2/panel.c:1454
 msgid "Portrait"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1452 src/gutenprintui2/panel.c:1453
+#: src/gutenprintui/panel.c:1455 src/gutenprintui2/panel.c:1456
 msgid "Landscape"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1454 src/gutenprintui2/panel.c:1455
+#: src/gutenprintui/panel.c:1457 src/gutenprintui2/panel.c:1458
 msgid "Upside down"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1456 src/gutenprintui2/panel.c:1457
+#: src/gutenprintui/panel.c:1459 src/gutenprintui2/panel.c:1460
 msgid "Seascape"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1460 src/gutenprintui2/panel.c:1461
+#: src/gutenprintui/panel.c:1463 src/gutenprintui2/panel.c:1464
 msgid ""
 "Select the orientation: portrait, landscape, upside down, or seascape "
 "(upside down landscape)"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1462 src/gutenprintui2/panel.c:1463
+#: src/gutenprintui/panel.c:1465 src/gutenprintui2/panel.c:1466
 msgid "Orientation:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1473 src/gutenprintui2/panel.c:1474
+#: src/gutenprintui/panel.c:1476 src/gutenprintui2/panel.c:1477
 msgid "Left:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1474 src/gutenprintui2/panel.c:1475
+#: src/gutenprintui/panel.c:1477 src/gutenprintui2/panel.c:1478
 msgid "Distance from the left of the paper to the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1477 src/gutenprintui/panel.c:1481
-#: src/gutenprintui2/panel.c:1478 src/gutenprintui2/panel.c:1482
+#: src/gutenprintui/panel.c:1480 src/gutenprintui/panel.c:1484
+#: src/gutenprintui2/panel.c:1481 src/gutenprintui2/panel.c:1485
 msgid "Right:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1478 src/gutenprintui2/panel.c:1479
+#: src/gutenprintui/panel.c:1481 src/gutenprintui2/panel.c:1482
 msgid "Distance from the left of the paper to the right of the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1482 src/gutenprintui2/panel.c:1483
+#: src/gutenprintui/panel.c:1485 src/gutenprintui2/panel.c:1486
 msgid "Distance from the right of the paper to the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1484 src/gutenprintui2/panel.c:1485
+#: src/gutenprintui/panel.c:1487 src/gutenprintui2/panel.c:1488
 msgid "Top:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1485 src/gutenprintui2/panel.c:1486
+#: src/gutenprintui/panel.c:1488 src/gutenprintui2/panel.c:1489
 msgid "Distance from the top of the paper to the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1488 src/gutenprintui/panel.c:1492
-#: src/gutenprintui2/panel.c:1489 src/gutenprintui2/panel.c:1493
+#: src/gutenprintui/panel.c:1491 src/gutenprintui/panel.c:1495
+#: src/gutenprintui2/panel.c:1492 src/gutenprintui2/panel.c:1496
 msgid "Bottom:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1489 src/gutenprintui2/panel.c:1490
+#: src/gutenprintui/panel.c:1492 src/gutenprintui2/panel.c:1493
 msgid "Distance from the top of the paper to bottom of the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1493 src/gutenprintui2/panel.c:1494
+#: src/gutenprintui/panel.c:1496 src/gutenprintui2/panel.c:1497
 msgid "Distance from the bottom of the paper to the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1503 src/gutenprintui2/panel.c:1504
+#: src/gutenprintui/panel.c:1506 src/gutenprintui2/panel.c:1507
 msgid "Center:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1506 src/gutenprintui2/panel.c:1507
+#: src/gutenprintui/panel.c:1509 src/gutenprintui2/panel.c:1510
 msgid "Horizontal"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1507 src/gutenprintui2/panel.c:1508
+#: src/gutenprintui/panel.c:1510 src/gutenprintui2/panel.c:1511
 msgid "Center the image horizontally on the paper"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1509 src/gutenprintui2/panel.c:1510
+#: src/gutenprintui/panel.c:1512 src/gutenprintui2/panel.c:1513
 msgid "Both"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1510 src/gutenprintui2/panel.c:1511
+#: src/gutenprintui/panel.c:1513 src/gutenprintui2/panel.c:1514
 msgid "Center the image on the paper"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1512 src/gutenprintui2/panel.c:1513
+#: src/gutenprintui/panel.c:1515 src/gutenprintui2/panel.c:1516
 msgid "Vertical"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1513 src/gutenprintui2/panel.c:1514
+#: src/gutenprintui/panel.c:1516 src/gutenprintui2/panel.c:1517
 msgid "Center the image vertically on the paper"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1526 src/gutenprintui2/panel.c:1527
+#: src/gutenprintui/panel.c:1529 src/gutenprintui2/panel.c:1530
 msgid "Setup Printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1551 src/gutenprintui2/panel.c:1551
+#: src/gutenprintui/panel.c:1554 src/gutenprintui2/panel.c:1554
 msgid "Printer Make:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1562 src/gutenprintui2/panel.c:1562
+#: src/gutenprintui/panel.c:1565 src/gutenprintui2/panel.c:1565
 msgid "Select the make of your printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1580 src/gutenprintui/panel.c:1871
-#: src/gutenprintui2/panel.c:1580 src/gutenprintui2/panel.c:1871
+#: src/gutenprintui/panel.c:1583 src/gutenprintui/panel.c:1671
+#: src/gutenprintui/panel.c:1889 src/gutenprintui2/panel.c:1583
+#: src/gutenprintui2/panel.c:1671 src/gutenprintui2/panel.c:1889
 msgid "Printer Model:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1591 src/gutenprintui2/panel.c:1591
+#: src/gutenprintui/panel.c:1594 src/gutenprintui2/panel.c:1594
 msgid "Select your printer model"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1639 src/gutenprintui2/panel.c:1639
+#: src/gutenprintui/panel.c:1642 src/gutenprintui2/panel.c:1642
 msgid "PPD File:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1653 src/gutenprintui2/panel.c:1653
+#: src/gutenprintui/panel.c:1658 src/gutenprintui2/panel.c:1658
 msgid "Enter the correct PPD filename for your printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1655 src/gutenprintui/panel.c:1722
-#: src/gutenprintui2/panel.c:1655 src/gutenprintui2/panel.c:1722
+#: src/gutenprintui/panel.c:1660 src/gutenprintui/panel.c:1740
+#: src/gutenprintui2/panel.c:1660 src/gutenprintui2/panel.c:1740
 msgid "Browse"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1662 src/gutenprintui2/panel.c:1662
+#: src/gutenprintui/panel.c:1667 src/gutenprintui2/panel.c:1667
 msgid "Choose the correct PPD filename for your printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1691 src/gutenprintui2/panel.c:1691
+#: src/gutenprintui/panel.c:1709 src/gutenprintui2/panel.c:1709
 msgid ""
 "Select the name of the output queue (not the type, or model, of printer) "
 "that you wish to print to"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1693 src/gutenprintui2/panel.c:1693
+#: src/gutenprintui/panel.c:1711 src/gutenprintui2/panel.c:1711
 msgid "Printer Queue:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1709 src/gutenprintui2/panel.c:1709
+#: src/gutenprintui/panel.c:1727 src/gutenprintui2/panel.c:1727
 msgid "Enter the correct command to print to your printer. "
 msgstr ""
 
-#: src/gutenprintui/panel.c:1720 src/gutenprintui2/panel.c:1720
+#: src/gutenprintui/panel.c:1738 src/gutenprintui2/panel.c:1738
 msgid "Enter the file to print to. "
 msgstr ""
 
-#: src/gutenprintui/panel.c:1728 src/gutenprintui2/panel.c:1728
+#: src/gutenprintui/panel.c:1746 src/gutenprintui2/panel.c:1746
 msgid "File to print to"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1736 src/gutenprintui2/panel.c:1736
+#: src/gutenprintui/panel.c:1754 src/gutenprintui2/panel.c:1754
 msgid "Print To File"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1766 src/gutenprintui2/panel.c:1766
+#: src/gutenprintui/panel.c:1784 src/gutenprintui2/panel.c:1784
 msgid "Define New Printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1784 src/gutenprintui/panel.c:1868
-#: src/gutenprintui2/panel.c:1784 src/gutenprintui2/panel.c:1868
+#: src/gutenprintui/panel.c:1802 src/gutenprintui/panel.c:1886
+#: src/gutenprintui2/panel.c:1802 src/gutenprintui2/panel.c:1886
 msgid "Printer Name:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1788 src/gutenprintui2/panel.c:1788
+#: src/gutenprintui/panel.c:1806 src/gutenprintui2/panel.c:1806
 msgid "Enter the name you wish to give this logical printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1798 src/gutenprintui2/panel.c:1798
+#: src/gutenprintui/panel.c:1816 src/gutenprintui2/panel.c:1816
 msgid "About Gutenprint "
 msgstr ""
 
-#: src/gutenprintui/panel.c:1805 src/gutenprintui2/panel.c:1805
+#: src/gutenprintui/panel.c:1823 src/gutenprintui2/panel.c:1823
 msgid "Gutenprint Version "
 msgstr ""
 
-#: src/gutenprintui/panel.c:1805 src/gutenprintui2/panel.c:1805
-msgid ""
-"\n"
-"\n"
-"Copyright (C) 1997-2003 Michael Sweet, Robert Krawitz,\n"
-"and the rest of the Gutenprint Development Team.\n"
-"\n"
-"Please visit our web site at http://gimp-print.sourceforge.net.\n"
-"\n"
-"This program is free software; you can redistribute it and/or modify\n"
-"it under the terms of the GNU General Public License as published by\n"
-"the Free Software Foundation; either version 2 of the License, or\n"
-"(at your option) any later version.\n"
-"\n"
-"This program is distributed in the hope that it will be useful,\n"
-"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-"GNU General Public License for more details.\n"
-"\n"
-"You should have received a copy of the GNU General Public License\n"
-"along with this program; if not, write to the Free Software\n"
-"Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA\n"
-msgstr ""
-
-#: src/gutenprintui/panel.c:1853 src/gutenprintui2/panel.c:1853
+#: src/gutenprintui/panel.c:1871 src/gutenprintui2/panel.c:1871
 msgid "Printer Settings"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1866 src/gutenprintui2/panel.c:1866
+#: src/gutenprintui/panel.c:1884 src/gutenprintui2/panel.c:1884
 msgid ""
 "Select the name of the printer (not the type, or model, of printer) that you "
 "wish to print to"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1883 src/gutenprintui2/panel.c:1883
+#: src/gutenprintui/panel.c:1901 src/gutenprintui2/panel.c:1901
 msgid "Setup Printer..."
 msgstr ""
 
-#: src/gutenprintui/panel.c:1885 src/gutenprintui2/panel.c:1885
+#: src/gutenprintui/panel.c:1903 src/gutenprintui2/panel.c:1903
 msgid ""
 "Choose the printer model, PPD file, and command that is used to print to "
 "this printer"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1898 src/gutenprintui2/panel.c:1898
+#: src/gutenprintui/panel.c:1916 src/gutenprintui2/panel.c:1916
 msgid "New Printer..."
 msgstr ""
 
-#: src/gutenprintui/panel.c:1899 src/gutenprintui2/panel.c:1899
+#: src/gutenprintui/panel.c:1917 src/gutenprintui2/panel.c:1917
 msgid ""
 "Define a new logical printer. This can be used to name a collection of "
 "settings that you wish to remember for future use."
 msgstr ""
 
-#: src/gutenprintui/panel.c:1942 src/gutenprintui2/panel.c:1942
+#: src/gutenprintui/panel.c:1960 src/gutenprintui2/panel.c:1960
 msgid "Image Size"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1967 src/gutenprintui2/panel.c:1967
+#: src/gutenprintui/panel.c:1985 src/gutenprintui2/panel.c:1985
 msgid "Scaling:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1971 src/gutenprintui2/panel.c:1971
+#: src/gutenprintui/panel.c:1989 src/gutenprintui2/panel.c:1989
 msgid "Set the scale (size) of the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1993 src/gutenprintui2/panel.c:1993
+#: src/gutenprintui/panel.c:2011 src/gutenprintui2/panel.c:2011
 msgid "Scale by:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:1998 src/gutenprintui2/panel.c:1998
+#: src/gutenprintui/panel.c:2016 src/gutenprintui2/panel.c:2016
 msgid ""
 "Select whether scaling is measured as percent of available page size or "
 "number of output dots per inch"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2001 src/gutenprintui2/panel.c:2001
+#: src/gutenprintui/panel.c:2019 src/gutenprintui2/panel.c:2019
 msgid "Percent"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2006 src/gutenprintui2/panel.c:2006
+#: src/gutenprintui/panel.c:2024 src/gutenprintui2/panel.c:2024
 msgid "Scale the print to the size of the page"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2010 src/gutenprintui2/panel.c:2010
+#: src/gutenprintui/panel.c:2028 src/gutenprintui2/panel.c:2028
 msgid "PPI"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2015 src/gutenprintui2/panel.c:2015
+#: src/gutenprintui/panel.c:2033 src/gutenprintui2/panel.c:2033
 msgid "Scale the print to the number of dots per inch"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2033 src/gutenprintui2/panel.c:2033
+#: src/gutenprintui/panel.c:2051 src/gutenprintui2/panel.c:2051
 msgid "Set the width of the print"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2035 src/gutenprintui2/panel.c:2035
+#: src/gutenprintui/panel.c:2053 src/gutenprintui2/panel.c:2053
 msgid "Set the height of the print"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2041 src/gutenprintui2/panel.c:2041
+#: src/gutenprintui/panel.c:2059 src/gutenprintui2/panel.c:2059
 msgid ""
 "Use Original\n"
 "Image Size"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2047 src/gutenprintui2/panel.c:2047
+#: src/gutenprintui/panel.c:2065 src/gutenprintui2/panel.c:2065
 msgid "Set the print size to the size of the image"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2070 src/gutenprintui2/panel.c:2071
+#: src/gutenprintui/panel.c:2088 src/gutenprintui2/panel.c:2089
 msgid "Print Color Adjust"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2073 src/gutenprintui2/panel.c:2074
+#: src/gutenprintui/panel.c:2091 src/gutenprintui2/panel.c:2092
 msgid "Set Defaults"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2075 src/gutenprintui2/panel.c:2076
+#: src/gutenprintui/panel.c:2093 src/gutenprintui2/panel.c:2094
 msgid "Close"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2104 src/gutenprintui2/panel.c:2105
+#: src/gutenprintui/panel.c:2122 src/gutenprintui2/panel.c:2123
 msgid "Image preview"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2118 src/gutenprintui2/panel.c:2119
+#: src/gutenprintui/panel.c:2136 src/gutenprintui2/panel.c:2137
 msgid "View Output Channels:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2204 src/gutenprintui2/panel.c:2210
+#: src/gutenprintui/panel.c:2222 src/gutenprintui2/panel.c:2228
 msgid "Output"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2232 src/gutenprintui2/panel.c:2238
+#: src/gutenprintui/panel.c:2250 src/gutenprintui2/panel.c:2256
 msgid "Output Type:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2236 src/gutenprintui2/panel.c:2242
+#: src/gutenprintui/panel.c:2254 src/gutenprintui2/panel.c:2260
 msgid "Select the desired output type"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2257 src/gutenprintui2/panel.c:2263
+#: src/gutenprintui/panel.c:2275 src/gutenprintui2/panel.c:2281
 msgid "Adjust Output..."
 msgstr ""
 
-#: src/gutenprintui/panel.c:2266 src/gutenprintui2/panel.c:2272
+#: src/gutenprintui/panel.c:2284 src/gutenprintui2/panel.c:2290
 msgid ""
 "Adjust color balance, brightness, contrast, saturation, and dither algorithm"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2284 src/gutenprintui2/panel.c:2291
+#: src/gutenprintui/panel.c:2302 src/gutenprintui2/panel.c:2309
 msgid "Size Units:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2287 src/gutenprintui2/panel.c:2294
+#: src/gutenprintui/panel.c:2305 src/gutenprintui2/panel.c:2312
 msgid " "
 msgstr ""
 
-#: src/gutenprintui/panel.c:2311 src/gutenprintui2/panel.c:2318
+#: src/gutenprintui/panel.c:2329 src/gutenprintui2/panel.c:2336
 msgid "Units:"
 msgstr ""
 
-#: src/gutenprintui/panel.c:2316 src/gutenprintui2/panel.c:2323
+#: src/gutenprintui/panel.c:2334 src/gutenprintui2/panel.c:2341
 msgid "Select the base unit of measurement for printing"
 msgstr ""
 
 #: src/gutenprintui/plist.c:90 src/gutenprintui/plist.c:99
-#: src/gutenprintui2/plist.c:90 src/gutenprintui2/plist.c:99
+#: src/gutenprintui2/plist.c:89 src/gutenprintui2/plist.c:98
 msgid "System V lp"
 msgstr ""
 
-#: src/gutenprintui/plist.c:96 src/gutenprintui2/plist.c:96
+#: src/gutenprintui/plist.c:96 src/gutenprintui2/plist.c:95
 msgid "CUPS"
 msgstr ""
 
-#: src/gutenprintui/plist.c:102 src/gutenprintui2/plist.c:102
+#: src/gutenprintui/plist.c:102 src/gutenprintui2/plist.c:101
 msgid "Berkeley lpd (/etc/lpc)"
 msgstr ""
 
-#: src/gutenprintui/plist.c:105 src/gutenprintui2/plist.c:105
+#: src/gutenprintui/plist.c:105 src/gutenprintui2/plist.c:104
 msgid "Berkeley lpd (/usr/bsd/lpc)"
 msgstr ""
 
-#: src/gutenprintui/plist.c:108 src/gutenprintui2/plist.c:108
+#: src/gutenprintui/plist.c:108 src/gutenprintui2/plist.c:107
 msgid "Berkeley lpd (/usr/etc/lpc"
 msgstr ""
 
-#: src/gutenprintui/plist.c:111 src/gutenprintui2/plist.c:111
+#: src/gutenprintui/plist.c:111 src/gutenprintui2/plist.c:110
 msgid "Berkeley lpd (/usr/libexec/lpc)"
 msgstr ""
 
-#: src/gutenprintui/plist.c:114 src/gutenprintui2/plist.c:114
+#: src/gutenprintui/plist.c:114 src/gutenprintui2/plist.c:113
 msgid "Berkeley lpd (/usr/sbin/lpc)"
 msgstr ""
 
-#: src/gutenprintui/plist.c:996 src/gutenprintui2/plist.c:1009
+#: src/gutenprintui/plist.c:1020 src/gutenprintui2/plist.c:1032
 msgid "Printer"
 msgstr ""
 
-#: src/gutenprintui/plist.c:1183 src/gutenprintui2/plist.c:1196
+#: src/gutenprintui/plist.c:1207 src/gutenprintui2/plist.c:1225
 msgid "(Default Printer)"
 msgstr ""
 
@@ -6405,72 +6507,88 @@ msgstr ""
 msgid "_Gamma value"
 msgstr ""
 
-#: src/cups/genppd.c:133
+#: src/cups/genppd.c:146
 msgid "Printer Features"
 msgstr ""
 
-#: src/cups/genppd.c:134
+#: src/cups/genppd.c:147
 msgid "Output Control"
 msgstr ""
 
-#: src/cups/genppd.c:139
+#: src/cups/genppd.c:152
 msgid "Common"
 msgstr ""
 
-#: src/cups/genppd.c:140
+#: src/cups/genppd.c:153
 msgid "Extra 1"
 msgstr ""
 
-#: src/cups/genppd.c:141
+#: src/cups/genppd.c:154
 msgid "Extra 2"
 msgstr ""
 
-#: src/cups/genppd.c:142
+#: src/cups/genppd.c:155
 msgid "Extra 3"
 msgstr ""
 
-#: src/cups/genppd.c:143
+#: src/cups/genppd.c:156
 msgid "Extra 4"
 msgstr ""
 
-#: src/cups/genppd.c:144
+#: src/cups/genppd.c:157
 msgid "Extra 5"
 msgstr ""
 
 #. TRANSLATORS: Specify the language of the PPD translation.
 #. * Use the English name of your language here, e.g. "Swedish" instead of
 #. * "Svenska".
-#: src/cups/genppd.c:888
+#: src/cups/genppd.c:1055
 msgid "English"
 msgstr ""
 
 #. TRANSLATORS: Specify PPD translation encoding e.g. ISOLatin1
-#: src/cups/genppd.c:890
+#: src/cups/genppd.c:1057
 msgid "ISOLatin1"
 msgstr ""
 
-#: src/cups/genppd.c:1465
+#: src/cups/genppd.c:1613
+msgid "2-Sided Printing"
+msgstr ""
+
+#: src/cups/genppd.c:1634
+msgid "Shrink Page If Necessary to Fit Borders"
+msgstr ""
+
+#: src/cups/genppd.c:1638
+msgid "Shrink (print the whole page)"
+msgstr ""
+
+#: src/cups/genppd.c:1639
+msgid "Crop (preserve dimensions)"
+msgstr ""
+
+#: src/cups/genppd.c:1640
+msgid "Expand (use maximum page area)"
+msgstr ""
+
+#: src/cups/genppd.c:1717
 msgid "No"
 msgstr ""
 
-#: src/cups/genppd.c:1467
+#: src/cups/genppd.c:1719
 msgid "Yes"
 msgstr ""
 
-#: src/cups/genppd.c:1497
+#: src/cups/genppd.c:1751 src/cups/genppd.c:1804
+msgid "Value"
+msgstr ""
+
+#: src/cups/genppd.c:1756
 msgid "Fine Adjustment"
 msgstr ""
 
 #: src/escputil/escputil.c:70
 msgid "Escputil version "
-msgstr ""
-
-#: src/escputil/escputil.c:71
-msgid ""
-", Copyright (C) 2000-2006 Robert Krawitz\n"
-"Escputil comes with ABSOLUTELY NO WARRANTY; for details type 'escputil -l'\n"
-"This is free software, and you are welcome to redistribute it\n"
-"under certain conditions; type 'escputil -l' for details.\n"
 msgstr ""
 
 #: src/escputil/escputil.c:76

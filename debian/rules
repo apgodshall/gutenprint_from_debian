@@ -68,14 +68,14 @@ realclean: debian/control
 	dh_testdir
 	rm -f build-stamp autoconfigure-stamp
 
-	-$(MAKE) distclean
-	-test -r /usr/share/misc/config.sub && \
+	[ ! -r /usr/share/misc/config.sub ] || \
 	  cp -f /usr/share/misc/config.sub scripts/config.sub
-	-test -r /usr/share/misc/config.guess && \
+	[ ! -r /usr/share/misc/config.guess ] || \
 	  cp -f /usr/share/misc/config.guess scripts/config.guess
 
 	rm -rf debian/build debian/install
-	-$(MAKE) distclean
+
+	[ ! -f Makefile ] || $(MAKE) distclean
 
 	rm -f $(GENERATED_FILES)
 

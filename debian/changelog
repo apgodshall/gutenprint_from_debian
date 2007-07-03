@@ -1,3 +1,14 @@
+gutenprint (5.0.1-2) unstable; urgency=low
+
+  * debian/control.in: Use ${binary:Version} and ${source:Version} in
+    place of deprecated ${Source-Version} substvar (Closes: #431391).
+    Thanks to Vincent Fourmond.
+  * debian/rules:
+    - Don't ignore clean target errors.
+    - Remove duplicate distclean command in the clean target.
+
+ -- Roger Leigh <rleigh@debian.org>  Tue, 03 Jul 2007 23:21:40 +0100
+
 gutenprint (5.0.1-1) unstable; urgency=low
 
   * New upstream stable release.

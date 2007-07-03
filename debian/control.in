@@ -9,7 +9,7 @@ Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgtk1.2-dev, libgimp2.0-dev,
 Package: gimp-print
 Architecture: any
 Depends: ${shlibs:Depends}, gimp (>= 2.0.4-1)
-Suggests: gutenprint-doc (>= ${Source-Version}), gutenprint-locales (>= ${Source-Version})
+Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
 Enhances: gimp
 Description: print plugin for the GIMP
  This package includes the Print plugin for the GIMP.
@@ -28,7 +28,7 @@ Package: cupsys-driver-gutenprint
 Architecture: any
 Section: graphics
 Depends: ${shlibs:Depends}, perl (>= 5.8.0), cupsys (>= 1.2.5) | cups (>= 1.2.5)
-Suggests: gutenprint-doc (>= ${Source-Version}), gutenprint-locales (>= ${Source-Version})
+Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
 Replaces: cupsys-driver-gimpprint, cupsys-driver-gimpprint-data
 Conflicts: cupsys-driver-gimpprint
 Description: printer drivers for CUPS
@@ -54,8 +54,8 @@ Description: printer drivers for CUPS
 Package: libgutenprint-dev
 Architecture: any
 Section: libdevel
-Depends: libgutenprint#LIBRARY_VERSION# (= ${Source-Version}), pkg-config (>= 0.14.0)
-Suggests: libgutenprint-doc (= ${Source-Version})
+Depends: libgutenprint#LIBRARY_VERSION# (= ${binary:Version}), pkg-config (>= 0.14.0)
+Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver library
  This package contains the header files for the Gutenprint library,
  along with a static version of libgutenprint.
@@ -76,7 +76,7 @@ Description: development files for the Gutenprint printer driver library
 Package: libgutenprint-doc
 Architecture: all
 Section: doc
-Suggests: libgutenprint-dev (= ${Source-Version})
+Suggests: libgutenprint-dev (= ${binary:Version})
 Description: documentation for the Gutenprint printer driver library
  This package contains lots of info-files, DVI docs and other
  documentation about the Gutenprint library for photo-quality
@@ -99,7 +99,7 @@ Package: libgutenprint#LIBRARY_VERSION#
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}
-Suggests: gutenprint-locales (>= ${Source-Version})
+Suggests: gutenprint-locales (>= ${source:Version})
 Description: runtime for the Gutenprint printer driver library
  This package includes the Gutenprint shared library, needed to
  run programs using Gutenprint drivers.
@@ -117,8 +117,8 @@ Description: runtime for the Gutenprint printer driver library
 Package: libgutenprintui1-dev
 Architecture: any
 Section: devel
-Depends: libgutenprintui1-#LIBRARYUI_VERSION# (= ${Source-Version}), pkg-config (>= 0.14.0)
-Suggests: libgutenprint-doc (= ${Source-Version})
+Depends: libgutenprintui1-#LIBRARYUI_VERSION# (= ${binary:Version}), pkg-config (>= 0.14.0)
+Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver user interface library
  This package contains the header files for the libgutenprintui
  library, along with a static version of libgutenprintui.
@@ -143,7 +143,7 @@ Package: libgutenprintui1-#LIBRARYUI_VERSION#
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}
-Recommends: gutenprint-locales (>= ${Source-Version})
+Recommends: gutenprint-locales (>= ${source:Version})
 Description: runtime for the Gutenprint printer driver user interface library
  This package includes the libgutenprintui library.  libgutenprintui
  contains GTK+ widgets which may be used for print dialogs etc. for
@@ -162,8 +162,8 @@ Description: runtime for the Gutenprint printer driver user interface library
 Package: libgutenprintui2-dev
 Architecture: any
 Section: devel
-Depends: libgutenprintui2-#LIBRARYUI_VERSION# (= ${Source-Version}), pkg-config (>= 0.14.0)
-Suggests: libgutenprint-doc (= ${Source-Version})
+Depends: libgutenprintui2-#LIBRARYUI_VERSION# (= ${binary:Version}), pkg-config (>= 0.14.0)
+Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver user interface library
  This package contains the header files for the libgutenprintui
  library, along with a static version of libgutenprintui.
@@ -187,7 +187,7 @@ Package: libgutenprintui2-#LIBRARYUI_VERSION#
 Architecture: any
 Section: libs
 Depends: ${shlibs:Depends}
-Recommends: gutenprint-locales (>= ${Source-Version})
+Recommends: gutenprint-locales (>= ${source:Version})
 Description: runtime for the Gutenprint printer driver user interface library
  This package includes the libgutenprintui library, necessary to run
  gimp-print.  libgutenprintui contains GTK+ widgets which may be
@@ -228,7 +228,7 @@ Package: escputil
 Architecture: any
 Section: utils
 Depends: ${shlibs:Depends}
-Suggests: gutenprint-locales (>= ${Source-Version})
+Suggests: gutenprint-locales (>= ${source:Version})
 Description: maintenance utility for Epson Stylus printers
  escputil is a utility to clean and align the heads of Epson Stylus
  printers.  It can also check the current ink levels in the printer.
@@ -277,7 +277,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
 Package: foomatic-db-gutenprint
 Architecture: all
 Section: text
-Depends: foomatic-db, ijsgutenprint (>= ${Source-Version})
+Depends: foomatic-db, ijsgutenprint (>= ${binary:Version})
 Replaces: foomatic-db-gimp-print
 Conflicts: foomatic-bin (<< 2.9), foomatic-db (<< 2.9), foomatic-db-gimp-print
 Description: OpenPrinting printer support - database for Gutenprint printer drivers
@@ -305,7 +305,7 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
 Package: gutenprint-doc
 Architecture: all
 Section: doc
-Suggests: cupsys-driver-gutenprint (>= ${Source-Version}), foomatic-db-gutenprint (>= ${Source-Version}), gimp-print (>= ${Source-Version}), ijsgutenprint (>= ${Source-Version})
+Suggests: cupsys-driver-gutenprint (>= ${binary:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-print (>= ${binary:Version}), ijsgutenprint (>= ${binary:Version})
 Description: users' guide for Gutenprint and CUPS
  This package contains a user guide for programs using the
  Gutenprint library for photographic quality printing.  Currently

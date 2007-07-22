@@ -1,3 +1,14 @@
+gutenprint (5.0.1-3) unstable; urgency=low
+
+  * debian/control: Remove libgutenprintui1-1 and libgutenprintui-dev,
+  * debian/rules: Disable libgutenprintui when running configure.  Remove
+    libgutenprintui1-1 from search path for dh_shlibdeps.
+    as well as libgtk1.2-dev build dependency.
+  * debian/libgutenprintui1-1.install: Remove.
+  * debian/libgutenprintui1-dev.install: Remove. 
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 22 Jul 2007 18:46:29 +0100
+
 gutenprint (5.0.1-2) unstable; urgency=low
 
   * debian/control.in: Use ${binary:Version} and ${source:Version} in

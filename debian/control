@@ -6,13 +6,13 @@ Uploaders: Roger Leigh <rleigh@debian.org>
 Standards-Version: 3.7.2
 Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35-1), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1-1), chrpath (>= 0.12), dpatch
 
-Package: gimp-print
+Package: gimp-gutenprint
 Architecture: any
-Depends: ${shlibs:Depends}, gimp (>= 2.0.4-1)
+Depends: ${shlibs:Depends}, gimp (>= 2.4.0~rc1-1)
 Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
 Enhances: gimp
 Description: print plugin for the GIMP
- This package includes the Print plugin for the GIMP.
+ This package includes the Gutenprint Print plugin for the GIMP.
  .
  This is Gutenprint version 5.0.1, a stable release
  in the 5.0 series.

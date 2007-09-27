@@ -1,3 +1,14 @@
+gutenprint (5.0.1-4) unstable; urgency=low
+
+  * debian/control: Rename gimp-print to gimp-gutenprint.
+  * Rename debian/gimp-print.* to debian/gimp-gutenprint.*.
+  * debian/gimp-gutenprint.preinst, debian/gimp-gutenprint.postrm: Remove,
+    since diversions are no longer used.
+  * debian/gimp-gutenprint.install: Install gutenprint plug-in
+    (Closes: #439500).
+
+ -- Roger Leigh <rleigh@debian.org>  Thu, 27 Sep 2007 20:03:33 +0100
+
 gutenprint (5.0.1-3) unstable; urgency=low
 
   * debian/control: Remove libgutenprintui1-1 and libgutenprintui-dev,

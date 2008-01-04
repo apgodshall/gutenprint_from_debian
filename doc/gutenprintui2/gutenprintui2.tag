@@ -49,14 +49,14 @@
       <arglist>(obj)</arglist>
     </member>
     <member kind="typedef">
-      <type>_StpuiCurve</type>
+      <type>struct _StpuiCurve</type>
       <name>StpuiCurve</name>
       <anchorfile>curve_8h.html</anchorfile>
       <anchor>5c0213fede0b7d8a91b66e4679cc899a</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>_StpuiCurveClass</type>
+      <type>struct _StpuiCurveClass</type>
       <name>StpuiCurveClass</name>
       <anchorfile>curve_8h.html</anchorfile>
       <anchor>057f1c40a70e84c7a187b423ebe4aada</anchor>
@@ -188,14 +188,14 @@
       <arglist>(obj)</arglist>
     </member>
     <member kind="typedef">
-      <type>_StpuiGammaCurve</type>
+      <type>struct _StpuiGammaCurve</type>
       <name>StpuiGammaCurve</name>
       <anchorfile>gammacurve_8h.html</anchorfile>
       <anchor>16a893a0c5c5908d5db1a36c91590d6c</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>_StpuiGammaCurveClass</type>
+      <type>struct _StpuiGammaCurveClass</type>
       <name>StpuiGammaCurveClass</name>
       <anchorfile>gammacurve_8h.html</anchorfile>
       <anchor>ec66cf466c32b2ead30a56c3fb1a3e09</anchor>
@@ -224,20 +224,13 @@
     <includes id="gammacurve_8h" name="gammacurve.h" local="no" imported="no">gutenprintui2/gammacurve.h</includes>
     <includes id="typebuiltins_8h" name="typebuiltins.h" local="no" imported="no">gutenprintui2/typebuiltins.h</includes>
     <class kind="struct">stpui_plist_t</class>
-    <class kind="struct">stpui_image</class>
+    <class kind="struct">stpui_image_t</class>
     <member kind="typedef">
-      <type>stpui_image</type>
-      <name>stpui_image_t</name>
-      <anchorfile>gutenprintui_8h.html</anchorfile>
-      <anchor>195aac96c77c6de3925cd3d13c6ce2f1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="typedef">
-      <type>guchar *(*)</type>
+      <type>guchar *(*</type>
       <name>get_thumbnail_func_t</name>
       <anchorfile>gutenprintui_8h.html</anchorfile>
-      <anchor>4ab1da499b20816c28d1b26c61652c1d</anchor>
-      <arglist>(void *data, gint *width, gint *height, gint *bpp, gint page)</arglist>
+      <anchor>9b59c94766b4713803ec6e1daaa84e70</anchor>
+      <arglist>)(void *data, gint *width, gint *height, gint *bpp, gint page)</arglist>
     </member>
     <member kind="enumeration">
       <name>orient_t</name>
@@ -949,62 +942,62 @@
     </member>
   </compound>
   <compound kind="struct">
-    <name>stpui_image</name>
-    <filename>structstpui__image.html</filename>
+    <name>stpui_image_t</name>
+    <filename>structstpui__image__t.html</filename>
     <member kind="variable">
       <type>stp_image_t</type>
       <name>im</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>00862540482f307175e9fbf252751320</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>38f170e2acf7842eb511adf52a1b9de9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>transpose</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>5f2a75c7187c6abcf20e15e2aad22549</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>c6914425cfe9376043dc64b9ade33b40</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>hflip</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>f2733a318654d50214c94fccd9a018b7</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>0b96d404e3e44afd8272c3534a465740</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>vflip</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>c378339fe87fa21d5f117fc11b3f5b6c</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>167d1341e9223f16afcc3ce4d52c6e72</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_ccw</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>0a31280def8cd739184192dbe8d34fa8</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>de9e076c2a520fe59fbbad51453c05a7</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_cw</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>e111082f0f23096d89e024c4fde9c0d6</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>fb7c04bd61d67e06429fcc88e088774e</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_180</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>aaae08fdabffb3d31ac761dfe0624506</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>215928f81c63d90d2ede73606cf95fd8</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>crop</name>
-      <anchorfile>structstpui__image.html</anchorfile>
-      <anchor>96e6cc155230793c8aa847e5a7cd7255</anchor>
+      <anchorfile>structstpui__image__t.html</anchorfile>
+      <anchor>77fc83d55bb4367e9698244528cbcbe9</anchor>
       <arglist>)(struct stpui_image *image, int left, int top, int right, int bottom)</arglist>
     </member>
   </compound>

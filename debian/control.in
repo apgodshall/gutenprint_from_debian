@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
-Standards-Version: 3.7.2
+Standards-Version: 3.7.3
 Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35-1), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1-1), chrpath (>= 0.12), dpatch
 
 Package: gimp-gutenprint
@@ -116,7 +116,7 @@ Description: runtime for the Gutenprint printer driver library
 
 Package: libgutenprintui2-dev
 Architecture: any
-Section: devel
+Section: libdevel
 Depends: libgutenprintui2-#LIBRARYUI_VERSION# (= ${binary:Version}), pkg-config (>= 0.14.0)
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver user interface library

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.355.2.2 2007/05/29 01:47:29 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.355.2.4 2007/12/29 20:42:27 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -67,6 +67,7 @@ static const escp2_printer_attr_t escp2_printer_attrs[] =
   { "send_zero_advance",       10, 1 },
   { "supports_ink_change",     11, 1 },
   { "packet_mode",             12, 1 },
+  { "interchangeable_ink",     13, 1 },
 };
 
 typedef struct
@@ -314,7 +315,13 @@ static const stp_parameter_t the_parameters[] =
   },
   {
     "SupportsPacketMode", N_("Supports Packet Mode"), N_("Advanced Printer Functionality"),
-    N_("Alternate Alignment Choices"),
+    N_("Supports D4 Packet Mode"),
+    STP_PARAMETER_TYPE_BOOLEAN, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, -1, 0, 0
+  },
+  {
+    "InterchangeableInk", N_("Has Interchangeable Ink Cartridges"), N_("Advanced Printer Functionality"),
+    N_("Has multiple choices of ink cartridges"),
     STP_PARAMETER_TYPE_BOOLEAN, STP_PARAMETER_CLASS_FEATURE,
     STP_PARAMETER_LEVEL_INTERNAL, 0, 0, -1, 0, 0
   },
@@ -872,7 +879,8 @@ static int
 supports_borderless(const stp_vars_t *v)
 {
   return (escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_YES) ||
-	  escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_FULL));
+	  escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_FULL) ||
+	  escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_H_ONLY));
 }
 
 static int
@@ -1427,16 +1435,23 @@ find_default_resolution(const stp_vars_t *v, const quality_t *q,
 {
   const res_t *const *res = escp2_reslist(v);
   int i = 0;
-  if (q->desired_hres < 0)
+  stp_dprintf(STP_DBG_ESCP2, v, "Quality %s: min %d %d max %d %d, des %d %d\n",
+	      q->name, q->min_hres, q->min_vres, q->max_hres, q->max_vres,
+	      q->desired_hres, q->desired_vres);
+  if (q->desired_hres < 0 || q->desired_vres < 0)
     {
       while (res[i])
 	i++;
       i--;
       while (i >= 0)
 	{
-	  stp_dprintf(STP_DBG_ESCP2, v, "Checking resolution %s %d...",
+	  stp_dprintf(STP_DBG_ESCP2, v, "  Checking resolution %s %d...\n",
 		      res[i]->name, i);
-	  if (verify_resolution(v, res[i]) &&
+	  if ((q->max_hres <= 0 || res[i]->printed_hres <= q->max_hres) &&
+	      (q->max_vres <= 0 || res[i]->printed_vres <= q->max_vres) &&
+	      q->min_hres <= res[i]->printed_hres &&
+	      q->min_vres <= res[i]->printed_vres &&
+	      verify_resolution(v, res[i]) &&
 	      verify_resolution_by_paper_type(v, res[i]))
 	    return res[i];
 	  i--;
@@ -1448,31 +1463,31 @@ find_default_resolution(const stp_vars_t *v, const quality_t *q,
       unsigned desired_hres = q->desired_hres;
       unsigned desired_vres = q->desired_vres;
       get_resolution_bounds_by_paper_type(v, &max_x, &max_y, &min_x, &min_y);
-      stp_dprintf(STP_DBG_ESCP2, v, "Comparing hres %d to %d, %d\n",
+      stp_dprintf(STP_DBG_ESCP2, v, "  Comparing hres %d to %d, %d\n",
 		  desired_hres, min_x, max_x);
-      stp_dprintf(STP_DBG_ESCP2, v, "Comparing vres %d to %d, %d\n",
+      stp_dprintf(STP_DBG_ESCP2, v, "  Comparing vres %d to %d, %d\n",
 		  desired_vres, min_y, max_y);
       if (max_x > 0 && desired_hres > max_x)
 	{
-	  stp_dprintf(STP_DBG_ESCP2, v, "Decreasing hres from %d to %d\n",
+	  stp_dprintf(STP_DBG_ESCP2, v, "  Decreasing hres from %d to %d\n",
 		      desired_hres, max_x);
 	  desired_hres = max_x;
 	}
       else if (desired_hres < min_x)
 	{
-	  stp_dprintf(STP_DBG_ESCP2, v, "Increasing hres from %d to %d\n",
+	  stp_dprintf(STP_DBG_ESCP2, v, "  Increasing hres from %d to %d\n",
 		      desired_hres, min_x);
 	  desired_hres = min_x;
 	}
       if (max_y > 0 && desired_vres > max_y)
 	{
-	  stp_dprintf(STP_DBG_ESCP2, v, "Decreasing vres from %d to %d\n",
+	  stp_dprintf(STP_DBG_ESCP2, v, "  Decreasing vres from %d to %d\n",
 		      desired_vres, max_y);
 	  desired_vres = max_y;
 	}
       else if (desired_vres < min_y)
 	{
-	  stp_dprintf(STP_DBG_ESCP2, v, "Increasing vres from %d to %d\n",
+	  stp_dprintf(STP_DBG_ESCP2, v, "  Increasing vres from %d to %d\n",
 		      desired_vres, min_y);
 	  desired_vres = min_y;
 	}
@@ -1484,7 +1499,7 @@ find_default_resolution(const stp_vars_t *v, const quality_t *q,
 	      res[i]->printed_hres == desired_hres)
 	    {
 	      stp_dprintf(STP_DBG_ESCP2, v,
-			  "Found desired resolution w/o oversample: %s %d: %d * %d, %d\n",
+			  "  Found desired resolution w/o oversample: %s %d: %d * %d, %d\n",
 			  res[i]->name, i, res[i]->printed_hres,
 			  res[i]->vertical_passes, res[i]->printed_vres);
 	      return res[i];
@@ -1499,7 +1514,7 @@ find_default_resolution(const stp_vars_t *v, const quality_t *q,
 	      res[i]->printed_hres * res[i]->vertical_passes == desired_hres)
 	    {
 	      stp_dprintf(STP_DBG_ESCP2, v,
-			  "Found desired resolution: %s %d: %d * %d, %d\n",
+			  "  Found desired resolution: %s %d: %d * %d, %d\n",
 			  res[i]->name, i, res[i]->printed_hres,
 			  res[i]->vertical_passes, res[i]->printed_vres);
 	      return res[i];
@@ -1518,7 +1533,7 @@ find_default_resolution(const stp_vars_t *v, const quality_t *q,
 	       res[i]->printed_hres * res[i]->vertical_passes <= q->max_hres))
 	    {
 	      stp_dprintf(STP_DBG_ESCP2, v,
-			  "Found acceptable resolution: %s %d: %d * %d, %d\n",
+			  "  Found acceptable resolution: %s %d: %d * %d, %d\n",
 			  res[i]->name, i, res[i]->printed_hres,
 			  res[i]->vertical_passes, res[i]->printed_vres);
 	      return res[i];
@@ -1984,7 +1999,7 @@ escp2_parameters(const stp_vars_t *v, const char *name,
     }
   else if (strcmp(name, "SupportsPacketMode") == 0)
     {
-      description->deflt.integer =
+      description->deflt.boolean =
 	escp2_has_cap(v, MODEL_PACKET_MODE, MODEL_PACKET_MODE_YES);
     }
   else if (strcmp(name, "PrintingMode") == 0)
@@ -2724,6 +2739,41 @@ setup_head_offset(stp_vars_t *v)
 }
 
 static void
+setup_split_channels(stp_vars_t *v)
+{
+  escp2_privdata_t *pd = get_privdata(v);
+  /*
+   * Set up the output channels
+   */
+  if (pd->physical_channels == 1 &&
+      
+      pd->inkname->channel_set->channels[0]->subchannels->split_channel_count > 1)
+    {
+      int i;
+      int incr = 1;
+      pd->split_channel_count =
+	pd->inkname->channel_set->channels[0]->subchannels->split_channel_count;
+      if (pd->res->vres <
+	  (escp2_base_separation(v) / escp2_black_nozzle_separation(v)))
+	{
+	  incr =
+	    (escp2_base_separation(v) / escp2_black_nozzle_separation(v)) /
+	    pd->res->vres;
+	  pd->split_channel_count /= incr;
+	  pd->nozzle_separation *= incr;
+	  pd->nozzles /= incr;
+	  pd->min_nozzles /= incr;
+	}
+      pd->split_channels = stp_malloc(pd->split_channel_count * sizeof(short));
+      for (i = 0; i < pd->split_channel_count; i++)
+	pd->split_channels[i] =
+	  pd->inkname->channel_set->channels[0]->subchannels->split_channels[i * incr];
+    }
+  else
+    pd->split_channel_count = 0;
+}
+
+static void
 setup_basic(stp_vars_t *v)
 {
   escp2_privdata_t *pd = get_privdata(v);
@@ -2893,8 +2943,9 @@ setup_softweave_parameters(stp_vars_t *v)
   escp2_privdata_t *pd = get_privdata(v);
   pd->horizontal_passes = pd->res->printed_hres / pd->physical_xdpi;
   if (pd->physical_channels == 1 &&
-      (pd->res->vres >=
-       (escp2_base_separation(v) / escp2_black_nozzle_separation(v))) &&
+      (pd->inkname->channel_set->channels[0]->subchannels->split_channel_count > 1 ||
+       (pd->res->vres >=
+	(escp2_base_separation(v) / escp2_black_nozzle_separation(v)))) &&
       (escp2_max_black_resolution(v) < 0 ||
        pd->res->vres <= escp2_max_black_resolution(v)) &&
       escp2_black_nozzles(v))
@@ -2987,6 +3038,7 @@ setup_head_parameters(stp_vars_t *v)
     pd->horizontal_passes = 1;
 
   setup_head_offset(v);
+  setup_split_channels(v);
 
   if (strcmp(stp_get_string_parameter(v, "PrintingMode"), "BW") == 0 &&
       pd->physical_channels == 1)
@@ -3067,6 +3119,13 @@ setup_page(stp_vars_t *v)
 	escp2_zero_margin_offset(v) * pd->page_management_units /
 	escp2_base_separation(v);
     }
+  else if (escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_H_ONLY) &&
+	   (stp_get_boolean_parameter(v, "FullBleed")) &&
+	   ((!input_slot || !(input_slot->is_cd))))
+    {
+      pd->paper_extra_bottom = 0;
+      pd->page_extra_height = 0;
+    }
   else
     {
       pd->page_extra_height = 0;
@@ -3113,6 +3172,19 @@ setup_page(stp_vars_t *v)
   pd->image_width = stp_get_width(v);
   pd->image_scaled_width = pd->image_width * pd->res->hres / 72;
   pd->image_printed_width = pd->image_width * pd->res->printed_hres / 72;
+  if (pd->split_channel_count >= 1)
+    {
+      pd->split_channel_width =
+	((pd->image_printed_width + pd->horizontal_passes - 1) /
+	 pd->horizontal_passes);
+      pd->split_channel_width = (pd->split_channel_width + 7) / 8;
+      pd->split_channel_width *= pd->bitwidth;
+      if (COMPRESSION)
+	{
+	  pd->comp_buf =
+	    stp_malloc(stp_compute_tiff_linewidth(v, pd->split_channel_width));
+	}
+    }
   pd->image_left_position = pd->image_left * pd->micro_units / 72;
   pd->zero_margin_offset = escp2_zero_margin_offset(v);
   if (supports_borderless(v) &&
@@ -3342,6 +3414,10 @@ escp2_print_page(stp_vars_t *v, stp_image_t *image)
       stp_free(pd->cols[i]);
   stp_free(pd->cols);
   stp_free(pd->channels);
+  if (pd->split_channels)
+    stp_free(pd->split_channels);
+  if (pd->comp_buf)
+    stp_free(pd->comp_buf);
   return status;
 }
 
@@ -3454,7 +3530,8 @@ static const stp_printfuncs_t print_escp2_printfuncs =
   escp2_describe_output,
   stp_verify_printer_params,
   escp2_job_start,
-  escp2_job_end
+  escp2_job_end,
+  NULL
 };
 
 static stp_family_t print_escp2_module_data =

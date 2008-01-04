@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
-Standards-Version: 3.7.2
+Standards-Version: 3.7.3
 Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35-1), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1-1), chrpath (>= 0.12), dpatch
 
 Package: gimp-gutenprint
@@ -14,7 +14,7 @@ Enhances: gimp
 Description: print plugin for the GIMP
  This package includes the Gutenprint Print plugin for the GIMP.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -41,7 +41,7 @@ Description: printer drivers for CUPS
  .
    http://www.cups.org
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -63,7 +63,7 @@ Description: development files for the Gutenprint printer driver library
  Install this package if you wish to develop programs that use
  libgutenprint.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -85,7 +85,7 @@ Description: documentation for the Gutenprint printer driver library
  Install this package if you want to have lots of info about the
  Gutenprint library when you're programming.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -104,7 +104,7 @@ Description: runtime for the Gutenprint printer driver library
  This package includes the Gutenprint shared library, needed to
  run programs using Gutenprint drivers.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -116,7 +116,7 @@ Description: runtime for the Gutenprint printer driver library
 
 Package: libgutenprintui2-dev
 Architecture: any
-Section: devel
+Section: libdevel
 Depends: libgutenprintui2-1 (= ${binary:Version}), pkg-config (>= 0.14.0)
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver user interface library
@@ -128,7 +128,7 @@ Description: development files for the Gutenprint printer driver user interface 
  Install this package if you wish to develop packages that use
  libgutenprintui.
  .
- This is Gutenprint version 5.0.1, a stable
+ This is Gutenprint version 5.0.2, a stable
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -148,7 +148,7 @@ Description: runtime for the Gutenprint printer driver user interface library
  gimp-print.  libgutenprintui contains GTK+ widgets which may be
  used for print dialogs etc. for use with libgutenprint.
  .
- This is Gutenprint version 5.0.1, a stable
+ This is Gutenprint version 5.0.2, a stable
  development release in the 5.0 line.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -169,7 +169,7 @@ Description: locale data files for Gutenprint
  They are needed when you want the programs in Gutenprint to print
  their messages in other languages than US English.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -188,7 +188,7 @@ Description: maintenance utility for Epson Stylus printers
  escputil is a utility to clean and align the heads of Epson Stylus
  printers.  It can also check the current ink levels in the printer.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
   .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -219,7 +219,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
  this package will still work with the appropriate foomatic setup
  if you wish to make use of foomatic.
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -247,7 +247,7 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
  .
  Home Page: http://www.openprinting.org/
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
@@ -267,7 +267,7 @@ Description: users' guide for Gutenprint and CUPS
  this covers using the Print plugin for the GIMP and the Common Unix
  Printing System (CUPS).
  .
- This is Gutenprint version 5.0.1, a stable release
+ This is Gutenprint version 5.0.2, a stable release
  in the 5.0 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a

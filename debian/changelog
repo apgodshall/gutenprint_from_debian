@@ -1,3 +1,18 @@
+gutenprint (5.0.2-2) unstable; urgency=low
+
+  * debian/control:
+    - ijsgutenprint only needs to Depend upon ghostscript.  The older
+      gs-* variants are no longer needed (Closes: #447533).
+  * debian/cupsys-driver-gutenprint.preinst:
+    - Remove /etc/cups/command.types if the version is <- 5.0.2-2
+      (Closes: #455016).  Thanks to Kumar Appaiah for finding this.
+  * debian/patches/21_gutenprintui_plist_localefix.dpatch: Set locale
+    to C before executing lpr to get non-localised output.  Patches
+    src/gutenprintui/plist.c and src/gutenprintui2/plist.c to fix
+    querying of available printers in a non-C locale (Closes: #456281).
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 06 Jan 2008 00:25:17 +0000
+
 gutenprint (5.0.2-1) unstable; urgency=low
 
   * New upstream release.

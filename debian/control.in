@@ -201,7 +201,7 @@ Description: maintenance utility for Epson Stylus printers
 Package: ijsgutenprint
 Architecture: any
 Section: text
-Depends: ${shlibs:Depends}, gs-esp (>= 6.53) | gs-gpl (>= 8.01-1) | gs (>= 6.53) | gs-afpl (>= 8.14)
+Depends: ${shlibs:Depends}, ghostscript (>= 8.61)
 Replaces: ijsgimpprint
 Conflicts: ijsgimpprint
 Description: inkjet server - Ghostscript driver for Gutenprint

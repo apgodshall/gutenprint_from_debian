@@ -22,6 +22,12 @@ install|upgrade)
     rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
     rm -rf /usr/share/ppd/gutenprint/5.0
     rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
+
+    # Remove /etc/command.types (moved to
+    # /usr/share/cups/mime/command.types).
+    if dpkg --compare-versions "$2" le "5.0.2-2"; then
+	rm -f /etc/cups/command.types
+    fi
 esac
 
 # dh_installdeb will replace this with shell code automatically

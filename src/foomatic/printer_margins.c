@@ -1,5 +1,5 @@
 /*
- * "$Id: printer_margins.c,v 1.17.8.2 2007/05/29 01:47:27 rlk Exp $"
+ * "$Id: printer_margins.c,v 1.21 2007/05/06 19:38:10 rlk Exp $"
  *
  *   Dump the per-printer margins for the OpenPrinting database
  *

@@ -1,28 +1,45 @@
-gutenprint (5.0.2-4) unstable; urgency=low
+gutenprint (5.1.98.2-2) experimental; urgency=low
 
+  * debian/cupsys-driver-gutenprint.postinst: Remove version suffix from
+    cups-genppdupdate.
+  * debian/rules, debian/cupsys-driver-gutenprint.install: Remove
+    cups-genppd; this is no longer needed with CUPS 1.2.x
+    (Closes: #474994).
+  * debian/control: Remove debian revision in Build-Depends package
+    versions.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 10 May 2008 12:32:39 +0100
+
+gutenprint (5.1.98.2-1) unstable; urgency=low
+
+  * New upstream stable beta release (Closes: #439961, #480113).
+  * debian/rules:
+    - Remove debian/libgutenprint2.install from GENERATED_FILES, and
+      remove the rule to generate it.
+    - Rename versioned binaries to 5.1.
+    - Remove commands for programs and manpages removed in this release.
   * debian/control.in:
-    - Add back cupsys-driver-gutenprint as a transitional package to
-      ease upgrades to cups-driver-gutenprint (Closes: #491331).
-    - cups-driver-gutenprint additionally replaces
-      cupsys-driver-gimpprint and cupsys-driver-gimpprint-data to ease
-      upgrades from sarge.
+    - Bump version from 5.0 to 5.1.
+    - cupsys-driver-gutenprint dependency on older ghostscript versions has
+      been restored, to allow migration to testing.
+  * debian/cupsys-driver-gutenprint.install:
+    - Rename versioned binaries to 5.1.
+    - Remove cups-genppdconfig.
+  * debian/cupsys-driver-gutenprint.postinst,
+    debian/cupsys-driver-gutenprint.postrm,
+    debian/cupsys-driver-gutenprint.preinst: Rename versioned binaries to
+    5.1.
+  * debian/gutenprint-doc.doc-base: Update version, section is now Graphics.
+  * debian/ijsgutenprint.install: Rename versioned binaries to 5.1.
+  * debian/libgutenprint2.install.in: Rename to
+    debian/libgutenprint2.install and hard-code version.
+  * debian/libgutenprint-doc.doc-base.developer,
+    debian/libgutenprint-doc.doc-base.reference: Section is now
+    Programming/C.
+  * debian/README.Debian: Bump version from 5.0 to 5.2.
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Mon, 28 Jul 2008 21:03:43 +0100
-
-gutenprint (5.0.2-3) unstable; urgency=low
-
-  * debian/control.in:
-    - Rename cupsys-driver-gutenprint to cups-driver-gutenprint
-      (Closes: #486126).
-    - Remove old Conflicts and Replaces on cupsys-driver-gimpprint*
-      packages, which are only present in oldstable and earlier releases.
-    - Upgrade to Standards-Version 3.8.0.
-    - Don't Build-Depend upon -1 Debian revisions.
-  * debian/*.doc-base: Use new doc-base sections.
-  * debian/cups-driver-gutenprint.p*: Use /etc/init.d/cups in place of
-    /etc/init.d/cupsys.
-
- -- Roger Leigh <rleigh@debian.org>  Mon, 30 Jun 2008 09:03:54 +0100
+ -- Roger Leigh <rleigh@debian.org>  Fri, 09 May 2008 17:04:37 +0100
 
 gutenprint (5.0.2-2) unstable; urgency=low
 

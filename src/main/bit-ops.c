@@ -1,5 +1,5 @@
 /*
- * "$Id: bit-ops.c,v 1.9.8.2 2007/05/12 19:14:27 faust3 Exp $"
+ * "$Id: bit-ops.c,v 1.12 2007/03/08 13:34:27 faust3 Exp $"
  *
  *   Softweave calculator for Gutenprint.
  *

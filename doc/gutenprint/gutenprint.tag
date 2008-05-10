@@ -2,7 +2,7 @@
 <tagfile>
   <compound kind="file">
     <name>array.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>array_8h</filename>
     <includes id="sequence_8h" name="sequence.h" local="no" imported="no">gutenprint/sequence.h</includes>
     <member kind="typedef">
@@ -92,7 +92,7 @@
   </compound>
   <compound kind="file">
     <name>bit-ops.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>bit-ops_8h</filename>
     <member kind="function">
       <type>void</type>
@@ -167,7 +167,7 @@
   </compound>
   <compound kind="file">
     <name>channel.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>channel_8h</filename>
     <member kind="function">
       <type>void</type>
@@ -340,7 +340,7 @@
   </compound>
   <compound kind="file">
     <name>color.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>color_8h</filename>
     <class kind="struct">stp_colorfuncs_t</class>
     <class kind="struct">stp_color_t</class>
@@ -431,7 +431,7 @@
   </compound>
   <compound kind="file">
     <name>curve-cache.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>curve-cache_8h</filename>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
     <class kind="struct">stp_cached_curve_t</class>
@@ -529,7 +529,7 @@
   </compound>
   <compound kind="file">
     <name>curve.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>curve_8h</filename>
     <includes id="sequence_8h" name="sequence.h" local="no" imported="no">gutenprint/sequence.h</includes>
     <class kind="struct">stp_curve_point_t</class>
@@ -629,6 +629,20 @@
       <name>stp_curve_copy</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>gcd7861bf1c9d61ac4ec87844a15ab9d3</anchor>
+      <arglist>(stp_curve_t *dest, const stp_curve_t *source)</arglist>
+    </member>
+    <member kind="function">
+      <type>stp_curve_t *</type>
+      <name>stp_curve_create_reverse</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>g8c2aed234d3e4ddc4c239801be17bb73</anchor>
+      <arglist>(const stp_curve_t *curve)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_curve_reverse</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>g3416157017287eae136fb928802be234</anchor>
       <arglist>(stp_curve_t *dest, const stp_curve_t *source)</arglist>
     </member>
     <member kind="function">
@@ -935,7 +949,7 @@
   </compound>
   <compound kind="file">
     <name>dither.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>dither_8h</filename>
     <class kind="struct">stp_dither_matrix_short_t</class>
     <class kind="struct">stp_dither_matrix_normal_t</class>
@@ -1198,7 +1212,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-intl-internal.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>gutenprint-intl-internal_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1252,7 +1266,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-intl.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>gutenprint-intl_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1306,7 +1320,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-module.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>gutenprint-module_8h</filename>
     <includes id="gutenprint_8h" name="gutenprint.h" local="no" imported="no">gutenprint/gutenprint.h</includes>
     <includes id="bit-ops_8h" name="bit-ops.h" local="no" imported="no">gutenprint/bit-ops.h</includes>
@@ -1328,7 +1342,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint-version.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>gutenprint-version_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1431,7 +1445,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprint.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>gutenprint_8h</filename>
     <includes id="array_8h" name="array.h" local="no" imported="no">gutenprint/array.h</includes>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
@@ -1446,7 +1460,7 @@
   </compound>
   <compound kind="file">
     <name>image.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>image_8h</filename>
     <class kind="struct">stp_image_t</class>
     <member kind="define">
@@ -1523,7 +1537,7 @@
   </compound>
   <compound kind="file">
     <name>list.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>list_8h</filename>
     <member kind="typedef">
       <type>struct stp_list_item</type>
@@ -1752,7 +1766,7 @@
   </compound>
   <compound kind="file">
     <name>module.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>module_8h</filename>
     <includes id="list_8h" name="list.h" local="no" imported="no">gutenprint/list.h</includes>
     <class kind="struct">stp_module_version_t</class>
@@ -1832,7 +1846,7 @@
   </compound>
   <compound kind="file">
     <name>mxml.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>mxml_8h</filename>
     <class kind="struct">stp_mxml_attr_t</class>
     <class kind="struct">stp_mxml_element_t</class>
@@ -2110,7 +2124,7 @@
   </compound>
   <compound kind="file">
     <name>paper.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>paper_8h</filename>
     <includes id="vars_8h" name="vars.h" local="no" imported="no">gutenprint/vars.h</includes>
     <class kind="struct">stp_papersize_t</class>
@@ -2137,6 +2151,21 @@
     <member kind="enumvalue">
       <name>PAPERSIZE_METRIC_EXTENDED</name>
       <anchor>gg72e4619e373e38dc02dc452813b7b95862e2906a87fa4bcf32913943fd5b225a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <name>stp_papersize_type_t</name>
+      <anchor>g31255c4eebfaaf5cd319e5638a6a3069</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_STANDARD</name>
+      <anchor>gg31255c4eebfaaf5cd319e5638a6a306999d27f84f91d583c3e465e56c83fff2f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_ENVELOPE</name>
+      <anchor>gg31255c4eebfaaf5cd319e5638a6a3069660290248a563e7590202afd3ba68fb4</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -2177,7 +2206,7 @@
   </compound>
   <compound kind="file">
     <name>path.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>path_8h</filename>
     <member kind="function">
       <type>stp_list_t *</type>
@@ -2196,7 +2225,7 @@
   </compound>
   <compound kind="file">
     <name>printers.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>printers_8h</filename>
     <includes id="string-list_8h" name="string-list.h" local="no" imported="no">gutenprint/string-list.h</includes>
     <includes id="list_8h" name="list.h" local="no" imported="no">gutenprint/list.h</includes>
@@ -2388,7 +2417,7 @@
   </compound>
   <compound kind="file">
     <name>sequence.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>sequence_8h</filename>
     <member kind="typedef">
       <type>struct stp_sequence</type>
@@ -2423,6 +2452,20 @@
       <name>stp_sequence_create_copy</name>
       <anchorfile>group__sequence.html</anchorfile>
       <anchor>gb03a34a03ffd4163f51126916d737df7</anchor>
+      <arglist>(const stp_sequence_t *sequence)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_sequence_reverse</name>
+      <anchorfile>group__sequence.html</anchorfile>
+      <anchor>g51f0d093b1b7c1bafe068dcbf172ac26</anchor>
+      <arglist>(stp_sequence_t *dest, const stp_sequence_t *source)</arglist>
+    </member>
+    <member kind="function">
+      <type>stp_sequence_t *</type>
+      <name>stp_sequence_create_reverse</name>
+      <anchorfile>group__sequence.html</anchorfile>
+      <anchor>gde64193f944aaba0365a96691d479974</anchor>
       <arglist>(const stp_sequence_t *sequence)</arglist>
     </member>
     <member kind="function">
@@ -2596,7 +2639,7 @@
   </compound>
   <compound kind="file">
     <name>string-list.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>string-list_8h</filename>
     <class kind="struct">stp_param_string_t</class>
     <member kind="typedef">
@@ -2679,7 +2722,7 @@
   </compound>
   <compound kind="file">
     <name>util.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>util_8h</filename>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
     <includes id="vars_8h" name="vars.h" local="no" imported="no">gutenprint/vars.h</includes>
@@ -2818,9 +2861,9 @@
     </member>
     <member kind="define">
       <type>#define</type>
-      <name>STP_DBG_OLYMPUS</name>
+      <name>STP_DBG_DYESUB</name>
       <anchorfile>group__util.html</anchorfile>
-      <anchor>g574664feccffc4527df73e32c7e863bf</anchor>
+      <anchor>g31234d4cc42f026f39ea32ee3dd7b0a1</anchor>
       <arglist></arglist>
     </member>
     <member kind="define">
@@ -3092,7 +3135,7 @@
   </compound>
   <compound kind="file">
     <name>vars.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>vars_8h</filename>
     <includes id="array_8h" name="array.h" local="no" imported="no">gutenprint/array.h</includes>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprint/curve.h</includes>
@@ -4219,7 +4262,7 @@
   </compound>
   <compound kind="file">
     <name>weave.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>weave_8h</filename>
     <class kind="struct">stp_weave_t</class>
     <class kind="struct">stp_pass_t</class>
@@ -4406,7 +4449,7 @@
   </compound>
   <compound kind="file">
     <name>xml.h</name>
-    <path>/home/rlk/sandbox/print-5.0/include/gutenprint/</path>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
     <filename>xml_8h</filename>
     <includes id="mxml_8h" name="mxml.h" local="no" imported="no">gutenprint/mxml.h</includes>
     <member kind="typedef">
@@ -4845,6 +4888,20 @@
       <name>stp_curve_copy</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>gcd7861bf1c9d61ac4ec87844a15ab9d3</anchor>
+      <arglist>(stp_curve_t *dest, const stp_curve_t *source)</arglist>
+    </member>
+    <member kind="function">
+      <type>stp_curve_t *</type>
+      <name>stp_curve_create_reverse</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>g8c2aed234d3e4ddc4c239801be17bb73</anchor>
+      <arglist>(const stp_curve_t *curve)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_curve_reverse</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>g3416157017287eae136fb928802be234</anchor>
       <arglist>(stp_curve_t *dest, const stp_curve_t *source)</arglist>
     </member>
     <member kind="function">
@@ -5696,6 +5753,21 @@
       <anchor>gg72e4619e373e38dc02dc452813b7b95862e2906a87fa4bcf32913943fd5b225a</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumeration">
+      <name>stp_papersize_type_t</name>
+      <anchor>g31255c4eebfaaf5cd319e5638a6a3069</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_STANDARD</name>
+      <anchor>gg31255c4eebfaaf5cd319e5638a6a306999d27f84f91d583c3e465e56c83fff2f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_ENVELOPE</name>
+      <anchor>gg31255c4eebfaaf5cd319e5638a6a3069660290248a563e7590202afd3ba68fb4</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>int</type>
       <name>stp_known_papersizes</name>
@@ -5958,6 +6030,20 @@
       <name>stp_sequence_create_copy</name>
       <anchorfile>group__sequence.html</anchorfile>
       <anchor>gb03a34a03ffd4163f51126916d737df7</anchor>
+      <arglist>(const stp_sequence_t *sequence)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_sequence_reverse</name>
+      <anchorfile>group__sequence.html</anchorfile>
+      <anchor>g51f0d093b1b7c1bafe068dcbf172ac26</anchor>
+      <arglist>(stp_sequence_t *dest, const stp_sequence_t *source)</arglist>
+    </member>
+    <member kind="function">
+      <type>stp_sequence_t *</type>
+      <name>stp_sequence_create_reverse</name>
+      <anchorfile>group__sequence.html</anchorfile>
+      <anchor>gde64193f944aaba0365a96691d479974</anchor>
       <arglist>(const stp_sequence_t *sequence)</arglist>
     </member>
     <member kind="function">
@@ -6261,9 +6347,9 @@
     </member>
     <member kind="define">
       <type>#define</type>
-      <name>STP_DBG_OLYMPUS</name>
+      <name>STP_DBG_DYESUB</name>
       <anchorfile>group__util.html</anchorfile>
-      <anchor>g574664feccffc4527df73e32c7e863bf</anchor>
+      <anchor>g31234d4cc42f026f39ea32ee3dd7b0a1</anchor>
       <arglist></arglist>
     </member>
     <member kind="define">
@@ -8521,6 +8607,13 @@
       <name>paper_unit</name>
       <anchorfile>structstp__papersize__t.html</anchorfile>
       <anchor>5692b27332297abca9e4715e3e9e3ce8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_papersize_type_t</type>
+      <name>paper_size_type</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>35412f4b1f65ab4697a6b2fb640d4576</anchor>
       <arglist></arglist>
     </member>
   </compound>

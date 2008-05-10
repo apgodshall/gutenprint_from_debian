@@ -1,5 +1,5 @@
 #! /bin/sh
-# preinst script for cups-driver-gutenprint
+# preinst script for cupsys-driver-gutenprint
 #
 # see: dh_installdeb(1)
 
@@ -18,9 +18,9 @@ install|upgrade)
     # This is to ensure stale PPDs from previous versions are removed.
     # When Gutenprint no longer allows the user to generate PPDs, make
     # this into a versioned check.
-    rm -rf /usr/share/cups/model/gutenprint/5.0
+    rm -rf /usr/share/cups/model/gutenprint/5.1
     rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
-    rm -rf /usr/share/ppd/gutenprint/5.0
+    rm -rf /usr/share/ppd/gutenprint/5.1
     rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
 
     # Remove /etc/command.types (moved to

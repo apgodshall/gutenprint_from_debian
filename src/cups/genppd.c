@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.119.2.5 2007/12/23 17:30:05 easysw Exp $"
+ * "$Id: genppd.c,v 1.142 2008/04/06 21:16:08 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -292,6 +292,12 @@ cat_ppd(int argc, char **argv)	/* I - Driver URI */
     fprintf(stderr, "ERROR: Bad ppd-name \"%s\" (%d)!\n", uri, status);
     return (1);
   }
+
+  if (strcmp(scheme, "gutenprint." GUTENPRINT_RELEASE_VERSION) != 0)
+    {
+      fprintf(stderr, "ERROR: Gutenprint version mismatch!\n");
+      return(1);
+    }
 
   s = strchr(resource + 1, '/');
   if (s)
@@ -1107,7 +1113,6 @@ write_ppd(
     gzputs(fp, "*PSVersion:	\"(2017.000) 550\"\n");
   else
     {
-      gzputs(fp, "*PSVersion:	\"(3010.000) 550\"\n");
       gzputs(fp, "*PSVersion:	\"(3010.000) 651\"\n");
       gzputs(fp, "*PSVersion:	\"(3010.000) 652\"\n");
       gzputs(fp, "*PSVersion:	\"(3010.000) 653\"\n");
@@ -1526,6 +1531,7 @@ write_ppd(
 	  stp_clear_string_parameter(v, "Resolution");
 	  stp_describe_parameter(v, "Quality", &desc1);
 	  stp_set_string_parameter(v, "Quality", desc1.deflt.str);
+	  stp_parameter_description_destroy(&desc1);
 	  stp_describe_resolution(v, &xdpi, &ydpi);
 	  stp_clear_string_parameter(v, "Quality");
 	  tmp_xdpi = xdpi;
@@ -1924,5 +1930,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.119.2.5 2007/12/23 17:30:05 easysw Exp $".
+ * End of "$Id: genppd.c,v 1.142 2008/04/06 21:16:08 rlk Exp $".
  */

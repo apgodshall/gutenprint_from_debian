@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.92.10.1 2007/03/02 12:01:20 rlk Exp $
+## $Id: Makefile.am,v 1.99 2008/04/28 02:06:44 rlk Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -25,8 +25,8 @@ include $(top_srcdir)/scripts/global.mk
 ## Variables
 
 pkgconfigdatadir = $(libdir)/pkgconfig
-pkgxmldatadir = $(pkgdatadir)/$(VERSION)/xml
-pkgmoduledir = $(pkglibdir)/$(VERSION)/modules
+pkgxmldatadir = $(pkgdatadir)/@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@/xml
+pkgmoduledir = $(pkglibdir)/@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@/modules
 
 
 ## Programs
@@ -39,7 +39,7 @@ pkgmodule_LTLIBRARIES = \
 	print-lexmark.la \
 	print-pcl.la \
 	print-ps.la \
-	print-olympus.la \
+	print-dyesub.la \
 	print-raw.la
 endif
 
@@ -77,11 +77,11 @@ print_lexmark_la_LDFLAGS = -module -avoid-version
 print_pcl_la_SOURCES = print-pcl.c
 print_pcl_la_LDFLAGS = -module -avoid-version
 
-print_ps_la_SOURCES = print-ps.c
+print_ps_la_SOURCES = print-ps.c xmlppd.c xmlppd.h
 print_ps_la_LDFLAGS = -module -avoid-version
 
-print_olympus_la_SOURCES = print-olympus.c
-print_olympus_la_LDFLAGS = -module -avoid-version
+print_dyesub_la_SOURCES = print-olympus.c
+print_dyesub_la_LDFLAGS = -module -avoid-version
 
 print_raw_la_SOURCES = print-raw.c
 print_raw_la_LDFLAGS = -module -avoid-version
@@ -95,7 +95,7 @@ module_SOURCES =				\
 	$(print_lexmark_la_SOURCES)		\
 	$(print_pcl_la_SOURCES)			\
 	$(print_ps_la_SOURCES)			\
-	$(print_olympus_la_SOURCES)		\
+	$(print_dyesub_la_SOURCES)		\
 	$(print_raw_la_SOURCES)
 
 if !BUILD_MODULES

@@ -1,5 +1,5 @@
 /*
- * "$Id: plist.c,v 1.6.10.4 2007/12/15 20:35:43 rlk Exp $"
+ * "$Id: plist.c,v 1.17 2008/01/31 12:56:09 m0m Exp $"
  *
  *   Print plug-in for the GIMP.
  *
@@ -84,34 +84,37 @@ typedef struct
 
 /*
  * Generic printing system, based on SysV lp
+ *
+ * CAUTION: Do not use lpstat -t or lpstat -p.
+ * See bug 742187 (huge delays with lpstat -d -p) for an explanation.
  */
 static const print_system_t default_printing_system =
   { "SysV", N_("System V lp"), "lp -s", "-d", "-oraw", "/usr/bin/lp",
-    "/usr/bin/lpstat -v | grep -i '^device for ' | awk '{print $3}' | sed 's/://'",
+    "/usr/bin/lpstat -v | awk '/^device for /i {sub(\":\", \"\", $3); print $3}'",
   "-n" };
 
 static print_system_t known_printing_systems[] =
 {
   { "CUPS", N_("CUPS"), "lp -s", "-d", "-oraw", "/usr/sbin/cupsd",
-    "/usr/bin/lpstat -v | grep -i '^device for ' | awk '{print $3}' | sed 's/://'",
+    "/usr/bin/lpstat -v | awk '/^device for /i {sub(\":\", \"\", $3); print $3}'",
     "-n" },
   { "SysV", N_("System V lp"), "lp -s", "-d", "-oraw", "/usr/bin/lp",
-    "/usr/bin/lpstat -v | grep -i '^device for ' | awk '{print $3}' | sed 's/://'",
+    "/usr/bin/lpstat -v | awk '/^device for /i {sub(\":\", \"\", $3); print $3}'",
     "-n" },
   { "lpd", N_("Berkeley lpd (/etc/lpc)"), "lpr", "-P", "-l", "/etc/lpc",
-    "/etc/lpc status | grep '^...*:' | sed 's/:.*//'",
+    "/etc/lpc status | awk '/^...*:/ {sub(\":.*\", \"\"); print}'",
     "-#" },
   { "lpd", N_("Berkeley lpd (/usr/bsd/lpc)"), "lpr", "-P", "-l", "/usr/bsd/lpc",
-    "/usr/bsd/lpc status | grep '^...*:' | sed 's/:.*//'",
+    "/usr/bsd/lpc status | awk '/^...*:/ {sub(\":.*\", \"\"); print}'",
     "-#" },
   { "lpd", N_("Berkeley lpd (/usr/etc/lpc"), "lpr", "-P", "-l", "/usr/etc/lpc",
-    "/usr/etc/lpc status | grep '^...*:' | sed 's/:.*//'",
+    "/usr/etc/lpc status | awk '/^...*:/ {sub(\":.*\", \"\"); print}'",
     "-#" },
   { "lpd", N_("Berkeley lpd (/usr/libexec/lpc)"), "lpr", "-P", "-l", "/usr/libexec/lpc",
-    "/usr/libexec/lpc status | grep '^...*:' | sed 's/:.*//'",
+    "/usr/libexec/lpc status | awk '/^...*:/ {sub(\":.*\", \"\"); print}'",
     "-#" },
   { "lpd", N_("Berkeley lpd (/usr/sbin/lpc)"), "lpr", "-P", "-l", "/usr/sbin/lpc",
-    "/usr/sbin/lpc status | grep '^...*:' | sed 's/:.*//'",
+    "/usr/sbin/lpc status | awk '/^...*:/ {sub(\":.*\", \"\"); print}'",
     "-#" },
 };
 
@@ -1257,7 +1260,11 @@ stpui_get_system_printers(void)
   if (global_printing_system)
   {
     const char *old_locale = getenv("LC_ALL");
+    const char *old_lc_messages = getenv("LC_MESSAGES");
+    const char *old_lang = getenv("LANG");
     (void) setenv("LC_ALL", "C", 1);
+    (void) setenv("LC_MESSAGES", "C", 1);
+    (void) setenv("LANG", "C", 1);
     if ((pfile = popen(global_printing_system->scan_command, "r")) != NULL)
     {
      /*
@@ -1283,6 +1290,14 @@ stpui_get_system_printers(void)
 	setenv("LC_ALL", old_locale, 1);
       else
 	unsetenv("LC_ALL");
+      if (old_lc_messages)
+	setenv("LC_MESSAGES", old_lc_messages, 1);
+      else
+	unsetenv("LC_MESSAGES");
+      if (old_lang)
+	setenv("LANG", old_lang, 1);
+      else
+	unsetenv("LANG");
     }
   }
 }
@@ -1623,6 +1638,7 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 		      else	/* Child 2 (printer command) */
 			{
 			  char *command;
+			  char *locale;
 			  if (stpui_plist_get_command_type(printer) ==
 			      COMMAND_TYPE_DEFAULT)
 			    {
@@ -1642,6 +1658,10 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 			  close (pipefd[0]);
 			  close (pipefd[1]);
 			  close(syncfd[1]);
+#ifdef HAVE_LOCALE_H
+			  locale = g_strdup(setlocale(LC_NUMERIC, NULL));
+			  setlocale(LC_NUMERIC, "C");
+#endif
 			  execl("/bin/sh", "/bin/sh", "-c", command, NULL);
 			  /* NOTREACHED */
 			  _exit (1);
@@ -1815,5 +1835,5 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 }
 
 /*
- * End of "$Id: plist.c,v 1.6.10.4 2007/12/15 20:35:43 rlk Exp $".
+ * End of "$Id: plist.c,v 1.17 2008/01/31 12:56:09 m0m Exp $".
  */

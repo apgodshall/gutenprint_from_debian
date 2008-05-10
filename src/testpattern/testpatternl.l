@@ -1,5 +1,5 @@
 /*
- * "$Id: testpatternl.l,v 1.17.14.1 2007/12/15 20:35:52 rlk Exp $"
+ * "$Id: testpatternl.l,v 1.20 2008/02/03 02:48:20 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -65,7 +65,7 @@ do							\
 %option noyywrap
 
 digit		[0-9]
-integer		[-+]?{digit}+
+integer		([-+]|0[xX])?{digit}+
 float		[-+]?{digit}+(\.{digit}+)?([eE][-+]?{digit}+)?
 string		([\"][^\"]+[\"])|([a-zA-Z0-9_][-a-zA-Z0-9_]*)|([\'][^\']*[\'])
 ws		[ \t]+
@@ -114,10 +114,11 @@ gray			yylval.ival = GRAY;DBG(GRAY); return GRAY;
 white			yylval.ival = WHITE;DBG(WHITE); return WHITE;
 output			DBG(OUTPUT); return OUTPUT;
 message			DBG(MESSAGE); return MESSAGE;
+noscale			DBG(NOSCALE); return NOSCALE;
 end			DBG(END); return END;
 
 
-{integer}		yylval.ival = atoi(yytext); DBG(tINT); return tINT;
+{integer}		yylval.ival = strtol(yytext, NULL, 0); yylval.dval = (double) yylval.ival; DBG(tINT); return tINT;
 {float}			yylval.dval = strtod(yytext, NULL); DBG(tDOUBLE); return tDOUBLE;
 {string}		yylval.sval = c_strstrip(yytext); DBG(tSTRING); return tSTRING;
 {ws}			DBG(whitespace); 	/* Skip blanks/tabs */

@@ -1,5 +1,5 @@
 /*
- * "$Id: util.h,v 1.33.10.1 2007/03/02 12:01:33 rlk Exp $"
+ * "$Id: util.h,v 1.34 2007/02/24 21:43:49 faust3 Exp $"
  *
  *   Gutenprint header.
  *
@@ -70,5 +70,5 @@ extern stp_image_t* stpi_buffer_image(stp_image_t* image, unsigned int flags);
 
 #endif /* GUTENPRINT_INTERNAL_UTIL_H */
 /*
- * End of "$Id: util.h,v 1.33.10.1 2007/03/02 12:01:33 rlk Exp $".
+ * End of "$Id: util.h,v 1.34 2007/02/24 21:43:49 faust3 Exp $".
  */

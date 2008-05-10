@@ -1,5 +1,5 @@
 #! /bin/sh
-# postrm script for cups-driver-gutenprint
+# postrm script for cupsys-driver-gutenprint
 #
 # see: dh_installdeb(1)
 
@@ -19,11 +19,11 @@ set -e
 if [ "$1" = remove ]; then
     # Remove generated PPDs
     # (note: user-generated now we no longer generate them automatically)
-    rm -rf /usr/share/cups/model/gutenprint/5.0
+    rm -rf /usr/share/cups/model/gutenprint/5.1
     rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
-    rm -rf /usr/share/ppd/gutenprint/5.0
+    rm -rf /usr/share/ppd/gutenprint/5.1
     rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
-    [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
+    [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 fi
 
 if [ "$1" = purge ]; then

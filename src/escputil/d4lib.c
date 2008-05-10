@@ -311,6 +311,7 @@ static int printError(unsigned char errorNb)
       msg++;
    }
    fprintf(stderr,"Unknown IEEE 1284.4 error number %d\n",errorNb);
+   return 0;
    return 1; /* non recoverable error */
 }
 

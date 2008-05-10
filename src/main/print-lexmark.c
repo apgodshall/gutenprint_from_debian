@@ -1,6 +1,6 @@
 
 /*
- * "$Id: print-lexmark.c,v 1.154.8.1 2007/12/15 20:35:48 rlk Exp $"
+ * "$Id: print-lexmark.c,v 1.155 2007/08/27 00:44:12 rlk Exp $"
  *
  *   Print plug-in Lexmark driver for the GIMP.
  *

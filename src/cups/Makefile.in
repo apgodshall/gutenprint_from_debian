@@ -38,53 +38,43 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/cups-genppdconfig.in $(srcdir)/cups-genppdupdate.in \
+	$(srcdir)/cups-genppdupdate.in \
 	$(srcdir)/test-rastertogutenprint.in \
 	$(top_srcdir)/scripts/global.mk COPYING
 @BUILD_CUPS_1_2_TRUE@cupsexec_driver_PROGRAMS = gutenprint.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT)
 @BUILD_CUPS_TRUE@bin_PROGRAMS = cups-calibrate$(EXEEXT)
 @BUILD_CUPS_TRUE@sbin_PROGRAMS = cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT)
-@BUILD_CUPS_TRUE@cupsexec_backend_PROGRAMS = epson$(EXEEXT) \
-@BUILD_CUPS_TRUE@	canon$(EXEEXT)
 @BUILD_CUPS_TRUE@cupsexec_filter_PROGRAMS = rastertogutenprint.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT) \
 @BUILD_CUPS_TRUE@	commandtoepson$(EXEEXT) \
 @BUILD_CUPS_TRUE@	commandtocanon$(EXEEXT)
 subdir = src/cups
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
-	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
-	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/isc-posix.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
+	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
+	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = cups-genppdconfig cups-genppdupdate \
-	test-rastertogutenprint
+CONFIG_CLEAN_FILES = cups-genppdupdate test-rastertogutenprint
 am__installdirs = "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(cupsexec_backenddir)" \
 	"$(DESTDIR)$(cupsexec_driverdir)" \
 	"$(DESTDIR)$(cupsexec_filterdir)" "$(DESTDIR)$(sbindir)" \
 	"$(DESTDIR)$(sbindir)" "$(DESTDIR)$(pkgdatadir)" \
 	"$(DESTDIR)$(pkgsysconfdir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
-cupsexec_backendPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 cupsexec_driverPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 cupsexec_filterPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 sbinPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
-PROGRAMS = $(bin_PROGRAMS) $(cupsexec_backend_PROGRAMS) \
-	$(cupsexec_driver_PROGRAMS) $(cupsexec_filter_PROGRAMS) \
-	$(sbin_PROGRAMS)
-am_canon_OBJECTS = canon.$(OBJEXT)
-canon_OBJECTS = $(am_canon_OBJECTS)
-am__DEPENDENCIES_1 =
-canon_DEPENDENCIES = $(am__DEPENDENCIES_1)
+PROGRAMS = $(bin_PROGRAMS) $(cupsexec_driver_PROGRAMS) \
+	$(cupsexec_filter_PROGRAMS) $(sbin_PROGRAMS)
 am_commandtocanon_OBJECTS = commandtocanon.$(OBJEXT)
 commandtocanon_OBJECTS = $(am_commandtocanon_OBJECTS)
+am__DEPENDENCIES_1 =
 commandtocanon_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_commandtoepson_OBJECTS = commandtoepson.$(OBJEXT)
 commandtoepson_OBJECTS = $(am_commandtoepson_OBJECTS)
@@ -103,9 +93,6 @@ cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LINK =  \
 	$(CFLAGS) \
 	$(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS) \
 	$(LDFLAGS) -o $@
-am_epson_OBJECTS = epson.$(OBJEXT)
-epson_OBJECTS = $(am_epson_OBJECTS)
-epson_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS = gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@-genppd.$(OBJEXT)
 gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS = $(am_gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS)
 gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_DEPENDENCIES =  \
@@ -141,16 +128,14 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(canon_SOURCES) $(commandtocanon_SOURCES) \
-	$(commandtoepson_SOURCES) $(cups_calibrate_SOURCES) \
+SOURCES = $(commandtocanon_SOURCES) $(commandtoepson_SOURCES) \
+	$(cups_calibrate_SOURCES) \
 	$(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES) \
-	$(epson_SOURCES) \
 	$(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES) \
 	$(rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES)
-DIST_SOURCES = $(canon_SOURCES) $(commandtocanon_SOURCES) \
-	$(commandtoepson_SOURCES) $(cups_calibrate_SOURCES) \
+DIST_SOURCES = $(commandtocanon_SOURCES) $(commandtoepson_SOURCES) \
+	$(cups_calibrate_SOURCES) \
 	$(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES) \
-	$(epson_SOURCES) \
 	$(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES) \
 	$(rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
@@ -215,27 +200,13 @@ FOOMATIC_PPDFILE = @FOOMATIC_PPDFILE@
 GENPPD_LIBS = @GENPPD_LIBS@
 GIMP2_CFLAGS = @GIMP2_CFLAGS@
 GIMP2_LIBS = @GIMP2_LIBS@
-GIMPTOOL = @GIMPTOOL@
 GIMPTOOL2_CHECK = @GIMPTOOL2_CHECK@
-GIMPTOOL_CHECK = @GIMPTOOL_CHECK@
-GIMP_CFLAGS = @GIMP_CFLAGS@
-GIMP_CFLAGS_NOUI = @GIMP_CFLAGS_NOUI@
-GIMP_DATA_DIR = @GIMP_DATA_DIR@
-GIMP_LIBS = @GIMP_LIBS@
-GIMP_LIBS_NOUI = @GIMP_LIBS_NOUI@
-GIMP_PLUGIN_DIR = @GIMP_PLUGIN_DIR@
-GLIB_CFLAGS = @GLIB_CFLAGS@
-GLIB_CONFIG = @GLIB_CONFIG@
-GLIB_LIBS = @GLIB_LIBS@
 GLIB_MKENUMS = @GLIB_MKENUMS@
 GMSGFMT = @GMSGFMT@
 GNUCFLAGS = @GNUCFLAGS@
 GREP = @GREP@
 GTK2_CFLAGS = @GTK2_CFLAGS@
 GTK2_LIBS = @GTK2_LIBS@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_CONFIG = @GTK_CONFIG@
-GTK_LIBS = @GTK_LIBS@
 GUTENPRINTUI2_BINARY_AGE = @GUTENPRINTUI2_BINARY_AGE@
 GUTENPRINTUI2_CFLAGS = @GUTENPRINTUI2_CFLAGS@
 GUTENPRINTUI2_CURRENT_INTERFACE = @GUTENPRINTUI2_CURRENT_INTERFACE@
@@ -243,13 +214,6 @@ GUTENPRINTUI2_INTERFACE_AGE = @GUTENPRINTUI2_INTERFACE_AGE@
 GUTENPRINTUI2_LIBDEPS = @GUTENPRINTUI2_LIBDEPS@
 GUTENPRINTUI2_LIBS = $(top_builddir)/src/gutenprintui2/libgutenprintui2.la
 GUTENPRINTUI2_VERSION = @GUTENPRINTUI2_VERSION@
-GUTENPRINTUI_BINARY_AGE = @GUTENPRINTUI_BINARY_AGE@
-GUTENPRINTUI_CFLAGS = @GUTENPRINTUI_CFLAGS@
-GUTENPRINTUI_CURRENT_INTERFACE = @GUTENPRINTUI_CURRENT_INTERFACE@
-GUTENPRINTUI_INTERFACE_AGE = @GUTENPRINTUI_INTERFACE_AGE@
-GUTENPRINTUI_LIBDEPS = @GUTENPRINTUI_LIBDEPS@
-GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
-GUTENPRINTUI_VERSION = @GUTENPRINTUI_VERSION@
 GUTENPRINT_BINARY_AGE = @GUTENPRINT_BINARY_AGE@
 GUTENPRINT_CFLAGS = @GUTENPRINT_CFLAGS@
 GUTENPRINT_CURRENT_INTERFACE = @GUTENPRINT_CURRENT_INTERFACE@
@@ -354,16 +318,12 @@ docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
-gimp_plug_indir = @gimp_plug_indir@
 gutenprint_cflags = @gutenprint_cflags@
 gutenprint_libdeps = @gutenprint_libdeps@
 gutenprint_libs = @gutenprint_libs@
 gutenprintui2_cflags = @gutenprintui2_cflags@
 gutenprintui2_libdeps = @gutenprintui2_libdeps@
 gutenprintui2_libs = @gutenprintui2_libs@
-gutenprintui_cflags = @gutenprintui_cflags@
-gutenprintui_libdeps = @gutenprintui_libdeps@
-gutenprintui_libs = @gutenprintui_libs@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -392,9 +352,9 @@ target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
+GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
 empty = 
 pkgsysconfdir = $(cups_conf_serverroot)
-cupsexec_backenddir = $(pkglibdir)/backend
 cupsexec_driverdir = $(pkglibdir)/driver
 cupsexec_filterdir = $(pkglibdir)/filter
 @CUPS_PPDS_AT_TOP_LEVEL_FALSE@cups_modeldir = $(pkgdatadir)/model/gutenprint/@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@/
@@ -406,7 +366,7 @@ STP_ENV = STP_MODULE_PATH=$(top_builddir)/src/main/.libs:$(top_builddir)/src/mai
 @BUILD_TRANSLATED_CUPS_PPDS_TRUE@LINGUAS = $(ALL_LINGUAS)
 @BUILD_TRANSLATED_CUPS_PPDS_TRUE@TRANSLATE_PPDS = -DCUPS_TRANSLATED_PPDS
 @BUILD_SIMPLIFIED_CUPS_PPDS_TRUE@BUILD_SIMPLE_PPDS = -DGENERATE_SIMPLIFIED_PPDS
-@BUILD_CUPS_TRUE@sbin_SCRIPTS = cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
+@BUILD_CUPS_TRUE@sbin_SCRIPTS = cups-genppdupdate
 @BUILD_CUPS_TRUE@TESTS = test-ppds test-rastertogutenprint
 @BUILD_CUPS_TRUE@noinst_SCRIPTS = test-rastertogutenprint
 @BUILD_GENPPD_STATIC_TRUE@STATIC_LDOPTS = -static -export-dynamic
@@ -416,10 +376,6 @@ commandtocanon_SOURCES = commandtocanon.c
 commandtocanon_LDADD = $(CUPS_LIBS)
 commandtoepson_SOURCES = commandtoepson.c
 commandtoepson_LDADD = $(CUPS_LIBS)
-canon_SOURCES = canon.c
-canon_LDADD = $(CUPS_LIBS)
-epson_SOURCES = epson.c
-epson_LDADD = $(CUPS_LIBS)
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_CFLAGS = -DALL_LINGUAS='"@ALL_LINGUAS@"' $(BUILD_SIMPLE_PPDS) $(TRANSLATE_PPDS)
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GENPPD_LIBS) $(GUTENPRINT_LIBS)
@@ -438,7 +394,7 @@ pkgsysconf_DATA = $(CUPS_CONF)
 @BUILD_CUPS_PPDS_TRUE@INSTALL_DATA_LOCAL_DEPS = ppd-stamp
 @USE_NLS_TRUE@PPD_NLS_1 = ppd-nls
 CLEANFILES = ppd-stamp
-DISTCLEANFILES = cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
+DISTCLEANFILES = cups-genppdupdate
 MAINTAINERCLEANFILES = Makefile.in
 EXTRA_DIST = \
 	COPYING \
@@ -481,8 +437,6 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-cups-genppdconfig: $(top_builddir)/config.status $(srcdir)/cups-genppdconfig.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 cups-genppdupdate: $(top_builddir)/config.status $(srcdir)/cups-genppdupdate.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 test-rastertogutenprint: $(top_builddir)/config.status $(srcdir)/test-rastertogutenprint.in
@@ -511,34 +465,6 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  echo " rm -f $$p $$f"; \
-	  rm -f $$p $$f ; \
-	done
-install-cupsexec_backendPROGRAMS: $(cupsexec_backend_PROGRAMS)
-	@$(NORMAL_INSTALL)
-	test -z "$(cupsexec_backenddir)" || $(MKDIR_P) "$(DESTDIR)$(cupsexec_backenddir)"
-	@list='$(cupsexec_backend_PROGRAMS)'; for p in $$list; do \
-	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  if test -f $$p \
-	     || test -f $$p1 \
-	  ; then \
-	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
-	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(cupsexec_backendPROGRAMS_INSTALL) '$$p' '$(DESTDIR)$(cupsexec_backenddir)/$$f'"; \
-	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(cupsexec_backendPROGRAMS_INSTALL) "$$p" "$(DESTDIR)$(cupsexec_backenddir)/$$f" || exit 1; \
-	  else :; fi; \
-	done
-
-uninstall-cupsexec_backendPROGRAMS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(cupsexec_backend_PROGRAMS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's,^.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
-	  echo " rm -f '$(DESTDIR)$(cupsexec_backenddir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(cupsexec_backenddir)/$$f"; \
-	done
-
-clean-cupsexec_backendPROGRAMS:
-	@list='$(cupsexec_backend_PROGRAMS)'; for p in $$list; do \
 	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
@@ -627,9 +553,6 @@ clean-sbinPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-canon$(EXEEXT): $(canon_OBJECTS) $(canon_DEPENDENCIES) 
-	@rm -f canon$(EXEEXT)
-	$(LINK) $(canon_OBJECTS) $(canon_LDADD) $(LIBS)
 commandtocanon$(EXEEXT): $(commandtocanon_OBJECTS) $(commandtocanon_DEPENDENCIES) 
 	@rm -f commandtocanon$(EXEEXT)
 	$(LINK) $(commandtocanon_OBJECTS) $(commandtocanon_LDADD) $(LIBS)
@@ -642,9 +565,6 @@ cups-calibrate$(EXEEXT): $(cups_calibrate_OBJECTS) $(cups_calibrate_DEPENDENCIES
 cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT): $(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS) $(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_DEPENDENCIES) 
 	@rm -f cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT)
 	$(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LINK) $(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS) $(cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD) $(LIBS)
-epson$(EXEEXT): $(epson_OBJECTS) $(epson_DEPENDENCIES) 
-	@rm -f epson$(EXEEXT)
-	$(LINK) $(epson_OBJECTS) $(epson_LDADD) $(LIBS)
 gutenprint.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT): $(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS) $(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_DEPENDENCIES) 
 	@rm -f gutenprint.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@$(EXEEXT)
 	$(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LINK) $(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_OBJECTS) $(gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD) $(LIBS)
@@ -677,12 +597,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/canon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/commandtocanon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/commandtoepson.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cups-calibrate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@-genppd.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/epson.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@-genppd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rastertoprinter.Po@am__quote@
 
@@ -930,7 +848,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(PROGRAMS) $(SCRIPTS) $(DATA) all-local
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(cupsexec_backenddir)" "$(DESTDIR)$(cupsexec_driverdir)" "$(DESTDIR)$(cupsexec_filterdir)" "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(pkgsysconfdir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(cupsexec_driverdir)" "$(DESTDIR)$(cupsexec_filterdir)" "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(pkgdatadir)" "$(DESTDIR)$(pkgsysconfdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -962,10 +880,9 @@ maintainer-clean-generic:
 	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-cupsexec_backendPROGRAMS \
-	clean-cupsexec_driverPROGRAMS clean-cupsexec_filterPROGRAMS \
-	clean-generic clean-libtool clean-local clean-sbinPROGRAMS \
-	mostlyclean-am
+clean-am: clean-binPROGRAMS clean-cupsexec_driverPROGRAMS \
+	clean-cupsexec_filterPROGRAMS clean-generic clean-libtool \
+	clean-local clean-sbinPROGRAMS mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -990,8 +907,7 @@ install-data-am: install-data-local install-pkgdataDATA \
 
 install-dvi: install-dvi-am
 
-install-exec-am: install-binPROGRAMS install-cupsexec_backendPROGRAMS \
-	install-cupsexec_driverPROGRAMS \
+install-exec-am: install-binPROGRAMS install-cupsexec_driverPROGRAMS \
 	install-cupsexec_filterPROGRAMS install-sbinPROGRAMS \
 	install-sbinSCRIPTS
 
@@ -1025,8 +941,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-cupsexec_backendPROGRAMS \
-	uninstall-cupsexec_driverPROGRAMS \
+uninstall-am: uninstall-binPROGRAMS uninstall-cupsexec_driverPROGRAMS \
 	uninstall-cupsexec_filterPROGRAMS uninstall-local \
 	uninstall-pkgdataDATA uninstall-pkgsysconfDATA \
 	uninstall-sbinPROGRAMS uninstall-sbinSCRIPTS
@@ -1034,13 +949,12 @@ uninstall-am: uninstall-binPROGRAMS uninstall-cupsexec_backendPROGRAMS \
 .MAKE: install-am install-data-am install-strip
 
 .PHONY: CTAGS GTAGS all all-am all-local check check-TESTS check-am \
-	clean clean-binPROGRAMS clean-cupsexec_backendPROGRAMS \
-	clean-cupsexec_driverPROGRAMS clean-cupsexec_filterPROGRAMS \
-	clean-generic clean-libtool clean-local clean-sbinPROGRAMS \
-	ctags dist-hook distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-cupsexec_backendPROGRAMS \
+	clean clean-binPROGRAMS clean-cupsexec_driverPROGRAMS \
+	clean-cupsexec_filterPROGRAMS clean-generic clean-libtool \
+	clean-local clean-sbinPROGRAMS ctags dist-hook distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS \
 	install-cupsexec_driverPROGRAMS \
 	install-cupsexec_filterPROGRAMS install-data install-data-am \
 	install-data-hook install-data-local install-dvi \
@@ -1053,7 +967,6 @@ uninstall-am: uninstall-binPROGRAMS uninstall-cupsexec_backendPROGRAMS \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am uninstall-binPROGRAMS \
-	uninstall-cupsexec_backendPROGRAMS \
 	uninstall-cupsexec_driverPROGRAMS \
 	uninstall-cupsexec_filterPROGRAMS uninstall-local \
 	uninstall-pkgdataDATA uninstall-pkgsysconfDATA \
@@ -1075,11 +988,6 @@ $(top_builddir)/src/gutenprintui/libgutenprintui.la:
 $(top_builddir)/src/gutenprintui2/libgutenprintui2.la:
 	cd $(top_builddir)/src/gutenprintui2; \
 	$(MAKE)
-
-cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@: $(top_builddir)/config.status cups-genppdconfig.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/cups-genppdconfig
-cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@: $(top_builddir)/config.status cups-genppdupdate.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/cups-genppdupdate
 
 install-data-local: $(INSTALL_DATA_LOCAL_DEPS)
 	if test -n "$(CUPS_PKG)" -a -n "$(INSTALL_DATA_LOCAL_DEPS)" ; then \
@@ -1110,7 +1018,6 @@ install-data-hook:
 	-@echo 'These messages are harmless and should be ignored.'
 	-rmdir $(DESTDIR)$(cups_modeldir)
 	-rmdir $(DESTDIR)$(pkgdatadir)
-	-rmdir $(DESTDIR)$(cupsexec_backenddir)
 	-rmdir $(DESTDIR)$(cupsexec_driverdir)
 	-rmdir $(DESTDIR)$(cupsexec_filterdir)
 	-rmdir $(DESTDIR)$(bindir)
@@ -1126,7 +1033,7 @@ all-local: $(INSTALL_DATA_LOCAL_DEPS)
 
 ppd: ppd-stamp
 
-ppd-stamp: cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
+ppd-stamp: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
 	$(MAKE) ppd-stamp-phony
 	touch ppd-stamp
 

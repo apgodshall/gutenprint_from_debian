@@ -1383,5 +1383,5 @@ stp_fill_parameter_settings(stp_parameter_t *desc,
 
 #endif /* GUTENPRINT_VARS_H */
 /*
- * End of "$Id: vars.h,v 1.3.8.1 2007/03/02 12:01:14 rlk Exp $".
+ * End of "$Id: vars.h,v 1.4 2007/01/23 01:18:16 rlk Exp $".
  */

@@ -25,14 +25,13 @@ endif
 
 # Get upstream version, and define libgutenprint suffix
 UPSTREAM_VERSION = $(shell dpkg-parsechangelog | grep ^Version | sed "s/.* //" | sed "s/-[^-]*$$//")
-#UPSTREAM_VERSION = 5.0.0
+#UPSTREAM_VERSION = 5.1.0
 UPSTREAM_VERSION_COMPACT = $(shell echo '$(UPSTREAM_VERSION)' | sed "s/\(.*\..*\)\..*/\1/"
 #LIBRARY_VERSION =  -$(UPSTREAM_VERSION)
 LIBRARY_VERSION = 2
 LIBRARYUI_VERSION = 1
 
-GENERATED_FILES = \
-	debian/libgutenprint2.install
+GENERATED_FILES =
 
 autoconfigure: autoconfigure-stamp
 autoconfigure-stamp: debian/control $(GENERATED_FILES)
@@ -114,13 +113,10 @@ binary-arch: build install
 	dh_testdir -a
 	dh_testroot -a
 	dh_installdocs -a
-	  cp src/cups/README debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint/README.cups
-	  mv debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppd.8 debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppd.5.0.8
-	  mv debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppdconfig.8 debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppdconfig.5.0.8
-	  mv debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppdupdate.8 debian/cups-driver-gutenprint/usr/share/man/man8/cups-genppdupdate.5.0.8
-	  mv debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1 debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.5.0.1
-	  ln -s ijsgutenprint.5.0.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
-	  ln -s ijsgutenprint.5.0 debian/ijsgutenprint/usr/bin/ijsgutenprint
+	  cp src/cups/README debian/cupsys-driver-gutenprint/usr/share/doc/cupsys-driver-gutenprint/README.cups
+	  mv debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1 debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.5.1.1
+	  ln -s ijsgutenprint.5.1.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
+	  ln -s ijsgutenprint.5.1 debian/ijsgutenprint/usr/bin/ijsgutenprint
 	dh_installexamples -a
 	dh_installchangelogs -a NEWS
 	dh_strip -a
@@ -128,8 +124,7 @@ binary-arch: build install
 	dh_compress -a -X.pdf -X.odt
 	dh_fixperms -a
 # Strip DT_RPATH from CUPS binaries.
-	find debian/cups-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
-	chrpath --delete debian/cups-driver-gutenprint/usr/sbin/cups-genppd.5.0
+	find debian/cupsys-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
 	dh_makeshlibs -a -V -X usr/lib/gutenprint
 	dh_installdeb -a
 	dh_shlibdeps -a -X usr/lib/gutenprint -l$(CURDIR)/debian/libgutenprint$(LIBRARY_VERSION)/usr/lib:$(CURDIR)/debian/libgutenprintui2-$(LIBRARYUI_VERSION)/usr/lib
@@ -142,9 +137,6 @@ binary: binary-indep binary-arch
 SEDPATTERN = -e "s/\#UPSTREAM_VERSION\#/$(UPSTREAM_VERSION)/g" -e "s/\#LIBRARY_VERSION\#/$(LIBRARY_VERSION)/g" -e "s/\#LIBRARYUI_VERSION\#/$(LIBRARYUI_VERSION)/g"
 
 debian/control: debian/control.in debian/changelog debian/rules
-	sed $(SEDPATTERN) <$< >$@
-
-debian/libgutenprint2.install: debian/libgutenprint2.install.in debian/changelog
 	sed $(SEDPATTERN) <$< >$@
 
 .PHONY: build clean binary-indep binary-arch binary install autoconfigure patch unpatch

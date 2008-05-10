@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.19.6.1 2007/03/02 12:01:12 rlk Exp $
+## $Id: Makefile.am,v 1.22 2008/02/27 12:28:06 rlk Exp $
 ## Copyright (C) 2001 Andy Stewart and Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -85,6 +85,10 @@ docs: html pdf
 pdf: gutenprint.pdf
 
 gutenprint.pdf:  $(MANUAL_SRC_FILES)
+	@if [ -z "$(DB2PDF)" ] ; then \
+	  echo "No db2pdf: cannot build documentation!"; \
+	  exit 1; \
+	fi
 	if test $(srcdir) = '.' ; then \
 	  : ; \
 	else \
@@ -104,6 +108,10 @@ html: html-stamp
 # html-stamp should *only* be called by html--it's just a timestamp!
 
 html-stamp: $(MANUAL_SRC_FILES)
+	@if [ -z "$(DB2HTML)" ] ; then \
+	  echo "No db2html: cannot build documentation!"; \
+	  exit 1; \
+	fi
 	if test $(srcdir) = '.' ; then \
 	  : ; \
 	else \

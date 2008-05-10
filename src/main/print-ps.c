@@ -1,5 +1,5 @@
 /*
- * "$Id: print-ps.c,v 1.87.8.2 2007/12/15 20:35:49 rlk Exp $"
+ * "$Id: print-ps.c,v 1.99 2007/12/24 03:05:52 rlk Exp $"
  *
  *   Print plug-in Adobe PostScript driver for the GIMP.
  *
@@ -39,6 +39,8 @@
 #include <limits.h>
 #endif
 #include <stdio.h>
+#include <unistd.h>
+#include "xmlppd.h"
 
 #ifdef _MSC_VER
 #define strncasecmp(s,t,n) _strnicmp(s,t,n)
@@ -49,8 +51,8 @@
  * Local variables...
  */
 
-static FILE	*ps_ppd = NULL;
-static const char	*ps_ppd_file = NULL;
+static char *m_ppd_file = NULL;
+static stp_mxml_node_t *m_ppd = NULL;
 
 
 /*
@@ -59,45 +61,20 @@ static const char	*ps_ppd_file = NULL;
 
 static void	ps_hex(const stp_vars_t *, unsigned short *, int);
 static void	ps_ascii85(const stp_vars_t *, unsigned short *, int, int);
-static char	*ppd_find(const char *, const char *, const char *, int *);
 
 static const stp_parameter_t the_parameters[] =
 {
-  {
-    "PageSize", N_("Page Size"), N_("Basic Printer Setup"),
-    N_("Size of the paper being printed to"),
-    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
-  },
-  {
-    "MediaType", N_("Media Type"), N_("Basic Printer Setup"),
-    N_("Type of media (plain paper, photo paper, etc.)"),
-    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
-  },
-  {
-    "InputSlot", N_("Media Source"), N_("Basic Printer Setup"),
-    N_("Source (input slot) of the media"),
-    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
-  },
-  {
-    "Resolution", N_("Resolution"), N_("Basic Printer Setup"),
-    N_("Resolution and quality of the print"),
-    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
-  },
-  {
-    "InkType", N_("Ink Type"), N_("Advanced Printer Setup"),
-    N_("Type of ink in the printer"),
-    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
-  },
   {
     "PPDFile", N_("PPDFile"), N_("Basic Printer Setup"),
     N_("PPD File"),
     STP_PARAMETER_TYPE_FILE, STP_PARAMETER_CLASS_FEATURE,
     STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+  },
+  {
+    "ModelName", N_("Model Name"), N_("Basic Printer Setup"),
+    N_("PPD File Model Name"),
+    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
+    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, -1, 0, 0
   },
   {
     "PrintingMode", N_("Printing Mode"), N_("Core Parameter"),
@@ -110,17 +87,176 @@ static const stp_parameter_t the_parameters[] =
 static const int the_parameter_count =
 sizeof(the_parameters) / sizeof(const stp_parameter_t);
 
+static int
+ps_option_to_param(stp_parameter_t *param, stp_mxml_node_t *option)
+{
+  const char *group_text = stp_mxmlElementGetAttr(option, "grouptext");
+
+  if (group_text != NULL)
+    param->category = group_text;
+  else
+    param->category = NULL;
+
+  param->text = stp_mxmlElementGetAttr(option, "text");
+  param->help = stp_mxmlElementGetAttr(option, "text");
+  if (stp_mxmlElementGetAttr(option, "stptype"))
+    {
+      const char *default_value = stp_mxmlElementGetAttr(option, "default");
+      double stp_default_value = strtod(stp_mxmlElementGetAttr(option, "stpdefault"), 0);
+      double lower_bound = strtod(stp_mxmlElementGetAttr(option, "stplower"), NULL);
+      double upper_bound = strtod(stp_mxmlElementGetAttr(option, "stpupper"), NULL);
+      param->p_type = atoi(stp_mxmlElementGetAttr(option, "stptype"));
+      param->is_mandatory = atoi(stp_mxmlElementGetAttr(option, "stpmandatory"));
+      param->p_class = atoi(stp_mxmlElementGetAttr(option, "stpclass"));
+      param->p_level = atoi(stp_mxmlElementGetAttr(option, "stplevel"));
+      param->channel = (unsigned char) atoi(stp_mxmlElementGetAttr(option, "stpchannel"));
+      param->read_only = 0;
+      param->is_active = 1;
+      param->verify_this_parameter = 1;
+      param->name = stp_mxmlElementGetAttr(option, "stpname");
+      stp_deprintf(STP_DBG_PS,
+		   "Gutenprint parameter %s type %d mandatory %d class %d level %d channel %d default %s %f",
+		   param->name, param->p_type, param->is_mandatory,
+		   param->p_class, param->p_level, param->channel,
+		   default_value, stp_default_value);
+      switch (param->p_type)
+	{
+	case STP_PARAMETER_TYPE_DOUBLE:
+	  param->deflt.dbl = stp_default_value;
+	  param->bounds.dbl.upper = upper_bound;
+	  param->bounds.dbl.lower = lower_bound;
+	  stp_deprintf(STP_DBG_PS, " %.3f %.3f %.3f\n",
+		       param->deflt.dbl, param->bounds.dbl.upper,
+		       param->bounds.dbl.lower);
+	  break;
+	case STP_PARAMETER_TYPE_DIMENSION:
+	  param->deflt.dimension = atoi(default_value);
+	  param->bounds.dimension.upper = (int) upper_bound;
+	  param->bounds.dimension.lower = (int) lower_bound;
+	  stp_deprintf(STP_DBG_PS, " %d %d %d\n",
+		       param->deflt.dimension, param->bounds.dimension.upper,
+		       param->bounds.dimension.lower);
+	  break;
+	case STP_PARAMETER_TYPE_INT:
+	  param->deflt.integer = atoi(default_value);
+	  param->bounds.integer.upper = (int) upper_bound;
+	  param->bounds.integer.lower = (int) lower_bound;
+	  stp_deprintf(STP_DBG_PS, " %d %d %d\n",
+		       param->deflt.integer, param->bounds.integer.upper,
+		       param->bounds.integer.lower);
+	  break;
+	case STP_PARAMETER_TYPE_BOOLEAN:
+	  param->deflt.boolean = strcasecmp(default_value, "true") == 0 ? 1 : 0;
+	  stp_deprintf(STP_DBG_PS, " %d\n", param->deflt.boolean);
+	  break;
+	default:
+	  stp_deprintf(STP_DBG_PS, "\n");
+	  break;
+	}
+    }
+  else
+    {
+      const char *ui = stp_mxmlElementGetAttr(option, "ui");
+      param->name = stp_mxmlElementGetAttr(option, "name");
+      if (strcasecmp(ui, "Boolean") == 0)
+	param->p_type = STP_PARAMETER_TYPE_BOOLEAN;
+      else
+	param->p_type = STP_PARAMETER_TYPE_STRING_LIST;
+      if (strcmp(param->name, "PageSize") == 0)
+	param->p_class = STP_PARAMETER_CLASS_CORE;
+      else
+	param->p_class = STP_PARAMETER_CLASS_FEATURE;
+      param->p_level = STP_PARAMETER_LEVEL_BASIC;
+      param->is_mandatory = 1;
+      param->is_active = 1;
+      param->channel = -1;
+      param->verify_this_parameter = 1;
+      param->read_only = 0;
+    }
+
+  return 0;
+}
+
 /*
  * 'ps_parameters()' - Return the parameter values for the given parameter.
  */
+
+static int
+check_ppd_file(const stp_vars_t *v)
+{
+  const char *ppd_file = stp_get_file_parameter(v, "PPDFile");
+
+  if (ppd_file == NULL || ppd_file[0] == 0)
+    {
+      stp_dprintf(STP_DBG_PS, v, "Empty PPD file\n");
+      return 0;
+    }
+  else if (m_ppd_file && strcmp(m_ppd_file, ppd_file) == 0)
+    {
+      stp_dprintf(STP_DBG_PS, v, "Not replacing PPD file %s\n", m_ppd_file);
+      return 1;
+    }
+  else
+    {
+      stp_dprintf(STP_DBG_PS, v, "Replacing PPD file %s with %s\n",
+		  m_ppd_file ? m_ppd_file : "(null)",
+		  ppd_file ? ppd_file : "(null)");
+      if (m_ppd != NULL)
+	stp_mxmlDelete(m_ppd);
+      m_ppd = NULL;
+
+      if (m_ppd_file)
+	stp_free(m_ppd_file);
+      m_ppd_file = NULL;
+
+      if ((m_ppd = stpi_xmlppd_read_ppd_file(ppd_file)) == NULL)
+	{
+	  stp_eprintf(v, "Unable to open PPD file %s\n", ppd_file);
+	  return 0;
+	}
+
+      m_ppd_file = stp_strdup(ppd_file);
+      return 1;
+    }
+}    
+  
 
 static stp_parameter_list_t
 ps_list_parameters(const stp_vars_t *v)
 {
   stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_mxml_node_t *option;
   int i;
+  int status = check_ppd_file(v);
+  stp_dprintf(STP_DBG_PS, v, "Adding parameters from %s\n",
+	      m_ppd_file ? m_ppd_file : "(null)");
+
   for (i = 0; i < the_parameter_count; i++)
     stp_parameter_list_add_param(ret, &(the_parameters[i]));
+
+  if (status)
+    {
+      int num_options = stpi_xmlppd_find_option_count(m_ppd);
+      for (i=0; i < num_options; i++)
+	{
+	  /* MEMORY LEAK!!! */
+	  stp_parameter_t *param = stp_malloc(sizeof(stp_parameter_t));
+	  option = stpi_xmlppd_find_option_index(m_ppd, i);
+	  if (option)
+	    {
+	      ps_option_to_param(param, option);
+	      if (param->p_type != STP_PARAMETER_TYPE_INVALID &&
+		  strcmp(param->name, "PageRegion") != 0)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding parameter %s %s\n",
+			      param->name, param->text);
+		  stp_parameter_list_add_param(ret, param);
+		}
+	      else
+		stp_free(param);
+	    }
+	}
+    }
   return ret;
 }
 
@@ -129,103 +265,116 @@ ps_parameters_internal(const stp_vars_t *v, const char *name,
 		       stp_parameter_t *description)
 {
   int		i;
-  char		line[1024],
-		lname[255],
-		loption[255],
-		*ltext;
-  const char *ppd_file = stp_get_file_parameter(v, "PPDFile");
+  stp_mxml_node_t *option;
+  int status = 0;
+  int num_choices;
+  const char *defchoice;
+
   description->p_type = STP_PARAMETER_TYPE_INVALID;
   description->deflt.str = 0;
+  description->is_active = 0;
 
   if (name == NULL)
     return;
 
-  if (ppd_file != NULL && strlen(ppd_file) > 0 &&
-      (ps_ppd_file == NULL || strcmp(ps_ppd_file, ppd_file) != 0))
-  {
-    if (ps_ppd != NULL)
-      fclose(ps_ppd);
-
-    ps_ppd = fopen(ppd_file, "r");
-
-    if (ps_ppd == NULL)
-      ps_ppd_file = NULL;
-    else
-      ps_ppd_file = ppd_file;
-  }
+  status = check_ppd_file(v);
 
   for (i = 0; i < the_parameter_count; i++)
+  {
     if (strcmp(name, the_parameters[i].name) == 0)
       {
 	stp_fill_parameter_settings(description, &(the_parameters[i]));
-	break;
-      }
-  if (strcmp(name, "PPDFile") == 0)
-    return;
-
-  if (strcmp(name, "PrintingMode") == 0)
-    {
-      description->bounds.str = stp_string_list_create();
-      stp_string_list_add_string
-	(description->bounds.str, "Color", _("Color"));
-      stp_string_list_add_string
-	(description->bounds.str, "BW", _("Black and White"));
-      description->deflt.str =
-	stp_string_list_param(description->bounds.str, 0)->name;
-      return;
-    }
-
-  if (ps_ppd == NULL)
-    {
-      if (strcmp(name, "PageSize") == 0)
-	{
-	  int papersizes = stp_known_papersizes();
-	  description->bounds.str = stp_string_list_create();
-	  for (i = 0; i < papersizes; i++)
-	    {
-	      const stp_papersize_t *pt = stp_get_papersize_by_index(i);
-	      if (strlen(pt->name) > 0)
-		stp_string_list_add_string
-		  (description->bounds.str, pt->name, gettext(pt->text));
-	    }
-	  description->deflt.str =
-	    stp_string_list_param(description->bounds.str, 0)->name;
+	if (strcmp(name, "PPDFile") == 0)
 	  description->is_active = 1;
-	}
-      else if (strcmp(name, "PPDFile") == 0)
-	description->is_active = 1;
-      else
-	description->is_active = 0;
-      return;
-    }
-
-  rewind(ps_ppd);
-  description->bounds.str = stp_string_list_create();
-
-  while (fgets(line, sizeof(line), ps_ppd) != NULL)
-  {
-    if (line[0] != '*')
-      continue;
-
-    if (sscanf(line, "*%s %[^:]", lname, loption) != 2)
-      continue;
-
-    if (strcasecmp(lname, name) == 0)
-    {
-      if ((ltext = strchr(loption, '/')) != NULL)
-        *ltext++ = '\0';
-      else
-        ltext = loption;
-
-      stp_string_list_add_string(description->bounds.str, loption, ltext);
-    }
+	else if (strcmp(name, "ModelName") == 0)
+	  {
+	    if (m_ppd && stp_mxmlElementGetAttr(m_ppd, "nickname"))
+	      {
+		const char *nickname = stp_mxmlElementGetAttr(m_ppd, "nickname");
+		description->bounds.str = stp_string_list_create();
+		stp_string_list_add_string(description->bounds.str,
+					   nickname, nickname);
+		description->deflt.str = nickname;
+		description->is_active = status;
+	      }
+	    else
+	      description->is_active = 0;
+	    return;
+	  }
+	else if (strcmp(name, "PrintingMode") == 0)
+	  {
+	    if (! m_ppd || strcmp(stp_mxmlElementGetAttr(m_ppd, "color"), "1") == 0)
+	      {
+		description->bounds.str = stp_string_list_create();
+		stp_string_list_add_string
+		  (description->bounds.str, "Color", _("Color"));
+		stp_string_list_add_string
+		  (description->bounds.str, "BW", _("Black and White"));
+		description->deflt.str =
+		  stp_string_list_param(description->bounds.str, 0)->name;
+		description->is_active = 1;
+	      }
+	    else
+	      description->is_active = 0;
+	    return;
+	  }
+      }
   }
 
+  if (!status)
+    return;
+  if ((option = stpi_xmlppd_find_option_named(m_ppd, name)) == NULL)
+  {
+    char *tmp = stp_malloc(strlen(name) + 4);
+    strcpy(tmp, "Stp");
+    strncat(tmp, name, strlen(name) + 3);
+    if ((option = stpi_xmlppd_find_option_named(m_ppd, tmp)) == NULL)
+      {
+	stp_dprintf(STP_DBG_PS, v, "no parameter %s", name);
+	stp_free(tmp);
+	return;
+      }
+    stp_free(tmp);
+  }
+
+  ps_option_to_param(description, option);
+  if (description->p_type != STP_PARAMETER_TYPE_STRING_LIST)
+    return;
+  num_choices = atoi(stp_mxmlElementGetAttr(option, "num_choices"));
+  defchoice = stp_mxmlElementGetAttr(option, "default");
+  description->bounds.str = stp_string_list_create();
+
+  stp_dprintf(STP_DBG_PS, v, "describe parameter %s, output name=[%s] text=[%s] category=[%s] choices=[%d] default=[%s]\n",
+	      name, description->name, description->text,
+	      description->category, num_choices, defchoice);
+
+  /* Describe all choices for specified option. */
+  for (i=0; i < num_choices; i++)
+  {
+    stp_mxml_node_t *choice = stpi_xmlppd_find_choice_index(option, i);
+    const char *choice_name = stp_mxmlElementGetAttr(choice, "name");
+    const char *choice_text = stp_mxmlElementGetAttr(choice, "text");
+    stp_string_list_add_string(description->bounds.str, choice_name, choice_text);
+    stp_dprintf(STP_DBG_PS, v, "    parameter %s, choice %d [%s] [%s]",
+		name, i, choice_name, choice_text);
+    if (strcmp(choice_name, defchoice) == 0)
+      {
+	stp_dprintf(STP_DBG_PS, v,
+		    "        parameter %s, choice %d [%s] DEFAULT\n",
+		    name, i, choice_name);
+	description->deflt.str = choice_name;
+      }
+  }
+
+  if (!description->deflt.str)
+    {
+	stp_dprintf(STP_DBG_PS, v,
+		    "        parameter %s, defaulting to [%s]",
+		    name, stp_string_list_param(description->bounds.str, 0)->name);
+	description->deflt.str = stp_string_list_param(description->bounds.str, 0)->name;
+    }
   if (stp_string_list_count(description->bounds.str) > 0)
-    description->deflt.str =
-      stp_string_list_param(description->bounds.str, 0)->name;
-  else
-    description->is_active = 0;
+    description->is_active = 1;
   return;
 }
 
@@ -253,29 +402,35 @@ ps_media_size_internal(const stp_vars_t *v,		/* I */
 		       int  *width,		/* O - Width in points */
 		       int  *height)		/* O - Height in points */
 {
-  char	*dimensions;			/* Dimensions of media size */
   const char *pagesize = stp_get_string_parameter(v, "PageSize");
-  const char *ppd_file_name = stp_get_file_parameter(v, "PPDFile");
-  float fwidth, fheight;
+  int status = check_ppd_file(v);
   if (!pagesize)
     pagesize = "";
 
   stp_dprintf(STP_DBG_PS, v,
 	      "ps_media_size(%d, \'%s\', \'%s\', %p, %p)\n",
-	      stp_get_model_id(v), ppd_file_name, pagesize,
+	      stp_get_model_id(v), m_ppd_file, pagesize,
 	      (void *) width, (void *) height);
 
-  if ((dimensions = ppd_find(ppd_file_name, "PaperDimension", pagesize, NULL))
-      != NULL)
+  stp_default_media_size(v, width, height);
+
+  if (status)
     {
-      sscanf(dimensions, "%f%f", &fwidth, &fheight);
-      *width = (int) fwidth;
-      *height = (int) fheight;
-      stp_dprintf(STP_DBG_PS, v, "dimensions '%s' %f %f %d %d\n",
-		  dimensions, fwidth, fheight, *width, *height);
+      stp_mxml_node_t *paper = stpi_xmlppd_find_page_size(m_ppd, pagesize);
+      if (paper)
+	{
+	  *width = atoi(stp_mxmlElementGetAttr(paper, "width"));
+	  *height = atoi(stp_mxmlElementGetAttr(paper, "height"));
+	}
+      else
+	{
+	  *width = 0;
+	  *height = 0;
+	}
     }
-  else
-    stp_default_media_size(v, width, height);
+
+  stp_dprintf(STP_DBG_PS, v, "dimensions %d %d\n", *width, *height);
+  return;
 }
 
 static void
@@ -304,55 +459,55 @@ ps_imageable_area_internal(const stp_vars_t *v,      /* I */
 			   int  *bottom, /* O - Bottom position in points */
 			   int  *top)	/* O - Top position in points */
 {
-  char	*area;				/* Imageable area of media */
-  float	fleft,				/* Floating point versions */
-	fright,
-	fbottom,
-	ftop;
   int width, height;
   const char *pagesize = stp_get_string_parameter(v, "PageSize");
   if (!pagesize)
     pagesize = "";
-  ps_media_size(v, &width, &height);
 
-  if ((area = ppd_find(stp_get_file_parameter(v, "PPDFile"),
-		       "ImageableArea", pagesize, NULL))
-      != NULL)
+  /* Set some defaults. */
+  ps_media_size_internal(v, &width, &height);
+  *left   = 0;
+  *right  = width;
+  *top    = 0;
+  *bottom = height;
+
+  if (check_ppd_file(v))
     {
-      int status = sscanf(area, "%f%f%f%f", &fleft, &fbottom, &fright, &ftop);
-      stp_dprintf(STP_DBG_PS, v,
-		  "area = \'%s\' status = %d l %f r %f b %f t %f h %d w %d\n",
-		  area, status, fleft, fright, fbottom, ftop, width, height);
-      if (status)
+      stp_mxml_node_t *paper = stpi_xmlppd_find_page_size(m_ppd, pagesize);
+      if (paper)
 	{
-	  *left   = (int) ceil((double) fleft);
-	  *right  = (int) floor((double) fright);
-	  *bottom = (int) floor((double) height - fbottom);
-	  *top    = (int) ceil((double) height - ftop);
-	  if (use_max_area)
-	    {
-	      if (*left > 0)
-		*left = 0;
-	      if (*right < width)
-		*right = width;
-	      if (*top > 0)
-		*top = 0;
-	      if (*bottom < height)
-		*bottom = height;
-	    }
+	  double pleft = atoi(stp_mxmlElementGetAttr(paper, "left"));
+	  double pright = atoi(stp_mxmlElementGetAttr(paper, "right"));
+	  double ptop = atoi(stp_mxmlElementGetAttr(paper, "top"));
+	  double pbottom = atoi(stp_mxmlElementGetAttr(paper, "bottom"));
+	  stp_dprintf(STP_DBG_PS, v, "size=l %f r %f b %f t %f h %d w %d\n",
+		      pleft, pright, pbottom, ptop, height, width);
+	  *left = (int) pleft;
+	  *right = (int) pright;
+	  *top = height - (int) ptop;
+	  *bottom = height - (int) pbottom;
+	  stp_dprintf(STP_DBG_PS, v, ">>>> l %d r %d b %d t %d h %d w %d\n",
+		      *left, *right, *bottom, *top, height, width);
 	}
-      else
-	*left = *right = *bottom = *top = 0;
-      stp_dprintf(STP_DBG_PS, v, "l %d r %d b %d t %d h %d w %d\n",
-		  *left, *right, *bottom, *top, width, height);
     }
-  else
-    {
-      *left   = 0;
-      *right  = width;
-      *top    = 0;
+
+  if (use_max_area)
+  {
+    if (*left > 0)
+      *left = 0;
+    if (*right < width)
+      *right = width;
+    if (*top > 0)
+      *top = 0;
+    if (*bottom < height)
       *bottom = height;
-    }
+  }
+
+  stp_dprintf(STP_DBG_PS, v, "pagesize %s max_area=%d l %d r %d b %d t %d h %d w %d\n",
+	      pagesize ? pagesize : "(null)",
+	      use_max_area, *left, *right, *bottom, *top, width, height);
+
+  return;
 }
 
 static void
@@ -449,6 +604,135 @@ ps_describe_output(const stp_vars_t *v)
     return "Whitescale";
 }
 
+static stp_string_list_t *
+ps_external_options(const stp_vars_t *v)
+{
+  stp_parameter_list_t param_list = ps_list_parameters(v);
+  stp_string_list_t *answer;
+  char *tmp;
+  char *ppd_name = NULL;
+  int i;
+#ifdef HAVE_LOCALE_H
+  char *locale;
+#endif
+  if (! param_list)
+    return NULL;
+  answer = stp_string_list_create();
+#ifdef HAVE_LOCALE_H
+  locale = stp_strdup(setlocale(LC_ALL, NULL));
+  setlocale(LC_ALL, "C");
+#endif
+  for (i = 0; i < stp_parameter_list_count(param_list); i++)
+    {
+      const stp_parameter_t *param = stp_parameter_list_param(param_list, i);
+      stp_parameter_t desc;
+      stp_describe_parameter(v, param->name, &desc);
+      if (desc.is_active)
+	{
+	  stp_mxml_node_t *option;
+	  if (m_ppd &&
+	      (option = stpi_xmlppd_find_option_named(m_ppd, desc.name)) == NULL)
+	    {
+	      ppd_name = stp_malloc(strlen(desc.name) + 4);
+	      strcpy(ppd_name, "Stp");
+	      strncat(ppd_name, desc.name, strlen(desc.name) + 3);
+	      if ((option = stpi_xmlppd_find_option_named(m_ppd, ppd_name)) == NULL)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "no parameter %s", desc.name);
+		  STP_SAFE_FREE(ppd_name);
+		}
+	    }
+	  switch (desc.p_type)
+	    {
+	    case STP_PARAMETER_TYPE_STRING_LIST:
+	      if (stp_get_string_parameter(v, desc.name) &&
+		  strcmp(stp_get_string_parameter(v, desc.name),
+			 desc.deflt.str))
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding string parameter %s (%s): %s %s\n",
+			      desc.name, ppd_name ? ppd_name : "(null)",
+			      stp_get_string_parameter(v, desc.name),
+			      desc.deflt.str);
+		  stp_string_list_add_string(answer,
+					     ppd_name ? ppd_name : desc.name,
+					     stp_get_string_parameter(v, desc.name));
+		}
+	      break;
+	    case STP_PARAMETER_TYPE_INT:
+	      if (stp_get_int_parameter(v, desc.name) != desc.deflt.integer)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding integer parameter %s (%s): %d %d\n",
+			      desc.name, ppd_name ? ppd_name : "(null)",
+			      stp_get_int_parameter(v, desc.name),
+			      desc.deflt.integer);
+		  stp_asprintf(&tmp, "%d", stp_get_int_parameter(v, desc.name));
+		  stp_string_list_add_string(answer,
+					     ppd_name ? ppd_name : desc.name,
+					     tmp);
+		  stp_free(tmp);
+		}
+	      break;
+	    case STP_PARAMETER_TYPE_BOOLEAN:
+	      if (stp_get_boolean_parameter(v, desc.name) != desc.deflt.boolean)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding boolean parameter %s (%s): %d %d\n",
+			      desc.name, ppd_name ? ppd_name : "(null)",
+			      stp_get_boolean_parameter(v, desc.name),
+			      desc.deflt.boolean);
+		  stp_asprintf(&tmp, "%s",
+			       stp_get_boolean_parameter(v, desc.name) ?
+			       "True" : "False");
+		  stp_string_list_add_string(answer,
+					     ppd_name ? ppd_name : desc.name,
+					     tmp);
+		  stp_free(tmp);
+		}
+	      break;
+	    case STP_PARAMETER_TYPE_DOUBLE:
+	      if (fabs(stp_get_float_parameter(v, desc.name) - desc.deflt.dbl) > .00001)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding float parameter %s (%s): %.3f %.3f\n",
+			      desc.name, ppd_name ? ppd_name : "(null)",
+			      stp_get_float_parameter(v, desc.name),
+			      desc.deflt.dbl);
+		  stp_asprintf(&tmp, "%.3f",
+			       stp_get_float_parameter(v, desc.name));
+		  stp_string_list_add_string(answer,
+					     ppd_name ? ppd_name : desc.name,
+					     tmp);
+		  stp_free(tmp);
+		}
+	      break;
+	    case STP_PARAMETER_TYPE_DIMENSION:
+	      if (stp_get_dimension_parameter(v, desc.name) !=
+		  desc.deflt.dimension)
+		{
+		  stp_dprintf(STP_DBG_PS, v, "Adding dimension parameter %s (%s): %d %d\n",
+			      desc.name, ppd_name ? ppd_name : "(null)",
+			      stp_get_dimension_parameter(v, desc.name),
+			      desc.deflt.dimension);
+		  stp_asprintf(&tmp, "%d",
+			       stp_get_dimension_parameter(v, desc.name));
+		  stp_string_list_add_string(answer,
+					     ppd_name ? ppd_name : desc.name,
+					     tmp);
+		  stp_free(tmp);
+		}
+	      break;
+	    default:
+	      break;
+	    }
+	  STP_SAFE_FREE(ppd_name);
+	}
+      stp_parameter_description_destroy(&desc);
+    }
+#ifdef HAVE_LOCALE_H
+  setlocale(LC_ALL, locale);
+  stp_free(locale);
+#endif
+  return answer;
+}
+
 /*
  * 'ps_print()' - Print an image to a PostScript printer.
  */
@@ -458,17 +742,11 @@ ps_print_internal(stp_vars_t *v, stp_image_t *image)
 {
   int		status = 1;
   int		model = stp_get_model_id(v);
-  const char	*ppd_file = stp_get_file_parameter(v, "PPDFile");
-  const char	*resolution = stp_get_string_parameter(v, "Resolution");
-  const char	*media_size = stp_get_string_parameter(v, "PageSize");
-  const char	*media_type = stp_get_string_parameter(v, "MediaType");
-  const char	*media_source = stp_get_string_parameter(v, "InputSlot");
   const char    *print_mode = stp_get_string_parameter(v, "PrintingMode");
   const char *input_image_type = stp_get_string_parameter(v, "InputImageType");
   unsigned short *out = NULL;
   int		top = stp_get_top(v);
   int		left = stp_get_left(v);
-  int		i, j;		/* Looping vars */
   int		y;		/* Looping vars */
   int		page_left,	/* Left margin of page */
 		page_right,	/* Right margin of page */
@@ -485,29 +763,10 @@ ps_print_internal(stp_vars_t *v, stp_image_t *image)
 		out_offset;	/* Output offset (Level 2 output) */
   time_t	curtime;	/* Current time of day */
   unsigned	zero_mask;
-  char		*command;	/* PostScript command */
-  const char	*temp;		/* Temporary string pointer */
-  int		order,		/* Order of command */
-		num_commands;	/* Number of commands */
-  struct			/* PostScript commands... */
-  {
-    const char	*keyword, *choice;
-    char	*command;
-    int		order;
-  }		commands[4];
   int           image_height,
 		image_width;
   int		color_out = 0;
   int		cmyk_out = 0;
-
-  if (!resolution)
-    resolution = "";
-  if (!media_size)
-    media_size = "";
-  if (!media_type)
-    media_type = "";
-  if (!media_source)
-    media_source = "";
 
   if (print_mode && strcmp(print_mode, "Color") == 0)
     color_out = 1;
@@ -571,104 +830,10 @@ ps_print_internal(stp_vars_t *v, stp_image_t *image)
   stp_puts("%%Orientation: Portrait\n", v);
   stp_puts("%%EndComments\n", v);
 
- /*
-  * Find any printer-specific commands...
-  */
-
-  num_commands = 0;
-
-  if ((command = ppd_find(ppd_file, "PageSize", media_size, &order)) != NULL)
-  {
-    commands[num_commands].keyword = "PageSize";
-    commands[num_commands].choice  = media_size;
-    commands[num_commands].command = stp_malloc(strlen(command) + 1);
-    strcpy(commands[num_commands].command, command);
-    commands[num_commands].order   = order;
-    num_commands ++;
-  }
-
-  if ((command = ppd_find(ppd_file, "InputSlot", media_source, &order)) != NULL)
-  {
-    commands[num_commands].keyword = "InputSlot";
-    commands[num_commands].choice  = media_source;
-    commands[num_commands].command = stp_malloc(strlen(command) + 1);
-    strcpy(commands[num_commands].command, command);
-    commands[num_commands].order   = order;
-    num_commands ++;
-  }
-
-  if ((command = ppd_find(ppd_file, "MediaType", media_type, &order)) != NULL)
-  {
-    commands[num_commands].keyword = "MediaType";
-    commands[num_commands].choice  = media_type;
-    commands[num_commands].command = stp_malloc(strlen(command) + 1);
-    strcpy(commands[num_commands].command, command);
-    commands[num_commands].order   = order;
-    num_commands ++;
-  }
-
-  if ((command = ppd_find(ppd_file, "Resolution", resolution, &order)) != NULL)
-  {
-    commands[num_commands].keyword = "Resolution";
-    commands[num_commands].choice  = resolution;
-    commands[num_commands].command = stp_malloc(strlen(command) + 1);
-    strcpy(commands[num_commands].command, command);
-    commands[num_commands].order   = order;
-    num_commands ++;
-  }
-
- /*
-  * Sort the commands using the OrderDependency value...
-  */
-
-  for (i = 0; i < (num_commands - 1); i ++)
-    for (j = i + 1; j < num_commands; j ++)
-      if (commands[j].order < commands[i].order)
-      {
-        temp                = commands[i].keyword;
-        commands[i].keyword = commands[j].keyword;
-        commands[j].keyword = temp;
-
-        temp                = commands[i].choice;
-        commands[i].choice  = commands[j].choice;
-        commands[j].choice  = temp;
-
-        order               = commands[i].order;
-        commands[i].order   = commands[j].order;
-        commands[j].order   = order;
-
-        command             = commands[i].command;
-        commands[i].command = commands[j].command;
-        commands[j].command = command;
-      }
-
- /*
-  * Send the commands...
-  */
-
-  if (num_commands > 0)
-  {
-    stp_puts("%%BeginSetup\n", v);
-
-    for (i = 0; i < num_commands; i ++)
-    {
-      stp_puts("[{\n", v);
-      stp_zprintf(v, "%%%%BeginFeature: *%s %s\n", commands[i].keyword,
-                  commands[i].choice);
-      if (commands[i].command[0])
-      {
-	stp_puts(commands[i].command, v);
-	if (commands[i].command[strlen(commands[i].command) - 1] != '\n')
-          stp_puts("\n", v);
-      }
-
-      stp_puts("%%EndFeature\n", v);
-      stp_puts("} stopped cleartomark\n", v);
-      stp_free(commands[i].command);
-    }
-
-    stp_puts("%%EndSetup\n", v);
-  }
+#if 0
+  /* This is still not correct -- rlk 20070601 */
+  ps_print_device_settings(v);
+#endif
 
  /*
   * Output the page...
@@ -996,93 +1161,6 @@ ps_ascii85(const stp_vars_t *v,	/* I - File to print to */
 }
 
 
-/*
- * 'ppd_find()' - Find a control string with the specified name & parameters.
- */
-
-static char *			/* O - Control string */
-ppd_find(const char *ppd_file,	/* I - Name of PPD file */
-         const char *name,	/* I - Name of parameter */
-         const char *option,	/* I - Value of parameter */
-         int  *order)		/* O - Order of the control string */
-{
-  char		line[1024],	/* Line from file */
-		lname[255],	/* Name from line */
-		loption[255],	/* Value from line */
-		*opt;		/* Current control string pointer */
-  static char	*value = NULL;	/* Current control string value */
-
-
-  if (ppd_file == NULL || name == NULL || option == NULL)
-    return (NULL);
-  if (!value)
-    value = stp_zalloc(32768);
-
-  if (ps_ppd_file == NULL || strcmp(ps_ppd_file, ppd_file) != 0)
-  {
-    if (ps_ppd != NULL)
-      fclose(ps_ppd);
-
-    ps_ppd = fopen(ppd_file, "r");
-
-    if (ps_ppd == NULL)
-      ps_ppd_file = NULL;
-    else
-      ps_ppd_file = ppd_file;
-  }
-
-  if (ps_ppd == NULL)
-    return (NULL);
-
-  if (order != NULL)
-    *order = 1000;
-
-  rewind(ps_ppd);
-  while (fgets(line, sizeof(line), ps_ppd) != NULL)
-  {
-    if (line[0] != '*')
-      continue;
-
-    if (strncasecmp(line, "*OrderDependency:", 17) == 0 && order != NULL)
-    {
-      sscanf(line, "%*s%d", order);
-      continue;
-    }
-    else if (sscanf(line, "*%s %[^/:]", lname, loption) != 2)
-      continue;
-
-    if (strcasecmp(lname, name) == 0 &&
-        strcasecmp(loption, option) == 0)
-    {
-      opt = strchr(line, ':') + 1;
-      while (*opt == ' ' || *opt == '\t')
-        opt ++;
-      if (*opt != '\"')
-        continue;
-
-      strcpy(value, opt + 1);
-      if ((opt = strchr(value, '\"')) == NULL)
-      {
-        while (fgets(line, sizeof(line), ps_ppd) != NULL)
-        {
-          strcat(value, line);
-          if (strchr(line, '\"') != NULL)
-          {
-            strcpy(strchr(value, '\"'), "\n");
-            break;
-          }
-        }
-      }
-      else
-        *opt = '\0';
-
-      return (value);
-    }
-  }
-
-  return (NULL);
-}
-
 static const stp_printfuncs_t print_ps_printfuncs =
 {
   ps_list_parameters,
@@ -1097,7 +1175,7 @@ static const stp_printfuncs_t print_ps_printfuncs =
   stp_verify_printer_params,
   NULL,
   NULL,
-  NULL
+  ps_external_options
 };
 
 

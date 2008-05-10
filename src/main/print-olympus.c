@@ -1,5 +1,5 @@
 /*
- * "$Id: print-olympus.c,v 1.61.2.3 2007/12/29 20:42:28 rlk Exp $"
+ * "$Id: print-olympus.c,v 1.83 2007/12/27 20:34:28 rlk Exp $"
  *
  *   Print plug-in DyeSub driver (formerly Olympus driver) for the GIMP.
  *
@@ -38,8 +38,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <limits.h>
-
-#define STP_DBG_DYESUB STP_DBG_OLYMPUS
 
 #ifdef __GNUC__
 #define inline __inline__
@@ -2670,16 +2668,16 @@ print_dyesub_module_exit(void)
 
 
 /* Module header */
-#define stp_module_version print_olympus_LTX_stp_module_version
-#define stp_module_data print_olympus_LTX_stp_module_data
+#define stp_module_version print_dyesub_LTX_stp_module_version
+#define stp_module_data print_dyesub_LTX_stp_module_data
 
 stp_module_version_t stp_module_version = {0, 0};
 
 stp_module_t stp_module_data =
   {
-    "olympus",
+    "dyesub",
     VERSION,
-    "Olympus family driver",
+    "DyeSub family driver",
     STP_MODULE_CLASS_FAMILY,
     NULL,
     print_dyesub_module_init,

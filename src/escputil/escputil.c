@@ -1,5 +1,5 @@
 /*
- * "$Id: escputil.c,v 1.87.8.3 2007/12/29 20:42:25 rlk Exp $"
+ * "$Id: escputil.c,v 1.92 2007/12/26 18:13:02 rlk Exp $"
  *
  *   Printer maintenance utility for EPSON Stylus (R) printers
  *

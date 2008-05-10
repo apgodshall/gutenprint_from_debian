@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for cups-driver-gutenprint
+# postinst script for cupsys-driver-gutenprint
 #
 # see: dh_installdeb(1)
 
@@ -26,9 +26,9 @@ set -e
 
 if [ "$1" = "configure" ]; then
   # Upgrade in-use PPD files
-  /usr/sbin/cups-genppdupdate.5.0
+  /usr/sbin/cups-genppdupdate
   # Restart CUPSys (to register new and updated PPDs)
-  [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
+  [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 elif [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] || [ "$1" = "abort-deconfigure" ]; then
   :
 else

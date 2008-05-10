@@ -1,21 +1,26 @@
-Welcome to Gutenprint 5.0.2!  Please read these notes carefully.
+Welcome to Gutenprint 5.2.0-beta2!  Please read these notes carefully.
+
+*** NOTE TO PACKAGERS: This is a beta release of the forthcoming 5.2
+    stable release.  As of 5.2 and until further notice, Gutenprint
+    will no longer deliver separate "development" and "stable" release
+    series.
 
 ================================================================
 
 I) INTRODUCTION
 
-    This is Gutenprint version 5.0.2, a stable release of Gutenprint
-    5.0.  Gutenprint, formerly named Gimp-Print, is a suite of printer
-    drivers that may be used with most common UNIX print spooling
-    systems, including CUPS, lpr, LPRng, or others.  These drivers
-    provide high quality printing for UNIX (including Macintosh OS X
-    10.2 and newer) and Linux systems in many cases equal to or better
-    than proprietary vendor-supplied drivers.  Gutenprint also
-    includes an enhanced print plug-in for the GIMP image editor,
-    replacing the Gimp-Print 4.2-based plugin supplied with GIMP 1.2,
-    2.0, and 2.2, and offering an alternative with additional
-    capabilities to the GtkPrint-based plugin supplied with GIMP 2.4
-    and beyond.
+    This is Gutenprint version 5.2.0-beta2, a beta release of
+    Gutenprint 5.2.  Gutenprint, formerly named Gimp-Print, is a suite
+    of printer drivers that may be used with most common UNIX print
+    spooling systems, including CUPS, lpr, LPRng, or others.  These
+    drivers provide high quality printing for UNIX (including
+    Macintosh OS X 10.2 and newer) and Linux systems in many cases
+    equal to or better than proprietary vendor-supplied drivers.
+    Gutenprint also includes an enhanced print plug-in for the GIMP
+    image editor, replacing the Gimp-Print 4.2-based plugin supplied
+    with GIMP 1.2, 2.0, and 2.2, and offering an alternative with
+    additional capabilities to the GtkPrint-based plugin supplied with
+    GIMP 2.4 and beyond.
 
     Gutenprint has been renamed in order to clearly distinguish it
     from GIMP.  While this package started out as the Print plugin for
@@ -115,7 +120,7 @@ A) OVERVIEW
 	gimp-print-devel@lists.sourceforge.net
 
 	================================================================
-	  Release: gutenprint 5.0.2 generated on 29 Dec 2007
+	  Release: gutenprint 5.1.98.1 generated on 12 Apr 2008
 
 	  Features:
 	    Build CUPS:                                 yes, installing in /usr
@@ -127,9 +132,7 @@ A) OVERVIEW
 	    Build Foomatic data:                        yes
 		Build Foomatic 3.x data:                yes
 	    Build enhanced Print plugin for GIMP:       yes
-		Build GIMP 1.2 plugin:                  yes
-		Build GIMP 2.x plugin:                  yes
-		    GIMP 2.x plugin will be named:      gutenprint
+		GIMP plugin will be named:              gutenprint
 		Install plugin(s) in home directory:    no
 	    Build EPSON Stylus utility:                 yes
 	    Build test programs:                        yes
@@ -139,12 +142,12 @@ A) OVERVIEW
 	    Installation prefix:                        /usr/local
 	    Data directory:                             /usr/local/share/gutenprint
 	    Library directory:                          /usr/local/lib/gutenprint
-	    XML data directory:                         /usr/local/share/gutenprint/5.0.2/xml
-	    Module directory:                           /usr/local/lib/gutenprint/5.0.2/modules
+	    XML data directory:                         /usr/local/share/gutenprint/5.1/xml
+	    Module directory:                           /usr/local/lib/gutenprint/5.1/modules
 	    Install sample images:                      yes
 
 	General configuration:
-	    Compiler options:                           -Disfinite=finite  -O6  -Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -Wformat=2 -finline-limit=1048576 -pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls
+	    Compiler options:                           -Disfinite=finite  -O6  -Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -Wformat=2 -finline-limit=131072 -pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls
 	    Build static libraries:                     yes
 	    Build shared libraries:                     no
 	    Maintainer mode:                            yes
@@ -154,7 +157,6 @@ A) OVERVIEW
 	    Use modules:                                static
 	    Use readline libraries:                     yes, extra arguments: -lncurses
 	================================================================
-
 
     The CUPS, GIMP, Foomatic, and Ghostscript components require that
     the appropriate packages be installed on your system.  Many
@@ -195,14 +197,12 @@ B) CORE DRIVER LIBRARY
       There are a few third party applications that link against
       Gutenprint.
 
-    * Gutenprint permits installation of Gimp-Print 4.2 alongside
-      Gutenprint 5.0, and in the future will permit concurrent
-      installation of different stable versions of Gutenprint with
-      different minor version numbers.  Gutenprint uses the old-style
-      kernel numbering system, whereby even numbered minor versions
-      are stable (4.2, 5.0, 5.2) and odd numbered minor versions are
-      development (4.3, 5.1).  Therefore, you should consider allowing
-      Gutenprint 5.0 and Gimp-Print 4.2 to be installed concurrently.
+    * Gutenprint permits installation of Gimp-Print 4.2 and Gutenprint
+      5.0 alongside Gutenprint 5.2, and in the future will permit
+      concurrent installation of different stable versions of
+      Gutenprint with different minor version numbers.  Therefore, you
+      should consider allowing Gutenprint 5.0, Gutenprint 5.2, and
+      Gimp-Print 4.2 to be installed concurrently.
 
     * The core driver library component also includes locale files for
       the libary and documentation.
@@ -215,7 +215,7 @@ B) CUPS
     Gutenprint may be used as a driver under CUPS (Common UNIX
     Printing System), if your system uses that spooler.  Full
     description of CUPS is beyond the scope of this README file; full
-    information may be found at http://www.cups.org.  Gutenprint 5.0
+    information may be found at http://www.cups.org.  Gutenprint 5.2
     requires CUPS 1.1.9 or higher.  We recommend use of 1.1.15 or
     above; that release of CUPS fixes some important bugs.  Gutenprint
     supports CUPS 1.2, and supports the CUPS 1.2 enhancements,
@@ -233,13 +233,13 @@ B) CUPS
     (openssl-devel) will be required.  Failure to install these
     packages will lead to errors when the package is compiled.
 
-    Installing the CUPS driver for Gutenprint 5.0 will not interfere
-    with your ability to continue using the Gimp-Print 4.2 CUPS
-    driver.
+    Installing the CUPS driver for Gutenprint 5.2 will not interfere
+    with your ability to continue using the Gutenprint 5.0 or
+    Gimp-Print 4.2 CUPS driver.
 
     The Gutenprint CUPS driver consists of the following components:
 
-    * The core Gutenprint CUPS driver, rastertogutenprint.5.0.  This
+    * The core Gutenprint CUPS driver, rastertogutenprint.5.2.  This
       is a CUPS filter that converts CUPS raster data into
       printer-specific data.  This is most commonly installed in
       /usr/lib/cups/filter.
@@ -256,16 +256,25 @@ B) CUPS
       /usr/share/cups/model/gutenprint.  These PPD files can only be
       used by the precise version of Gutenprint that they were built
       with; for example, it is not possible to use PPD files from
-      Gutenprint 5.0.2 with Gutenprint 5.0.1.
+      Gutenprint 5.0.0 with Gutenprint 5.2.0.
+
+      If you are using CUPS 1.2 or above, these PPD files are not
+      actually installed by default.  Instead, a CUPS driver generates
+      these PPD files on demand.
 
     * A utility to update PPD files from an earlier release of
-      Gutenprint, cups-genppdupdate.5.0.  This utility may be used to
+      Gutenprint, cups-genppdupdate.  This utility may be used to
       update PPD files generated by earlier versions of Gutenprint
       starting from 4.3.21.  This is normally installed in /usr/sbin.
       This utility cannot update PPD files from Gimp-Print 4.2.
 
-    * A utility to generate PPD files, cups-genppd.5.0.  Normally this
-      is only required when the package is built.
+    * A utility to generate PPD files, cups-genppd.5.2.  Normally this
+      is only required when the package is built, and only with CUPS
+      1.1.
+
+    * A driver to generate PPD files on the fly, gutenprint.5.2.  This
+      is normally used to generate PPD files on the fly with CUPS 1.2
+      and above.
 
     * A utility to permit additional color calibration for
       Gutenprint-supported printers, cups-calibrate.  This is normally
@@ -357,14 +366,14 @@ B) CUPS
     sudo /System/Library/StartupItems/PrintingServices/PrintingServices.sh restart
   
     You may optionally choose to update your existing PPD files using
-    the command cups-genppdupdate.5.0, after which you should restart
-    CUPS as described above.  We strongly recommend use of this update
+    the command cups-genppdupdate, after which you should restart CUPS
+    as described above.  We strongly recommend use of this update
     procedure.  This script will automatically update Gutenprint PPD
     files from earlier versions.  This script will only update PPD
     files from earlier versions of Gutenprint; it will not update
-    Gimp-Print 4.2 PPD files.  However, you may install Gutenprint 5.0
+    Gimp-Print 4.2 PPD files.  However, you may install Gutenprint 5.2
     alongside Gimp-Print 4.2, and use both Gimp-Print 4.2 and
-    Gutenprint 5.0 drivers concurrently in separate printer queues.
+    Gutenprint 5.2 drivers concurrently in separate printer queues.
     Therefore, you need not convert a workflow based on Gimp-Print 4.2
     right away, but can gradually convert or even permanently use both
     drivers for different printer queues.
@@ -387,13 +396,16 @@ B) CUPS
 
     --enable-simplified-cups-ppds
 
-	Gutenprint 5.0 offers an option of creating simplified PPD
+	Gutenprint 5.2 offers an option of creating simplified PPD
 	files (containing only basic options and standard paper sizes)
 	in addition to PPD files offering all available options
 	(including all color correction options).  If this option is
 	used, both the simplified and standard PPD files are created.
 	If --enable-simplified-cups-ppds=only is specified, only the
 	simplified PPD files are built.
+
+	If the new dynamic PPD file generation is used with CUPS 1.2,
+	the simplified PPD files are always offered.
 
     --disable-cups-level3-ppds
 
@@ -408,7 +420,7 @@ B) CUPS
     --disable-cups-ppds-at-top-level
 
 	Normally, the PPD files are placed in
-	/usr/share/cups/model/gutenprint/5.0.  If this option is used,
+	/usr/share/cups/model/gutenprint/5.2.  If this option is used,
 	the PPD files are placed in /usr/share/cups/model.  There is
 	normally no good reason to use this option.
 
@@ -424,16 +436,16 @@ B) CUPS
     NOTES TO PACKAGERS: 
 
     * We recommend that your installation package run
-      cups-genppdupdate.5.0 and restart CUPS as part of the
-      installation process.
+      cups-genppdupdate and restart CUPS as part of the installation
+      process.
 
     * All files and directories with versioned names
-      (e. g. cups-genppdupdate, rastertogutenprint, the PPD files) may
-      be installed concurrently with other versions of Gimp-Print and
-      Gutenprint as described above.  Other executables (such as the
-      Canon and Epson back ends, and cups-calibrate) are not
-      versioned, but are not linked against libgutenprint and do not
-      have any other dependencies on Gutenprint.
+      (e. g. rastertogutenprint and the PPD files) may be installed
+      concurrently with other versions of Gimp-Print and Gutenprint as
+      described above.  Other executables (such as the Canon and Epson
+      back ends, and cups-calibrate) are not versioned, but are not
+      linked against libgutenprint and do not have any other
+      dependencies on Gutenprint.
 
 
 ----------------
@@ -469,7 +481,7 @@ C) FOOMATIC
     Therefore, we no longer provide documentation on direct use of the
     Ghostscript driver without the Foomatic front end.
 
-    The Ghostscript driver in Gutenprint 5.0 is based on the IJS
+    The Ghostscript driver in Gutenprint 5.2 is based on the IJS
     protocol.  IJS is a protocol originally developed by
     Hewlett-Packard to allow new drivers to be used with Ghostscript
     without having to be compiled into Ghostscript.  As this driver
@@ -480,11 +492,11 @@ C) FOOMATIC
     maintain and required a complex procedure to integrate with
     Ghostscript.
 
-    Gutenprint 5.0 offers two Foomatic drivers, one supporting the
+    Gutenprint 5.2 offers two Foomatic drivers, one supporting the
     full range of options and the other supporting simplified options,
     as describe above under CUPS.  The full-featured driver is named
-    "gutenprint-ijs.5.0"; the simplified driver is named
-    "gutenprint-ijs-simplified.5.0".  This allows Gutenprint 5.0 to
+    "gutenprint-ijs.5.2"; the simplified driver is named
+    "gutenprint-ijs-simplified.5.2".  This allows Gutenprint 5.2 to
     coexist with Gimp-Print 4.2; both drivers may be installed and
     used (on separate printer queues, of course) on the same system.
 
@@ -506,7 +518,7 @@ C) FOOMATIC
     NOTES TO PACKAGERS: 
 
     * We recommend packaging the IJS driver
-      (/usr/bin/ijsgutenprint.5.0) and its man page
+      (/usr/bin/ijsgutenprint.5.2) and its man page
       (/usr/man/man1/ijsgutenprint.1.gz) together with the Foomatic
       data.
 
@@ -520,19 +532,18 @@ C) FOOMATIC
 
 D) GIMP
 
-    Gutenprint may be used with an enhanced Print plug-in for GIMP,
-    providing the ability to print images.  If you wish to do so, you
-    must use GIMP 1.2.3 or above on the 1.2 line, or any GIMP 2.x
-    release (2.0, 2.1, 2.2, etc.)  Please read the release notes in
-    addition to this README, as there have been some changes in
-    procedure since Gimp-Print 4.2 if you are using certain versions
-    of GIMP.
+    Gutenprint may be used with an enhanced Print plug-in for GIMP
+    (2.0 and above), providing the ability to print images.  Please
+    read the release notes in addition to this README, as there have
+    been some changes in procedure since Gimp-Print 4.2 if you are
+    using certain versions of GIMP.  Gutenprint 5.2 no longer supports
+    GIMP 1.2.
 
     The enhanced Print plugin for GIMP replaces the Gimp-Print
     4.2-based plugin provided with GIMP 2.0 and 2.2.  As of the GIMP
     2.4, GIMP team provides a new Print plugin based on the GtkPrint
     framework.  This plugin provides standard printing capabilities,
-    but does not provide all of the new Gutenprint 5.0 features.
+    but does not provide all of the new Gutenprint 5.2 features.
     Therefore, the enhanced Print plugin for GIMP distributed with
     Gutenprint does not replace that plugin, but is installed
     alongside that plugin.
@@ -554,25 +565,18 @@ D) GIMP
 
     ./configure --enable-user-install
 
-    It is not possible for Gimp-Print 4.2 and Gutenprint 5.1 (or any
+    It is not possible for Gimp-Print 4.2 and Gutenprint 5.2 (or any
     future release) to coexist in the same installation of GIMP.  The
-    Gutenprint 5.0-based plugin can read settings from previous
+    Gutenprint 5.2-based plugin can read settings from previous
     versions of Gimp-Print, but the configuration file format in
-    Gutenprint 5.0 cannot be read by older versions of Gimp-Print.
-
-    The GIMP 1.2 will not be supported in Gutenprint 5.1 and beyond.
-    However, all Gutenprint 5.0 releases will support the GIMP 1.2.
-
-    The GIMP 2.x plugin may eventually be migrated to the GIMP project
-    for a future GIMP release and be removed from the Gutenprint
-    distribution.
+    Gutenprint 5.2 cannot be read by older versions of Gimp-Print.
 
     NOTE TO PACKAGERS:
 
     * The enhanced GIMP plugin, unlike the core library and the
       Foomatic and CUPS drivers, may not be installed concurrently
       with other versions.  For example, you may not install both the
-      Gimp-Print 4.2 and the Gutenprint 5.1 version of the Print
+      Gimp-Print 4.2 and the Gutenprint 5.2 version of the Print
       plugin, as they use different configuration file formats.
 
 
@@ -629,10 +633,10 @@ A) PRINTER INSTALLATION
     driver, so you may find more than one PPD file for your printer.
     Gutenprint PPD files are described as
 
-    Epson Stylus Photo R300 Foomatic/gutenprint-ijs.5.0
-    Epson Stylus Photo R300 Foomatic/gutenprint-ijs-simplified.5.0
-    Epson Stylus Photo R300 - CUPS+Gutenprint v5.0.2
-    Epson Stylus Photo R300 - CUPS+Gutenprint v5.0.2 Simplified
+    Epson Stylus Photo R300 Foomatic/gutenprint-ijs.5.2
+    Epson Stylus Photo R300 Foomatic/gutenprint-ijs-simplified.5.2
+    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.0
+    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.0 Simplified
 
     The "simplified" PPD files offer a basic set of options only, for
     selecting printer options, standard paper sizes, and basic quality
@@ -644,7 +648,7 @@ A) PRINTER INSTALLATION
     CUPS+Gutenprint and Foomatic/gutenprint-ijs PPD files.  While
     either kind of PPD file will work, we recommend using the
     CUPS+Gutenprint PPD files.  These PPD files can be automatically
-    updated with cups-genppdupdate.5.0.
+    updated with cups-genppdupdate.
 
     Other PPD files are described differently, such as
 
@@ -662,20 +666,20 @@ A) PRINTER INSTALLATION
     of the driver that they were built against.  If you attempt to use
     a version of Gutenprint with PPD files not built for that precise
     version, the driver will fail with a diagnostic error message.
-    For example, PPD files built for Gutenprint 5.0.1 will not
-    work with driver version 5.0.2.  You can identify printers using
+    For example, PPD files built for Gutenprint 5.0.0-beta4 will not
+    work with driver version 5.0.0.  You can identify printers using
     Gutenprint PPD files by the name of the PPD file, which will be
     something like:
 
-		    EPSON Stylus Photo EX - CUPS+Gutenprint v5.0.2(en)
+		    EPSON Stylus Photo EX - CUPS+Gutenprint v5.2.0(en)
 
     Linux users please note: If you are using CUPS 1.1.11 or higher,
     and you have a USB-connected printer, you must have a printer
     connected to each USB port that you plan to use and powered on
     when you restart CUPS.  If you do not do so, you will not be able
     to reinstall the printer.  It is only necessary to do this if you
-    wish to update PPD files manually; if you use
-    cups-genppdupdate.5.0, you do not need to do this.
+    wish to update PPD files manually; if you use cups-genppdupdate,
+    you do not need to do this.
 
     Starting with CUPS 1.1.11, you cannot choose an AppSocket
     connection and enter "usb:/dev/usblp0" or the like as the URI; you

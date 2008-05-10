@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.87.8.3 2007/12/15 20:35:36 rlk Exp $
+## $Id: Makefile.am,v 1.96 2008/04/06 01:10:52 rlk Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -34,7 +34,6 @@ pkgdatadir = $(cups_conf_datadir)
 pkglibdir = $(cups_conf_serverbin)
 pkgsysconfdir = $(cups_conf_serverroot)
 
-cupsexec_backenddir = $(pkglibdir)/backend
 cupsexec_driverdir = $(pkglibdir)/driver
 cupsexec_filterdir = $(pkglibdir)/filter
 if CUPS_PPDS_AT_TOP_LEVEL
@@ -67,8 +66,7 @@ endif
 if BUILD_CUPS
 bin_PROGRAMS = cups-calibrate
 sbin_PROGRAMS = cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
-sbin_SCRIPTS = cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
-cupsexec_backend_PROGRAMS = epson canon
+sbin_SCRIPTS = cups-genppdupdate
 cupsexec_filter_PROGRAMS = rastertogutenprint.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ commandtoepson commandtocanon
 
 TESTS= test-ppds test-rastertogutenprint
@@ -88,12 +86,6 @@ commandtocanon_LDADD = $(CUPS_LIBS)
 commandtoepson_SOURCES = commandtoepson.c
 commandtoepson_LDADD = $(CUPS_LIBS)
 
-canon_SOURCES = canon.c
-canon_LDADD = $(CUPS_LIBS)
-
-epson_SOURCES = epson.c
-epson_LDADD = $(CUPS_LIBS)
-
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_CFLAGS = -DALL_LINGUAS='"@ALL_LINGUAS@"' $(BUILD_SIMPLE_PPDS) $(TRANSLATE_PPDS)
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GENPPD_LIBS) $(GUTENPRINT_LIBS)
@@ -107,11 +99,6 @@ gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS = $(STA
 rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = rastertoprinter.c
 rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GUTENPRINT_LIBS)
 rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS = $(STATIC_LDOPTS)
-
-cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@: $(top_builddir)/config.status cups-genppdconfig.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/cups-genppdconfig
-cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@: $(top_builddir)/config.status cups-genppdupdate.in
-	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/cups-genppdupdate
 
 ## Data
 
@@ -165,7 +152,6 @@ install-data-hook:
 	-@echo 'These messages are harmless and should be ignored.'
 	-rmdir $(DESTDIR)$(cups_modeldir)
 	-rmdir $(DESTDIR)$(pkgdatadir)
-	-rmdir $(DESTDIR)$(cupsexec_backenddir)
 	-rmdir $(DESTDIR)$(cupsexec_driverdir)
 	-rmdir $(DESTDIR)$(cupsexec_filterdir)
 	-rmdir $(DESTDIR)$(bindir)
@@ -181,7 +167,7 @@ all-local: $(INSTALL_DATA_LOCAL_DEPS)
 
 ppd: ppd-stamp
 
-ppd-stamp: cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
+ppd-stamp: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
 	$(MAKE) ppd-stamp-phony
 	touch ppd-stamp
 
@@ -229,7 +215,7 @@ clean-local:
 ## Clean
 
 CLEANFILES = ppd-stamp
-DISTCLEANFILES = cups-genppdconfig.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ cups-genppdupdate.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
+DISTCLEANFILES = cups-genppdupdate
 MAINTAINERCLEANFILES = Makefile.in
 
 EXTRA_DIST = \

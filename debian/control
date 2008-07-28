@@ -3,8 +3,8 @@ Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
-Standards-Version: 3.7.3
-Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35-1), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1-1), chrpath (>= 0.12), dpatch
+Standards-Version: 3.8.0
+Build-Depends: libcups2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1), chrpath (>= 0.12), dpatch
 
 Package: gimp-gutenprint
 Architecture: any
@@ -25,12 +25,20 @@ Description: print plugin for the GIMP
  tasks.  Gutenprint was formerly known as Gimp-Print.
 
 Package: cupsys-driver-gutenprint
+Architecture: all
+Section: graphics
+Depends: cups-driver-gutenprint (>= ${source:Version})
+Description: printer drivers for CUPS
+ This is a transitional package to migrate existing users of
+ cupsys-driver-gutenprint to cups-driver-gutenprint (its successor).
+ It may be safely removed after upgrading.
+
+Package: cups-driver-gutenprint
 Architecture: any
 Section: graphics
-Depends: ${shlibs:Depends}, perl (>= 5.8.0), cupsys (>= 1.2.5) | cups (>= 1.2.5)
+Depends: ${shlibs:Depends}, perl (>= 5.8.0), cups (>= 1.3.7-6)
 Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
-Replaces: cupsys-driver-gimpprint, cupsys-driver-gimpprint-data
-Conflicts: cupsys-driver-gimpprint
+Replaces: cupsys-driver-gutenprint, cupsys-driver-gimpprint, cupsys-driver-gimpprint-data
 Description: printer drivers for CUPS
  This package includes a CUPS driver based on Gutenprint.
  .
@@ -163,7 +171,7 @@ Architecture: all
 Section: libs
 Description: locale data files for Gutenprint
  This package contains the i18n files of Gutenprint, used by
- libgutenprint2, cupsys-driver-gutenprint and
+ libgutenprint2, cups-driver-gutenprint and
  escputil.  It is also used by the GIMP Print plugin.
  .
  They are needed when you want the programs in Gutenprint to print
@@ -215,7 +223,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
  .
  If you wish to print using Ghostscript and the Gutenprint drivers,
  install this package.  This is typical for LPRng setups.  If you
- are using CUPS, cupsys-driver-gutenprint is a better choice, but
+ are using CUPS, cups-driver-gutenprint is a better choice, but
  this package will still work with the appropriate foomatic setup
  if you wish to make use of foomatic.
  .
@@ -260,7 +268,7 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
 Package: gutenprint-doc
 Architecture: all
 Section: doc
-Suggests: cupsys-driver-gutenprint (>= ${binary:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-print (>= ${binary:Version}), ijsgutenprint (>= ${binary:Version})
+Suggests: cups-driver-gutenprint (>= ${binary:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-print (>= ${binary:Version}), ijsgutenprint (>= ${binary:Version})
 Description: users' guide for Gutenprint and CUPS
  This package contains a user guide for programs using the
  Gutenprint library for photographic quality printing.  Currently

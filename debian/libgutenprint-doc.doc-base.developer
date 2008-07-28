@@ -8,7 +8,7 @@ Abstract: The gutenprint library routines give programmers an interface to
  demanding printing tasks.  This manual covers developing programs that use
  libgutenprint for printing, as well as the concepts and internals of the
  library.
-Section: Apps/Programming
+Section: Programming/C
 
 Format: HTML
 Index: /usr/share/doc/libgutenprint-doc/developer/html/book1.html

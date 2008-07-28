@@ -1,5 +1,5 @@
 #! /bin/sh
-# postrm script for cupsys-driver-gutenprint
+# postrm script for cups-driver-gutenprint
 #
 # see: dh_installdeb(1)
 
@@ -23,7 +23,7 @@ if [ "$1" = remove ]; then
     rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
     rm -rf /usr/share/ppd/gutenprint/5.0
     rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
-    [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
+    [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
 fi
 
 if [ "$1" = purge ]; then

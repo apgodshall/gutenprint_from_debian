@@ -1,3 +1,29 @@
+gutenprint (5.0.2-4) unstable; urgency=low
+
+  * debian/control.in:
+    - Add back cupsys-driver-gutenprint as a transitional package to
+      ease upgrades to cups-driver-gutenprint (Closes: #491331).
+    - cups-driver-gutenprint additionally replaces
+      cupsys-driver-gimpprint and cupsys-driver-gimpprint-data to ease
+      upgrades from sarge.
+
+ -- Roger Leigh <rleigh@debian.org>  Mon, 28 Jul 2008 21:03:43 +0100
+
+gutenprint (5.0.2-3) unstable; urgency=low
+
+  * debian/control.in:
+    - Rename cupsys-driver-gutenprint to cups-driver-gutenprint
+      (Closes: #486126).
+    - Remove old Conflicts and Replaces on cupsys-driver-gimpprint*
+      packages, which are only present in oldstable and earlier releases.
+    - Upgrade to Standards-Version 3.8.0.
+    - Don't Build-Depend upon -1 Debian revisions.
+  * debian/*.doc-base: Use new doc-base sections.
+  * debian/cups-driver-gutenprint.p*: Use /etc/init.d/cups in place of
+    /etc/init.d/cupsys.
+
+ -- Roger Leigh <rleigh@debian.org>  Mon, 30 Jun 2008 09:03:54 +0100
+
 gutenprint (5.0.2-2) unstable; urgency=low
 
   * debian/control:

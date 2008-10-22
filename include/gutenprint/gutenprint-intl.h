@@ -1,9 +1,9 @@
 /*
- * "$Id: gutenprint-intl.h,v 1.2 2004/11/28 15:59:29 rleigh Exp $"
+ * "$Id: gutenprint-intl.h,v 1.5 2008/08/13 07:35:51 easysw Exp $"
  *
  *   I18N header file for Gimp-Print.
  *
- *   Copyright 1997-2000 Michael Sweet (mike@easysw.com),
+ *   Copyright 1997-2008 Michael Sweet (mike@easysw.com),
  *	Robert Krawitz (rlk@alum.mit.edu) and Michael Natterer (mitch@gimp.org)
  *
  *   This program is free software; you can redistribute it and/or modify it
@@ -52,24 +52,22 @@ INCLUDE_LOCALE_H
 #endif
 
 #ifdef ENABLE_NLS
-
-#include <libintl.h>
-#ifndef _
+#  include <libintl.h>
+#  ifndef _
 /** Translate String. */
-#define _(String) gettext (String)
-#endif
-#ifndef gettext_noop
+#    define _(String) gettext (String)
+#  endif
+#  ifndef gettext_noop
 /** Mark String for translation, but don't translate it right now. */
-#define gettext_noop(String) (String)
-#endif
-#ifdef gettext_noop
+#    define gettext_noop(String) (String)
+#  endif
+#  ifdef gettext_noop
 /** Mark String for translation, but don't translate it right now. */
-# define N_(String) gettext_noop (String)
-#else
+#    define N_(String) gettext_noop (String)
+#  else
 /** Mark String for translation, but don't translate it right now. */
-# define N_(String) (String)
-#endif
-
+#    define N_(String) (String)
+#  endif
 #else /* ifndef ENABLE_NLS */
 /* Stubs that do something close enough.  */
 #    define textdomain(String) (String)

@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.180 2008/04/28 02:06:43 rlk Exp $
+dnl $Id: configure.ac,v 1.205 2008/10/19 19:35:30 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -36,11 +36,11 @@ dnl For more detailed information, see the libtool info documentation.
 dnl
 pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
-pushdef([GUTENPRINT_MINOR_VERSION],     [1])
-pushdef([GUTENPRINT_MICRO_VERSION],     [98])
-pushdef([GUTENPRINT_EXTRA_VERSION],     [.2])
+pushdef([GUTENPRINT_MINOR_VERSION],     [2])
+pushdef([GUTENPRINT_MICRO_VERSION],     [1])
+pushdef([GUTENPRINT_EXTRA_VERSION],     [])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
-pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
+pushdef([GUTENPRINT_INTERFACE_AGE],     [3])
 pushdef([GUTENPRINT_BINARY_AGE],        [0])
 pushdef([GUTENPRINTUI2_CURRENT_INTERFACE], [1])
 pushdef([GUTENPRINTUI2_INTERFACE_AGE],     [0])
@@ -49,7 +49,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.180 $)
+AC_REVISION($Revision: 1.205 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -206,12 +206,23 @@ STP_ARG_WITH_DETAILED(
      cups_prefix="${prefix}"
   ])
 
+dnl GNU gettext checks.
+AM_GNU_GETTEXT_VERSION([0.16])
+AM_GNU_GETTEXT([external])
+
+AM_CONDITIONAL(USE_NLS, test x${USE_NLS} = xyes)
+
+STP_ARG_ENABLE([nls-macosx],
+               [build CUPS PPD files],
+               [USE_NLS_OSX],
+               [(automatic)])
+
 USE_LEVEL3_PS=no
 BUILD_CUPS_PPDS="${BUILD_CUPS}"
-BUILD_TRANSLATED_CUPS_PPDS="${BUILD_CUPS}"
+BUILD_TRANSLATED_CUPS_PPDS=no
 BUILD_CUPS_1_2="no"
 if test -n "${CUPS_CONFIG}" -a "${BUILD_CUPS}" = "yes" ; then
-  cups_version=`${CUPS_CONFIG} --version`
+  cups_version=`${CUPS_CONFIG} --version | sed -e '1,$s/svn$/.0/'`
 dnl Quote to protect sed regexes
   [cups_major=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\1/'`]
   [cups_minor=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
@@ -236,10 +247,25 @@ STP_ARG_ENABLE([cups-1_2-enhancements],
                [BUILD_CUPS_1_2],
                [(automatic)])
 
+if test "$USE_NLS" != no -a "$BUILD_CUPS_PPDS" = yes ; then
+   BUILD_TRANSLATED_CUPS_PPDS="yes"
+fi
+
 STP_ARG_ENABLE([translated-cups-ppds],
                [build translated CUPS PPD files],
                [BUILD_TRANSLATED_CUPS_PPDS],
-               [yes])
+               [(automatic)])
+
+if test "$BUILD_CUPS_1_2" = yes -a "$BUILD_TRANSLATED_CUPS_PPDS" = yes ; then
+   BUILD_GLOBALIZED_CUPS_PPDS=yes
+else
+   BUILD_GLOBALIZED_CUPS_PPDS=no
+fi
+
+STP_ARG_ENABLE([globalized-cups-ppds],
+               [build globalized CUPS PPD files],
+               [BUILD_GLOBALIZED_CUPS_PPDS],
+               [(automatic)])
 
 STP_ARG_ENABLE_DETAILED([simplified-cups-ppds],
 			[],
@@ -452,6 +478,7 @@ dnl aclocal flags.
 dnl AM_ACLOCAL_INCLUDE(m4 m4local)
 
 dnl Checks for programs.
+AM_ICONV_LINK
 AC_ISC_POSIX
 AC_PROG_AWK
 AC_PROG_CC
@@ -535,10 +562,6 @@ if test x${BUILD_GHOSTSCRIPT} = xyes ; then
   IJS_CFLAGS=`$IJS_CONFIG --cflags`
   IJS_LIBS=`$IJS_CONFIG --libs`
 fi
-
-dnl GNU gettext checks.
-AM_GNU_GETTEXT_VERSION([0.11.5])
-AM_GNU_GETTEXT([external])
 
 GUTENPRINT_RELEASE_VERSION=${GUTENPRINT_MAJOR_VERSION}.${GUTENPRINT_MINOR_VERSION}
 AH_TEMPLATE(GUTENPRINT_RELEASE_VERSION,, [Gutenprint release version])
@@ -767,7 +790,9 @@ AM_CONDITIONAL(BUILD_CUPS_PPDS, test x${BUILD_CUPS_PPDS} = xyes)
 
 AM_CONDITIONAL(CUPS_PPDS_AT_TOP_LEVEL, test x${CUPS_PPDS_AT_TOP_LEVEL} = xyes)
 
-AM_CONDITIONAL(BUILD_TRANSLATED_CUPS_PPDS, test x${BUILD_TRANSLATED_CUPS_PPDS} = xyes)
+AM_CONDITIONAL(BUILD_TRANSLATED_CUPS_PPDS, test x${BUILD_TRANSLATED_CUPS_PPDS} = xyes )
+
+AM_CONDITIONAL(BUILD_GLOBALIZED_CUPS_PPDS, test x${BUILD_GLOBALIZED_CUPS_PPDS} = xyes )
 
 AM_CONDITIONAL(BUILD_SIMPLIFIED_CUPS_PPDS, test x${BUILD_SIMPLIFIED_CUPS_PPDS} = xyes)
 
@@ -796,8 +821,6 @@ AM_CONDITIONAL(INSTALL_SAMPLES, test x${INSTALL_SAMPLES} = xyes)
 AM_CONDITIONAL(INSTALL_USER_GUIDE, test x${INSTALL_USER_GUIDE} = xyes)
 
 STP_CUPS_PATH
-
-AM_CONDITIONAL(USE_NLS, test x${USE_NLS} = xyes)
 
 # loadable modules
 # portable sh has no AND test...
@@ -869,8 +892,13 @@ else
   AC_DEFINE_UNQUOTED(CUPS_MODELDIR, "${cups_conf_datadir}/model/${PACKAGE}/${GUTENPRINT_RELEASE_VERSION}/")
 fi
 
+AC_ARG_WITH(cups_nickname, [  --with-cups-nickname="nickname suffix"
+                          Suffix to add to PPD NickName, default=" - CUPS+Gutenprint v"],
+  CUPS_PPD_NICKNAME_STRING="$withval",
+  CUPS_PPD_NICKNAME_STRING=" - CUPS+Gutenprint v")
+
 AH_TEMPLATE(CUPS_PPD_NICKNAME_STRING,, [CUPS PPD Nickname string])
-AC_DEFINE_UNQUOTED(CUPS_PPD_NICKNAME_STRING, [" - CUPS+Gutenprint v"])
+AC_DEFINE_UNQUOTED(CUPS_PPD_NICKNAME_STRING, "$CUPS_PPD_NICKNAME_STRING")
 
 
 AC_DEFINE_UNQUOTED(CUPS_PPD_PS_LEVEL, ${CUPS_PPD_PS_LEVEL}, [CUPS PPD PostScript level])
@@ -920,6 +948,12 @@ AC_SUBST(PLUG_IN_PATH)
 AC_SUBST(WHICH_PPDS)
 AC_SUBST(BUILD_CUPS_PPDS)
 
+dnl Optional architecture options to be applied after all autoconf tests
+dnl are done...
+AC_ARG_WITH(archflags, [  --with-archflags="..."  additional options for CFLAGS and LDFLAGS],
+    CFLAGS="$CFLAGS $withval"
+    LDFLAGS="$LDFLAGS $withval")
+
 dnl Output files
 
 AC_CONFIG_FILES([Makefile])
@@ -941,6 +975,7 @@ AC_CONFIG_FILES([po/Makefile.in])
 AC_CONFIG_FILES([samples/Makefile])
 AC_CONFIG_FILES([src/Makefile])
 AC_CONFIG_FILES([src/cups/Makefile])
+AC_CONFIG_FILES([src/cups/Info.plist])
 AC_CONFIG_FILES([src/cups/cups-genppdupdate],
                 [chmod +x src/cups/cups-genppdupdate])
 AC_CONFIG_FILES([src/escputil/Makefile])
@@ -958,6 +993,15 @@ AC_CONFIG_FILES([src/testpattern/Makefile])
 AC_CONFIG_FILES([src/gimp2/Makefile])
 AC_CONFIG_FILES([src/main/Makefile])
 AC_CONFIG_FILES([src/main/gutenprint.pc])
+AC_CONFIG_FILES([src/xml/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/media/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/mediasizes/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/model/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/inputslots/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/inks/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/weaves/Makefile])
+AC_CONFIG_FILES([src/xml/escp2/qualitypresets/Makefile])
 AC_CONFIG_FILES([src/gutenprintui2/Makefile])
 AC_CONFIG_FILES([src/gutenprintui2/gutenprintui2.pc])
 AC_CONFIG_FILES([test/Makefile])
@@ -988,6 +1032,7 @@ if test "$BUILD_CUPS" != "no" ; then
     echo "        Build CUPS PPD files:                   $BUILD_CUPS_PPDS"
     if test "$BUILD_CUPS_PPDS" != "no" ; then
 	echo "            Build translated CUPS PPD files:    $BUILD_TRANSLATED_CUPS_PPDS"
+	echo "                Build global CUPS PPD files:    $BUILD_GLOBALIZED_CUPS_PPDS"
 	echo "            Build simplified CUPS PPD files:    $BUILD_SIMPLIFIED_CUPS_PPDS"
 	echo "            Install CUPS PPDs at top level:     $CUPS_PPDS_AT_TOP_LEVEL"
     fi
@@ -1027,7 +1072,7 @@ echo "    Build EPSON Stylus utility:                 $BUILD_ESCPUTIL"
 echo "    Build test programs:                        $BUILD_TEST"
 echo "    Build testpattern generator:                $BUILD_TESTPATTERN"
 echo
-echo "Installation summary:"
+echo "  Installation summary:"
 echo "    Installation prefix:                        $prefix"
 echo "    Data directory:                             $PACKAGE_DATA_DIR"
 echo "    Library directory:                          $PACKAGE_LIB_DIR"
@@ -1035,7 +1080,7 @@ echo "    XML data directory:                         $PKGXMLDATADIR"
 echo "    Module directory:                           $PKGMODULEDIR"
 echo "    Install sample images:                      $INSTALL_SAMPLES"
 echo
-echo "General configuration:"
+echo "  General configuration:"
 if test x$ac_compiler_gnu = "xyes"; then
     echo "    Compiler options:                           $CFLAGS $GNUCFLAGS"
 else
@@ -1053,6 +1098,7 @@ if test -n "$EXTRA_LIBREADLINE_DEPS" ; then
 else
     echo "    Use readline libraries:                     $USE_READLINE"
 fi
+echo "    uname -a output:                            `uname -a`"
 echo "================================================================"
 if test $warnings_emitted -ne 0 ; then
     echo

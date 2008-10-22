@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.h,v 1.117 2008/01/19 21:08:45 rlk Exp $"
+ * "$Id: print-escp2.h,v 1.132 2008/07/11 01:24:25 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -44,35 +44,6 @@
 typedef unsigned long model_cap_t;
 typedef unsigned long model_featureset_t;
 
-
-#define RES_LOW		 0
-#define RES_360		 1
-#define RES_720_360	 2
-#define RES_720		 3
-#define RES_1440_720	 4
-#define RES_2880_720	 5
-#define RES_2880_1440	 6
-#define RES_2880_2880	 7
-#define RES_5760_2880	 8
-#define RES_N		 9
-
-/*
- ****************************************************************
- *                                                              *
- * DROP SIZES                                                   *
- *                                                              *
- ****************************************************************
- */
-
-typedef struct
-{
-  const char *listname;
-  short numdropsizes;
-  double dropsizes[MAX_DROP_SIZES];
-} escp2_dropsize_t;
-
-typedef const escp2_dropsize_t *escp2_drop_list_t[RES_N];
-
 /*
  ****************************************************************
  *                                                              *
@@ -80,32 +51,6 @@ typedef const escp2_dropsize_t *escp2_drop_list_t[RES_N];
  *                                                              *
  ****************************************************************
  */
-
-typedef struct
-{
-  const char *name;
-  float base_density;
-  float subchannel_cutoff;
-  float k_transition;
-  float k_lower;
-  float k_upper;
-  float cyan;
-  float magenta;
-  float yellow;
-  float black;
-  float saturation;
-  float gamma;
-  const char *hue_adjustment;
-  const char *lum_adjustment;
-  const char *sat_adjustment;
-} paper_adjustment_t;
-
-typedef struct
-{
-  const char *listname;
-  short paper_count;
-  const paper_adjustment_t *papers;
-} paper_adjustment_list_t;
 
 typedef enum
 {
@@ -118,24 +63,14 @@ typedef enum
 
 typedef struct
 {
+  const char *cname;
   const char *name;
   const char *text;
   paper_class_t paper_class;
-  short paper_feed_sequence;
-  short platen_gap;
-  short feed_adjustment;
-  short vacuum_intensity;
-  short paper_thickness;
   const char *preferred_ink_type;
   const char *preferred_ink_set;
+  stp_vars_t *v;
 } paper_t;
-
-typedef struct
-{
-  const char *listname;
-  short paper_count;
-  const paper_t *papers;
-} paperlist_t;
 
 
 /*
@@ -146,20 +81,66 @@ typedef struct
  ****************************************************************
  */
 
+/* Drop sizes are grouped under resolution because each resolution
+   has different drop sizes. */
+typedef struct
+{
+  short numdropsizes;
+  double dropsizes[MAX_DROP_SIZES];
+} escp2_dropsize_t;
+
 typedef struct
 {
   const char *name;
   const char *text;
   short hres;
   short vres;
-  short virtual_hres;
-  short virtual_vres;
   short printed_hres;
   short printed_vres;
-  short softweave;
-  short printer_weave;
   short vertical_passes;
+  stp_raw_t *command;
+  stp_vars_t *v;
 } res_t;
+
+typedef struct
+{
+  char *name;
+  res_t *resolutions;
+  size_t n_resolutions;
+} resolution_list_t;
+
+typedef struct
+{
+  char *name;
+  char *text;
+  short min_hres;
+  short min_vres;
+  short max_hres;
+  short max_vres;
+  short desired_hres;
+  short desired_vres;
+} quality_t;
+
+typedef struct
+{
+  char *name;
+  quality_t *qualities;
+  size_t n_quals;
+} quality_list_t;
+
+typedef struct
+{
+  char *name;
+  char *text;
+  stp_raw_t *command;
+} printer_weave_t;
+
+typedef struct
+{
+  char *name;
+  size_t n_printer_weaves;
+  printer_weave_t *printer_weaves;
+} printer_weave_list_t;
 
 
 /*
@@ -180,22 +161,16 @@ typedef struct
   const char *subchannel_transition;
   const char *subchannel_value;
   const char *subchannel_scale;
-  const short split_channels[PHYSICAL_CHANNEL_LIMIT];
+  short *split_channels;
 } physical_subchannel_t;
 
 typedef struct
 {
-  const char *curve_name;
-  const char *curve;
-  stp_curve_t *curve_impl;
-} hue_curve_t;
-
-typedef struct
-{
-  const char *listname;
-  const physical_subchannel_t *subchannels;
+  const char *name;
   short n_subchannels;
-  hue_curve_t *hue_curve;
+  physical_subchannel_t *subchannels;
+  const char *hue_curve_name;
+  stp_curve_t *hue_curve;
 } ink_channel_t;
 
 typedef enum
@@ -205,110 +180,59 @@ typedef enum
   INKSET_CcMmYyK          = 2,
   INKSET_CcMmYKk          = 3,
   INKSET_QUADTONE         = 4,
-  INKSET_CMYKRB		  = 5,
+  INKSET_OTHER		  = 5,
   INKSET_EXTENDED	  = 6
 } inkset_id_t;
 
 typedef struct
 {
   const char *name;
-  const ink_channel_t *const *channels;
-  const ink_channel_t *const *aux_channels;
+  const char *text;
   short channel_count;
   short aux_channel_count;
-} channel_set_t;
-
-typedef struct
-{
-  const char *name;
-  const char *text;
   inkset_id_t inkset;
-  const channel_set_t *channel_set;
-} escp2_inkname_t;
+  ink_channel_t *channels;
+  ink_channel_t *aux_channels;
+} inkname_t;
 
 typedef struct
 {
   int n_shades;
-  double shades[PHYSICAL_CHANNEL_LIMIT];
+  double *shades;
 } shade_t;
-
-typedef shade_t shade_set_t[PHYSICAL_CHANNEL_LIMIT];
 
 typedef struct
 {
   const char *name;
   const char *text;
-  const escp2_inkname_t *const *inknames;
-  const char *papers;
-  const char *paper_adjustments;
-  const shade_set_t *shades;
+  short n_shades;
   short n_inks;
+  shade_t *shades;
+  inkname_t *inknames;
 } inklist_t;
 
 typedef struct
 {
-  const char *listname;
-  const inklist_t *const *inklists;
+  const char *name;
   short n_inklists;
+  inklist_t *inklists;
 } inkgroup_t;
-
-typedef struct
-{
-  const char *listname;
-  int count;
-  const char *const *names;
-} channel_name_t;
     
 
 /*
  ****************************************************************
  *                                                              *
- * MISCELLANEOUS                                                *
+ * INPUT SLOTS                                                  *
  *                                                              *
  ****************************************************************
  */
 
-/*
- * For each printer, we can select from a variety of dot sizes.
- * For single dot size printers, the available sizes are usually 0,
- * which is the "default", and some subset of 1-4.  For simple variable
- * dot size printers (with only one kind of variable dot size), the
- * variable dot size is specified as 0x10.  For newer printers, there
- * is a choice of variable dot sizes available, 0x10, 0x11, and 0x12 in
- * order of increasing size.
- *
- * Normally, we want to specify the smallest dot size that lets us achieve
- * a density of less than .8 or thereabouts (above that we start to get
- * some dither artifacts).  This needs to be tested for each printer and
- * resolution.
- *
- * An entry of -1 in a slot means that this resolution is not available.
- */
-
-typedef short escp2_dot_size_t[RES_N];
-
-/*
- * Choose the number of bits to use at each resolution.
- */
-
-typedef short escp2_bits_t[RES_N];
-
-/*
- * Choose the base resolution to use at each resolution.
- */
-
-typedef short escp2_base_resolutions_t[RES_N];
-
-/*
- * Specify the base density for each available resolution.
- * This obviously depends upon the dot size.
- */
-
-typedef float escp2_densities_t[RES_N];
-
 #define ROLL_FEED_CUT_ALL (1)
 #define ROLL_FEED_CUT_LAST (2)
 #define ROLL_FEED_DONT_EJECT (4)
+
+#define DUPLEX_NO_TUMBLE (1)
+#define DUPLEX_TUMBLE (2)
 
 typedef struct
 {
@@ -316,68 +240,31 @@ typedef struct
   const char *text;
   short is_cd;
   short is_roll_feed;
+  short duplex;
   unsigned roll_feed_cut_flags;
-  const stp_raw_t init_sequence;
-  const stp_raw_t deinit_sequence;
+  const stp_raw_t *init_sequence;
+  const stp_raw_t *deinit_sequence;
 } input_slot_t;
 
-typedef struct
-{
-  const char *name;
-  const input_slot_t *slots;
-  size_t n_input_slots;
-} input_slot_list_t;
-
-typedef struct
-{
-  const char *name;
-  const char *text;
-  short min_hres;
-  short min_vres;
-  short max_hres;
-  short max_vres;
-  short desired_hres;
-  short desired_vres;
-} quality_t;
-
-typedef struct
-{
-  const char *name;
-  const quality_t *qualities;
-  size_t n_quals;
-} quality_list_t;
-
-typedef enum
-{
-  AUTO_MODE_QUALITY,
-  AUTO_MODE_MANUAL
-} auto_mode_t;
-
-typedef struct
-{
-  const char *name;
-  const char *text;
-  short value;
-} printer_weave_t;
-
-typedef struct
-{
-  const char *name;
-  size_t n_printer_weaves;
-  const printer_weave_t *printer_weaves;
-} printer_weave_list_t;
+/*
+ ****************************************************************
+ *                                                              *
+ * FLAGS                                                        *
+ *                                                              *
+ ****************************************************************
+ */
 
 #define MODEL_COMMAND_MASK	0xful /* What general command set does */
-#define MODEL_COMMAND_1998	0x0ul
-#define MODEL_COMMAND_1999	0x1ul /* The 1999 series printers */
-#define MODEL_COMMAND_2000	0x2ul /* The 2000 series printers */
+#define MODEL_COMMAND_1998	0x0ul /* Old (ESC .) printers */
+#define MODEL_COMMAND_1999	0x1ul /* ESC i printers w/o extended ESC(c */
+#define MODEL_COMMAND_2000	0x2ul /* ESC i printers with extended ESC(c */
 #define MODEL_COMMAND_PRO	0x3ul /* Stylus Pro printers */
 
 #define MODEL_ZEROMARGIN_MASK	0x30ul /* Does this printer support */
 #define MODEL_ZEROMARGIN_NO	0x00ul /* zero margin mode? */
-#define MODEL_ZEROMARGIN_YES	0x10ul /* (print to edge of the paper) */
-#define MODEL_ZEROMARGIN_FULL	0x20ul /* (print to edge of the paper) */
-#define MODEL_ZEROMARGIN_H_ONLY	0x30ul /* (print to edge of the paper) */
+#define MODEL_ZEROMARGIN_YES	0x10ul /* (print beyond bottom of page) */
+#define MODEL_ZEROMARGIN_FULL	0x20ul /* (do not print beyond bottom) */
+#define MODEL_ZEROMARGIN_H_ONLY	0x30ul /* (no special treatment for vertical) */
 
 #define MODEL_VARIABLE_DOT_MASK	0x40ul /* Does this printer support var */
 #define MODEL_VARIABLE_NO	0x00ul /* dot size printing? The newest */
@@ -387,33 +274,29 @@ typedef struct
 #define MODEL_GRAYMODE_NO	0x00ul /* fast black printing? */
 #define MODEL_GRAYMODE_YES	0x80ul
 
-#define MODEL_VACUUM_MASK	0x100ul
-#define MODEL_VACUUM_NO		0x000ul
-#define MODEL_VACUUM_YES	0x100ul
-
-#define MODEL_FAST_360_MASK	0x200ul
+#define MODEL_FAST_360_MASK	0x100ul
 #define MODEL_FAST_360_NO	0x000ul
-#define MODEL_FAST_360_YES	0x200ul
+#define MODEL_FAST_360_YES	0x100ul
 
-#define MODEL_SEND_ZERO_ADVANCE_MASK	0x400ul
+#define MODEL_SEND_ZERO_ADVANCE_MASK	0x200ul
 #define MODEL_SEND_ZERO_ADVANCE_NO	0x000ul
-#define MODEL_SEND_ZERO_ADVANCE_YES	0x400ul
+#define MODEL_SEND_ZERO_ADVANCE_YES	0x200ul
 
-#define MODEL_SUPPORTS_INK_CHANGE_MASK	0x800ul
+#define MODEL_SUPPORTS_INK_CHANGE_MASK	0x400ul
 #define MODEL_SUPPORTS_INK_CHANGE_NO	0x000ul
-#define MODEL_SUPPORTS_INK_CHANGE_YES	0x800ul
+#define MODEL_SUPPORTS_INK_CHANGE_YES	0x400ul
 
-#define MODEL_PACKET_MODE_MASK	0x1000ul
-#define MODEL_PACKET_MODE_NO	0x0000ul
-#define MODEL_PACKET_MODE_YES	0x1000ul
+#define MODEL_PACKET_MODE_MASK	0x800ul
+#define MODEL_PACKET_MODE_NO	0x000ul
+#define MODEL_PACKET_MODE_YES	0x800ul
 
-#define MODEL_INTERCHANGEABLE_INK_MASK	0x2000ul
+#define MODEL_INTERCHANGEABLE_INK_MASK	0x1000ul
 #define MODEL_INTERCHANGEABLE_INK_NO	0x0000ul
-#define MODEL_INTERCHANGEABLE_INK_YES	0x2000ul
+#define MODEL_INTERCHANGEABLE_INK_YES	0x1000ul
 
-#define MODEL_ENVELOPE_LANDSCAPE_MASK	0x4000ul
+#define MODEL_ENVELOPE_LANDSCAPE_MASK	0x2000ul
 #define MODEL_ENVELOPE_LANDSCAPE_NO	0x0000ul
-#define MODEL_ENVELOPE_LANDSCAPE_YES	0x4000ul
+#define MODEL_ENVELOPE_LANDSCAPE_YES	0x2000ul
 
 typedef enum
 {
@@ -421,7 +304,6 @@ typedef enum
   MODEL_ZEROMARGIN,
   MODEL_VARIABLE_DOT,
   MODEL_GRAYMODE,
-  MODEL_VACUUM,
   MODEL_FAST_360,
   MODEL_SEND_ZERO_ADVANCE,
   MODEL_SUPPORTS_INK_CHANGE,
@@ -433,17 +315,22 @@ typedef enum
 
 typedef struct escp2_printer
 {
+  int		active;
+/*****************************************************************************/
   model_cap_t	flags;		/* Bitmask of flags, see above */
 /*****************************************************************************/
   /* Basic head configuration */
   short		nozzles;	/* Number of nozzles per color */
   short		min_nozzles;	/* Minimum number of nozzles per color */
+  short		nozzle_start;	/* Starting usable nozzle */
   short		nozzle_separation; /* Separation between rows, in 1/360" */
   short		black_nozzles;	/* Number of black nozzles (may be extra) */
   short		min_black_nozzles;	/* # of black nozzles (may be extra) */
+  short		black_nozzle_start;	/* Starting usable nozzle */
   short		black_nozzle_separation; /* Separation between rows */
   short		fast_nozzles;	/* Number of fast nozzles */
   short		min_fast_nozzles;	/* # of fast nozzles (may be extra) */
+  short		fast_nozzle_start;	/* Starting usable nozzle */
   short		fast_nozzle_separation; /* Separation between rows */
   short		physical_channels; /* Number of ink channels */
 /*****************************************************************************/
@@ -528,39 +415,73 @@ typedef struct escp2_printer
   short		alternate_alignment_passes;
   short		alternate_alignment_choices;
 /*****************************************************************************/
-  const short *dot_sizes;	/* Vector of dot sizes for resolutions */
-  const float *densities;	/* List of densities for each printer */
-  const char *drops; /* Drop sizes */
-/*****************************************************************************/
-  const char *reslist;
-  const char *inkgroup;
-/*****************************************************************************/
-  const short *bits;
-  const short *base_resolutions;
-  const char *input_slots;
-/*****************************************************************************/
-  const char *quality_list;
-  const stp_raw_t *preinit_sequence;
-  const stp_raw_t *postinit_remote_sequence;
-/*****************************************************************************/
-  const stp_raw_t *vertical_borderless_sequence;
-  const char *const printer_weaves;
-  const char *channel_names;
+  stp_raw_t *preinit_sequence;
+  stp_raw_t *preinit_remote_sequence;
+  stp_raw_t *postinit_sequence;
+  stp_raw_t *postinit_remote_sequence;
+  stp_raw_t *vertical_borderless_sequence;
+/*****************/
+  stp_mxml_node_t *media;
+  stp_list_t *media_cache;
+  stp_string_list_t *papers;
+/*****************/
+  stp_mxml_node_t *slots;
+  stp_list_t *slots_cache;
+  stp_string_list_t *input_slots;
+/*****************/
+  stp_mxml_node_t *media_sizes;
+/*****************/
+  stp_string_list_t *channel_names;
+/*****************/
+  resolution_list_t *resolutions;
+/*****************/
+  printer_weave_list_t *printer_weaves;
+/*****************/
+  quality_list_t *quality_list;
+/*****************/
+  inkgroup_t *inkgroup;
 } stpi_escp2_printer_t;
 
-extern const stpi_escp2_printer_t stpi_escp2_model_capabilities[];
-extern const int stpi_escp2_model_limit;
+/* From escp2-channels.c: */
 
-extern const paper_adjustment_list_t *stpi_escp2_get_paper_adjustment_list_named(const char *);
-extern const paperlist_t *stpi_escp2_get_paperlist_named(const char *);
-extern const quality_list_t *stpi_escp2_get_quality_list_named(const char *);
-extern const escp2_inkname_t *stpi_escp2_get_default_black_inkset(void);
-extern const inkgroup_t *stpi_escp2_get_inkgroup_named(const char *);
-extern const input_slot_list_t *stpi_escp2_get_input_slot_list_named(const char *);
-extern const res_t *const *stpi_escp2_get_reslist_named(const char *);
-extern const escp2_drop_list_t *stpi_escp2_get_drop_list_named(const char *);
-extern const printer_weave_list_t *stpi_escp2_get_printer_weaves_named(const char *);
-extern const channel_name_t *stpi_escp2_get_channel_names_named(const char *);
+extern const inkname_t *stpi_escp2_get_default_black_inkset(void);
+extern int stp_escp2_load_inkgroup(const stp_vars_t *v, const char *name);
+
+/* From escp2-papers.c: */
+extern int stp_escp2_load_media(const stp_vars_t *v, const char *name);
+extern int stp_escp2_has_media_feature(const stp_vars_t *v, const char *name);
+extern const paper_t *stp_escp2_get_default_media_type(const stp_vars_t *v);
+extern const paper_t *stp_escp2_get_media_type(const stp_vars_t *v, int ignore_res);
+extern int stp_escp2_printer_supports_rollfeed(const stp_vars_t *v);
+extern int stp_escp2_printer_supports_print_to_cd(const stp_vars_t *v);
+extern int stp_escp2_printer_supports_duplex(const stp_vars_t *v);
+
+extern int stp_escp2_load_input_slots(const stp_vars_t *v, const char *name);
+extern const input_slot_t *stp_escp2_get_input_slot(const stp_vars_t *v);
+
+extern int stp_escp2_load_media_sizes(const stp_vars_t *v, const char *name);
+extern void stp_escp2_set_media_size(stp_vars_t *v, const stp_vars_t *src);
+
+/* From escp2-resolutions.c: */
+extern int stp_escp2_load_resolutions(const stp_vars_t *v, const char *name);
+extern int stp_escp2_load_resolutions_from_xml(const stp_vars_t *v, stp_mxml_node_t *node);
+extern int stp_escp2_load_printer_weaves(const stp_vars_t *v, const char *name);
+extern int stp_escp2_load_printer_weaves_from_xml(const stp_vars_t *v, stp_mxml_node_t *node);
+extern int stp_escp2_load_quality_presets(const stp_vars_t *v, const char *name);
+extern int stp_escp2_load_quality_presets_from_xml(const stp_vars_t *v, stp_mxml_node_t *node);
+
+/* From print-escp2.c: */
+extern const res_t *stp_escp2_find_resolution(const stp_vars_t *v);
+extern const inklist_t *stp_escp2_inklist(const stp_vars_t *v);
+
+/* From print-escp2-data.c: */
+extern void stp_escp2_load_model(const stp_vars_t *v, int model);
+extern stpi_escp2_printer_t *stp_escp2_get_printer(const stp_vars_t *v);
+extern model_featureset_t stp_escp2_get_cap(const stp_vars_t *v,
+					    escp2_model_option_t feature);
+extern int stp_escp2_has_cap(const stp_vars_t *v, escp2_model_option_t feature,
+			     model_featureset_t class);
+
 
 typedef struct
 {
@@ -568,6 +489,7 @@ typedef struct
   int nozzles;			/* Number of nozzles */
   int min_nozzles;		/* Fewest nozzles we're allowed to use */
   int nozzle_separation;	/* Nozzle separation, in dots */
+  int nozzle_start;		/* First usable nozzle */
   int *head_offset;		/* Head offset (for C80-type printers) */
   int max_head_offset;		/* Largest head offset */
   int page_management_units;	/* Page management units (dpi) */
@@ -577,15 +499,14 @@ typedef struct
   int unit_scale;		/* Scale factor for units */
   int send_zero_pass_advance;	/* Send explicit command for zero advance */
   int zero_margin_offset;	/* Zero margin offset */
-  int split_channel_count;	/* For split black channels, like C120 */
-  int split_channel_width;	/* Linewidth for split black channels */
+  int split_channel_count;	/* For split channels, like C120 */
+  int split_channel_width;	/* Linewidth for split channels */
   short *split_channels;
 
   /* Ink parameters */
   int bitwidth;			/* Number of bits per ink drop */
   int drop_size;		/* ID of the drop size we're using */
-  int ink_resid;		/* Array index for the drop set we're using */
-  const escp2_inkname_t *inkname; /* Description of the ink set */
+  const inkname_t *inkname;	/* Description of the ink set */
   int use_aux_channels;		/* Use gloss channel */
 
   /* Ink channels */
@@ -603,29 +524,31 @@ typedef struct
   int use_extended_commands;	/* Do we use the extended commands? */
   const input_slot_t *input_slot; /* Input slot description */
   const paper_t *paper_type;	/* Paper type */
-  const paper_adjustment_t *paper_adjustment;	/* Paper adjustments */
+  stp_vars_t *media_settings;	/* Hardware media settings */
   const inkgroup_t *ink_group;	/* Which set of inks */
-  const stp_raw_t *init_sequence; /* Initialization sequence */
+  const stp_raw_t *preinit_sequence; /* Initialization sequence */
+  const stp_raw_t *preinit_remote_sequence; /* Initialization sequence */
   const stp_raw_t *deinit_sequence; /* De-initialization sequence */
+  const stp_raw_t *deinit_remote_sequence; /* De-initialization sequence */
   const stp_raw_t *borderless_sequence; /* Vertical borderless sequence */
   model_featureset_t command_set; /* Which command set this printer supports */
   int variable_dots;		/* Print supports variable dot sizes */
-  int has_vacuum;		/* Printer supports vacuum command */
   int has_graymode;		/* Printer supports fast grayscale mode */
   int base_separation;		/* Basic unit of separation */
   int resolution_scale;		/* Scale factor for ESC(D command */
-  int printing_resolution;	/* Printing resolution for this resolution */
   int separation_rows;		/* Row separation scaling */
   int pseudo_separation_rows;	/* Special row separation for some printers */
   int extra_720dpi_separation;	/* Special separation needed at 720 DPI */
   int bidirectional_upper_limit; /* Max total resolution for auto-bidi */
+  int duplex;
+  int extra_vertical_feed;	/* Extra vertical feed */
 
   /* weave parameters */
   int horizontal_passes;	/* Number of horizontal passes required
 				   to print a complete row */
   int physical_xdpi;		/* Horizontal distance between dots in pass */
   const res_t *res;		/* Description of the printing resolution */
-  const printer_weave_t *printer_weave; /* Printer weave parameters */
+  const stp_raw_t *printer_weave; /* Printer weave parameters */
   int use_printer_weave;	/* Use the printer weaving mechanism */
 
   /* page parameters */		/* Indexed from top left */
@@ -686,5 +609,5 @@ extern void stpi_escp2_terminate_page(stp_vars_t *v);
 
 #endif /* GUTENPRINT_INTERNAL_ESCP2_H */
 /*
- * End of "$Id: print-escp2.h,v 1.117 2008/01/19 21:08:45 rlk Exp $".
+ * End of "$Id: print-escp2.h,v 1.132 2008/07/11 01:24:25 rlk Exp $".
  */

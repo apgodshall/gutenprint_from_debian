@@ -57,34 +57,37 @@
      PRINTER = 273,
      PARAMETER = 274,
      PARAMETER_INT = 275,
-     PARAMETER_FLOAT = 276,
-     PARAMETER_CURVE = 277,
-     DENSITY = 278,
-     TOP = 279,
-     LEFT = 280,
-     HSIZE = 281,
-     VSIZE = 282,
-     BLACKLINE = 283,
-     NOSCALE = 284,
-     PATTERN = 285,
-     XPATTERN = 286,
-     EXTENDED = 287,
-     IMAGE = 288,
-     GRID = 289,
-     SEMI = 290,
-     CHANNEL = 291,
-     CMYK = 292,
-     KCMY = 293,
-     RGB = 294,
-     CMY = 295,
-     GRAY = 296,
-     WHITE = 297,
-     RAW = 298,
-     MODE = 299,
-     PAGESIZE = 300,
-     MESSAGE = 301,
-     OUTPUT = 302,
-     END = 303
+     PARAMETER_BOOL = 276,
+     PARAMETER_FLOAT = 277,
+     PARAMETER_CURVE = 278,
+     DENSITY = 279,
+     TOP = 280,
+     LEFT = 281,
+     HSIZE = 282,
+     VSIZE = 283,
+     BLACKLINE = 284,
+     NOSCALE = 285,
+     PATTERN = 286,
+     XPATTERN = 287,
+     EXTENDED = 288,
+     IMAGE = 289,
+     GRID = 290,
+     SEMI = 291,
+     CHANNEL = 292,
+     CMYK = 293,
+     KCMY = 294,
+     RGB = 295,
+     CMY = 296,
+     GRAY = 297,
+     WHITE = 298,
+     RAW = 299,
+     MODE = 300,
+     PAGESIZE = 301,
+     MESSAGE = 302,
+     OUTPUT = 303,
+     START_JOB = 304,
+     END_JOB = 305,
+     END = 306
    };
 #endif
 /* Tokens.  */
@@ -106,34 +109,37 @@
 #define PRINTER 273
 #define PARAMETER 274
 #define PARAMETER_INT 275
-#define PARAMETER_FLOAT 276
-#define PARAMETER_CURVE 277
-#define DENSITY 278
-#define TOP 279
-#define LEFT 280
-#define HSIZE 281
-#define VSIZE 282
-#define BLACKLINE 283
-#define NOSCALE 284
-#define PATTERN 285
-#define XPATTERN 286
-#define EXTENDED 287
-#define IMAGE 288
-#define GRID 289
-#define SEMI 290
-#define CHANNEL 291
-#define CMYK 292
-#define KCMY 293
-#define RGB 294
-#define CMY 295
-#define GRAY 296
-#define WHITE 297
-#define RAW 298
-#define MODE 299
-#define PAGESIZE 300
-#define MESSAGE 301
-#define OUTPUT 302
-#define END 303
+#define PARAMETER_BOOL 276
+#define PARAMETER_FLOAT 277
+#define PARAMETER_CURVE 278
+#define DENSITY 279
+#define TOP 280
+#define LEFT 281
+#define HSIZE 282
+#define VSIZE 283
+#define BLACKLINE 284
+#define NOSCALE 285
+#define PATTERN 286
+#define XPATTERN 287
+#define EXTENDED 288
+#define IMAGE 289
+#define GRID 290
+#define SEMI 291
+#define CHANNEL 292
+#define CMYK 293
+#define KCMY 294
+#define RGB 295
+#define CMY 296
+#define GRAY 297
+#define WHITE 298
+#define RAW 299
+#define MODE 300
+#define PAGESIZE 301
+#define MESSAGE 302
+#define OUTPUT 303
+#define START_JOB 304
+#define END_JOB 305
+#define END 306
 
 
 

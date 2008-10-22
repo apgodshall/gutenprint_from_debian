@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-resolutions.c,v 1.44 2008/02/24 04:08:05 rlk Exp $"
+ * "$Id: escp2-resolutions.c,v 1.51 2008/07/06 02:17:43 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -29,690 +29,307 @@
 #include <gutenprint/gutenprint-intl-internal.h>
 #include "print-escp2.h"
 
-static const res_t r_360x90dpi =
-{ "360x90dpi",     N_("360 x 90 DPI Fast Economy"),
-  360,  90,  360,  90,  360,  90,   0, 0, 1 };
-static const res_t r_360x90sw =
-{ "360x90sw",      N_("360 x 90 DPI Fast Economy"),
-  360,  90,  360,  90,  360,  90,   1, 0, 1 };
 
-static const res_t r_360x120dpi =
-{ "360x120dpi",    N_("360 x 120 DPI Economy"),
-  360,  120,  360,  120,  360,  120,  0, 0, 1 };
-static const res_t r_360x120sw =
-{ "360x120sw",     N_("360 x 120 DPI Economy"),
-  360,  120,  360,  120,  360,  120,  1, 0, 1 };
-
-static const res_t r_180dpi =
-{ "180dpi",        N_("180 DPI Economy"),
-  180,  180,  180,  180,  180,  180,  0, 0, 1 };
-static const res_t r_180sw =
-{ "180sw",         N_("180 DPI Economy"),
-  180,  180,  180,  180,  180,  180,  1, 0, 1 };
-
-static const res_t r_360x180dpi =
-{ "360x180dpi",    N_("360 x 180 DPI Draft"),
-  360,  180,  360,  180,  360,  180,  0, 0, 1 };
-static const res_t r_360x180sw =
-{ "360x180sw",     N_("360 x 180 DPI Draft"),
-  360,  180,  360,  180,  360,  180,  1, 0, 1 };
-
-static const res_t r_360x240dpi =
-{ "360x240dpi",    N_("360 x 240 DPI Draft"),
-  360,  240,  360,  240,  360,  240,  0, 0, 1 };
-static const res_t r_360x240sw =
-{ "360x240sw",     N_("360 x 240 DPI Draft"),
-  360,  240,  360,  240,  360,  240,  1, 0, 1 };
-
-static const res_t r_360mw =
-{ "360mw",         N_("360 DPI High Quality"),
-  360,  360,  360,  360,  360,  360,  0, 1, 1 };
-static const res_t r_360pro =
-{ "360pro",        N_("360 DPI"),
-  360,  360,  360,  360,  360,  360,  0, 1, 1 };
-static const res_t r_360 =
-{ "360",           N_("360 DPI"),
-  360,  360,  360,  360,  360,  360,  0, 0, 1 };
-static const res_t r_360sw =
-{ "360sw",         N_("360 DPI"),
-  360,  360,  360,  360,  360,  360,  1, 0, 1 };
-
-static const res_t r_720x360mw =
-{ "720x360mw",     N_("720 x 360 DPI"),
-  720,  360,  720,  360,  720,  360,  0, 1, 1 };
-static const res_t r_720x360sw =
-{ "720x360sw",     N_("720 x 360 DPI"),
-  720,  360,  720,  360,  720,  360,  1, 0, 1 };
-static const res_t r_720x360un =
-{ "720x360un",     N_("720 x 360 DPI Enhanced"),
-  720,  360, 1440,  720,  720,  360,  1, 0, 1 };
-
-static const res_t r_720mw =
-{ "720mw",         N_("720 DPI"),
-  720,  720,  720,  720,  720,  720,  0, 1, 1 };
-static const res_t r_720sw =
-{ "720sw",         N_("720 DPI"),
-  720,  720,  720,  720,  720,  720,  1, 0, 1 };
-static const res_t r_720un =
-{ "720un",         N_("720 DPI High Quality"),
-  720,  720, 1440,  720,  720,  720,  1, 0, 1 };
-static const res_t r_720hq =
-{ "720hq",         N_("720 DPI High Quality"),
-  720,  720,  720,  720,  720,  720,  1, 0, 2 };
-static const res_t r_720hq2 =
-{ "720hq2",        N_("720 DPI Highest Quality"),
-  720,  720,  720,  720,  720,  720,  1, 0, 4 };
-static const res_t r_720x720oov =
-{ "720x720oov",    N_("720 x 720 DPI"),
-  2880, 720,  2880, 720,  720, 720,  1, 0, 1 };
-
-static const res_t r_1440x720mw =
-{ "1440x720mw",     N_("1440 x 720 DPI"),
-  1440, 720,  1440, 720,  1440, 720,  0, 1, 1 };
-static const res_t r_1440x720sw =
-{ "1440x720sw",    N_("1440 x 720 DPI"),
-  1440, 720,  1440, 720,  1440, 720,  1, 0, 1 };
-static const res_t r_1440x720hq2 =
-{ "1440x720hq2",   N_("1440 x 720 DPI Highest Quality"),
-  1440, 720,  1440, 720,  1440, 720,  1, 0, 2 };
-static const res_t r_720x1440sw =
-{ "720x1440sw",    N_("1440 x 720 DPI Transposed"),
-  720, 1440,  720, 1440,  720, 1440,  1, 0, 1 };
-static const res_t r_720x1440ov =
-{ "720x1440ov",   N_("1440 x 720 DPI Transposed"),
-  1440, 1440, 1440, 1440, 720, 1440,  1, 0, 1};
-static const res_t r_1440x720ov =
-{ "1440x720ov",    N_("1440 x 720 DPI"),
-  2880, 720,  2880, 720,  1440, 720,  1, 0, 1 };
-
-static const res_t r_2880x720mw =
-{ "2880x720mw",    N_("2880 x 720 DPI"),
-  2880, 720,  2880, 720,  2880, 720,  0, 1, 1};
-static const res_t r_2880x720sw =
-{ "2880x720sw",    N_("2880 x 720 DPI"),
-  2880, 720,  2880, 720,  2880, 720,  1, 0, 1};
-static const res_t r_2880x720hq2 =
-{ "2880x720hq2",   N_("2880 x 720 DPI Highest Quality"),
-  2880, 720,  2880, 720,  2880, 720,  1, 0, 2 };
-
-static const res_t r_1440x1440mw =
-{ "1440x1440mw",   N_("1440 x 1440 DPI"),
-  1440, 1440,  1440, 1440,  1440, 1440, 0, 1, 1};
-static const res_t r_1440x1440sw =
-{ "1440x1440sw",   N_("1440 x 1440 DPI"),
-  1440, 1440,  1440, 1440,  1440, 1440, 1, 0, 1};
-static const res_t r_1440x1440ov =
-{ "1440x1440ov",   N_("1440 x 1440 DPI"),
-  2880, 1440,  2880, 1440,  1440, 1440, 1, 0, 1};
-
-static const res_t r_2880x1440mw =
-{ "2880x1440mw",   N_("2880 x 1440 DPI"),
-  2880, 1440,  2880, 1440,  2880, 1440, 0, 1, 1};
-static const res_t r_2880x1440sw =
-{ "2880x1440sw",   N_("2880 x 1440 DPI"),
-  2880, 1440,  2880, 1440,  2880, 1440, 1, 0, 1};
-static const res_t r_1440x2880sw =
-{ "1440x2880sw",   N_("2880 x 1440 DPI Transposed"),
-  1440, 2880,  1440, 2880,  1440, 2880, 1, 0, 1};
-static const res_t r_2880x1440sw2400 =
-{ "2880x1440sw",   N_("2880 x 1440 DPI"),
-  1440, 2880,  1440, 2880,  1440, 2880, 1, 0, 1};
-
-static const res_t r_5760x1440sw =
-{ "5760x1440sw",   N_("5760 x 1440 DPI"),
-  5760, 1440,  5760, 1440,  5760, 1440, 1, 0, 1};
-
-static const res_t r_2880x2880mw =
-{ "2880x2880mw",   N_("2880 x 2880 DPI"),
-  2880, 2880,  2880, 2880,  2880, 2880, 0, 1, 1};
-static const res_t r_2880x2880sw =
-{ "2880x2880sw",   N_("2880 x 2880 DPI"),
-  2880, 2880,  2880, 2880,  2880, 2880, 1, 0, 1};
-
-static const res_t r_5760x2880mw =
-{ "5760x2880mw",   N_("5760 x 2880 DPI"),
-  5760, 2880,  5760, 2880,  5760, 2880, 0, 1, 1};
-static const res_t r_5760x2880sw =
-{ "5760x2880sw",   N_("5760 x 2880 DPI"),
-  5760, 2880,  5760, 2880,  5760, 2880, 1, 0, 1};
-
-
-
-static const res_t *const stpi_escp2_720dpi_reslist[] =
+int
+stp_escp2_load_printer_weaves_from_xml(const stp_vars_t *v,
+				       stp_mxml_node_t *node)
 {
-  &r_360x90dpi,
-
-  &r_360x120dpi,
-
-  &r_180dpi,
-
-  &r_360x240dpi,
-
-  &r_360x180dpi,
-
-  &r_360mw,
-  &r_360,
-
-  &r_720x360sw,
-
-  &r_720mw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_1440dpi_reslist[] =
-{
-  &r_360x90sw,
-
-  &r_360x120sw,
-
-  &r_180sw,
-
-  &r_360x240sw,
-
-  &r_360x180sw,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720sw,
-  &r_720hq,
-
-  &r_1440x720sw,
-  &r_1440x720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_2880dpi_reslist[] =
-{
-  &r_360x90sw,
-
-  &r_360x120sw,
-
-  &r_180sw,
-
-  &r_360x240sw,
-
-  &r_360x180sw,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720sw,
-
-  &r_1440x720sw,
-  &r_1440x720hq2,
-
-  &r_2880x720sw,
-  &r_2880x720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_2880_1440dpi_reslist[] =
-{
-  &r_360x90sw,
-
-  &r_360x120sw,
-
-  &r_180sw,
-
-  &r_360x240sw,
-
-  &r_360x180sw,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720sw,
-
-  &r_1440x720sw,
-
-  &r_2880x720sw,
-
-  &r_1440x1440sw,
-
-  &r_2880x1440sw,
-
-  &r_2880x2880sw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_g3_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_360x120dpi,
-
-  &r_180dpi,
-
-  &r_360x240dpi,
-
-  &r_360x180dpi,
-
-  &r_360mw,
-  &r_360,
-
-  &r_720x360sw,
-
-  &r_720sw,
-  &r_720hq,
-
-  &r_1440x720sw,
-  &r_1440x720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_superfine_reslist[] =
-{
-  &r_360x90sw,
-
-  &r_360x120sw,
-
-  &r_360x180sw,
-
-  &r_360x240sw,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720sw,
-
-  &r_1440x720sw,
-
-  &r_1440x1440ov,
-
-  &r_2880x1440sw,
-
-  &r_5760x1440sw,
-
-  &r_2880x2880sw,
-
-  &r_5760x2880sw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_claria_1400_reslist[] =
-{
-  &r_360x90sw,
-
-  &r_360x180sw,
-
-  &r_360x240sw,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720x360un,
-
-  &r_720sw,
-
-  &r_720un,
-
-  &r_1440x720sw,
-
-  &r_1440x1440ov,
-
-  &r_2880x1440sw,
-
-  &r_5760x1440sw,
-
-  &r_2880x2880sw,
-
-  &r_5760x2880sw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_picturemate_reslist[] =
-{
-
-  &r_720x720oov,
-
-  &r_1440x720ov,
-
-  &r_720x1440ov,
-
-  &r_1440x1440sw,
-
-  &r_2880x1440sw,
-
-  &r_5760x1440sw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_sc500_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_360x120dpi,
-
-  &r_180dpi,
-
-  &r_360x240dpi,
-
-  &r_360x180dpi,
-
-  &r_360mw,
-  &r_360,
-
-  &r_720x360mw,
-
-  &r_720mw,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_g3_720dpi_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_360x120sw,
-
-  &r_180dpi,
-
-  &r_360x240sw,
-
-  &r_360x180dpi,
-
-  &r_360mw,
-  &r_360,
-
-  &r_720x360sw,
-
-  &r_720sw,
-  &r_720hq,
-  &r_720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_720dpi_soft_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_360x120sw,
-
-  &r_180dpi,
-
-  &r_360x240sw,
-
-  &r_360x180dpi,
-
-  &r_360sw,
-
-  &r_720x360sw,
-
-  &r_720sw,
-  &r_720hq,
-  &r_720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_sc640_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_180dpi,
-
-  &r_360x180dpi,
-
-  &r_360mw,
-  &r_360,
-
-  &r_720x360sw,
-
-  &r_720mw,
-
-  &r_1440x720sw,
-  &r_1440x720hq2,
-
-  NULL
-};
-
-static const res_t *const stpi_escp2_pro_reslist[] =
-{
-  &r_360x90dpi,
-
-  &r_180dpi,
-
-  &r_360x180dpi,
-
-  &r_360pro,
-
-  &r_720x360mw,
-
-  &r_720mw,
-
-  &r_1440x720mw,
-
-  &r_2880x720mw,
-
-  &r_1440x1440mw,
-
-  &r_2880x1440mw,
-
-  &r_2880x2880mw,
-
-  NULL
-};
-
-typedef struct
-{
-  const char *name;
-  const res_t *const *const res_list;
-} resolution_t;
-
-static const resolution_t the_resolutions[] =
-{
-  { "superfine", stpi_escp2_superfine_reslist },
-  { "claria_1400", stpi_escp2_claria_1400_reslist },
-  { "pro", stpi_escp2_pro_reslist },
-  { "720dpi", stpi_escp2_720dpi_reslist },
-  { "720dpi_soft", stpi_escp2_720dpi_soft_reslist },
-  { "g3_720dpi", stpi_escp2_g3_720dpi_reslist },
-  { "1440dpi", stpi_escp2_1440dpi_reslist },
-  { "2880dpi", stpi_escp2_2880dpi_reslist },
-  { "2880_1440dpi", stpi_escp2_2880_1440dpi_reslist },
-  { "g3", stpi_escp2_g3_reslist },
-  { "sc500", stpi_escp2_sc500_reslist },
-  { "sc640", stpi_escp2_sc640_reslist },
-  { "picturemate", stpi_escp2_picturemate_reslist },
-};
-
-const res_t *const *
-stpi_escp2_get_reslist_named(const char *n)
-{
-  int i;
-  if (n)
-    for (i = 0; i < sizeof(the_resolutions) / sizeof(resolution_t); i++)
-      {
-	if (strcmp(n, the_resolutions[i].name) == 0)
-	  return the_resolutions[i].res_list;
-      }
-  return NULL;
+  stpi_escp2_printer_t *printdef = stp_escp2_get_printer(v);
+  printer_weave_list_t *xpw = stp_malloc(sizeof(printer_weave_list_t));
+  int count = 0;
+  stp_mxml_node_t *child = node->child;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "weave"))
+	count++;
+      child = child->next;
+    }
+  printdef->printer_weaves = xpw;
+  if (stp_mxmlElementGetAttr(node, "name"))
+    xpw->name = stp_strdup(stp_mxmlElementGetAttr(node, "name"));
+  xpw->n_printer_weaves = count;
+  xpw->printer_weaves = stp_zalloc(sizeof(printer_weave_t) * count);
+  child = node->child;
+  count = 0;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "weave"))
+	{
+	  const char *wname = stp_mxmlElementGetAttr(child, "name");
+	  const char *wtext = stp_mxmlElementGetAttr(child, "text");
+	  const char *cmd = stp_mxmlElementGetAttr(child, "command");
+	  if (wname)
+	    xpw->printer_weaves[count].name = stp_strdup(wname);
+	  if (wtext)
+	    xpw->printer_weaves[count].text = stp_strdup(wtext);
+	  if (cmd)
+	    xpw->printer_weaves[count].command = stp_xmlstrtoraw(cmd);
+	  count++;
+	}
+      child = child->next;
+    }
+  return 1;
 }
 
-#define DECLARE_PRINTER_WEAVES(name)				\
-static const printer_weave_list_t name##_printer_weave_list =	\
-{								\
-  #name,							\
-  sizeof(name##_printer_weaves) / sizeof(printer_weave_t),	\
-  name##_printer_weaves						\
+int
+stp_escp2_load_printer_weaves(const stp_vars_t *v, const char *name)
+{
+  stp_list_t *dirlist = stpi_data_path();
+  stp_list_item_t *item;
+  int found = 0;
+  item = stp_list_get_start(dirlist);
+  while (item)
+    {
+      const char *dn = (const char *) stp_list_item_get_data(item);
+      char *ffn = stpi_path_merge(dn, name);
+      stp_mxml_node_t *weaves =
+	stp_mxmlLoadFromFile(NULL, ffn, STP_MXML_NO_CALLBACK);
+      stp_free(ffn);
+      if (weaves)
+	{
+	  stp_mxml_node_t *node = stp_mxmlFindElement(weaves, weaves,
+						      "escp2:PrinterWeaves", NULL,
+						      NULL, STP_MXML_DESCEND);
+	  if (node)
+	    stp_escp2_load_printer_weaves_from_xml(v, node);
+	  stp_mxmlDelete(weaves);
+	  found = 1;
+	  break;
+	}
+      item = stp_list_item_next(item);
+    }
+  stp_list_destroy(dirlist);
+  if (! found)
+    {
+      stp_erprintf("Unable to load printer weaves from %s!\n", name);
+      stp_abort();
+    }
+  return found;
 }
 
-static const printer_weave_t standard_printer_weaves[] =
+int
+stp_escp2_load_resolutions_from_xml(const stp_vars_t *v, stp_mxml_node_t *node)
 {
-  { "Off", N_("Off"), 0 },
-  { "On", N_("On"), 1 }
-};
-
-DECLARE_PRINTER_WEAVES(standard);
-
-static const printer_weave_t pro7000_printer_weaves[] =
-{
-  { "Off", N_("Off"), 0 },
-  { "On", N_("Interleave"), 1 },
-  { "FOL", N_("Full Overlap"), 2 },
-  { "FourPass", N_("Four Pass"), 3 },
-  { "FOL2", N_("Full Overlap 2"), 4 },
-};
-
-DECLARE_PRINTER_WEAVES(pro7000);
-
-static const printer_weave_t pro7500_printer_weaves[] =
-{
-  { "Off", N_("Off"), 0 },
-  { "On", N_("Interleave"), 1 },
-  { "FOL", N_("Full Overlap"), 2 },
-  { "FourPass", N_("Four Pass"), 3 },
-  { "FOL2", N_("Full Overlap 2"), 4 },
-  { "MW2", N_("Interleave 2"), 5 },
-};
-
-DECLARE_PRINTER_WEAVES(pro7500);
-
-static const printer_weave_t pro7600_printer_weaves[] =
-{
-  { "Off", N_("Off"), 0 },
-  { "On", N_("Interleave"), 1 },
-  { "FOL", N_("Full Overlap"), 2 },
-  { "FourPass", N_("Four Pass"), 3 },
-  { "FOL2", N_("Full Overlap 2"), 4 },
-  { "MW2", N_("Interleave 2"), 5 },
-  { "EightPass", N_("Eight Pass"), 6 },
-};
-
-DECLARE_PRINTER_WEAVES(pro7600);
-
-typedef struct
-{
-  const char *name;
-  const printer_weave_list_t *weave_list;
-} weave_t;
-
-static const weave_t the_weaves[] =
-{
-  { "standard", &standard_printer_weave_list },
-  { "pro7000", &pro7000_printer_weave_list },
-  { "pro7500", &pro7500_printer_weave_list },
-  { "pro7600", &pro7600_printer_weave_list },
-};
-
-const printer_weave_list_t *
-stpi_escp2_get_printer_weaves_named(const char *n)
-{
-  int i;
-  if (n)
-    for (i = 0; i < sizeof(the_weaves) / sizeof(weave_t); i++)
-      {
-	if (strcmp(n, the_weaves[i].name) == 0)
-	  return the_weaves[i].weave_list;
-      }
-  return NULL;
+  stpi_escp2_printer_t *printdef = stp_escp2_get_printer(v);
+  resolution_list_t *xrs = stp_malloc(sizeof(resolution_list_t));
+  int count = 0;
+  stp_mxml_node_t *child = node->child;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "resolution"))
+	count++;
+      child = child->next;
+    }
+  printdef->resolutions = xrs;
+  if (stp_mxmlElementGetAttr(node, "name"))
+    xrs->name = stp_strdup(stp_mxmlElementGetAttr(node, "name"));
+  xrs->n_resolutions = count;
+  xrs->resolutions = stp_zalloc(sizeof(res_t) * count);
+  child = node->child;
+  count = 0;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "resolution"))
+	{
+	  res_t *res = &(xrs->resolutions[count]);
+	  stp_mxml_node_t *cchild = child->child;
+	  const char *wname = stp_mxmlElementGetAttr(child, "name");
+	  const char *wtext = stp_mxmlElementGetAttr(child, "text");
+	  res->v = stp_vars_create();
+	  res->vertical_passes = 1;
+	  if (wname)
+	    res->name = stp_strdup(wname);
+	  if (wtext)
+	    res->text = stp_strdup(wtext);
+	  stp_vars_fill_from_xmltree_ref(cchild, node, res->v);
+	  while (cchild)
+	    {
+	      if (cchild->type == STP_MXML_ELEMENT)
+		{
+		  const char *elt = cchild->value.element.name;
+		  if (cchild->type == STP_MXML_ELEMENT &&
+		      (!strcmp(elt, "physicalResolution") ||
+		       !strcmp(elt, "printedResolution")))
+		    {
+		      long data[2] = { 0, 0 };
+		      stp_mxml_node_t *ccchild = cchild->child;
+		      data[0] = stp_xmlstrtol(ccchild->value.text.string);
+		      ccchild = ccchild->next;
+		      data[1] = stp_xmlstrtol(ccchild->value.text.string);
+		      if (!strcmp(elt, "physicalResolution"))
+			{
+			  res->hres = data[0];
+			  res->vres = data[1];
+			}			      
+		      else if (!strcmp(elt, "printedResolution"))
+			{
+			  res->printed_hres = data[0];
+			  res->printed_vres = data[1];
+			}			      
+		    }
+		  else if (!strcmp(elt, "verticalPasses") &&
+			   cchild->child &&
+			   cchild->child->type == STP_MXML_TEXT)
+		    res->vertical_passes = stp_xmlstrtol(cchild->child->value.text.string);
+		  else if (!strcmp(elt, "printerWeave") &&
+			   stp_mxmlElementGetAttr(cchild, "command"))
+		    res->command = stp_xmlstrtoraw(stp_mxmlElementGetAttr(cchild, "command"));
+		}
+	      cchild = cchild->next;
+	    }
+	  if (!res->printed_hres)
+	    res->printed_hres = res->hres;
+	  if (!res->printed_vres)
+	    res->printed_vres = res->vres;
+	  count++;
+	}
+      child = child->next;
+    }
+  return 1;
 }
 
-
-#define DECLARE_QUALITY_LIST(name)			\
-static const quality_list_t name##_quality_list =	\
-{							\
-  #name,						\
-  name##_qualities,					\
-  sizeof(name##_qualities) / sizeof(const quality_t),	\
+int
+stp_escp2_load_resolutions(const stp_vars_t *v, const char *name)
+{
+  stp_list_t *dirlist = stpi_data_path();
+  stp_list_item_t *item;
+  int found = 0;
+  item = stp_list_get_start(dirlist);
+  while (item)
+    {
+      const char *dn = (const char *) stp_list_item_get_data(item);
+      char *ffn = stpi_path_merge(dn, name);
+      stp_mxml_node_t *resolutions =
+	stp_mxmlLoadFromFile(NULL, ffn, STP_MXML_NO_CALLBACK);
+      stp_free(ffn);
+      if (resolutions)
+	{
+	  stp_mxml_node_t *node = stp_mxmlFindElement(resolutions, resolutions,
+						      "escp2:resolutions", NULL,
+						      NULL, STP_MXML_DESCEND);
+	  if (node)
+	    stp_escp2_load_resolutions_from_xml(v, node);
+	  stp_mxmlDelete(resolutions);
+	  found = 1;
+	  break;
+	}
+      item = stp_list_item_next(item);
+    }
+  stp_list_destroy(dirlist);
+  if (! found)
+    {
+      stp_erprintf("Unable to load resolutions from %s!\n", name);
+      stp_abort();
+    }
+  return found;
 }
 
-static const quality_t standard_qualities[] =
+int
+stp_escp2_load_quality_presets_from_xml(const stp_vars_t *v, stp_mxml_node_t *node)
 {
-  { "FastEconomy", N_("Fast Economy"), 180, 90, 360, 120, 360, 90 },
-  { "Economy",     N_("Economy"),      360, 180, 360, 240, 360, 180 },
-  { "Draft",       N_("Draft"),        360, 360, 360, 360, 360, 360 },
-  { "Standard",    N_("Standard"),     0, 0, 0, 0, 720, 360 },
-  { "High",        N_("High"),         0, 0, 0, 0, 720, 720 },
-  { "Photo",       N_("Photo"),        1440, 720, 2880, 720, 1440, 720 },
-  { "HighPhoto",   N_("Super Photo"),  1440, 1440, 2880, 1440, 1440, 1440 },
-  { "UltraPhoto",  N_("Ultra Photo"),  2880, 1440, 2880, 1440, 2880, 1440 },
-  { "Best",        N_("Best"),         720, 360, 0, 1440, -1, -1 },
-};
+  stpi_escp2_printer_t *printdef = stp_escp2_get_printer(v);
+  quality_list_t *qpw = stp_malloc(sizeof(quality_list_t));
+  int count = 0;
+  stp_mxml_node_t *child = node->child;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "quality"))
+	count++;
+      child = child->next;
+    }
+  printdef->quality_list = qpw;
+  if (stp_mxmlElementGetAttr(node, "name"))
+    qpw->name = stp_strdup(stp_mxmlElementGetAttr(node, "name"));
+  qpw->n_quals = count;
+  qpw->qualities = stp_zalloc(sizeof(quality_t) * count);
+  child = node->child;
+  count = 0;
+  while (child)
+    {
+      if (child->type == STP_MXML_ELEMENT &&
+	  !strcmp(child->value.element.name, "quality"))
+	{
+	  stp_mxml_node_t *cchild = child->child;
+	  const char *wname = stp_mxmlElementGetAttr(child, "name");
+	  const char *wtext = stp_mxmlElementGetAttr(child, "text");
+	  if (wname)
+	    qpw->qualities[count].name = stp_strdup(wname);
+	  if (wtext)
+	    qpw->qualities[count].text = stp_strdup(wtext);
+	  while (cchild)
+	    {
+	      if (cchild->type == STP_MXML_ELEMENT &&
+		  (!strcmp(cchild->value.element.name, "minimumResolution") ||
+		   !strcmp(cchild->value.element.name, "maximumResolution") ||
+		   !strcmp(cchild->value.element.name, "desiredResolution")))
+		{
+		  long data[2] = { 0, 0 };
+		  stp_mxml_node_t *ccchild = cchild->child;
+		  data[0] = stp_xmlstrtol(ccchild->value.text.string);
+		  ccchild = ccchild->next;
+		  data[1] = stp_xmlstrtol(ccchild->value.text.string);
+		  if (!strcmp(cchild->value.element.name, "minimumResolution"))
+		    {
+		      qpw->qualities[count].min_hres = data[0];
+		      qpw->qualities[count].min_vres = data[1];
+		    }			      
+		  else if (!strcmp(cchild->value.element.name, "maximumResolution"))
+		    {
+		      qpw->qualities[count].max_hres = data[0];
+		      qpw->qualities[count].max_vres = data[1];
+		    }			      
+		  else if (!strcmp(cchild->value.element.name, "desiredResolution"))
+		    {
+		      qpw->qualities[count].desired_hres = data[0];
+		      qpw->qualities[count].desired_vres = data[1];
+		    }			      
+		}
+	      cchild = cchild->next;
+	    }
+	  count++;
+	}
+      child = child->next;
+    }
+  return 1;
+}
 
-DECLARE_QUALITY_LIST(standard);
-
-static const quality_t v2880_qualities[] =
+int
+stp_escp2_load_quality_presets(const stp_vars_t *v, const char *name)
 {
-  { "FastEconomy", N_("Fast Economy"), 180, 90, 360, 120, 360, 90 },
-  { "Economy",     N_("Economy"),      360, 180, 360, 240, 360, 180 },
-  { "Draft",       N_("Draft"),        360, 360, 360, 360, 360, 360 },
-  { "Standard",    N_("Standard"),     0, 0, 0, 0, 720, 360 },
-  { "High",        N_("High"),         0, 0, 0, 0, 720, 720 },
-  { "Photo",       N_("Photo"),        1440, 720, 2880, 720, 1440, 720 },
-  { "HighPhoto",   N_("Super Photo"),  1440, 1440, 2880, 1440, 1440, 1440 },
-  { "UltraPhoto",  N_("Ultra Photo"),  2880, 2880, 2880, 2880, 2880, 2880 },
-  { "Best",        N_("Best"),         720, 360, 0, 0, -1, -1 },
-};
-
-DECLARE_QUALITY_LIST(v2880);
-
-static const quality_t p1_5_qualities[] =
-{
-  { "FastEconomy", N_("Fast Economy"), 180, 90, 360, 120, 360, 90 },
-  { "Economy",     N_("Economy"),      360, 180, 360, 240, 360, 180 },
-  { "Draft",       N_("Draft"),        360, 360, 360, 360, 360, 360 },
-  { "Standard",    N_("Standard"),     0, 0, 0, 0, 720, 360 },
-  { "High",        N_("High"),         0, 0, 0, 0, 720, 720 },
-  { "Photo",       N_("Photo"),        1440, 720, 1440, 720, 1440, 720 },
-  { "HighPhoto",   N_("Super Photo"),  1440, 1440, 2880, 1440, 1440, 1440 },
-  { "UltraPhoto",  N_("Ultra Photo"),  2880, 1440, 2880, 1440, 2880, 1440 },
-  { "Best",        N_("Best"),         720, 360, 0, 1440, -1, -1 },
-};
-
-DECLARE_QUALITY_LIST(p1_5);
-
-static const quality_t picturemate_qualities[] =
-{
-  { "Draft",       N_("Draft"),        1440,  720, 1440,  720, 1440,  720 },
-  { "Standard",    N_("Standard"),     1440, 1440, 1440, 1440, 1440, 1440 },
-  { "Photo",       N_("Photo"),        1440, 1440, 1440, 1440, 1440, 1440 },
-  { "High",        N_("High"),         2880, 1440, 2880, 1440, 2880, 1440 },
-  { "HighPhoto",   N_("Super Photo"),  2880, 1440, 2880, 1440, 2880, 1440 },
-  { "UltraPhoto",  N_("Ultra Photo"),  5760, 1440, 5760, 1440, 5760, 1440 },
-  { "Best",        N_("Best"),         5760, 1440, 5760, 1440, 5760, 1440 },
-};
-
-DECLARE_QUALITY_LIST(picturemate);
-
-typedef struct
-{
-  const char *name;
-  const quality_list_t *quality_list;
-} qual_t;
-
-static const qual_t the_qualities[] =
-{
-  { "standard", &standard_quality_list },
-  { "p1_5", &p1_5_quality_list },
-  { "picturemate", &picturemate_quality_list },
-  { "v2880", &v2880_quality_list },
-};
-
-const quality_list_t *
-stpi_escp2_get_quality_list_named(const char *n)
-{
-  int i;
-  if (n)
-    for (i = 0; i < sizeof(the_qualities) / sizeof(qual_t); i++)
-      {
-	if (strcmp(n, the_qualities[i].name) == 0)
-	  return the_qualities[i].quality_list;
-      }
-  return NULL;
+  stp_list_t *dirlist = stpi_data_path();
+  stp_list_item_t *item;
+  int found = 0;
+  item = stp_list_get_start(dirlist);
+  while (item)
+    {
+      const char *dn = (const char *) stp_list_item_get_data(item);
+      char *ffn = stpi_path_merge(dn, name);
+      stp_mxml_node_t *qualities =
+	stp_mxmlLoadFromFile(NULL, ffn, STP_MXML_NO_CALLBACK);
+      stp_free(ffn);
+      if (qualities)
+	{
+	  stp_mxml_node_t *node = stp_mxmlFindElement(qualities, qualities,
+						      "escp2:QualityPresets", NULL,
+						      NULL, STP_MXML_DESCEND);
+	  if (node)
+	    stp_escp2_load_quality_presets_from_xml(v, node);
+	  stp_mxmlDelete(qualities);
+	  found = 1;
+	  break;
+	}
+      item = stp_list_item_next(item);
+    }
+  stp_list_destroy(dirlist);
+  if (! found)
+    {
+      stp_erprintf("Unable to load quality presets from %s!\n", name);
+      stp_abort();
+    }
+  return found;
 }

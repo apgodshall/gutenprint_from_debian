@@ -1,5 +1,5 @@
 /*
- * "$Id: escputil.c,v 1.92 2007/12/26 18:13:02 rlk Exp $"
+ * "$Id: escputil.c,v 1.96 2008/07/05 01:43:26 rlk Exp $"
  *
  *   Printer maintenance utility for EPSON Stylus (R) printers
  *
@@ -972,22 +972,23 @@ get_printer(int quiet, int fail_if_not_found)
 
 static const char *colors_new[] =
   {
-    N_("Black"),		/* 0 */
-    N_("Photo Black"),		/* 1 */
-    N_("Unknown"),		/* 2 */
-    N_("Cyan"),			/* 3 */
-    N_("Magenta"),		/* 4 */
-    N_("Yellow"),		/* 5 */
-    N_("Light Cyan"),		/* 6 */
-    N_("Light Magenta"),	/* 7 */
-    N_("Unknown"),		/* 8 */
-    N_("Unknown"),		/* 9 */
-    N_("Light Black"),		/* a */
-    N_("Matte Black"),		/* b */
-    N_("Red"),			/* c */
-    N_("Blue"),			/* d */
-    N_("Gloss Optimizer"),	/* e */
-    N_("Light Light Black"),	/* f */
+    N_("Black"),		/* 00 */
+    N_("Photo Black"),		/* 01 */
+    N_("Unknown"),		/* 02 */
+    N_("Cyan"),			/* 03 */
+    N_("Magenta"),		/* 04 */
+    N_("Yellow"),		/* 05 */
+    N_("Light Cyan"),		/* 06 */
+    N_("Light Magenta"),	/* 07 */
+    N_("Unknown"),		/* 08 */
+    N_("Unknown"),		/* 09 */
+    N_("Light Black"),		/* 0a */
+    N_("Matte Black"),		/* 0b */
+    N_("Red"),			/* 0c */
+    N_("Blue"),			/* 0d */
+    N_("Gloss Optimizer"),	/* 0e */
+    N_("Light Light Black"),	/* 0f */
+    N_("Orange"),		/* 10 */
   };
 static int color_count = sizeof(colors_new) / sizeof(const char *);
 
@@ -1006,7 +1007,7 @@ static const char *aux_colors[] =
     N_("Blue"),			/* a */
     NULL,			/* b */
     NULL,			/* c */
-    NULL,			/* d */
+    N_("Orange"),		/* d */
     NULL,			/* e */
     NULL,			/* f */
   };
@@ -1073,17 +1074,32 @@ print_error(int param)
     case 6:
       printf(_("Error: Paper out\n"));
       break;
+    case 0xc:
+      printf(_("Error: Miscellaneous paper error\n"));
+      break;
+    case 0x10:
+      printf(_("Error: Maintenance cartridge overflow\n"));
+      break;
     case 0x11:
       printf(_("Error: Wait return from the tear-off position\n"));
       break;
     case 0x12:
       printf(_("Error: Double feed error\n"));
       break;
+    case 0x1a:
+      printf(_("Error: Ink cartridge lever released\n\n"));
+      break;
     case 0x1c:
       printf(_("Error: Unrecoverable cutter error\n"));
       break;
     case 0x1d:
       printf(_("Error: Recoverable cutter jam\n"));
+      break;
+    case 0x22:
+      printf(_("Error: No maintenance cartridge present\n"));
+      break;
+    case 0x25:
+      printf(_("Error: Rear cover open\n"));
       break;
     case 0x29:
       printf(_("Error: CD Tray Out\n"));
@@ -1094,9 +1110,56 @@ print_error(int param)
     case 0x2b:
       printf(_("Error: Tray cover open\n"));
       break;
+    case 0x36:
+      printf(_("Error: Maintenance cartridge cover open\n"));
+      break;
+    case 0x37:
+      printf(_("Error: Front cover open\n"));
+      break;
+    case 0x41:
+      printf(_("Error: Maintenance request\n"));
+      break;
     default:
       printf(_("Error: Unknown (%d)\n"), param);
       break;
+    }
+}
+
+static void
+print_warning(int param, const stp_string_list_t *color_list)
+{
+  if (param >= 0x10 && param < 0x20)
+    {
+      param &= 0xf;
+      if (color_list && param < stp_string_list_count(color_list))
+	printf(_("Warning: %s Ink Low\n"),
+	       gettext(stp_string_list_param(color_list, param)->text));
+      else
+	printf(_("Warning: Channel %d Ink Low\n"), param);
+    }
+  else if (param >= 0x50 && param < 0x60)
+    {
+      param &= 0xf;
+      if (color_list && param < stp_string_list_count(color_list))
+	printf(_("Warning: %s Cleaning Disabled\n"),
+	       gettext(stp_string_list_param(color_list, param)->text));
+      else
+	printf(_("Warning: Channel %d Cleaning \n"), param);
+    }
+  else
+    {
+      switch (param)
+	{
+	case 0x20:
+	  printf(_("Warning: Maintenance cartridge near full\n"));
+	  break;
+	case 0x21:
+	  printf(_("Warning: Maintenance request pending\n"));
+	  break;
+	default:
+	  printf(_("Warning: Unknown (%d)\n"), param);
+	  break;
+	}
     }
 }
 
@@ -1224,7 +1287,16 @@ do_new_status(status_cmd_t cmd, char *buf, int bytes,
   int i = 0;
   int j;
   const char *ind;
+  const stp_string_list_t *color_list = NULL;
+  stp_parameter_t desc;
+  const stp_vars_t *printvars = stp_printer_get_defaults(printer);
+  stp_describe_parameter(printvars, "ChannelNames", &desc);
+  if (desc.p_type == STP_PARAMETER_TYPE_STRING_LIST)
+    color_list = desc.bounds.str;
   STP_DEBUG(fprintf(stderr, "New format bytes: %d bytes\n", bytes));
+  if (cmd == CMD_STATUS)
+    printf(_("Printer Name: %s\n"),
+	    printer ? stp_printer_get_long_name(printer) : _("Unknown"));
   while (i < bytes)
     {
       unsigned hdr = buf[i];
@@ -1249,7 +1321,7 @@ do_new_status(status_cmd_t cmd, char *buf, int bytes,
 		printf("%18s    %20d\n",
 		       gettext(aux_colors[(int) ind[1]]), ind[2]);
 	      else
-		printf("%8s 0x%2x 0x%2x    %20d\n",
+		printf("%8s 0x%02x 0x%02x    %20d\n",
 		       _("Unknown"), (unsigned char) ind[0],
 		       (unsigned char) ind[1], ind[2]);
 	      ind += param;
@@ -1271,42 +1343,11 @@ do_new_status(status_cmd_t cmd, char *buf, int bytes,
 	      print_self_printing_state(param);
 	      break; 
 	    case 0x4:	/* Warning */
-#if 0
-	      /*
-	       * Bits mean different things on different printers
-	       * Need to figure out how to do this...
-	       * Maybe we don't really need to, since we're also
-	       * printing out ink levels
-	       */
-	      for (j = 0; j < total_param_count; i++)
+	      for (j = 0; j < total_param_count; j++)
 		{
 		  param = (unsigned) buf[i + j + 2];
-		  switch (param)
-		    {
-		    case 0x10:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    case 0x11:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    case 0x12:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    case 0x13:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    case 0x14:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    case 0x15:
-		      printf(_("Warning: Black Ink Low\n"));
-		      break;
-		    default:
-		      printf(_("Warning: Unknown (%d)\n"), param);
-		      break;
-		    }
+		  print_warning(param, color_list);
 		}
-#endif
 	      break;
 	    case 0x19:	/* Job name */
 	      if (total_param_count > 5)
@@ -1324,6 +1365,7 @@ do_new_status(status_cmd_t cmd, char *buf, int bytes,
 	}
       i += total_param_count + 2;
     }
+  stp_parameter_description_destroy(&desc);
   exit(0);
 }
 

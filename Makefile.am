@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-## $Id: Makefile.am,v 1.151 2008/04/12 22:41:01 rlk Exp $
+## $Id: Makefile.am,v 1.154 2008/10/06 12:38:07 rlk Exp $
 ## Copyright (C) 2000-2004 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -30,6 +30,7 @@ include $(top_srcdir)/scripts/global.mk
 SUBDIRS = include src samples test po man doc scripts
 DISTDIRS = m4 m4extra
 
+docdir = $(datadir)/$(PACKAGE)/doc
 
 ## Rules
 
@@ -37,6 +38,17 @@ DISTDIRS = m4 m4extra
 libtool: $(LIBTOOL_DEPS)
 	cd $(srcdir); \
 	$(SHELL) ./config.status --recheck
+
+# Don't list ChangeLog as a dependency here because it forces network
+# access, and because it usually runs as superuser rather than the user
+# who normally builds Gutenprint.
+install-data-local: NEWS AUTHORS COPYING README
+	$(mkdir_p) $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) $(srcdir)/NEWS $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) $(srcdir)/ChangeLog $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) $(srcdir)/AUTHORS $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) $(srcdir)/COPYING $(DESTDIR)$(docdir)
+	$(INSTALL_DATA) $(srcdir)/README $(DESTDIR)$(docdir)
 
 # This rather strange-looking code ensures that the change log is only
 # rebuilt if any of the CVS/Entries files have changed since the change log
@@ -60,7 +72,7 @@ ChangeLog: ChangeLogStamp
 	  echo "ChangeLog: .noupdate found: NOT updating ChangeLog from CVS" ; \
 	elif test -d CVS ; then \
 	  echo "ChangeLog: Updating ChangeLog from CVS" ; \
-	  cvs log | $(PERL) scripts/mkchlog > ChangeLog.tmp ; \
+	  cvs log | $(PERL) scripts/mkchlog -e @sourceforge.net -X src/xml/escp2/resolutions -s '^(guten|gimp-|)print-[0-9]+_' > ChangeLog.tmp ; \
 	  if test -s ChangeLog.tmp ; then \
 	    mv ChangeLog.tmp ChangeLog ; \
 	  else \
@@ -196,7 +208,7 @@ MAINTAINERCLEANFILES = \
 	$(CLEANMFOUR) \
 	$(CLEANPO)
 
-EXTRA_DIST = autogen.sh ChangeLogStamp
+EXTRA_DIST = autogen.sh ChangeLogStamp README.package
 
 .PHONY: deb html install-cups install-gimp install-ghost snapshot ChangeLogPhony dist-time-check
 

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-pcl.c,v 1.150 2008/04/26 01:15:11 rlk Exp $"
+ * "$Id: print-pcl.c,v 1.156 2008/08/06 22:49:05 rlk Exp $"
  *
  *   Print plug-in HP PCL driver for the GIMP.
  *
@@ -37,7 +37,6 @@
 #include <string.h>
 
 /* #define DEBUG */
-/* #define PCL_DEBUG_DISABLE_COMPRESSION */
 /* #define PCL_DEBUG_DISABLE_BLANKLINE_REMOVAL */
 
 /*
@@ -274,26 +273,16 @@ static const pcl_t pcl_resolutions[] =
 };
 #define NUM_RESOLUTIONS		(sizeof(pcl_resolutions) / sizeof (pcl_t))
 
-static void
-pcl_describe_resolution(const stp_vars_t *v, int *x, int *y)
+static const pcl_t pcl_qualities[] =
 {
-  int i;
-  const char *resolution = stp_get_string_parameter(v, "Resolution");
-  if (resolution)
-    {
-      for (i = 0; i < NUM_RESOLUTIONS; i++)
-	{
-	  if (!strcmp(resolution, pcl_resolutions[i].pcl_name))
-	    {
-	      *x = pcl_resolutions[i].p0;
-	      *y = pcl_resolutions[i].p1;
-	      return;
-	    }
-	}
-    }
-  *x = -1;
-  *y = -1;
-}
+    { "Draft", N_("Draft"), PCL_RES_150_150, 150, 150},
+    { "Standard", N_("Standard"), PCL_RES_300_300, 300, 300},
+    { "High", N_("High"), PCL_RES_600_600, 600, 600},
+    { "High", N_("Standard"), PCL_RES_600_300, 600, 300},
+    { "Photo", N_("Photo"), PCL_RES_1200_600, 1200, 600},
+    { "Photo", N_("Photo"), PCL_RES_2400_600, 2400, 600},
+};
+#define NUM_QUALITIES		(sizeof(pcl_qualities) / sizeof (pcl_t))
 
 typedef struct {
   int top_margin;
@@ -1264,49 +1253,55 @@ static const stp_parameter_t the_parameters[] =
     "PageSize", N_("Page Size"), N_("Basic Printer Setup"),
     N_("Size of the paper being printed to"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "MediaType", N_("Media Type"), N_("Basic Printer Setup"),
     N_("Type of media (plain paper, photo paper, etc.)"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InputSlot", N_("Media Source"), N_("Basic Printer Setup"),
     N_("Source (input slot) of the media"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
+  },
+  {
+    "Quality", N_("Print Quality"), N_("Basic Output Adjustment"),
+    N_("Print Quality"),
+    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 0, 0
   },
   {
     "Resolution", N_("Resolution"), N_("Basic Printer Setup"),
-    N_("Resolution and quality of the print"),
+    N_("Resolution of the print"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InkType", N_("Ink Type"), N_("Advanced Printer Setup"),
     N_("Type of ink in the printer"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InkChannels", N_("Ink Channels"), N_("Advanced Printer Functionality"),
     N_("Ink Channels"),
     STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, -1, 0, 0
+    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, STP_CHANNEL_NONE, 0, 0
   },
   {
     "PrintingMode", N_("Printing Mode"), N_("Core Parameter"),
     N_("Printing Output Mode"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Duplex", N_("Double-Sided Printing"), N_("Basic Printer Setup"),
     N_("Duplex/Tumble Setting"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
 };
 
@@ -1358,18 +1353,18 @@ static const float_param_t float_parameters[] =
   },
   {
     {
-      "LightCyanTransition", N_("Light Cyan Transition"), N_("Advanced Ink Adjustment"),
+      "LightCyanTrans", N_("Light Cyan Transition"), N_("Advanced Ink Adjustment"),
       N_("Light Cyan Transition"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, -1, 1, 0
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
     }, 0.0, 5.0, 1.0, 1
   },
   {
     {
-      "LightMagentaTransition", N_("Light Magenta Transition"), N_("Advanced Ink Adjustment"),
+      "LightMagentaTrans", N_("Light Magenta Transition"), N_("Advanced Ink Adjustment"),
       N_("Light Magenta Transition"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, -1, 1, 0
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
     }, 0.0, 5.0, 1.0, 1
   },
 };
@@ -1489,6 +1484,51 @@ pcl_get_model_capabilities(int model)	/* I: Model */
   }
   stp_erprintf("pcl: model %d not found in capabilities list.\n",model);
   return &(pcl_model_capabilities[0]);
+}
+
+/*
+ * Determine the current resolution based on quality and resolution settings
+ */
+
+static void
+pcl_describe_resolution(const stp_vars_t *v, int *x, int *y)
+{
+  int i;
+  int model = stp_get_model_id(v);
+  const char *resolution = stp_get_string_parameter(v, "Resolution");
+  const char *quality;
+  const pcl_cap_t *caps = NULL;
+  if (resolution)
+    {
+      for (i = 0; i < NUM_RESOLUTIONS; i++)
+	{
+	  if (!strcmp(resolution, pcl_resolutions[i].pcl_name))
+	    {
+	      *x = pcl_resolutions[i].p0;
+	      *y = pcl_resolutions[i].p1;
+	      return;
+	    }
+	}
+    }
+  quality = stp_get_string_parameter(v, "Quality");
+  caps = pcl_get_model_capabilities(model);
+  if (quality && strcmp(quality, "None") == 0)
+    quality = "Standard";
+  if (quality)
+    {
+      for (i = 0; i < NUM_QUALITIES; i++)
+	{
+	  if ((caps->resolutions & pcl_qualities[i].pcl_code) &&
+	      !strcmp(quality, pcl_qualities[i].pcl_name))
+	    {
+	      *x = pcl_qualities[i].p0;
+	      *y = pcl_qualities[i].p1;
+	      return;
+	    }
+	}
+    }
+  *x = -1;
+  *y = -1;
 }
 
 /*
@@ -1662,6 +1702,14 @@ pcl_parameters(const stp_vars_t *v, const char *name,
   stp_deprintf(STP_DBG_PCL, "Resolutions: %d\n", caps->resolutions);
   stp_deprintf(STP_DBG_PCL, "ColorType = %d, PrinterType = %d\n", caps->color_type, caps->stp_printer_type);
 
+  for (i = 0; i < the_parameter_count; i++)
+    if (strcmp(name, the_parameters[i].name) == 0)
+      {
+	stp_fill_parameter_settings(description, &(the_parameters[i]));
+	break;
+      }
+  description->deflt.str = NULL;
+
   for (i = 0; i < float_parameter_count; i++)
     if (strcmp(name, float_parameters[i].param.name) == 0)
       {
@@ -1670,15 +1718,8 @@ pcl_parameters(const stp_vars_t *v, const char *name,
 	description->deflt.dbl = float_parameters[i].defval;
 	description->bounds.dbl.upper = float_parameters[i].max;
 	description->bounds.dbl.lower = float_parameters[i].min;
-      }
-
-  for (i = 0; i < the_parameter_count; i++)
-    if (strcmp(name, the_parameters[i].name) == 0)
-      {
-	stp_fill_parameter_settings(description, &(the_parameters[i]));
 	break;
       }
-  description->deflt.str = NULL;
 
   if (strcmp(name, "PageSize") == 0)
     {
@@ -1735,15 +1776,11 @@ pcl_parameters(const stp_vars_t *v, const char *name,
   else if (strcmp(name, "Resolution") == 0)
   {
     description->bounds.str = stp_string_list_create();
-    description->deflt.str = NULL;
+    stp_string_list_add_string(description->bounds.str, "None", _("Default"));
+    description->deflt.str = "None";
     for (i = 0; i < NUM_RESOLUTIONS; i++)
       if (caps->resolutions & pcl_resolutions[i].pcl_code)
 	{
-	  if (pcl_resolutions[i].pcl_code >= PCL_RES_300_300 &&
-	      description->deflt.str == NULL)
-	    description->deflt.str =
-	      pcl_val_to_string(pcl_resolutions[i].pcl_code,
-				pcl_resolutions, NUM_RESOLUTIONS);
 	  stp_string_list_add_string
 	    (description->bounds.str,
 	     pcl_val_to_string(pcl_resolutions[i].pcl_code,
@@ -1751,8 +1788,31 @@ pcl_parameters(const stp_vars_t *v, const char *name,
 	     pcl_val_to_text(pcl_resolutions[i].pcl_code,
 			     pcl_resolutions, NUM_RESOLUTIONS));
 	}
-    if (description->deflt.str == NULL)
-      stp_erprintf("No default resolution set!\n");
+  }
+  else if (strcmp(name, "Quality") == 0)
+  {
+    int has_standard_quality = 0;
+    description->bounds.str = stp_string_list_create();
+    stp_string_list_add_string(description->bounds.str, "None",
+			       _("Manual Control"));
+    for (i = 0; i < NUM_QUALITIES; i++)
+      if (caps->resolutions & pcl_qualities[i].pcl_code)
+	{
+	  const char *qual =
+	    pcl_val_to_string(pcl_qualities[i].pcl_code,
+			      pcl_qualities, NUM_QUALITIES);
+	  if (! stp_string_list_is_present(description->bounds.str, qual))
+	    stp_string_list_add_string
+	      (description->bounds.str, qual,
+	       pcl_val_to_text(pcl_qualities[i].pcl_code,
+			       pcl_qualities, NUM_QUALITIES));
+	  if (strcmp(qual, "Standard") == 0)
+	    has_standard_quality = 1;
+	}
+    if (has_standard_quality)
+      description->deflt.str = "Standard";
+    else
+      description->deflt.str = "None";
   }
   else if (strcmp(name, "InkType") == 0)
   {
@@ -1815,8 +1875,8 @@ pcl_parameters(const stp_vars_t *v, const char *name,
       else
 	description->is_active = 0;
     }
-  else if (strcmp(name, "LightCyanTransition") == 0 ||
-	   strcmp(name, "LightMagentaTransition") == 0)
+  else if (strcmp(name, "LightCyanTrans") == 0 ||
+	   strcmp(name, "LightMagentaTrans") == 0)
     {
       if (caps->color_type & PCL_COLOR_CMYKcm &&
 	  stp_check_string_parameter(v, "PrintingMode", STP_PARAMETER_DEFAULTED) &&
@@ -2100,11 +2160,9 @@ get_double_param(stp_vars_t *v, const char *param)
 static int
 pcl_do_print(stp_vars_t *v, stp_image_t *image)
 {
-  int i;
   pcl_privdata_t privdata;
   int		status = 1;
   int		model = stp_get_model_id(v);
-  const char	*resolution = stp_get_string_parameter(v, "Resolution");
   const char	*media_size = stp_get_string_parameter(v, "PageSize");
   const char	*media_type = stp_get_string_parameter(v, "MediaType");
   const char	*media_source = stp_get_string_parameter(v, "InputSlot");
@@ -2175,24 +2233,14 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
   * Figure out the output resolution...
   */
 
-  xdpi = 0;
-  ydpi = 0;
-  if (resolution)
-    {
-      for (i = 0; i < NUM_RESOLUTIONS; i++)
-	{
-	  if (!strcmp(resolution, pcl_resolutions[i].pcl_name))
-	    {
-	      xdpi = pcl_resolutions[i].p0;
-	      ydpi = pcl_resolutions[i].p1;
-	      break;
-	    }
-	}
-    }
+  pcl_describe_resolution(v, &xdpi, &ydpi);
 
   stp_deprintf(STP_DBG_PCL,"pcl: resolution=%dx%d\n",xdpi,ydpi);
-  if (xdpi == 0 || ydpi == 0)
-    return 0;
+  if (xdpi <= 0 || ydpi <= 0)
+    {
+      stp_eprintf(v, "No resolution found; cannot print.\n");
+      return 0;
+    }
 
  /*
   * Choose the correct color conversion function...
@@ -2498,13 +2546,12 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
     }
   }
 
-#ifndef PCL_DEBUG_DISABLE_COMPRESSION
-  if ((caps->stp_printer_type & PCL_PRINTER_TIFF) == PCL_PRINTER_TIFF)
+  if ((caps->stp_printer_type & PCL_PRINTER_TIFF) == PCL_PRINTER_TIFF &&
+      !(stp_get_debug_level() & STP_DBG_NO_COMPRESSION))
   {
     stp_puts("\033*b2M", v);			/* Mode 2 (TIFF) */
   }
   else
-#endif
   {
     stp_puts("\033*b0M", v);			/* Mode 0 (no compression) */
   }
@@ -2615,14 +2662,13 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
 
 /* Allocate buffer for pcl_mode2 tiff compression */
 
-#ifndef PCL_DEBUG_DISABLE_COMPRESSION
-  if ((caps->stp_printer_type & PCL_PRINTER_TIFF) == PCL_PRINTER_TIFF)
+  if ((caps->stp_printer_type & PCL_PRINTER_TIFF) == PCL_PRINTER_TIFF &&
+      !(stp_get_debug_level() & STP_DBG_NO_COMPRESSION))
   {
     privdata.comp_buf = stp_malloc((privdata.height + 128 + 7) * 129 / 128);
     privdata.writefunc = pcl_mode2;
   }
   else
-#endif
   {
     privdata.comp_buf = NULL;
     privdata.writefunc = pcl_mode0;
@@ -2722,12 +2768,12 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
   if (lcyan)
     stp_channel_set_density_adjustment
       (v, STP_ECOLOR_C, 1, (get_double_param(v, "CyanDensity") *
-			get_double_param(v, "LightCyanTransition") *
+			get_double_param(v, "LightCyanTrans") *
 			get_double_param(v, "Density")));
   if (lmagenta)
     stp_channel_set_density_adjustment
       (v, STP_ECOLOR_M, 1, (get_double_param(v, "MagentaDensity") *
-			get_double_param(v, "LightMagentaTransition") *
+			get_double_param(v, "LightMagentaTrans") *
 			get_double_param(v, "Density")));
 
 

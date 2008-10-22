@@ -1,4 +1,4 @@
-/* $Id: unprint.c,v 1.39 2008/01/27 21:28:08 rlk Exp $ */
+/* $Id: unprint.c,v 1.42 2008/07/18 02:03:48 rlk Exp $ */
 /*
  * Generate PPM files from printer output
  *
@@ -87,7 +87,7 @@ typedef struct {
  * actually read in the data.  This optimization may be worthwhile.
  */
 
-#define MAX_INKS 12
+#define MAX_INKS 20
 typedef struct {
    unsigned char *line[MAX_INKS];
    int startx[MAX_INKS];
@@ -115,10 +115,10 @@ line_type **page=NULL;
 
 /* Color Codes:
    color    Epson1  Epson2   Sequential
-   Black    0       0        0
-   Magenta  1       1        1
-   Cyan     2       2        2
-   Yellow   4       4        3
+   Black    0       0        0/16
+   Magenta  1       1        1/17
+   Cyan     2       2        2/18
+   Yellow   4       4        3/19
    L.Mag.   17      257      4
    L.Cyan   18      258      5
    L.Black  16      256      6
@@ -128,6 +128,7 @@ line_type **page=NULL;
    P.Black  64      N/A      0
    Gloss    9       N/A      10
    LL.Black 48      768      11
+   Orange   10       N/A     12
  */
 
 /* convert either Epson1 or Epson2 color encoding into a sequential encoding */
@@ -137,7 +138,6 @@ seqcolor(int c)
   switch (c)
     {
     case 0:
-    case 64:
       return 0;
     case 1:
       return 1;
@@ -166,6 +166,16 @@ seqcolor(int c)
     case 48:
     case 768:
       return 11;
+    case 10:
+      return 12;
+    case 64:
+      return 16;
+    case 65:
+      return 17;
+    case 66:
+      return 18;
+    case 68:
+      return 19;
     default:
       return 0;
     }
@@ -273,18 +283,27 @@ set_bits(unsigned char *p,int idx,int value)
 }
 
 static float ink_colors[MAX_INKS][4] =
-{{ 0,   0,  0,  1 },		/* K */
- { 1,  .1,  1,  1 },		/* M */
- { .1, .7, .7,  1 },		/* C */
- { 1,   1, .1,  1 },		/* Y */
- { 1,  .7,  1,  1 },		/* m */
- { .4,  1,  1,  1 },		/* c */
- { .7, .7, .7,  1 },		/* k */
- { .7, .7,  0,  1 },		/* dY */
- { 1,   0,  0,  1 },		/* R */
- { 0,   0,  1,  1 },		/* B */
- { 1,   1,  1,  1 },		/* Gloss */
- { .8, .8, .8,  1 },		/* llk */
+/* C(R) M(G) Y(B) K(W) */
+{{ 0,   0,   0,   1 },		/* 0  K */
+ { 1,    .1, 1,   1 },		/* 1  M */
+ {  .1, 1,   1,   1 },		/* 2  C */
+ { 1,   1,    .1, 1 },		/* 3  Y */
+ { 1,    .7, 1,   1 },		/* 4  m */
+ {  .4, 1,   1,   1 },		/* 5  c */
+ {  .7,  .7,  .7, 1 },		/* 6  k */
+ {  .7,  .7, 0,   1 },		/* 7  dY */
+ { 1,   0,   0,   1 },		/* 8  R */
+ { 0,   0,   1,   1 },		/* 8  B */
+ { 1,   1,   1,   1 },		/* 10 Gloss */
+ {  .8,  .8,  .8, 1 },		/* 11 llk */
+ {  .9,  .3, 0,   1 },		/* 12 Orange */
+ { 0,   0,   0,   1 },		/* 13 K */
+ { 0,   0,   0,   1 },		/* 14 K */
+ { 0,   0,   0,   1 },		/* 15 K */
+ { 0,   0,   0,   1 },		/* 16 K */
+ { 1,    .1, 1,   1 },		/* 17 M */
+ {  .1, 1,   1,   1 },		/* 18 C */
+ { 1,   1,    .1, 1 },		/* 19 Y */
 };
 
 static float quadtone_inks[] = { 0.0, .25, .5, .75 };
@@ -1040,6 +1059,7 @@ parse_escp2_extended(FILE *fp_r)
 
       break;
     case 's':		/* Set print speed */
+    case 'm':		/* Set paper type */
       break;
     case 'S': /* set paper dimensions */
       switch (bufsize)

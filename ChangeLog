@@ -1,4 +1,3756 @@
 ===============================================================================
+Name: gutenprint-5_2_1
+
+2008-10-19	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.53) (+2747 -2447)
+		po/da.po (1.94) (+2745 -2448)
+		po/de.po (1.67) (+2738 -2447)
+		po/el.po (1.68) (+2747 -2447)
+		po/en_GB.po (1.161) (+2749 -2447)
+		po/es.po (1.66) (+2747 -2447)
+		po/fr.po (1.94) (+2749 -2447)
+		po/hu.po (1.25) (+2749 -2447)
+		po/ja.po (1.62) (+2747 -2447)
+		po/nb.po (1.27) (+2749 -2447)
+		po/nl.po (1.77) (+2745 -2448)
+		po/pl.po (1.72) (+2747 -2447)
+		po/pt.po (1.67) (+2747 -2447)
+		po/sk.po (1.71) (+2747 -2447)
+		po/sv.po (1.97) (+2750 -2448)
+		po/zh_TW.po (1.27) (+2747 -2447)
+
+	Gutenprint 5.2.1 release
+
+2008-10-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.398) (+1 -1)
+		configure.ac (1.205) (+4 -4)
+
+	Fix release that didn't get bumped.
+
+2008-10-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.397) (+2 -2)
+		README (1.196) (+15 -15)
+		configure.ac (1.204) (+4 -4)
+
+	Prep for 5.2.1 release
+
+2008-10-19	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.93) (+1209 -1122)
+		po/nl.po (1.76) (+1243 -1137)
+
+	Update Danish, Dutch translation
+
+2008-10-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.396) (+141 -19)
+		doc/gutenprint-users-manual.odt (1.5) (+356 -472)
+		doc/gutenprint-users-manual.pdf (1.5) (+3820 -2943)
+		src/foomatic/foomatic-generator.in (1.66) (+5 -4)
+		src/foomatic/foomatic-printermap (1.179) (+49 -0)
+		src/foomatic/printers.c (1.13) (+3 -1)
+		src/xml/escp2/inks/Makefile.am (1.5) (+4 -1)
+		src/xml/escp2/inks/nx100.xml (1.1) (added)
+		src/xml/escp2/inks/wf40.xml (1.1) (added)
+		src/xml/escp2/inks/wf500.xml (1.1) (added)
+		src/xml/escp2/media/Makefile.am (1.8) (+2 -1)
+		src/xml/escp2/media/c120.xml (1.12) (+48 -0)
+		src/xml/escp2/media/wf500.xml (1.1) (added)
+		src/xml/escp2/model/Makefile.am (1.9) (+4 -2)
+		src/xml/escp2/model/model_92.xml (1.2) (+108 -44)
+		src/xml/escp2/model/model_93.xml (1.1) (added)
+		src/xml/escp2/model/model_94.xml (1.1) (added)
+		src/xml/escp2/qualitypresets/Makefile.am (1.2) (+3 -2)
+		src/xml/escp2/qualitypresets/wf40.xml (1.1) (added)
+		src/xml/printers.xml (1.19) (+51 -1)
+		test/run-weavetest (1.27) (+3 -3)
+
+	   1) Preliminary support for the following printers.  These printers
+	      may be retuned for improved quality or performance in future
+	      releases.
+
+	      Epson inkjet printers:
+
+		Epson PictureMate 215
+		Epson PX 101
+		Epson PX 201
+		Epson PX 601F
+		Epson Stylus CX9300F
+		Epson Stylus CX9400F
+		Epson Stylus CX9475F
+		Epson Stylus DX9400F
+		Epson Stylus NX200
+		Epson Stylus NX400
+		Epson Stylus Photo R290
+		Epson Stylus Photo RX610
+		Epson Stylus Photo RX690
+		Epson Stylus Office B30
+		Epson Stylus Office B33
+		Epson Stylus Office B40W
+		Epson Stylus Office T30
+		Epson Stylus Office T33
+		Epson Stylus Office T40W
+		Epson Stylus Office BX300F
+		Epson Stylus Office BX600FW
+		Epson Stylus Office SX600FW
+		Epson Stylus Office TX300F
+		Epson Stylus Office TX600FW
+		Epson Stylus SX200
+		Epson Stylus SX205
+		Epson Stylus SX400
+		Epson Stylus SX405
+		Epson Stylus TX200
+		Epson Stylus TX400
+		Epson ME Office 70
+		Epson ME Office 80W
+		Epson ME Office 700FW
+		Epson WorkForce 30
+		Epson WorkForce 40
+		Epson WorkForce 500
+		Epson WorkForce 600
+
+	   2) Experimental support for the following printers.  These printers
+	      may not function correctly, and may be retuned for improved
+	      quality or performance in future releases.
+
+	      Epson inkjet printers:
+
+		Epson Artisan 700
+		Epson Artisan 800
+		Epson Stylus NX100
+		Epson Stylus NX300
+		Epson Stylus PX700FW
+		Epson Stylus PX800FW
+		Epson Stylus S20
+		Epson Stylus SX100
+		Epson Stylus SX105
+		Epson Stylus T20
+		Epson Stylus TX100
+		Epson Stylus Photo TX700W
+		Epson Stylus Photo TX800W
+
+2008-10-12	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.92) (+81 -183)
+		po/nl.po (1.75) (+98 -237)
+
+	Update Dutch and Danish translations
+
+2008-10-11	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.178) (+1 -0)
+		src/xml/printers.xml (1.18) (+2 -1)
+
+	Add Epson DX9400F
+
+2008-10-06	<rlk@sourceforge.net>
+
+	Files:	Makefile.am (1.154) (+13 -1)
+
+	Install ChangeLog, NEWS, AUTHORS, COPYING, and README into
+	documentation.
+
+===============================================================================
+Name: gutenprint-5_2_0-rc1
+
+2008-10-05	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.395) (+0 -4)
+
+	CUPS progress messages on OS X do not appear to be fully fixed.
+
+2008-10-04	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.52) (+1 -1)
+		po/da.po (1.91) (+1 -1)
+		po/de.po (1.66) (+1 -1)
+		po/el.po (1.67) (+1 -1)
+		po/en_GB.po (1.160) (+1 -1)
+		po/es.po (1.65) (+1 -1)
+		po/fr.po (1.93) (+1 -1)
+		po/hu.po (1.24) (+1 -1)
+		po/ja.po (1.61) (+1 -1)
+		po/nb.po (1.26) (+1 -1)
+		po/nl.po (1.74) (+1 -1)
+		po/pl.po (1.71) (+1 -1)
+		po/pt.po (1.66) (+1 -1)
+		po/sk.po (1.70) (+1 -1)
+		po/sv.po (1.96) (+2 -2)
+		po/zh_TW.po (1.26) (+1 -1)
+
+	Gutenprint 5.2.0-rc1 release
+
+2008-10-04	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.136) (+7 -5)
+
+	ATTR messages shouldn't be printed when suppress_messages is in
+	effect.
+
+2008-10-03	<easysw@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.135) (+5 -5)
+
+	Sigh...  Need to pass message catalog to stp_i18n_printf(), and between the
+	compiler not erroring out and the verbosity of the build I did not see the
+	warning...
+
+2008-10-03	<easysw@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.134) (+6 -6)
+
+	Use stp_i18n_printf() for INFO: messages, otherwise they won't be localized.
+
+2008-10-03	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.394) (+5 -1)
+
+	Force stderr to be unbuffered to ensure status messages get reported
+	on OS X.
+
+2008-10-03	<easysw@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.133) (+9 -2)
+
+	Don't buffer stderr so we get progress updates.
+
+2008-09-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/Makefile.am (1.8) (+3 -2)
+
+	Don't remove model_92 from the distribution even though it's currently
+	not used; it will cause confusion at a later date.
+
+2008-09-28	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.393) (+24 -2)
+		src/xml/escp2/model/Makefile.am (1.7) (+2 -3)
+		src/xml/printers.xml (1.17) (+4 -4)
+
+	Fix colors at 720 DPI and below on more Epson printers
+
+2008-09-28	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_65.xml (1.12) (+4 -12)
+
+	Redo fix 2034454 Epson DX7400 colours wrong below 1440dpi
+
+2008-09-25	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.170) (+365 -466)
+
+	Revert to 5.2.0-beta4 version.
+
+2008-09-22	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.53) (+3 -1)
+
+	Function correctly if there is no driver_bin installed but one is
+	specified on the command line.
+
+2008-09-22	<easysw@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.118) (+4 -4)
+
+	Get po files from srcdir...
+
+2008-09-20	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.392) (+164 -10)
+		README (1.195) (+7 -0)
+		README.package (1.2) (+102 -23)
+
+	Release note updates
+
+2008-09-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.52) (+14 -4)
+
+	Preserve original language in *StpLocale when updating a PPD file, to
+	allow -loriginal to return to original language.
+
+2008-09-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.169) (+466 -365)
+
+	Accept driver syntax in genppd.
+
+2008-09-17	<mbroughtn@sourceforge.net>
+
+	Files:	man/cups-genppd.8.in (1.6) (+2 -2)
+
+	Correct example.  Model lists now show Epson rather than EPSON printers.
+
+2008-09-17	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.391) (+7 -0)
+		doc/gutenprint-users-manual.odt (1.4) (+495 -479)
+		doc/gutenprint-users-manual.pdf (1.4) (+2896 -2908)
+
+	Miscellaneous updates
+
+2008-09-13	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.390) (+1 -1)
+		doc/gutenprint-users-manual.odt (1.3) (+744 -1064)
+		doc/gutenprint-users-manual.pdf (1.3) (+3793 -4813)
+		src/foomatic/foomatic-generator.in (1.65) (+41 -24)
+		src/foomatic/printers.c (1.12) (+2 -1)
+
+	Update manual and release notes.
+
+2008-09-13	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.389) (+849 -1152)
+
+	Start prep for 5.2 release.
+
+2008-09-13	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.203) (+3 -3)
+
+	Bump version
+
+2008-09-09	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.16) (+3 -3)
+
+	Fix the DX8400/DX8450 in addition to the CX8400.
+
+2008-09-03	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_91.xml (1.7) (+1 -1)
+
+	Fix CD position for R1900.
+
+2008-08-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.132) (+12 -9)
+
+	More correct way of specifying page dimensions.
+
+2008-08-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.11) (+3 -1)
+
+	Add -o option to specify command line options.
+
+2008-08-20	<rlk@sourceforge.net>
+
+	Files:	src/main/channel.c (1.30) (+14 -8)
+
+	Only retrieve the cyan, magenta, and yellow balances once rather than
+	each time through the loop.
+
+2008-08-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.10) (+40 -7)
+
+	Add -m argument to generate MD5 checksums.
+
+	Add -O argument to generate output.
+
+	Add -n argument to optionally not create PPD files.
+
+2008-08-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.131) (+15 -3)
+
+	[ 2058858 ] HP 870 truncates legal page
+
+	Print Gutenprint error messages as errors rather than as debug2's.
+
+	Fix is to explicitly set the page height and width in addition to the
+	page size.  This is an undocumented API wart that we should fix at
+	some point.
+
+===============================================================================
+Name: gutenprint-5_2_0-beta4
+
+2008-08-18	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.51) (+2922 -2899)
+		po/da.po (1.90) (+3065 -2945)
+		po/de.po (1.65) (+2933 -2910)
+		po/el.po (1.66) (+2923 -2900)
+		po/en_GB.po (1.159) (+2914 -2878)
+		po/es.po (1.64) (+2922 -2899)
+		po/fr.po (1.92) (+2927 -2889)
+		po/hu.po (1.23) (+2927 -2889)
+		po/ja.po (1.60) (+2922 -2899)
+		po/nb.po (1.25) (+2924 -2900)
+		po/nl.po (1.73) (+3099 -2960)
+		po/pl.po (1.70) (+2923 -2900)
+		po/pt.po (1.65) (+2923 -2900)
+		po/sk.po (1.69) (+2922 -2899)
+		po/sv.po (1.95) (+2928 -2890)
+		po/zh_TW.po (1.25) (+2919 -2898)
+
+	Gutenprint 5.2.0-beta4 release
+
+2008-08-18	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.388) (+6 -0)
+		src/main/print-ps.c (1.101) (+58 -21)
+		src/main/xmlppd.c (1.3) (+17 -0)
+
+	[ 1973668 ] Print preview does not correctly handle absence of PPD
+
+2008-08-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.387) (+40 -39)
+		README (1.194) (+2 -2)
+		src/foomatic/foomatic-printermap (1.177) (+1 -0)
+		src/xml/printers.xml (1.15) (+2 -1)
+
+	Add Epson CX5500.
+
+	Drop support for OS X 10.2.
+
+2008-08-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/i18n.c (1.6) (+3 -3)
+
+	Fix minor typo.
+
+2008-08-16	<easysw@sourceforge.net>
+
+	Files:	src/cups/i18n.c (1.5) (+12 -8)
+
+	Clean up fuzzy translation check, since "fuzzy" doesn't have to be the
+	first flag on the comment line.  Still need to decide if this is the right
+	thing to do or change the msgmerge options to not add fuzzies in the first
+	place...
+
+2008-08-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/i18n.c (1.4) (+10 -4)
+
+	Don't translate fuzzy translations.
+
+2008-08-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.117) (+2 -2)
+
+	Fix syntax error.
+
+2008-08-16	<easysw@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.116) (+1 -4)
+
+	Drop old reference to cups_bundledir...
+
+2008-08-15	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.115) (+4 -4)
+
+	Distribute i18n.h.
+
+2008-08-14	<tillkamppeter@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.14) (+16 -16)
+
+	Replaced more "Okidata" by "Oki", to assure that also CUPS Raster PPDs use "Oki" as manufacturer name.
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.9) (+2 -0)
+
+	Build PPD files before running.
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.176) (+15 -15)
+
+	Change Okidata to Oki per Till.
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.114) (+19 -9)
+		src/cups/cups-genppdupdate.in (1.51) (+7 -2)
+
+	Correctly install PPD files when required
+
+2008-08-14	<easysw@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.168) (+6 -3)
+
+	Re-commit LanguageEncoding fix (Robert is just too fast for me... :)
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.89) (+4 -1)
+
+	Comment out duplicate paper size for Sony UPDP10.
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.167) (+4 -3)
+
+	Ensure that we don't accidentally get a duplicate resolution
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.202) (+3 -2)
+		src/cups/Makefile.am (1.113) (+4 -4)
+
+	Check correctly for libiconv
+
+2008-08-14	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/f360_ultrachrome_k3.xml (1.9) (+0 -63)
+
+	Remove duplicate definitions of Watercolor paper
+
+2008-08-13	<easysw@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.112) (+4 -4)
+		src/cups/genppd.c (1.166) (+22 -22)
+		src/cups/i18n.c (1.3) (+4 -10)
+
+	Fix localization issues.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.386) (+3 -3)
+
+	Update note about how translations are done.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/i18n.c (1.2) (+10 -3)
+
+	Add strlcpy function implementation.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/Makefile.am (1.6) (+3 -2)
+
+	Add model 92 to the Makefile.
+
+2008-08-13	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.201) (+2 -24)
+		include/gutenprint/gutenprint-intl-internal.h (1.4) (+9 -24)
+		include/gutenprint/gutenprint-intl.h (1.5) (+13 -29)
+		m4/stp_cups.m4 (1.11) (+0 -8)
+		po/Makevars (1.4) (+0 -12)
+		src/cups/Makefile.am (1.111) (+28 -72)
+		src/cups/genppd.c (1.165) (+70 -180)
+		src/cups/i18n.c (1.1) (added)
+		src/cups/i18n.h (1.1) (added)
+		src/cups/po2strings.c (1.3) (removed)
+		src/cups/rastertoprinter.c (1.130) (+39 -44)
+		src/main/Makefile.am (1.103) (+1 -2)
+		src/main/intl.c (1.12) (removed)
+
+	Revamp PPD and CUPS raster driver localization code to use our own loader
+	and remove the old bits.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	README (1.193) (+6 -5)
+
+	Update configuration output block.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	README (1.192) (+88 -42)
+
+	Add some more info about CUPS driver.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	README (1.191) (+0 -5)
+
+	Remove reference to CUPS back ends
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	Makefile.am (1.153) (+2 -2)
+
+	Distribute README.package for packagers.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.385) (+3 -2)
+
+	Minor updates.
+
+2008-08-13	<rlk@sourceforge.net>
+
+	Files:	README (1.190) (+10 -23)
+
+	Remove most references to Gimp-Print 4.2.
+
+2008-08-12	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.384) (+32 -13)
+
+	Note recent quality improvements on Epson printers.
+
+2008-08-12	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_64.xml (1.11) (+2 -2)
+		src/xml/escp2/model/model_67.xml (1.10) (+2 -2)
+		src/xml/escp2/model/model_68.xml (1.10) (+2 -2)
+		src/xml/escp2/model/model_70.xml (1.11) (+1 -1)
+		src/xml/escp2/model/model_71.xml (1.10) (+1 -1)
+		src/xml/escp2/model/model_81.xml (1.11) (+1 -0)
+		src/xml/escp2/model/model_82.xml (1.12) (+1 -0)
+		src/xml/escp2/model/model_85.xml (1.11) (+1 -0)
+		src/xml/escp2/model/model_91.xml (1.6) (+1 -0)
+
+	Improve borderless printing, particularly at high resolutions
+
+2008-08-12	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.13) (+5 -5)
+
+	Place printers in a more reasonable order in the file.
+
+2008-08-10	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_91.xml (1.5) (+0 -1)
+
+	Fix borderless printing on R1900.
+
+2008-08-10	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_81.xml (1.10) (+0 -1)
+		src/xml/escp2/model/model_82.xml (1.11) (+0 -1)
+
+	Fix borderless printers on Claria printers
+
+2008-08-06	<rlk@sourceforge.net>
+
+	Files:	src/main/print-pcl.c (1.156) (+1 -7)
+
+	Remove duplicate Resolution entry.
+
+2008-08-06	<faust3@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.229) (+29 -1)
+
+	added support for the Quality option (although it currently is unused)
+
+2008-08-06	<faust3@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.175) (+1 -0)
+		src/xml/printers.xml (1.12) (+2 -1)
+
+	added MP160, it seems to be similar to the MP150 and MP170 printer
+
+2008-08-05	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.383) (+4 -0)
+		src/xml/escp2/model/model_65.xml (1.11) (+12 -4)
+		src/xml/escp2/model/model_92.xml (1.1) (added)
+		src/xml/printers.xml (1.11) (+4 -4)
+
+	2034454 Epson DX7400 colours wrong below 1440dpi
+
+2008-08-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_65.xml (1.10) (+4 -12)
+
+	2034454 Epson DX7400 colours wrong below 1440 dpi
+
+	(really below 720 DPI)
+
+2008-08-02	<rleigh@sourceforge.net>
+
+	Files:	test/xml-curve.c (1.7) (+2 -2)
+
+	[test] Fix debug code in xml-curve.c
+
+2008-08-01	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.72) (+115 -242)
+
+	Updated Dutch translation
+
+2008-08-01	<rleigh@sourceforge.net>
+
+	Files:	po/en_GB.po (1.158) (+891 -1626)
+
+	[po] Update British English translation.
+
+2008-07-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.50) (+2 -2)
+
+	Fix an unitialized string error.
+
+2008-07-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.164) (+23 -21)
+
+	Some corrections per Till.
+
+2008-07-31	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.163) (+70 -7)
+
+	Add support for OpenPrinting PPD extensions Quick Presets and Widget
+	Hinting.
+
+2008-07-30	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.200) (+15 -3)
+
+	Add uname -a output to configure output.
+
+2008-07-30	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.199) (+14 -14)
+
+	Move the OS X NLS stuff before the other CUPS  stuff.
+
+2008-07-30	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.110) (+2 -2)
+
+	Avoid race condition when building PPD files with make -j.
+
+2008-07-29	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.382) (+7 -0)
+		configure.ac (1.198) (+27 -9)
+		src/cups/Makefile.am (1.109) (+8 -1)
+
+	Set --enable-translated-cups-ppds to a reasonable default based on USE_NLS.
+
+	Add --enable-globalized-cups-ppds option.
+
+2008-07-29	<rlk@sourceforge.net>
+
+	Files:	doc/README.maintaining (1.27) (+20 -18)
+
+	Minor reorganization to place all requirements at the top.
+
+2008-07-28	<rlk@sourceforge.net>
+
+	Files:	doc/README.maintaining (1.26) (+8 -7)
+
+	Add a few more required packages.
+
+2008-07-28	<rlk@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.5) (+13 -1)
+
+	Add comments alerting people not to stick margins on papers listed
+	here.
+
+2008-07-28	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.64) (+3 -4)
+
+	Ensure that all printers get a meaningful setting for VeryHigh quality.
+
+2008-07-28	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.381) (+5 -6)
+
+	Minor wording fix.
+
+2008-07-28	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.89) (+89 -215)
+
+	Updated Danish translation
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.380) (+18 -13)
+
+	Additional minor updates
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.379) (+74 -30)
+
+	Various updates in preparation for 5.2.0-beta4.
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	src/main/print-pcl.c (1.155) (+100 -46)
+
+	Add quality presets to PCL driver.
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.49) (+9 -5)
+		src/cups/genppd.c (1.162) (+6 -7)
+
+	Always honor -l option to cups-genppdupdate, even if Gutenprint 5.2 is
+	in use (provides an out in the case of broken applications).
+
+	Allow -lC.
+
+	Allow -loriginal to preserve original language of PPD files, again with
+	Gutenprint 5.2.
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.108) (+7 -7)
+		src/cups/cups-genppdupdate.in (1.48) (+2 -7)
+
+	CUPS 1.1 still needs discrete PPD files
+
+2008-07-27	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.107) (+24 -10)
+		src/cups/cups-genppdupdate.in (1.47) (+44 -13)
+		src/cups/genppd.c (1.161) (+51 -40)
+		src/cups/test-ppds (1.5) (+9 -1)
+
+	Create separate targets for global PPDs, discrete translated PPDs,
+	non-translated PPDs, and global PPDs with numbers "localized".  The
+	latter is for testing purposes, to work around bugs in cupstestppd.
+
+	Add -N option to genppd to optionally localize numbers, for testing
+	purposes.
+
+	Treat absence of any -L argument to genppd as an indication to create
+	globalized PPDs; -L C generates non-translated PPD files.
+
+	Add -l option to cups-genppdupdate to specify the language for PPD
+	files.  For Gutenprint 5.2 and above, this is ignored as globalized
+	PPD files are corrected, so this is for downgrade purposes (at present).
+
+	Do not actually run test-ppds as part of automated testing, due to
+	problems with cupstestppd.
+
+	Add code to filter out spurious errors and warnings in test-ppds.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_87.xml (1.14) (+1 -1)
+
+	Use unidirectional by default at 720 HQ/1440x720 and better; it
+	generates noticeably smoother output.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.54) (+3 -2)
+
+	Fix nozzle start problem with split channel printers that in some
+	cases would reduce quality (introduced post-beta3, so no regression).
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.160) (+71 -19)
+
+	Translate group names.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.50) (+4669 -3781)
+		po/da.po (1.88) (+4382 -3397)
+		po/de.po (1.64) (+4243 -3357)
+		po/el.po (1.65) (+4213 -3326)
+		po/en_GB.po (1.157) (+4428 -3529)
+		po/es.po (1.63) (+5348 -4460)
+		po/fr.po (1.91) (+4429 -3529)
+		po/hu.po (1.22) (+4348 -3445)
+		po/ja.po (1.59) (+5337 -4449)
+		po/nb.po (1.24) (+4415 -3536)
+		po/nl.po (1.71) (+4414 -3410)
+		po/pl.po (1.69) (+4289 -3402)
+		po/pt.po (1.64) (+4913 -4025)
+		po/sk.po (1.68) (+5380 -4492)
+		po/sv.po (1.94) (+4193 -3306)
+		po/zh_TW.po (1.24) (+4248 -3364)
+
+	20080726 translation snapshot
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.129) (+8 -5)
+
+	Only set explicit width/height if named page size isn't present or is
+	invalid.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.378) (+4 -0)
+
+	Note fix of PictureMate PPD problem.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.377) (+26 -29)
+
+	No actual beta4 release yet.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.414) (+69 -4)
+
+	Select an appropriate paper size in stp_media_size().  Fixes custom
+	page sizes in PPD files for PictureMate printers.
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.8) (+20 -0)
+
+	Improve test performance by not unnecessarily running pdftops (which
+	is very slow on at least some systems).
+
+2008-07-26	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.159) (+9 -2)
+
+	Translators: please keep messages short.
+
+2008-07-25	<easysw@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.158) (+10 -2)
+
+	Don't localize numbers...
+
+2008-07-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.157) (+20 -3)
+		src/main/intl.c (1.11) (+16 -2)
+
+	Fix (hopefully for real) PPD globalization.
+
+2008-07-24	<easysw@sourceforge.net>
+
+	Files:	src/main/intl.c (1.10) (+7 -3)
+
+	Possible fix for 10.4.8 crash - don't localize if CFProcessPath isn't set.
+
+2008-07-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.106) (+2 -2)
+		src/cups/genppd.c (1.156) (+131 -149)
+		src/cups/rastertoprinter.c (1.128) (+5 -10)
+
+	Successfully translate prebuilt PPD files.
+
+	Correctly generate translations.
+
+2008-07-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.105) (+7 -2)
+		src/main/print-canon.c (1.228) (+5 -5)
+		src/main/print-escp2.c (1.413) (+19 -19)
+		src/main/print-lexmark.c (1.157) (+6 -6)
+		src/main/print-pcl.c (1.154) (+7 -7)
+		src/xml/escp2/inks/c64.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/c80.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/c82.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/claria.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/cx3650.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/f360.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/f360_photo.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.5) (+20 -20)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.5) (+32 -32)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.6) (+42 -42)
+		src/xml/escp2/inks/photo_gen0.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/photo_gen1.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/photo_gen2.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/photo_gen3.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/photo_gen4.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/photo_pigment.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/pro_gen1.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/pro_gen2.xml (1.5) (+12 -12)
+		src/xml/escp2/inks/pro_pigment.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.5) (+32 -32)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.7) (+42 -42)
+		src/xml/escp2/inks/standard.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/standard_gen0.xml (1.5) (+4 -4)
+		src/xml/escp2/inks/ultrachrome.xml (1.5) (+32 -32)
+
+	Change "ChannelTransition" to "ChannelTrans" to reduce length of option
+	names and because these options have different meaning than in 5.0.
+
+	Take a cut at generating globalized PPD files correctly.
+
+2008-07-23	<easysw@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.155) (+179 -120)
+		src/cups/rastertoprinter.c (1.127) (+11 -6)
+
+	Map StpLightMagentaTransition to StpLtMagentaTransition to avoid getting
+	keywords longer than 40 characters.
+
+	Localize Resolution options and fix localization of numeric options.
+
+2008-07-22	<easysw@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.104) (+2 -2)
+		src/cups/genppd.c (1.154) (+4 -10)
+
+	Fix typos in genppd and uninstall changes.
+
+2008-07-21	<easysw@sourceforge.net>
+
+	Files:	po/Makevars (1.3) (+3 -0)
+		src/cups/Makefile.am (1.103) (+12 -35)
+		src/cups/genppd.c (1.153) (+68 -4)
+
+	Fix uninstall rules.
+
+	Add localizations of numeric and custom options.
+
+2008-07-21	<easysw@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.88) (+2 -2)
+
+	Fix invalid paper size text (colon can't be bare in UI text since genppd
+	doesn't do quoting of colons...)
+
+2008-07-21	<easysw@sourceforge.net>
+
+	Files:	po/.cvsignore (1.11) (+1 -0)
+		scripts/.cvsignore (1.5) (+1 -0)
+
+	Ignore other generated files.
+
+2008-07-21	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-ppds (1.4) (+4 -3)
+
+	Don't remove and make PPD files if command line argument is passed
+	(makes it easier to use manually).
+
+2008-07-21	<rlk@sourceforge.net>
+
+	Files:	src/main/print-vars.c (1.89) (+4 -4)
+
+	Fix potential null pointer dereference
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	src/main/intl.c (1.9) (+1 -7)
+
+	Remove bogus setbuf() call.
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	NEWS (1.376) (+17 -0)
+		src/cups/Info.plist.in (1.3) (+8 -0)
+		src/cups/Makefile.am (1.102) (+2 -2)
+		src/cups/genppd.c (1.152) (+6 -6)
+		src/cups/po2strings.c (1.2) (+148 -28)
+
+	Add information to NEWS file.
+
+	Add additional info to Info.plist file.
+
+	Use iconv to convert .po charset to UTF-8, then to UTF-16BE.
+
+	Fix cupsLanguages and language check to match.
+
+2008-07-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.101) (+4 -2)
+
+	Need to distribute po2strings.c
+
+2008-07-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.151) (+4 -4)
+
+	Avoid failure if language is not set.
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	src/cups/.cvsignore (1.12) (+1 -0)
+		src/cups/Info.plist.in (1.2) (+2 -2)
+
+	Fix typo...
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.197) (+3 -2)
+		src/cups/Info.plist (1.2) (removed)
+		src/cups/Info.plist.in (1.1) (added)
+		src/main/intl.c (1.8) (+9 -4)
+
+	Create Info.plist with proper Gutenprint version numbers.
+
+2008-07-20	<rlk@sourceforge.net>
+
+	Files:	src/main/print-pcl.c (1.153) (+9 -8)
+
+	Don't smash floating point default value when describing parameters.
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.150) (+316 -45)
+
+	Add support for generating globalized PPD files.
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	src/main/mxml-file.c (1.10) (+3 -3)
+
+	Fix potential NULL dereference.
+
+2008-07-20	<easysw@sourceforge.net>
+
+	Files:	src/main/intl.c (1.7) (+3 -1)
+
+	Fix compiler warning.
+
+2008-07-20	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.126) (+3 -2)
+
+	Need errno.h to use errno.
+
+2008-07-19	<easysw@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.125) (+103 -100)
+
+	Tweak CUPS raster driver messages based on feedback from Robert.
+
+2008-07-19	<easysw@sourceforge.net>
+
+	Files:	src/cups/.cvsignore (1.11) (+7 -6)
+		src/cups/rastertoprinter.c (1.124) (+165 -167)
+
+	Localize INFO, ERROR, and WARNING messages in CUPS raster driver, and make
+	several of them more user-friendly and without the "Gutenprint" prefix.
+
+	Update DEBUG messages to use a consistent "Gutenprint:" prefix.
+
+	Update .cvsignore file to account for current executable names.
+
+2008-07-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.375) (+6 -0)
+		src/xml/escp2/media/c120.xml (1.11) (+144 -0)
+		src/xml/escp2/model/model_85.xml (1.10) (+37 -4)
+
+	Add enhanced resolutions for C120 to reduce banding
+
+2008-07-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.374) (+3 -0)
+
+	Note CX8300/CX8400 fix.
+
+2008-07-19	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.10) (+3 -3)
+
+	Change CX8400 and CX8300 definitions to work correctly based on report.
+
+2008-07-19	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/b500.xml (1.12) (+61 -61)
+
+	Adjust B500 parameters per latest manual.
+
+2008-07-19	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_87.xml (1.13) (+1 -1)
+
+	Raise the limit for auto-bidirectional on B300.
+
+2008-07-19	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.196) (+3 -3)
+		include/gutenprint/gutenprint-intl-internal.h (1.3) (+6 -4)
+		include/gutenprint/gutenprint-intl.h (1.4) (+18 -18)
+		src/main/intl.c (1.6) (+10 -8)
+
+	Fix build system to support --disable-nls on Mac OS X.
+
+2008-07-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-raw.c (1.41) (+5 -1)
+
+	Call stp_image_init() correctly.
+
+2008-07-18	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.53) (+2 -2)
+
+	Fix crash with CMY mode, black and white, and low resolution.
+
+2008-07-18	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.373) (+5 -0)
+		src/main/escp2-driver.c (1.52) (+52 -38)
+		src/xml/escp2/media/b500.xml (1.11) (+68 -5)
+		src/xml/escp2/model/model_87.xml (1.12) (+35 -2)
+
+	Add HQ/enhanced resolutions to B-500 to match Epson OEM driver
+
+2008-07-18	<rlk@sourceforge.net>
+
+	Files:	test/run-weavetest (1.26) (+1 -1)
+
+	Add 358 nozzles for B500.
+
+2008-07-18	<rlk@sourceforge.net>
+
+	Files:	test/unprint.c (1.42) (+34 -23)
+
+	Separate split channel inks to enable inspection of each sub-channel.
+
+2008-07-17	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.24) (+11 -2)
+
+	Handle ESC(d command (appears to be nop).
+
+2008-07-17	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.412) (+15 -16)
+
+	Ensure that stp_image_init() and stp_image_conclude() are paired up.
+
+2008-07-17	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.31) (+1 -0)
+
+	Make sure to set error status if subprocess dies from a signal.
+
+2008-07-17	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.30) (+15 -13)
+
+	Weed out printers before running testpattern if -S mode is used (makes
+	valgrind a lot faster).
+
+	Exit if subprocess dies from signal in -S mode.
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.54) (+47 -2)
+
+	Check to make sure stp_image_t calls are at least minimally valid.
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.87) (+14 -9)
+
+	Avoid overflow of nputc buffer.
+
+2008-07-16	<easysw@sourceforge.net>
+
+	Files:	src/main/intl.c (1.5) (+5 -3)
+
+	Fix crash when unable to get localized string.
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.29) (+31 -14)
+
+	Add -S option allowing running each printer through a separate
+	testpattern process.
+
+	Allow 2 -R options to run *only* the minimum resolution.
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.270) (+7 -7)
+
+	Fix fencepost causing double initialization/small memory leak
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.86) (+10 -7)
+
+	Ensure that image data is freed (avoid memory leak on Olympus P440).
+
+2008-07-16	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.53) (+2 -2)
+
+	Correctly initialize global.
+
+2008-07-14	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.195) (+8 -2)
+
+	Add --with-archflags configure option to add compiler/linker flags after
+	all autoconf tests are done.
+
+2008-07-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.28) (+4 -4)
+
+	Use callgrind rather than cachegrind so kcachegrind works
+
+2008-07-14	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.269) (+33 -8)
+		src/main/print-weave.c (1.71) (+37 -23)
+
+	Improve weave setup performance by using qsort rather than bubble sort
+
+2008-07-13	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.85) (+19 -3)
+
+	Performance improvement for Olympus P200.
+
+2008-07-13	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/util.h (1.7) (+3 -2)
+		src/main/escp2-driver.c (1.51) (+7 -5)
+		src/main/print-escp2-data.c (1.268) (+1 -3)
+		src/main/print-escp2.c (1.411) (+13 -6)
+		src/main/print-papers.c (1.41) (+1 -26)
+		src/main/print-pcl.c (1.152) (+5 -8)
+		src/main/print-weave.c (1.70) (+48 -53)
+
+	Add debug option to turn off compression.
+
+	Remove some dead code.
+
+	Minor code cleanup.
+
+2008-07-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.149) (+2 -6)
+
+	Remove some dead code.
+
+2008-07-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.148) (+14 -7)
+
+	Need to limit X resolution also to avoid confusing MS Office.
+
+2008-07-12	<easysw@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.100) (+2 -2)
+
+	Don't fail due to missing locale dir.
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	src/main/print-vars.c (1.88) (+11 -1)
+
+	Fail if we try to fill a param string with no text or category.
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	src/main/print-vars.c (1.87) (+2 -2)
+
+	Don't attempt to translate a null help string.
+
+2008-07-12	<easysw@sourceforge.net>
+
+	Files:	src/main/intl.c (1.4) (+4 -1)
+
+	Protect against NULL translation text.
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.7) (+7 -3)
+
+	Add -V (verbose) option.
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/paper.h (1.4) (+3 -3)
+
+	Fix Doxygen comment
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.194) (+3 -3)
+
+	Fix up incorrect test.
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.410) (+48 -47)
+
+	Only display densities and hue maps for appropriate inks
+
+2008-07-12	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.372) (+23 -1)
+
+	Additional accumulated changes
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.46) (+20 -5)
+		src/cups/genppd.c (1.147) (+19 -19)
+
+	Avoid use of vertical resolutions greater than 720 DPI when listing
+	XXXxYYYdpi resolutions in PPD files, to cater to certain broken
+	applications.
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	src/main/intl.c (1.3) (+2 -2)
+
+	Add comment at #elif defined(ENABLE_NLS) for clarity.
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.193) (+10 -8)
+
+	Don't print out "bundle" message on non-OS X systems (where it's
+	meaningless).
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.192) (+5 -3)
+		src/cups/Makefile.am (1.99) (+7 -2)
+
+	Conditionalize special OS X CUPS install code.
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.409) (+13 -2)
+		src/main/print-escp2.h (1.132) (+3 -2)
+		src/xml/escp2/model/model_87.xml (1.11) (+1 -0)
+
+	Improve print quality at bottom of page on B-500 type printers.
+	Tested with both non-duplex (where it helps) and duplex (where it
+	must be disabled).
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.50) (+7 -6)
+
+	Don't send a unidirectional/bidirectional command if bidirectional
+	upper limit is set to -1.
+
+2008-07-11	<rlk@sourceforge.net>
+
+	Files:	src/main/print-weave.c (1.69) (+3 -3)
+
+	Print out a fe more debugging parameters.
+
+2008-07-09	<rlk@sourceforge.net>
+
+	Files:	src/gutenprintui2/panel.c (1.18) (+104 -20)
+
+	Offer integer options
+
+2008-07-09	<rlk@sourceforge.net>
+
+	Files:	src/main/print-color.c (1.140) (+2 -2)
+
+	Make color correction be a basic parameter.
+
+2008-07-08	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.191) (+4 -3)
+		src/main/print-util.c (1.116) (+2 -2)
+
+	Rename --with-nickname=foo to --with-cups-nickname=foo.
+
+	stp_set_codeset depended on gettext.
+
+2008-07-08	<rlk@sourceforge.net>
+
+	Files:	test/unprint.c (1.41) (+4 -1)
+
+	Handle additional inks on B-300.
+
+2008-07-08	<rlk@sourceforge.net>
+
+	Files:	src/main/intl.c (1.2) (+2 -1)
+
+	Use of strcmp requires string.h.
+
+2008-07-08	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.408) (+8 -5)
+
+	Allow use of quadtone inks with color mode; switch to black and white
+	dynamically.
+
+2008-07-08	<easysw@sourceforge.net>
+
+	Files:	configure.ac (1.190) (+20 -4)
+		include/gutenprint/gutenprint-intl-internal.h (1.2) (+15 -2)
+		include/gutenprint/gutenprint-intl.h (1.3) (+16 -2)
+		m4/stp_cups.m4 (1.10) (+8 -0)
+		po/Makevars (1.2) (+9 -0)
+		src/cups/Info.plist (1.1) (added)
+		src/cups/Makefile.am (1.98) (+57 -2)
+		src/cups/genppd.c (1.146) (+22 -106)
+		src/cups/po2strings.c (1.1) (added)
+		src/cups/rastertoprinter.c (1.123) (+3 -3)
+		src/main/Makefile.am (1.102) (+2 -1)
+		src/main/intl.c (1.1) (added)
+
+	configure.ac:
+	    - Filter out trailing "svn" from cups version numbers.
+	    - Use CoreFoundation for localization.
+	    - Add --with-nickname configure option to override default
+	      "CUPS+Gutenprint" suffix.
+
+	m4/stp_cups.m4:
+	    - Add cups_bundledir definition.
+
+	po/Makevars:
+	    - Add dummy Mac OS X po install targets.
+
+	src/cups/Info.plist:
+	    - Added (bundle information file)
+
+	src/cups/Makefile.am:
+	    - Add install targets so we can symlink into a bundle.
+	    - Add .strings install to install-data-local target.
+
+	src/cups/genppd.c:
+	    - Move bulk of set_language() to main/intl.c.
+	    - Drop default language suffix from URI, and do not enumerate all
+	      of the languages we support - we'll be doing globalized PPDs.
+	      (still support the suffix if provided by the user)
+	    - Update copyrights to this year and my name instead of ESP.
+	    - Use driver long name instead of Ghostscript for Product.
+	    - Only list one PSVersion.
+
+	src/cups/rastertoprinter.c:
+	    - Update copyright to this year and my name instead of ESP.
+
+	src/cups/po2strings.c:
+	    - Added to convert .po files to .strings.
+
+	src/main/Makefile.am:
+	    - Added intl.c to libgutenprint sources.
+
+	src/main/intl.c:
+	    - Added with stp_gettext and stp_setlocale functions.
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/b500.xml (1.4) (+21 -15)
+		src/xml/escp2/inks/c120.xml (1.4) (+9 -3)
+		src/xml/escp2/inks/c64.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/c80.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/c82.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/claria.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/cmy.xml (1.4) (+3 -0)
+		src/xml/escp2/inks/cx3650.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/f360.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/f360_photo.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.4) (+18 -0)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.4) (+748 -733)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.5) (+18 -0)
+		src/xml/escp2/inks/photo_gen0.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/photo_gen1.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/photo_gen2.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/photo_gen3.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/photo_gen4.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/photo_pigment.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/picturemate_4.xml (1.4) (+3 -0)
+		src/xml/escp2/inks/pro_gen1.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/pro_gen2.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/pro_pigment.xml (1.4) (+12 -0)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.4) (+15 -0)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.6) (+18 -0)
+		src/xml/escp2/inks/standard.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/standard_gen0.xml (1.4) (+6 -0)
+		src/xml/escp2/inks/ultrachrome.xml (1.4) (+15 -0)
+		src/xml/escp2/inks/x80.xml (1.4) (+6 -0)
+		src/xml/escp2/media/b500.xml (1.10) (+113 -900)
+		src/xml/escp2/media/c120.xml (1.10) (+89 -612)
+		src/xml/escp2/media/c64.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/c80.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/c82.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/claria.xml (1.9) (+104 -792)
+		src/xml/escp2/media/claria1400.xml (1.7) (+104 -792)
+		src/xml/escp2/media/cmy.xml (1.7) (+91 -680)
+		src/xml/escp2/media/cx3650.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/f360.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/f360_photo.xml (1.7) (+128 -681)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.7) (+128 -681)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.7) (+211 -1475)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.8) (+220 -1517)
+		src/xml/escp2/media/photo_gen0.xml (1.7) (+148 -1364)
+		src/xml/escp2/media/photo_gen1.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/photo_gen2.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/photo_gen3.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/photo_gen3_4.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/photo_gen4.xml (1.8) (+92 -648)
+		src/xml/escp2/media/photo_pigment.xml (1.7) (+149 -782)
+		src/xml/escp2/media/picturemate_4.xml (1.7) (+42 -70)
+		src/xml/escp2/media/picturemate_6.xml (1.7) (+42 -70)
+		src/xml/escp2/media/pro_gen1.xml (1.7) (+153 -1368)
+		src/xml/escp2/media/pro_gen2.xml (1.7) (+154 -1369)
+		src/xml/escp2/media/pro_pigment.xml (1.7) (+159 -794)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.8) (+213 -1477)
+		src/xml/escp2/media/pro_ultrachrome_k3.xml (1.2) (+215 -1478)
+		src/xml/escp2/media/standard.xml (1.7) (+149 -1365)
+		src/xml/escp2/media/standard_gen0.xml (1.7) (+148 -1364)
+		src/xml/escp2/media/ultrachrome.xml (1.7) (+211 -1475)
+		src/xml/escp2/media/x80.xml (1.7) (+92 -681)
+
+	Use references to curves.
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.371) (+9 -6)
+
+	Update
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.45) (+3 -3)
+
+	Correctly split the locale from teh region.
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.27) (+1 -1)
+
+	Don't filter out "none" (default) value for options.
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.407) (+5 -2)
+
+	Try harder to find a usable ink type.
+
+2008-07-07	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.26) (+12 -5)
+
+	Add option to use minimum resolution where possible (for speed)
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.25) (+4 -4)
+
+	Don't smash the special option list.
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/cmykrb.xml (1.7) (+20 -20)
+		src/xml/escp2/inks/cmykro.xml (1.5) (+97 -269)
+		src/xml/escp2/inks/picturemate_6.xml (1.6) (+5 -5)
+		src/xml/escp2/media/cmykro.xml (1.4) (+202 -1448)
+		src/xml/escp2/media/r800.xml (1.2) (+188 -1434)
+		src/xml/escp2/model/model_91.xml (1.4) (+22 -15)
+
+	Preliminary tuning for R1900
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.86) (+5 -5)
+		src/main/print-vars.c (1.86) (+55 -26)
+		src/xml/escp2/inks/cmykrb.xml (1.6) (+73 -240)
+		src/xml/escp2/media/cmykrb.xml (1.8) (+198 -1444)
+
+	Allow driver data to refer to curves rather than embedding them
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.267) (+4 -2)
+
+	Match stp_xml_init with stp_xml_exit.
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.24) (+72 -24)
+
+	Allow cross product of options.
+
+2008-07-06	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/xml.h (1.4) (+8 -3)
+		src/main/escp2-channels.c (1.85) (+31 -12)
+		src/main/escp2-papers.c (1.117) (+6 -6)
+		src/main/escp2-resolutions.c (1.51) (+2 -2)
+		src/main/print-vars.c (1.85) (+77 -39)
+
+	Allow references to parameters rather than only inline values
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.116) (+7 -1)
+		src/main/print-escp2-data.c (1.266) (+6 -3)
+		src/xml/escp2/media/Makefile.am (1.7) (+2 -1)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.7) (+21 -41)
+		src/xml/escp2/media/pro_ultrachrome_k3.xml (1.1) (added)
+		src/xml/escp2/model/model_88.xml (1.6) (+1 -1)
+		src/xml/escp2/model/model_89.xml (1.5) (+1 -1)
+		src/xml/escp2/model/model_90.xml (1.5) (+1 -1)
+
+	Fix media definitions for x880 printers.
+
+	Change assert to printf/abort to print better information.
+
+	Check that media and ink specifications match (that check found the
+	problem with the x880).
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/cmykro.xml (1.4) (+3 -3)
+
+	Fix R1900 ink names.
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/cmykro.xml (1.3) (+45 -45)
+
+	R1900 apparently doesn't need head offset.
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/paper.h (1.3) (+24 -8)
+		src/cups/rastertoprinter.c (1.122) (+13 -6)
+		src/ghost/ijsgutenprint.c (1.21) (+2 -2)
+		src/main/print-papers.c (1.40) (+32 -2)
+		src/xml/escp2/inks/cmykrb.xml (1.5) (+260 -160)
+		src/xml/escp2/inks/cmykro.xml (1.2) (+260 -160)
+		src/xml/escp2/inks/picturemate_6.xml (1.5) (+65 -128)
+		src/xml/escp2/media/Makefile.am (1.6) (+2 -1)
+		src/xml/escp2/media/b500.xml (1.9) (+604 -308)
+		src/xml/escp2/media/c120.xml (1.9) (+408 -204)
+		src/xml/escp2/media/c64.xml (1.6) (+912 -456)
+		src/xml/escp2/media/c80.xml (1.6) (+912 -456)
+		src/xml/escp2/media/c82.xml (1.6) (+912 -456)
+		src/xml/escp2/media/claria.xml (1.8) (+528 -286)
+		src/xml/escp2/media/claria1400.xml (1.6) (+528 -286)
+		src/xml/escp2/media/cmy.xml (1.6) (+456 -228)
+		src/xml/escp2/media/cmykrb.xml (1.7) (+960 -440)
+		src/xml/escp2/media/cmykro.xml (1.3) (+960 -440)
+		src/xml/escp2/media/cx3650.xml (1.6) (+912 -456)
+		src/xml/escp2/media/f360.xml (1.6) (+912 -456)
+		src/xml/escp2/media/f360_photo.xml (1.6) (+456 -228)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.6) (+456 -228)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.6) (+984 -574)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.7) (+1008 -588)
+		src/xml/escp2/media/photo_gen0.xml (1.6) (+912 -456)
+		src/xml/escp2/media/photo_gen1.xml (1.6) (+912 -456)
+		src/xml/escp2/media/photo_gen2.xml (1.6) (+912 -456)
+		src/xml/escp2/media/photo_gen3.xml (1.6) (+912 -475)
+		src/xml/escp2/media/photo_gen3_4.xml (1.6) (+912 -475)
+		src/xml/escp2/media/photo_gen4.xml (1.7) (+432 -234)
+		src/xml/escp2/media/photo_pigment.xml (1.6) (+504 -294)
+		src/xml/escp2/media/picturemate_4.xml (1.6) (+48 -22)
+		src/xml/escp2/media/picturemate_6.xml (1.6) (+48 -22)
+		src/xml/escp2/media/pro_gen1.xml (1.6) (+912 -456)
+		src/xml/escp2/media/pro_gen2.xml (1.6) (+912 -456)
+		src/xml/escp2/media/pro_pigment.xml (1.6) (+504 -294)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.6) (+984 -574)
+		src/xml/escp2/media/r800.xml (1.1) (added)
+		src/xml/escp2/media/standard.xml (1.6) (+912 -456)
+		src/xml/escp2/media/standard_gen0.xml (1.6) (+912 -456)
+		src/xml/escp2/media/ultrachrome.xml (1.6) (+984 -574)
+		src/xml/escp2/media/x80.xml (1.6) (+456 -228)
+		src/xml/escp2/model/model_64.xml (1.10) (+1 -2)
+		test/unprint.c (1.40) (+20 -14)
+
+	R800 does not take new paper handling commands (R1800 apparently does).
+
+	Clean up formatting of curves in XML files.
+
+	Add function to find paper size precisely by size and make ijsgutenprint
+	use it.
+
+	CUPS driver handles explicit paper size that it can't find (e. g.
+	someone edited the PPD file) by treating it as a custom size.
+
+	Unprinter handles orange ink.
+
+	Remove incorrect hue curves on CMY/CMYK inks.
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.23) (+1 -1)
+
+	Fix off by one in printing remote commands.
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.96) (+20 -19)
+
+	Add orange ink for R1900.
+
+2008-07-05	<rlk@sourceforge.net>
+
+	Files:	Makefile.am (1.152) (+2 -2)
+		scripts/mkchlog (1.12) (+49 -25)
+
+	Generalize mkchlog and ignore certain directories
+
+2008-07-04	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/vars.h (1.7) (+3 -1)
+		src/escputil/d4lib.c (1.10) (+0 -1)
+		src/gimp2/print-gutenprint.c (1.2) (+3 -2)
+		src/gutenprintui2/plist.c (1.18) (+2 -3)
+		src/main/dither-main.c (1.61) (+3 -3)
+		src/main/escp2-driver.c (1.49) (+1 -5)
+		src/main/generic-options.c (1.11) (+6 -6)
+		src/main/print-canon.c (1.227) (+17 -17)
+		src/main/print-escp2.c (1.406) (+73 -73)
+		src/main/print-lexmark.c (1.156) (+10 -12)
+		src/main/print-olympus.c (1.84) (+9 -9)
+		src/main/print-pcl.c (1.151) (+11 -11)
+		src/main/print-ps.c (1.100) (+4 -4)
+		src/main/print-raw.c (1.40) (+3 -3)
+
+	Fix some Solaris compiler warnings
+
+2008-07-04	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.6) (+10 -4)
+
+	Handle the absence of pstoraster, which is not a standard part of
+	CUPS.
+
+	Don't assume /bin/sh
+
+	Fix a bash-ism.
+
+2008-07-04	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.189) (+2 -3)
+
+	Remove src/resolutions makefile
+
+2008-07-04	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.174) (+1 -0)
+		src/xml/escp2/media/cmykro.xml (1.2) (+223 -221)
+		src/xml/escp2/model/model_91.xml (1.3) (+2 -2)
+		src/xml/printers.xml (1.9) (+2 -1)
+
+	Change definitions to match R1900 manual.
+
+	Add PX-G5300 as alias for R1900.
+
+2008-07-04	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_87.xml (1.10) (+44 -44)
+
+	Rearrange to match layout of other files.
+
+2008-07-03	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-resolutions.c (1.50) (+204 -195)
+		src/main/print-escp2-data.c (1.265) (+13 -19)
+		src/main/print-escp2.h (1.131) (+5 -2)
+		src/xml/escp2/Makefile.am (1.7) (+1 -4)
+		src/xml/escp2/model/model_0.xml (1.8) (+68 -5)
+		src/xml/escp2/model/model_1.xml (1.8) (+87 -5)
+		src/xml/escp2/model/model_10.xml (1.9) (+85 -5)
+		src/xml/escp2/model/model_11.xml (1.9) (+85 -5)
+		src/xml/escp2/model/model_12.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_13.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_14.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_15.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_16.xml (1.9) (+88 -5)
+		src/xml/escp2/model/model_17.xml (1.9) (+88 -5)
+		src/xml/escp2/model/model_18.xml (1.9) (+85 -5)
+		src/xml/escp2/model/model_19.xml (1.9) (+88 -5)
+		src/xml/escp2/model/model_2.xml (1.8) (+87 -5)
+		src/xml/escp2/model/model_20.xml (1.9) (+96 -5)
+		src/xml/escp2/model/model_21.xml (1.9) (+78 -5)
+		src/xml/escp2/model/model_22.xml (1.9) (+88 -5)
+		src/xml/escp2/model/model_23.xml (1.9) (+88 -5)
+		src/xml/escp2/model/model_24.xml (1.8) (+84 -5)
+		src/xml/escp2/model/model_25.xml (1.9) (+96 -5)
+		src/xml/escp2/model/model_26.xml (1.9) (+80 -5)
+		src/xml/escp2/model/model_27.xml (1.8) (+72 -5)
+		src/xml/escp2/model/model_28.xml (1.8) (+70 -6)
+		src/xml/escp2/model/model_29.xml (1.8) (+70 -6)
+		src/xml/escp2/model/model_3.xml (1.8) (+93 -5)
+		src/xml/escp2/model/model_30.xml (1.8) (+70 -6)
+		src/xml/escp2/model/model_31.xml (1.8) (+70 -6)
+		src/xml/escp2/model/model_32.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_33.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_34.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_35.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_36.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_37.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_38.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_39.xml (1.8) (+68 -5)
+		src/xml/escp2/model/model_4.xml (1.8) (+84 -5)
+		src/xml/escp2/model/model_40.xml (1.8) (+70 -6)
+		src/xml/escp2/model/model_41.xml (1.8) (+77 -6)
+		src/xml/escp2/model/model_42.xml (1.9) (+78 -5)
+		src/xml/escp2/model/model_43.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_44.xml (1.9) (+82 -5)
+		src/xml/escp2/model/model_45.xml (1.8) (+68 -5)
+		src/xml/escp2/model/model_46.xml (1.9) (+63 -5)
+		src/xml/escp2/model/model_47.xml (1.9) (+73 -5)
+		src/xml/escp2/model/model_48.xml (1.10) (+71 -6)
+		src/xml/escp2/model/model_49.xml (1.10) (+71 -6)
+		src/xml/escp2/model/model_5.xml (1.8) (+84 -5)
+		src/xml/escp2/model/model_50.xml (1.9) (+90 -5)
+		src/xml/escp2/model/model_51.xml (1.9) (+90 -5)
+		src/xml/escp2/model/model_52.xml (1.9) (+90 -5)
+		src/xml/escp2/model/model_53.xml (1.9) (+63 -5)
+		src/xml/escp2/model/model_54.xml (1.9) (+96 -5)
+		src/xml/escp2/model/model_55.xml (1.9) (+82 -5)
+		src/xml/escp2/model/model_56.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_57.xml (1.9) (+60 -5)
+		src/xml/escp2/model/model_58.xml (1.9) (+60 -5)
+		src/xml/escp2/model/model_59.xml (1.9) (+86 -5)
+		src/xml/escp2/model/model_6.xml (1.8) (+84 -5)
+		src/xml/escp2/model/model_60.xml (1.9) (+82 -5)
+		src/xml/escp2/model/model_61.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_62.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_63.xml (1.9) (+84 -5)
+		src/xml/escp2/model/model_64.xml (1.9) (+100 -6)
+		src/xml/escp2/model/model_65.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_66.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_67.xml (1.9) (+100 -6)
+		src/xml/escp2/model/model_68.xml (1.9) (+99 -5)
+		src/xml/escp2/model/model_69.xml (1.9) (+90 -5)
+		src/xml/escp2/model/model_7.xml (1.8) (+93 -5)
+		src/xml/escp2/model/model_70.xml (1.10) (+100 -6)
+		src/xml/escp2/model/model_71.xml (1.9) (+97 -6)
+		src/xml/escp2/model/model_72.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_73.xml (1.9) (+55 -5)
+		src/xml/escp2/model/model_74.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_75.xml (1.9) (+81 -5)
+		src/xml/escp2/model/model_76.xml (1.10) (+82 -6)
+		src/xml/escp2/model/model_77.xml (1.9) (+84 -5)
+		src/xml/escp2/model/model_78.xml (1.9) (+94 -5)
+		src/xml/escp2/model/model_79.xml (1.9) (+82 -5)
+		src/xml/escp2/model/model_8.xml (1.8) (+93 -5)
+		src/xml/escp2/model/model_80.xml (1.9) (+90 -5)
+		src/xml/escp2/model/model_81.xml (1.9) (+114 -6)
+		src/xml/escp2/model/model_82.xml (1.10) (+134 -6)
+		src/xml/escp2/model/model_83.xml (1.9) (+92 -5)
+		src/xml/escp2/model/model_84.xml (1.9) (+84 -5)
+		src/xml/escp2/model/model_85.xml (1.9) (+99 -6)
+		src/xml/escp2/model/model_86.xml (1.9) (+55 -5)
+		src/xml/escp2/model/model_87.xml (1.9) (+92 -7)
+		src/xml/escp2/model/model_88.xml (1.5) (+71 -6)
+		src/xml/escp2/model/model_89.xml (1.4) (+71 -6)
+		src/xml/escp2/model/model_9.xml (1.8) (+85 -5)
+		src/xml/escp2/model/model_90.xml (1.4) (+71 -6)
+		src/xml/escp2/model/model_91.xml (1.2) (+100 -6)
+
+	Embed resolution data inside model files.
+
+	Change "href" to "src".
+
+2008-07-02	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.173) (+1 -0)
+		src/main/escp2-channels.c (1.84) (+3 -3)
+		src/main/print-escp2.c (1.405) (+21 -3)
+		src/main/print-escp2.h (1.130) (+3 -3)
+		src/xml/escp2/inks/Makefile.am (1.4) (+2 -1)
+		src/xml/escp2/inks/cmykrb.xml (1.4) (+4 -4)
+		src/xml/escp2/inks/cmykro.xml (1.1) (added)
+		src/xml/escp2/inks/picturemate_6.xml (1.4) (+1 -1)
+		src/xml/escp2/media/Makefile.am (1.5) (+2 -1)
+		src/xml/escp2/media/cmykro.xml (1.1) (added)
+		src/xml/escp2/model/Makefile.am (1.5) (+3 -2)
+		src/xml/escp2/model/model_91.xml (1.1) (added)
+		src/xml/printers.xml (1.8) (+2 -1)
+
+	Add nominal support for R1900 (CMYKRO and CMYRO not enabled yet)
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.370) (+45 -20)
+		README (1.189) (+12 -51)
+		README.package (1.1) (added)
+
+	Update documentation for next release
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/b500.xml (1.3) (+121 -165)
+		src/xml/escp2/inks/c120.xml (1.3) (+109 -149)
+		src/xml/escp2/inks/c64.xml (1.3) (+138 -144)
+		src/xml/escp2/inks/c80.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/c82.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/claria.xml (1.3) (+246 -255)
+		src/xml/escp2/inks/cmy.xml (1.3) (+25 -26)
+		src/xml/escp2/inks/cmykrb.xml (1.3) (+702 -832)
+		src/xml/escp2/inks/cx3650.xml (1.3) (+138 -144)
+		src/xml/escp2/inks/defaultblack.xml (1.2) (+12 -12)
+		src/xml/escp2/inks/f360.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/f360_photo.xml (1.3) (+246 -255)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.3) (+374 -386)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.3) (+723 -750)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.4) (+543 -556)
+		src/xml/escp2/inks/photo_gen0.xml (1.3) (+279 -288)
+		src/xml/escp2/inks/photo_gen1.xml (1.3) (+279 -288)
+		src/xml/escp2/inks/photo_gen2.xml (1.3) (+268 -278)
+		src/xml/escp2/inks/photo_gen3.xml (1.3) (+279 -288)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/photo_gen4.xml (1.3) (+246 -255)
+		src/xml/escp2/inks/photo_pigment.xml (1.3) (+246 -255)
+		src/xml/escp2/inks/picturemate_4.xml (1.3) (+54 -104)
+		src/xml/escp2/inks/picturemate_6.xml (1.3) (+252 -256)
+		src/xml/escp2/inks/pro_gen1.xml (1.3) (+279 -288)
+		src/xml/escp2/inks/pro_gen2.xml (1.3) (+279 -288)
+		src/xml/escp2/inks/pro_pigment.xml (1.3) (+246 -255)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.3) (+729 -756)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.5) (+543 -556)
+		src/xml/escp2/inks/standard.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/standard_gen0.xml (1.3) (+139 -144)
+		src/xml/escp2/inks/ultrachrome.xml (1.3) (+733 -760)
+		src/xml/escp2/inks/x80.xml (1.3) (+101 -106)
+		src/xml/escp2/inputslots/b500.xml (1.3) (+8 -8)
+		src/xml/escp2/inputslots/cd_cutter_roll_feed.xml (1.3) (+23 -23)
+		src/xml/escp2/inputslots/cd_roll_feed.xml (1.3) (+18 -18)
+		src/xml/escp2/inputslots/cutter_roll_feed.xml (1.3) (+14 -14)
+		src/xml/escp2/inputslots/pro_roll_feed.xml (1.3) (+7 -6)
+		src/xml/escp2/inputslots/r1800.xml (1.3) (+22 -22)
+		src/xml/escp2/inputslots/r2400.xml (1.3) (+17 -17)
+		src/xml/escp2/inputslots/rx700.xml (1.3) (+17 -17)
+		src/xml/escp2/inputslots/spro5000.xml (1.3) (+11 -11)
+		src/xml/escp2/inputslots/standard_roll_feed.xml (1.3) (+10 -10)
+		src/xml/escp2/media/b500.xml (1.8) (+1173 -1173)
+		src/xml/escp2/media/c120.xml (1.8) (+1157 -1157)
+		src/xml/escp2/media/c64.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/c80.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/c82.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/claria.xml (1.7) (+1592 -1592)
+		src/xml/escp2/media/claria1400.xml (1.5) (+1592 -1592)
+		src/xml/escp2/media/cmy.xml (1.5) (+703 -703)
+		src/xml/escp2/media/cmykrb.xml (1.6) (+2087 -2087)
+		src/xml/escp2/media/cx3650.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/f360.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/f360_photo.xml (1.5) (+722 -722)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.5) (+722 -722)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.5) (+1647 -1647)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.6) (+2301 -2301)
+		src/xml/escp2/media/photo_gen0.xml (1.5) (+1425 -1425)
+		src/xml/escp2/media/photo_gen1.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/photo_gen2.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/photo_gen3.xml (1.5) (+1463 -1463)
+		src/xml/escp2/media/photo_gen3_4.xml (1.5) (+1463 -1463)
+		src/xml/escp2/media/photo_gen4.xml (1.6) (+1245 -1245)
+		src/xml/escp2/media/photo_pigment.xml (1.5) (+840 -840)
+		src/xml/escp2/media/picturemate_4.xml (1.5) (+74 -74)
+		src/xml/escp2/media/picturemate_6.xml (1.5) (+74 -74)
+		src/xml/escp2/media/pro_gen1.xml (1.5) (+1463 -1463)
+		src/xml/escp2/media/pro_gen2.xml (1.5) (+1501 -1501)
+		src/xml/escp2/media/pro_pigment.xml (1.5) (+903 -903)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.5) (+1709 -1709)
+		src/xml/escp2/media/standard.xml (1.5) (+1444 -1444)
+		src/xml/escp2/media/standard_gen0.xml (1.5) (+1425 -1425)
+		src/xml/escp2/media/ultrachrome.xml (1.5) (+1647 -1647)
+		src/xml/escp2/media/x80.xml (1.5) (+722 -722)
+		src/xml/escp2/mediasizes/standard.xml (1.2) (+93 -93)
+		src/xml/escp2/model/model_0.xml (1.7) (+38 -38)
+		src/xml/escp2/model/model_1.xml (1.7) (+37 -37)
+		src/xml/escp2/model/model_10.xml (1.8) (+41 -41)
+		src/xml/escp2/model/model_11.xml (1.8) (+40 -40)
+		src/xml/escp2/model/model_12.xml (1.8) (+53 -53)
+		src/xml/escp2/model/model_13.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_14.xml (1.8) (+45 -45)
+		src/xml/escp2/model/model_15.xml (1.8) (+45 -45)
+		src/xml/escp2/model/model_16.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_17.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_18.xml (1.8) (+43 -43)
+		src/xml/escp2/model/model_19.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_2.xml (1.7) (+37 -37)
+		src/xml/escp2/model/model_20.xml (1.8) (+45 -45)
+		src/xml/escp2/model/model_21.xml (1.8) (+59 -59)
+		src/xml/escp2/model/model_22.xml (1.8) (+47 -47)
+		src/xml/escp2/model/model_23.xml (1.8) (+47 -47)
+		src/xml/escp2/model/model_24.xml (1.7) (+39 -39)
+		src/xml/escp2/model/model_25.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_26.xml (1.8) (+57 -57)
+		src/xml/escp2/model/model_27.xml (1.7) (+40 -40)
+		src/xml/escp2/model/model_28.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_29.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_3.xml (1.7) (+38 -38)
+		src/xml/escp2/model/model_30.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_31.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_32.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_33.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_34.xml (1.8) (+57 -57)
+		src/xml/escp2/model/model_35.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_36.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_37.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_38.xml (1.8) (+59 -59)
+		src/xml/escp2/model/model_39.xml (1.7) (+37 -37)
+		src/xml/escp2/model/model_4.xml (1.7) (+38 -38)
+		src/xml/escp2/model/model_40.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_41.xml (1.7) (+41 -41)
+		src/xml/escp2/model/model_42.xml (1.8) (+58 -58)
+		src/xml/escp2/model/model_43.xml (1.8) (+58 -58)
+		src/xml/escp2/model/model_44.xml (1.8) (+57 -57)
+		src/xml/escp2/model/model_45.xml (1.7) (+37 -37)
+		src/xml/escp2/model/model_46.xml (1.8) (+59 -59)
+		src/xml/escp2/model/model_47.xml (1.8) (+58 -58)
+		src/xml/escp2/model/model_48.xml (1.9) (+49 -49)
+		src/xml/escp2/model/model_49.xml (1.9) (+49 -49)
+		src/xml/escp2/model/model_5.xml (1.7) (+38 -38)
+		src/xml/escp2/model/model_50.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_51.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_52.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_53.xml (1.8) (+58 -58)
+		src/xml/escp2/model/model_54.xml (1.8) (+45 -45)
+		src/xml/escp2/model/model_55.xml (1.8) (+57 -57)
+		src/xml/escp2/model/model_56.xml (1.8) (+57 -57)
+		src/xml/escp2/model/model_57.xml (1.8) (+63 -63)
+		src/xml/escp2/model/model_58.xml (1.8) (+49 -49)
+		src/xml/escp2/model/model_59.xml (1.8) (+58 -58)
+		src/xml/escp2/model/model_6.xml (1.7) (+38 -38)
+		src/xml/escp2/model/model_60.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_61.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_62.xml (1.8) (+52 -52)
+		src/xml/escp2/model/model_63.xml (1.8) (+52 -52)
+		src/xml/escp2/model/model_64.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_65.xml (1.8) (+48 -48)
+		src/xml/escp2/model/model_66.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_67.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_68.xml (1.8) (+55 -55)
+		src/xml/escp2/model/model_69.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_7.xml (1.7) (+40 -40)
+		src/xml/escp2/model/model_70.xml (1.9) (+53 -53)
+		src/xml/escp2/model/model_71.xml (1.8) (+56 -56)
+		src/xml/escp2/model/model_72.xml (1.8) (+59 -59)
+		src/xml/escp2/model/model_73.xml (1.8) (+49 -49)
+		src/xml/escp2/model/model_74.xml (1.8) (+47 -47)
+		src/xml/escp2/model/model_75.xml (1.8) (+47 -47)
+		src/xml/escp2/model/model_76.xml (1.9) (+49 -49)
+		src/xml/escp2/model/model_77.xml (1.8) (+51 -51)
+		src/xml/escp2/model/model_78.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_79.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_8.xml (1.7) (+39 -39)
+		src/xml/escp2/model/model_80.xml (1.8) (+61 -61)
+		src/xml/escp2/model/model_81.xml (1.8) (+54 -54)
+		src/xml/escp2/model/model_82.xml (1.9) (+54 -54)
+		src/xml/escp2/model/model_83.xml (1.8) (+50 -50)
+		src/xml/escp2/model/model_84.xml (1.8) (+52 -52)
+		src/xml/escp2/model/model_85.xml (1.8) (+63 -63)
+		src/xml/escp2/model/model_86.xml (1.8) (+47 -47)
+		src/xml/escp2/model/model_87.xml (1.8) (+48 -48)
+		src/xml/escp2/model/model_88.xml (1.4) (+51 -51)
+		src/xml/escp2/model/model_89.xml (1.3) (+51 -51)
+		src/xml/escp2/model/model_9.xml (1.7) (+40 -40)
+		src/xml/escp2/model/model_90.xml (1.3) (+51 -51)
+		src/xml/escp2/qualitypresets/p1_5.xml (1.2) (+45 -45)
+		src/xml/escp2/qualitypresets/picturemate.xml (1.2) (+35 -35)
+		src/xml/escp2/qualitypresets/standard.xml (1.2) (+45 -45)
+		src/xml/escp2/qualitypresets/v2880.xml (1.2) (+46 -46)
+		src/xml/escp2/weaves/pro7000.xml (1.2) (+5 -5)
+		src/xml/escp2/weaves/pro7500.xml (1.2) (+6 -6)
+		src/xml/escp2/weaves/pro7600.xml (1.2) (+7 -7)
+		src/xml/escp2/weaves/standard.xml (1.2) (+2 -2)
+
+	Clean up indentation/formatting of all XML files.
+
+	Fix ink definitions for 4-color PictureMate printers.
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.3) (+2 -0)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.4) (+2 -0)
+
+	Dark inks do need transition parameters
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.23) (+1 -2)
+
+	Don't forcibly default color correction to raw.
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.22) (+49 -52)
+
+	Add option to place md5 output in a single file.
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_88.xml (1.3) (+4 -2)
+		src/xml/escp2/model/model_89.xml (1.2) (+4 -2)
+		src/xml/escp2/model/model_90.xml (1.2) (+4 -2)
+
+	x880 printers have 8 inks
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.3) (+1 -1)
+
+	Correct name of ink set.
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.2) (+2 -2)
+
+	Light light black is apparently 0x20, not 0x30, on these printers.
+
+2008-06-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/Makefile.am (1.3) (+2 -1)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.1) (added)
+		src/xml/escp2/model/Makefile.am (1.4) (+4 -2)
+		src/xml/escp2/model/model_88.xml (1.2) (+1 -1)
+		src/xml/escp2/model/model_89.xml (1.1) (added)
+		src/xml/escp2/model/model_90.xml (1.1) (added)
+		src/xml/printers.xml (1.7) (+3 -3)
+
+	7880, 9880, and 11880 are 8-color Ultrachrome K3 printers
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.115) (+17 -1)
+		src/main/print-escp2-data.c (1.264) (+9 -1)
+		src/main/print-papers.c (1.39) (+3 -3)
+		src/main/print-vars.c (1.84) (+9 -1)
+
+	Protect reading XML files against locale issues
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.121) (+39 -14)
+		src/cups/test-rastertogutenprint.in (1.5) (+71 -8)
+
+	Use the actual page size name as passed to CUPS rather than trying
+	to find a best fit, which doesn't always do what is intended.  If the
+	user specified a custom page size, that's what CUPS should honor.
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.172) (+6 -1)
+		src/xml/escp2/model/Makefile.am (1.3) (+3 -2)
+		src/xml/escp2/model/model_88.xml (1.1) (added)
+		src/xml/papers.xml (1.4) (+19 -1)
+		src/xml/printers.xml (1.6) (+6 -1)
+
+	Add Epson 11880; add definitions for 7800, 7880, 9800, 9880
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.263) (+2 -2)
+		src/main/print-escp2.c (1.404) (+7 -1)
+
+	Fix logic for enlarging capability database
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.21) (+7 -4)
+		src/testpattern/testpattern.c (1.52) (+15 -6)
+		src/testpattern/testpattern.h (1.19) (+2 -1)
+
+	Add -q option to suppress progress output
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.3) (+34 -7)
+		src/xml/printers.xml (1.5) (+27 -7)
+
+	Add copyright notices and comments
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.83) (+390 -3106)
+		src/main/escp2-driver.c (1.48) (+2 -2)
+		src/main/print-escp2-data.c (1.262) (+24 -368)
+		src/main/print-escp2.c (1.403) (+111 -136)
+		src/main/print-escp2.h (1.129) (+23 -36)
+		src/xml/escp2/inks/Makefile.am (1.2) (+2 -1)
+		src/xml/escp2/inks/b500.xml (1.2) (+79 -70)
+		src/xml/escp2/inks/c120.xml (1.2) (+63 -54)
+		src/xml/escp2/inks/c64.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/c80.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/c82.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/claria.xml (1.2) (+103 -115)
+		src/xml/escp2/inks/cmy.xml (1.2) (+12 -6)
+		src/xml/escp2/inks/cmykrb.xml (1.2) (+217 -171)
+		src/xml/escp2/inks/cx3650.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/defaultblack.xml (1.1) (added)
+		src/xml/escp2/inks/f360.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/f360_photo.xml (1.2) (+102 -102)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.2) (+173 -179)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.2) (+318 -328)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.2) (+282 -294)
+		src/xml/escp2/inks/photo_gen0.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/photo_gen1.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/photo_gen2.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/photo_gen3.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/photo_gen4.xml (1.2) (+102 -126)
+		src/xml/escp2/inks/photo_pigment.xml (1.2) (+102 -94)
+		src/xml/escp2/inks/picturemate_4.xml (1.2) (+28 -16)
+		src/xml/escp2/inks/picturemate_6.xml (1.2) (+64 -40)
+		src/xml/escp2/inks/pro_gen1.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/pro_gen2.xml (1.2) (+126 -115)
+		src/xml/escp2/inks/pro_pigment.xml (1.2) (+102 -94)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.2) (+318 -300)
+		src/xml/escp2/inks/standard.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/standard_gen0.xml (1.2) (+60 -51)
+		src/xml/escp2/inks/ultrachrome.xml (1.2) (+318 -300)
+		src/xml/escp2/inks/x80.xml (1.2) (+36 -30)
+
+	Convert remaining (ink channel) data to XML
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.369) (+2 -2)
+
+	Bump version.
+
+2008-06-28	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.20) (+75 -37)
+
+	Add RawChannels to list of parameters being tested.
+
+	Add -r option to turn off testing all resolutions.
+
+2008-06-27	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.114) (+43 -34)
+		src/main/escp2-resolutions.c (1.49) (+19 -10)
+		src/main/print-escp2-data.c (1.261) (+72 -7)
+		src/main/print-escp2.c (1.402) (+48 -113)
+		src/main/print-escp2.h (1.128) (+8 -5)
+
+	Encapsulate model IDs differently
+
+2008-06-27	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.22) (+4 -4)
+
+	Correct handling of old-style printers.
+
+2008-06-27	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.171) (+1 -0)
+		src/xml/printers.xml (1.4) (+2 -1)
+
+	Support B-308
+
+2008-06-22	<rlk@sourceforge.net>
+
+	Files:	po/POTFILES.in (1.24) (+0 -1)
+
+	Remove escp2-inks.c
+
+2008-06-22	<rlk@sourceforge.net>
+
+	Files:	src/main/Makefile.am (1.101) (+1 -2)
+		src/main/escp2-driver.c (1.47) (+9 -9)
+		src/main/escp2-inks.c (1.65) (removed)
+		src/main/escp2-resolutions.c (1.48) (+114 -519)
+		src/main/print-escp2-data.c (1.260) (+91 -473)
+		src/main/print-escp2.c (1.401) (+179 -214)
+		src/main/print-escp2.h (1.127) (+69 -119)
+
+	Convert resolution data to XML.
+
+2008-06-21	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.188) (+4 -2)
+		src/main/print-escp2-data.c (1.259) (+1 -3)
+		src/xml/escp2/Makefile.am (1.6) (+7 -1)
+		src/xml/escp2/inks/.cvsignore (1.1) (added)
+		src/xml/escp2/inks/Makefile.am (1.1) (added)
+		src/xml/escp2/inks/b500.xml (1.1) (added)
+		src/xml/escp2/inks/c120.xml (1.1) (added)
+		src/xml/escp2/inks/c64.xml (1.1) (added)
+		src/xml/escp2/inks/c80.xml (1.1) (added)
+		src/xml/escp2/inks/c82.xml (1.1) (added)
+		src/xml/escp2/inks/claria.xml (1.1) (added)
+		src/xml/escp2/inks/cmy.xml (1.1) (added)
+		src/xml/escp2/inks/cmykrb.xml (1.1) (added)
+		src/xml/escp2/inks/cx3650.xml (1.1) (added)
+		src/xml/escp2/inks/f360.xml (1.1) (added)
+		src/xml/escp2/inks/f360_photo.xml (1.1) (added)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.1) (added)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.1) (added)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen0.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen1.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen2.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen3.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.1) (added)
+		src/xml/escp2/inks/photo_gen4.xml (1.1) (added)
+		src/xml/escp2/inks/photo_pigment.xml (1.1) (added)
+		src/xml/escp2/inks/picturemate_4.xml (1.1) (added)
+		src/xml/escp2/inks/picturemate_6.xml (1.1) (added)
+		src/xml/escp2/inks/pro_gen1.xml (1.1) (added)
+		src/xml/escp2/inks/pro_gen2.xml (1.1) (added)
+		src/xml/escp2/inks/pro_pigment.xml (1.1) (added)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.1) (added)
+		src/xml/escp2/inks/standard.xml (1.1) (added)
+		src/xml/escp2/inks/standard_gen0.xml (1.1) (added)
+		src/xml/escp2/inks/ultrachrome.xml (1.1) (added)
+		src/xml/escp2/inks/x80.xml (1.1) (added)
+		src/xml/escp2/model/model_0.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_1.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_10.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_11.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_12.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_13.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_14.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_15.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_16.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_17.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_18.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_19.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_2.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_20.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_21.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_22.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_23.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_24.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_25.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_26.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_27.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_28.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_29.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_3.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_30.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_31.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_32.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_33.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_34.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_35.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_36.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_37.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_38.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_39.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_4.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_40.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_41.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_42.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_43.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_44.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_45.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_46.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_47.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_48.xml (1.8) (+2 -0)
+		src/xml/escp2/model/model_49.xml (1.8) (+2 -0)
+		src/xml/escp2/model/model_5.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_50.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_51.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_52.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_53.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_54.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_55.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_56.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_57.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_58.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_59.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_6.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_60.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_61.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_62.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_63.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_64.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_65.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_66.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_67.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_68.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_69.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_7.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_70.xml (1.8) (+3 -1)
+		src/xml/escp2/model/model_71.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_72.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_73.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_74.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_75.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_76.xml (1.8) (+3 -1)
+		src/xml/escp2/model/model_77.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_78.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_79.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_8.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_80.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_81.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_82.xml (1.8) (+4 -2)
+		src/xml/escp2/model/model_83.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_84.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_85.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_86.xml (1.7) (+2 -0)
+		src/xml/escp2/model/model_87.xml (1.7) (+3 -1)
+		src/xml/escp2/model/model_9.xml (1.6) (+2 -0)
+
+	Add data for resolutions and channel definitions.  More code needs
+	to be written.
+
+	Fix media definition for Stylus Photo 1400.
+
+2008-06-21	<rlk@sourceforge.net>
+
+	Files:	README (1.188) (+7 -5)
+		scripts/autogen.sh (1.35) (+17 -8)
+
+	A few fixes from Matt Broughton.
+
+2008-06-21	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_48.xml (1.7) (+8 -5)
+		src/xml/escp2/model/model_49.xml (1.7) (+8 -5)
+
+	Add borderless support to Stylus Pro 7600/9600
+
+2008-06-20	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.187) (+4 -2)
+		src/main/escp2-driver.c (1.46) (+8 -7)
+		src/main/escp2-resolutions.c (1.47) (+161 -166)
+		src/main/print-escp2-data.c (1.258) (+97 -96)
+		src/main/print-escp2.c (1.400) (+5 -7)
+		src/main/print-escp2.h (1.126) (+20 -22)
+		src/testpattern/run-testpattern-2.in (1.19) (+23 -8)
+		src/xml/escp2/Makefile.am (1.5) (+14 -5)
+		src/xml/escp2/model/model_0.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_1.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_10.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_11.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_12.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_13.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_14.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_15.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_16.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_17.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_18.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_19.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_2.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_20.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_21.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_22.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_23.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_24.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_25.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_26.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_27.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_28.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_29.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_3.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_30.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_31.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_32.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_33.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_34.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_35.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_36.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_37.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_38.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_39.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_4.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_40.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_41.xml (1.5) (+2 -0)
+		src/xml/escp2/model/model_42.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_43.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_44.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_45.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_46.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_47.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_48.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_49.xml (1.6) (+2 -0)
+		src/xml/escp2/model/model_5.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_50.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_51.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_52.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_53.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_54.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_55.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_56.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_57.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_58.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_59.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_6.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_60.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_61.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_62.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_63.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_64.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_65.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_66.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_67.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_68.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_69.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_7.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_70.xml (1.7) (+1 -0)
+		src/xml/escp2/model/model_71.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_72.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_73.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_74.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_75.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_76.xml (1.7) (+1 -0)
+		src/xml/escp2/model/model_77.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_78.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_79.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_8.xml (1.5) (+1 -0)
+		src/xml/escp2/model/model_80.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_81.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_82.xml (1.7) (+1 -0)
+		src/xml/escp2/model/model_83.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_84.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_85.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_86.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_87.xml (1.6) (+1 -0)
+		src/xml/escp2/model/model_9.xml (1.5) (+1 -0)
+		src/xml/escp2/qualitypresets/.cvsignore (1.1) (added)
+		src/xml/escp2/qualitypresets/Makefile.am (1.1) (added)
+		src/xml/escp2/qualitypresets/p1_5.xml (1.1) (added)
+		src/xml/escp2/qualitypresets/picturemate.xml (1.1) (added)
+		src/xml/escp2/qualitypresets/standard.xml (1.1) (added)
+		src/xml/escp2/qualitypresets/v2880.xml (1.1) (added)
+		src/xml/escp2/weaves/.cvsignore (1.1) (added)
+		src/xml/escp2/weaves/Makefile.am (1.1) (added)
+		src/xml/escp2/weaves/pro7000.xml (1.1) (added)
+		src/xml/escp2/weaves/pro7500.xml (1.1) (added)
+		src/xml/escp2/weaves/pro7600.xml (1.1) (added)
+		src/xml/escp2/weaves/standard.xml (1.1) (added)
+
+	Convert quality presets and printer weave settings to XML.
+
+2008-06-18	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.87) (+597 -987)
+
+	Update Danish translation
+
+2008-06-17	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.44) (+2 -1)
+
+	We do need to use Fcntl.
+
+2008-06-16	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.82) (+1 -216)
+		src/main/print-escp2-data.c (1.257) (+104 -89)
+		src/main/print-escp2.c (1.399) (+15 -102)
+		src/main/print-escp2.h (1.125) (+4 -11)
+		src/xml/escp2/model/model_0.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_1.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_10.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_11.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_12.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_13.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_14.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_15.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_16.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_17.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_18.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_19.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_2.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_20.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_21.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_22.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_23.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_24.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_25.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_26.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_27.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_28.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_29.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_3.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_30.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_31.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_32.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_33.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_34.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_35.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_36.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_37.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_38.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_39.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_4.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_40.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_41.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_42.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_43.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_44.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_45.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_46.xml (1.5) (+9 -0)
+		src/xml/escp2/model/model_47.xml (1.5) (+9 -0)
+		src/xml/escp2/model/model_48.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_49.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_5.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_50.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_51.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_52.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_53.xml (1.5) (+9 -0)
+		src/xml/escp2/model/model_54.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_55.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_56.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_57.xml (1.5) (+9 -0)
+		src/xml/escp2/model/model_58.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_59.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_6.xml (1.4) (+6 -0)
+		src/xml/escp2/model/model_60.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_61.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_62.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_63.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_64.xml (1.5) (+10 -0)
+		src/xml/escp2/model/model_65.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_66.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_67.xml (1.5) (+10 -0)
+		src/xml/escp2/model/model_68.xml (1.5) (+10 -0)
+		src/xml/escp2/model/model_69.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_7.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_70.xml (1.6) (+8 -0)
+		src/xml/escp2/model/model_71.xml (1.5) (+10 -0)
+		src/xml/escp2/model/model_72.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_73.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_74.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_75.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_76.xml (1.6) (+6 -0)
+		src/xml/escp2/model/model_77.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_78.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_79.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_8.xml (1.4) (+8 -0)
+		src/xml/escp2/model/model_80.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_81.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_82.xml (1.6) (+8 -0)
+		src/xml/escp2/model/model_83.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_84.xml (1.5) (+8 -0)
+		src/xml/escp2/model/model_85.xml (1.5) (+7 -0)
+		src/xml/escp2/model/model_86.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_87.xml (1.5) (+6 -0)
+		src/xml/escp2/model/model_9.xml (1.4) (+8 -0)
+
+	Convert channel names to XML
+
+2008-06-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.145) (+3 -3)
+
+	Remove safety check for output order, which is really implemented in
+	CUPS.
+
+2008-06-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.43) (+1 -4)
+
+	Remove unneeded 'use' statements.
+
+2008-06-15	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.21) (+200 -179)
+
+	Fix a few problems.
+
+	Improve performance.
+
+2008-06-15	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.256) (+338 -969)
+		src/main/print-escp2.c (1.398) (+2 -86)
+		src/main/print-escp2.h (1.124) (+19 -15)
+		src/xml/.cvsignore (1.2) (+3 -0)
+		src/xml/escp2/model/model_0.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_1.xml (1.3) (+26 -0)
+		src/xml/escp2/model/model_10.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_11.xml (1.4) (+28 -0)
+		src/xml/escp2/model/model_12.xml (1.4) (+41 -0)
+		src/xml/escp2/model/model_13.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_14.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_15.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_16.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_17.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_18.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_19.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_2.xml (1.3) (+26 -0)
+		src/xml/escp2/model/model_20.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_21.xml (1.4) (+45 -0)
+		src/xml/escp2/model/model_22.xml (1.4) (+31 -0)
+		src/xml/escp2/model/model_23.xml (1.4) (+31 -0)
+		src/xml/escp2/model/model_24.xml (1.3) (+28 -0)
+		src/xml/escp2/model/model_25.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_26.xml (1.4) (+41 -0)
+		src/xml/escp2/model/model_27.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_28.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_29.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_3.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_30.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_31.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_32.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_33.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_34.xml (1.4) (+43 -0)
+		src/xml/escp2/model/model_35.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_36.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_37.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_38.xml (1.4) (+45 -0)
+		src/xml/escp2/model/model_39.xml (1.3) (+26 -0)
+		src/xml/escp2/model/model_4.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_40.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_41.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_42.xml (1.4) (+44 -0)
+		src/xml/escp2/model/model_43.xml (1.4) (+44 -0)
+		src/xml/escp2/model/model_44.xml (1.4) (+43 -0)
+		src/xml/escp2/model/model_45.xml (1.3) (+26 -0)
+		src/xml/escp2/model/model_46.xml (1.4) (+41 -0)
+		src/xml/escp2/model/model_47.xml (1.4) (+41 -0)
+		src/xml/escp2/model/model_48.xml (1.4) (+30 -0)
+		src/xml/escp2/model/model_49.xml (1.4) (+30 -0)
+		src/xml/escp2/model/model_5.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_50.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_51.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_52.xml (1.4) (+42 -0)
+		src/xml/escp2/model/model_53.xml (1.4) (+40 -0)
+		src/xml/escp2/model/model_54.xml (1.4) (+29 -0)
+		src/xml/escp2/model/model_55.xml (1.4) (+43 -0)
+		src/xml/escp2/model/model_56.xml (1.4) (+43 -0)
+		src/xml/escp2/model/model_57.xml (1.4) (+45 -0)
+		src/xml/escp2/model/model_58.xml (1.4) (+32 -0)
+		src/xml/escp2/model/model_59.xml (1.4) (+44 -0)
+		src/xml/escp2/model/model_6.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_60.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_61.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_62.xml (1.4) (+35 -0)
+		src/xml/escp2/model/model_63.xml (1.4) (+35 -0)
+		src/xml/escp2/model/model_64.xml (1.4) (+36 -0)
+		src/xml/escp2/model/model_65.xml (1.4) (+34 -0)
+		src/xml/escp2/model/model_66.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_67.xml (1.4) (+36 -0)
+		src/xml/escp2/model/model_68.xml (1.4) (+36 -0)
+		src/xml/escp2/model/model_69.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_7.xml (1.3) (+27 -0)
+		src/xml/escp2/model/model_70.xml (1.5) (+35 -0)
+		src/xml/escp2/model/model_71.xml (1.4) (+36 -0)
+		src/xml/escp2/model/model_72.xml (1.4) (+45 -0)
+		src/xml/escp2/model/model_73.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_74.xml (1.4) (+32 -0)
+		src/xml/escp2/model/model_75.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_76.xml (1.5) (+33 -0)
+		src/xml/escp2/model/model_77.xml (1.4) (+34 -0)
+		src/xml/escp2/model/model_78.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_79.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_8.xml (1.3) (+26 -0)
+		src/xml/escp2/model/model_80.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_81.xml (1.4) (+36 -0)
+		src/xml/escp2/model/model_82.xml (1.5) (+36 -0)
+		src/xml/escp2/model/model_83.xml (1.4) (+35 -0)
+		src/xml/escp2/model/model_84.xml (1.4) (+35 -0)
+		src/xml/escp2/model/model_85.xml (1.4) (+46 -0)
+		src/xml/escp2/model/model_86.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_87.xml (1.4) (+33 -0)
+		src/xml/escp2/model/model_9.xml (1.3) (+27 -0)
+
+	Convert basic scalar data to XML
+
+2008-06-15	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.186) (+4 -4)
+
+	Bump version.
+
+2008-06-15	<rlk@sourceforge.net>
+
+	Files:	src/main/sequence.c (1.26) (+2 -2)
+
+	Avoid trivial infinite loop in certain cases of malformed sequence.
+
+2008-06-14	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.70) (+606 -1018)
+
+	Updated Dutch translation
+
+===============================================================================
+Name: gutenprint-5_2_0-beta3
+
+2008-06-14	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.49) (+6109 -3313)
+		po/da.po (1.86) (+6602 -3614)
+		po/de.po (1.63) (+7005 -4220)
+		po/el.po (1.64) (+5675 -2880)
+		po/en_GB.po (1.156) (+6602 -3617)
+		po/es.po (1.62) (+7028 -4230)
+		po/fr.po (1.90) (+6624 -3639)
+		po/hu.po (1.21) (+6645 -3607)
+		po/ja.po (1.58) (+7043 -4245)
+		po/nb.po (1.23) (+6506 -3708)
+		po/nl.po (1.69) (+6704 -3624)
+		po/pl.po (1.68) (+6471 -3678)
+		po/pt.po (1.63) (+6997 -4199)
+		po/sk.po (1.67) (+7355 -4557)
+		po/sv.po (1.93) (+6520 -3535)
+		po/zh_TW.po (1.23) (+7024 -4166)
+
+	Gutenprint 5.2.0-beta3 release
+
+2008-06-14	<rlk@sourceforge.net>
+
+	Files:	src/Makefile.am (1.22) (+2 -2)
+
+	Need to build src/main before src/xml to allow extract-strings to be built.
+
+2008-06-14	<rlk@sourceforge.net>
+
+	Files:	src/xml/extract-strings.c (1.2) (+2 -1)
+
+	Return correct exit status.
+
+2008-06-11	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.368) (+45 -4)
+		README (1.187) (+3 -3)
+		configure.ac (1.185) (+7 -7)
+
+	Prep for beta3 release
+
+2008-06-11	<rlk@sourceforge.net>
+
+	Files:	src/main/mxml-file.c (1.9) (+4 -3)
+
+	Fix trivial bug in stp_mxmlLoadFromFile.
+
+2008-06-11	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.45) (+40 -32)
+
+	Change ordering of remote commands to match Epson recommendations.
+
+2008-06-11	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/c120.xml (1.7) (+73 -73)
+
+	Further attempts to improve print speed/quality.
+
+2008-06-11	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/c120.xml (1.6) (+10 -10)
+
+	Improve print speed.
+
+2008-06-10	<rlk@sourceforge.net>
+
+	Files:	src/xml/Makefile.am (1.2) (+13 -11)
+		src/xml/escp2/Makefile.am (1.4) (+7 -2)
+		src/xml/escp2/inputslots/Makefile.am (1.2) (+4 -2)
+		src/xml/escp2/inputslots/b500.xml (1.2) (+2 -2)
+		src/xml/escp2/inputslots/cd_cutter_roll_feed.xml (1.2) (+5 -5)
+		src/xml/escp2/inputslots/cd_roll_feed.xml (1.2) (+4 -4)
+		src/xml/escp2/inputslots/cutter_roll_feed.xml (1.2) (+3 -3)
+		src/xml/escp2/inputslots/pro_roll_feed.xml (1.2) (+2 -2)
+		src/xml/escp2/inputslots/r1800.xml (1.2) (+5 -5)
+		src/xml/escp2/inputslots/r2400.xml (1.2) (+4 -4)
+		src/xml/escp2/inputslots/rx700.xml (1.2) (+4 -4)
+		src/xml/escp2/inputslots/spro5000.xml (1.2) (+4 -4)
+		src/xml/escp2/inputslots/standard_roll_feed.xml (1.2) (+2 -2)
+		src/xml/escp2/media/Makefile.am (1.4) (+4 -2)
+		src/xml/escp2/media/b500.xml (1.7) (+50 -50)
+		src/xml/escp2/media/c120.xml (1.5) (+34 -34)
+		src/xml/escp2/media/c64.xml (1.4) (+57 -57)
+		src/xml/escp2/media/c80.xml (1.4) (+57 -57)
+		src/xml/escp2/media/c82.xml (1.4) (+57 -57)
+		src/xml/escp2/media/claria.xml (1.6) (+44 -44)
+		src/xml/escp2/media/claria1400.xml (1.4) (+44 -44)
+		src/xml/escp2/media/cmy.xml (1.4) (+38 -38)
+		src/xml/escp2/media/cmykrb.xml (1.5) (+60 -60)
+		src/xml/escp2/media/cx3650.xml (1.4) (+57 -57)
+		src/xml/escp2/media/f360.xml (1.4) (+57 -57)
+		src/xml/escp2/media/f360_photo.xml (1.4) (+38 -38)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.4) (+38 -38)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.4) (+63 -63)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.5) (+66 -66)
+		src/xml/escp2/media/photo_gen0.xml (1.4) (+57 -57)
+		src/xml/escp2/media/photo_gen1.xml (1.4) (+57 -57)
+		src/xml/escp2/media/photo_gen2.xml (1.4) (+57 -57)
+		src/xml/escp2/media/photo_gen3.xml (1.4) (+57 -57)
+		src/xml/escp2/media/photo_gen3_4.xml (1.4) (+57 -57)
+		src/xml/escp2/media/photo_gen4.xml (1.5) (+36 -36)
+		src/xml/escp2/media/photo_pigment.xml (1.4) (+42 -42)
+		src/xml/escp2/media/picturemate_4.xml (1.4) (+4 -4)
+		src/xml/escp2/media/picturemate_6.xml (1.4) (+4 -4)
+		src/xml/escp2/media/pro_gen1.xml (1.4) (+57 -57)
+		src/xml/escp2/media/pro_gen2.xml (1.4) (+57 -57)
+		src/xml/escp2/media/pro_pigment.xml (1.4) (+42 -42)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.4) (+63 -63)
+		src/xml/escp2/media/standard.xml (1.4) (+57 -57)
+		src/xml/escp2/media/standard_gen0.xml (1.4) (+57 -57)
+		src/xml/escp2/media/ultrachrome.xml (1.4) (+63 -63)
+		src/xml/escp2/media/x80.xml (1.4) (+38 -38)
+		src/xml/escp2/mediasizes/Makefile.am (1.2) (+4 -2)
+		src/xml/escp2/model/Makefile.am (1.2) (+4 -2)
+		src/xml/extract-strings.c (1.1) (added)
+		src/xml/papers.xml (1.2) (+165 -165)
+		src/xml/printers.xml (1.3) (+1366 -1356)
+
+	Create xmli18n-tmp.h correctly
+
+2008-06-09	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.184) (+3 -2)
+		src/foomatic/foomatic-printermap (1.170) (+4 -1)
+		src/main/escp2-driver.c (1.44) (+12 -13)
+		src/main/escp2-papers.c (1.113) (+66 -1)
+		src/main/print-escp2-data.c (1.255) (+10 -10)
+		src/main/print-escp2.c (1.397) (+16 -7)
+		src/main/print-escp2.h (1.123) (+18 -11)
+		src/testpattern/run-testpattern-2.in (1.18) (+1 -1)
+		src/xml/escp2/Makefile.am (1.3) (+4 -3)
+		src/xml/escp2/mediasizes/.cvsignore (1.1) (added)
+		src/xml/escp2/mediasizes/Makefile.am (1.1) (added)
+		src/xml/escp2/mediasizes/standard.xml (1.1) (added)
+		src/xml/escp2/model/model_10.xml (1.3) (+1 -0)
+		src/xml/escp2/model/model_11.xml (1.3) (+1 -0)
+		src/xml/escp2/model/model_12.xml (1.3) (+1 -0)
+		src/xml/escp2/model/model_13.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_14.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_15.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_16.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_17.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_18.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_19.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_20.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_21.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_22.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_23.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_25.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_26.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_32.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_33.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_34.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_35.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_36.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_37.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_38.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_42.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_43.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_44.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_46.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_47.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_48.xml (1.3) (+1 -1)
+		src/xml/escp2/model/model_49.xml (1.3) (+1 -1)
+		src/xml/escp2/model/model_50.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_51.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_52.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_53.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_54.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_55.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_56.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_57.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_58.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_59.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_60.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_61.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_62.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_63.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_64.xml (1.3) (+3 -1)
+		src/xml/escp2/model/model_65.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_66.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_67.xml (1.3) (+3 -1)
+		src/xml/escp2/model/model_68.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_69.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_70.xml (1.4) (+4 -2)
+		src/xml/escp2/model/model_71.xml (1.3) (+4 -2)
+		src/xml/escp2/model/model_72.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_73.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_74.xml (1.3) (+3 -2)
+		src/xml/escp2/model/model_75.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_76.xml (1.4) (+4 -2)
+		src/xml/escp2/model/model_77.xml (1.3) (+3 -2)
+		src/xml/escp2/model/model_78.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_79.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_80.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_81.xml (1.3) (+4 -2)
+		src/xml/escp2/model/model_82.xml (1.4) (+4 -2)
+		src/xml/escp2/model/model_83.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_84.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_85.xml (1.3) (+4 -2)
+		src/xml/escp2/model/model_86.xml (1.3) (+2 -1)
+		src/xml/escp2/model/model_87.xml (1.3) (+3 -1)
+		src/xml/printers.xml (1.2) (+4 -1)
+
+	Add media size data.
+
+	Convert initialization sequences to XML.
+
+	Add some additional checks to run-testpattern-2.
+
+2008-06-08	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.254) (+177 -353)
+		src/main/print-escp2.c (1.396) (+37 -32)
+		src/main/print-escp2.h (1.122) (+7 -8)
+
+	Simplify loading
+
+2008-06-08	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.183) (+3 -2)
+		include/gutenprint/mxml.h (1.2) (+6 -2)
+		src/main/escp2-driver.c (1.43) (+8 -8)
+		src/main/escp2-papers.c (1.112) (+398 -453)
+		src/main/mxml-file.c (1.8) (+46 -2)
+		src/main/print-escp2-data.c (1.253) (+177 -328)
+		src/main/print-escp2.c (1.395) (+151 -414)
+		src/main/print-escp2.h (1.121) (+29 -20)
+		src/main/xml.c (1.42) (+8 -4)
+		src/xml/escp2/Makefile.am (1.2) (+3 -2)
+		src/xml/escp2/inputslots/.cvsignore (1.1) (added)
+		src/xml/escp2/inputslots/Makefile.am (1.1) (added)
+		src/xml/escp2/inputslots/b500.xml (1.1) (added)
+		src/xml/escp2/inputslots/cd_cutter_roll_feed.xml (1.1) (added)
+		src/xml/escp2/inputslots/cd_roll_feed.xml (1.1) (added)
+		src/xml/escp2/inputslots/cutter_roll_feed.xml (1.1) (added)
+		src/xml/escp2/inputslots/default.xml (1.1) (added)
+		src/xml/escp2/inputslots/pro_roll_feed.xml (1.1) (added)
+		src/xml/escp2/inputslots/r1800.xml (1.1) (added)
+		src/xml/escp2/inputslots/r2400.xml (1.1) (added)
+		src/xml/escp2/inputslots/rx700.xml (1.1) (added)
+		src/xml/escp2/inputslots/spro5000.xml (1.1) (added)
+		src/xml/escp2/inputslots/standard_roll_feed.xml (1.1) (added)
+		src/xml/escp2/media/b500.xml (1.6) (+2 -2)
+		src/xml/escp2/media/c120.xml (1.4) (+2 -2)
+		src/xml/escp2/media/c64.xml (1.3) (+2 -2)
+		src/xml/escp2/media/c80.xml (1.3) (+2 -2)
+		src/xml/escp2/media/c82.xml (1.3) (+2 -2)
+		src/xml/escp2/media/claria.xml (1.5) (+2 -2)
+		src/xml/escp2/media/claria1400.xml (1.3) (+2 -2)
+		src/xml/escp2/media/cmy.xml (1.3) (+2 -2)
+		src/xml/escp2/media/cmykrb.xml (1.4) (+2 -2)
+		src/xml/escp2/media/cx3650.xml (1.3) (+2 -2)
+		src/xml/escp2/media/f360.xml (1.3) (+2 -2)
+		src/xml/escp2/media/f360_photo.xml (1.3) (+2 -2)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.3) (+2 -2)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.3) (+2 -2)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.4) (+2 -2)
+		src/xml/escp2/media/photo_gen0.xml (1.3) (+2 -2)
+		src/xml/escp2/media/photo_gen1.xml (1.3) (+2 -2)
+		src/xml/escp2/media/photo_gen2.xml (1.3) (+2 -2)
+		src/xml/escp2/media/photo_gen3.xml (1.3) (+2 -2)
+		src/xml/escp2/media/photo_gen3_4.xml (1.3) (+2 -2)
+		src/xml/escp2/media/photo_gen4.xml (1.4) (+2 -2)
+		src/xml/escp2/media/photo_pigment.xml (1.3) (+2 -2)
+		src/xml/escp2/media/picturemate_4.xml (1.3) (+2 -2)
+		src/xml/escp2/media/picturemate_6.xml (1.3) (+2 -2)
+		src/xml/escp2/media/pro_gen1.xml (1.3) (+2 -2)
+		src/xml/escp2/media/pro_gen2.xml (1.3) (+2 -2)
+		src/xml/escp2/media/pro_pigment.xml (1.3) (+2 -2)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.3) (+2 -2)
+		src/xml/escp2/media/standard.xml (1.3) (+2 -2)
+		src/xml/escp2/media/standard_gen0.xml (1.3) (+2 -2)
+		src/xml/escp2/media/ultrachrome.xml (1.3) (+2 -2)
+		src/xml/escp2/media/x80.xml (1.3) (+2 -2)
+		src/xml/escp2/model/model_0.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_1.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_10.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_11.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_12.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_13.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_14.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_15.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_16.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_17.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_18.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_19.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_2.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_20.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_21.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_22.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_23.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_24.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_25.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_26.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_27.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_28.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_29.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_3.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_30.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_31.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_32.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_33.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_34.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_35.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_36.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_37.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_38.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_39.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_4.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_40.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_41.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_42.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_43.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_44.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_45.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_46.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_47.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_48.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_49.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_5.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_50.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_51.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_52.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_53.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_54.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_55.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_56.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_57.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_58.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_59.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_6.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_60.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_61.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_62.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_63.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_64.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_65.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_66.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_67.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_68.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_69.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_7.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_70.xml (1.3) (+7 -1)
+		src/xml/escp2/model/model_71.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_72.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_73.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_74.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_75.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_76.xml (1.3) (+7 -1)
+		src/xml/escp2/model/model_77.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_78.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_79.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_8.xml (1.2) (+4 -1)
+		src/xml/escp2/model/model_80.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_81.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_82.xml (1.3) (+7 -1)
+		src/xml/escp2/model/model_83.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_84.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_85.xml (1.2) (+7 -1)
+		src/xml/escp2/model/model_86.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_87.xml (1.2) (+6 -1)
+		src/xml/escp2/model/model_9.xml (1.2) (+4 -1)
+
+	Convert input slots to use XML.
+
+	Place top level tags in "escp2" namespace.
+
+	Convert init/deinit strings to XML.
+
+	Use href for referencing paper and input slot XML files.
+
+	Add mxml call to load from a named file (save having to open/close files
+	and all that).
+
+	Fix small memory leak in Epson driver on start/end job calls.
+
+2008-06-08	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.17) (+16 -6)
+		src/testpattern/testpattern.c (1.51) (+34 -12)
+		src/testpattern/testpattern.h (1.18) (+5 -2)
+		src/testpattern/testpatternl.l (1.22) (+3 -1)
+		src/testpattern/testpatterny.y (1.32) (+15 -2)
+
+	Correctly handle multi-page jobs
+
+2008-06-07	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/printer_options.c (1.5) (+9 -7)
+		src/testpattern/run-testpattern-2.in (1.16) (+33 -12)
+		src/testpattern/testpattern.c (1.50) (+13 -1)
+		src/testpattern/testpatternl.l (1.21) (+2 -1)
+		src/testpattern/testpatterny.y (1.31) (+12 -2)
+
+	Test full bleed.
+
+	Allow boolean parameters.
+
+	Set non-string parameters correctly in test pattern generator.
+
+2008-06-03	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/printers.h (1.5) (+12 -4)
+		src/main/printers.c (1.85) (+53 -18)
+		src/testpattern/run-testpattern-2.in (1.15) (+2 -1)
+		src/testpattern/testpattern.c (1.49) (+11 -1)
+
+	Add stp_set_printer_defaults_soft to allow setting defaults for only
+	unset parameters.
+
+	Test input slots, color correction algorithms, and image types.
+
+2008-06-03	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.81) (+9 -32)
+		src/main/print-escp2-data.c (1.252) (+3 -3)
+		src/main/print-escp2.c (1.394) (+134 -41)
+		src/xml/escp2/media/b500.xml (1.5) (+2 -0)
+		src/xml/escp2/media/c120.xml (1.3) (+692 -971)
+		src/xml/escp2/media/claria.xml (1.4) (+0 -36)
+		src/xml/escp2/media/claria1400.xml (1.2) (+0 -37)
+		src/xml/escp2/media/cmykrb.xml (1.3) (+649 -141)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.3) (+757 -121)
+		src/xml/escp2/media/photo_gen4.xml (1.3) (+567 -773)
+
+	Create definitions for C120, R800, R2400, and RX700.
+
+	Remove quadtone support for C120.
+
+	Fix some definitiosn for other printers.
+
+	Fix parameter definitions for dry times.
+
+	Extract all parameters from XML files (still needs to be tested!)
+
+2008-06-03	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.251) (+3 -3)
+
+	PM-D600 and PM-A650 should not use SN 01 command.
+
+2008-06-02	<rlk@sourceforge.net>
+
+	Files:	doc/gutenprint.dox.in (1.6) (+47 -10)
+		doc/gutenprintui2.dox.in (1.4) (+299 -83)
+
+	Update Doxygen input files to 1.5.3
+
+2008-06-02	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/vars.h (1.6) (+2 -2)
+
+	Fix documentation comment.
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/Makefile.am (1.3) (+2 -1)
+		src/xml/escp2/media/b500.xml (1.4) (+452 -0)
+		src/xml/escp2/media/claria.xml (1.3) (+925 -27)
+		src/xml/escp2/media/claria1400.xml (1.1) (added)
+		src/xml/escp2/model/model_82.xml (1.2) (+1 -1)
+
+	Add additional paper types for B500.
+
+	Add print method data for Claria printers.
+
+	Separate Stylus Photo 1400 (it has slightly different media handling).
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/b500.xml (1.3) (+48 -48)
+		src/xml/escp2/media/c120.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/c64.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/c80.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/c82.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/claria.xml (1.2) (+722 -722)
+		src/xml/escp2/media/cmy.xml (1.2) (+703 -703)
+		src/xml/escp2/media/cmykrb.xml (1.2) (+1533 -1533)
+		src/xml/escp2/media/cx3650.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/f360.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/f360_photo.xml (1.2) (+703 -703)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.2) (+703 -703)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.2) (+1627 -1627)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.2) (+1627 -1627)
+		src/xml/escp2/media/photo_gen0.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/photo_gen1.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/photo_gen2.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/photo_gen3.xml (1.2) (+1444 -1444)
+		src/xml/escp2/media/photo_gen3_4.xml (1.2) (+1444 -1444)
+		src/xml/escp2/media/photo_gen4.xml (1.2) (+1444 -1444)
+		src/xml/escp2/media/photo_pigment.xml (1.2) (+819 -819)
+		src/xml/escp2/media/picturemate_4.xml (1.2) (+72 -72)
+		src/xml/escp2/media/picturemate_6.xml (1.2) (+72 -72)
+		src/xml/escp2/media/pro_gen1.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/pro_gen2.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/pro_pigment.xml (1.2) (+819 -819)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.2) (+1629 -1629)
+		src/xml/escp2/media/standard.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/standard_gen0.xml (1.2) (+1425 -1425)
+		src/xml/escp2/media/ultrachrome.xml (1.2) (+1627 -1627)
+		src/xml/escp2/media/x80.xml (1.2) (+703 -703)
+
+	Fix names of HSL map parameters and clean up indentation
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.80) (+1 -32)
+		src/main/escp2-driver.c (1.42) (+22 -6)
+		src/main/print-escp2.c (1.393) (+5 -4)
+		src/main/xml.c (1.41) (+3 -3)
+		src/xml/escp2/media/Makefile.am (1.2) (+2 -1)
+		src/xml/escp2/media/b500.xml (1.2) (+790 -1469)
+		src/xml/escp2/media/photo_gen4.xml (1.1) (added)
+		src/xml/escp2/model/model_70.xml (1.2) (+1 -1)
+		src/xml/escp2/model/model_76.xml (1.2) (+1 -1)
+
+	Add support for MI and ESC(m commands for B500.
+
+	Remove quadtone ink support for B500.
+
+	Change stp_xmlstrtoul and stp_xmlstrtol to accept bases other than 10.
+
+	Support some additional media options in Epson driver.
+
+	Add additional media set for newer photo printers.
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.182) (+6 -2)
+		include/gutenprint/path.h (1.2) (+8 -2)
+		po/POTFILES.in (1.23) (+2 -2)
+		scripts/global.mk (1.11) (+1 -1)
+		src/Makefile.am (1.21) (+3 -2)
+		src/cups/Makefile.am (1.97) (+3 -3)
+		src/cups/genppd.c (1.144) (+45 -2)
+		src/cups/test-rastertogutenprint.in (1.4) (+1 -1)
+		src/foomatic/Makefile.am (1.51) (+3 -3)
+		src/main/.cvsignore (1.23) (+0 -1)
+		src/main/Makefile.am (1.100) (+2 -31)
+		src/main/dither-matrix-1x1.xml (1.3) (removed)
+		src/main/dither-matrix-2x1.xml (1.3) (removed)
+		src/main/dither-matrix-4x1.xml (1.3) (removed)
+		src/main/escp2-channels.c (1.79) (+79 -76)
+		src/main/escp2-driver.c (1.41) (+34 -32)
+		src/main/escp2-papers.c (1.111) (+1 -1681)
+		src/main/papers.xml (1.29) (removed)
+		src/main/path.c (1.20) (+24 -4)
+		src/main/print-escp2-data.c (1.250) (+110 -110)
+		src/main/print-escp2.c (1.392) (+532 -136)
+		src/main/print-escp2.h (1.120) (+25 -65)
+		src/main/print-vars.c (1.83) (+8 -4)
+		src/main/printers.xml (1.231) (removed)
+		src/main/xml.c (1.40) (+2 -12)
+		src/testpattern/run-testpattern (1.24) (+1 -1)
+		src/testpattern/run-testpattern-1 (1.10) (+1 -1)
+		src/testpattern/run-testpattern-2.in (1.14) (+4 -2)
+		src/xml/.cvsignore (1.1) (added)
+		src/xml/Makefile.am (1.1) (added)
+		src/xml/dither-matrix-1x1.xml (1.1) (added)
+		src/xml/dither-matrix-2x1.xml (1.1) (added)
+		src/xml/dither-matrix-4x1.xml (1.1) (added)
+		src/xml/escp2/.cvsignore (1.1) (added)
+		src/xml/escp2/Makefile.am (1.1) (added)
+		src/xml/escp2/media/.cvsignore (1.1) (added)
+		src/xml/escp2/media/Makefile.am (1.1) (added)
+		src/xml/escp2/media/b500.xml (1.1) (added)
+		src/xml/escp2/media/c120.xml (1.1) (added)
+		src/xml/escp2/media/c64.xml (1.1) (added)
+		src/xml/escp2/media/c80.xml (1.1) (added)
+		src/xml/escp2/media/c82.xml (1.1) (added)
+		src/xml/escp2/media/claria.xml (1.1) (added)
+		src/xml/escp2/media/cmy.xml (1.1) (added)
+		src/xml/escp2/media/cmykrb.xml (1.1) (added)
+		src/xml/escp2/media/cx3650.xml (1.1) (added)
+		src/xml/escp2/media/f360.xml (1.1) (added)
+		src/xml/escp2/media/f360_photo.xml (1.1) (added)
+		src/xml/escp2/media/f360_photo7_japan.xml (1.1) (added)
+		src/xml/escp2/media/f360_ultrachrome.xml (1.1) (added)
+		src/xml/escp2/media/f360_ultrachrome_k3.xml (1.1) (added)
+		src/xml/escp2/media/photo_gen0.xml (1.1) (added)
+		src/xml/escp2/media/photo_gen1.xml (1.1) (added)
+		src/xml/escp2/media/photo_gen2.xml (1.1) (added)
+		src/xml/escp2/media/photo_gen3.xml (1.1) (added)
+		src/xml/escp2/media/photo_gen3_4.xml (1.1) (added)
+		src/xml/escp2/media/photo_pigment.xml (1.1) (added)
+		src/xml/escp2/media/picturemate_4.xml (1.1) (added)
+		src/xml/escp2/media/picturemate_6.xml (1.1) (added)
+		src/xml/escp2/media/pro_gen1.xml (1.1) (added)
+		src/xml/escp2/media/pro_gen2.xml (1.1) (added)
+		src/xml/escp2/media/pro_pigment.xml (1.1) (added)
+		src/xml/escp2/media/pro_ultrachrome.xml (1.1) (added)
+		src/xml/escp2/media/standard.xml (1.1) (added)
+		src/xml/escp2/media/standard_gen0.xml (1.1) (added)
+		src/xml/escp2/media/ultrachrome.xml (1.1) (added)
+		src/xml/escp2/media/x80.xml (1.1) (added)
+		src/xml/escp2/model/.cvsignore (1.1) (added)
+		src/xml/escp2/model/Makefile.am (1.1) (added)
+		src/xml/escp2/model/model_0.xml (1.1) (added)
+		src/xml/escp2/model/model_1.xml (1.1) (added)
+		src/xml/escp2/model/model_10.xml (1.1) (added)
+		src/xml/escp2/model/model_11.xml (1.1) (added)
+		src/xml/escp2/model/model_12.xml (1.1) (added)
+		src/xml/escp2/model/model_13.xml (1.1) (added)
+		src/xml/escp2/model/model_14.xml (1.1) (added)
+		src/xml/escp2/model/model_15.xml (1.1) (added)
+		src/xml/escp2/model/model_16.xml (1.1) (added)
+		src/xml/escp2/model/model_17.xml (1.1) (added)
+		src/xml/escp2/model/model_18.xml (1.1) (added)
+		src/xml/escp2/model/model_19.xml (1.1) (added)
+		src/xml/escp2/model/model_2.xml (1.1) (added)
+		src/xml/escp2/model/model_20.xml (1.1) (added)
+		src/xml/escp2/model/model_21.xml (1.1) (added)
+		src/xml/escp2/model/model_22.xml (1.1) (added)
+		src/xml/escp2/model/model_23.xml (1.1) (added)
+		src/xml/escp2/model/model_24.xml (1.1) (added)
+		src/xml/escp2/model/model_25.xml (1.1) (added)
+		src/xml/escp2/model/model_26.xml (1.1) (added)
+		src/xml/escp2/model/model_27.xml (1.1) (added)
+		src/xml/escp2/model/model_28.xml (1.1) (added)
+		src/xml/escp2/model/model_29.xml (1.1) (added)
+		src/xml/escp2/model/model_3.xml (1.1) (added)
+		src/xml/escp2/model/model_30.xml (1.1) (added)
+		src/xml/escp2/model/model_31.xml (1.1) (added)
+		src/xml/escp2/model/model_32.xml (1.1) (added)
+		src/xml/escp2/model/model_33.xml (1.1) (added)
+		src/xml/escp2/model/model_34.xml (1.1) (added)
+		src/xml/escp2/model/model_35.xml (1.1) (added)
+		src/xml/escp2/model/model_36.xml (1.1) (added)
+		src/xml/escp2/model/model_37.xml (1.1) (added)
+		src/xml/escp2/model/model_38.xml (1.1) (added)
+		src/xml/escp2/model/model_39.xml (1.1) (added)
+		src/xml/escp2/model/model_4.xml (1.1) (added)
+		src/xml/escp2/model/model_40.xml (1.1) (added)
+		src/xml/escp2/model/model_41.xml (1.1) (added)
+		src/xml/escp2/model/model_42.xml (1.1) (added)
+		src/xml/escp2/model/model_43.xml (1.1) (added)
+		src/xml/escp2/model/model_44.xml (1.1) (added)
+		src/xml/escp2/model/model_45.xml (1.1) (added)
+		src/xml/escp2/model/model_46.xml (1.1) (added)
+		src/xml/escp2/model/model_47.xml (1.1) (added)
+		src/xml/escp2/model/model_48.xml (1.1) (added)
+		src/xml/escp2/model/model_49.xml (1.1) (added)
+		src/xml/escp2/model/model_5.xml (1.1) (added)
+		src/xml/escp2/model/model_50.xml (1.1) (added)
+		src/xml/escp2/model/model_51.xml (1.1) (added)
+		src/xml/escp2/model/model_52.xml (1.1) (added)
+		src/xml/escp2/model/model_53.xml (1.1) (added)
+		src/xml/escp2/model/model_54.xml (1.1) (added)
+		src/xml/escp2/model/model_55.xml (1.1) (added)
+		src/xml/escp2/model/model_56.xml (1.1) (added)
+		src/xml/escp2/model/model_57.xml (1.1) (added)
+		src/xml/escp2/model/model_58.xml (1.1) (added)
+		src/xml/escp2/model/model_59.xml (1.1) (added)
+		src/xml/escp2/model/model_6.xml (1.1) (added)
+		src/xml/escp2/model/model_60.xml (1.1) (added)
+		src/xml/escp2/model/model_61.xml (1.1) (added)
+		src/xml/escp2/model/model_62.xml (1.1) (added)
+		src/xml/escp2/model/model_63.xml (1.1) (added)
+		src/xml/escp2/model/model_64.xml (1.1) (added)
+		src/xml/escp2/model/model_65.xml (1.1) (added)
+		src/xml/escp2/model/model_66.xml (1.1) (added)
+		src/xml/escp2/model/model_67.xml (1.1) (added)
+		src/xml/escp2/model/model_68.xml (1.1) (added)
+		src/xml/escp2/model/model_69.xml (1.1) (added)
+		src/xml/escp2/model/model_7.xml (1.1) (added)
+		src/xml/escp2/model/model_70.xml (1.1) (added)
+		src/xml/escp2/model/model_71.xml (1.1) (added)
+		src/xml/escp2/model/model_72.xml (1.1) (added)
+		src/xml/escp2/model/model_73.xml (1.1) (added)
+		src/xml/escp2/model/model_74.xml (1.1) (added)
+		src/xml/escp2/model/model_75.xml (1.1) (added)
+		src/xml/escp2/model/model_76.xml (1.1) (added)
+		src/xml/escp2/model/model_77.xml (1.1) (added)
+		src/xml/escp2/model/model_78.xml (1.1) (added)
+		src/xml/escp2/model/model_79.xml (1.1) (added)
+		src/xml/escp2/model/model_8.xml (1.1) (added)
+		src/xml/escp2/model/model_80.xml (1.1) (added)
+		src/xml/escp2/model/model_81.xml (1.1) (added)
+		src/xml/escp2/model/model_82.xml (1.1) (added)
+		src/xml/escp2/model/model_83.xml (1.1) (added)
+		src/xml/escp2/model/model_84.xml (1.1) (added)
+		src/xml/escp2/model/model_85.xml (1.1) (added)
+		src/xml/escp2/model/model_86.xml (1.1) (added)
+		src/xml/escp2/model/model_87.xml (1.1) (added)
+		src/xml/escp2/model/model_9.xml (1.1) (added)
+		src/xml/papers.xml (1.1) (added)
+		src/xml/printers.xml (1.1) (added)
+		test/run-testdither (1.13) (+1 -1)
+		test/run-weavetest (1.25) (+1 -1)
+
+	Start converting Epson driver data to XML.
+
+	Stage 1: Convert existing paper data into XML and verify current
+	      	 functionality.
+
+	      	 This also includes creating a top level XML model file for
+	      	 each distinct printer model (there's a 1-1 mapping between
+	      	 the models in escp2-printers.c and the model files).
+
+		 All of these XML files are going into an escp2 subdirectory
+	      	 of the top level XML directory.  The model files will go into
+	      	 a "model" subdirectory, and the paper files will go into a
+	      	 "media" subdirectory.
+
+		 The media definition will be able to express capabilities on
+	      	 a per-media type, per-inkset, and per-resolution basis.  The
+	      	 actual data will be made available to the rest of the package
+	      	 through an stp_vars_t.
+
+		 I'm creating this data using the existing 5.2 beta tree and a
+	      	 small program to generate the XML.
+
+		 I'm verifying existing functionality by means of md5 checksum
+	      	 verification using the testpattern-2 test.
+
+		 Note that the existing mechanical sequence information will
+	      	 be made available as advanced options, some of them integer
+	      	 and some of them floating point.  Things like vacuum
+	      	 intensity and feed adjustment are exposed by the OEM driver,
+	      	 so we should expose them also.
+
+		 This stage will not be checked in.
+
+	Stage 2: Move all of the XML files from src/main to src/xml.
+
+	      	 This requires creating the appropriate makefile structure and
+	      	 scrubbing all uses of STP_DATA_PATH within the source tree.
+
+		 Functionality will be verified in the same way.  I will also
+	      	 verify that an installation works correctly.
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	src/main/dither-ordered.c (1.30) (+1 -11)
+
+	Remove spurious (and incorrect) comment.
+
+2008-06-01	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.68) (+819 -1013)
+
+	Updated Dutch translation
+
+2008-05-23	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2-data.c (1.249) (+3 -3)
+		src/main/print-escp2.c (1.391) (+20 -18)
+
+	Fix duplex printing on B500
+
+2008-05-20	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/vars.h (1.5) (+126 -10)
+		include/gutenprint/xml.h (1.3) (+10 -2)
+		src/main/print-vars.c (1.82) (+432 -47)
+		src/main/printers.c (1.84) (+3 -102)
+		src/main/xml.c (1.39) (+124 -1)
+
+	Add some additional operations on stp_vars_t
+
+2008-05-17	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.78) (+17 -13)
+		src/main/escp2-inks.c (1.64) (+9 -7)
+		src/main/escp2-papers.c (1.110) (+25 -19)
+		src/main/escp2-resolutions.c (1.46) (+25 -19)
+		src/main/print-escp2.c (1.390) (+2 -2)
+
+	Do not attempt to print debug message with possible null pointer
+
+2008-05-17	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.13) (+5 -1)
+
+	Check ink sets also.
+
+	Add -f to specify families to test.
+
+2008-05-14	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.95) (+43 -40)
+
+	Minor cleanup
+
+2008-05-14	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.20) (+9 -4)
+
+	Reset the vertical position on form feed.
+
+2008-05-12	<rlk@sourceforge.net>
+
+	Files:	po/hu.po (1.20) (+742 -901)
+
+	Update Hungarian translation
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	doc/README.maintaining (1.25) (+2 -2)
+
+	Update for gettext 0.16
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.94) (+43 -44)
+
+	Print the name of the printer, and any warnings, for status.
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.77) (+3 -3)
+
+	Distinguish between the two black cartridges on the C120.
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.181) (+3 -3)
+
+	Bump required gettext version to 0.16 per Roger Leigh.
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.93) (+43 -4)
+		src/foomatic/foomatic-printermap (1.169) (+2 -0)
+		src/main/escp2-channels.c (1.76) (+142 -1)
+		src/main/escp2-driver.c (1.40) (+13 -3)
+		src/main/escp2-inks.c (1.63) (+28 -1)
+		src/main/escp2-papers.c (1.109) (+64 -1)
+		src/main/escp2-resolutions.c (1.45) (+4 -1)
+		src/main/print-escp2-data.c (1.248) (+29 -1)
+		src/main/print-escp2.c (1.389) (+115 -17)
+		src/main/print-escp2.h (1.119) (+9 -4)
+		src/main/printers.xml (1.230) (+3 -1)
+
+	Preliminary support for B-300, B-500
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.12) (+1 -1)
+
+	Test each media type.
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/main/dither-ordered.c (1.29) (+2 -2)
+
+	Fix an initialization warning.
+
+2008-05-11	<rlk@sourceforge.net>
+
+	Files:	src/main/dither-main.c (1.60) (+3 -1)
+
+	Don't accidentally use segmented dither if dither algorithm defaults
+	to adaptive hybrid.
+
+2008-05-08	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.143) (+9 -4)
+
+	Generate information for Macintosh color management (harmless
+	elsewhere)
+
+	Safety check for output order and duplex options (don't use unless
+	they're active, as these are not mandatory).
+
+2008-05-05	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.367) (+33 -0)
+		src/foomatic/foomatic-printermap (1.168) (+34 -0)
+		src/main/printers.xml (1.229) (+35 -1)
+
+	Add additional HP laser printers.
+
+2008-05-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.366) (+1 -1)
+
+	Update number of supported printers.
+
+2008-05-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.365) (+445 -0)
+		src/foomatic/foomatic-printermap (1.167) (+429 -0)
+		src/main/printers.xml (1.228) (+437 -8)
+
+	Add a number of laser printers from Brother, Epson, Gestetner, Infotec, Lanier, Lexmark, NRG, Ricoh, Samsung, and Savin
+
+2008-05-04	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.39) (+14 -9)
+		src/main/print-escp2-data.c (1.247) (+88 -88)
+		src/main/print-escp2.c (1.388) (+19 -4)
+		src/main/print-escp2.h (1.118) (+6 -2)
+
+	Fix missing line problem in color on CX-3700
+
+===============================================================================
 Name: gutenprint-5_2_0-beta2
 
 2008-04-28	<rlk@sourceforge.net>
@@ -40775,7 +44527,7 @@ Name: print-3_1_6
 
 	Current best stuff
 
-	<@sourceforge.net>
+1999-09-12	<rlk@sourceforge.net>
 
 	Files:	Makefile.am (1.1) (added)
 		Makefile.in (1.1) (added)

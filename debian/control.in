@@ -15,7 +15,7 @@ Description: print plugin for the GIMP
  This package includes the Gutenprint Print plugin for the GIMP.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -42,7 +42,7 @@ Description: printer drivers for CUPS
    http://www.cups.org
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -64,7 +64,7 @@ Description: development files for the Gutenprint printer driver library
  libgutenprint.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -86,7 +86,7 @@ Description: documentation for the Gutenprint printer driver library
  Gutenprint library when you're programming.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -105,7 +105,7 @@ Description: runtime for the Gutenprint printer driver library
  run programs using Gutenprint drivers.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -129,7 +129,7 @@ Description: development files for the Gutenprint printer driver user interface 
  libgutenprintui.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -149,7 +149,7 @@ Description: runtime for the Gutenprint printer driver user interface library
  used for print dialogs etc. for use with libgutenprint.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -170,7 +170,7 @@ Description: locale data files for Gutenprint
  their messages in other languages than US English.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -189,7 +189,7 @@ Description: maintenance utility for Epson Stylus printers
  printers.  It can also check the current ink levels in the printer.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
   .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -220,7 +220,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
  if you wish to make use of foomatic.
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -248,7 +248,7 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
  Home Page: http://www.openprinting.org/
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems
@@ -268,7 +268,7 @@ Description: users' guide for Gutenprint and CUPS
  Printing System (CUPS).
  .
  This is Gutenprint version #UPSTREAM_VERSION#, a stable release
- in the 5.1 series.
+ in the 5.2 series.
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems

@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-driver.c,v 1.38 2007/12/30 05:38:44 rlk Exp $"
+ * "$Id: escp2-driver.c,v 1.54 2008/07/26 23:15:47 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -53,8 +53,8 @@ escp2_reset_printer(stp_vars_t *v)
    * Magic initialization string that's needed to take printer out of
    * packet mode.
    */
-  if (pd->init_sequence)
-    stp_zfwrite(pd->init_sequence->data, pd->init_sequence->bytes, 1, v);
+  if (pd->preinit_sequence)
+    stp_zfwrite(pd->preinit_sequence->data, pd->preinit_sequence->bytes, 1, v);
 
   stp_send_command(v, "\033@", "");
 }
@@ -103,9 +103,12 @@ print_debug_params(stp_vars_t *v)
   print_remote_int_param(v, "Xdpi", pd->res->hres);
   print_remote_int_param(v, "Printed_ydpi", pd->res->printed_vres);
   print_remote_int_param(v, "Printed_xdpi", pd->res->printed_hres);
+/*
   print_remote_int_param(v, "Use_softweave", pd->res->softweave);
-  print_remote_int_param(v, "Use_printer_weave", pd->res->printer_weave);
+  print_remote_int_param(v, "Printer_weave", pd->res->printer_weave);
+*/
   print_remote_int_param(v, "Use_printer_weave", pd->use_printer_weave);
+  print_remote_int_param(v, "Duplex", pd->duplex);
   print_remote_int_param(v, "Page_left", pd->page_left);
   print_remote_int_param(v, "Page_right", pd->page_right);
   print_remote_int_param(v, "Page_top", pd->page_top);
@@ -136,7 +139,6 @@ print_debug_params(stp_vars_t *v)
   print_remote_int_param(v, "Unit_scale", pd->unit_scale);
   print_remote_int_param(v, "Zero_advance", pd->send_zero_pass_advance);
   print_remote_int_param(v, "Bits", pd->bitwidth);
-  print_remote_int_param(v, "Resid", pd->ink_resid);
   print_remote_int_param(v, "Drop Size", pd->drop_size);
   print_remote_int_param(v, "Initial_vertical_offset", pd->initial_vertical_offset);
   print_remote_int_param(v, "Channels_in_use", pd->channels_in_use);
@@ -146,17 +148,18 @@ print_debug_params(stp_vars_t *v)
   print_remote_int_param(v, "Use_fast_360", pd->use_fast_360);
   print_remote_int_param(v, "Command_set", pd->command_set);
   print_remote_int_param(v, "Variable_dots", pd->variable_dots);
-  print_remote_int_param(v, "Has_vacuum", pd->has_vacuum);
   print_remote_int_param(v, "Has_graymode", pd->has_graymode);
   print_remote_int_param(v, "Base_separation", pd->base_separation);
   print_remote_int_param(v, "Resolution_scale", pd->resolution_scale);
+#if 0
   print_remote_int_param(v, "Printing_resolution", pd->printing_resolution);
+#endif
   print_remote_int_param(v, "Separation_rows", pd->separation_rows);
   print_remote_int_param(v, "Pseudo_separation_rows", pd->pseudo_separation_rows);
   print_remote_int_param(v, "Extra_720dpi_separation", pd->extra_720dpi_separation);
   print_remote_int_param(v, "Use_aux_channels", pd->use_aux_channels);
   print_remote_param(v, "Ink name", pd->inkname->name);
-  print_remote_int_param(v, "  channels", pd->inkname->channel_set->channel_count);
+  print_remote_int_param(v, "  channels", pd->inkname->channel_count);
   print_remote_int_param(v, "  inkset", pd->inkname->inkset);
   for (i = 0; i < count; i++)
     {
@@ -210,56 +213,50 @@ escp2_set_remote_sequence(stp_vars_t *v)
 {
   /* Magic remote mode commands, whatever they do */
   escp2_privdata_t *pd = get_privdata(v);
+  const stp_vars_t *pv = pd->media_settings;
 
   if (stp_get_debug_level() & STP_DBG_MARK_FILE)
     print_debug_params(v);
   if (pd->advanced_command_set || pd->input_slot)
     {
-      int feed_sequence = 0;
       /* Enter remote mode */
       stp_send_command(v, "\033(R", "bcs", 0, "REMOTE1");
-      if (pd->command_set == MODEL_COMMAND_PRO)
+      /* Per the manual, job setup comes first, then SN command */
+      if (pd->input_slot &&
+	  pd->input_slot->roll_feed_cut_flags == ROLL_FEED_CUT_ALL)
+	      stp_send_command(v, "JS", "bh", 0);
+      if (pd->preinit_remote_sequence)
+	stp_zfwrite(pd->preinit_remote_sequence->data,
+		    pd->preinit_remote_sequence->bytes, 1, v);
+      if (stp_check_int_parameter(pv, "FeedAdjustment", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "SN", "bccc", 0, 4,
+			 stp_get_int_parameter(pv, "FeedAdjustment"));
+      if (stp_check_int_parameter(pv, "VacuumIntensity", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "SN", "bccc", 0, 5,
+			 stp_get_int_parameter(pv, "VacuumIntensity"));
+      if (stp_check_int_parameter(pv, "ScanDryTime", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "DR", "bcch", 0, 1,
+			 (int) stp_get_float_parameter(pv, "ScanDryTime") * 1000);
+      if (stp_check_int_parameter(pv, "ScanMinDryTime", STP_PARAMETER_ACTIVE))
 	{
-	  if (pd->paper_type)
-	    {
-	      stp_send_command(v, "PH", "bcc", 0,
-			       pd->paper_type->paper_thickness);
-	      if (pd->has_vacuum)
-		stp_send_command(v, "SN", "bccc", 0, 5,
-				 pd->paper_type->vacuum_intensity);
-	      stp_send_command(v, "SN", "bccc", 0, 4,
-			       pd->paper_type->feed_adjustment);
-	    }
+	  stp_send_command(v, "DR", "bcccc", 0, 0x41, 0xff, 0xff);
+	  stp_send_command(v, "DR", "bcch", 0, 1,
+			   (int) stp_get_float_parameter(pv, "ScanMinDryTime") * 1000);
 	}
-      else if (pd->advanced_command_set)
-	{
-	  if (pd->paper_type)
-	    feed_sequence = pd->paper_type->paper_feed_sequence;
-	  /* Function unknown */
-	  stp_send_command(v, "PM", "bh", 0);
-	  /* Set mechanism sequence */
-	  stp_send_command(v, "SN", "bccc", 0, 0, feed_sequence);
-	  if (stp_get_boolean_parameter(v, "FullBleed"))
-	    {
-	      stp_send_command(v, "FP", "bch", 0,
-			       (unsigned short) -pd->zero_margin_offset);
-	      if (pd->borderless_sequence)
-		stp_zfwrite(pd->borderless_sequence->data,
-			    pd->borderless_sequence->bytes,
-			    1, v);
-	    }
-	}
+      if (stp_check_int_parameter(pv, "PageDryTime", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "DR", "bcch", 0, 1,
+			 (int) stp_get_float_parameter(pv, "PageDryTime"));
+      /* Next comes paper path */
       if (pd->input_slot)
 	{
 	  int divisor = pd->base_separation / 360;
 	  int height = pd->page_true_height * 5 / divisor;
-	  if (pd->input_slot->init_sequence.bytes)
-	    stp_zfwrite(pd->input_slot->init_sequence.data,
-			pd->input_slot->init_sequence.bytes, 1, v);
+	  if (pd->input_slot->init_sequence)
+	    stp_zfwrite(pd->input_slot->init_sequence->data,
+			pd->input_slot->init_sequence->bytes, 1, v);
 	  switch (pd->input_slot->roll_feed_cut_flags)
 	    {
 	    case ROLL_FEED_CUT_ALL:
-	      stp_send_command(v, "JS", "bh", 0);
 	      stp_send_command(v, "CO", "bccccl", 0, 0, 1, 0, 0);
 	      stp_send_command(v, "CO", "bccccl", 0, 0, 0, 0, height);
 	      break;
@@ -271,7 +268,39 @@ escp2_set_remote_sequence(stp_vars_t *v)
 	      break;
 	    }
 	}
-
+      if (stp_check_int_parameter(pv, "PaperMedia", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "MI", "bcccc", 0, 1,
+			 stp_get_int_parameter(pv, "PaperMedia"),
+			 (stp_check_int_parameter(pv, "PaperMediaSize", STP_PARAMETER_ACTIVE) ?
+			  stp_get_int_parameter(pv, "PaperMediaSize") :
+			  99));	/* User-defined size (for now!) */
+      if (pd->duplex)
+	{
+	  /* If there's ever duplex no tumble, we'll need to special
+	     case it, too */
+	  if (pd->duplex == DUPLEX_TUMBLE && (pd->input_slot->duplex & DUPLEX_TUMBLE))
+	    stp_send_command(v, "DP", "bcc", 0, 2); /* Auto duplex */
+	  else
+	    stp_send_command(v, "DP", "bcc", 0, 2); /* Auto duplex */
+	}
+      if (stp_check_int_parameter(pv, "PaperThickness", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "PH", "bcc", 0,
+			 stp_get_int_parameter(pv, "PaperThickness"));
+      if (stp_check_int_parameter(pv, "FeedSequence", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "SN", "bccc", 0, 0,
+			 stp_get_int_parameter(pv, "FeedSequence"));
+      if (stp_check_int_parameter(pv, "PlatenGap", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "US", "bccc", 0, 1,
+			 stp_get_int_parameter(pv, "PlatenGap"));
+      if (stp_get_boolean_parameter(v, "FullBleed"))
+	{
+	  stp_send_command(v, "FP", "bch", 0,
+			   (unsigned short) -pd->zero_margin_offset);
+	  if (pd->borderless_sequence)
+	    stp_zfwrite(pd->borderless_sequence->data,
+			pd->borderless_sequence->bytes,
+			1, v);
+	}
       /* Exit remote mode */
 
       stp_send_command(v, "\033", "ccc", 0, 0, 0);
@@ -314,12 +343,10 @@ static void
 escp2_set_printer_weave(stp_vars_t *v)
 {
   escp2_privdata_t *pd = get_privdata(v);
-  int printer_weave_parm = 0;
   if (pd->printer_weave)
-    printer_weave_parm = pd->printer_weave->value;
-  else if (pd->res->printer_weave)
-    printer_weave_parm = pd->res->printer_weave;
-  stp_send_command(v, "\033(i", "bc", printer_weave_parm);
+    stp_zfwrite(pd->printer_weave->data, pd->printer_weave->bytes, 1, v);
+  else
+    stp_send_command(v, "\033(i", "bc", 0);
 }
 
 static void
@@ -327,12 +354,13 @@ escp2_set_printhead_speed(stp_vars_t *v)
 {
   escp2_privdata_t *pd = get_privdata(v);
   const char *direction = stp_get_string_parameter(v, "PrintingDirection");
-  int unidirectional;
+  int unidirectional = -1;
   if (direction && strcmp(direction, "Unidirectional") == 0)
     unidirectional = 1;
   else if (direction && strcmp(direction, "Bidirectional") == 0)
     unidirectional = 0;
-  else if (pd->res->printed_hres * pd->res->printed_vres *
+  else if (pd->bidirectional_upper_limit >= 0 &&
+	   pd->res->printed_hres * pd->res->printed_vres *
 	   pd->res->vertical_passes >= pd->bidirectional_upper_limit)
     {
       stp_dprintf(STP_DBG_ESCP2, v,
@@ -344,7 +372,7 @@ escp2_set_printhead_speed(stp_vars_t *v)
 		  pd->bidirectional_upper_limit);
       unidirectional = 1;
     }
-  else
+  else if (pd->bidirectional_upper_limit >= 0)
     {
       stp_dprintf(STP_DBG_ESCP2, v,
 		  "Setting bidirectional: hres %d vres %d passes %d total %d limit %d\n",
@@ -355,13 +383,13 @@ escp2_set_printhead_speed(stp_vars_t *v)
 		  pd->bidirectional_upper_limit);
       unidirectional = 0;
     }
-  if (unidirectional)
+  if (unidirectional == 1)
     {
       stp_send_command(v, "\033U", "c", 1);
-      if (pd->res->hres > pd->printing_resolution)
+      if (pd->res->hres > pd->physical_xdpi)
 	stp_send_command(v, "\033(s", "bc", 2);
     }
-  else
+  else if (unidirectional == 0)
     stp_send_command(v, "\033U", "c", 0);
 }
 
@@ -410,10 +438,14 @@ escp2_set_paper_dimensions(stp_vars_t *v)
   escp2_privdata_t *pd = get_privdata(v);
   if (pd->advanced_command_set)
     {
+      const stp_vars_t *pv = pd->media_settings;
       int w = pd->page_true_width * pd->page_management_units / 72;
       int h = (pd->page_true_height + pd->paper_extra_bottom) *
 	pd->page_management_units / 72;
       stp_send_command(v, "\033(S", "bll", w, h);
+      if (stp_check_int_parameter(pv, "PrintMethod", STP_PARAMETER_ACTIVE))
+	stp_send_command(v, "\033(m", "bc", 
+			 stp_get_int_parameter(pv, "PrintMethod"));
     }
 }
 
@@ -428,7 +460,7 @@ escp2_set_printhead_resolution(stp_vars_t *v)
 
       xres = pd->resolution_scale / pd->physical_xdpi;
 
-      if (pd->command_set == MODEL_COMMAND_PRO && !pd->res->softweave)
+      if (pd->command_set == MODEL_COMMAND_PRO && pd->printer_weave)
 	yres = yres /  pd->res->vres;
       else if (pd->split_channel_count > 1)
 	yres = yres * pd->nozzle_separation / pd->base_separation *
@@ -507,7 +539,8 @@ send_print_command(stp_vars_t *v, stp_pass_t *pass, int ncolor, int nlines)
   if (pd->command_set == MODEL_COMMAND_PRO || pd->variable_dots)
     {
       int nwidth = pd->bitwidth * ((lwidth + 7) / 8);
-      stp_send_command(v, "\033i", "ccchh", ncolor, COMPRESSION,
+      stp_send_command(v, "\033i", "ccchh", ncolor,
+		       (stp_get_debug_level() & STP_DBG_NO_COMPRESSION) ? 0 : 1,
 		       pd->bitwidth, nwidth, nlines);
     }
   else
@@ -525,8 +558,9 @@ send_print_command(stp_vars_t *v, stp_pass_t *pass, int ncolor, int nlines)
 	ygap *= pd->pseudo_separation_rows;
       else
 	ygap *= pd->separation_rows;
-      stp_send_command(v, "\033.", "cccch", COMPRESSION, ygap, xgap, nlines,
-		       lwidth);
+      stp_send_command(v, "\033.", "cccch",
+		       (stp_get_debug_level() & STP_DBG_NO_COMPRESSION) ? 0 : 1,
+		       ygap, xgap, nlines, lwidth);
     }
 }
 
@@ -536,39 +570,43 @@ send_extra_data(stp_vars_t *v, int extralines)
   escp2_privdata_t *pd = get_privdata(v);
   int lwidth = (pd->image_printed_width + (pd->horizontal_passes - 1)) /
     pd->horizontal_passes;
-#ifdef TEST_UNCOMPRESSED
-  int i;
-  for (i = 0; i < pd->bitwidth * (lwidth + 7) / 8; i++)
-    stp_putc(0, v);
-#else  /* !TEST_UNCOMPRESSED */
-  int k, l;
-  int bytes_to_fill = pd->bitwidth * ((lwidth + 7) / 8);
-  int full_blocks = bytes_to_fill / 128;
-  int leftover = bytes_to_fill % 128;
-  int total_bytes = extralines * (full_blocks + 1) * 2;
-  unsigned char *buf = stp_malloc(total_bytes);
-  total_bytes = 0;
-  for (k = 0; k < extralines; k++)
+  if (stp_get_debug_level() & STP_DBG_NO_COMPRESSION)
     {
-      for (l = 0; l < full_blocks; l++)
-	{
-	  buf[total_bytes++] = 129;
-	  buf[total_bytes++] = 0;
-	}
-      if (leftover == 1)
-	{
-	  buf[total_bytes++] = 1;
-	  buf[total_bytes++] = 0;
-	}
-      else if (leftover > 0)
-	{
-	  buf[total_bytes++] = 257 - leftover;
-	  buf[total_bytes++] = 0;
-	}
+      int i, k;
+      for (k = 0; k < extralines; k++)
+	for (i = 0; i < pd->bitwidth * (lwidth + 7) / 8; i++)
+	  stp_putc(0, v);
     }
-  stp_zfwrite((const char *) buf, total_bytes, 1, v);
-  stp_free(buf);
-#endif /* TEST_UNCOMPRESSED */
+  else
+    {
+      int k, l;
+      int bytes_to_fill = pd->bitwidth * ((lwidth + 7) / 8);
+      int full_blocks = bytes_to_fill / 128;
+      int leftover = bytes_to_fill % 128;
+      int total_bytes = extralines * (full_blocks + 1) * 2;
+      unsigned char *buf = stp_malloc(total_bytes);
+      total_bytes = 0;
+      for (k = 0; k < extralines; k++)
+	{
+	  for (l = 0; l < full_blocks; l++)
+	    {
+	      buf[total_bytes++] = 129;
+	      buf[total_bytes++] = 0;
+	    }
+	  if (leftover == 1)
+	    {
+	      buf[total_bytes++] = 1;
+	      buf[total_bytes++] = 0;
+	    }
+	  else if (leftover > 0)
+	    {
+	      buf[total_bytes++] = 257 - leftover;
+	      buf[total_bytes++] = 0;
+	    }
+	}
+      stp_zfwrite((const char *) buf, total_bytes, 1, v);
+      stp_free(buf);
+    }
 }
 
 void
@@ -596,16 +634,16 @@ stpi_escp2_deinit_printer(stp_vars_t *v)
   if (pd->advanced_command_set || pd->input_slot)
     {
       stp_send_command(v, "\033(R", "bcs", 0, "REMOTE1");
-      if (pd->input_slot && pd->input_slot->deinit_sequence.bytes)
-	stp_zfwrite(pd->input_slot->deinit_sequence.data,
-		    pd->input_slot->deinit_sequence.bytes, 1, v);
+      if (pd->input_slot && pd->input_slot->deinit_sequence)
+	stp_zfwrite(pd->input_slot->deinit_sequence->data,
+		    pd->input_slot->deinit_sequence->bytes, 1, v);
       /* Load settings from NVRAM */
       stp_send_command(v, "LD", "b");
 
       /* Magic deinit sequence reported by Simone Falsini */
-      if (pd->deinit_sequence)
-	stp_zfwrite(pd->deinit_sequence->data, pd->deinit_sequence->bytes,
-		    1, v);
+      if (pd->deinit_remote_sequence)
+	stp_zfwrite(pd->deinit_remote_sequence->data,
+		    pd->deinit_remote_sequence->bytes, 1, v);
       /* Exit remote mode */
       stp_send_command(v, "\033", "ccc", 0, 0, 0);
     }
@@ -622,6 +660,7 @@ stpi_escp2_flush_pass(stp_vars_t *v, int passno, int vertical_subpass)
   stp_pass_t *pass = stp_get_pass_by_pass(v, passno);
   stp_linecount_t *linecount = stp_get_linecount_by_pass(v, passno);
   int minlines = pd->min_nozzles;
+  int nozzle_start = pd->nozzle_start;
 
   for (j = 0; j < pd->channels_in_use; j++)
     {
@@ -640,23 +679,37 @@ stpi_escp2_flush_pass(stp_vars_t *v, int passno, int vertical_subpass)
 	    {
 	      int sc = pd->split_channel_count;
 	      int k, l;
+	      int minlines_lo, nozzle_start_lo;
+	      minlines /= sc;
+	      nozzle_start /= sc;
+	      minlines_lo = pd->min_nozzles - (minlines * sc);
+	      nozzle_start_lo = pd->nozzle_start - (nozzle_start * sc);
 	      for (k = 0; k < sc; k++)
 		{
+		  int ml = minlines + (k < minlines_lo ? 1 : 0);
+		  int ns = nozzle_start + (k < nozzle_start_lo ? 1 : 0);
 		  int lc = ((nlines + (sc - k - 1)) / sc);
-		  if (lc < minlines)
-		    {
-		      extralines = minlines - lc;
-		    }
+		  int base = (pd->nozzle_start + k) % sc;
+		  if (lc < ml)
+		    extralines = ml - lc;
+		  else
+		    extralines = 0;
+		  extralines -= ns;
+		  if (extralines < 0)
+		    extralines = 0;
 		  if (lc + extralines > 0)
 		    {
+		      int sc_off = k + j * sc;
 		      set_horizontal_position(v, pass, vertical_subpass);
-		      send_print_command(v, pass, pd->split_channels[k],
-					 lc + extralines);
+		      send_print_command(v, pass, pd->split_channels[sc_off],
+					 lc + extralines + ns);
+		      if (ns > 0)
+			send_extra_data(v, ns);
 		      for (l = 0; l < lc; l++)
 			{
-			  int sp = (l * sc) + k;
+			  int sp = (l * sc) + base;
 			  unsigned long offset = sp * pd->split_channel_width;
-			  if (COMPRESSION)
+			  if (!(stp_get_debug_level() & STP_DBG_NO_COMPRESSION))
 			    {
 			      unsigned char *comp_ptr;
 			      stp_pack_tiff(v, bufs->v[j] + offset,
@@ -669,7 +722,7 @@ stpi_escp2_flush_pass(stp_vars_t *v, int passno, int vertical_subpass)
 			    stp_zfwrite((const char *) bufs->v[j] + offset,
 					pd->split_channel_width, 1, v);
 			}
-		      if (extralines)
+		      if (extralines > 0)
 			send_extra_data(v, extralines);
 		      stp_send_command(v, "\r", "");
 		    }
@@ -684,12 +737,14 @@ stpi_escp2_flush_pass(stp_vars_t *v, int passno, int vertical_subpass)
 		  nlines = minlines;
 		}
 	      send_print_command(v, pass, ncolor, nlines);
-
+	      extralines -= nozzle_start;
 	      /*
 	       * Send the data
 	       */
+	      if (nozzle_start)
+		send_extra_data(v, nozzle_start);
 	      stp_zfwrite((const char *)bufs->v[j], lineoffs->v[j], 1, v);
-	      if (extralines)
+	      if (extralines > 0)
 		send_extra_data(v, extralines);
 	      stp_send_command(v, "\r", "");
 	    }
@@ -705,7 +760,7 @@ stpi_escp2_terminate_page(stp_vars_t *v)
 {
   escp2_privdata_t *pd = get_privdata(v);
   if (!pd->input_slot ||
-      pd->input_slot->roll_feed_cut_flags != ROLL_FEED_DONT_EJECT)
+      !(pd->input_slot->roll_feed_cut_flags & ROLL_FEED_DONT_EJECT))
     {
       if (!pd->printed_something)
 	stp_send_command(v, "\n", "");

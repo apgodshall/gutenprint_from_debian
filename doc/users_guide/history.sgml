@@ -6,13 +6,13 @@ This software package was first written by Michael Sweet of
 initially worked only as a print plugin to the GIMP (GNU Image
 Manipulation Program).  In the summer of 1999,
 Robert Krawitz (the current
-Gimp-Print project leader) purchased an Epson Stylus Photo EX printer
+Gutenprint project leader) purchased an Epson Stylus Photo EX printer
 to feed his photography hobby. Finding no existing printer drivers, Robert
-adapted Mike's Gimp-Print plugin to his six-color printer, and by the end
+adapted Mike's GIMP Print plugin to his six-color printer, and by the end
 of the year released version 3.0 of the Gimp-Print software, which was
 included in version 1.1 of the GIMP.  The intention was for this to be
 the stable plugin in version 1.2 of the GIMP while development of the
-Gimp-Print plugin continued for later release.
+GIMP Print plugin continued for later release.
   </para>
   <para>
 Robert put the Gimp-Print development tree on SourceForge starting
@@ -101,8 +101,8 @@ team hopes to include the following:
   </itemizedlist>
   </para>
   <para>
-The entire Gimp-Print team hopes you will really enjoy using this
-software!  For more information, please consult the GIMP-Print project
+The entire Gutenprint team hopes you will really enjoy using this
+software!  For more information, please consult the Gutenprint project
 <ulink url="http://gimp-print.sourceforge.net">web page</ulink>.
   </para>
   </chapter>

@@ -23,27 +23,20 @@ AUTOMAKE_OPTIONS = 1.4 gnu
 
 MAINT_CHARSET = latin1
 
-
-## Variables
-
-AM_CFLAGS = $(GNUCFLAGS)
-INCLUDES = @INCLUDES@
-LIBPRINTUT = $(top_builddir)/lib/libprintut.la
-LIBS = $(INTLLIBS) @LIBS@
+include $(top_srcdir)/scripts/global.mk
 
 
 ## Programs
 
-ESCPUTIL_BIN = escputil
+if BUILD_ESCPUTIL
+bin_PROGRAMS = escputil
+endif
 
-bin_PROGRAMS = @ESCPUTIL_BIN@
+escputil_SOURCES = d4lib.c escputil.c d4lib.h
 
-EXTRA_PROGRAMS = escputil
-
-escputil_LDADD = $(LIBPRINTUT) $(LIBREADLINE_DEPS)
+escputil_LDADD = $(GUTENPRINT_LIBS) $(LIBREADLINE_DEPS)
 
 
 ## Clean
 
-CLEANFILES = $(EXTRA_PROGRAMS)
 MAINTAINERCLEANFILES = Makefile.in

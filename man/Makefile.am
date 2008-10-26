@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.6.6.2 2002/11/11 21:20:10 rleigh Exp $
+## $Id: Makefile.am,v 1.21 2005/04/18 10:54:56 rleigh Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -23,31 +23,42 @@ AUTOMAKE_OPTIONS = 1.4 gnu
 
 MAINT_CHARSET = latin1
 
+include $(top_srcdir)/scripts/global.mk
+
 
 ## Data
 
-# Conditional installation of manpages is currently broken in automake 1.4
+# Conditional installation of manpages is currently broken in automake...
 
-man_MANS = \
+if BUILD_CUPS
+CUPS_MAN = \
 	cups-calibrate.8 \
+	cups-genppd.8 \
+	cups-genppdconfig.8 \
+	cups-genppdupdate.8
+endif
+
+if BUILD_ESCPUTIL
+ESCPUTIL_MAN = escputil.1
+endif
+
+if BUILD_GHOSTSCRIPT
+GHOSTSCRIPT_MAN = ijsgutenprint.1
+endif
+
+man_MANS = $(CUPS_MAN) $(ESCPUTIL_MAN) $(GHOSTSCRIPT_MAN)
+
+EXTRA_man_MANS = \
+	cups-calibrate.8 \
+	cups-genppd.8 \
+	cups-genppdconfig.8 \
+	cups-genppdupdate.8 \
 	escputil.1 \
-	gimpprint.3 \
-	gimpprint-config.1 \
-	gimpprint-color.7 \
-	gimpprint-dithers.7 \
-	gimpprint-imagetypes.7 \
-	gimpprint-inktypes.7 \
-	gimpprint-mediasizes.7 \
-	gimpprint-mediasources.7 \
-	gimpprint-mediatypes.7 \
-	gimpprint-models.7 \
-	gimpprint-resolutions.7 \
-	ijsgimpprint.1
+	ijsgutenprint.1
 
 
 ## Clean
 
-DISTCLEANFILES = $(man_MANS)
+DISTCLEANFILES = $(MAIN_MAN) $(EXTRA_man_MANS)
 MAINTAINERCLEANFILES = Makefile.in
 
-# EXTRA_DIST = $(man_MANS)

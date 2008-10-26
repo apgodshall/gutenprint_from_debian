@@ -1,5 +1,5 @@
 /*
- * "$Id: printers.c,v 1.2 2001/09/02 13:30:26 rlk Exp $"
+ * "$Id: printers.c,v 1.10 2004/09/17 18:38:12 rleigh Exp $"
  *
  *   Dump the per-printer options for Grant Taylor's *-omatic database
  *
@@ -24,22 +24,21 @@
 #include <config.h>
 #endif
 #include <stdio.h>
-#ifdef INCLUDE_GIMP_PRINT_H
-#include INCLUDE_GIMP_PRINT_H
-#else
-#include <gimp-print/gimp-print.h>
-#endif
-#include "../../lib/libprintut.h"
+#include <gutenprint/gutenprint.h>
 
 int
 main(int argc, char **argv)
 {
   int i;
-  for (i = 0; i < stp_known_printers(); i++)
+
+  stp_init();
+  for (i = 0; i < stp_printer_model_count(); i++)
     {
-      const stp_papersize_t p = stp_get_printer_by_index(i);
+      const stp_printer_t *p = stp_get_printer_by_index(i);
       printf("$printer_name{'%s'} = '%s';\n", stp_printer_get_driver(p),
 	     stp_printer_get_long_name(p));
+      printf("$printer_make{'%s'} = '%s';\n", stp_printer_get_driver(p),
+	     stp_printer_get_manufacturer(p));
     }
   return 0;
 }

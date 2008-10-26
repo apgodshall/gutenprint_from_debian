@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.h,v 1.105.6.4 2007/12/29 20:42:28 rlk Exp $"
+ * "$Id: print-escp2.h,v 1.117 2008/01/19 21:08:45 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -68,7 +68,7 @@ typedef struct
 {
   const char *listname;
   short numdropsizes;
-  const double dropsizes[MAX_DROP_SIZES];
+  double dropsizes[MAX_DROP_SIZES];
 } escp2_dropsize_t;
 
 typedef const escp2_dropsize_t *escp2_drop_list_t[RES_N];
@@ -177,6 +177,8 @@ typedef struct
   short head_offset;
   short split_channel_count;
   const char *channel_density;
+  const char *subchannel_transition;
+  const char *subchannel_value;
   const char *subchannel_scale;
   const short split_channels[PHYSICAL_CHANNEL_LIMIT];
 } physical_subchannel_t;
@@ -227,7 +229,7 @@ typedef struct
 typedef struct
 {
   int n_shades;
-  const double shades[PHYSICAL_CHANNEL_LIMIT];
+  double shades[PHYSICAL_CHANNEL_LIMIT];
 } shade_t;
 
 typedef shade_t shade_set_t[PHYSICAL_CHANNEL_LIMIT];
@@ -407,7 +409,11 @@ typedef struct
 
 #define MODEL_INTERCHANGEABLE_INK_MASK	0x2000ul
 #define MODEL_INTERCHANGEABLE_INK_NO	0x0000ul
-#define MODEL_INTERCHANGEABLE_INK_YES	0x1000ul
+#define MODEL_INTERCHANGEABLE_INK_YES	0x2000ul
+
+#define MODEL_ENVELOPE_LANDSCAPE_MASK	0x4000ul
+#define MODEL_ENVELOPE_LANDSCAPE_NO	0x0000ul
+#define MODEL_ENVELOPE_LANDSCAPE_YES	0x4000ul
 
 typedef enum
 {
@@ -421,6 +427,7 @@ typedef enum
   MODEL_SUPPORTS_INK_CHANGE,
   MODEL_PACKET_MODE,
   MODEL_INTERCHANGEABLE_INK,
+  MODEL_ENVELOPE_LANDSCAPE,
   MODEL_LIMIT
 } escp2_model_option_t;
 
@@ -481,6 +488,8 @@ typedef struct escp2_printer
   int		max_paper_height; /* Maximum paper height, in points */
   int		min_paper_width; /* Maximum paper width, in points */
   int		min_paper_height; /* Maximum paper height, in points */
+  int		max_imageable_width; /* Maximum imageable area, in points */
+  int		max_imageable_height; /* Maximum imageable area, in points */
 /*****************************************************************************/
   /* Borders */
 				/* SHEET FED: */
@@ -677,5 +686,5 @@ extern void stpi_escp2_terminate_page(stp_vars_t *v);
 
 #endif /* GUTENPRINT_INTERNAL_ESCP2_H */
 /*
- * End of "$Id: print-escp2.h,v 1.105.6.4 2007/12/29 20:42:28 rlk Exp $".
+ * End of "$Id: print-escp2.h,v 1.117 2008/01/19 21:08:45 rlk Exp $".
  */

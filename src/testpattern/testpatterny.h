@@ -65,25 +65,26 @@
      HSIZE = 281,
      VSIZE = 282,
      BLACKLINE = 283,
-     PATTERN = 284,
-     XPATTERN = 285,
-     EXTENDED = 286,
-     IMAGE = 287,
-     GRID = 288,
-     SEMI = 289,
-     CHANNEL = 290,
-     CMYK = 291,
-     KCMY = 292,
-     RGB = 293,
-     CMY = 294,
-     GRAY = 295,
-     WHITE = 296,
-     RAW = 297,
-     MODE = 298,
-     PAGESIZE = 299,
-     MESSAGE = 300,
-     OUTPUT = 301,
-     END = 302
+     NOSCALE = 284,
+     PATTERN = 285,
+     XPATTERN = 286,
+     EXTENDED = 287,
+     IMAGE = 288,
+     GRID = 289,
+     SEMI = 290,
+     CHANNEL = 291,
+     CMYK = 292,
+     KCMY = 293,
+     RGB = 294,
+     CMY = 295,
+     GRAY = 296,
+     WHITE = 297,
+     RAW = 298,
+     MODE = 299,
+     PAGESIZE = 300,
+     MESSAGE = 301,
+     OUTPUT = 302,
+     END = 303
    };
 #endif
 /* Tokens.  */
@@ -113,25 +114,26 @@
 #define HSIZE 281
 #define VSIZE 282
 #define BLACKLINE 283
-#define PATTERN 284
-#define XPATTERN 285
-#define EXTENDED 286
-#define IMAGE 287
-#define GRID 288
-#define SEMI 289
-#define CHANNEL 290
-#define CMYK 291
-#define KCMY 292
-#define RGB 293
-#define CMY 294
-#define GRAY 295
-#define WHITE 296
-#define RAW 297
-#define MODE 298
-#define PAGESIZE 299
-#define MESSAGE 300
-#define OUTPUT 301
-#define END 302
+#define NOSCALE 284
+#define PATTERN 285
+#define XPATTERN 286
+#define EXTENDED 287
+#define IMAGE 288
+#define GRID 289
+#define SEMI 290
+#define CHANNEL 291
+#define CMYK 292
+#define KCMY 293
+#define RGB 294
+#define CMY 295
+#define GRAY 296
+#define WHITE 297
+#define RAW 298
+#define MODE 299
+#define PAGESIZE 300
+#define MESSAGE 301
+#define OUTPUT 302
+#define END 303
 
 
 

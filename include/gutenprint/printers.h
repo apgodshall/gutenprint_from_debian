@@ -1,5 +1,5 @@
 /*
- * "$Id: printers.h,v 1.3.8.1 2007/12/15 20:35:35 rlk Exp $"
+ * "$Id: printers.h,v 1.4 2007/08/27 00:44:12 rlk Exp $"
  *
  *   libgimpprint printer functions.
  *
@@ -247,5 +247,5 @@ const char *stp_describe_output(const stp_vars_t *v);
 
 #endif /* GUTENPRINT_PRINTERS_H */
 /*
- * End of "$Id: printers.h,v 1.3.8.1 2007/12/15 20:35:35 rlk Exp $".
+ * End of "$Id: printers.h,v 1.4 2007/08/27 00:44:12 rlk Exp $".
  */

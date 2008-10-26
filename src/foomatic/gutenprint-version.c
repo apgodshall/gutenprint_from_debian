@@ -1,5 +1,5 @@
 /*
- * "$Id: gutenprint-version.c,v 1.2.18.1 2007/03/04 23:57:48 tillkamppeter Exp $"
+ * "$Id: gutenprint-version.c,v 1.3 2007/03/05 00:04:00 tillkamppeter Exp $"
  *
  *   Dump the per-printer options for the OpenPrinting database
  *

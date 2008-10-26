@@ -1,5 +1,5 @@
 /*
- * "$Id: paper_sizes.c,v 1.8.18.1 2007/03/04 23:57:48 tillkamppeter Exp $"
+ * "$Id: paper_sizes.c,v 1.9 2007/03/05 00:04:00 tillkamppeter Exp $"
  *
  *   Dump the per-printer options for the OpenPrinting database
  *

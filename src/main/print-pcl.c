@@ -1,5 +1,5 @@
 /*
- * "$Id: print-pcl.c,v 1.145.2.1 2007/12/15 20:35:49 rlk Exp $"
+ * "$Id: print-pcl.c,v 1.150 2008/04/26 01:15:11 rlk Exp $"
  *
  *   Print plug-in HP PCL driver for the GIMP.
  *
@@ -199,6 +199,9 @@ static const pcl_t pcl_media_types[] =
  */
 
 #define PAPERSOURCE_MOD			16
+#define PAPERSOURCE_340_MOD		(PAPERSOURCE_MOD)
+#define PAPERSOURCE_DJ_MOD		(PAPERSOURCE_MOD << 1)
+#define PAPERSOURCE_ADJ_GUIDE		(PAPERSOURCE_MOD << 2)
 
 #define PCL_PAPERSOURCE_STANDARD	0	/* Don't output code */
 #define PCL_PAPERSOURCE_MANUAL		2
@@ -209,20 +212,24 @@ static const pcl_t pcl_media_types[] =
 #define PCL_PAPERSOURCE_LJ_TRAY3	4
 #define PCL_PAPERSOURCE_LJ_TRAY4	5
 #define PCL_PAPERSOURCE_LJ_TRAY1	8
+#define PCL_PAPERSOURCE_LJ_TRAY1_ADJ	(PCL_PAPERSOURCE_LJ_TRAY1 + PAPERSOURCE_ADJ_GUIDE)
+#define PCL_PAPERSOURCE_LJ_TRAY2_ADJ	(PCL_PAPERSOURCE_LJ_TRAY2 + PAPERSOURCE_ADJ_GUIDE)
+#define PCL_PAPERSOURCE_LJ_TRAY3_ADJ	(PCL_PAPERSOURCE_LJ_TRAY3 + PAPERSOURCE_ADJ_GUIDE)
+#define PCL_PAPERSOURCE_LJ_TRAY4_ADJ	(PCL_PAPERSOURCE_LJ_TRAY4 + PAPERSOURCE_ADJ_GUIDE)
 
 /* Deskjet 340 types */
-#define PCL_PAPERSOURCE_340_PCSF	1 + PAPERSOURCE_MOD
+#define PCL_PAPERSOURCE_340_PCSF	(1 + PAPERSOURCE_340_MOD)
 						/* Portable sheet feeder for 340 */
-#define PCL_PAPERSOURCE_340_DCSF	4 + PAPERSOURCE_MOD
+#define PCL_PAPERSOURCE_340_DCSF	(4 + PAPERSOURCE_340_MOD)
 						/* Desktop sheet feeder for 340 */
 
 /* Other Deskjet types */
-#define PCL_PAPERSOURCE_DJ_TRAY		1 + PAPERSOURCE_MOD + PAPERSOURCE_MOD
-#define PCL_PAPERSOURCE_DJ_TRAY2	4 + PAPERSOURCE_MOD + PAPERSOURCE_MOD
+#define PCL_PAPERSOURCE_DJ_TRAY		(1 + PAPERSOURCE_DJ_MOD)
+#define PCL_PAPERSOURCE_DJ_TRAY2	(4 + PAPERSOURCE_DJ_MOD)
 						/* Tray 2 for 2500 */
-#define PCL_PAPERSOURCE_DJ_OPTIONAL	5 + PAPERSOURCE_MOD + PAPERSOURCE_MOD
+#define PCL_PAPERSOURCE_DJ_OPTIONAL	(5 + PAPERSOURCE_DJ_MOD)
 						/* Optional source for 2500 */
-#define PCL_PAPERSOURCE_DJ_AUTO		7 + PAPERSOURCE_MOD + PAPERSOURCE_MOD
+#define PCL_PAPERSOURCE_DJ_AUTO		(7 + PAPERSOURCE_DJ_MOD)
 						/* Autoselect for 2500 */
 
 static const pcl_t pcl_media_sources[] =
@@ -230,9 +237,13 @@ static const pcl_t pcl_media_sources[] =
     { "Standard", N_ ("Standard"), PCL_PAPERSOURCE_STANDARD},
     { "Manual", N_ ("Manual"), PCL_PAPERSOURCE_MANUAL},
 /*  {"Envelope", PCL_PAPERSOURCE_ENVELOPE}, */
+    { "MultiPurposeAdj", N_ ("Tray 1 - Movable Guides"), PCL_PAPERSOURCE_LJ_TRAY1_ADJ},
     { "MultiPurpose", N_ ("Tray 1"), PCL_PAPERSOURCE_LJ_TRAY1},
+    { "UpperAdj", N_ ("Tray 2 - Movable Guides"), PCL_PAPERSOURCE_LJ_TRAY2_ADJ},
     { "Upper", N_ ("Tray 2"), PCL_PAPERSOURCE_LJ_TRAY2},
+    { "LowerAdj", N_ ("Tray 3 - Movable Guides"), PCL_PAPERSOURCE_LJ_TRAY3_ADJ},
     { "Lower", N_ ("Tray 3"), PCL_PAPERSOURCE_LJ_TRAY3},
+    { "LargeCapacityAdj", N_ ("Tray 4 - Movable Guides"), PCL_PAPERSOURCE_LJ_TRAY4_ADJ},
     { "LargeCapacity", N_ ("Tray 4"), PCL_PAPERSOURCE_LJ_TRAY4},
     { "Portable", N_ ("Portable Sheet Feeder"), PCL_PAPERSOURCE_340_PCSF},
     { "Desktop", N_ ("Desktop Sheet Feeder"), PCL_PAPERSOURCE_340_DCSF},
@@ -611,9 +622,13 @@ static const short laserjet_papersources[] =
 {
   PCL_PAPERSOURCE_STANDARD,
   PCL_PAPERSOURCE_MANUAL,
+  PCL_PAPERSOURCE_LJ_TRAY1_ADJ,
   PCL_PAPERSOURCE_LJ_TRAY1,
+  PCL_PAPERSOURCE_LJ_TRAY2_ADJ,
   PCL_PAPERSOURCE_LJ_TRAY2,
+  PCL_PAPERSOURCE_LJ_TRAY3_ADJ,
   PCL_PAPERSOURCE_LJ_TRAY3,
+  PCL_PAPERSOURCE_LJ_TRAY4_ADJ,
   PCL_PAPERSOURCE_LJ_TRAY4,
   -1,
 };
@@ -1034,8 +1049,34 @@ static const pcl_cap_t pcl_model_capabilities[] =
     emptylist,
     laserjet_papersources,
   },
+  /* PCL-4 with large paper */
+  { 23,
+    13 * 72, 19 * 72,
+    1, 1,				/* Min paper size */
+    PCL_RES_150_150 | PCL_RES_300_300,
+    {12, 12, 18, 18},
+    {12, 12, 10, 10},	/* Check/Fix */
+    PCL_COLOR_NONE,
+    PCL_PRINTER_LJ,
+    ljbig_papersizes,
+    emptylist,
+    laserjet_papersources,
+  },
   /* LaserJet III series */
   { 3,
+    17 * 72 / 2, 14 * 72,
+    1, 1,				/* Min paper size */
+    PCL_RES_150_150 | PCL_RES_300_300,
+    {12, 12, 18, 18},
+    {12, 12, 10, 10},	/* Check/Fix */
+    PCL_COLOR_NONE,
+    PCL_PRINTER_LJ | PCL_PRINTER_TIFF | PCL_PRINTER_BLANKLINE,
+    ljsmall_papersizes,
+    emptylist,
+    laserjet_papersources,
+  },
+  /* LaserJet III series */
+  { 31,
     17 * 72 / 2, 14 * 72,
     1, 1,				/* Min paper size */
     PCL_RES_150_150 | PCL_RES_300_300,
@@ -1057,6 +1098,19 @@ static const pcl_cap_t pcl_model_capabilities[] =
     PCL_COLOR_NONE,
     PCL_PRINTER_LJ | PCL_PRINTER_TIFF | PCL_PRINTER_BLANKLINE,
     ljsmall_papersizes,
+    emptylist,
+    laserjet_papersources,
+  },
+  /* PCL-5 with large paper */
+  { 33,
+    13 * 72, 19 * 72,
+    1, 1,				/* Min paper size */
+    PCL_RES_150_150 | PCL_RES_300_300,
+    {12, 12, 18, 18},
+    {12, 12, 10, 10},	/* Check/Fix */
+    PCL_COLOR_NONE,
+    PCL_PRINTER_LJ | PCL_PRINTER_TIFF | PCL_PRINTER_BLANKLINE,
+    ljbig_papersizes,
     emptylist,
     laserjet_papersources,
   },
@@ -1111,6 +1165,20 @@ static const pcl_cap_t pcl_model_capabilities[] =
     PCL_PRINTER_LJ | PCL_PRINTER_NEW_ERG | PCL_PRINTER_TIFF | PCL_PRINTER_BLANKLINE |
       PCL_PRINTER_DUPLEX,
     ljsmall_papersizes,
+    emptylist,
+    laserjet_papersources,
+  },
+  /* PCL-5c/5e/6/XL with large paper */
+  { 61,
+    13 * 72, 19 * 72,
+    1, 1,				/* Min paper size */
+    PCL_RES_150_150 | PCL_RES_300_300 | PCL_RES_600_600,
+    {12, 12, 18, 18},
+    {12, 12, 10, 10},	/* Check/Fix */
+    PCL_COLOR_NONE,
+    PCL_PRINTER_LJ | PCL_PRINTER_NEW_ERG | PCL_PRINTER_TIFF | PCL_PRINTER_BLANKLINE |
+      PCL_PRINTER_DUPLEX,
+    ljbig_papersizes,
     emptylist,
     laserjet_papersources,
   },
@@ -2079,6 +2147,8 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
   const stp_papersize_t *pp;
   int		the_top_margin,	/* Corrected top margin */
 		the_left_margin;	/* Corrected left margin */
+  int		manual_feed_left_adjust = 0;
+  int		extra_left_margin = 0;
   stp_curve_t   *lum_adjustment;
   stp_curve_t   *hue_adjustment;
   double density;
@@ -2264,6 +2334,12 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
 
 /* Correct the value by taking the modulus */
 
+	  if ((pcl_media_source & PAPERSOURCE_ADJ_GUIDE) ==
+	      PAPERSOURCE_ADJ_GUIDE)
+	    {
+	      manual_feed_left_adjust = 1;
+	      stp_deprintf(STP_DBG_PCL, "Adjusting left margin for manual feed.\n");
+	    }
           pcl_media_source = pcl_media_source % PAPERSOURCE_MOD;
           stp_zprintf(v, "\033&l%dH", pcl_media_source);
         }
@@ -2454,8 +2530,26 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
   stp_deprintf(STP_DBG_PCL, "left %d margin %d top %d margin %d width %d height %d\n",
 	  left, the_left_margin, top, the_top_margin, out_width, out_height);
 
+  if (manual_feed_left_adjust)
+    {
+      unsigned wdelta = caps->custom_max_width - stp_get_page_width(v);
+      if (wdelta > 0)
+	{
+	  /*
+	   * Why 3?  I would expect it would be 2 here, but it appears
+	   * that at least one printer (LJ 1022) actually partially
+	   * adjusts the margin itself.  Adjusting the left margin by 1/3
+	   * of the difference between the maximum width and the actual
+	   * width experimentally yields correct results -- rlk 20081014
+	   */
+	  stp_deprintf(STP_DBG_PCL,
+		       "  Adjusting manual feed left margin by %d\n", wdelta / 3);
+	  extra_left_margin += wdelta / 3;
+	}
+    }
+
   if (!privdata.do_cretb) {
-    stp_zprintf(v, "\033&a%dH", 10 * left);		/* Set left raster position */
+    stp_zprintf(v, "\033&a%dH", 10 * (left + extra_left_margin));		/* Set left raster position */
     stp_zprintf(v, "\033&a%dV", 10 * (top + the_top_margin));
 				/* Set top raster position */
   }
@@ -2466,7 +2560,7 @@ pcl_do_print(stp_vars_t *v, stp_image_t *image)
     {
       /* Move to top left of printed area */
       stp_zprintf(v, "\033*p%dY", (top + the_top_margin)*4); /* Measured in dots. */
-      stp_zprintf(v, "\033*p%dX", left*4);
+      stp_zprintf(v, "\033*p%dX", (left + extra_left_margin)*4);
     }
   stp_puts("\033*r1A", v); 			/* Start GFX */
 

@@ -1,5 +1,5 @@
 /*
- * "$Id: rastertoprinter.c,v 1.105.2.6 2008/01/02 01:38:09 rlk Exp $"
+ * "$Id: rastertoprinter.c,v 1.120 2008/01/02 01:39:06 rlk Exp $"
  *
  *   Gutenprint based raster filter for the Common UNIX Printing System.
  *
@@ -1389,5 +1389,5 @@ Image_width(stp_image_t *image)	/* I - Image */
 
 
 /*
- * End of "$Id: rastertoprinter.c,v 1.105.2.6 2008/01/02 01:38:09 rlk Exp $".
+ * End of "$Id: rastertoprinter.c,v 1.120 2008/01/02 01:39:06 rlk Exp $".
  */

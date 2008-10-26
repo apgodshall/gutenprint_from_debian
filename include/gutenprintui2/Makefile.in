@@ -41,13 +41,12 @@ DIST_COMMON = $(am__pkginclude_HEADERS_DIST) $(srcdir)/Makefile.am \
 subdir = include/gutenprintui2
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
-	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
-	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
-	$(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/isc-posix.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
+	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
+	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
@@ -118,27 +117,13 @@ FOOMATIC_PPDFILE = @FOOMATIC_PPDFILE@
 GENPPD_LIBS = @GENPPD_LIBS@
 GIMP2_CFLAGS = @GIMP2_CFLAGS@
 GIMP2_LIBS = @GIMP2_LIBS@
-GIMPTOOL = @GIMPTOOL@
 GIMPTOOL2_CHECK = @GIMPTOOL2_CHECK@
-GIMPTOOL_CHECK = @GIMPTOOL_CHECK@
-GIMP_CFLAGS = @GIMP_CFLAGS@
-GIMP_CFLAGS_NOUI = @GIMP_CFLAGS_NOUI@
-GIMP_DATA_DIR = @GIMP_DATA_DIR@
-GIMP_LIBS = @GIMP_LIBS@
-GIMP_LIBS_NOUI = @GIMP_LIBS_NOUI@
-GIMP_PLUGIN_DIR = @GIMP_PLUGIN_DIR@
-GLIB_CFLAGS = @GLIB_CFLAGS@
-GLIB_CONFIG = @GLIB_CONFIG@
-GLIB_LIBS = @GLIB_LIBS@
 GLIB_MKENUMS = @GLIB_MKENUMS@
 GMSGFMT = @GMSGFMT@
 GNUCFLAGS = @GNUCFLAGS@
 GREP = @GREP@
 GTK2_CFLAGS = @GTK2_CFLAGS@
 GTK2_LIBS = @GTK2_LIBS@
-GTK_CFLAGS = @GTK_CFLAGS@
-GTK_CONFIG = @GTK_CONFIG@
-GTK_LIBS = @GTK_LIBS@
 GUTENPRINTUI2_BINARY_AGE = @GUTENPRINTUI2_BINARY_AGE@
 GUTENPRINTUI2_CFLAGS = @GUTENPRINTUI2_CFLAGS@
 GUTENPRINTUI2_CURRENT_INTERFACE = @GUTENPRINTUI2_CURRENT_INTERFACE@
@@ -146,13 +131,6 @@ GUTENPRINTUI2_INTERFACE_AGE = @GUTENPRINTUI2_INTERFACE_AGE@
 GUTENPRINTUI2_LIBDEPS = @GUTENPRINTUI2_LIBDEPS@
 GUTENPRINTUI2_LIBS = $(top_builddir)/src/gutenprintui2/libgutenprintui2.la
 GUTENPRINTUI2_VERSION = @GUTENPRINTUI2_VERSION@
-GUTENPRINTUI_BINARY_AGE = @GUTENPRINTUI_BINARY_AGE@
-GUTENPRINTUI_CFLAGS = @GUTENPRINTUI_CFLAGS@
-GUTENPRINTUI_CURRENT_INTERFACE = @GUTENPRINTUI_CURRENT_INTERFACE@
-GUTENPRINTUI_INTERFACE_AGE = @GUTENPRINTUI_INTERFACE_AGE@
-GUTENPRINTUI_LIBDEPS = @GUTENPRINTUI_LIBDEPS@
-GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
-GUTENPRINTUI_VERSION = @GUTENPRINTUI_VERSION@
 GUTENPRINT_BINARY_AGE = @GUTENPRINT_BINARY_AGE@
 GUTENPRINT_CFLAGS = @GUTENPRINT_CFLAGS@
 GUTENPRINT_CURRENT_INTERFACE = @GUTENPRINT_CURRENT_INTERFACE@
@@ -257,16 +235,12 @@ docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
-gimp_plug_indir = @gimp_plug_indir@
 gutenprint_cflags = @gutenprint_cflags@
 gutenprint_libdeps = @gutenprint_libdeps@
 gutenprint_libs = @gutenprint_libs@
 gutenprintui2_cflags = @gutenprintui2_cflags@
 gutenprintui2_libdeps = @gutenprintui2_libdeps@
 gutenprintui2_libs = @gutenprintui2_libs@
-gutenprintui_cflags = @gutenprintui_cflags@
-gutenprintui_libdeps = @gutenprintui_libdeps@
-gutenprintui_libs = @gutenprintui_libs@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -295,6 +269,7 @@ target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
+GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
 stpui_public_h_sources = \
 	gutenprintui.h		\
 	curve.h			\

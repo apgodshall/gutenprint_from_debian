@@ -1,5 +1,5 @@
 /*
- * "$Id: xml.c,v 1.33.18.1 2007/05/29 01:47:30 rlk Exp $"
+ * "$Id: xml.c,v 1.38 2007/05/26 15:53:06 rlk Exp $"
  *
  *   XML parser - process Gutenprint XML data with mxml.
  *

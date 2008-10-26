@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.190.2.5 2007/12/29 20:42:27 rlk Exp $"
+ * "$Id: print-canon.c,v 1.226 2008/04/20 13:39:16 faust3 Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -1579,6 +1579,8 @@ static int canon_setup_channel(stp_vars_t *v,canon_privdata_t* privdata,int chan
 
 /* setup the dither channels */
 static void canon_setup_channels(stp_vars_t *v,canon_privdata_t* privdata){
+    /* (in gutenprint notation) => KCMY,  1230 => CMYK etc. */
+    const char default_channel_order[STP_NCOLORS] = {0,1,2,3};
     /* codes for the primary channels */
     const char primary[STP_NCOLORS] = {'K','C','M','Y',};
     /* codes for the subchannels */
@@ -1588,15 +1590,23 @@ static void canon_setup_channels(stp_vars_t *v,canon_privdata_t* privdata){
     const char *secondary_density_control[STP_NCOLORS] = {NULL,"LightCyanTransition","LightMagentaTransition","LightYellowTransition"};
     /* ink darkness for every channel */
     const double ink_darkness[] = {1.0, 0.31 / .5, 0.61 / .97, 0.08};
+    const char* channel_order = default_channel_order;
+
+
 
     int channel;
+    int channel_idx;
+
+    if(privdata->caps->channel_order)
+        channel_order = privdata->caps->channel_order;
 
 
     /* loop through the dither channels */
-    for(channel=0; channel < STP_NCOLORS ; channel++){
+    for(channel_idx = 0; channel_idx < STP_NCOLORS ; channel_idx++){
         int i;
         unsigned int subchannel = 0;
         stp_shade_t* shades = NULL;
+        channel = channel_order[channel_idx];
         if(channel == STP_ECOLOR_K && privdata->used_inks & CANON_INK_K_MASK){ /* black channel */
             /* find K and k inks */
             for(i=0;i<privdata->mode->num_inks;i++){
@@ -2114,6 +2124,11 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 
 
   canon_deinit_printer(v, &privdata);
+  /* canon_end_job does not get called for jobmode automatically */
+  if(!stp_get_string_parameter(v, "JobMode") ||
+    strcmp(stp_get_string_parameter(v, "JobMode"), "Page") == 0){
+    canon_end_job(v,image);
+  }
 
   for(i=0;i< privdata.num_channels;i++)
       if(privdata.channels[i].buf)

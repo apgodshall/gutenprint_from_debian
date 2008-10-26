@@ -1,5 +1,5 @@
 /*
- * "$Id: printrcy.y,v 1.1.18.1 2007/03/02 12:01:20 rlk Exp $"
+ * "$Id: printrcy.y,v 1.2 2006/11/15 01:28:49 rlk Exp $"
  *
  *   Test pattern generator for Gutenprint
  *

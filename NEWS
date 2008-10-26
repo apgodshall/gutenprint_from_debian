@@ -1,48 +1,32 @@
-Welcome to Gutenprint 5.0.2!  Please read these release notes
-carefully.
+Welcome to Gutenprint 5.2.0-beta2 (5.1.98.2)!  Please read these
+release notes carefully.
 
-Gutenprint, formerly named Gimp-Print, is a suite of printer drivers
-that may be used with most common UNIX print spooling systems,
-including CUPS, lpr, LPRng, or others.  These drivers provide high
-quality printing for UNIX (including Macintosh OS X 10.2, 10.3, 10.4,
-and 10.5) and Linux systems that in many cases equal or exceed
-proprietary vendor-supplied drivers in quality and functionality, and
-can be used for demanding printing tasks requiring flexibility and
-high quality.  This software package includes an enhanced Print
-plug-in for GIMP that replaces the plug-in packaged with GIMP, and
-Ghostscript and CUPS drivers, as well as Foomatic data supporting the
-Ghostscript driver.
+Gutenprint is a suite of printer drivers that may be used with most
+common UNIX print spooling systems, including CUPS, lpr, LPRng, or
+others.  These drivers provide high quality printing for UNIX, Linux,
+and Macintosh OS X (10.2 and above) systems.  Gutenprint includes CUPS
+and Foomatic drivers, and an enhanced Print plug-in for GIMP that
+replaces the print plug-in packaged with the GIMP distribution.
 
-Gutenprint has been renamed in order to clearly distinguish it from
-GIMP.  While this package started out as the original Print plugin
-for GIMP, it has expanded into a collection of general purpose
-printer drivers, and the new, enhanced Print plugin for GIMP is
-now only a small part of the package.  Furthermore, the name
-Gutenprint recognizes Johannes Gutenberg, the inventor of the movable
-type printing press.  Finally, the word "guten" means "good" in
-German.
+Gutenprint currently supports almost 900 printer models.
 
-Gutenprint 5.0.2 is a stable release of Gutenprint 5.0, with bug fixes
-and new features.
+Gutenprint 5.2.0-beta1 is the first beta release of Gutenprint 5.2.
 
-Gutenprint currently supports over 800 printer models.
+*** NOTE TO PACKAGERS: This is a beta release of the forthcoming 5.2
+    stable release.  As of 5.2 and until further notice, Gutenprint
+    will no longer deliver separate "development" and "stable" release
+    series.
 
 These release notes contain the following sections:
 
 I)    General Requirements
 II)   Changes from Previous Releases
-	* New features and fixes in 5.0.2
-	* New features and fixes in 5.0.1
-III)  Overall changes from 4.2 to 5.0.
-	A) General user-visible changes
-	B) New Functionality
-	C) Changes to the Print plugin for the GIMP
-	D) Changes to the CUPS interface
-	E) Changes to the Ghostscript driver
-	F) Changes to the Foomatic data generator
-	G) Quality improvements
-	H) Architectural Changes
-IV)   Exceptions and Workarounds
+	* Changes from Gutenprint 5.2.0-beta1
+        * General changes from Gutenprint 5.0
+	* Changes from Gutenprint 5.0.2 and 5.1.7
+	* Changes from Gutenprint 5.0.2 only
+	* Changes from Gutenprint 5.1.7 only
+III)   Exceptions and Workarounds
 	A) General Issues
 	B) Build/Installation Issues
 
@@ -80,13 +64,13 @@ output with any of the printers supported by this package.  We
 strongly recommend using CUPS with Gutenprint as a general-purpose
 printing solution.
 
-The enhanced Print plug-in for GIMP requires either GIMP 2.0 or above,
-or 1.2.3 or above on the 1.2 line (1.2.5 is recommended).  This
-plug-in will work with any printing system, and offers a comprehensive
-user interface to control all aspects of the printing process.  If you
-are printing photographs in large format from GIMP at very high
-resolution, disk space requirements may be substantial, and we
-recommend at least 2 GB of free disk space for that purpose.
+The enhanced Print plug-in for GIMP requires GIMP 2.0 or above (GIMP
+2.2 recommended).  This plug-in will work with any printing system,
+and offers a comprehensive user interface to control all aspects of
+the printing process.  If you are printing photographs in large format
+from GIMP at very high resolution, disk space requirements may be
+substantial, and we recommend at least 2 GB of free disk space for
+that purpose.
 
 The Ghostscript driver requires GNU Ghostscript 6.53 or higher, ESP
 Ghostscript 7.05 or higher, or AFPL Ghostscript 7.04 or higher.  It
@@ -116,1043 +100,431 @@ for building and installing Gutenprint.
 
 II) MAJOR CHANGES FROM PREVIOUS RELEASES
 
-*) NEW FEATURES AND FIXES IN GUTENPRINT 5.0.2:
+* CHANGES FROM GUTENPRINT 5.2.0-BETA1:
+
+   This release fixes a fatal bug that causes Gutenprint 5.2.0-beta1
+   to not initialize correctly.
+
+----------------
+
+* GENERAL CHANGES FROM GUTENPRINT 5.0:
+
+   1) Gutenprint 5.2 and beyond no longer support GIMP 1.2.  Please
+      ensure that you are using GIMP 2.0 or above.
+
+   2) The PostScript driver has been rewritten, offering enhanced
+      functionality approaching that of the native printer drivers.
+      This driver is used by the enhanced Print plugin for the GIMP,
+      and by other packages (such as PhotoPrint) that utilize
+      Gutenprint.  In particular, the following specific functionality
+      has been added:
+
+      - All PPD file options are now offered.
+
+      - CMYK input is now handled correctly.
+
+      - The PostScript driver recognizes Gutenprint PPD files (from
+        the native CUPS driver, not from Foomatic) and presents
+        floating point options correctly.
+
+	Note that this driver does not offer the curve options offered
+	by the native drivers.
+
+----------------
+
+* CHANGES FROM GUTENPRINT 5.0.2 AND 5.1.7:
+
+   1) cups-genppdupdate is no longer versioned, as it was in 5.0 and
+      5.1 (cups-genppdupdate.5.0 and cups-genppdupdate.5.1).  It also
+      supports the following options:
+
+      -r Specify the major.minor version to update to, e. g. 5.0 or
+         5.1.
+
+      -f Bypass ownership/permissions checks on update PPD files.
+
+      -i Interactively ask whether to update each PPD file.
+
+   2) The performance of cups-genppdupdate has been improved
+      significantly.
+
+   3) cups-genppdupdate no longer updates PPD files that differ only
+      in case of the file extension (e. g. printer.ppd and
+      printer.PPD).  This avoids updating PPD files twice on
+      filesystems that are case insensitive, such as OS X.
+
+   4) cups-genppdconfig has been removed from this release.  This
+      command was used to configure CUPS printer queues, but is not
+      necessary as there are ample other tools available to configure
+      printer queues.
+
+   5) Support for generic large format PCL laser printers has been
+      added.
+
+   6) Many translations have been updated.
+
+   7) The Canon iPixma 4500 has been fixed.
+
+   8) L-size photo paper (3 1/2x5 inches) has been added.
+
+----------------
+
+* CHANGES FROM GUTENPRINT 5.0.2 ONLY:
 
    1) New printers supported in this release:
 
       * Epson inkjet printers:
 
-	Epson Stylus CX4400
-	Epson Stylus CX4900
-	Epson Stylus CX5600
-	Epson Stylus CX7400
-	Epson Stylus CX9400
-	Epson Stylus DX4050
-	Epson Stylus Photo RX595
-	Epson Stylus C110
-	Epson Stylus C120
-	Epson Stylus D120
-	Epson PM 670C
-	Epson PX V780
+	EPSON PictureMate 100
+	EPSON PictureMate 210 (Corrected)
+	EPSON PictureMate 240 (Corrected)
+	EPSON PictureMate 250 (Corrected)
+	EPSON PictureMate 260
+	EPSON PictureMate 270
+	EPSON PictureMate 280 (Corrected)
+	EPSON PictureMate 290
+	EPSON PictureMate 500
+	EPSON PictureMate 2005
+	EPSON PictureMate Dash
+	EPSON PictureMate Flash (Corrected)
+	EPSON PictureMate Pal (Corrected)
+	EPSON PictureMate Snap (Corrected)
+	EPSON E 150 (Corrected)
+	EPSON E 300
+	EPSON E 520
+	EPSON E 500
+	EPSON E 720
+	EPSON E 700
+	EPSON Stylus D92
+	EPSON Stylus DX4400
+	EPSON Stylus DX4450
+	EPSON Stylus DX7000F
+	EPSON Stylus DX7400
+	EPSON Stylus DX7450
+	EPSON Stylus DX8400
+	EPSON Stylus DX8450
+	EPSON Stylus Photo R280
+	EPSON Stylus Photo R285
+	EPSON Stylus Photo RX585
+	EPSON Stylus Photo RX680
+	EPSON Stylus Photo RX685
+
+	(Note that a number of the PictureMate printers that were
+	previously included generated grossly incorrect output.  Not
+	all of the PictureMate printers have been fully tuned at this
+	point.)
 
       * Canon inkjet printers:
+        Canon PIXMA MP520 (#1872394)
+	Canon PIXMA iP6000D
 
-	Canon MP710
-	Canon MP740
+   2) Printing for the Canon PIXMA iP4500 has been fixed (#1834153).
 
-      * PCL laser printers:
+   3) Printing near the bottom of the page has been improved for many
+      modern Epson inkjet printers.  In addition, we have determined
+      that most of these printers can print with consistent high
+      quality at 2880x2880 and 5760x2880 DPI.  Therefore, these
+      resolutions will be used for Ultra Photo and Best qualities
+      respectively on these printers.
 
-      	Sharp AR-M257
-	HP LserJet 1022
+      Printers affected include:
 
-   2) Preliminary support for the following printers:
+      * Stylus Photo R800, R1800, PM-G820
 
-      * Canon inkjet printers:
+      * Stylus Photo R2400
 
-	Canon BJC5100
-	Canon BJC5500
-	Canon BJC8500
-	Canon Pixma iP4500
-	Canon Pixma iP5300
-	Canon Pixma iP8500
-	Canon Pixma iX5000
-	Canon Pixma MP170
-	Canon Pixma MP180
-	Canon Pixma MP610
-	Canon Pixma Pro 9500
-	Canon i80
+      * All printers using Claria ink
 
-      * Dye sublimation printers:
+   4) Full bleed printing now works properly on the Epson Stylus Photo
+      R2400.
 
-	Canon SELPHY ES1 (*)
-	Canon SELPHY ES2 (*)
-	Canon SELPHY ES20(*)
-	Shinko CHC S9045
+   5) The Epson Stylus C120 now allows printing at 2880x2880 and
+      5760x2880.  However, print quality near the bottom of the page
+      may be poor, and these settings are therefore not used for Ultra
+      Photo and Best quality.
 
-	(*) Note that these printers may not work on all systems due to
-	    communication requirements.
+   6) The ink drop sizes on the Epson Stylus Photo printers using
+      Claria ink have been retuned, yielding improved quality at lower
+      resolutions.
 
-   3) All native CUPS PPD files are now perfectly compliant with the
-      PPD specification, as tested under CUPS 1.2.  Fixing this
-      requires some changes to the internal resolution names.  These
-      changes should be transparent if PPD files are updated with
-      cups-genppdupdate.5.1.
+   7) A problem with determining the system printer queues in the GIMP
+      plugin on certain systems using languages other than English has
+      been fixed.
 
-   4) Borderless printing on the Epson Stylus Photo 2200 now works
-      correctly.
+   8) Envelope paper sizes are now offered in both portrait and
+      landscape form factor, as some printers expect envelopes to be
+      fed long edge first while some expect them to be fed short edge
+      first.
 
-   5) The printer maintenance utility for EPSON inkjet printers,
-      escputil, now reports status more reliably.  Previously some
-      people reported errors of the form "Unknown IEEE 1284.4 error";
-      these errors have been resolved.
+   9) PCL laser printers now offer paper trays with adjustable guides.
+      Many laser printers use adjustable guides for manual feed of
+      papers narrower than letter size.
 
-      In addition, escputil now correctly reports the ink color for
-      certain printers (in particular, printers using Claria (TM) inks
-      and printers using alternate ink cartridges (for example, the
-      Stylus Photo 1400 that allows either a photo black or a matte
-      black ink cartridge to be installed).
+   10) The GIMP plugin now offers reset buttons for individual
+      settings, so it is possible to reset a single setting to its
+      default without resetting all settings.
 
-   6) A bug in which certain data was not printed correctly by Canon
-      inkjet printers was fixed (in areas where the entire area was
-      filled with maximum color density, some lines could be silently
-      discarded).
+   11) A new dither algorithm, Ordered New, has been added.  This
+      dither algorithm is most likely to improve output at low
+      resolutions, particularly when printing black and white.  It
+      will only help on printers offering multiple drop sizes.
 
-   7) A bug involving excessive memory consumption in certain cases
-      has been fixed.  Printing multiple page documents on Canon
-      inkjet printers with the Duplex option set to Long Edge resulted
-      in very large memory consumption on alternate pages, which was
-      not released until the job completed.  For example, in color at
-      600 DPI, the memory consumption would be about 120 megabytes on
-      alternate pages, so printing a 100 page document would result in
-      6 GB of memory consumption.  Depending upon the system, the
-      results might be that the job would fail to print or would only
-      partially print, the system might run very slowly while the job
-      was being processed, or other components of the system might
-      fail.
+   12) Various new controls and settings have been added to assist in
+      printer calibration.  While the tools for using these controls
+      are not yet created, these tools will assist in calibrating
+      printers in the future.
 
-   8) Various fixes for the Canon iP4000, iP4200, and i560.  Color
-      improvements have been made on the iP4200.
+      * The Epson driver now offers additional controls for adjusting
+      	the relationship between light and dark ink:
 
-   9) The paper size for the CD - Custom paper size has been changed
-      to 120 mm from 118.8 mm to allow correct printing from CUPS.
+	+ The Value parameters (such as Light Cyan Value) specify the
+	  relative darkness of the light vs. dark inks.
 
-   10) A compile problem on Solaris has been fixed.
+	+ The Cutoff parameters now specify the point at which the
+	  darker ink is first used, relative to the value of the light
+	  ink.
 
-   11) It is now possible to specify the printer model to all escputil
-      commands, via the -m option.  It is no longer necessary to use
-      the -u option to specify a new printer vs. an old printer.
+	+ The Scale parameters now specify the amount of light ink
+	  used (essentially the density of the light ink).  This is
+	  the same as the parameters previously called Cutoff.
 
-   12) The Epson driver will not select resolutions higher than
-      5760x1440 for the automatic quality settings, as we have
-      determined that many current printers offer poor quality at the
-      bottom of the page with resolutions of 2880x2880 and 5760x2880.
-      We have not removed these resolutions altogether, as they may
-      work well for certain applications, but they will not be
-      automatically selected by the Best or Ultra Photo quality
-      settings.
+      * The Epson driver now exposes as defaults the actual GCR
+        settings used for the printer, paper, and ink combination in
+        use.
 
-   13) A problem where in some cases certain options were not handled
-      correctly by the CUPS driver has been fixed.  In particular,
-      yes/no options such as borderless printing were not handled
-      correctly in all cases when the printing system is CUPS 1.2 or
-      1.3.
+      * The Epson driver now allows passing low level settings such as
+        printer base resolution, ink drop size selection, and relative
+        ink drop size as parameters.  The ink drop size can be
+        accessed in the GIMP plugin, while the base resolution and ink
+        drop size selection can only be used via the test pattern
+        generator or other application that allows setting integer
+        parameters.
 
-   14) The CUPS driver in Gutenprint, and all associated utilities,
-      are now licensed as GPL v2 or higher.  That code was previously
-      licensed as GPL v2 only.  While that did not cause any direct
-      problems, since the CUPS driver does not form a library that
-      other code may wish to link against, it was licensed differently
-      from the rest of the Gutenprint project.  That is now resolved,
-      and the entire Gutenprint code base is now licensed as GPL v2 or
-      higher.
+      * Two new dither algorithms, Segmented and Segmented New, have
+	been added.  These are not intended for normal use, and will
+	normally behave like Ordered and Ordered New.  However, if Raw
+	color correction is selected and a printer with multiple drop
+	sizes is used, the range of input will be divided up such that
+	the high order bits will select the drop size to be used and
+	the lower bits will specify the amount of ink.  High order
+	bits of 0 indicate that all drop sizes should be used.
+
+	For example, if a printer offers 3 drop sizes (2 bits), the
+	range of 0-16383 will print all drop sizes normally (with the
+	range of 0-16383 being scaled to 0-65535), 16384-32767 will
+	use the small drop size, and so forth.
+
+	This is intended to assist in tuning ink drop sizes and is not
+	normally useful otherwise.
+
+      * A new parameter allowing dumping out of color correction state
+	(lookup tables, GCR data, curves, etc.) has been added, and is
+	accessible in the GIMP plugin.  At present, this data cannot
+	be used directly, but it is intended that in the future this
+	mechanism be used to allow calibration information to be saved
+	and restored.
 
 
-*) NEW FEATURES AND FIXES IN GUTENPRINT 5.0.1:
+----------------
 
-  1) New printers supported in this release:
+* CHANGES FROM GUTENPRINT 5.1.7 ONLY:
 
-     * Dye sublimation printers using the Olympus driver:
+   1) The following HP inkjet printers are now supported.  Support for
+      these printers was dropped in 5.1.4, but is now restored as some
+      users have no alternative options.  We recommend that where
+      possible users switch to the HPIJS driver package (the printer
+      part of HPLIP), available from http://hplip.sourceforge.net.
+      The HPIJS package is licensed under the GPL and BSD licenses.
 
-       Canon CP-10
-       Fujifilm FinePix NX-500
-       Kodak Easyshare Printer
-       Olympus P-S100
-       Sony DPP-EX5
-       Sony UP-DR100
-
-     * Canon inkjet printers:
-
-       The support for these printers is under development, and there
-       may be issues with these printers.  Please check with the
-       mailing list (gimp-print-devel@lists.sourceforge.net) if you
-       have any questions.
-
-       Canon PIXMA iP2000
-       Canon PIXMA iP3000
-       Canon PIXMA iP3100
-       Canon PIXMA iP4100
-       Canon PIXMA iP4200
-       Canon PIXMA iP4300
-       Canon PIXMA iP5000
-       Canon PIXMA iP5200
-       Canon PIXMA iP6700
-       Canon PIXMA MP150
-       Canon PIXMA MP500
-       Canon PIXMA MP700
-       Canon PIXMA MP730
-       Canon PIXMA MP750
-       Canon PIXMA MP760
-       Canon PIXMA MP770
-       Canon PIXMA MP780
-       Canon PIXMA MP790
-       Canon PIXMA MP830
-       Canon PIXUS iP3100
-       Canon PIXUS iP4100
-       Canon i560
-       Canon i850
-       Canon i860
-       Canon i865
-
-     * Epson inkjet printers:
-
-       Epson Picturemate Flash
-       Epson Picturemate Pal
-       Epson Picturemate Snap
-       Epson Picturemate PM-200
-       Epson Picturemate PM-210
-       Epson Picturemate PM-240
-       Epson Picturemate PM-250
-       Epson Picturemate PM-280
-       Epson Stylus C79+
-       Epson Stylus C87+
-       Epson Stylus Photo 1400
-       Epson Stylus Photo 1410
-       Epson Stylus Photo R230
-       Epson Stylus Photo R240 (preliminary)
-       Epson Stylus Photo R245 (preliminary)
-       Epson Stylus Photo R260
-       Epson Stylus Photo R265
-       Epson Stylus Photo R270
-       Epson Stylus Photo R350
-       Epson Stylus Photo R360
-       Epson Stylus Photo R380
-       Epson Stylus Photo R390
-       Epson Stylus Photo RX560
-       Epson Stylus Photo RX580
-       Epson Stylus Photo RX590
-       Epson Stylus Photo RX640
-       Epson PM A820
-       Epson PM D870
-       Epson PM G850
-       Epson PM G4500
-       Epson Stylus CX5000
-       Epson Stylus CX5000F
-       Epson Stylus CX6000
-       Epson Stylus CX7000F
-
-     The driver for the Stylus Photo 1400 has two separate quality
-     settings for 720x360 and 720 DPI.  The 720x360 DPI Enhanced and
-     720 DPI High Quality options offer improved quality at some cost
-     in printing speed.  The small format Claria-based printers (R260,
-     R390, RX580, and related printers) offer 720x360 and 720 DPI
-     modes approximately equal in quality to the Enhanced and High
-     Quality modes on the 1400 without a speed penalty.
-
-     * Lexmark inkjet and compatible printers:
-
-       Compaq IJ1200
-       Lexmark X73
-
-     * PCL laser printers (monochrome only):
-
-       Lexmark Optra E220
-       Xerox WorkCentre M118
-
-  2) CUPS 1.2 is now supported using on-the-fly PPD file generation.
-     In addition, the resolution names are all compliant with the PPD
-     specification.  cups-genppdupdate correctly updates on-the-fly
-     PPD files.  The PPD files now use the correct UTF-8 encoding.
-
-  3) The native CUPS driver offers a new Shrink Page If Necessary to
-     Fit Borders option, enabling the user to choose how to fit the
-     output to the imageable area of the page.  This is useful when a
-     printer offers a choice of imageable areas, typically normal
-     (which has margins) and full bleed (which allows printing to the
-     edge of the paper, or even beyond).  The following options are
-     available:
-
-     * Shrink (default): the output is shrunk if necessary to fit the
-       imageable area of the page.  If a printer is capable of
-       borderless operation but normal margins are selected, the
-       output will be shrunk.  This will print the entire page
-       (nothing will be lost), but will not preserve the dimensions of
-       the printout.  For example, a line intended to be 10 cm long
-       may print smaller than that.
-
-     * Crop: the output is cropped if necessary to fit the imageable
-       area of the page.  The dimensions of the page will be preserved
-       (a line intended to be 10 cm long will print out exactly 10
-       cm), but the edges of the output may be truncated (cropped).
-
-     * Expand: the output is expanded from the normal imageable area
-       to fit the maximum possible imageable area of the page.  When
-       selected on printers capable of full bleed output, in
-       conjunction with any other necessary options, the output will
-       be expanded to match the maximum page dimension.  The
-       dimensions of the page will be expanded if necessary beyond the
-       page size; a line intended to be 10 cm long may print longer
-       than that.
-
-     This option has no effect on printers not capable of full bleed
-     or other expanded margins.  It also has no effect when printing
-     to CD's or when printing to papers where the paper margin is
-     wider than the margin offered by the printer.
-
-     This behavior is different from Gutenprint 5.0.0; the behavior in
-     Gutenprint 5.0.0 was equivalent to the Crop option in Gutenprint
-     5.0.1.  The change has been made due to extensive user feedback
-     that cropping the output leads to unexpected results in normal
-     printing operation.  Users who need exact dimensional accuracy
-     should use the Crop option with borderless printing enabled.
-
-  4) Epson inkjet printers now correctly support borderless printing.
-     In addition, printing at the top and bottom of the page has been
-     improved on printers that support borderless printing, although
-     this is still not perfect in all cases.
-
-     Certain printers (in particular the C/D8x and C6x series) do not
-     print correctly to the bottom of the page with all colors.  This
-     problem is understood, but we do not know when a fix will be
-     available.
-
-  5) The list of resolutions supported on newer Epson printers has
-     been changed; resolutions of 2880x1440, 5760x1440, 2880x2880, and
-     5760x2880 (as appropriate) have been added, replacing various
-     1440x1440 and 1440x2880 enhanced resolutions.
-
-  6) The output for the Canon PIXMA printers has been improved.
-
-  7) The Canon driver now supports DuplexNoTumble for the PIXMA
-     iP4000.
-
-  8) Roll printing now works correctly on the Epson Stylus Photo
-     R800.
-
-  9) Printing with Canon PIXMA printers connected to windows hosts
-     (bug 1625202) has been fixed.
-
-  10) CD printing has been fixed for the Canon PIXMA iP4000 and iP4200.
-
-  11) The Canon driver now also supports the CD fine adjustment controls.
-
-  12) The Resolutions for the Canon S300 have been fixed.
- 
-  13) Some Canon MULTIPASS printers have been renamed to PIXMA.
-
-  14) A minor border problem with the R800 and related printers has
-     been fixed.  The standard bottom border is now slightly wider to
-     eliminate the very bottom of the print from being chopped off.
-
-  15) A build problem with the CUPS driver on some systems (in
-     particular, OS X and any system where --disable-nls is used) has
-     been fixed.
-
-  16) The Postscript driver now handles CMYK input correctly, fixing a
-     problem with Cinepaint (bug 1701954).
-
-  17) The Postscript driver and UI library now handle setting the
-     locale correctly.
-
-  18) The PPD file updater, cups-genppdupdate.5.1, now handles the -n
-     (don't do anything) correctly.  In addition, it handles --help
-     and --version.
-
-  19) The range of sizes for printing custom CD's has been extended
-     down to 65 mm in both the Epson and Canon drivers.
-
-  20) Printing to CD's on Epson printers now works correctly if the
-     image is not placed at the top of the page.
+	HP Business Inkjet 2200
+	HP Business Inkjet 2230
+	HP Business Inkjet 2250
+	HP Business Inkjet 2250TN
+	HP Business Inkjet 2280
+	HP Color Inkjet Printer CP1160
+	HP Color Inkjet Printer CP1700
+	HP Color LaserJet 2500
+	HP Color LaserJet 4500
+	HP Color LaserJet 4550
+	HP Color LaserJet 4600
+	HP Color LaserJet 5
+	HP Color LaserJet 5000
+	HP Color LaserJet 5500
+	HP Color LaserJet 8550GN
+	HP DeskJet 400
+	HP DeskJet 420C
+	HP DeskJet 450
+	HP DeskJet 500
+	HP DeskJet 500C
+	HP DeskJet 505J Plus
+	HP DeskJet 510
+	HP DeskJet 520
+	HP DeskJet 540C
+	HP DeskJet 550C
+	HP DeskJet 5550
+	HP DeskJet 5551
+	HP DeskJet 560C
+	HP DeskJet 600
+	HP DeskJet 600C
+	HP DeskJet 610C
+	HP DeskJet 610CL
+	HP DeskJet 6122
+	HP DeskJet 6127
+	HP DeskJet 612C
+	HP DeskJet 640C
+	HP DeskJet 648C
+	HP DeskJet 660C
+	HP DeskJet 670C
+	HP DeskJet 670TV
+	HP DeskJet 672C
+	HP DeskJet 680C
+	HP DeskJet 682C
+	HP DeskJet 690C
+	HP DeskJet 692C
+	HP DeskJet 693C
+	HP DeskJet 694C
+	HP DeskJet 695C
+	HP DeskJet 697C
+	HP DeskJet 810C
+	HP DeskJet 812C
+	HP DeskJet 815C
+	HP DeskJet 816C
+	HP DeskJet 825C
+	HP DeskJet 830C
+	HP DeskJet 832C
+	HP DeskJet 840C
+	HP DeskJet 841C
+	HP DeskJet 842C
+	HP DeskJet 843C
+	HP DeskJet 845C
+	HP DeskJet 850C
+	HP DeskJet 855C
+	HP DeskJet 870C
+	HP DeskJet 880C
+	HP DeskJet 882C
+	HP DeskJet 890C
+	HP DeskJet 895C
+	HP DeskJet 916C
+	HP DeskJet 920C
+	HP DeskJet 9300
+	HP DeskJet 930C
+	HP DeskJet 932C
+	HP DeskJet 933C
+	HP DeskJet 934C
+	HP DeskJet 935C
+	HP DeskJet 940C
+	HP DeskJet 948C
+	HP DeskJet 950C
+	HP DeskJet 952C
+	HP DeskJet 955C
+	HP DeskJet 957C
+	HP DeskJet 959C
+	HP DeskJet 960C
+	HP DeskJet 970C
+	HP DeskJet 975C
+	HP DeskJet 980C
+	HP DeskJet 990C
+	HP DeskJet 995C
+	HP DeskJet 1100C
+	HP DeskJet 1120C
+	HP DeskJet 1125C
+	HP DeskJet 1200C
+	HP DeskJet 1220C
+	HP DeskJet 1600C
+	HP DeskJet 1600CM
+	HP DeskJet 2000
+	HP DeskJet 2500
+	HP DeskJet 2500CM
+	HP DeskJet 340C
+	HP DeskJet 3810
+	HP DeskJet 3816
+	HP DeskJet 3820
+	HP DeskJet 3822
+	HP OfficeJet 300
+	HP OfficeJet 330
+	HP OfficeJet 350
+	HP OfficeJet 500
+	HP OfficeJet 520
+	HP OfficeJet 570
+	HP OfficeJet 580
+	HP OfficeJet 590
+	HP OfficeJet 600
+	HP OfficeJet 610
+	HP OfficeJet 625
+	HP OfficeJet 630
+	HP OfficeJet 635
+	HP OfficeJet 700
+	HP OfficeJet 710
+	HP OfficeJet 720
+	HP OfficeJet 725
+	HP OfficeJet 5105
+	HP OfficeJet 5110
+	HP OfficeJet 5110xi
+	HP OfficeJet 6105
+	HP OfficeJet 6110
+	HP OfficeJet 7110
+	HP OfficeJet 7130
+	HP OfficeJet 7140
+	HP OfficeJet D125
+	HP OfficeJet D135
+	HP OfficeJet D145
+	HP OfficeJet D155
+	HP OfficeJet G55
+	HP OfficeJet G85
+	HP OfficeJet G95
+	HP OfficeJet K60
+	HP OfficeJet K60xi
+	HP OfficeJet K80
+	HP OfficeJet K80xi
+	HP OfficeJet LX
+	HP OfficeJet Pro 1150C
+	HP OfficeJet Pro 1170C
+	HP OfficeJet Pro 1175C
+	HP OfficeJet R40
+	HP OfficeJet R45
+	HP OfficeJet R60
+	HP OfficeJet R65
+	HP OfficeJet R80
+	HP OfficeJet T45
+	HP OfficeJet T65
+	HP OfficeJet V40
+	HP OfficeJet V40xi
+	HP OfficeJet
+	HP PSC 370
+	HP PSC 380
+	HP PSC 500
+	HP PSC 750
+	HP PSC 950
+	HP PSC 950xi
+	HP PSC 2110
+	HP PSC 2150
+	HP PSC 2210
+	HP PhotoSmart 7150
+	HP PhotoSmart 7345
+	HP PhotoSmart 7350
+	HP PhotoSmart 7550
+	HP PhotoSmart P100
+	HP PhotoSmart P130
+	HP PhotoSmart P230
+	HP PhotoSmart P1000
+	HP PhotoSmart P1100
+	HP PhotoSmart P1115
+	HP PhotoSmart P1215
+	HP PhotoSmart P1218
+	HP PhotoSmart P1315
+	HP e-printer e20
 
 
 ================================================================
 
-III) OVERALL CHANGES BETWEEN GIMP-PRINT 4.2 AND GUTENPRINT 5.0:
-
-A) GENERAL USER-VISIBLE CHANGES:
-
-  1) Gutenprint offers many new options, which are described
-     separately below.  Many other options that are present in both
-     4.2 and 5.0 function differently between the two releases.
-
-  2) Options in the CUPS driver and GIMP plugin are now grouped
-     according to function.  This work is still in progress, and
-     we expect to make further usability improvements.
-
-  3) Simplified bundles of settings are now offered for users who do
-     not need to customize the settings.  The Print Quality and Image
-     Type controls offer a variety of settings optimized for common
-     printing tasks; these settings may be overridden by explicit user
-     choice.
-
-  4) Many of the color settings have changed effect.  We recommend
-     starting with no color adjustments and making appropriate changes
-     only as required.  Specific changes that you should be aware of
-     include:
-
-     * The default operation of the contrast setting has changed to be
-       more in accord with other packages.  In 4.2, reducing the
-       contrast resulted in changing the black and white setting.  In
-       5.0, reducing the contrast does not change the black and white
-       settings.  As a result, it is possible to use the contrast
-       setting to improve highlight and shadow detail by reducing the
-       contrast.
-
-       The previous behavior is available by turning on the "Linear
-       Contrast Adjustment" setting.
-
-     * The brightness control now behaves more in accord with standard
-       practice, adjusting the image's overall brightness without
-       changing the black or white points.
-
-     * The Cyan, Magenta, and Yellow settings have been replaced with
-       separate settings for gamma, density, and gray balance for
-       Cyan, Magenta, Yellow, and Black.  The Cyan, Magenta, and
-       Yellow settings in Gimp-Print 4.2 most closely correspond to
-       the gamma settings in 5.0.
-
-       The per-channel density settings do not affect the color
-       correction.  They are applied after the color correction to
-       scale the individual channels.  The per-channel gray balance
-       settings adjust gray balance without affecting per-channel
-       density settings (i. e. the adjust the amount of ink used to
-       generate gray), permitting increased color saturation without
-       compromising gray balance.
-
-  5) The Uncorrected color correction mode is recommended for users
-     who wish to use their own color (ICC or otherwise) profiles with
-     Gutenprint drivers.  This will yield the maximum gamut and most
-     uniform response.  If you are not using your own color
-     management, you will generally get best results from the High
-     Accuracy color correction setting.  Users who wish to perform
-     their own linearization and ink limiting may wish to use the Raw
-     color correction mode, which does not adjust the density.
-
-     Any profiles generated against Gimp-Print 4.2 are unlikely to
-     produce good results with Gutenprint 5.0.  The color generation
-     is sufficiently different that you will need to create new
-     profiles against Gutenprint 5.0.  In general, unless otherwise
-     noted in the release notes, color adjustment should not change
-     between Gutenprint 5.0 releases starting with release 5.0.0.
-
-  6) The old man pages, and src/ghost/README, have been withdrawn.
-     These pages, and the Ghostscript README file, were based on the
-     Gimp-Print 4.2 options, which were much less extensive than the
-     current option system.  It is not practical to keep them up to
-     date in any meaningful way.  Our recommendation is that people
-     use either the native CUPS driver or Foomatic to manage options
-     rather than attempt to create and manage printer queues by hand.
-
-  7) The source browser in the documentation package has been removed.
-     This information, which consists of color-coded annotation of the
-     source code, is of little interest to the vast majority of users
-     and consumes a significant amount of space in the installation.
-
-
-----------------
-
-B) NEW FUNCTIONALITY:
-
-  1) This release offers a new "curve" data type, permitting very
-     precise adjustments of output.  Currently the curves are only
-     accessible in the GIMP plugin.
-
-  2) This release offers many new output controls:
-
-     + Balance (density) controls for each color channel, in addition
-       to the gamma controls present in 4.2.
-
-     + Gray balance controls for the cyan, magenta, and yellow
-       channels.  These controls allow fine tuning of gray tones
-       without affecting color.
-
-     + Black (GCR) transition, including the transition gamma and the
-       upper and lower limits.
-
-     + Transitions for photo (light cyan, light magenta, and gray)
-       inks.
-
-     + Transfer curves for each channel (cyan, magenta, yellow, black,
-       and composite), allowing very precise control over the output.
-
-     + Transfer curves for generation of additional channels where
-       applicable, such as red and blue inks for the Epson Stylus
-       Photo R800 and R1800.
-
-     + Hue, saturation, and luminosity transfer curves permit tuning
-       of the color corrections utilized by Gutenprint.
-
-     + Ink limit control.
-
-     + The density control now permits setting density as high as 8.0,
-       vs. 2.0 in 4.2.
-
-  3) The Epson driver offers (almost) true full bleed for printers
-     that support it (but see the limitations below).
-
-  4) The PCL driver now offers duplex (two sided) printing support on
-     appropriate printers.
-
-  5) The package now includes support for a number of dye sublimation
-     photo printers made by Olympus, Canon, Sony, and Fujifilm.
-
-  6) The resolution list for Epson printers has been simplified; many
-     redundant resolutions have been removed.
-
-  7) Print head direction for Epson printers (unidirectional
-     vs. bidirectional) is now a separate control.  In addition to
-     contributing to the simplification of the Epson printer
-     resolutions, this permits the choice of unidirectional
-     vs. bidirectional at all resolutions if desired.  By default, the
-     driver picks the most appropriate choice for the situation.
-
-  8) The Epson driver now allows printing directly to CD's on printers
-     that support this functionality.  In addition, a choice of center
-     hole size (16 mm or 43 mm) is now offered.  A fine adjustment is
-     provided to permit control over positioning of the image on the
-     CD.  This fine adjustment setting is not available in the
-     Foomatic interface at present.
-
-     To print to a CD, you need to select the "Print to CD" media
-     source (input slot).  You must also select the appropriate page
-     size (3" CD or 5" CD).  Note that this is different from the
-     instructions Epson provides, which specify A4 media size.
-
-  9) The Epson driver now offers a choice of print head weave
-     patterns.  In addition to simplifying the resolution choices for
-     Epson Stylus Pro printers, this offers an additional control for
-     fine tuning output quality.
-
-  10) The Epson driver offers an Ink Set control for printers taking
-     different choices of inks (such as the Epson Stylus Photo 2200,
-     which offers a choice of Matte Black and Photo Black inks).
-
-  11) Where practical, all controls offer a default setting for
-     simplicity of operation.  This default value is intended to offer
-     the optimal choice given the printer and its other settings.  For
-     example, if "Automatic" is selected for print head direction, the
-     print head motion will be unidirectional at high resolutions
-     (since unidirectional usually produces better output), but
-     bidirectional at low resolutions (for faster printing).
-
-     The default is only offered for options that are not directly
-     controlled by the user's action.  For example, there is no
-     default choice offered for paper type, since the correct value is
-     based on the paper type loaded by the user.  Similarly, there is
-     no default for the input slot or ink set.
-
-  12) Support for a variety of input types, in both 8 and 16 bit
-     resolution, has been added.  Gutenprint can now handle input in
-     grayscale, whitescale (inverted grayscale), RGB, CMY, CMYK, and
-     KCMY in 8 and 16 bit resolutions for all output types.
-
-  13) A new Threshold color correction mode has been added that
-     produces either all-on or all-off of each color.  This is similar
-     to the Monochrome mode in 4.2, except that it works for color as
-     well as black.
-
-  14) A new Desaturated color correction mode has been added that
-     produces gray (desaturated) output using color inks.
-
-  15) A new Density color correction mode has been added that corrects
-     only for density.  This will normally produce excessively dark
-     output.  However, applications that wish to use their own
-     linearization curves may wish to use this interface to prevent
-     Gutenprint from performing its own linearization.
-
-  16) A new Raw color correction mode has been added that performs no
-     correction whatsoever on the input.  This mode may be used by
-     applications that wish to perform their own ink limiting and
-     linearization, and use Gutenprint to perform dithering
-     (screening) and output generation only.
-
-  17) A new Predithered color correction mode has been added that
-     combines the effects of Raw and Threshold.  This mode may be used
-     by applications that wish to perform their own dithering and use
-     Gutenprint to generate printer-specific output only.  The input
-     value should be the size of the drop desired (for single-level
-     printers, it should be 0 or 1; for printers with three drop
-     sizes, it should be 0, 1, 2, or 3).
-
-  18) A new Correct Hue Only color correction mode has been added that
-     performs partial color correction (adjusts hue, but not
-     darkness).
-
-  19) The escputil command, which performs various printer
-     administration activities on Epson Stylus printers, has a number
-     of improvements:
-
-     * A new extended ink information command has been added.  This
-       command, which is supported on printers with separate
-       individual ink cartridges, prints additional information about
-       the ink cartridge in addition to the amount of ink present.  On
-       older printers, it simply returns the standard ink
-       information.
-
-     * The status command now prints status in a human-readable format
-       rather than simply reporting the raw information returned by
-       the printer.
-
-     * Ink level detection now works on all known supported printers,
-       and may work on other non-supported printers.  Previously it
-       did not work on some newer printers.  However, it is somewhat
-       slower on these printers than it is on older printers that
-       support the faster ink detection method.
-
-     * Ink level detection now prints the correct ink color names for
-       the printer model.
-
-     * It is now no longer necessary to use the -u flag with certain
-       printers in most cases.  The utility now autodetects the
-       printer model and generates appropriate commands in all cases.
-
-       If you supply a printer queue (with the -P option) rather than
-       a raw device (with the -r option), you will still need to
-       provide the -u flag, as the utility cannot detect the actual
-       printer connected to a queue.  However, commands that must be
-       run bidirectionally (ink level, identify, and printer status)
-       do not require the -u flag any more.
-
-     * escputil now successfully detects ink level, printer model, and
-       status even if the printer is out of ink.
-
-  20) The Epson driver permits adjusting the dot size if required to
-     increase the amount of ink printed.  For example, if 1440x720 DPI
-     is selected, but the density requested is very high, the printer
-     will switch to using drop sizes appropriate for 720 DPI.  This
-     option is not normally required and is disabled by default.
-
-
-----------------
-
-C) CHANGES TO THE ENHANCED PRINT PLUGIN FOR THE GIMP:
-
-  1) A new plugin for the GIMP 2.x, enhanced with all new Gutenprint
-     5.0 functionality, is now provided.
-
-  2) The Print plugin for the GIMP 1.2 is now deprecated and will be
-     withdrawn in 5.1 (the development release following 5.0).  The
-     Print plugin for the GIMP 1.2 will continue to be supported with
-     critical bug fixes in all 5.0 releases, but no new functionality
-     will be added, or non-critical bugs fixed, following the release
-     of 5.0.0.
-
-  3) The plugin now always displays the page preview with the top of
-     the page at the top of the preview pane, rotating the image
-     preview as necessary to display landscape or portrait mode.
-
-  4) The positioning controls have been simplified.
-
-  5) The printrc file format is different.  Gutenprint 5.0 can read
-     printrc files created by Gimp-Print 4.2 and earlier, but it
-     writes out the printrc file in a format that earlier versions of
-     Gimp-Print cannot read.
-
-  6) Printer queue discovery and command specification are greatly
-     simplified over 4.2.  The plugin now offers a default printing
-     command that is determined based on the characteristics of the
-     system, and also offers the choice of printing to a file or using
-     a custom print command for each printer defined in the printrc
-     file.  The default printing command is correct whether the output
-     is Postscript or not; it is no longer necessary to remove "-oraw"
-     from the print command line.
-
-  7) The Print plugin now always displays all options relevant to
-     what's being printed, enabling and disabling options as
-     appropriate.
-
-  8) The plugin now lists printers grouped by manufacturer, rather
-     than a single long list.
-
-  9) If you are using an older version of the GIMP 1.2, and the GIMP
-     is installed in a non-standard location on your system such that
-     you cannot run configure in Gutenprint without using
-     --with-gimp-prefix or --with-gimp-exec-prefix, please read item
-     (8) in Exceptions and Workarounds below.  In addition, if you
-     have both the GIMP 1.3/2.0 and the GIMP 1.2 installed on your
-     system, you should read the same material.
-
-
-----------------
-
-D) CHANGES TO THE CUPS INTERFACE:
-
-  1) The CUPS PPD files now offer both fine and coarse adjustments for
-     all color controls, permitting much finer control over output (in
-     steps of .005 rather than .05) without making the menus unwieldly.
-
-  2) The CUPS driver refuses to function with PPD files created for a
-     different version of Gutenprint or Gimp-Print, providing an error
-     message indicating the problem.  This avoids problems caused by
-     mismatches between the PPD files and the driver.  While
-     mismatches are potentially not harmful in all cases, they could
-     cause problems ranging from failures to print with poor
-     diagnostic messages to incorrect results.
-
-  3) The Gutenprint 5.0 CUPS driver can be installed concurrently with
-     the 4.2 driver.  Both the PPD files and the driver carry
-     different names from their 4.2 counterparts, permitting a
-     parallel installation or gradual switchover between 4.2 and
-     5.0-based releases.
-
-  4) An update script (cups-genppdupdate.5.0) is provided to update
-     PPD files between later 4.3 and 5.0-based releases, preserving
-     option values where possible.  This script will not update PPD
-     files based on Gimp-Print 4.2, or Gimp-Print 4.3 releases prior
-     to 4.3.21.
-
-  5) On printers capable of borderless output, the CUPS driver now
-     advertises (via the *ImageableArea in PPD files) the full page
-     dimension, and crops the output if the borderless mode is not
-     selected.  If borderless mode is selected, the full image (up to
-     the limits of the printer) will be printed.
-
-     This compromise is necessitated by the fact that PPD files can
-     only supply a single imageable area for a particular page size,
-     so it was necessary to select which imageable area to provide.
-     In early prereleases of Gutenprint 5.0, we supplied the normal
-     page area, and stretched the output if the user selected full
-     bleed.  This caused problems for many users, in that it was not
-     possible to print the full surface of the paper while preserving
-     dimensions.
-
-     Based on user feedback, we determined that the best solution is
-     to provide the full page size as the imageable area and crop the
-     result if full bleed mode is not selected.
-
-  6) The CUPS driver now offers 16-bit printing as an option with ESP
-     Ghostscript 8.15, and Apple Macintosh OS X 10.4 ("Tiger"), using
-     the new Color Precision control.  Setting Color Precision to
-     "Best" enables 16-bit printing if the system supports it; setting
-     it to "Normal" uses 8-bit printing.  Setting Color Precision to
-     "Best" has no effect if the version of CUPS does not support
-     16-bit printing; in that case, "Best" is still 8-bit.
-
-     The higher precision may improve results with certain source
-     material, particularly if it contains smooth color gradients.
-     The result would be freedom from banding, particularly in
-     highlights where it might be visible with 8-bit color
-     computation.  It may be somewhat slower than 8-bit printing.
-
-  7) Due to the implementation of CUPS, it is necessary on some
-     systems to link the programs associated with the CUPS driver (in
-     particular, cups-genppd and rastertogutenprint) statically
-     against the Gutenprint library.  Please see bugs 865253 and
-     865265 for full details.
-
-     This fix works correctly unless --disable-static (to disable
-     building static libraries) is passed on the command line.
-     Normally, only people packaging up Gutenprint for distribution
-     use this option.  If you wish to use this option, please read
-     item (6) in Exceptions and Workarounds *carefully* for a full
-     description of the problem along with suggested methods of
-     procedure.
-
-
-----------------
-
-E) CHANGES TO THE GHOSTSCRIPT DRIVER:
-
-  1) The stp driver, a monolithic (traditional) Ghostscript driver
-     used with Ghostscript 5.10, 5.50, and 6.51, has been withdrawn.
-     The only supported Ghostscript driver is the IJS-based driver,
-     for GNU Ghostscript 6.53 and above, ESP Ghostscript 7.05 and
-     above, and AFPL Ghostscript 7.04 and above.
-
-     This change was made due to the difficulty of supporting the
-     monolithic driver and the complexity of building it.  The
-     traditional monolithic driver architecture required that all
-     drivers be compiled into Ghostscript, requiring that program to
-     be recompiled whenever a driver is added.  This is a rather
-     complicated operation that cannot easily be automated.  The IJS
-     architecture, based on the open source HPIJS driver supplied by
-     Hewlett-Packard for HP inkjet printers, allows for drivers to be
-     compiled independently of the core Ghostscript.  A
-     Gimp-Print/Gutenprint driver based on the IJS architecture was
-     introduced into Gimp-Print 4.2.1 and 4.3.0, and has been
-     recommended for use with Gimp-Print 4.2.2 and beyond.
-
-     In addition to a greatly simplified build procedure and overall
-     cleaner architecture, the separation between Ghostscript and
-     driver imposed by the IJS architecture permits use of Gutenprint
-     with AFPL Ghostscript with no license conflict.
-
-
-----------------
-
-F) CHANGES TO FOOMATIC DATA GENERATION:
-
-  1) The Ghostscript IJS driver now functions only with Foomatic PPD
-     files created for the matching version of Gutenprint, providing
-     an error message indicating the problem if an incorrect PPD file
-     is used.  This avoids problems caused by mismatches between the
-     PPD files and the driver.  While mismatches are not harmful in
-     all cases, they could cause problems ranging from failures to
-     print with poor diagnostic messages to incorrect results.
-
-  2) The Gutenprint 5.0 Foomatic data and IJS driver can be installed
-     concurrently with the 4.2 driver.  Both the PPD files and the
-     driver carry different names from their 4.2 counterparts,
-     permitting a parallel installation or gradual switchover between
-     4.2 and 5.0-based releases.
-
-  3) On printers capable of borderless output, the Foomatic driver now
-     advertises (via the *ImageableArea in PPD files) the full page
-     dimension, and crops the output if the borderless mode is not
-     selected.  If borderless mode is selected, the full image (up to
-     the limits of the printer) will be printed.
-
-     This compromise is necessitated by the fact that PPD files can
-     only supply a single imageable area for a particular page size,
-     so it was necessary to select which imageable area to provide.
-     In early prereleases of Gutenprint 5.0, we supplied the normal
-     page area, and stretched the output if the user selected full
-     bleed.  This caused problems for many users, in that it was not
-     possible to print the full surface of the paper while preserving
-     dimensions.
-
-     Based on user feedback, we determined that the best solution is
-     to provide the full page size as the imageable area and crop the
-     result if full bleed mode is not selected.
-
-
-----------------
-
-G) QUALITY IMPROVEMENTS:
-
-  1) Color and tonal accuracy is greatly improved compared to 4.2
-     while the gamut (range of printable colors) has been increased.
-     This particularly improves the hue accuracy of red, magenta, and
-     blue, and the tonal accuracy of cyan and green.  Most Epson
-     printers have been fully tuned for the new color correction
-     algorithms introduced for this release.
-
-     The default gamma has been changed to produce lighter midtones
-     with all Epson printers.
-
-  2) The handling of variable drop sizes and photo inks (6 and 7 color
-     printers) has been completely revised, with the result being that
-     variable drop size printers with photo inks (such as most Epson
-     Stylus Photo and Stylus Pro printers) give much more consistent
-     results with fewer artifacts.  In particular, colors match
-     correctly across all resolutions, which was not the case in 4.2.
-
-     In 4.2, variable size drops and light inks were treated the same
-     way; an "effective drop size" based on the relative size of the
-     drops and the darkness of the inks was used to decide what kind
-     of drop to print.  While this method has some advantages (it
-     ensures that dark and light inks are never printed at the same
-     place, and also that dark dots are optimally dispersed among
-     light dots), it has some serious disadvantages as well: the
-     properties of a small dark dot and a large light dot are not
-     really the same, particularly when inks are mixed.  The
-     combination of different drop sizes being used at different
-     resolutions meant that the transition between light and dark inks
-     differed depending upon the resolution chosen, and if more than
-     one drop size was required at a given resolution, the transition
-     tended to be quite marked.
-
-     The new method of handling variable size drops and light inks is
-     to first separate each of the four channels (cyan, magenta,
-     yellow, and black) into the appropriate light and dark inks, if
-     needed.  This separation is performed based on the relative
-     darkness of the different ink sub-colors (such as light and dark
-     cyan) and specific characteristics of the printer, ink type, and
-     paper chosen.  Following this, each sub-color is screened
-     separately, and the appropriate combination of drop sizes is
-     chosen.
-
-     The drop size selection in this release has also been changed to
-     fill the page with as many small drops as possible before
-     switching to larger drops.  This ensures that the largest number
-     of the smallest possible drops is printed, which yields a
-     smoother texture in the midtones.
-
-     Finally, new dither algorithms described below allow drops of ink
-     of different colors to be dispersed, avoiding clumping or
-     overprinting of drops.
-
-  3) The EvenTone dither algorithm has been extensively reworked in
-     this release, offering many improvements.
-
-     First, it has been rewritten to work correctly with variable drop
-     size and photo printers.  This algorithm, which offers
-     significant improvements over the standard Adaptive Hybrid
-     algorithm, does not work optimally with variable drop sizes or
-     photo printers in 4.2.
-
-     Secondly, a variation called Hybrid EvenTone has been added.
-     This dither algorithm perturbs the dot positions slightly to
-     break up some patterning seen in standard EvenTone dithering in
-     solid regions of pale tones, particularly when printing with
-     black ink only.  This very slightly reduces the smoothness of
-     texture in exchange for largely eliminating this undesirable
-     patterning.  This algorithm is also expected to be more resistant
-     to microbanding effects.
-
-  4) The conversion between black and composite (CMY) gray has been
-     improved in this release, yielding more neutral grays on most
-     printers.
-
-  5) Epson printers have been completely retuned, in most cases
-     yielding much better density, more accurate gray scale, and
-     darker black on all paper types.
-
-
-----------------
-
-H) ARCHITECTURAL CHANGES:
-
-  1) Family drivers are now modular.  A "family driver" is a
-     collection of printer drivers for one group of printers sharing a
-     common programming architecture, e. g. ESC/P2, PCL, Lexmark,
-     Canon.  The drivers can be built as separate modules and loaded
-     at runtime as needed.
-
-  2) Color processing is now partially modularized.  This architecture
-     will enable us, or others, to provide color management without
-     having to change the internal interfaces within Gutenprint.
-
-  3) New composite data types.  Gutenprint 5.0 defines additional data
-     types.  These types include:
-
-     * Sequences, curves, and arrays.  A sequence is a primitive
-       vector of numbers data type; curves and arrays provide
-       additional capabilities such as interpolation (for curves) and
-       multiple dimensions (for arrays).
-
-     * Lists are a general ordered container of named objects of
-       arbitrary type.  They are used throughout the core library in a
-       variety of ways.  The creator of a list can specify
-       constructor, destructor, name comparison, copy, and sort
-       operations on list members.
-
-     * Parameters, which are part of the options system described
-       below.  In addition to storing values and descriptions of the
-       parameter, parameters can be queried to determine defaults and
-       constraints.  Parameter lists (which use the list container
-       internally) are also defined as part of this.
-
-     * String lists are used in various ways; in particular, they are
-       used by the parameter system to inform programs of the
-       available choices of values for string-valued parameters.
-
-  4) Complete overhaul of the options system.  Rather than offering a
-     fixed set of operations, family drivers, color modules, etc. can
-     now offer a wide variety of options using a predefined set of
-     data types.  The data types currently supported are strings
-     picked from a list, floating point numbers, integers, curves,
-     arrays, Boolean values, dimensions, and filenames.
-
-     The new options system provides a flexible way for drivers to
-     inform applications of default values and UI hints, the ability
-     to selectively enable and disable options, and a generalized way
-     of verifying legality of option choices.
-
-  5) The coordinate system has been changed from bottom left to top
-     left of the page, and the printable area can now extend beyond
-     the edge of the page.  The result is a more intuitive coordinate
-     system for driver writers that matches the coordinate system of
-     printers, and the ability to do true full bleed.
-
-  6) The specification of color correction, input, and output modes
-     has been completely revised, permitting applications to specify
-     input mode, output mode, channel bit depth, and color correction
-     completely independently.  This architecture is also more
-     extensible.
-
-  7) Complete overhaul of the black generation in CMYK output.  Black
-     generation is now performed in the color code rather than the
-     dither code.  This simplifies the dither code, puts the CMYK
-     generation where it should be, and improves overall flexibility.
-
-  8) Complete overhaul of the multi-tone (photo or quadtone) ink
-     processing architecture (channels).  Instead of being processed
-     as part of the dithering code as in 4.2, where ink drops of
-     lighter inks were assigned virtual values proportional to their
-     darkness as well as their size, this is now processed after the
-     initial color conversion.  This has a number of major advantages:
-
-     * As the actual amount of ink to be printed is visible to the
-       color code, the color code can do ink limiting without fear
-       that the dither code will change the amount of ink to be
-       printed.
-
-     * It ensures that the same proportions of inks will be printed at
-       any density and resolution.  In 4.2, the ramp from light to
-       dark ink varied depending upon the dot sizes available and
-       hence the resolution.  This has already been demonstrated to
-       yield much better linearity and much more neutral gray scale
-       with even very modest tuning effort.
-
-     * It enables use of all drop sizes of all ink tones.  In 4.2, we
-       could not use the smallest drop size of dark ink, because the
-       virtual dot size of a small dot of dark ink is typically close
-       to the virtual dot size of a large dot of small ink.  This
-       would yield very sharp transition, and perhaps even result in
-       more light ink printed in darker regions than in lighter
-       regions.  With channel processing separate from dithering, this
-       concern no longer exists; we can safely use small drops of dark
-       ink, improving smoothness.
-
-     * It enables the color code to do ink limiting intelligently
-       without concern that the dither code will rearrange things
-       behind its back.
-
-     * It greatly simplifies the specification of inks.  With drop
-       size and darkness orthogonal, family drivers can greatly
-       simplify their tables of inks.
-
-     * Dither algorithms can choose to ignore smaller drop sizes if
-       they wish to offer fast operation.
-
-     * Applications with special requirements can now access the raw
-       ink channels directly.  This facility was used to create a
-       mechanism to more accurately tune printer inks.
-
-  9) The color system can now generate arbitrary ink colors, lifting
-     the CMYK-only restriction in previous versions of the package.
-     This permits full support for the Epson Stylus Photo R800 and
-     R1800, which use red and blue ink in addition to the traditional
-     CMYK.
-
-  10) Use of true XML to store data about printers and paper sizes, and
-     to represent new data types (sequences, curves, and arrays).
-     This uses the "mxml" XML library, a fast, lightweight XML parser
-     written by Mike Sweet for this project.  Currently, the use of
-     XML (as opposed to compiled-in data) is limited, but we expect
-     that this will change beyond the initial 5.0 release.
-
-  11) In addition to parameters, internal components such as family
-     drivers, color drivers, etc. can store arbitrary data in the
-     basic stp_vars_t object.  This facility is used to simplify the
-     internal driver API; the family driver no longer needs to keep
-     track of dither, color, etc. information itself.
-
-  12) The Epson Stylus family driver has been decomposed into more
-     functionally distinct units.  The data schema has been
-     considerably improved, and the code itself broken into more
-     easily maintained units.
-
-  13) The build system has been updated with a more contemporary
-     toolchain based on autoconf 2.5 and gettext 0.11.
-
-  14) The Print plugin for the GIMP has been decomposed into a UI
-     library and the core plugin.  The user interface library is a
-     pure GTK-based library; the tiny GIMP plugin is a client of this
-     library.
-
-  15) Printer characteristics are exposed to the application level as
-     read-only parameters.  This permits the escputil utility to not
-     duplicate information stored in the printer driver.
-
-
-================================================================
-
-IV) EXCEPTIONS AND WORKAROUNDS
+III) EXCEPTIONS AND WORKAROUNDS
 
 A) GENERAL ISSUES
 
-  1) The Canon, Hewlett-Packard, and Lexmark drivers do not offer all
-     of the additional options and improvements that the Epson driver
-     does.  We do not have an estimated time for fix.  Please contact
-     us if you would like to assist with this.
-
-  2) This release is slower than 4.2 in many cases, particularly when
-     using High Accuracy (which is the default color correction in
-     most cases) or Bright color correction.  It is possible that this
-     release will not be able to drive some printers at full speed,
-     particularly if your computer has a slow processor.  Performance
-     has been only partially analyzed or tuned at present.
+  1) The Canon, Hewlett-Packard, Lexmark, and dye sublimation drivers
+     do not offer all of the additional options and improvements that
+     the Epson driver does.  Please contact us if you would like to
+     assist with this.
 
 
 ----------------
@@ -1256,10 +628,10 @@ B) BUILD/INSTALLATION ISSUES
      version, the genppd program operated correctly.  If instead the
      output looks like this:
 
-	 src/cups$ zgrep LanguageVersion ppd/*/stp-pcl-4.5.0.ppd.gz
-	 ppd/C/stp-pcl-4.5.0.ppd.gz:*LanguageVersion: English
-	 ppd/da/stp-pcl-4.5.0.ppd.gz:*LanguageVersion: English
-	 ppd/en_GB/stp-pcl-4.5.0.ppd.gz:*LanguageVersion: English
+	 src/cups$ zgrep LanguageVersion ppd/*/stp-pcl-4.5.1.ppd.gz
+	 ppd/C/stp-pcl-4.5.1.ppd.gz:*LanguageVersion: English
+	 ppd/da/stp-pcl-4.5.1.ppd.gz:*LanguageVersion: English
+	 ppd/en_GB/stp-pcl-4.5.1.ppd.gz:*LanguageVersion: English
 	 ...
 
      the program did not operate correctly.
@@ -1267,7 +639,7 @@ B) BUILD/INSTALLATION ISSUES
      If you do not have 'zgrep' on your system, you can gunzip the
      PPD files, and use
 
-	 grep LanguageVersion ppd/*/stp-pcl-4.5.0.ppd
+	 grep LanguageVersion ppd/*/stp-pcl-4.5.1.ppd
 
      to accomplish the same test.
 
@@ -1374,7 +746,7 @@ B) BUILD/INSTALLATION ISSUES
   3) There are multiple issues that one must be aware of when using
      Foomatic with Gutenprint.
 
-     i) Before installing any new release of Gutenprint 5.0, you must
+     i) Before installing any new release of Gutenprint 5.1, you must
 	manually remove any existing Foomatic option files.  This is
 	because the Foomatic utility to load data kits
 	(foomatic-kitload) does not remove obsolete data files from
@@ -1418,7 +790,7 @@ B) BUILD/INSTALLATION ISSUES
 
 	Please check the Foomatic site
 	(http://www.openprinting.org/foomatic.html) and the Gutenprint
-	site (http://gutenprint.sourceforge.net) for updated
+	site (http://gimp-print.sourceforge.net) for updated
 	instructions about this.
 
      ii) Unlike with the CUPS native driver, there is no simple way to
@@ -1431,8 +803,8 @@ B) BUILD/INSTALLATION ISSUES
 
      iii) The Foomatic data is version locked to the Gutenprint release
 	installed on the system.  For example, PPD files generated
-	with the Foomatic data for release 5.0.0 will not work with
-	the ijsgutenprint in release 5.0.1.  This is to prevent
+	with the Foomatic data for release 5.1.0 will not work with
+	the ijsgutenprint in release 5.1.1.  This is to prevent
 	accidentally using incorrect data, which could cause incorrect
 	function to take place.
 
@@ -1483,8 +855,8 @@ B) BUILD/INSTALLATION ISSUES
      ./configure --with-readline=libs (specifies the libraries to be
 				      linked against)
 
-     An hypothetical (this won't work anywhere!) example of the
-     latter would be
+     A hypothetical (this won't work anywhere!) example of the latter
+     would be
 
      ./configure --with-readline='-lncurses -ltermcap'
 
@@ -1494,47 +866,3 @@ B) BUILD/INSTALLATION ISSUES
      to build, we suggest using --with-readline=no.  The commands
      used within escputil are very short and seldom require
      significant editing.
-
-  5) The fix for bug 929227 (Gimp-Print incorrectly attempts to build
-     against GIMP 2.0) requires special build instructions if you are
-     using a very old version of the GIMP 1.2 (1.2.0, 1.2.1, or
-     1.2.2).  Specifically, you must set GIMPTOOL in the environment
-     to point to the proper version of gimptool when running
-     Gutenprint's configure script.  For example:
-
-     GIMPTOOL=/usr/bin/gimptool ./configure
-
-     The bug fix involves checking for the presence of the GIMP
-     slightly differently from how it was previously done.
-     Previously, Gimp-Print checked for the presence of a program
-     named "gimptool", which provides information about how to build
-     plugins against the GIMP.  This worked correctly when only the
-     GIMP 1.2 was installed, but not when the GIMP 2.0 was installed.
-
-     The GIMP 2.0 actually installs a program named "gimptool-2.0",
-     and creates a symbolic link named "gimptool" pointing to it.
-     Later versions of the GIMP 1.2 (1.2.3, 1.2.4, 1.2.5, and any
-     later versions that may be released) similarly create a program
-     named "gimptool-1.2" and a symbolic link named "gimptool".  As
-     the configure script prior to this bug fix simply checked for
-     gimptool, it incorrectly detected a gimptool from the GIMP 2.0.
-
-     The current configure script checks first for gimptool-1.2 and
-     then for gimptool, and only accepts the use of a GIMP 1.2 version
-     of one of these programs.  However, if you have one of the older
-     versions of the GIMP 1.2 installed in a non-standard location,
-     and you use --with-gimp-prefix or --with-gimp-exec-prefix to
-     specify its location, the configure script will not automatically
-     detect the correct location of gimptool, and you must specify it
-     as described above.  Note that you must specify a copy of
-     gimptool from the GIMP 1.2, not from the GIMP 2.0.  If your copy
-     of the GIMP is installed in a standard location (typically
-     /usr/bin or /usr/local/bin), you do not need to use
-     --with-gimp-prefix or --with-gimp-exec-prefix, and therefore do
-     not need to use this workaround.
-
-     If you cannot upgrade to the GIMP 2.x, the Gutenprint and GIMP
-     projects recommend upgrading to revision of the GIMP 1.2.5, which
-     will not require this workaround.  This workaround is available
-     in the event that you cannot or do not wish to upgrade your
-     installation of the GIMP.

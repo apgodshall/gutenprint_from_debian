@@ -1,5 +1,5 @@
 /*
- * "$Id: gutenprintui-internal.h,v 1.3 2005/09/17 21:54:33 rlk Exp $"
+ * "$Id: gutenprintui-internal.h,v 1.5 2008/01/22 02:36:42 rlk Exp $"
  *
  *   Print plug-in for the GIMP.
  *
@@ -77,15 +77,27 @@ typedef struct
 
 typedef struct
 {
+  GtkWidget *f_label;
+  GtkWidget *f_entry;
+  GtkWidget *f_button;
+  GtkWidget *f_browser;
+  gboolean f_is_visible;
+} file_option_t;
+
+typedef struct
+{
   const stp_parameter_t *fast_desc;
   int is_active;
   int is_enabled;
+  int reset_all;
   GtkWidget *checkbox;
+  GtkWidget *reset_btn;
   union {
     list_option_t list;
     float_option_t flt;
     curve_option_t curve;
     boolean_option_t bool;
+    file_option_t file;
   } info;
 } option_t;
 

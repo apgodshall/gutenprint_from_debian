@@ -1,0 +1,87 @@
+## $Id: Makefile.am,v 1.18 2001/10/10 23:05:16 rlk Exp $
+## Copyright (C) 2000 Roger Leigh
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2, or (at your option)
+## any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+## Process this file with automake to produce Makefile.in.
+
+AUTOMAKE_OPTIONS = 1.4 gnu
+
+@SET_MAKE@
+
+MAINT_CHARSET = latin1
+
+
+## Variables
+
+AM_CFLAGS = $(GNUCFLAGS)
+INCLUDES = @INCLUDES@ $(GIMP_CFLAGS) $(LIBGIMPPRINT_CFLAGS)
+LIBS = @LIBS@ ../../lib/libprintut.la $(INTLLIBS) ../../lib/libprintut.la
+
+libexecdir = $(gimptool_prefix)/plug-ins
+
+
+## Programs
+
+GIMP_BIN = print
+
+libexec_PROGRAMS = @GIMP_BIN@
+
+EXTRA_PROGRAMS = print
+
+print_SOURCES = \
+	print-image-gimp.c \
+	print-intl.h \
+	print.c \
+	gimp_color_window.c \
+	gimp_main_window.c \
+	print_gimp.h
+print_LDADD = $(GIMP_LIBS) $(LIBGIMPPRINT_LIBS) ../../lib/libprintut.la
+print_DEPENDENCIES = $(LIBGIMPPRINT_LIBS)
+
+
+## Rules
+
+install-libexecPROGRAMS: $(libexec_PROGRAMS)
+	@DESTDIR='$(DESTDIR)'; export DESTDIR;\
+	list='$(libexec_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    if test -f .libs/$$p; then \
+	      cd .libs; \
+	    fi; \
+	    echo $(GIMPTOOL) --install-@PLUG_IN_PATH@ $$p; \
+            $(GIMPTOOL) --install-@PLUG_IN_PATH@ $$p; \
+	  else :; fi; \
+	done
+
+uninstall-libexecPROGRAMS:
+	@DESTDIR='$(DESTDIR)'; export DESTDIR;\
+	list='$(libexec_PROGRAMS)'; for p in $$list; do \
+	    echo $(GIMPTOOL) --uninstall-@PLUG_IN_PATH@ "$$p"; \
+            $(GIMPTOOL) --uninstall-@PLUG_IN_PATH@ "$$p"; \
+	    echo $(GIMPTOOL) --uninstall-admin-bin "$$p"; \
+	    $(GIMPTOOL) --uninstall-admin-bin "$$p"; \
+	done; \
+	exit 0
+
+$(LIBGIMPPRINT_LIBS):
+	cd ../main ; \
+	$(MAKE)
+
+
+## Clean
+
+CLEANFILES = $(EXTRA_PROGRAMS)
+MAINTAINERCLEANFILES = Makefile.in

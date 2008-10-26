@@ -1,5 +1,5 @@
 /*
- * "$Id: print-papers.c,v 1.38 2008/01/15 03:48:46 rlk Exp $"
+ * "$Id: print-papers.c,v 1.41 2008/07/13 18:05:16 rlk Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -125,30 +125,6 @@ stpi_paper_create(stp_papersize_t *p)
   return 0;
 }
 
-static int
-stpi_paper_destroy(stp_papersize_t *p)
-{
-  stp_list_item_t *paper_item;
-  check_paperlist();
-
-  /* Check if paper exists */
-  paper_item = stp_list_get_start(paper_list);
-  while (paper_item)
-    {
-      const stp_papersize_t *ep = (const stp_papersize_t *)
-	stp_list_item_get_data(paper_item);
-      if (ep && !strcmp(p->name, ep->name))
-	{
-	  stp_list_item_destroy (paper_list, paper_item);
-	  return 0;
-	}
-      paper_item = stp_list_item_next(paper_item);
-    }
-  /* Paper did not exist */
-  return 1;
-}
-
-
 int
 stp_known_papersizes(void)
 {
@@ -187,7 +163,7 @@ paper_size_mismatch(int l, int w, const stp_papersize_t *val)
 {
   int hdiff = abs(l - (int) val->height);
   int vdiff = abs(w - (int) val->width);
-  return hdiff + vdiff;
+  return hdiff > vdiff ? hdiff : vdiff;
 }
 
 const stp_papersize_t *
@@ -203,15 +179,44 @@ stp_get_papersize_by_size(int l, int w)
       val = stp_get_papersize_by_index(i);
 
       if (val->width == w && val->height == l)
-	return val;
+	{
+	  if (val->top == 0 && val->left == 0 &&
+	      val->bottom == 0 && val->right == 0)
+	    return val;
+	  else
+	    ref = val;
+	}
       else
 	{
 	  int myscore = paper_size_mismatch(l, w, val);
-	  if (myscore < score && myscore < 20)
+	  if (myscore < score && myscore < 5)
 	    {
 	      ref = val;
 	      score = myscore;
 	    }
+	}
+    }
+  return ref;
+}
+
+const stp_papersize_t *
+stp_get_papersize_by_size_exact(int l, int w)
+{
+  const stp_papersize_t *ref = NULL;
+  const stp_papersize_t *val = NULL;
+  int i;
+  int sizes = stp_known_papersizes();
+  for (i = 0; i < sizes; i++)
+    {
+      val = stp_get_papersize_by_index(i);
+
+      if (val->width == w && val->height == l)
+	{
+	  if (val->top == 0 && val->left == 0 &&
+	      val->bottom == 0 && val->right == 0)
+	    return val;
+	  else
+	    ref = val;
 	}
     }
   return ref;

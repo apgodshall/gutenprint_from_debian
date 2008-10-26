@@ -1,5 +1,5 @@
 /*
- * "$Id: testpatternl.l,v 1.20 2008/02/03 02:48:20 rlk Exp $"
+ * "$Id: testpatternl.l,v 1.22 2008/06/08 01:03:51 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -87,6 +87,7 @@ ink_limit		DBG(INK_LIMIT); return INK_LIMIT;
 printer			DBG(PRINTER); return PRINTER;
 parameter		DBG(PARAMETER); return PARAMETER;
 parameter_int		DBG(PARAMETER_INT); return PARAMETER_INT;
+parameter_bool		DBG(PARAMETER_BOOL); return PARAMETER_BOOL;
 parameter_string	DBG(PARAMETER); return PARAMETER;
 parameter_float		DBG(PARAMETER_FLOAT); return PARAMETER_FLOAT;
 parameter_curve		DBG(PARAMETER_CURVE); return PARAMETER_CURVE;
@@ -115,6 +116,8 @@ white			yylval.ival = WHITE;DBG(WHITE); return WHITE;
 output			DBG(OUTPUT); return OUTPUT;
 message			DBG(MESSAGE); return MESSAGE;
 noscale			DBG(NOSCALE); return NOSCALE;
+start_job		DBG(START_JOB); return START_JOB;
+end_job			DBG(END_JOB); return END_JOB;
 end			DBG(END); return END;
 
 

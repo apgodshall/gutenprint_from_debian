@@ -64,21 +64,25 @@
     </member>
     <member kind="enumeration">
       <name>StpuiCurveType</name>
+      <anchorfile>curve_8h.html</anchorfile>
       <anchor>59cb8817385039367325d6dbb4a0996b</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STPUI_CURVE_TYPE_LINEAR</name>
+      <anchorfile>curve_8h.html</anchorfile>
       <anchor>59cb8817385039367325d6dbb4a0996b741f86dc6dfb50a67dd621a287014de1</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STPUI_CURVE_TYPE_SPLINE</name>
+      <anchorfile>curve_8h.html</anchorfile>
       <anchor>59cb8817385039367325d6dbb4a0996b6cef8a118ee2829db63f812874a412c1</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>STPUI_CURVE_TYPE_FREE</name>
+      <anchorfile>curve_8h.html</anchorfile>
       <anchor>59cb8817385039367325d6dbb4a0996b1a204ef2d450d762415a1c0c1c77db89</anchor>
       <arglist></arglist>
     </member>
@@ -224,7 +228,14 @@
     <includes id="gammacurve_8h" name="gammacurve.h" local="no" imported="no">gutenprintui2/gammacurve.h</includes>
     <includes id="typebuiltins_8h" name="typebuiltins.h" local="no" imported="no">gutenprintui2/typebuiltins.h</includes>
     <class kind="struct">stpui_plist_t</class>
-    <class kind="struct">stpui_image_t</class>
+    <class kind="struct">stpui_image</class>
+    <member kind="typedef">
+      <type>struct stpui_image</type>
+      <name>stpui_image_t</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>195aac96c77c6de3925cd3d13c6ce2f1</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="typedef">
       <type>guchar *(*</type>
       <name>get_thumbnail_func_t</name>
@@ -234,51 +245,61 @@
     </member>
     <member kind="enumeration">
       <name>orient_t</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a0</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>ORIENT_AUTO</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a006af5eabe5d18a247c02641283fe4481</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>ORIENT_PORTRAIT</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a0f81c23cf1763365fba8e36db87131ff5</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>ORIENT_LANDSCAPE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a04dc9735e5b3e4c86b60141acc08e5db1</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>ORIENT_UPSIDEDOWN</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a03ca76babc9953cc92305856ac00a2350</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>ORIENT_SEASCAPE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>c33232f845969eb04b32e1006c8240a07de33495add2d66cc743f2edcbb548e3</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
       <name>command_t</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>b31350eb38b009cbd282027630a1ee10</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>COMMAND_TYPE_DEFAULT</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>b31350eb38b009cbd282027630a1ee10a6a7840c2276bfe38dd68b4fe3a8babf</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>COMMAND_TYPE_CUSTOM</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>b31350eb38b009cbd282027630a1ee10cb7cf14821d9fcbaa983ee33d7b8e926</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>COMMAND_TYPE_FILE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>b31350eb38b009cbd282027630a1ee105e9a887a5dab88a425cb52c8b1e49a7f</anchor>
       <arglist></arglist>
     </member>
@@ -942,62 +963,62 @@
     </member>
   </compound>
   <compound kind="struct">
-    <name>stpui_image_t</name>
-    <filename>structstpui__image__t.html</filename>
+    <name>stpui_image</name>
+    <filename>structstpui__image.html</filename>
     <member kind="variable">
       <type>stp_image_t</type>
       <name>im</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>38f170e2acf7842eb511adf52a1b9de9</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>00862540482f307175e9fbf252751320</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>transpose</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>c6914425cfe9376043dc64b9ade33b40</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>5f2a75c7187c6abcf20e15e2aad22549</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>hflip</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>0b96d404e3e44afd8272c3534a465740</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>f2733a318654d50214c94fccd9a018b7</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>vflip</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>167d1341e9223f16afcc3ce4d52c6e72</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>c378339fe87fa21d5f117fc11b3f5b6c</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_ccw</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>de9e076c2a520fe59fbbad51453c05a7</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>0a31280def8cd739184192dbe8d34fa8</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_cw</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>fb7c04bd61d67e06429fcc88e088774e</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>e111082f0f23096d89e024c4fde9c0d6</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>rotate_180</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>215928f81c63d90d2ede73606cf95fd8</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>aaae08fdabffb3d31ac761dfe0624506</anchor>
       <arglist>)(struct stpui_image *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>crop</name>
-      <anchorfile>structstpui__image__t.html</anchorfile>
-      <anchor>77fc83d55bb4367e9698244528cbcbe9</anchor>
+      <anchorfile>structstpui__image.html</anchorfile>
+      <anchor>96e6cc155230793c8aa847e5a7cd7255</anchor>
       <arglist>)(struct stpui_image *image, int left, int top, int right, int bottom)</arglist>
     </member>
   </compound>

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-olympus.c,v 1.83 2007/12/27 20:34:28 rlk Exp $"
+ * "$Id: print-olympus.c,v 1.89 2008/08/14 01:01:41 rlk Exp $"
  *
  *   Print plug-in DyeSub driver (formerly Olympus driver) for the GIMP.
  *
@@ -137,6 +137,8 @@ typedef struct {
   size_t n_items;
 } laminate_list_t;
 
+#define NPUTC_BUFSIZE (4096)
+
 typedef struct
 {
   int w_dpi, h_dpi;
@@ -147,6 +149,7 @@ typedef struct
   const char* pagesize;
   const laminate_t* laminate;
   int print_mode;
+  char nputc_buf[NPUTC_BUFSIZE];
 } dyesub_privdata_t;
 
 static dyesub_privdata_t privdata;
@@ -164,6 +167,7 @@ typedef struct {
   int imgh_px, imgw_px;
   int prnh_px, prnw_px, prnt_px, prnb_px, prnl_px, prnr_px;
   int print_mode;	/* portrait or landscape */
+  int image_rows;
 } dyesub_print_vars_t;
 
 typedef struct /* printer specific parameters */
@@ -970,7 +974,10 @@ static const dyesub_pagesize_t updp10_page[] =
 {
   { "w288h432", "UPC-10P23 (4x6)", -1, -1, 12, 12, 18, 18, DYESUB_LANDSCAPE},
   { "w288h387", "UPC-10P34 (4x5)", -1, 384, 12, 12, 16, 16, DYESUB_LANDSCAPE},
+#if 0
+  /* We can't have two paper sizes that are the same size --rlk 20080813 */
   { "w288h432", "UPC-10S01 (Sticker)", -1, -1, 12, 12, 18, 18, DYESUB_LANDSCAPE},
+#endif
   { "Custom", NULL, -1, -1, 12, 12, 0, 0, DYESUB_LANDSCAPE},
 };
 
@@ -1221,7 +1228,7 @@ static void updr150_printer_end_func(stp_vars_t *v)
 static const dyesub_pagesize_t cx400_page[] =
 {
   { "w288h432", NULL, 295, 428, 24, 24, 23, 22, DYESUB_PORTRAIT},
-  { "w288h387", "4x5 3/8 (Digital Camera 3:4)", 295, 386, 24, 24, 23, 23, DYESUB_PORTRAIT},
+  { "w288h387", "4x5 3/8", 295, 386, 24, 24, 23, 23, DYESUB_PORTRAIT},
   { "w288h504", NULL, 295, 513, 24, 24, 23, 22, DYESUB_PORTRAIT},
   { "Custom", NULL, 295, 428, 0, 0, 0, 0, DYESUB_PORTRAIT},
 };
@@ -1697,49 +1704,49 @@ static const stp_parameter_t the_parameters[] =
     "PageSize", N_("Page Size"), N_("Basic Printer Setup"),
     N_("Size of the paper being printed to"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "MediaType", N_("Media Type"), N_("Basic Printer Setup"),
     N_("Type of media (plain paper, photo paper, etc.)"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InputSlot", N_("Media Source"), N_("Basic Printer Setup"),
     N_("Source (input slot) of the media"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Resolution", N_("Resolution"), N_("Basic Printer Setup"),
     N_("Resolution and quality of the print"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InkType", N_("Ink Type"), N_("Advanced Printer Setup"),
     N_("Type of ink in the printer"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Laminate", N_("Laminate Pattern"), N_("Advanced Printer Setup"),
     N_("Laminate Pattern"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 0, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 0, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Borderless", N_("Borderless"), N_("Advanced Printer Setup"),
     N_("Print without borders"),
     STP_PARAMETER_TYPE_BOOLEAN, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 0, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 0, STP_CHANNEL_NONE, 1, 0
   },
   {
     "PrintingMode", N_("Printing Mode"), N_("Core Parameter"),
     N_("Printing Output Mode"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
 };
 
@@ -2167,9 +2174,24 @@ dyesub_describe_output(const stp_vars_t *v)
 static void
 dyesub_nputc(stp_vars_t *v, char byte, int count)
 {
-  int i;
-  for (i = 0; i < count; i++)
+  if (count == 1)
     stp_putc(byte, v);
+  else
+    {
+      int i;
+      char *buf = privdata.nputc_buf;
+      int size = count;
+      int blocks = size / NPUTC_BUFSIZE;
+      int leftover = size % NPUTC_BUFSIZE;
+      if (size > NPUTC_BUFSIZE)
+	size = NPUTC_BUFSIZE;
+      (void) memset(buf, byte, size);
+      if (blocks)
+	for (i = 0; i < blocks; i++)
+	  stp_zfwrite(buf, size, 1, v);
+      if (leftover)
+	stp_zfwrite(buf, leftover, 1, v);
+    }
 }
 
 static void
@@ -2220,9 +2242,10 @@ dyesub_interpolate(int oldval, int oldsize, int newsize)
 }
 
 static void
-dyesub_free_image(unsigned short** image_data, stp_image_t *image)
+dyesub_free_image(dyesub_print_vars_t *pv, stp_image_t *image)
 {
-  int image_px_height = stp_image_height(image);
+  unsigned short** image_data = pv->image_data;
+  int image_px_height = pv->image_rows;
   int i;
 
   for (i = 0; i< image_px_height; i++)
@@ -2245,6 +2268,7 @@ dyesub_read_image(stp_vars_t *v,
   int i;
 
   image_data = stp_zalloc(image_px_height * sizeof(unsigned short *));
+  pv->image_rows = 0;
   if (!image_data)
     return NULL;	/* ? out of memory ? */
 
@@ -2255,22 +2279,21 @@ dyesub_read_image(stp_vars_t *v,
 	  stp_deprintf(STP_DBG_DYESUB,
 	  	"dyesub_read_image: "
 		"stp_color_get_row(..., %d, ...) == 0\n", i);
-	  dyesub_free_image(image_data, image);
+	  dyesub_free_image(pv, image);
 	  return NULL;
 	}	
       image_data[i] = stp_malloc(row_size);
+      pv->image_rows = i+1;
       if (!image_data[i])
         {
 	  stp_deprintf(STP_DBG_DYESUB,
 	  	"dyesub_read_image: "
 		"(image_data[%d] = stp_malloc()) == NULL\n", i);
-	  dyesub_free_image(image_data, image);
+	  dyesub_free_image(pv, image);
 	  return NULL;
 	}	
       memcpy(image_data[i], stp_channel_get_output(v), row_size);
     }
-  stp_image_conclude(image);
-
   return image_data;
 }
 
@@ -2449,6 +2472,7 @@ dyesub_do_print(stp_vars_t *v, stp_image_t *image)
       stp_eprintf(v, _("Print options not verified; cannot print.\n"));
       return 0;
     }
+  (void) memset(&pv, 0, sizeof(pv));
 
   stp_image_init(image);
   pv.imgw_px = stp_image_width(image);
@@ -2531,7 +2555,10 @@ dyesub_do_print(stp_vars_t *v, stp_image_t *image)
   pv.plane_interlacing = dyesub_feature(caps, DYESUB_FEATURE_PLANE_INTERLACE);
   pv.print_mode = page_mode;
   if (!pv.image_data)
-      return 2;	
+    {
+      stp_image_conclude(image);
+      return 2;
+    }
   /* /FIXME */
 
 
@@ -2539,7 +2566,6 @@ dyesub_do_print(stp_vars_t *v, stp_image_t *image)
   dyesub_adjust_curve(v, caps->adj_magenta, "MagentaCurve");
   dyesub_adjust_curve(v, caps->adj_yellow, "YellowCurve");
   stp_set_float_parameter(v, "Density", 1.0);
-
 
   if (dyesub_feature(caps, DYESUB_FEATURE_FULL_HEIGHT))
     {
@@ -2611,7 +2637,8 @@ dyesub_do_print(stp_vars_t *v, stp_image_t *image)
   /* printer end */
   dyesub_exec(v, caps->printer_end_func, "caps->printer_end");
 
-  dyesub_free_image(pv.image_data, image);
+  dyesub_free_image(&pv, image);
+  stp_image_conclude(image);
   return status;
 }
 

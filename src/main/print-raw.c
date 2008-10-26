@@ -1,5 +1,5 @@
 /*
- * "$Id: print-raw.c,v 1.39 2007/08/27 00:44:12 rlk Exp $"
+ * "$Id: print-raw.c,v 1.41 2008/07/18 10:57:24 rlk Exp $"
  *
  *   Print plug-in RAW driver for the GIMP.
  *
@@ -80,13 +80,13 @@ static const stp_parameter_t the_parameters[] =
     "InkType", N_("Ink Type"), N_("Advanced Printer Setup"),
     N_("Type of ink in the printer"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "PrintingMode", N_("Printing Mode"), N_("Core Parameter"),
     N_("Printing Output Mode"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
 };
 
@@ -210,18 +210,21 @@ raw_print(const stp_vars_t *v, stp_image_t *image)
   int ink_channels = 1;
   int rotate_output = 0;
   const char *ink_type = stp_get_string_parameter(nv, "InkType");
+  stp_image_init(image);
 
   stp_prune_inactive_options(nv);
   if (!stp_verify(nv))
     {
       stp_eprintf(nv, _("Print options not verified; cannot print.\n"));
       stp_vars_destroy(nv);
+      stp_image_conclude(image);
       return 0;
     }
   if (width != stp_image_width(image) || height != stp_image_height(image))
     {
       stp_eprintf(nv, _("Image dimensions must match paper dimensions"));
       stp_vars_destroy(nv);
+      stp_image_conclude(image);
       return 0;
     }
   if (ink_type)
@@ -251,6 +254,7 @@ raw_print(const stp_vars_t *v, stp_image_t *image)
     {
       stp_eprintf(nv, "Internal error!  Output channels or input channels must be 1\n");
       stp_vars_destroy(nv);
+      stp_image_conclude(image);
       return 0;
     }
 

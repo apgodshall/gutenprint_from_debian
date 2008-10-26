@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.226 2008/04/20 13:39:16 faust3 Exp $"
+ * "$Id: print-canon.c,v 1.229 2008/08/06 20:46:49 faust3 Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -200,79 +200,85 @@ static const stp_parameter_t the_parameters[] =
     "PageSize", N_("Page Size"), N_("Basic Printer Setup"),
     N_("Size of the paper being printed to"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "MediaType", N_("Media Type"), N_("Basic Printer Setup"),
     N_("Type of media (plain paper, photo paper, etc.)"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InputSlot", N_("Media Source"), N_("Basic Printer Setup"),
     N_("Source (input slot) of the media"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "CDInnerRadius", N_("CD Hub Size"), N_("Basic Printer Setup"),
     N_("Print only outside of the hub of the CD, or all the way to the hole"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "CDOuterDiameter", N_("CD Size (Custom)"), N_("Basic Printer Setup"),
     N_("Variable adjustment for the outer diameter of CD"),
     STP_PARAMETER_TYPE_DIMENSION, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "CDInnerDiameter", N_("CD Hub Size (Custom)"), N_("Basic Printer Setup"),
     N_("Variable adjustment to the inner hub of the CD"),
     STP_PARAMETER_TYPE_DIMENSION, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "CDXAdjustment", N_("CD Horizontal Fine Adjustment"), N_("Advanced Printer Setup"),
     N_("Fine adjustment to horizontal position for CD printing"),
     STP_PARAMETER_TYPE_DIMENSION, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "CDYAdjustment", N_("CD Vertical Fine Adjustment"), N_("Advanced Printer Setup"),
     N_("Fine adjustment to horizontal position for CD printing"),
     STP_PARAMETER_TYPE_DIMENSION, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Resolution", N_("Resolution"), N_("Basic Printer Setup"),
     N_("Resolution and quality of the print"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InkType", N_("Ink Type"), N_("Advanced Printer Setup"),
     N_("Type of ink in the printer"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "InkChannels", N_("Ink Channels"), N_("Advanced Printer Functionality"),
     N_("Ink Channels"),
     STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, -1, 0, 0
+    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, STP_CHANNEL_NONE, 0, 0
   },
   {
     "PrintingMode", N_("Printing Mode"), N_("Core Parameter"),
     N_("Printing Output Mode"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "Duplex", N_("Double-Sided Printing"), N_("Basic Printer Setup"),
     N_("Duplex/Tumble Setting"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
-    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
+  },
+  {
+    "Quality", N_("Print Quality"), N_("Basic Output Adjustment"),
+    N_("Print Quality"),
+    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 0, 0
   },
 };
 
@@ -324,26 +330,26 @@ static const float_param_t float_parameters[] =
   },
   {
     {
-      "LightCyanTransition", N_("Light Cyan Transition"), N_("Advanced Ink Adjustment"),
+      "LightCyanTrans", N_("Light Cyan Transition"), N_("Advanced Ink Adjustment"),
       N_("Light Cyan Transition"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, -1, 1, 0
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
     }, 0.0, 5.0, 1.0, 1
   },
   {
     {
-      "LightMagentaTransition", N_("Light Magenta Transition"), N_("Advanced Ink Adjustment"),
+      "LightMagentaTrans", N_("Light Magenta Transition"), N_("Advanced Ink Adjustment"),
       N_("Light Magenta Transition"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, -1, 1, 0
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
     }, 0.0, 5.0, 1.0, 1
   },
  {
     {
-      "LightYellowTransition", N_("Light Yellow Transition"), N_("Advanced Ink Adjustment"),
+      "LightYellowTrans", N_("Light Yellow Transition"), N_("Advanced Ink Adjustment"),
       N_("Light Yellow Transition"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, -1, 1, 0
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
     }, 0.0, 5.0, 1.0, 1
   },
 };
@@ -454,9 +460,11 @@ canon_source_type(const char *name, const canon_cap_t * caps)
 static const canon_mode_t* canon_get_current_mode(const stp_vars_t *v){
     const char* input_slot = stp_get_string_parameter(v, "InputSlot");
     const char *resolution = stp_get_string_parameter(v, "Resolution");
+    const char *quality = stp_get_string_parameter(v, "Quality");
     const canon_cap_t * caps = canon_get_model_capabilities(v);
     const canon_mode_t* mode = NULL;
     int i;
+
     if(resolution){
         for(i=0;i<caps->modelist->count;i++){
             if(!strcmp(resolution,caps->modelist->modes[i].name)){
@@ -465,8 +473,18 @@ static const canon_mode_t* canon_get_current_mode(const stp_vars_t *v){
             }
         }
     }
+
     if(!mode)
         mode = &caps->modelist->modes[caps->modelist->default_mode];
+
+#if 0
+    if(quality && strcmp(quality, "None") == 0)
+        quality = "Standard";
+
+    if(quality && !strcmp(quality,"Standard")){
+        return &caps->modelist->modes[caps->modelist->default_mode];
+    }
+#endif
 
 #if 0
     /* only some modes can print to cd */
@@ -805,6 +823,16 @@ canon_parameters(const stp_vars_t *v, const char *name,
     }
     else
       description->is_active = 0;
+  }
+  else if (strcmp(name, "Quality") == 0)
+  {
+    int has_standard_quality = 0;
+    description->bounds.str = stp_string_list_create();
+    stp_string_list_add_string(description->bounds.str, "None",
+			       _("Manual Control"));
+    stp_string_list_add_string(description->bounds.str, "Standard",
+			       _("Standard"));
+    description->deflt.str = "Standard";
   }
 }
 
@@ -1587,7 +1615,7 @@ static void canon_setup_channels(stp_vars_t *v,canon_privdata_t* privdata){
     const char secondary[STP_NCOLORS] = {'k','c','m','y'};
     /* names of the density adjustment controls */
     const char *primary_density_control[STP_NCOLORS] = {"BlackDensity","CyanDensity","MagentaDensity","YellowDensity"};
-    const char *secondary_density_control[STP_NCOLORS] = {NULL,"LightCyanTransition","LightMagentaTransition","LightYellowTransition"};
+    const char *secondary_density_control[STP_NCOLORS] = {NULL,"LightCyanTrans","LightMagentaTrans","LightYellowTrans"};
     /* ink darkness for every channel */
     const double ink_darkness[] = {1.0, 0.31 / .5, 0.61 / .97, 0.08};
     const char* channel_order = default_channel_order;

@@ -1,5 +1,5 @@
 #! @PERL@ -w
-# $Id: cups-genppdupdate.in,v 1.42 2008/04/12 01:20:33 rlk Exp $
+# $Id: cups-genppdupdate.in,v 1.53 2008/09/22 11:04:24 rlk Exp $
 # Update CUPS PPDs for Gutenprint queues.
 # Copyright (C) 2002-2003 Roger Leigh (rleigh@debian.org)
 #
@@ -20,8 +20,6 @@
 use strict;
 use Getopt::Std;
 use Fcntl qw(:mode);
-use File::Temp qw(:POSIX);
-use File::Copy qw(mv);
 
 sub parse_options ();
 sub update_ppd ($); # Original PPD filename
@@ -43,6 +41,7 @@ our $opt_o; # Output directory
 our $opt_r; # Gutenprint version
 our $opt_i; # Interactive
 our $opt_f; # Force upgrade
+our $opt_l; # Language
 
 my $debug = 0;
 my $verbose = 0;   # Verbose output
@@ -64,6 +63,7 @@ my $updated_ppd_count = 0;
 my $skipped_ppd_count = 0;
 my $failed_ppd_count = 0;
 my $exit_after_parse_args = 0;
+my @languages = qw(Global C @ALL_LINGUAS@);
 
 my $serverdir = "@cups_conf_serverbin@";
 my $driver_bin = "$serverdir/driver/gutenprint.$version";
@@ -170,7 +170,11 @@ if (!$quiet || $verbose) {
 	print STDOUT "No Gutenprint PPD files to update.\n";
     } elsif ($updated_ppd_count > 0) {
 	my $plural = $updated_ppd_count == 1 ? "" : "s";
-	print STDOUT "Updated $updated_ppd_count PPD file${plural}.  Restart cupsd for the changes to take effect.\n";
+	print STDOUT "Updated $updated_ppd_count PPD file${plural}.";
+	if (!defined $opt_o || $opt_o ne "") {
+	    print STDOUT "Restart cupsd for the changes to take effect.";
+	}
+	print STDOUT "\n";
     } else {
 	if ($failed_ppd_count > 0) {
 	    print STDOUT "Failed to update any PPD files\n";
@@ -198,6 +202,10 @@ sub HELP_MESSAGE($;$$$) {
     print $fh "  -r version  Use PPD files for Gutenprint major.minor version.\n";
     print $fh "  -f          Ignore new PPD file safety checks.\n";
     print $fh "  -i          Prompt (interactively) for each PPD file.\n";
+    print $fh "  -l language Language choice (Gutenprint 5.1 or below).\n";
+    print $fh "              Choices: " . join(" ", @languages) . "\n";
+    print $fh "              Or -loriginal to preserve original language\n";
+    print $fh "                 with Gutenprint 5.2 or above\n";
     exit(0);
 }
 
@@ -216,7 +224,7 @@ sub help() {
 }
 
 sub parse_options () {
-    if (!getopts('d:hnqs:vNo:p:P:r:if')) {
+    if (!getopts('d:hnqs:vNo:p:P:r:ifl:')) {
 	help();
     }
     if ($opt_n) {
@@ -251,6 +259,7 @@ sub parse_options () {
 		if (-d $opt_s) {
 		    $ppd_base_dir = "$opt_s";
 		    $driver_bin = "";
+		    $use_static_ppd = "yes";
 		} else {
 		    die "$opt_s: invalid directory: $!\n";
 		}
@@ -264,6 +273,7 @@ sub parse_options () {
 	    $file_version = "\"$version";
 	    if (-x $driver_bin) {
 		$driver_version = `$driver_bin VERSION`;
+		$use_static_ppd = "no";
 		chomp $driver_version;
 		$file_version = "\"$driver_version\"\$";
 	    } elsif (! -d $ppd_base_dir && ! -l $ppd_base_dir) {
@@ -276,6 +286,7 @@ sub parse_options () {
 	    $ppd_base_dir = "$opt_s";
 	    $driver_bin = "";
 	    $driver_version = "";
+	    $use_static_ppd = "yes";
 	}
 	else {
 	    die "$opt_s: invalid directory: $!\n";
@@ -292,12 +303,19 @@ sub parse_options () {
     if ($opt_P) {
 	if (-x $opt_P) {
 	    $driver_bin = "$opt_P";
+	    $driver_version = `$driver_bin VERSION`;
+	    chomp $driver_version;
+	    $use_static_ppd = "no";
 	}
 	else {
 	    die "$opt_P: invalid executable: $!\n";
 	}
     }
     if ($opt_h) {
+	help();
+    }
+    if ($opt_l && lc $opt_l ne "original" && ! grep { $_ eq $opt_l } @languages) {
+	print STDERR "Unknown language '$opt_l'\n";
 	help();
     }
     if ($opt_i) {
@@ -326,7 +344,9 @@ sub get_ppd_fh($$$$$) {
 	}
 	my ($url);
 	my (@url_list);
-	if ($locale) {
+	if (((defined $opt_r && $opt_r < 5.2) ||
+	     (defined $opt_l && $opt_l ne "")) &&
+	    $locale ne "") {
 	    if ($region) {
 		push @url_list, "gutenprint.$version://$driver/$simplified/${locale}_${region}";
 	    }
@@ -393,11 +413,13 @@ sub update_ppd ($) {
     my ($lingo) = "";
     my ($region) = "";
     my ($valid) = 0;
+    my ($orig_locale) = "";
     while (<ORIG>) {
 	if (/\*StpLocale:/) {
-	    ($locale) = m/^\*StpLocale:\s\"*(.*)\"$/;
+	    ($locale) = m/^\*StpLocale:\s*\"(.*)\"$/;
+	    $orig_locale = $locale;
 	    $valid = 1;
-	} elsif (/\*LanguageVersion/) {
+	} elsif (/^\*LanguageVersion/) {
 	    ($lingo) = m/^\*LanguageVersion:\s*(.*)$/;
 	} elsif (/^\*StpDriverName:/ ) {
 	    ($driver) = m/^\*StpDriverName:\s*\"(.*)\"$/;
@@ -421,18 +443,26 @@ sub update_ppd ($) {
 #	print STDERR "Skipping $ppd_source_filename: not a Gutenprint PPD file\n";
 	return -1;
     }
+    if (defined $opt_l && $opt_l ne "" && lc $opt_l ne "original") {
+	$locale = $opt_l;
+	$orig_locale = $locale;
+    }
     if ($debug & 2) {
 	print "Gutenprint Filename: $filename\n";
-	print "Locale: $locale\n";
+	if ($opt_l) {
+	    print "Locale: $locale (from -l)\n";
+	} else {
+	    print "Locale: $locale\n";
+	}
 	print "Language: $lingo\n";
 	print "Driver: $driver\n";
     }
     if ($locale) {
 	# Split into the language and territory.
-	($locale, $region) = split(/-/, $locale);
+	($locale, $region) = split(/_/, $locale);
     } else {
 	# Split into the language and territory.
-	($locale, $region) = split(/-/, $lingo);
+	($locale, $region) = split(/_/, $lingo);
 	# Convert language into language code.
 	$locale = $languagemappings{"\L$lingo"};
 	if (!defined($locale)) {
@@ -475,7 +505,7 @@ sub update_ppd ($) {
 
     seek(ORIG, 0, 0);
 
-    my ($odt, $oopt, $ores, $odef) = get_ppd_data(ORIG, 1, 0, 0, 1, 0);
+    my ($odt, $oopt, $ores, $odef) = get_ppd_data(ORIG, 1, 0, 1, 1, 0);
     my ($ndt, $nopt, $nres, $ndef, $source_data) = get_ppd_data($source_fd, 1, 1, 1, 1, 1);
 
     # Close original and temporary files...
@@ -492,6 +522,14 @@ sub update_ppd ($) {
     my %new_defaults = %$ndef;
     my %options = %$nopt;
     my %resolution_map = %$nres;
+    my %old_resolution_map = reverse %$ores;
+
+    # Store previous language in the PPD file so that -l original works
+    # correctly.
+
+    if ($orig_locale ne "") {
+	$source_data =~ s/(\*StpLocale:\s*\")(.*)(\")/$1$orig_locale$3/;
+    }
 
     if ($debug & 4) {
 	print "Options (Old->New Default Type):\n";
@@ -518,7 +556,13 @@ sub update_ppd ($) {
 	if (keys %resolution_map) {
 	    print "Resolution Map:\n";
 	    foreach (sort keys %resolution_map) {
-		print "$_: $resolution_map{$_}\n";
+		print "   $_: $resolution_map{$_}\n";
+	    }
+	}
+	if (keys %old_resolution_map) {
+	    print "Old Resolution Map:\n";
+	    foreach (sort keys %old_resolution_map) {
+		print "   $_: $old_resolution_map{$_}\n";
 	    }
 	}
 	print "Non-UI Defaults:\n";
@@ -576,16 +620,31 @@ default_loop:
 		# Check the old setting is valid
 		foreach my $opt (@{$options{$option}}) {
 		    my $def_option = $default_option_value;
-		    if (($def_option eq $opt) ||
-			($option eq "Resolution" &&
-			 (defined $resolution_map{$default_option_value}) &&
-			 ($def_option = $resolution_map{$default_option_value}) eq $opt)) { # Valid option
-			# Set the option in the new PPD
-			$source_data =~ s/\*($default_option).*/*$1:$def_option/m;
-			if ($verbose) {
-			    print "$ppd_source_filename: Set *$default_option to $def_option\n";
+		    my $odef_option = $def_option;
+		    if ($option eq "Resolution" &&
+			defined $old_resolution_map{$def_option}) {
+			if ($debug & 4) {
+			    print "Intermapping old resolution $def_option to $old_resolution_map{$def_option}\n";
 			}
-			next default_loop;
+			$def_option = $old_resolution_map{$def_option};
+		    }
+		    my @dopts = ($def_option);
+		    if ($def_option ne $odef_option) {
+			push @dopts, $odef_option;
+		    }
+
+		    foreach my $dopt (@dopts) {
+			if (($dopt eq $opt) ||
+			    ($option eq "Resolution" &&
+			     (defined $resolution_map{$dopt}) &&
+			     ($dopt = $resolution_map{$dopt}) eq $opt)) { # Valid option
+			    # Set the option in the new PPD
+			    $source_data =~ s/^\*($default_option).*/*$1:$dopt/m;
+			    if ($verbose) {
+				print "$ppd_source_filename: Set *$default_option to $dopt\n";
+			    }
+			    next default_loop;
+			}
 		    }
 		}
 		warn "Warning: $ppd_source_filename: Invalid option: *$default_option: $defaults{$default_option}.  Using default setting $new_defaults{$default_option}.\n";
@@ -664,6 +723,7 @@ sub find_ppd ($$$$) {
 	push @lingos, "C/";
     }
     push @lingos, "en/", "";
+    push @lingos, "Global/";
     my (@bases);
     push @bases, "stp-${drivername}.$version${simplified}";
     push @bases, "${drivername}.$version${simplified}";

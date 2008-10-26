@@ -1,5 +1,5 @@
 /*
- * "$Id: xml.c,v 1.38 2007/05/26 15:53:06 rlk Exp $"
+ * "$Id: xml.c,v 1.42 2008/06/08 15:10:36 rlk Exp $"
  *
  *   XML parser - process Gutenprint XML data with mxml.
  *
@@ -200,18 +200,8 @@ stp_xml_exit(void)
 void
 stp_xml_parse_file_named(const char *name)
 {
-  stp_list_t *dir_list;                  /* List of directories to scan */
-  stp_list_t *file_list;                 /* List of XML files */
+  stp_list_t *file_list = stpi_list_files_on_data_path(name); /* List of XML files */
   stp_list_item_t *item;                 /* Pointer to current list item */
-  if (!(dir_list = stp_list_create()))
-    return;
-  stp_list_set_freefunc(dir_list, stp_list_node_free_data);
-  if (getenv("STP_DATA_PATH"))
-    stp_path_split(dir_list, getenv("STP_DATA_PATH"));
-  else
-    stp_path_split(dir_list, PKGXMLDATADIR);
-  file_list = stp_path_search(dir_list, name);
-  stp_list_destroy(dir_list);
   item = stp_list_get_start(file_list);
   while (item)
     {
@@ -318,7 +308,7 @@ long
 stp_xmlstrtol(const char *textval)
 {
   long val; /* The value to return */
-  val = strtol(textval, (char **)NULL, 10);
+  val = strtol(textval, (char **)NULL, 0);
 
   return val;
 }
@@ -330,7 +320,7 @@ unsigned long
 stp_xmlstrtoul(const char *textval)
 {
   unsigned long val; /* The value to return */
-  val = strtoul(textval, (char **)NULL, 10);
+  val = strtoul(textval, (char **)NULL, 0);
 
   return val;
 }
@@ -345,6 +335,133 @@ stp_xmlstrtod(const char *textval)
   val = strtod(textval, (char **)NULL);
 
   return val;
+}
+
+/*
+ * Convert an encoded text string into a raw.
+ */
+stp_raw_t *
+stp_xmlstrtoraw(const char *textval)
+{
+  size_t tcount;
+  stp_raw_t *raw;
+  unsigned char *answer;
+  unsigned char *aptr;
+  if (! textval || *textval == 0)
+    return NULL;
+  tcount = strlen(textval);
+  raw = stp_zalloc(sizeof(stp_raw_t));
+  answer = stp_malloc(tcount + 1); /* Worst case -- we may not need it all */
+  aptr = answer;
+  raw->data = answer;
+  while (*textval)
+    {
+      if (*textval != '\\')
+	{
+	  *aptr++ = *textval++;
+	  raw->bytes++;
+	}
+      else
+	{
+	  textval++;
+	  if (textval[0] >= '0' && textval[0] <= '3' &&
+	      textval[1] >= '0' && textval[1] <= '7' &&
+	      textval[2] >= '0' && textval[2] <= '7')
+	    {
+	      *aptr++ = (((textval[0] - '0') << 6) +
+			 ((textval[1] - '0') << 3) +
+			 ((textval[2] - '0') << 0));
+	      raw->bytes++;
+	      textval += 3;
+	    }
+	  else if (textval[0] == '\0' || textval[1] == '\0' || textval[2] == '\0')
+	    break;
+	  else
+	    textval += 3;
+	}
+    }
+  *aptr = '\0';
+  return raw;
+}
+
+char *
+stp_rawtoxmlstr(const stp_raw_t *raw)
+{
+  if (raw && raw->bytes > 0)
+    {
+      int i;
+      const unsigned char *data = (const unsigned char *) (raw->data);
+      char *answer = stp_malloc((raw->bytes * 4) + 1); /* \012 */
+      unsigned char *aptr = (unsigned char *) answer;
+      for (i = 0; i < raw->bytes; i++)
+	{
+	  if (data[i] > ' ' && data[i] < '\177' && data[i] != '\\' &&
+	      data[i] != '<' && data[i] != '>' && data[i] != '&')
+	    *aptr++ = data[i];
+	  else
+	    {
+	      *aptr++ = '\\';
+	      *aptr++ = '0' + ((data[i] & '\300') >> 6);
+	      *aptr++ = '0' + ((data[i] & '\070') >> 3);
+	      *aptr++ = '0' + ((data[i] & '\007') >> 0);
+	    }
+	}
+      *aptr = '\0';
+      return answer;
+    }
+  return NULL;
+}
+
+char *
+stp_strtoxmlstr(const char *str)
+{
+  if (str && strlen(str) > 0)
+    {
+      int i;
+      int bytes = strlen(str);
+      const unsigned char *data = (const unsigned char *) (str);
+      char *answer = stp_malloc((bytes * 4) + 1); /* "\012" is worst case */
+      unsigned char *aptr = (unsigned char *) answer;
+      for (i = 0; i < bytes; i++)
+	{
+	  if (data[i] > ' ' && data[i] < '\177' && data[i] != '\\' &&
+	      data[i] != '<' && data[i] != '>' && data[i] != '&')
+	    *aptr++ = data[i];
+	  else
+	    {
+	      *aptr++ = '\\';
+	      *aptr++ = '0' + ((data[i] & '\300') >> 6);
+	      *aptr++ = '0' + ((data[i] & '\070') >> 3);
+	      *aptr++ = '0' + ((data[i] & '\007') >> 0);
+	    }
+	}
+      *aptr = '\0';
+      return answer;
+    }
+  return NULL;
+}
+
+void
+stp_prtraw(const stp_raw_t *raw, FILE *fp)
+{
+  if (raw && raw->bytes > 0)
+    {
+      int i;
+      const unsigned char *data = (const unsigned char *) (raw->data);
+      for (i = 0; i < raw->bytes; i++)
+	{
+	  if (data[i] > ' ' && data[i] < '\177' && data[i] != '\\' &&
+	      data[i] != '<' && data[i] != '>' && data[i] != '&')
+	    fputc(data[i], fp);
+	  else
+	    {
+	      fputc('\\', fp);
+	      fputc('0' + ((data[i] & '\300') >> 6), fp);
+	      fputc('0' + ((data[i] & '\070') >> 3), fp);
+	      fputc('0' + ((data[i] & '\007') >> 0), fp);
+	    }
+	}
+    }
 }
 
 

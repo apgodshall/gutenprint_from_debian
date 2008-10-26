@@ -6,48 +6,63 @@ Getopt::Long::Configure("bundling", "no_ignore_case", "pass_through");
 use strict;
 
 my $valgrind = 0;
-my $cachegrind = 0;
+my $callgrind = 0;
 my $gdb_attach = 0;
-my $calc_md5 = 0;
+my $calc_md5_file = undef;
+my $calc_md5_dir = undef;
 my $dontrun = 0;
 my $retval = 0;
 my $testpattern_command;
 my @printer_list = ();
 my @special_options = ();
-my @standard_options = qw(InkType DitherAlgorithm Duplex);
+my @standard_options = qw(InkType InkSet DitherAlgorithm Duplex MediaType InputSlot ColorCorrection ImageType FullBleed Quality UseGloss Weave RawChannels PrintingDirection Density CyanDensity);
 my $global_status = 1;
+my $run_installed = 0;
+my $use_min_res = 0;
 my $output = undef;
 
 my @extras = ();
+my @job_extras = ();
 my @messages = ();
 my @global_messages = ();
+my @families = ();
 my %stpdata = ();
 my %models_found = ();
 my %models;
 my %families;
 my $skip_duplicate_printers = 0;
 my $std_pages = 1;
+my $skip_resolutions = 0;
+my $quiet = 0;
+my $single = 0;
 
 my @default_options = ();
-my %base_settings = ("DitherAlgorithm" => "Fast",
-		     "ColorCorrection" => "Raw");
+my %base_settings = ("DitherAlgorithm" => "Fast");
+
+my %param_types;
+my %param_classes;
+my %param_levels;
+my %stp_float_values;
 
 GetOptions("v+"  => \$valgrind,
-	   "c"   => \$cachegrind,
+	   "c"   => \$callgrind,
 	   "g"   => \$gdb_attach,
 	   "n"   => \$dontrun,
 	   "p:i" => \$std_pages,
 	   "s!"  => \$skip_duplicate_printers,
+	   "S!"  => \$single,
+	   "i!"  => \$run_installed,
+	   "r!"  => \$skip_resolutions,
+	   "R+"  => \$use_min_res,
+	   "q!"  => \$quiet,
 	   "o=s" => \@special_options,
+	   "f=s" => \@families,
 	   "O=s" => \$output,
 	   "d=s" => \@default_options,
-	   "m:s" => \$calc_md5);
+	   "m:s" => \$calc_md5_dir,
+	   "M:s" => \$calc_md5_file);
 
 my $pages = $std_pages;
-
-if (defined $calc_md5 && $calc_md5 eq "0") {
-    $calc_md5 = undef;
-}
 
 if (! @special_options) {
     @special_options = @standard_options;
@@ -65,39 +80,64 @@ foreach my $opt (@default_options) {
 my $pwd = `pwd`;
 chomp $pwd;
 
-if (! defined $ENV{"STP_DATA_PATH"}) {
-    $ENV{"STP_DATA_PATH"} = "${pwd}/../main";
+if (! $run_installed && ! defined $ENV{"STP_DATA_PATH"}) {
+    $ENV{"STP_DATA_PATH"} = "${pwd}/../xml";
 }
 
 if (! defined $ENV{"STP_MODULE_PATH"}) {
     $ENV{"STP_MODULE_PATH"} = "${pwd}/../main:${pwd}/../main/.libs";
 }
 
-sub set_opt($$) {
-    my ($opt, $val) = @_;
-    push @extras, "parameter \"$opt\" \"$val\";\n";
+sub set_opt($$$) {
+    my ($opt, $val, $printer) = @_;
+    my ($type) = $param_types{$printer}{$opt};
+    if ($type == 1) {
+	push @extras, "parameter_int \"$opt\" $val;\n";
+    } elsif ($type == 2) {
+	my ($xval) = $val;
+	if ($val =~ /true/i) {
+	    $xval = 1;
+	} elsif ($val =~ /false/i) {
+	    $xval = 0;
+	}
+	push @extras, "parameter_bool \"$opt\" $xval;\n";
+    } elsif ($type == 3) {
+	push @extras, "parameter_float \"$opt\" $val;\n";
+    } elsif ($type == 4) {
+	push @extras, "parameter_curve \"$opt\" \"$val\";\n";
+    } else {
+	push @extras, "parameter \"$opt\" \"$val\";\n";
+    } 
 }
 
 sub set_message($) {
     my ($message) = @_;
-    push @messages, "message \"$message\";\n";
+    push @messages, "message \"$message\";\n" if (! $quiet);
 }
 
 sub set_global_message($) {
     my ($message) = @_;
-    push @global_messages, "message \"$message\";\n";
+    push @global_messages, "message \"$message\";\n" if (! $quiet);
 }
 
-sub print_one_testpattern($) {
-    my ($printer) = @_;
+sub print_one_testpattern($;$) {
+    my ($printer, $raw) = @_;
     my $stuff = join "", @global_messages;
+    $stuff .= join "", @job_extras;
     foreach my $page (0..$pages - 1) {
     	$stuff .= "printer \"$printer\";\n";
+	$stuff .= "parameter \"PageSize\" \"Auto\";\n";
 	$stuff .= join "", @extras, @messages;
-	if ($pages > 1) {
+	if (! $quiet && $pages > 1) {
 	    $stuff .= "message \"(page $page)\";\n";
 	}
 	$stuff .= "parameter_int \"PageNumber\" $page;\n";
+	if ($page == 0) {
+	    $stuff .= "start_job;\n";
+	}
+	if ($page == $pages - 1) {
+	    $stuff .= "end_job;\n";
+	}
 	$stuff .= << 'EOF';
 hsize 0.1;
 vsize 0.1;
@@ -105,6 +145,33 @@ left 0.15;
 top 0.15;
 blackline 0;
 steps 16;
+EOF
+	if ($raw > 0) {
+	    $stuff .= "mode extended $raw 16;\n";
+	    $stuff .= "xpattern ";
+	    for (my $i = 0; $i < $raw; $i++) {
+		$stuff .= "0.0 0.0 1.0  ";
+	    }
+	    $stuff .= ";\n";
+	    for (my $i = 0; $i < $raw; $i++) {
+		$stuff .= "xpattern ";
+		for (my $j = 0; $j < $raw; $j++) {
+		    if ($i == $j) {
+			$stuff .= "0.0 1.0 1.0  ";
+		    } else {
+			$stuff .= "0.0 0.0 1.0  ";
+		    }
+		}
+		$stuff .= ";\n";
+	    }
+	    $stuff .= "xpattern ";
+	    for (my $i = 0; $i < $raw; $i++) {
+		$stuff .= "0.0 0.0 1.0  ";
+	    }
+	    $stuff .= ";\n";
+	    $stuff .= "end;\n";
+	} else {
+	    $stuff .= << 'EOF';
 mode rgb 8;
 pattern 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0  0.0 0.0 1.0  0.0 0.0 1.0  0.0 0.0 1.0 ;
 pattern 1.0 1.0 1.0 1.0 1.0 0.0 0.0 1.0  0.0 1.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0;
@@ -154,6 +221,7 @@ pattern 1.0 1.0 1.0 1.0 1.0 0.0 0.9 1.0  0.0 0.1 1.0 0.0 0.1 1.0 0.0 0.0 1.0;
 pattern 0.0 0.0 1.0 1.0 1.0 0.0 0.9 1.0  0.0 0.1 1.0 0.0 0.1 1.0 0.0 0.0 1.0;
 end;
 EOF
+	}
     }
     return $stuff;
 }
@@ -188,30 +256,100 @@ sub do_print {
     }
 }
 
+sub do_output($) {
+    my ($outkey) = @_;
+    if (defined $output || defined $calc_md5_dir ||
+	defined $calc_md5_file) {
+	my $md5_cmd;
+	my $outbase = "${outkey}.prn";
+	my $outfile = "$output/$outbase";
+	if (defined $calc_md5_file) {
+	    $md5_cmd = "md5sum -b | sed 's/-/$outbase/' >> '$calc_md5_file'";
+	} elsif (defined $calc_md5_dir) {
+	    my $md5_dir = $calc_md5_dir;
+	    if (defined $calc_md5_dir && $calc_md5_dir eq "") {
+		$md5_dir = $output;
+	    }
+	    my $md5file = "$md5_dir/${outkey}.md5";
+	    if (! $md5_dir) {
+		$md5file = "${outkey}.md5";
+	    }
+	    $md5_cmd = "md5sum -b | sed 's/-/$outbase/' > '$md5file'";
+	}
+	if ($output && $md5_cmd ne "") {
+	    push @job_extras, "output \"|tee '$outfile' | $md5_cmd\";\n";
+	} elsif ($output) {
+	    push @job_extras, "output \"$outfile\";\n";
+	} else {
+	    push @job_extras, "output \"|$md5_cmd\";\n";
+	}
+    }
+}
 
-sub do_printer {
+sub build_list($$) {
+    my ($keys, $printer) = @_;
+    my (@keys) = split (/,/, $keys);
+    my ($key) = $keys[0];
+    my ($rest);
+    my (@stuff);
+    if ($#keys > 0) {
+	$rest = join ",", @keys[1..$#keys];
+	@stuff = build_list($rest, $printer);
+    }
+    my (@tmp);
+    if ($param_types{$printer}{$key} == 3) {
+	my ($minv) = $stp_float_values{$printer}{'MINVAL'}{$key};
+	my ($defv) = $stp_float_values{$printer}{'DEFVAL'}{$key};
+	my ($maxv) = $stp_float_values{$printer}{'MAXVAL'}{$key};
+	push @tmp, $minv;
+	push @tmp, ($minv + $defv) / 2.0;
+	push @tmp, $defv;
+	push @tmp, ($defv + $maxv) / 2.0;
+	push @tmp, $maxv;
+    } elsif (defined($param_types{$printer}{$key})) {
+	@tmp = keys %{$stpdata{$printer}{$key}};
+    }
+    if (! @tmp) {
+	return @stuff;
+    } elsif (! @stuff) {
+	return @tmp;
+    } else {
+	my (@answer);
+	foreach my $i (@tmp) {
+	    foreach my $j (@stuff) {
+		push @answer, "$i,$j";
+	    }
+	}
+	return @answer;
+    }
+    return @tmp;
+}
+
+sub build_key($$) {
+    my ($keys, $printer) = @_;
+    my (@keys) = split (/,/, $keys);
+    my (@answer) = grep { defined $param_types{$printer}{$_} } @keys;
+    return join ",", @answer;
+}
+
+sub do_printer($$) {
     my ($printer, $fh) = @_;
     my $tmp;
     my $min_res_name;
     my $min_res_value = 0;
     my $first_time = 1;
-    my $model_id = $models{$printer};
-    my $family_id = $families{$printer};
     my $key;
     my %opt_vals = {};
-    if ($skip_duplicate_printers && $models_found{$family_id}{$model_id}) {
-	return;
-    } else {
-	$models_found{$family_id}{$model_id} = 1;
-    }
     $tmp = $stpdata{$printer}{'Resolution'};
     my (@resolutions) = grep {$_ ne 'None' } keys %$tmp;
     $tmp = $stpdata{$printer}{'PrintingMode'};
     my (@printing_modes) = grep {$_ ne 'None' } keys %$tmp;
     foreach $key (@special_options) {
-	$tmp = $stpdata{$printer}{$key};
-	my (@tmp) = grep {$_ ne 'None' } keys %$tmp;
-	$opt_vals{$key} = \@tmp;
+	my $nkey = build_key($key, $printer);
+	if ($nkey ne "") {
+	    my (@vals) = build_list($nkey, $printer);
+	    $opt_vals{$nkey} = \@vals;
+	}
     }
     foreach $tmp (sort @resolutions) {
 	my $res_value = ($stpdata{$printer}{'x_resolution'}{$tmp} *
@@ -221,97 +359,91 @@ sub do_printer {
 	    $min_res_name = $tmp;
 	}
     }
+    if ($use_min_res > 1) {
+	@resolutions = ($min_res_name);
+    }
     # We want to do all resolutions and all ink types in both color modes.
     # We don't need to do both resolutions and ink types.
     my $pmode;
     foreach $pmode (@printing_modes) {
 	my ($resolution);
 	$pages = $std_pages;
-	foreach $resolution (@resolutions) {
-	    @extras = ();
-	    @messages = ();
-	    @global_messages = ();
-	    if ($first_time) {
-		set_global_message("$printer\n");
-		$first_time = 0;
+	if (! $skip_resolutions) {
+	    foreach $resolution (@resolutions) {
+		@extras = ();
+		@job_extras = ();
+		@messages = ();
+		@global_messages = ();
+		if ($first_time) {
+		    set_global_message("$printer\n");
+		    $first_time = 0;
+		}
+		set_opt("PrintingMode", $pmode, $printer);
+		set_opt("Resolution", $resolution, $printer);
+		map { set_opt($_, $base_settings{$_}, $printer)} keys %base_settings;
+		do_output("${printer}_PrintingMode_${pmode}_Resolution_${resolution}");
+		set_message("    ${pmode}+${resolution}");
+		my $output = print_one_testpattern($printer);
+		do_print( $output, $fh );
 	    }
-	    set_opt("PrintingMode", $pmode);
-	    set_opt("Resolution", $resolution);
-	    map { set_opt($_, $base_settings{$_})} keys %base_settings;
-	    if (defined $output || defined $calc_md5) {
-		my $outkey = "${printer}_PrintingMode_${pmode}_Resolution_${resolution}";
-		my $md5_dir = $calc_md5;
-		if (defined $calc_md5 && $calc_md5 eq "") {
-		    $md5_dir = $output;
-		}
-		my $outbase = "${outkey}.prn";
-		my $outfile = "$output/$outbase";
-		my $md5file = "$md5_dir/${outkey}.md5";
-		if (! $md5_dir) {
-		    $md5file = "${outkey}.md5";
-		}
-		if ($output && $calc_md5) {
-		    push @extras, "output \"|tee '$outfile' | md5sum -b | sed 's/-/$outbase/' > '$md5file'\";\n";
-		} elsif ($output) {
-		    push @extras, "output \"$outfile\";\n";
-		} else {
-		    push @extras, "output \"|md5sum -b | sed 's/-/$outbase/' > '$md5file'\";\n";
-		}
-	    }
-	    set_message("    ${pmode}+${resolution}");
-	    my $output = print_one_testpattern($printer);
-	    do_print( $output, $fh );
 	}
-	foreach $key (@special_options) {
+	foreach $key (keys %opt_vals) {
+	    next if ($key eq "RawChannels" && $pmode ne "Color");
+	    my (@subkeys) = split (/,/, $key);
 	    $tmp = $opt_vals{$key};
-	    my (@opts) = @$tmp;
-	    if ($#opts >= 1) {
+	    if (defined $tmp && $tmp >= 1) {
+		my (@opts) = @$tmp;
 		my $opt;
+		my $rawval;
 		foreach $opt (@opts) {
-		    my ($out_file);
+		    my (@subopts) = split (/,/, $opt);
 		    @extras = ();
+		    @job_extras = ();
 		    @messages = ();
 		    @global_messages = ();
 		    if ($first_time) {
 			set_global_message("$printer\n");
 			$first_time = 0;
 		    }
-		    set_opt("PrintingMode", $pmode);
-		    set_opt("Resolution", $min_res_name);
-		    set_opt($key, $opt);
+		    set_opt("PrintingMode", $pmode, $printer);
+		    if ($use_min_res) {
+			set_opt("Resolution", $min_res_name, $printer);
+		    }
+		    my (@mvals);
+		    my (@ovals);
+		    map {
+			my $k = $subkeys[$_];
+			my $v = $subopts[$_];
+			if ($k eq "RawChannels") {
+			    $rawval = $v;
+			} else {
+			    set_opt($k, $v, $printer);
+			}
+			push @mvals, "${k}_${v}";
+			push @ovals, "${k}=${v}";
+		    } (0..$#subkeys);
+		    # FIXME! need to handle Duplex as a subkey
 		    map {
 			if ($key ne $_) {
-			    set_opt($_, $base_settings{$_});
+			    set_opt($_, $base_settings{$_}, $printer);
 			    if ($key eq "Duplex") {
-				set_opt("JobMode", "Job");
+				set_opt("JobMode", "Job", $printer);
 				$pages = 4;
 			    } else {
 				$pages = $std_pages;
 			    }
 			}
 		    } keys %base_settings;
-		    if (defined $output || defined $calc_md5) {
-			my $outkey = "${printer}_PrintingMode_${pmode}_Resolution_${min_res_name}_${key}_${opt}";
-			my $md5_dir = $calc_md5;
-			if (defined $calc_md5 && $calc_md5 eq "") {
-			    $md5_dir = $output;
-			}
-			my $outbase = "${outkey}.prn";
-			my $outfile = "$output/$outbase";
-			my $md5file = "$md5_dir/${outkey}.md5";
-			if (! $md5_dir) {
-			    $md5file = "${outkey}.md5";
-			}
-			if (defined $output && defined $calc_md5) {
-			    push @extras, "output \"|tee '$outfile' | md5sum -b | sed 's/-/$outbase/' > '$md5file'\";\n";
-			} elsif ($output) {
-			    push @extras, "output \"$outfile\";\n";
-			} else {
-			    push @extras, "output \"|md5sum -b | sed 's/-/$outbase/' > '$md5file'\";\n";
-			}
+		    my ($mstring) = join "_", @mvals;
+		    my ($ostring) = join "+", @ovals;
+		    if ($use_min_res) {
+			do_output("${printer}_PrintingMode_${pmode}_Resolution_${min_res_name}_${mstring}");
+			set_message("    ${ostring}+${pmode}+${min_res_name}");
+		    } else {
+			do_output("${printer}_PrintingMode_${pmode}_${mstring}");
+			set_message("    ${ostring}+${pmode}");
 		    }
-		    set_message("    ${key}=${opt}+${pmode}+${min_res_name}");
-		    my $output = print_one_testpattern($printer);
+		    my $output = print_one_testpattern($printer, $rawval);
 		    do_print( $output, $fh );
 		}
 	    }
@@ -319,14 +451,27 @@ sub do_printer {
     }
 }
 
+my (@nprinter_list);
+foreach my $printer (@printer_list) {
+    my $model_id = $models{$printer};
+    my $family_id = $families{$printer};
+    if (($skip_duplicate_printers && $models_found{$family_id}{$model_id}) ||
+	(@families && ! grep { $family_id eq $_ } @families)) {
+    } else {
+	$models_found{$family_id}{$model_id} = 1;
+	push @nprinter_list, $printer;
+    }
+}
+@printer_list = @nprinter_list;
+
 if ($dontrun) {
     map { do_printer($_, \*STDOUT) } @printer_list;
     exit 0;
 } else {
     my $valgrind_command;
     my $valopts;
-    if ($cachegrind) {
-	$valopts = '--tool=cachegrind';
+    if ($callgrind) {
+	$valopts = '--tool=callgrind --dump-instr=yes --trace-jump=yes';
 	$valgrind = 4;
     } elsif ($valgrind) {
 	$valopts = '--tool=memcheck';
@@ -348,18 +493,38 @@ if ($dontrun) {
 	mkdir $output || die "Can't create directory $output: $!\n";
     }
 
-    if (defined $calc_md5 && $calc_md5 ne "" && ! -d $calc_md5) {
-	mkdir $calc_md5 || die "Can't create directory $calc_md5: $!\n";
+    if (defined $calc_md5_dir && $calc_md5_dir ne "" && ! -d $calc_md5_dir) {
+	mkdir $calc_md5_dir || die "Can't create directory $calc_md5_dir: $!\n";
+    }
+
+    if (defined $calc_md5_file) {
+	unlink $calc_md5_file;
+	system "touch $calc_md5_file";
     }
 
     my $status = 1;
     my ($suppress);
-    if (! defined $output && ! defined $calc_md5) { $suppress = '-n'; }
-    $testpattern_command = "$valgrind_command ./testpattern $suppress";
-    open TESTPATTERN, "|$testpattern_command" or
-	die "Can't run $testpattern_command: $!\n";
-    map { do_printer($_, \*TESTPATTERN) } @printer_list;
-    $status = close TESTPATTERN;
+    if (! defined $output && ! defined $calc_md5_dir &&
+	! defined $calc_md5_file) {
+	$suppress = '-n';
+    }
+    my ($qopt) = $quiet ? "-q" : "";
+    $testpattern_command = "$valgrind_command ./testpattern $suppress $qopt";
+    if ($single) {
+	foreach my $printer (@printer_list) {
+	    open TESTPATTERN, "|$testpattern_command" or
+		die "Can't run $testpattern_command: $!\n";
+	    do_printer($printer, \*TESTPATTERN);
+	    $status |= close TESTPATTERN;
+	    $status |= ($? & 255);
+	    last if ($? & 255);
+	}
+    } else {
+	open TESTPATTERN, "|$testpattern_command" or
+	    die "Can't run $testpattern_command: $!\n";
+	map { do_printer($_, \*TESTPATTERN) } @printer_list;
+	$status = close TESTPATTERN;
+    }
     if ($status) {
 	exit 0;
     } else {

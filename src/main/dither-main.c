@@ -1,5 +1,5 @@
 /*
- * "$Id: dither-main.c,v 1.59 2008/02/18 14:20:17 rlk Exp $"
+ * "$Id: dither-main.c,v 1.61 2008/07/04 14:29:28 rlk Exp $"
  *
  *   Dither routine entrypoints
  *
@@ -94,7 +94,7 @@ static const stp_parameter_t dither_parameters[] =
        "paper or smears; increase the density if black "
        "regions are not solid."),
     STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
-    STP_PARAMETER_LEVEL_ADVANCED, 0, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 0, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
     "DitherAlgorithm", N_("Dither Algorithm"), N_("Screening Adjustment"),
@@ -105,7 +105,7 @@ static const stp_parameter_t dither_parameters[] =
        "Fast and Very Fast are considerably faster, and work well for text and line art.\n"
        "Hybrid Floyd-Steinberg generally produces inferior output."),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_OUTPUT,
-    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, -1, 1, 0
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
 };
 
@@ -254,6 +254,8 @@ stpi_set_dither_function(stp_vars_t *v)
 	  (d->x_aspect > 2 || d->y_aspect > 2))
 	d->stpi_dither_type = D_ADAPTIVE_HYBRID;
     }
+  if (d->stpi_dither_type == -1)
+    d->stpi_dither_type = D_ADAPTIVE_HYBRID;
   switch (d->stpi_dither_type)
     {
     case D_PREDITHERED:

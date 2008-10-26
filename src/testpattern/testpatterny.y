@@ -1,5 +1,5 @@
 /*
- * "$Id: testpatterny.y,v 1.30 2008/01/27 21:44:21 rlk Exp $"
+ * "$Id: testpatterny.y,v 1.32 2008/06/08 01:03:51 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -105,6 +105,7 @@ find_color(const char *name)
 %token PRINTER
 %token PARAMETER
 %token PARAMETER_INT
+%token PARAMETER_BOOL
 %token PARAMETER_FLOAT
 %token PARAMETER_CURVE
 %token DENSITY
@@ -132,6 +133,8 @@ find_color(const char *name)
 %token PAGESIZE
 %token MESSAGE
 %token OUTPUT
+%token START_JOB
+%token END_JOB
 %token END
 
 %start Thing
@@ -342,6 +345,15 @@ parameter_int: PARAMETER_INT tSTRING tINT
 	}
 ;
 
+parameter_bool: PARAMETER_BOOL tSTRING tINT
+	{
+	  if (getenv("STP_TESTPATTERN_DEBUG"))
+	    fprintf(stderr, ">>>parameter_bool %s %d\n", $2, $3);
+	  stp_set_boolean_parameter(global_vars, $2, $3);
+	  free($2);
+	}
+;
+
 parameter_float: PARAMETER_FLOAT tSTRING NUMBER
 	{
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
@@ -365,7 +377,7 @@ parameter_curve: PARAMETER_CURVE tSTRING tSTRING
 	}
 ;
 
-parameter: parameter_string | parameter_int | parameter_float | parameter_curve
+parameter: parameter_string | parameter_int | parameter_float | parameter_curve | parameter_bool
 ;
 density: DENSITY NUMBER
 	{
@@ -591,9 +603,11 @@ message: A_Message
 
 Output0: OUTPUT
 	{
+	  close_output();
 	  if (global_output)
 	    free(global_output);
 	  global_output = NULL;
+	  output = stdout;
 	}
 
 Output1: OUTPUT tSTRING
@@ -607,9 +621,18 @@ A_Output: Output0 | Output1
 output: A_Output
 ;
 
+start_job: START_JOB
+	{ start_job = 1; }
+;
+
+end_job: END_JOB
+	{ end_job = 1; }
+;
+
 A_Rule: gamma | channel_gamma | level | channel_level | global_gamma | steps
 	| ink_limit | printer | parameter | density | top | left | hsize
-	| vsize | blackline | noscale | inputspec | page_size | message | output
+	| vsize | blackline | noscale | inputspec | page_size | message
+	| output | start_job | end_job
 ;
 
 Rule: A_Rule SEMI

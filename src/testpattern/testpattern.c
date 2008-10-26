@@ -1,5 +1,5 @@
 /*
- * "$Id: testpattern.c,v 1.48 2008/01/27 21:44:21 rlk Exp $"
+ * "$Id: testpattern.c,v 1.54 2008/07/16 23:59:23 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -51,11 +51,13 @@ static stp_image_status_t Image_get_row(stp_image_t *image,
 					unsigned char *data,
 					size_t byte_limit, int row);
 static int Image_height(stp_image_t *image);
+static void Image_reset(stp_image_t *image);
 static int Image_width(stp_image_t *image);
+static int Image_is_valid = 0;
 static stp_image_t theImage =
 {
   Image_init,
-  NULL,				/* reset */
+  Image_reset,
   Image_width,
   Image_height,
   Image_get_row,
@@ -63,7 +65,7 @@ static stp_image_t theImage =
   Image_conclude,
   NULL
 };
-stp_vars_t *global_vars;
+stp_vars_t *global_vars = NULL;
 
 double global_levels[STP_CHANNEL_LIMIT];
 double global_gammas[STP_CHANNEL_LIMIT];
@@ -89,7 +91,12 @@ int global_use_raw_cmyk;
 int global_did_something;
 int global_noscale = 0;
 int global_suppress_output = 0;
+int global_quiet = 0;
 char *global_output = NULL;
+FILE *output = NULL;
+int write_to_process = 0;
+int start_job = 0;
+int end_job = 0;
 
 static testpattern_t *static_testpatterns;
 
@@ -182,6 +189,19 @@ writefunc(void *file, const char *buf, size_t bytes)
     }
 }
 
+void
+close_output(void)
+{
+  if (output && output != stdout)
+    {
+      if (write_to_process)
+	(void) pclose(output);
+      else
+	(void) fclose(output);
+      output = NULL;
+    }
+}
+
 static void
 initialize_global_parameters(void)
 {
@@ -222,6 +242,8 @@ initialize_global_parameters(void)
   if (global_printer)
     free(global_printer); /* Allocated with strdup() */
   global_printer = NULL;
+  start_job = 0;
+  end_job = 0;
 }
 
 static int
@@ -237,8 +259,6 @@ do_print(void)
   int count;
   int i;
   char tmp[32];
-  FILE *output = stdout;
-  int write_to_process = 0;
 
   initialize_global_parameters();
   global_vars = stp_vars_create();
@@ -279,6 +299,7 @@ do_print(void)
 	output = NULL;
       else if (global_output[0] == '|')
 	{
+	  close_output();
 	  write_to_process = 1;
 	  output = popen(global_output+1, "w");
 	  if (! output)
@@ -291,6 +312,7 @@ do_print(void)
 	}
       else
 	{
+	  close_output();
 	  output = fopen(global_output, "wb");
 	  if (! output)
 	    {
@@ -301,8 +323,6 @@ do_print(void)
 	  global_output = NULL;
 	}
     }
-  else
-    output = stdout;
   stp_set_printer_defaults(v, the_printer);
   stp_set_outfunc(v, writefunc);
   stp_set_errfunc(v, writefunc);
@@ -339,6 +359,18 @@ do_print(void)
 	  int val = stp_get_int_parameter(global_vars, p->name);
 	  stp_set_int_parameter(v, p->name, val);
 	}
+      else if (p->p_type == STP_PARAMETER_TYPE_BOOLEAN &&
+	       stp_check_boolean_parameter(global_vars, p->name, STP_PARAMETER_ACTIVE))
+	{
+	  int val = stp_get_boolean_parameter(global_vars, p->name);
+	  stp_set_boolean_parameter(v, p->name, val);
+	}
+      else if (p->p_type == STP_PARAMETER_TYPE_CURVE &&
+	       stp_check_curve_parameter(global_vars, p->name, STP_PARAMETER_ACTIVE))
+	{
+	  const stp_curve_t *val = stp_get_curve_parameter(global_vars, p->name);
+	  stp_set_curve_parameter(v, p->name, val);
+	}
       else if (p->p_type == STP_PARAMETER_TYPE_DOUBLE &&
 	       stp_check_float_parameter(global_vars, p->name, STP_PARAMETER_ACTIVE))
 	{
@@ -349,6 +381,16 @@ do_print(void)
   stp_set_page_width(v, stp_get_page_width(global_vars));
   stp_set_page_height(v, stp_get_page_height(global_vars));
   stp_parameter_list_destroy(params);
+  if (stp_check_string_parameter(v, "PageSize", STP_PARAMETER_ACTIVE) &&
+      !strcmp(stp_get_string_parameter(v, "PageSize"), "Auto"))
+    {
+      stp_parameter_t desc;
+      stp_describe_parameter(v, "PageSize", &desc);
+      if (desc.p_type == STP_PARAMETER_TYPE_STRING_LIST)
+	stp_set_string_parameter(v, "PageSize", desc.deflt.str);
+      stp_parameter_description_destroy(&desc);
+    }
+  stp_set_printer_defaults_soft(v, the_printer);
 
   stp_get_imageable_area(v, &left, &right, &bottom, &top);
   stp_describe_resolution(v, &x, &y);
@@ -379,18 +421,21 @@ do_print(void)
   stp_set_top(v, top);
 
   stp_merge_printvars(v, stp_printer_get_defaults(the_printer));
+  if (start_job)
+    {
+      stp_start_job(v, &theImage);
+      start_job = 0;
+    }
   if (stp_print(v, &theImage) != 1)
     return 2;
+  if (end_job)
+    {
+      stp_end_job(v, &theImage);
+      end_job = 0;
+    }
   stp_vars_destroy(v);
   stp_free(static_testpatterns);
   static_testpatterns = NULL;
-  if (output && output != stdout)
-    {
-      if (write_to_process)
-	(void) pclose(output);
-      else
-	(void) fclose(output);
-    }
   return 0;
 }
 
@@ -402,19 +447,24 @@ main(int argc, char **argv)
   int global_status = 0;
   while (1)
     {
-      c = getopt(argc, argv, "n");
+      c = getopt(argc, argv, "nq");
       if (c == -1)
 	break;
       switch (c)
 	{
 	case 'n':
 	  global_suppress_output = 1;
+	  break;
+	case 'q':
+	  global_quiet = 1;
+	  break;
 	default:
 	  break;
 	}
     }
 
   stp_init();
+  output = stdout;
   while (1)
     {
       status = do_print();
@@ -423,6 +473,7 @@ main(int argc, char **argv)
       else if (status != 0)
 	global_status = 1;
     }
+  close_output();
   return global_status;
 }
 
@@ -969,6 +1020,11 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 	      size_t byte_limit, int row)
 {
   int depth = global_channel_depth;
+  if (! Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_get_row with invalid image!\n");
+      abort();
+    }
   if (static_testpatterns[0].type == E_IMAGE)
     {
       testpattern_t *t = &(static_testpatterns[0]);
@@ -979,7 +1035,8 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 	  fprintf(stderr, "Read failed!\n");
 	  return STP_IMAGE_STATUS_ABORT;
 	}
-      fprintf(stderr, ".");
+      if (!global_quiet)
+	fprintf(stderr, ".");
     }
   else
     {
@@ -991,7 +1048,8 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 		       global_printer_width, global_steps, depth,
 		       global_bit_depth / 8);
 	  previous_band = band;
-	  fprintf(stderr, ".");
+	  if (!global_quiet)
+	    fprintf(stderr, ".");
 	}
       else if (row == global_printer_height - 1)
 	fill_black(data, global_printer_width, global_steps,
@@ -1005,7 +1063,8 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 		       global_printer_width, global_steps, depth,
 		       global_bit_depth / 8);
 	  previous_band = band;
-	  fprintf(stderr, ".");
+	  if (!global_quiet)
+	    fprintf(stderr, ".");
 	}
       else
 	fill_pattern(&(static_testpatterns[band]), data,
@@ -1018,6 +1077,11 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 static int
 Image_width(stp_image_t *image)
 {
+  if (! Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_width with invalid image!\n");
+      abort();
+    }
   if (static_testpatterns[0].type == E_IMAGE)
     return static_testpatterns[0].d.image.x;
   else
@@ -1027,6 +1091,11 @@ Image_width(stp_image_t *image)
 static int
 Image_height(stp_image_t *image)
 {
+  if (! Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_height with invalid image!\n");
+      abort();
+    }
   if (static_testpatterns[0].type == E_IMAGE)
     return static_testpatterns[0].d.image.y;
   else
@@ -1036,17 +1105,46 @@ Image_height(stp_image_t *image)
 static void
 Image_init(stp_image_t *image)
 {
+  if (Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_init with already valid image!\n");
+      abort();
+    }
+  Image_is_valid = 1;
+ /* dummy function */
+}
+
+static void
+Image_reset(stp_image_t *image)
+{
+  if (!Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_reset with invalid image!\n");
+      abort();
+    }
  /* dummy function */
 }
 
 static void
 Image_conclude(stp_image_t *image)
 {
-  fprintf(stderr, "\n");
+  if (! Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_conclude with invalid image!\n");
+      abort();
+    }
+  Image_is_valid = 0;
+  if (!global_quiet)
+    fprintf(stderr, "\n");
 }
 
 static const char *
 Image_get_appname(stp_image_t *image)
 {
+  if (! Image_is_valid)
+    {
+      fprintf(stderr, "Calling Image_get_appname with invalid image!\n");
+      abort();
+    }
   return "Test Pattern";
 }

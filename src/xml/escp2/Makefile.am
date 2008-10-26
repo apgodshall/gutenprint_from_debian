@@ -1,0 +1,56 @@
+## $Id: Makefile.am,v 1.7 2008/07/03 12:34:39 rlk Exp $
+## Copyright (C) 2008 Robert Krawitz
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2, or (at your option)
+## any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+## Process this file with automake to produce Makefile.in.
+
+@SET_MAKE@
+
+include $(top_srcdir)/scripts/global.mk
+
+SUBDIRS =					\
+	inks					\
+	inputslots				\
+	model					\
+	media					\
+	mediasizes				\
+	qualitypresets				\
+	weaves
+
+xml-stamp: media/xml-stamp			\
+	   model/xml-stamp			\
+	   inputslots/xml-stamp			\
+	   inks/xml-stamp			\
+	   mediasizes/xml-stamp			\
+	   qualitypresets/Makefile.am		\
+	   weaves/Makefile.am			\
+	   Makefile.am
+	-rm -f xml-stamp
+	touch xml-stamp
+	sed 's;^;media/;' media/xml-stamp >> xml-stamp
+	sed 's;^;model/;' model/xml-stamp >> xml-stamp
+	sed 's;^;inputslots/;' inputslots/xml-stamp >> xml-stamp
+	sed 's;^;inks/;' inks/xml-stamp >> xml-stamp
+	sed 's;^;mediasizes/;' mediasizes/xml-stamp >> xml-stamp
+	sed 's;^;weaves/;' weaves/xml-stamp >> xml-stamp
+	sed 's;^;qualitypresets/;' qualitypresets/xml-stamp >> xml-stamp
+
+all-local: xml-stamp
+## Clean
+
+CLEANFILES = xml-stamp
+
+MAINTAINERCLEANFILES = Makefile.in

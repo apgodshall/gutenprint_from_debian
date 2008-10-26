@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.96 2008/04/06 01:10:52 rlk Exp $
+## $Id: Makefile.am,v 1.118 2008/09/22 03:10:45 easysw Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -45,14 +45,20 @@ endif
 
 LOCAL_CPPFLAGS = $(GUTENPRINT_CFLAGS) $(CUPS_CFLAGS)
 
-STP_ENV= STP_MODULE_PATH=$(top_builddir)/src/main/.libs:$(top_builddir)/src/main STP_DATA_PATH=$(top_srcdir)/src/main
+STP_ENV= STP_MODULE_PATH=$(top_builddir)/src/main/.libs:$(top_builddir)/src/main STP_DATA_PATH=$(top_srcdir)/src/xml STP_LOCALEDIR=$(top_srcdir)/src/cups/catalog
 
 ## Programs
 
 if BUILD_TRANSLATED_CUPS_PPDS
-PPD_NLS = $(PPD_NLS_1)
+if BUILD_GLOBALIZED_CUPS_PPDS
+PPD = ppd-global
+else
+PPD = $(PPD_NLS_1)
+endif
 LINGUAS = $(ALL_LINGUAS)
 TRANSLATE_PPDS = -DCUPS_TRANSLATED_PPDS
+else
+PPD = ppd-nonls
 endif
 
 if BUILD_SIMPLIFIED_CUPS_PPDS
@@ -86,18 +92,18 @@ commandtocanon_LDADD = $(CUPS_LIBS)
 commandtoepson_SOURCES = commandtoepson.c
 commandtoepson_LDADD = $(CUPS_LIBS)
 
-cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c
+cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c i18n.c i18n.h
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_CFLAGS = -DALL_LINGUAS='"@ALL_LINGUAS@"' $(BUILD_SIMPLE_PPDS) $(TRANSLATE_PPDS)
-cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GENPPD_LIBS) $(GUTENPRINT_LIBS)
+cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GENPPD_LIBS) $(GUTENPRINT_LIBS) @LIBICONV@
 cups_genppd_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS = $(STATIC_LDOPTS)
 
-gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c
+gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = genppd.c i18n.c i18n.h
 gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_CFLAGS = -DCUPS_DRIVER_INTERFACE -DALL_LINGUAS='"@ALL_LINGUAS@"' $(BUILD_SIMPLE_PPDS) $(TRANSLATE_PPDS)
-gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GUTENPRINT_LIBS)
+gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GUTENPRINT_LIBS) @LIBICONV@
 gutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS = $(STATIC_LDOPTS)
 
-rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = rastertoprinter.c
-rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GUTENPRINT_LIBS)
+rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_SOURCES = rastertoprinter.c i18n.c i18n.h
+rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDADD = $(CUPS_LIBS) $(GUTENPRINT_LIBS) @LIBICONV@
 rastertogutenprint_@GUTENPRINT_MAJOR_VERSION@_@GUTENPRINT_MINOR_VERSION@_LDFLAGS = $(STATIC_LDOPTS)
 
 ## Data
@@ -121,8 +127,6 @@ PPD_NLS_1 = ppd-nls
 endif
 
 
-## Rules
-
 install-data-local: $(INSTALL_DATA_LOCAL_DEPS)
 	if test -n "$(CUPS_PKG)" -a -n "$(INSTALL_DATA_LOCAL_DEPS)" ; then \
 	  $(mkdir_p) $(DESTDIR)$(cups_modeldir); \
@@ -137,14 +141,24 @@ install-data-local: $(INSTALL_DATA_LOCAL_DEPS)
 	  cd ..; \
 	  done \
 	fi
+	$(mkdir_p) "$(DESTDIR)$(localedir)"
+	for file in $(srcdir)/../../po/*.po; do \
+	  lang=`basename $$file .po`; \
+	  $(mkdir_p) "$(DESTDIR)$(localedir)/$$lang"; \
+	  $(INSTALL_DATA) $$file "$(DESTDIR)$(localedir)/$$lang/gutenprint_$$lang.po"; \
+	done
 
 uninstall-local: $(INSTALL_DATA_LOCAL_DEPS)
 # Remove PPDs installed in new PPD location
 	if test -z "DONT_UNINSTALL_PPDS" ; then \
 	  if test -n "$(INSTALL_DATA_LOCAL_DEPS)" ; then \
 	    $(RM) -fr $(DESTDIR)$(cups_modeldir)/* ; \
-	  fi \
+	  fi ; \
 	fi
+	for file in $(srcdir)/../../po/*.po; do \
+	  lang=`basename $$file .po`; \
+	  $(RM) "$(DESTDIR)$(localedir)/$$lang/gutenprint_$$lang.po"; \
+	done
 
 install-data-hook:
 # Remove unused directories in install tree
@@ -167,34 +181,47 @@ all-local: $(INSTALL_DATA_LOCAL_DEPS)
 
 ppd: ppd-stamp
 
-ppd-stamp: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
+ppd-stamp: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ $(top_srcdir)/src/xml/xml-stamp
 	$(MAKE) ppd-stamp-phony
 	touch ppd-stamp
 
-ppd-stamp-phony: ppd-stamp-pre ppd-nonls $(PPD_NLS)
+ppd-stamp-phony: ppd-stamp-pre $(PPD)
 
 ppd-stamp-pre:
 	-$(RM) -r ppd
-	-mkdir ppd
+
+ppd-catalog:
+	$(mkdir_p) catalog
+	for file in $(srcdir)/../../po/*.po; do \
+	  lang=`basename $$file .po`; \
+	  $(mkdir_p) "catalog/$$lang"; \
+	  $(INSTALL_DATA) $$file "catalog/$$lang/gutenprint_$$lang.po"; \
+	done
 
 ppd-nonls: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
-	for language in C ; do \
-	  mkdir ppd/$$language ; \
-	  echo "$$language:" ; \
-	  LC_ALL=$$language LANG=$$language LANGUAGE=$$language $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -p ppd/$$language ; \
-	done
+	$(mkdir_p) ppd/C
+	LC_ALL= LANG= LANGUAGE= $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -l C -p ppd/C
 
-ppd-nls: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@
-	wdir=`pwd` ; \
-	cd $(top_builddir)/po ; \
-	$(MAKE) ; \
-	$(MAKE) DESTDIR= prefix=$${wdir}/catalog datadir=$${wdir}/catalog/share install
-	for language in `$(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ -L -c \`pwd\`/catalog/share/locale` ; do \
+ppd-global: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ ppd-catalog
+	$(mkdir_p) ppd/Global
+	@echo "Global PPDs:"
+	LC_ALL= LANG= LANGUAGE= $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -p ppd/Global
+	-$(RM) -r catalog
+
+ppd-global-ln: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ ppd-catalog
+	$(mkdir_p) ppd/Global
+	@echo "Global PPDs (localized numbers for testing):"
+	LC_ALL= LANG= LANGUAGE= $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -p ppd/Global -N
+	-$(RM) -r catalog
+
+ppd-nls: cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ ppd-catalog ppd-nonls
+	$(mkdir_p) ppd
+	for language in `$(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ -L` ; do \
 	  mkdir ppd/$$language ; \
 	  echo "$$language:" ; \
-	  LC_ALL=$$language LANG=$$language LANGUAGE=$$language $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -l $$language -p ppd/$$language -c `pwd`/catalog/share/locale ; \
+	  LC_ALL=$$language LANG=$$language LANGUAGE=$$language $(STP_ENV) ./cups-genppd.@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@ @WHICH_PPDS@ -l $$language -p ppd/$$language; \
 	done
-	$(RM) -r catalog
+	-$(RM) -r catalog
 
 dist-hook:
 	for dir in commands ; do \
@@ -225,5 +252,6 @@ EXTRA_DIST = \
 	command.txt \
 	command.types \
 	test-ppds
+
 
 

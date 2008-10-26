@@ -42,27 +42,25 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
-	$(srcdir)/cups-gutenprint.list.in $(top_srcdir)/configure \
-	$(top_srcdir)/scripts/global.mk ABOUT-NLS AUTHORS COPYING \
-	ChangeLog INSTALL NEWS
+	$(top_srcdir)/configure $(top_srcdir)/scripts/global.mk \
+	ABOUT-NLS AUTHORS COPYING ChangeLog INSTALL NEWS
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
-	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
-	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
+	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
+	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = cups-gutenprint.list
-depcomp =
-am__depfiles_maybe =
+CONFIG_CLEAN_FILES =
 SOURCES =
 DIST_SOURCES =
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
@@ -87,13 +85,18 @@ distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
+AMDEP_FALSE = @AMDEP_FALSE@
+AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_CUPS_1_2_FALSE = @BUILD_CUPS_1_2_FALSE@
+BUILD_CUPS_1_2_TRUE = @BUILD_CUPS_1_2_TRUE@
 BUILD_CUPS_FALSE = @BUILD_CUPS_FALSE@
+BUILD_CUPS_PPDS = @BUILD_CUPS_PPDS@
 BUILD_CUPS_PPDS_FALSE = @BUILD_CUPS_PPDS_FALSE@
 BUILD_CUPS_PPDS_TRUE = @BUILD_CUPS_PPDS_TRUE@
 BUILD_CUPS_TRUE = @BUILD_CUPS_TRUE@
@@ -119,6 +122,8 @@ BUILD_LIBGUTENPRINTUI_FALSE = @BUILD_LIBGUTENPRINTUI_FALSE@
 BUILD_LIBGUTENPRINTUI_TRUE = @BUILD_LIBGUTENPRINTUI_TRUE@
 BUILD_MODULES_FALSE = @BUILD_MODULES_FALSE@
 BUILD_MODULES_TRUE = @BUILD_MODULES_TRUE@
+BUILD_SIMPLIFIED_CUPS_PPDS_FALSE = @BUILD_SIMPLIFIED_CUPS_PPDS_FALSE@
+BUILD_SIMPLIFIED_CUPS_PPDS_TRUE = @BUILD_SIMPLIFIED_CUPS_PPDS_TRUE@
 BUILD_TESTPATTERN_FALSE = @BUILD_TESTPATTERN_FALSE@
 BUILD_TESTPATTERN_TRUE = @BUILD_TESTPATTERN_TRUE@
 BUILD_TEST_FALSE = @BUILD_TEST_FALSE@
@@ -126,6 +131,7 @@ BUILD_TEST_TRUE = @BUILD_TEST_TRUE@
 BUILD_TRANSLATED_CUPS_PPDS_FALSE = @BUILD_TRANSLATED_CUPS_PPDS_FALSE@
 BUILD_TRANSLATED_CUPS_PPDS_TRUE = @BUILD_TRANSLATED_CUPS_PPDS_TRUE@
 CC = @CC@
+CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CONVERT = @CONVERT@
 CPP = @CPP@
@@ -138,12 +144,14 @@ CUPS_PPDS_AT_TOP_LEVEL_TRUE = @CUPS_PPDS_AT_TOP_LEVEL_TRUE@
 CUPS_PPD_PS_LEVEL = @CUPS_PPD_PS_LEVEL@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DB2HTML = @DB2HTML@
 DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
+DEPDIR = @DEPDIR@
 DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DVIPDF = @DVIPDF@
@@ -178,6 +186,7 @@ GLIB_LIBS = @GLIB_LIBS@
 GLIB_MKENUMS = @GLIB_MKENUMS@
 GMSGFMT = @GMSGFMT@
 GNUCFLAGS = @GNUCFLAGS@
+GREP = @GREP@
 GTK2_CFLAGS = @GTK2_CFLAGS@
 GTK2_LIBS = @GTK2_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
@@ -273,14 +282,17 @@ VERSION = @VERSION@
 WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
-ac_ct_AR = @ac_ct_AR@
+YFLAGS = @YFLAGS@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
-ac_ct_RANLIB = @ac_ct_RANLIB@
-ac_ct_STRIP = @ac_ct_STRIP@
-ac_pt_PKG_CONFIG = @ac_pt_PKG_CONFIG@
+am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
+am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
+am__include = @am__include@
 am__leading_dot = @am__leading_dot@
+am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
@@ -297,6 +309,9 @@ cups_exec_prefix = @cups_exec_prefix@
 cups_prefix = @cups_prefix@
 cups_sbindir = @cups_sbindir@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
 gimp_plug_indir = @gimp_plug_indir@
@@ -314,17 +329,21 @@ host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -399,15 +418,15 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu  --ignore-deps'; \
-	      cd $(srcdir) && $(AUTOMAKE) --gnu  --ignore-deps \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu '; \
+	      cd $(srcdir) && $(AUTOMAKE) --gnu  \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  --ignore-deps Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  --ignore-deps Makefile
+	  $(AUTOMAKE) --gnu  Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -443,8 +462,6 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
-cups-gutenprint.list: $(top_builddir)/config.status $(srcdir)/cups-gutenprint.list.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -597,7 +614,7 @@ distdir: $(DISTFILES)
 	esac
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/. $(distdir)/doc $(distdir)/include/gutenprint $(distdir)/m4 $(distdir)/man $(distdir)/po $(distdir)/scripts $(distdir)/src/cups $(distdir)/src/foomatic $(distdir)/src/gutenprintui $(distdir)/src/gutenprintui2 $(distdir)/src/main $(distdir)/src/testpattern
+	$(mkdir_p) $(distdir)/doc $(distdir)/include/gutenprint $(distdir)/m4 $(distdir)/man $(distdir)/po $(distdir)/scripts $(distdir)/src/cups $(distdir)/src/foomatic $(distdir)/src/gutenprintui $(distdir)/src/gutenprintui2 $(distdir)/src/main $(distdir)/src/testpattern
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \

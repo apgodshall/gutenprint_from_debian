@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.145 2006/07/16 22:59:20 rlk Exp $
+dnl $Id: configure.ac,v 1.151.2.2 2007/05/29 01:47:26 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -37,7 +37,7 @@ dnl
 pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [0])
-pushdef([GUTENPRINT_MICRO_VERSION],     [0])
+pushdef([GUTENPRINT_MICRO_VERSION],     [1])
 pushdef([GUTENPRINT_EXTRA_VERSION],     [])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
 pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
@@ -52,7 +52,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.145 $)
+AC_REVISION($Revision: 1.151.2.2 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -116,8 +116,15 @@ AC_SUBST([GUTENPRINTUI2_CURRENT_INTERFACE])
 AC_SUBST([GUTENPRINTUI2_INTERFACE_AGE])
 AC_SUBST([GUTENPRINTUI2_BINARY_AGE])
 
+dnl Make sure we inherit common compiler options from the environment...
+CFLAGS="${CFLAGS:=}"
+CPPFLAGS="${CPPFLAGS:=}"
+CXXFLAGS="${CXXFLAGS:=}"
+LDFLAGS="${LDFLAGS:=}"
+LIBS="${LIBS:=}"
+
 dnl Initialize automake stuff.
-AM_INIT_AUTOMAKE(1.9 dist-bzip2 no-dist-gzip tar-ustar check-news gnu no-dependencies)
+AM_INIT_AUTOMAKE(1.9 dist-bzip2 no-dist-gzip tar-ustar check-news gnu)
 popdef([GUTENPRINT_NAME])
 popdef([GUTENPRINT_VERSION])
 
@@ -214,12 +221,34 @@ STP_ARG_WITH_DETAILED(
      cups_prefix="${prefix}"
   ])
 
+USE_LEVEL3_PS=no
 BUILD_CUPS_PPDS="${BUILD_CUPS}"
 BUILD_TRANSLATED_CUPS_PPDS="${BUILD_CUPS}"
+BUILD_CUPS_1_2="no"
+if test -n "${CUPS_CONFIG}" -a "${BUILD_CUPS}" = "yes" ; then
+  cups_version=`${CUPS_CONFIG} --version`
+dnl Quote to protect sed regexes
+  [cups_major=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\1/'`]
+  [cups_minor=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
+  [cups_point=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\3/'`]
+dnl There was no CUPS 1.0.15 or the like
+  if test "$cups_major" -gt 1 -o "$cups_minor" -gt 1 -o "$cups_point" -gt 14 ; then
+    USE_LEVEL3_PS=yes
+  fi
+  if test "$cups_major" -gt 1 -o "$cups_minor" -gt 1 ; then
+    BUILD_CUPS_PPDS="no"
+    BUILD_CUPS_1_2="yes"
+  fi
+fi
 
 STP_ARG_ENABLE([cups-ppds],
                [build CUPS PPD files],
                [BUILD_CUPS_PPDS],
+               [(automatic)])
+
+STP_ARG_ENABLE([cups-1_2-enhancements],
+               [build CUPS 1.2 enhancements],
+               [BUILD_CUPS_1_2],
                [(automatic)])
 
 STP_ARG_ENABLE([translated-cups-ppds],
@@ -239,19 +268,6 @@ STP_ARG_ENABLE_DETAILED([simplified-cups-ppds],
     only) [WHICH_PPDS]="-s"; BUILD_SIMPLIFIED_CUPS_PPDS=only; AC_MSG_RESULT([only]) ;;
     *) AC_MSG_ERROR([${enableval}: not a valid option ('yes', 'no', or 'only')]) ;;
 				   ])
-
-USE_LEVEL3_PS=no
-if test -n "${CUPS_CONFIG}" -a "${BUILD_CUPS}" = "yes" ; then
-  cups_version=`${CUPS_CONFIG} --version`
-dnl Quote to protect sed regexes
-  [cups_major=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\1/'`]
-  [cups_minor=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
-  [cups_point=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\3/'`]
-dnl There was no CUPS 1.0.15 or the like
-  if test "$cups_major" -gt 1 -o "$cups_minor" -gt 1 -o "$cups_point" -gt 14 ; then
-    USE_LEVEL3_PS=yes
-  fi
-fi
 
 STP_ARG_ENABLE([cups-ppds-at-top-level],
 	       [place CUPS PPD files at top level],
@@ -428,7 +444,7 @@ if test x$BUILD_GIMP2 = xyes; then
 fi
 
 STP_ARG_WITH([gimp2],
-             [build GIMP 2.0 Print plugin],
+             [build GIMP 2.x Print plugin],
              [BUILD_GIMP2],
              [(automatic)])
 
@@ -587,6 +603,16 @@ if test "x${datadir}" = 'x${prefix}/share'; then
   else
     PACKAGE_DATA_DIR="${prefix}/share/${PACKAGE}"
   fi
+elif test "x${datadir}" = 'x${datarootdir}'; then
+  if test "x${datarootdir}" = 'x${prefix}/share'; then
+    if test "x${prefix}" = "xNONE"; then
+      PACKAGE_DATA_DIR="${ac_default_prefix}/share/${PACKAGE}"
+    else
+      PACKAGE_DATA_DIR="${prefix}/share/${PACKAGE}"
+    fi
+  else
+    PACKAGE_DATA_DIR="${datarootdir}/${PACKAGE}"
+  fi
 else
   PACKAGE_DATA_DIR="${datadir}/${PACKAGE}"
 fi
@@ -621,15 +647,20 @@ AC_DEFINE_UNQUOTED(PKGMODULEDIR, ["$PKGMODULEDIR"])
 
 dnl Compiler flags
 if test x$ac_compiler_gnu = "xyes"; then
-  STP_ADD_COMPILER_ARGS([-Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -finline-limit=1048576],, [GNUCFLAGS])
+  STP_ADD_COMPILER_ARGS([-Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Wwrite-strings -Werror-implicit-function-declaration -Winline -Wformat=2 -finline-limit=1048576],, [GNUCFLAGS])
   if test x${USE_MAINTAINER_MODE} = xyes ; then
     STP_ADD_COMPILER_ARGS([-pedantic -Waggregate-return -Wcast-qual -Wshadow -Wredundant-decls],, [GNUCFLAGS])
+  fi
+  if test x$ENABLE_DEBUG = xyes ; then
+    STP_ADD_COMPILER_ARG([-g])
+  else
+    STP_ADD_FIRST_COMPILER_ARG([-O6 -O3 -O2 -O1 -O])
   fi
 else
   if test x$ENABLE_DEBUG = xyes ; then
     STP_ADD_COMPILER_ARG([-g])
   else
-    STP_ADD_FIRST_COMPILER_ARG([-O6 -O3 -O2 -O1 -O])
+    STP_ADD_FIRST_COMPILER_ARG([-O])
   fi
 fi
 if test x$ENABLE_PROFILE = xyes ; then
@@ -651,7 +682,7 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([typedef struct __attribute__((__packed__)) {
                   [AC_MSG_RESULT([no])])
 
 AH_VERBATIM([HAVE_GCC_ATTRIBUTES_BOILERPLATE],
-[#ifndef HAVE_GCC_ATTRIBUTES
+[#if !defined(HAVE_GCC_ATTRIBUTES) && !defined(__attribute__)
 /* This should really be a C99 anonymous variadic macro. */
 #define __attribute__(attr)
 #endif])
@@ -768,6 +799,9 @@ dnl Checks for library functions.
 AC_CHECK_FUNCS([nanosleep poll usleep])
 AC_CHECK_FUNCS([getopt_long])
 
+dnl finite() is non-standard, isfinite() is ISO-standard, figure out
+dnl which to use...
+AC_SEARCH_LIBS(finite, m, CFLAGS="-Disfinite=finite $CFLAGS")
 
 dnl Define what has to be built
 AM_CONDITIONAL(BUILD_FOOMATIC, test x${BUILD_FOOMATIC} = xyes)
@@ -778,11 +812,15 @@ AM_CONDITIONAL(BUILD_GHOSTSCRIPT, test x${BUILD_GHOSTSCRIPT} = xyes)
 
 AM_CONDITIONAL(BUILD_CUPS, test x${BUILD_CUPS} = xyes)
 
+AM_CONDITIONAL(BUILD_CUPS_1_2, test x${BUILD_CUPS_1_2} = xyes)
+
 AM_CONDITIONAL(BUILD_CUPS_PPDS, test x${BUILD_CUPS_PPDS} = xyes)
 
 AM_CONDITIONAL(CUPS_PPDS_AT_TOP_LEVEL, test x${CUPS_PPDS_AT_TOP_LEVEL} = xyes)
 
 AM_CONDITIONAL(BUILD_TRANSLATED_CUPS_PPDS, test x${BUILD_TRANSLATED_CUPS_PPDS} = xyes)
+
+AM_CONDITIONAL(BUILD_SIMPLIFIED_CUPS_PPDS, test x${BUILD_SIMPLIFIED_CUPS_PPDS} = xyes)
 
 if test x${USE_LEVEL3_PS} = xno ; then
   CUPS_PPD_PS_LEVEL=2
@@ -946,6 +984,7 @@ AC_SUBST(LIBREADLINE_DEPS)
 AC_SUBST(MAINTAINER_CFLAGS)
 AC_SUBST(PLUG_IN_PATH)
 AC_SUBST(WHICH_PPDS)
+AC_SUBST(BUILD_CUPS_PPDS)
 
 dnl Output files
 
@@ -996,7 +1035,6 @@ AC_CONFIG_FILES([src/gutenprintui/Makefile])
 AC_CONFIG_FILES([src/gutenprintui/gutenprintui.pc])
 AC_CONFIG_FILES([src/gutenprintui2/Makefile])
 AC_CONFIG_FILES([src/gutenprintui2/gutenprintui2.pc])
-AC_CONFIG_FILES([cups-gutenprint.list])
 AC_CONFIG_FILES([test/Makefile])
 AC_CONFIG_FILES([scripts/Makefile])
 AC_CONFIG_COMMANDS([default], [
@@ -1019,13 +1057,18 @@ echo "================================================================"
 echo "  Release: $PACKAGE_STRING generated on $RELEASE_DATE"
 echo
 echo "  Features:"
-echo "    Build CUPS:                                 $BUILD_CUPS, installing in $cups_prefix"
 if test "$BUILD_CUPS" != "no" ; then
+    echo "    Build CUPS:                                 $BUILD_CUPS, installing in $cups_prefix"
+    echo "        Build CUPS 1.2 enhancements:            $BUILD_CUPS_1_2"
     echo "        Build CUPS PPD files:                   $BUILD_CUPS_PPDS"
-    echo "            Build translated CUPS PPD files:    $BUILD_TRANSLATED_CUPS_PPDS"
-    echo "            Build simplified CUPS PPD files:    $BUILD_SIMPLIFIED_CUPS_PPDS"
-    echo "            Generate PS level 3 CUPS PPD files: $USE_LEVEL3_PS"
-    echo "        Install CUPS PPD files at top level:    $CUPS_PPDS_AT_TOP_LEVEL"
+    if test "$BUILD_CUPS_PPDS" != "no" ; then
+	echo "            Build translated CUPS PPD files:    $BUILD_TRANSLATED_CUPS_PPDS"
+	echo "            Build simplified CUPS PPD files:    $BUILD_SIMPLIFIED_CUPS_PPDS"
+	echo "            Install CUPS PPDs at top level:     $CUPS_PPDS_AT_TOP_LEVEL"
+    fi
+    if test "$BUILD_CUPS_PPDS" != "no" -o "$BUILD_CUPS_1_2" != "no" ; then
+        echo "        Generate PS level 3 CUPS PPD files:     $USE_LEVEL3_PS"
+    fi
     echo "        Build genppd statically:                $STATIC_GENPPD"
 
     if test "$STATIC_GENPPD" = "no" ; then
@@ -1036,6 +1079,8 @@ if test "$BUILD_CUPS" != "no" ; then
 	echo "                        Please review the README and release notes carefully!"
 	warnings_emitted=1
     fi
+else
+    echo "    Build CUPS:                                 $BUILD_CUPS"
 fi
 echo "    Build Ghostscript IJS driver:               $BUILD_GHOSTSCRIPT"
 echo "    Build Foomatic data:                        $BUILD_FOOMATIC"
@@ -1078,6 +1123,7 @@ fi
 echo "    Build static libraries:                     $enable_static"
 echo "    Build shared libraries:                     $enable_shared"
 echo "    Maintainer mode:                            $USE_MAINTAINER_MODE"
+echo "    Use i18n:                                   $USE_NLS"
 echo "    Generate profiling information:             $ENABLE_PROFILE"
 echo "    Generate debugging symbols:                 $ENABLE_DEBUG"
 echo "    Use modules:                                $WITH_MODULES"

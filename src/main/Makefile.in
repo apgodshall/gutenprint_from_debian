@@ -48,11 +48,12 @@ subdir = src/main
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
-	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
-	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
+	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
+	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
@@ -80,14 +81,16 @@ am__libgutenprint_la_SOURCES_DIST = array.c bit-ops.c channel.c \
 	color.c curve.c curve-cache.c dither-ed.c dither-eventone.c \
 	dither-inks.c dither-main.c dither-ordered.c \
 	dither-very-fast.c dither-predithered.c generic-options.c \
-	image.c module.c path.c print-dither-matrices.c print-list.c \
-	print-papers.c print-util.c print-vars.c print-version.c \
-	print-weave.c printers.c sequence.c string-list.c xml.c \
-	mxml-attr.c mxml-file.c mxml-node.c mxml-search.c \
-	dither-impl.h dither-inlined-functions.h generic-options.h \
-	gutenprint-internal.h util.h print-color.c color-conversion.h \
-	color-conversions.c print-canon.c print-escp2.c escp2-driver.c \
-	print-escp2.h print-escp2-data.c escp2-channels.c escp2-inks.c \
+	image.c buffer-image.c module.c path.c print-dither-matrices.c \
+	print-list.c print-papers.c print-util.c print-vars.c \
+	print-version.c print-weave.c printers.c sequence.c \
+	string-list.c xml.c mxml-attr.c mxml-file.c mxml-node.c \
+	mxml-search.c dither-impl.h dither-inlined-functions.h \
+	generic-options.h gutenprint-internal.h util.h print-color.c \
+	color-conversion.h color-conversions.c print-canon.c \
+	print-canon.h canon-inks.h canon-media.h canon-modes.h \
+	canon-printers.h print-escp2.c escp2-driver.c print-escp2.h \
+	print-escp2-data.c escp2-channels.c escp2-inks.c \
 	escp2-papers.c escp2-resolutions.c print-lexmark.c print-pcl.c \
 	print-ps.c print-olympus.c print-raw.c
 am__objects_1 = mxml-attr.lo mxml-file.lo mxml-node.lo mxml-search.lo
@@ -110,11 +113,11 @@ am_libgutenprint_la_OBJECTS = array.lo bit-ops.lo channel.lo color.lo \
 	curve.lo curve-cache.lo dither-ed.lo dither-eventone.lo \
 	dither-inks.lo dither-main.lo dither-ordered.lo \
 	dither-very-fast.lo dither-predithered.lo generic-options.lo \
-	image.lo module.lo path.lo print-dither-matrices.lo \
-	print-list.lo print-papers.lo print-util.lo print-vars.lo \
-	print-version.lo print-weave.lo printers.lo sequence.lo \
-	string-list.lo xml.lo $(am__objects_1) $(am__objects_2) \
-	$(am__objects_12)
+	image.lo buffer-image.lo module.lo path.lo \
+	print-dither-matrices.lo print-list.lo print-papers.lo \
+	print-util.lo print-vars.lo print-version.lo print-weave.lo \
+	printers.lo sequence.lo string-list.lo xml.lo $(am__objects_1) \
+	$(am__objects_2) $(am__objects_12)
 libgutenprint_la_OBJECTS = $(am_libgutenprint_la_OBJECTS)
 print_canon_la_LIBADD =
 am_print_canon_la_OBJECTS = print-canon.lo
@@ -147,8 +150,8 @@ am_print_raw_la_OBJECTS = print-raw.lo
 print_raw_la_OBJECTS = $(am_print_raw_la_OBJECTS)
 @BUILD_MODULES_TRUE@am_print_raw_la_rpath = -rpath $(pkgmoduledir)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
-depcomp =
-am__depfiles_maybe =
+depcomp = $(SHELL) $(top_srcdir)/scripts/depcomp
+am__depfiles_maybe = depfiles
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
@@ -175,13 +178,18 @@ CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
+AMDEP_FALSE = @AMDEP_FALSE@
+AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_CUPS_1_2_FALSE = @BUILD_CUPS_1_2_FALSE@
+BUILD_CUPS_1_2_TRUE = @BUILD_CUPS_1_2_TRUE@
 BUILD_CUPS_FALSE = @BUILD_CUPS_FALSE@
+BUILD_CUPS_PPDS = @BUILD_CUPS_PPDS@
 BUILD_CUPS_PPDS_FALSE = @BUILD_CUPS_PPDS_FALSE@
 BUILD_CUPS_PPDS_TRUE = @BUILD_CUPS_PPDS_TRUE@
 BUILD_CUPS_TRUE = @BUILD_CUPS_TRUE@
@@ -207,6 +215,8 @@ BUILD_LIBGUTENPRINTUI_FALSE = @BUILD_LIBGUTENPRINTUI_FALSE@
 BUILD_LIBGUTENPRINTUI_TRUE = @BUILD_LIBGUTENPRINTUI_TRUE@
 BUILD_MODULES_FALSE = @BUILD_MODULES_FALSE@
 BUILD_MODULES_TRUE = @BUILD_MODULES_TRUE@
+BUILD_SIMPLIFIED_CUPS_PPDS_FALSE = @BUILD_SIMPLIFIED_CUPS_PPDS_FALSE@
+BUILD_SIMPLIFIED_CUPS_PPDS_TRUE = @BUILD_SIMPLIFIED_CUPS_PPDS_TRUE@
 BUILD_TESTPATTERN_FALSE = @BUILD_TESTPATTERN_FALSE@
 BUILD_TESTPATTERN_TRUE = @BUILD_TESTPATTERN_TRUE@
 BUILD_TEST_FALSE = @BUILD_TEST_FALSE@
@@ -214,6 +224,7 @@ BUILD_TEST_TRUE = @BUILD_TEST_TRUE@
 BUILD_TRANSLATED_CUPS_PPDS_FALSE = @BUILD_TRANSLATED_CUPS_PPDS_FALSE@
 BUILD_TRANSLATED_CUPS_PPDS_TRUE = @BUILD_TRANSLATED_CUPS_PPDS_TRUE@
 CC = @CC@
+CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CONVERT = @CONVERT@
 CPP = @CPP@
@@ -226,12 +237,14 @@ CUPS_PPDS_AT_TOP_LEVEL_TRUE = @CUPS_PPDS_AT_TOP_LEVEL_TRUE@
 CUPS_PPD_PS_LEVEL = @CUPS_PPD_PS_LEVEL@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DB2HTML = @DB2HTML@
 DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
+DEPDIR = @DEPDIR@
 DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DVIPDF = @DVIPDF@
@@ -266,6 +279,7 @@ GLIB_LIBS = @GLIB_LIBS@
 GLIB_MKENUMS = @GLIB_MKENUMS@
 GMSGFMT = @GMSGFMT@
 GNUCFLAGS = @GNUCFLAGS@
+GREP = @GREP@
 GTK2_CFLAGS = @GTK2_CFLAGS@
 GTK2_LIBS = @GTK2_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
@@ -361,14 +375,17 @@ VERSION = @VERSION@
 WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
-ac_ct_AR = @ac_ct_AR@
+YFLAGS = @YFLAGS@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
-ac_ct_RANLIB = @ac_ct_RANLIB@
-ac_ct_STRIP = @ac_ct_STRIP@
-ac_pt_PKG_CONFIG = @ac_pt_PKG_CONFIG@
+am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
+am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
+am__include = @am__include@
 am__leading_dot = @am__leading_dot@
+am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
@@ -385,6 +402,9 @@ cups_exec_prefix = @cups_exec_prefix@
 cups_prefix = @cups_prefix@
 cups_sbindir = @cups_sbindir@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
 gimp_plug_indir = @gimp_plug_indir@
@@ -402,17 +422,21 @@ host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -437,7 +461,14 @@ color_traditional_la_SOURCES = \
 	color-conversions.c
 
 color_traditional_la_LDFLAGS = -module -avoid-version
-print_canon_la_SOURCES = print-canon.c
+print_canon_la_SOURCES = \
+	print-canon.c \
+	print-canon.h \
+	canon-inks.h \
+	canon-media.h \
+	canon-modes.h \
+	canon-printers.h
+
 print_canon_la_LDFLAGS = -module -avoid-version
 print_escp2_la_SOURCES = \
 	print-escp2.c \
@@ -501,6 +532,7 @@ libgutenprint_la_SOURCES = \
 	dither-predithered.c			\
 	generic-options.c			\
 	image.c					\
+	buffer-image.c				\
 	module.c				\
 	path.c					\
 	print-dither-matrices.c			\
@@ -554,9 +586,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  --ignore-deps src/main/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/main/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  --ignore-deps src/main/Makefile
+	  $(AUTOMAKE) --gnu  src/main/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -655,14 +687,75 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/array.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bit-ops.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/buffer-image.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/channel.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/color-conversions.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/color.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/curve-cache.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/curve.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-ed.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-eventone.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-inks.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-main.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-ordered.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-predithered.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dither-very-fast.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-channels.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-driver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-inks.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-papers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-resolutions.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/generic-options.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/image.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/module.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mxml-attr.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mxml-file.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mxml-node.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mxml-search.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/path.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-canon.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-color.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-dither-matrices.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-escp2-data.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-escp2.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-lexmark.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-olympus.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-papers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-pcl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-ps.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-raw.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-util.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-vars.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-version.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/print-weave.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/printers.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sequence.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/string-list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml.Plo@am__quote@
+
 .c.o:
-	$(COMPILE) -c $<
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c $<
 
 .c.obj:
-	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
 .c.lo:
-	$(LTCOMPILE) -c -o $@ $<
+@am__fastdepCC_TRUE@	if $(LTCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -826,6 +919,7 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	clean-pkgmoduleLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -852,6 +946,7 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

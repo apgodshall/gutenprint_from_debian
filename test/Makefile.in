@@ -46,16 +46,18 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @BUILD_TEST_TRUE@noinst_PROGRAMS = testdither$(EXEEXT) \
 @BUILD_TEST_TRUE@	escp2-weavetest$(EXEEXT) unprint$(EXEEXT) \
 @BUILD_TEST_TRUE@	pcl-unprint$(EXEEXT) bjc-unprint$(EXEEXT) \
-@BUILD_TEST_TRUE@	curve$(EXEEXT) xml-curve$(EXEEXT)
+@BUILD_TEST_TRUE@	curve$(EXEEXT) xml-curve$(EXEEXT) \
+@BUILD_TEST_TRUE@	pixma_parse$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
 	$(top_srcdir)/m4/gimp.m4 $(top_srcdir)/m4/iconv.m4 \
-	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
-	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/progtest.m4 \
-	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
-	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
-	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/m4/isc-posix.m4 $(top_srcdir)/m4/lib-ld.m4 \
+	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
+	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/m4/stp.m4 \
+	$(top_srcdir)/m4/stp_cups.m4 $(top_srcdir)/m4/stp_gimp.m4 \
+	$(top_srcdir)/m4/stp_option.m4 $(top_srcdir)/m4/stp_release.m4 \
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
@@ -75,6 +77,9 @@ escp2_weavetest_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_pcl_unprint_OBJECTS = pcl-unprint.$(OBJEXT)
 pcl_unprint_OBJECTS = $(am_pcl_unprint_OBJECTS)
 pcl_unprint_DEPENDENCIES = $(am__DEPENDENCIES_1)
+am_pixma_parse_OBJECTS = pixma_parse.$(OBJEXT)
+pixma_parse_OBJECTS = $(am_pixma_parse_OBJECTS)
+pixma_parse_LDADD = $(LDADD)
 am_testdither_OBJECTS = testdither.$(OBJEXT)
 testdither_OBJECTS = $(am_testdither_OBJECTS)
 testdither_DEPENDENCIES = $(am__DEPENDENCIES_1)
@@ -85,8 +90,8 @@ am_xml_curve_OBJECTS = xml-curve.$(OBJEXT)
 xml_curve_OBJECTS = $(am_xml_curve_OBJECTS)
 xml_curve_DEPENDENCIES = $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
-depcomp =
-am__depfiles_maybe =
+depcomp = $(SHELL) $(top_srcdir)/scripts/depcomp
+am__depfiles_maybe = depfiles
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
@@ -97,22 +102,29 @@ LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(bjc_unprint_SOURCES) $(curve_SOURCES) \
 	$(escp2_weavetest_SOURCES) $(pcl_unprint_SOURCES) \
-	$(testdither_SOURCES) $(unprint_SOURCES) $(xml_curve_SOURCES)
+	$(pixma_parse_SOURCES) $(testdither_SOURCES) \
+	$(unprint_SOURCES) $(xml_curve_SOURCES)
 DIST_SOURCES = $(bjc_unprint_SOURCES) $(curve_SOURCES) \
 	$(escp2_weavetest_SOURCES) $(pcl_unprint_SOURCES) \
-	$(testdither_SOURCES) $(unprint_SOURCES) $(xml_curve_SOURCES)
+	$(pixma_parse_SOURCES) $(testdither_SOURCES) \
+	$(unprint_SOURCES) $(xml_curve_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
+AMDEP_FALSE = @AMDEP_FALSE@
+AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+BUILD_CUPS_1_2_FALSE = @BUILD_CUPS_1_2_FALSE@
+BUILD_CUPS_1_2_TRUE = @BUILD_CUPS_1_2_TRUE@
 BUILD_CUPS_FALSE = @BUILD_CUPS_FALSE@
+BUILD_CUPS_PPDS = @BUILD_CUPS_PPDS@
 BUILD_CUPS_PPDS_FALSE = @BUILD_CUPS_PPDS_FALSE@
 BUILD_CUPS_PPDS_TRUE = @BUILD_CUPS_PPDS_TRUE@
 BUILD_CUPS_TRUE = @BUILD_CUPS_TRUE@
@@ -138,6 +150,8 @@ BUILD_LIBGUTENPRINTUI_FALSE = @BUILD_LIBGUTENPRINTUI_FALSE@
 BUILD_LIBGUTENPRINTUI_TRUE = @BUILD_LIBGUTENPRINTUI_TRUE@
 BUILD_MODULES_FALSE = @BUILD_MODULES_FALSE@
 BUILD_MODULES_TRUE = @BUILD_MODULES_TRUE@
+BUILD_SIMPLIFIED_CUPS_PPDS_FALSE = @BUILD_SIMPLIFIED_CUPS_PPDS_FALSE@
+BUILD_SIMPLIFIED_CUPS_PPDS_TRUE = @BUILD_SIMPLIFIED_CUPS_PPDS_TRUE@
 BUILD_TESTPATTERN_FALSE = @BUILD_TESTPATTERN_FALSE@
 BUILD_TESTPATTERN_TRUE = @BUILD_TESTPATTERN_TRUE@
 BUILD_TEST_FALSE = @BUILD_TEST_FALSE@
@@ -145,6 +159,7 @@ BUILD_TEST_TRUE = @BUILD_TEST_TRUE@
 BUILD_TRANSLATED_CUPS_PPDS_FALSE = @BUILD_TRANSLATED_CUPS_PPDS_FALSE@
 BUILD_TRANSLATED_CUPS_PPDS_TRUE = @BUILD_TRANSLATED_CUPS_PPDS_TRUE@
 CC = @CC@
+CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CONVERT = @CONVERT@
 CPP = @CPP@
@@ -157,12 +172,14 @@ CUPS_PPDS_AT_TOP_LEVEL_TRUE = @CUPS_PPDS_AT_TOP_LEVEL_TRUE@
 CUPS_PPD_PS_LEVEL = @CUPS_PPD_PS_LEVEL@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
+CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DB2HTML = @DB2HTML@
 DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
+DEPDIR = @DEPDIR@
 DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DVIPDF = @DVIPDF@
@@ -197,6 +214,7 @@ GLIB_LIBS = @GLIB_LIBS@
 GLIB_MKENUMS = @GLIB_MKENUMS@
 GMSGFMT = @GMSGFMT@
 GNUCFLAGS = @GNUCFLAGS@
+GREP = @GREP@
 GTK2_CFLAGS = @GTK2_CFLAGS@
 GTK2_LIBS = @GTK2_LIBS@
 GTK_CFLAGS = @GTK_CFLAGS@
@@ -292,14 +310,17 @@ VERSION = @VERSION@
 WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
-ac_ct_AR = @ac_ct_AR@
+YFLAGS = @YFLAGS@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
-ac_ct_RANLIB = @ac_ct_RANLIB@
-ac_ct_STRIP = @ac_ct_STRIP@
-ac_pt_PKG_CONFIG = @ac_pt_PKG_CONFIG@
+am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
+am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
+am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
+am__fastdepCXX_TRUE = @am__fastdepCXX_TRUE@
+am__include = @am__include@
 am__leading_dot = @am__leading_dot@
+am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
@@ -316,6 +337,9 @@ cups_exec_prefix = @cups_exec_prefix@
 cups_prefix = @cups_prefix@
 cups_sbindir = @cups_sbindir@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 gimp2_plug_indir = @gimp2_plug_indir@
 gimp_plug_indir = @gimp_plug_indir@
@@ -333,17 +357,21 @@ host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -365,6 +393,7 @@ testdither_SOURCES = testdither.c
 testdither_LDADD = $(GUTENPRINT_LIBS)
 xml_curve_SOURCES = xml-curve.c
 xml_curve_LDADD = $(GUTENPRINT_LIBS)
+pixma_parse_SOURCES = pixma_parse.c pixma_parse.h
 
 #run-weavetest: escp2-weavetest
 CLEANFILES = mixed-color-1bit.ppm
@@ -383,9 +412,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(top_srcdir
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  --ignore-deps test/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  test/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  --ignore-deps test/Makefile
+	  $(AUTOMAKE) --gnu  test/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -422,6 +451,9 @@ escp2-weavetest$(EXEEXT): $(escp2_weavetest_OBJECTS) $(escp2_weavetest_DEPENDENC
 pcl-unprint$(EXEEXT): $(pcl_unprint_OBJECTS) $(pcl_unprint_DEPENDENCIES) 
 	@rm -f pcl-unprint$(EXEEXT)
 	$(LINK) $(pcl_unprint_LDFLAGS) $(pcl_unprint_OBJECTS) $(pcl_unprint_LDADD) $(LIBS)
+pixma_parse$(EXEEXT): $(pixma_parse_OBJECTS) $(pixma_parse_DEPENDENCIES) 
+	@rm -f pixma_parse$(EXEEXT)
+	$(LINK) $(pixma_parse_LDFLAGS) $(pixma_parse_OBJECTS) $(pixma_parse_LDADD) $(LIBS)
 testdither$(EXEEXT): $(testdither_OBJECTS) $(testdither_DEPENDENCIES) 
 	@rm -f testdither$(EXEEXT)
 	$(LINK) $(testdither_LDFLAGS) $(testdither_OBJECTS) $(testdither_LDADD) $(LIBS)
@@ -438,14 +470,35 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bjc-unprint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/curve.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-weavetest.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcl-unprint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pixma_parse.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testdither.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unprint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xml-curve.Po@am__quote@
+
 .c.o:
-	$(COMPILE) -c $<
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c $<
 
 .c.obj:
-	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ `$(CYGPATH_W) '$<'`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Po"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
 .c.lo:
-	$(LTCOMPILE) -c -o $@ $<
+@am__fastdepCC_TRUE@	if $(LTCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -643,6 +696,7 @@ clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
 	mostlyclean-am
 
 distclean: distclean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-libtool distclean-tags
@@ -668,6 +722,7 @@ install-man:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

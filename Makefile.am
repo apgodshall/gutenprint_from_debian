@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-## $Id: Makefile.am,v 1.144 2005/11/21 11:16:22 rleigh Exp $
+## $Id: Makefile.am,v 1.146 2006/09/14 13:35:45 easysw Exp $
 ## Copyright (C) 2000-2004 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -199,3 +199,4 @@ MAINTAINERCLEANFILES = \
 EXTRA_DIST = autogen.sh ChangeLogStamp
 
 .PHONY: deb html install-cups install-gimp install-ghost snapshot ChangeLogPhony dist-time-check
+

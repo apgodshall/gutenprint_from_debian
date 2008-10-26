@@ -1,5 +1,5 @@
 /*
- * "$Id: pcl-unprint.c,v 1.5 2001/06/03 20:53:24 rlk Exp $"
+ * "$Id: pcl-unprint.c,v 1.5.6.2 2003/01/17 11:15:58 davehill Exp $"
  *
  *   pclunprint.c - convert an HP PCL file into an image file for viewing.
  *
@@ -33,7 +33,12 @@
 #include<ctype.h>
 #include<string.h>
 
-static const char *id="@(#) $Id: pcl-unprint.c,v 1.5 2001/06/03 20:53:24 rlk Exp $";
+static const char *id="@(#) $Id: pcl-unprint.c,v 1.5.6.2 2003/01/17 11:15:58 davehill Exp $";
+
+/*
+ * Size of buffer used to read file
+ */
+#define READ_SIZE 1024
 
 /*
  * Largest data attached to a command. 1024 means that we can have up to 8192
@@ -42,7 +47,7 @@ static const char *id="@(#) $Id: pcl-unprint.c,v 1.5 2001/06/03 20:53:24 rlk Exp
 #define MAX_DATA 1024
 
 FILE *read_fd,*write_fd;
-char read_buffer[1024];
+char read_buffer[READ_SIZE];
 char data_buffer[MAX_DATA];
 char initial_command[3];
 int initial_command_index;
@@ -88,6 +93,7 @@ typedef struct {
     int lcyan_data_rows_per_row;
     char **lmagenta_bufs;
     int lmagenta_data_rows_per_row;
+    int buffer_length;
     int active_height;			/* Height of output data */
     int output_depth;
 } output_t;
@@ -124,11 +130,11 @@ typedef struct {
 #define PCL_RASTER_HEIGHT 17
 #define PCL_START_RASTER 18
 #define PCL_END_RASTER 19
-#define PCL_END_RASTER_NEW 20
+#define PCL_END_COLOUR_RASTER 20
 #define PCL_DATA 21
 #define PCL_DATA_LAST 22
 #define PCL_PRINT_QUALITY 23
-#define PCL_PJL_COMMAND 24
+#define PCL_ENTER_PJL 24
 #define PCL_GRAY_BALANCE 25
 #define PCL_DRIVER_CONFIG 26
 #define PCL_PAGE_ORIENTATION 27
@@ -137,6 +143,16 @@ typedef struct {
 #define PCL_UNIT_OF_MEASURE 30
 #define PCL_RELATIVE_VERTICAL_PIXEL_MOVEMENT 31
 #define PCL_PALETTE_CONFIGURATION 32
+#define PCL_LPI 33
+#define PCL_CPI 34
+#define PCL_PAGE_LENGTH 35
+#define PCL_NUM_COPIES 36
+#define PCL_DUPLEX 37
+#define PCL_MEDIA_SIDE 38
+#define RTL_CONFIGURE 39
+#define PCL_ENTER_PCL 40
+#define PCL_ENTER_HPGL2 41
+#define PCL_NEGATIVE_MOTION 42
 
 typedef struct {
   const char initial_command[3];		/* First part of command */
@@ -150,18 +166,28 @@ const commands_t pcl_commands[] =
     {
 /* Two-character sequences ESC <x> */
 	{ "E", '\0', 0, PCL_RESET, "PCL RESET" },
-	{ "%", '\0', 0, PCL_PJL_COMMAND, "PJL Command" },	/* Special! */
+	{ "%", 'A', 0, PCL_ENTER_PCL, "PCL mode" },
+	{ "%", 'B', 0, PCL_ENTER_HPGL2, "HPGL/2 mode" },
+	{ "%", 'X', 0, PCL_ENTER_PJL, "PJL mode" },
 /* Parameterised sequences */
 /* Raster positioning */
+	{ "&a", 'G', 0, PCL_MEDIA_SIDE, "Set Media Side" },
 	{ "&a", 'H', 0, PCL_LEFTRASTER_POS, "Left Raster Position" },
+	{ "&a", 'N', 0, PCL_NEGATIVE_MOTION, "Negative Motion" },
 	{ "&a", 'V', 0, PCL_TOPRASTER_POS, "Top Raster Position" },
+/* Characters */
+	{ "&k", 'H', 0, PCL_CPI, "Characters per Inch" },
 /* Media */
 	{ "&l", 'A', 0, PCL_MEDIA_SIZE , "Media Size" },
+	{ "&l", 'D', 0, PCL_LPI , "Lines per Inch" },
 	{ "&l", 'E', 0, PCL_TOP_MARGIN , "Top Margin" },
 	{ "&l", 'H', 0, PCL_MEDIA_SOURCE, "Media Source" },
 	{ "&l", 'L', 0, PCL_PERF_SKIP , "Perf. Skip" },
 	{ "&l", 'M', 0, PCL_MEDIA_TYPE , "Media Type" },
 	{ "&l", 'O', 0, PCL_PAGE_ORIENTATION, "Page Orientation" },
+	{ "&l", 'P', 0, PCL_PAGE_LENGTH, "Page Length in Lines" },
+	{ "&l", 'S', 0, PCL_DUPLEX, "Duplex mode" },
+	{ "&l", 'X', 0, PCL_NUM_COPIES, "Number of copies" },
 /* Units */
 	{ "&u", 'D', 0, PCL_UNIT_OF_MEASURE, "Unit of Measure" },	/* from bpd05446 */
 /* Raster data */
@@ -185,13 +211,15 @@ const commands_t pcl_commands[] =
 /* Raster graphics */
 	{ "*r", 'A', 0, PCL_START_RASTER, "Start Raster Graphics" },
 	{ "*r", 'B', 0, PCL_END_RASTER, "End Raster Graphics"},
-	{ "*r", 'C', 0, PCL_END_RASTER_NEW, "End Raster Graphics" },
+	{ "*r", 'C', 0, PCL_END_COLOUR_RASTER, "End Colour Raster Graphics" },
 	{ "*r", 'Q', 0, PCL_RASTERGRAPHICS_QUALITY, "Raster Graphics Quality" },
 	{ "*r", 'S', 0, PCL_RASTER_WIDTH, "Raster Width" },
 	{ "*r", 'T', 0, PCL_RASTER_HEIGHT, "Raster Height" },
 	{ "*r", 'U', 0, PCL_COLOURTYPE, "Colour Type" },
 /* Resolution */
 	{ "*t", 'R', 0, PCL_RESOLUTION, "Resolution" },
+/* RTL/PCL5 */
+	{ "*v", 'W', 1, RTL_CONFIGURE, "RTL Configure Image Data" },
    };
 
 int pcl_find_command (void);
@@ -232,7 +260,7 @@ void fill_buffer(void)
 {
 
     if ((read_pointer == -1) || (read_pointer >= read_size)) {
-	read_size = (int) fread(&read_buffer, sizeof(char), 1024, read_fd);
+	read_size = (int) fread(&read_buffer, sizeof(char), READ_SIZE, read_fd);
 
 #ifdef DEBUG
 	fprintf(stderr, "Read %d characters\n", read_size);
@@ -288,7 +316,7 @@ void pcl_read_command(void)
    ESC & l 26 A ESC & l 0 L. The key to this is that the terminator for
    the first command is in the range 96-126 (lower case).
 
-   There is a problem with the "PJL command" (ESC %) as it does not
+   There is a problem with the "escape command" (ESC %) as it does not
    conform to this specification, so we have to check for it specifically!
 */
 
@@ -362,12 +390,11 @@ void pcl_read_command(void)
 #endif
 
 /* Check to see if this character forms a "two character" command,
-   or is a PJL command. */
+   or is a special command. */
 
-	if (PCL_TWOCHAR(c)
-	    || (c == '%')) {
+	if (PCL_TWOCHAR(c)) {
 #ifdef DEBUG
-	    fprintf(stderr, "Two character or PJL command\n");
+	    fprintf(stderr, "Two character command\n");
 #endif
 	    initial_command[initial_command_index] = '\0';
 	    return;
@@ -421,10 +448,21 @@ void pcl_read_command(void)
 
 	    }
 	    else {
-		fprintf(stderr, "ERROR: Illegal second character %c in parameterised command.\n",
+/* The second character is not legal. If the first character is '%' then allow it
+ * through */
+
+		    if (initial_command[0] == '%') {
+#ifdef DEBUG
+			fprintf(stderr, "ESC%% commmand\n");
+#endif
+			initial_command[initial_command_index] = '\0';
+		    }
+		    else {
+			fprintf(stderr, "ERROR: Illegal second character %c in parameterised command.\n",
 		    c);
-		initial_command[initial_command_index] = '\0';
-		return;
+			initial_command[initial_command_index] = '\0';
+			return;
+		    }
 	    }
 	}	/* Parameterised check */
 
@@ -695,7 +733,7 @@ int decode_tiff(char *in_buffer,		/* I: Data buffer */
 	    fprintf(stderr, "\n");
 #endif
 	    if ((dpos + count + 1) > maxlen) {
-		fprintf(stderr, "ERROR: Too much expanded data (%d), increase MAX_DATA!\n", dpos + count + 1);
+		fprintf(stderr, "ERROR: Too much expanded data (%d)!\n", dpos + count + 1);
 		exit(EXIT_FAILURE);
 	    }
 	    memcpy(&decode_buf[dpos], &in_buffer[pos+1], (size_t) (count + 1));
@@ -707,7 +745,7 @@ int decode_tiff(char *in_buffer,		/* I: Data buffer */
 	    fprintf(stderr, "%02x repeated %d times\n", (unsigned char) in_buffer[pos + 1], 1 - count);
 #endif
 	    if ((dpos + 1 - count) > maxlen) {
-		fprintf(stderr, "ERROR: Too much expanded data (%d), increase MAX_DATA!\n", dpos + 1 - count);
+		fprintf(stderr, "ERROR: Too much expanded data (%d)!\n", dpos + 1 - count);
 		exit(EXIT_FAILURE);
 	    }
 	    memset(&decode_buf[dpos], in_buffer[pos + 1], (size_t) (1 - count));
@@ -813,7 +851,9 @@ int main(int argc, char *argv[])
     output_data.lcyan_data_rows_per_row = 0;
     output_data.lmagenta_bufs = NULL;
     output_data.lmagenta_data_rows_per_row = 0;
+    output_data.buffer_length = 0;
     output_data.active_height = 0;
+    output_data.output_depth = 0;
 
     id = id;				/* Remove compiler warning */
     received_rows = NULL;
@@ -1011,40 +1051,42 @@ int main(int argc, char *argv[])
  * Allocate some storage for the expected planes
  */
 
+		output_data.buffer_length = (image_data.image_width + 7) / 8;
+
 		if (output_data.black_data_rows_per_row != 0) {
 		    output_data.black_bufs = xmalloc(output_data.black_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.black_data_rows_per_row; i++) {
-			output_data.black_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.black_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 		if (output_data.cyan_data_rows_per_row != 0) {
 		    output_data.cyan_bufs = xmalloc(output_data.cyan_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.cyan_data_rows_per_row; i++) {
-			output_data.cyan_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.cyan_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 		if (output_data.magenta_data_rows_per_row != 0) {
 		    output_data.magenta_bufs = xmalloc(output_data.magenta_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.magenta_data_rows_per_row; i++) {
-			output_data.magenta_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.magenta_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 		if (output_data.yellow_data_rows_per_row != 0) {
 		    output_data.yellow_bufs = xmalloc(output_data.yellow_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.yellow_data_rows_per_row; i++) {
-			output_data.yellow_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.yellow_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 		if (output_data.lcyan_data_rows_per_row != 0) {
 		    output_data.lcyan_bufs = xmalloc(output_data.lcyan_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.lcyan_data_rows_per_row; i++) {
-			output_data.lcyan_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.lcyan_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 		if (output_data.lmagenta_data_rows_per_row != 0) {
 		    output_data.lmagenta_bufs = xmalloc(output_data.lmagenta_data_rows_per_row * sizeof (char *));
 		    for (i=0; i < output_data.lmagenta_data_rows_per_row; i++) {
-			output_data.lmagenta_bufs[i] = xmalloc(MAX_DATA * sizeof (char));
+			output_data.lmagenta_bufs[i] = xmalloc(output_data.buffer_length * sizeof (char));
 		    }
 		}
 
@@ -1076,7 +1118,7 @@ int main(int argc, char *argv[])
 		break;
 
 	    case PCL_END_RASTER :
-	    case PCL_END_RASTER_NEW :
+	    case PCL_END_COLOUR_RASTER :
 		fprintf(stderr, "%s\n", pcl_commands[command_index].description);
 
 /*
@@ -1098,6 +1140,8 @@ int main(int argc, char *argv[])
 			image_data.image_height, image_row_counter);
 		else
 		    fprintf(stderr, "\t%d rows processed.\n", image_row_counter);
+
+		image_data.image_height = -1;
 
 		if (output_data.black_data_rows_per_row != 0) {
 		    for (i=0; i < output_data.black_data_rows_per_row; i++) {
@@ -1325,7 +1369,7 @@ int main(int argc, char *argv[])
 
 		for (i=0; i<expected_data_rows_per_row; i++)
 		{
-		    memset(received_rows[i], 0, (size_t) MAX_DATA * sizeof(char));
+		    memset(received_rows[i], 0, (size_t) output_data.buffer_length * sizeof(char));
 		}
 		for (i=0; i<numeric_arg; i++)
 		{
@@ -1348,6 +1392,15 @@ int main(int argc, char *argv[])
 	    case PCL_UNIT_OF_MEASURE :
 	    case PCL_GRAY_BALANCE :
 	    case PCL_DRIVER_CONFIG :
+	    case PCL_LPI :
+	    case PCL_CPI :
+	    case PCL_PAGE_LENGTH :
+	    case PCL_NUM_COPIES :
+	    case PCL_DUPLEX :
+	    case PCL_MEDIA_SIDE :
+	    case RTL_CONFIGURE :
+	    case PCL_ENTER_PCL :
+	    case PCL_NEGATIVE_MOTION :
 		fprintf(stderr, "%s: %d (ignored)", pcl_commands[command_index].description, numeric_arg);
 		if (pcl_commands[command_index].has_data == 1) {
 		    fprintf(stderr, " Data: ");
@@ -1564,7 +1617,7 @@ int main(int argc, char *argv[])
 		    output_data.active_height = numeric_arg;
 		}
 		else
-		    output_data.active_height = decode_tiff(data_buffer, numeric_arg, received_rows[current_data_row], MAX_DATA);
+		    output_data.active_height = decode_tiff(data_buffer, numeric_arg, received_rows[current_data_row], output_data.buffer_length);
 
 		if (command == PCL_DATA_LAST) {
 		    if (image_data.colour_type == PCL_MONO)
@@ -1579,13 +1632,13 @@ int main(int argc, char *argv[])
 
 		break;
 
-	    case PCL_PJL_COMMAND : {
+	    case PCL_ENTER_HPGL2 :
+	    case PCL_ENTER_PJL : {
 		    int c;
-		    fprintf(stderr, "%s\n", pcl_commands[command_index].description);
+		    fprintf(stderr, "%s %d\n", pcl_commands[command_index].description, numeric_arg);
 
 /*
- * This is a special command, actually it is a PJL instruction. Read up
- * to the next ESC and output it.
+ * This is a special command. Read up to the next ESC and output it.
  */
 
 		    c = 0;

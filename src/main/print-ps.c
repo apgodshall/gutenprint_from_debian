@@ -1,9 +1,9 @@
 /*
- * "$Id: print-ps.c,v 1.26 2001/11/09 12:16:53 rlk Exp $"
+ * "$Id: print-ps.c,v 1.26.2.7 2004/06/13 14:33:55 rlk Exp $"
  *
  *   Print plug-in Adobe PostScript driver for the GIMP.
  *
- *   Copyright 1997-2000 Michael Sweet (mike@easysw.com) and
+ *   Copyright 1997-2002 Michael Sweet (mike@easysw.com) and
  *	Robert Krawitz (rlk@alum.mit.edu)
  *
  *   This program is free software; you can redistribute it and/or modify it
@@ -59,15 +59,23 @@ static void	ps_ascii85(const stp_vars_t, unsigned short *, int, int);
 static char	*ppd_find(const char *, const char *, const char *, int *);
 
 
+static char *
+c_strdup(const char *s)
+{
+  char *ret = stp_malloc(strlen(s) + 1);
+  strcpy(ret, s);
+  return ret;
+}
+
 /*
  * 'ps_parameters()' - Return the parameter values for the given parameter.
  */
 
 static stp_param_t *				/* O - Parameter values */
-ps_parameters(const stp_printer_t printer,	/* I - Printer model */
-              const char *ppd_file,		/* I - PPD file (not used) */
-              const char *name,		/* I - Name of parameter */
-              int  *count)		/* O - Number of values */
+ps_parameters_internal(const stp_printer_t printer,	/* I - Printer model */
+		       const char *ppd_file,	/* I - PPD file (not used) */
+		       const char *name,	/* I - Name of parameter */
+		       int  *count)		/* O - Number of values */
 {
   int		i;
   char		line[1024],
@@ -103,15 +111,15 @@ ps_parameters(const stp_printer_t printer,	/* I - Printer model */
       if (strcmp(name, "PageSize") == 0)
 	{
 	  int papersizes = stp_known_papersizes();
-	  valptrs = stp_malloc(sizeof(stp_param_t) * papersizes);
+	  valptrs = stp_zalloc(sizeof(stp_param_t) * papersizes);
 	  *count = 0;
 	  for (i = 0; i < papersizes; i++)
 	    {
 	      const stp_papersize_t pt = stp_get_papersize_by_index(i);
 	      if (strlen(stp_papersize_get_name(pt)) > 0)
 		{
-		  valptrs[*count].name = strdup(stp_papersize_get_name(pt));
-		  valptrs[*count].text = strdup(stp_papersize_get_text(pt));
+		  valptrs[*count].name = c_strdup(stp_papersize_get_name(pt));
+		  valptrs[*count].text = c_strdup(stp_papersize_get_text(pt));
 		  (*count)++;
 		}
 	    }
@@ -124,7 +132,8 @@ ps_parameters(const stp_printer_t printer,	/* I - Printer model */
   rewind(ps_ppd);
   *count = 0;
 
-  valptrs = stp_malloc(100 * sizeof(stp_param_t));
+  /* FIXME -- need to use realloc */
+  valptrs = stp_zalloc(100 * sizeof(stp_param_t));
 
   while (fgets(line, sizeof(line), ps_ppd) != NULL)
   {
@@ -141,8 +150,8 @@ ps_parameters(const stp_printer_t printer,	/* I - Printer model */
       else
         ltext = loption;
 
-      valptrs[(*count)].name = strdup(loption);
-      valptrs[(*count)].text = strdup(ltext);
+      valptrs[(*count)].name = c_strdup(loption);
+      valptrs[(*count)].text = c_strdup(ltext);
       (*count) ++;
     }
   }
@@ -156,10 +165,23 @@ ps_parameters(const stp_printer_t printer,	/* I - Printer model */
     return (valptrs);
 }
 
+static stp_param_t *				/* O - Parameter values */
+ps_parameters(const stp_printer_t printer,	/* I - Printer model */
+              const char *ppd_file,		/* I - PPD file (not used) */
+              const char *name,		/* I - Name of parameter */
+              int  *count)		/* O - Number of values */
+{
+  stp_param_t *answer;
+  setlocale(LC_ALL, "C");
+  answer = ps_parameters_internal(printer, ppd_file, name, count);
+  setlocale(LC_ALL, "");
+  return answer;
+}
+
 static const char *
-ps_default_parameters(const stp_printer_t printer,
-		      const char *ppd_file,
-		      const char *name)
+ps_default_parameters_internal(const stp_printer_t printer,
+			       const char *ppd_file,
+			       const char *name)
 {
   int		i;
   char		line[1024],
@@ -216,7 +238,7 @@ ps_default_parameters(const stp_printer_t printer,
 
     if (strcasecmp(lname, defname) == 0)
     {
-      return strdup(loption);
+      return c_strdup(loption);
     }
   }
 
@@ -228,18 +250,30 @@ ps_default_parameters(const stp_printer_t printer,
   return NULL;
 }
 
+static const char *
+ps_default_parameters(const stp_printer_t printer,
+		      const char *ppd_file,
+		      const char *name)
+{
+  const char *answer;
+  setlocale(LC_ALL, "C");
+  answer = ps_default_parameters_internal(printer, ppd_file, name);
+  setlocale(LC_ALL, "");
+  return answer;
+}
 
 /*
  * 'ps_media_size()' - Return the size of the page.
  */
 
 static void
-ps_media_size(const stp_printer_t printer,	/* I - Printer model */
-	      const stp_vars_t v,		/* I */
-              int  *width,		/* O - Width in points */
-              int  *height)		/* O - Height in points */
+ps_media_size_internal(const stp_printer_t printer,	/* I - Printer model */
+		       const stp_vars_t v,		/* I */
+		       int  *width,		/* O - Width in points */
+		       int  *height)		/* O - Height in points */
 {
   char	*dimensions;			/* Dimensions of media size */
+  float fwidth, fheight;
 
   stp_dprintf(STP_DBG_PS, v,
 	      "ps_media_size(%d, \'%s\', \'%s\', %08x, %08x)\n",
@@ -250,23 +284,39 @@ ps_media_size(const stp_printer_t printer,	/* I - Printer model */
   if ((dimensions = ppd_find(stp_get_ppd_file(v), "PaperDimension",
 			     stp_get_media_size(v), NULL))
       != NULL)
-    sscanf(dimensions, "%d%d", width, height);
+    {
+      sscanf(dimensions, "%f%f", &fwidth, &fheight);
+      *width = fwidth;
+      *height = fheight;
+      stp_dprintf(STP_DBG_PS, v, "dimensions '%s' %f %f %d %d\n",
+		  dimensions, fwidth, fheight, *width, *height);
+    }
   else
     stp_default_media_size(printer, v, width, height);
 }
 
+static void
+ps_media_size(const stp_printer_t printer,	/* I - Printer model */
+	      const stp_vars_t v,		/* I */
+              int  *width,		/* O - Width in points */
+              int  *height)		/* O - Height in points */
+{
+  setlocale(LC_ALL, "C");
+  ps_media_size_internal(printer, v, width, height);
+  setlocale(LC_ALL, "");
+}
 
 /*
  * 'ps_imageable_area()' - Return the imageable area of the page.
  */
 
 static void
-ps_imageable_area(const stp_printer_t printer,	/* I - Printer model */
-		  const stp_vars_t v,      /* I */
-                  int  *left,		/* O - Left position in points */
-                  int  *right,		/* O - Right position in points */
-                  int  *bottom,		/* O - Bottom position in points */
-                  int  *top)		/* O - Top position in points */
+ps_imageable_area_internal(const stp_printer_t printer,	/* I - Printer model */
+			   const stp_vars_t v,      /* I */
+			   int  *left,	/* O - Left position in points */
+			   int  *right,	/* O - Right position in points */
+			   int  *bottom, /* O - Bottom position in points */
+			   int  *top)	/* O - Top position in points */
 {
   char	*area;				/* Imageable area of media */
   float	fleft,				/* Floating point versions */
@@ -301,6 +351,19 @@ ps_imageable_area(const stp_printer_t printer,	/* I - Printer model */
 }
 
 static void
+ps_imageable_area(const stp_printer_t printer,	/* I - Printer model */
+		  const stp_vars_t v,      /* I */
+                  int  *left,		/* O - Left position in points */
+                  int  *right,		/* O - Right position in points */
+                  int  *bottom,		/* O - Bottom position in points */
+                  int  *top)		/* O - Top position in points */
+{
+  setlocale(LC_ALL, "C");
+  ps_imageable_area_internal(printer, v, left, right, bottom, top);
+  setlocale(LC_ALL, "");
+}
+
+static void
 ps_limit(const stp_printer_t printer,	/* I - Printer model */
 	    const stp_vars_t v,  		/* I */
 	    int *width,
@@ -318,8 +381,8 @@ ps_limit(const stp_printer_t printer,	/* I - Printer model */
  * This is really bogus...
  */
 static void
-ps_describe_resolution(const stp_printer_t printer,
-			const char *resolution, int *x, int *y)
+ps_describe_resolution_internal(const stp_printer_t printer,
+				const char *resolution, int *x, int *y)
 {
   *x = -1;
   *y = -1;
@@ -327,14 +390,23 @@ ps_describe_resolution(const stp_printer_t printer,
   return;
 }
 
+static void
+ps_describe_resolution(const stp_printer_t printer,
+			const char *resolution, int *x, int *y)
+{
+  setlocale(LC_ALL, "C");
+  ps_describe_resolution_internal(printer, resolution, x, y);
+  setlocale(LC_ALL, "");
+}
+
 /*
  * 'ps_print()' - Print an image to a PostScript printer.
  */
 
 static void
-ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
-         stp_image_t *image,		/* I - Image to print */
-	 const stp_vars_t v)
+ps_print_internal(const stp_printer_t printer,	/* I - Model (Level 1 or 2) */
+		  stp_image_t *image,		/* I - Image to print */
+		  const stp_vars_t v)
 {
   unsigned char *cmap = stp_get_cmap(v);
   int		model = stp_printer_get_model(printer);
@@ -367,10 +439,12 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
   stp_convert_t	colorfunc;	/* Color conversion function... */
   int		zero_mask;
   char		*command;	/* PostScript command */
+  const char	*temp;		/* Temporary string pointer */
   int		order,		/* Order of command */
 		num_commands;	/* Number of commands */
   struct			/* PostScript commands... */
   {
+    const char	*keyword, *choice;
     char	*command;
     int		order;
   }		commands[4];
@@ -455,6 +529,7 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
   stp_zprintf(v, "%%%%Creator: %s/Gimp-Print\n", image->get_appname(image));
 #endif
   stp_zprintf(v, "%%%%CreationDate: %s", ctime(&curtime));
+  stp_puts("%Copyright: 1997-2002 by Michael Sweet (mike@easysw.com) and Robert Krawitz (rlk@alum.mit.edu)\n", v);
   stp_zprintf(v, "%%%%BoundingBox: %d %d %d %d\n",
           left, top - out_height, left + out_width, top);
   stp_puts("%%DocumentData: Clean7Bit\n", v);
@@ -462,8 +537,6 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
   stp_puts("%%Pages: 1\n", v);
   stp_puts("%%Orientation: Portrait\n", v);
   stp_puts("%%EndComments\n", v);
-  stp_puts("%Copyright: 1997-2000 by Michael Sweet (mike@easysw.com) and Robert Krawitz (rlk@alum.mit.edu)\n", v);
-  stp_puts("%%EndProlog\n", v);
 
  /*
   * Find any printer-specific commands...
@@ -473,6 +546,8 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
   if ((command = ppd_find(ppd_file, "PageSize", media_size, &order)) != NULL)
   {
+    commands[num_commands].keyword = "PageSize";
+    commands[num_commands].choice  = media_size;
     commands[num_commands].command = stp_malloc(strlen(command) + 1);
     strcpy(commands[num_commands].command, command);
     commands[num_commands].order   = order;
@@ -481,6 +556,8 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
   if ((command = ppd_find(ppd_file, "InputSlot", media_source, &order)) != NULL)
   {
+    commands[num_commands].keyword = "InputSlot";
+    commands[num_commands].choice  = media_source;
     commands[num_commands].command = stp_malloc(strlen(command) + 1);
     strcpy(commands[num_commands].command, command);
     commands[num_commands].order   = order;
@@ -489,6 +566,8 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
   if ((command = ppd_find(ppd_file, "MediaType", media_type, &order)) != NULL)
   {
+    commands[num_commands].keyword = "MediaType";
+    commands[num_commands].choice  = media_type;
     commands[num_commands].command = stp_malloc(strlen(command) + 1);
     strcpy(commands[num_commands].command, command);
     commands[num_commands].order   = order;
@@ -497,6 +576,8 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
   if ((command = ppd_find(ppd_file, "Resolution", resolution, &order)) != NULL)
   {
+    commands[num_commands].keyword = "Resolution";
+    commands[num_commands].choice  = resolution;
     commands[num_commands].command = stp_malloc(strlen(command) + 1);
     strcpy(commands[num_commands].command, command);
     commands[num_commands].order   = order;
@@ -511,12 +592,21 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
     for (j = i + 1; j < num_commands; j ++)
       if (commands[j].order < commands[i].order)
       {
+        temp                = commands[i].keyword;
+        commands[i].keyword = commands[j].keyword;
+        commands[j].keyword = temp;
+
+        temp                = commands[i].choice;
+        commands[i].choice  = commands[j].choice;
+        commands[j].choice  = temp;
+
         order               = commands[i].order;
+        commands[i].order   = commands[j].order;
+        commands[j].order   = order;
+
         command             = commands[i].command;
         commands[i].command = commands[j].command;
-        commands[i].order   = commands[j].order;
         commands[j].command = command;
-        commands[j].order   = order;
       }
 
  /*
@@ -525,16 +615,26 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
   if (num_commands > 0)
   {
-    stp_puts("%%BeginProlog\n", v);
+    stp_puts("%%BeginSetup\n", v);
 
     for (i = 0; i < num_commands; i ++)
     {
-      stp_puts(commands[i].command, v);
-      stp_puts("\n", v);
+      stp_puts("[{\n", v);
+      stp_zprintf(v, "%%%%BeginFeature: *%s %s\n", commands[i].keyword,
+                  commands[i].choice);
+      if (commands[i].command[0])
+      {
+	stp_puts(commands[i].command, v);
+	if (commands[i].command[strlen(commands[i].command) - 1] != '\n')
+          stp_puts("\n", v);
+      }
+
+      stp_puts("%%EndFeature\n", v);
+      stp_puts("} stopped cleartomark\n", v);
       stp_free(commands[i].command);
     }
 
-    stp_puts("%%EndProlog\n", v);
+    stp_puts("%%EndSetup\n", v);
   }
 
  /*
@@ -545,12 +645,19 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
   stp_puts("gsave\n", v);
 
   stp_zprintf(v, "%d %d translate\n", left, top);
+
+  /* Force locale to "C", because decimal numbers in Postscript must
+     always be printed with a decimal point rather than the
+     locale-specific setting. */
+
+  setlocale(LC_ALL, "C");
   stp_zprintf(v, "%.3f %.3f scale\n",
           (double)out_width / ((double)image_width),
           (double)out_height / ((double)image_height));
+  setlocale(LC_ALL, "");
 
-  in  = stp_malloc(image_width * image_bpp);
-  out = stp_malloc((image_width * out_bpp + 3) * 2);
+  in  = stp_zalloc(image_width * image_bpp);
+  out = stp_zalloc((image_width * out_bpp + 3) * 2);
 
   stp_compute_lut(nv, 256);
 
@@ -649,6 +756,16 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
   stp_free_vars(nv);
 }
 
+static void
+ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
+         stp_image_t *image,		/* I - Image to print */
+	 const stp_vars_t v)
+{
+  setlocale(LC_ALL, "C");
+  ps_print_internal(printer, image, v);
+  setlocale(LC_ALL, "");
+}
+
 
 /*
  * 'ps_hex()' - Print binary data as a series of hexadecimal numbers.
@@ -656,10 +773,10 @@ ps_print(const stp_printer_t printer,		/* I - Model (Level 1 or 2) */
 
 static void
 ps_hex(const stp_vars_t v,	/* I - File to print to */
-       unsigned short *data,	/* I - Data to print */
-       int    length)	/* I - Number of bytes to print */
+       unsigned short   *data,	/* I - Data to print */
+       int              length)	/* I - Number of bytes to print */
 {
-  int		col;	/* Current column */
+  int		col;		/* Current column */
   static const char	*hex = "0123456789ABCDEF";
 
 
@@ -668,7 +785,7 @@ ps_hex(const stp_vars_t v,	/* I - File to print to */
   {
     unsigned char pixel = (*data & 0xff00) >> 8;
    /*
-    * Put the hex chars out to the file; note that we don't use fprintf()
+    * Put the hex chars out to the file; note that we don't use stp_zprintf()
     * for speed reasons...
     */
 
@@ -678,9 +795,12 @@ ps_hex(const stp_vars_t v,	/* I - File to print to */
     data ++;
     length --;
 
-    col = (col + 1) & 31;
-    if (col == 0)
+    col += 2;
+    if (col >= 72)
+    {
+      col = 0;
       stp_putc('\n', v);
+    }
   }
 
   if (col > 0)
@@ -693,15 +813,15 @@ ps_hex(const stp_vars_t v,	/* I - File to print to */
  */
 
 static void
-ps_ascii85(const stp_vars_t v,		/* I - File to print to */
+ps_ascii85(const          stp_vars_t v,	/* I - File to print to */
 	   unsigned short *data,	/* I - Data to print */
-	   int    length,	/* I - Number of bytes to print */
-	   int    last_line)	/* I - Last line of raster data? */
+	   int            length,	/* I - Number of bytes to print */
+	   int            last_line)	/* I - Last line of raster data? */
 {
-  int		i;		/* Looping var */
-  unsigned	b;		/* Binary data word */
-  unsigned char	c[5];		/* ASCII85 encoded chars */
-  static int	column = 0;	/* Current column */
+  int		i;			/* Looping var */
+  unsigned	b;			/* Binary data word */
+  unsigned char	c[5];			/* ASCII85 encoded chars */
+  static int	column = 0;		/* Current column */
 
 
   while (length > 3)
@@ -774,8 +894,8 @@ ps_ascii85(const stp_vars_t v,		/* I - File to print to */
 
 static char *			/* O - Control string */
 ppd_find(const char *ppd_file,	/* I - Name of PPD file */
-         const char *name,		/* I - Name of parameter */
-         const char *option,		/* I - Value of parameter */
+         const char *name,	/* I - Name of parameter */
+         const char *option,	/* I - Value of parameter */
          int  *order)		/* O - Order of the control string */
 {
   char		line[1024],	/* Line from file */
@@ -788,7 +908,7 @@ ppd_find(const char *ppd_file,	/* I - Name of PPD file */
   if (ppd_file == NULL || name == NULL || option == NULL)
     return (NULL);
   if (!value)
-    value = stp_malloc(32768);
+    value = stp_zalloc(32768);
 
   if (ps_ppd_file == NULL || strcmp(ps_ppd_file, ppd_file) != 0)
   {
@@ -864,5 +984,7 @@ const stp_printfuncs_t stp_ps_printfuncs =
   ps_print,
   ps_default_parameters,
   ps_describe_resolution,
-  stp_verify_printer_params
+  stp_verify_printer_params,
+  stp_start_job,
+  stp_end_job
 };

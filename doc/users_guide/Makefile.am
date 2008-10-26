@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.28 2001/11/08 13:15:18 rlk Exp $
+## $Id: Makefile.am,v 1.28.2.4 2003/12/07 14:57:33 rlk Exp $
 ## Copyright (C) 2001 Andy Stewart and Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -27,6 +27,13 @@ MAINT_CHARSET = latin1
 ## Variables
 
 MANUAL = users-guide
+MANUAL_SRC_FILES = $(srcdir)/$(MANUAL).sgml \
+	$(srcdir)/title.sgml \
+	$(srcdir)/history.sgml \
+	$(srcdir)/gimp.sgml \
+	$(srcdir)/cups.sgml \
+	$(srcdir)/utils.sgml \
+	$(srcdir)/gfdl.sgml
 HTMLDIR = html
 
 OUTPUTS = \
@@ -94,7 +101,7 @@ dist-hook: $(USER_GUIDE)
 	fi ; \
 	done
 
-$(MANUAL).pdf:  ./$(MANUAL).sgml
+$(MANUAL).pdf:  $(MANUAL_SRC_FILES)
 	if test $(srcdir) = '.' ; then \
 	  : ; \
 	else \
@@ -121,11 +128,19 @@ pdf: $(MANUAL).pdf
 
 ps: $(MANUAL).ps
 
-$(MANUAL).ps:  $(MANUAL).sgml $(EPS_IMAGES)
-	sed -e 's/\.png"/.eps"/g' -e 's/FORMAT="PNG"/FORMAT="EPS"/g' $< > $(MANUAL)-eps.sgml
+$(MANUAL).ps:  $(MANUAL_SRC_FILES) $(EPS_IMAGES)
+	for i in $(MANUAL_SRC_FILES); do \
+		j=`basename $$i .sgml`; \
+		sed -e 's/\.png"/.eps"/g' \
+		    -e 's/FORMAT="PNG"/FORMAT="EPS"/g' $$i > $$j-eps.sgml; \
+	done
+	cat $(MANUAL).sgml | sed -e 's/\.sgml"/-eps.sgml"/g' > $(MANUAL)-eps.sgml	
 	$(DB2PS) $(MANUAL)-eps.sgml
 	mv $(MANUAL)-eps.ps $(MANUAL).ps
-	-$(RM) -f $(MANUAL)-eps.*
+	for i in $(MANUAL_SRC_FILES); do \
+		j=`basename $$i .sgml`; \
+		$(RM) -f $${j}-eps.*; \
+	done
 
 %.eps:
 	if test ! -d figures ; then mkdir figures ; fi
@@ -136,7 +151,7 @@ html: html-stamp
 # This ugly workaround with SOURCE is because db2html doesn't seem to like
 # "./users-guide.sgml".  Note that db2ps does not have the same limitation.
 # html-stamp should *only* be called by html--it's just a timestamp!
-html-stamp: $(MANUAL).sgml $(PNG_IMAGES)
+html-stamp: $(srcdir)/$(MANUAL).sgml $(PNG_IMAGES)
 	if test $(srcdir) = '.' ; then \
 	  : ; \
 	else \
@@ -165,29 +180,29 @@ install-data-local: $(STANDARD_TARGETS)
 	    $(INSTALL_DATA) $(srcdir)/$(MANUAL).pdf $(DESTDIR)$(datadir)/$(PACKAGE)/doc ; \
 	  fi ; \
 	  if test -d $(HTMLDIR) ; then \
-	    cd $(HTMLDIR) ; \
+	    HTMLGENDIR="$(HTMLDIR)" ; \
 	  elif test -d $(srcdir)/$(HTMLDIR) ; then \
-	    cd $(srcdir)/$(HTMLDIR) ; \
+	    HTMLGENDIR="$(srcdir)/$(HTMLDIR)" ; \
 	  else \
 	    exit 1 ; \
 	  fi ; \
-	  for file in *.html *.css ; do \
+	  for file in $$HTMLGENDIR/*.html $$HTMLGENDIR/*.css ; do \
 	    if test -f $$file ; then \
 	      $(INSTALL_DATA) $$file $(DESTDIR)$(datadir)/$(PACKAGE)/doc/html ; \
 	    fi ; \
 	  done ; \
-	  cd figures ; \
-	  for file in *.png ; do \
+	  for file in $$HTMLGENDIR/figures/*.png ; do \
 	    if test -f $$file ; then \
 	      $(INSTALL_DATA) $$file $(DESTDIR)$(datadir)/$(PACKAGE)/doc/html/figures ; \
 	    fi ; \
 	  done ; \
-	  cd ../stylesheet-images ; \
-	  for file in * ; do \
-	    if test -f $$file ; then \
-	      $(INSTALL_DATA) $$file $(DESTDIR)$(datadir)/$(PACKAGE)/doc/html/stylesheet-images ; \
-	    fi ; \
-	  done ; \
+	  if test -d $$HTMLGENDIR/stylesheet-images ; then \
+	    for file in $$HTMLGENDIR/stylesheet-images/* ; do \
+	      if test -f $$file ; then \
+	        $(INSTALL_DATA) $$file $(DESTDIR)$(datadir)/$(PACKAGE)/doc/html/stylesheet-images ; \
+	      fi ; \
+	    done ; \
+	  fi ; \
 	fi
 
 uninstall-local:
@@ -210,7 +225,7 @@ clean-local:
 	if test $(srcdir) = "." ; then \
 	  : ; \
 	else \
-	  $(RM) -f $(MANUAL).sgml ; \
+	  $(RM) -f $(MANUAL_SRC_FILES); \
 	  $(RM) -rf figures ; \
 	fi
 	-$(RM) -rf *.tex *.log *.aux *.dvi *.gz *.out *.junk *.out *.fot
@@ -263,6 +278,6 @@ help:
 MAINTAINERCLEANFILES = Makefile.in html-stamp
 
 
-EXTRA_DIST = README $(MANUAL).sgml html-stamp
+EXTRA_DIST = README $(MANUAL_SRC_FILES) html-stamp
 
 .PHONY: docs html ps pdf help

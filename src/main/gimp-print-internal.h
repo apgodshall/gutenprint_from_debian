@@ -1,5 +1,5 @@
 /*
- * "$Id: gimp-print-internal.h,v 1.43 2001/09/08 17:19:31 rlk Exp $"
+ * "$Id: gimp-print-internal.h,v 1.43.4.4 2002/12/08 21:12:41 rlk Exp $"
  *
  *   Print plug-in header file for the GIMP.
  *
@@ -37,32 +37,24 @@
 #include <config.h>
 #endif
 
-#ifndef HAVE_ASPRINTF
-#if defined(HAVE_VARARGS_H) && !defined(HAVE_STDARG_H)
-#include <varargs.h>
-#else
-#include <stdarg.h>
-#endif
-extern int vasprintf (char **result, const char *format, va_list args);
-extern int asprintf (char **result, const char *format, ...);
-#endif
-
 /*
  * ECOLOR_K must be 0
  */
-#define ECOLOR_K 0
-#define ECOLOR_C 1
-#define ECOLOR_M 2
-#define ECOLOR_Y 3
+#define ECOLOR_K  0
+#define ECOLOR_C  1
+#define ECOLOR_M  2
+#define ECOLOR_Y  3
+#define ECOLOR_LC 4
+#define ECOLOR_LM 5
+#define ECOLOR_LY 6
 #define NCOLORS (4)
-#define NCHANNELS (7)
 #define MAX_WEAVE (8)
 
 typedef struct
 {
   double value;
   unsigned bit_pattern;
-  int is_dark;
+  int subchannel;
   unsigned dot_size;
 } stp_simple_dither_range_t;
 
@@ -72,7 +64,7 @@ typedef struct
   double lower;
   double upper;
   unsigned bit_pattern;
-  int is_dark;
+  int subchannel;
   unsigned dot_size;
 } stp_dither_range_t;
 
@@ -80,8 +72,21 @@ typedef struct
 {
    double value[2];
    unsigned bits[2];
-   int isdark[2];
+   int subchannel[2];
 } stp_full_dither_range_t;
+
+typedef struct
+{
+  unsigned subchannel_count;
+  unsigned char **c;
+} stp_channel_t;
+
+typedef struct
+{
+  unsigned channel_count;
+  stp_channel_t *c;
+} stp_dither_data_t;
+
 
 typedef struct			/* Weave parameters for a specific row */
 {
@@ -114,57 +119,24 @@ typedef struct			/* Weave parameters for a specific pass */
   int subpass;
 } stp_pass_t;
 
-typedef union {			/* Offsets from the start of each line */
-  unsigned long v[NCHANNELS];		/* (really pass) */
-  struct {
-    unsigned long k;
-    unsigned long m;
-    unsigned long c;
-    unsigned long y;
-    unsigned long M;
-    unsigned long C;
-    unsigned long Y;
-  } p;
+typedef struct {		/* Offsets from the start of each line */
+  int ncolors;
+  unsigned long *v;		/* (really pass) */
 } stp_lineoff_t;
 
-typedef union {			/* Is this line active? */
-  char v[NCHANNELS];			/* (really pass) */
-  struct {
-    char k;
-    char m;
-    char c;
-    char y;
-    char M;
-    char C;
-    char Y;
-  } p;
+typedef struct {		/* Is this line (really pass) active? */
+  int ncolors;
+  char *v;
 } stp_lineactive_t;
 
-typedef union {		/* number of rows for a pass */
-  int v[NCHANNELS];		/* (really pass) */
-  struct {
-    int k;
-    int m;
-    int c;
-    int y;
-    int M;
-    int C;
-    int Y;
-  } p;
+typedef struct {		/* number of rows for a pass */
+  int ncolors;
+  int *v;
 } stp_linecount_t;
 
-
-typedef union {			/* Base pointers for each pass */
-  unsigned char *v[NCHANNELS];
-  struct {
-    unsigned char *k;
-    unsigned char *m;
-    unsigned char *c;
-    unsigned char *y;
-    unsigned char *M;
-    unsigned char *C;
-    unsigned char *Y;
-  } p;
+typedef struct {		/* Base pointers for each pass */
+  int ncolors;
+  unsigned char **v;
 } stp_linebufs_t;
 
 typedef struct stp_softweave
@@ -194,7 +166,7 @@ typedef struct stp_softweave
   int vmod;			/* Number of banks of passes */
   int oversample;		/* Excess precision per row */
   int repeat_count;		/* How many times a pass is repeated */
-  int ncolors;			/* How many colors (1, 4, or 6) */
+  int ncolors;			/* How many colors */
   int linewidth;		/* Line width in input pixels */
   int vertical_height;		/* Image height in output pixels */
   int firstline;		/* Actual first line (referenced to paper) */
@@ -203,13 +175,8 @@ typedef struct stp_softweave
   int lineno;
   int vertical_oversample;	/* Vertical oversampling */
   int current_vertical_subpass;
-  int separation_rows;		/* Vertical spacing between rows. */
-				/* This is used for the 1520/3000, which */
-				/* use a funny value for the "print density */
-				/* in the vertical direction". */
   int horizontal_width;		/* Horizontal width, in bits */
-  int last_color;
-  int head_offset[NCHANNELS];		/* offset of printheads */
+  int *head_offset;		/* offset of printheads */
   unsigned char *s[MAX_WEAVE];
   unsigned char *fold_buf;
   unsigned char *comp_buf;
@@ -253,10 +220,6 @@ typedef struct stp_dither_matrix
   int prescaled;
   const void *data;
 } stp_dither_matrix_t;
-
-extern const stp_dither_matrix_short_t stp_1_1_matrix;
-extern const stp_dither_matrix_short_t stp_2_1_matrix;
-extern const stp_dither_matrix_short_t stp_4_1_matrix;
 
 /*
  * Prototypes...
@@ -314,13 +277,14 @@ extern int	stp_dither_get_last_position(void *vd, int color, int dark);
 
 extern void	stp_free_dither(void *);
 
+extern stp_dither_data_t *stp_create_dither_data(void);
+extern void	stp_add_channel(stp_dither_data_t *d, unsigned char *data,
+				unsigned channel, unsigned subchannel);
+extern void	stp_free_dither_data(stp_dither_data_t *d);
 
 extern void	stp_dither(const unsigned short *, int, void *,
-			   unsigned char *,
-			   unsigned char *, unsigned char *,
-			   unsigned char *, unsigned char *,
-			   unsigned char *, unsigned char *,
-			   int duplicate_line, int zero_mask);
+			   stp_dither_data_t *, int duplicate_line,
+			   int zero_mask);
 
 extern void	stp_fold(const unsigned char *line, int single_height,
 			 unsigned char *outbuf);
@@ -356,7 +320,7 @@ extern int	stp_pack_uncompressed(const unsigned char *line, int height,
 extern void *stp_initialize_weave(int jets, int separation, int oversample,
 				  int horizontal, int vertical,
 				  int ncolors, int width, int linewidth,
-				  int lineheight, int vertical_row_separation,
+				  int lineheight,
 				  int first_line, int phys_lines, int strategy,
                                   int *head_offset,  /* Get from model - used for 480/580 printers */
 				  stp_vars_t v,
@@ -385,7 +349,10 @@ extern void stp_fill_uncompressed(stp_softweave_t *sw, int row, int subpass,
 extern int stp_compute_tiff_linewidth(const stp_softweave_t *sw, int n);
 extern int stp_compute_uncompressed_linewidth(const stp_softweave_t *sw, int n);
 
-
+extern int stp_start_job(const stp_printer_t printer,
+			 stp_image_t *image, const stp_vars_t v);
+extern int stp_end_job(const stp_printer_t printer,
+		       stp_image_t *image, const stp_vars_t v);
 
 extern void stp_flush_all(void *, int model, int width, int hoffset,
 			  int ydpi, int xdpi, int physical_xdpi);
@@ -399,7 +366,7 @@ stp_write_weave(void *        vsw,
 		int           offset,	/* I - Offset from left side of page */
 		int		xdpi,
 		int		physical_xdpi,
-		const unsigned char *cols[]);
+		unsigned char *const cols[]);
 
 extern stp_lineoff_t *
 stp_get_lineoffsets_by_pass(const stp_softweave_t *sw, int pass);
@@ -450,11 +417,15 @@ extern void stp_erprintf(const char *format, ...);
 #define STP_DBG_LEXMARK		0x80
 #define STP_DBG_WEAVE_PARAMS	0x100
 #define STP_DBG_ROWS		0x200
+#define STP_DBG_MARK_FILE       0x400
 extern void stp_dprintf(unsigned long level, const stp_vars_t v,
 			const char *format, ...);
 extern void stp_deprintf(unsigned long level, const char *format, ...);
+extern unsigned long stp_debug_level;
 
 extern void *stp_malloc (size_t);
+extern void *stp_zalloc (size_t);
+extern void *stp_realloc (void *ptr, size_t);
 extern void stp_free(void *ptr);
 
 /* Uncomment the next line to get performance statistics:
@@ -520,5 +491,5 @@ extern void  print_timers(void );
 
 #endif /* _GIMP_PRINT_INTERNAL_H_ */
 /*
- * End of "$Id: gimp-print-internal.h,v 1.43 2001/09/08 17:19:31 rlk Exp $".
+ * End of "$Id: gimp-print-internal.h,v 1.43.4.4 2002/12/08 21:12:41 rlk Exp $".
  */

@@ -1,9 +1,9 @@
 /*
- * "$Id: rastertoprinter.c,v 1.19 2001/09/02 13:30:26 rlk Exp $"
+ * "$Id: rastertoprinter.c,v 1.19.4.15 2004/03/26 03:29:39 rlk Exp $"
  *
  *   GIMP-print based raster filter for the Common UNIX Printing System.
  *
- *   Copyright 1993-2001 by Easy Software Products.
+ *   Copyright 1993-2003 by Easy Software Products.
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License,
@@ -57,12 +57,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#ifdef HAVE_LIMITS_H
+#include <limits.h>
+#endif
 #ifdef INCLUDE_GIMP_PRINT_H
 #include INCLUDE_GIMP_PRINT_H
 #else
 #include <gimp-print/gimp-print.h>
 #endif
 #include "../../lib/libprintut.h"
+
+/* Solaris with gcc has problems because gcc's limits.h doesn't #define */
+/* this */
+#ifndef CHAR_BIT
+#define CHAR_BIT 8
+#endif
 
 /*
  * Structure for page raster data...
@@ -73,6 +82,12 @@ typedef struct
   cups_raster_t		*ras;		/* Raster stream to read from */
   int			page;		/* Current page number */
   int			row;		/* Current row number */
+  int			left;
+  int			right;
+  int			bottom;
+  int			top;
+  int			width;
+  int			height;
   cups_page_header_t	header;		/* Page header from file */
 } cups_image_t;
 
@@ -265,13 +280,14 @@ main(int  argc,				/* I - Number of command-line arguments */
   * Figure out which driver to use...
   */
 
-  if ((printer = stp_get_printer_by_driver(ppd->modelname)) == NULL)
-  {
-    fprintf(stderr, "ERROR: Fatal error: Unable to find driver named \"%s\"!\n",
-            ppd->modelname);
-    ppdClose(ppd);
-    return (1);
-  }
+  if ((printer = stp_get_printer_by_long_name(ppd->modelname)) == NULL)
+    if ((printer = stp_get_printer_by_driver(ppd->modelname)) == NULL)
+    {
+      fprintf(stderr, "ERROR: Fatal error: Unable to find driver named \"%s\"!\n",
+              ppd->modelname);
+      ppdClose(ppd);
+      return (1);
+    }
 
   ppdClose(ppd);
 
@@ -301,10 +317,28 @@ main(int  argc,				/* I - Number of command-line arguments */
   cups.ras = cupsRasterOpen(fd, CUPS_RASTER_READ);
 
  /*
+  * Setup default print variables...
+  */
+
+  v = stp_allocate_copy(stp_printer_get_printvars(printer));
+
+  stp_set_scaling(v, 0); /* No scaling */
+  stp_set_cmap(v, NULL);
+  stp_set_left(v, 0);
+  stp_set_top(v, 0);
+  stp_set_orientation(v, ORIENT_PORTRAIT);
+  stp_set_outfunc(v, cups_writefunc);
+  stp_set_errfunc(v, cups_writefunc);
+  stp_set_outdata(v, stdout);
+  stp_set_errdata(v, stderr);
+  stp_set_job_mode(v, STP_JOB_MODE_JOB);
+
+ /*
   * Process pages as needed...
   */
 
   cups.page = 0;
+
 
   while (cupsRasterReadHeader(cups.ras, &cups.header))
   {
@@ -312,8 +346,10 @@ main(int  argc,				/* I - Number of command-line arguments */
     * Update the current page...
     */
 
-    cups.page ++;
     cups.row = 0;
+
+    fprintf(stderr, "PAGE: %d 1\n", cups.page + 1);
+    /* use 1-based page logging */
 
    /*
     * Debugging info...
@@ -370,45 +406,27 @@ main(int  argc,				/* I - Number of command-line arguments */
     * Setup printer driver variables...
     */
 
-    v = stp_allocate_copy(stp_printer_get_printvars(printer));
-
-    stp_set_app_gamma(v, 1.0);
-    stp_set_brightness(v, stp_brightness);
-    stp_set_contrast(v, stp_contrast);
-    stp_set_cyan(v, stp_cyan);
-    stp_set_magenta(v, stp_magenta);
-    stp_set_yellow(v, stp_yellow);
-    stp_set_saturation(v, stp_saturation);
-    stp_set_density(v, stp_density);
-    stp_set_scaling(v, 0); /* No scaling */
-    stp_set_cmap(v, NULL);
     stp_set_page_width(v, cups.header.PageSize[0]);
     stp_set_page_height(v, cups.header.PageSize[1]);
-    stp_set_orientation(v, ORIENT_PORTRAIT);
-    stp_set_gamma(v, stp_gamma);
     stp_set_image_type(v, cups.header.cupsRowCount);
-    stp_set_outfunc(v, cups_writefunc);
-    stp_set_errfunc(v, cups_writefunc);
-    stp_set_outdata(v, stdout);
-    stp_set_errdata(v, stderr);
 
     switch (cups.header.cupsColorSpace)
     {
       case CUPS_CSPACE_W :
-          stp_set_output_type(v, OUTPUT_GRAY);
+	  stp_set_output_type(v, OUTPUT_GRAY);
 	  break;
       case CUPS_CSPACE_K :
-          stp_set_output_type(v, OUTPUT_MONOCHROME);
+	  stp_set_output_type(v, OUTPUT_MONOCHROME);
 	  break;
       case CUPS_CSPACE_RGB :
-          stp_set_output_type(v, OUTPUT_COLOR);
+	  stp_set_output_type(v, OUTPUT_COLOR);
 	  break;
       case CUPS_CSPACE_CMYK :
-          stp_set_output_type(v, OUTPUT_RAW_CMYK);
+	  stp_set_output_type(v, OUTPUT_RAW_CMYK);
 	  break;
       default :
-          fprintf(stderr, "ERROR: Bad colorspace %d!",
-	          cups.header.cupsColorSpace);
+	  fprintf(stderr, "ERROR: Bad colorspace %d!",
+		  cups.header.cupsColorSpace);
 	  break;
     }
 
@@ -416,14 +434,17 @@ main(int  argc,				/* I - Number of command-line arguments */
       fprintf(stderr, "ERROR: Unable to set dither algorithm!\n");
     else
       stp_set_dither_algorithm(v,
-                               stp_dither_algorithm_name(cups.header.cupsRowStep));
+			       stp_dither_algorithm_name(cups.header.cupsRowStep));
 
-    stp_set_media_source(v, cups.header.MediaClass);
-    stp_set_media_type(v, cups.header.MediaType);
-    stp_set_ink_type(v, cups.header.OutputType);
+    if (cups.header.MediaClass && strlen(cups.header.MediaClass) > 0)
+      stp_set_media_source(v, cups.header.MediaClass);
+    if (cups.header.MediaType && strlen(cups.header.MediaType) > 0)
+      stp_set_media_type(v, cups.header.MediaType);
+    if (cups.header.OutputType && strlen(cups.header.OutputType) > 0)
+      stp_set_ink_type(v, cups.header.OutputType);
 
     fprintf(stderr, "DEBUG: PageSize = %dx%d\n", cups.header.PageSize[0],
-            cups.header.PageSize[1]);
+	    cups.header.PageSize[1]);
 
     if ((size = stp_get_papersize_by_size(cups.header.PageSize[1],
 					  cups.header.PageSize[0])) != NULL)
@@ -436,11 +457,17 @@ main(int  argc,				/* I - Number of command-line arguments */
     else
       stp_set_resolution(v, res[cups.header.cupsCompression].name);
 
-   /*
-    * Print the page...
-    */
-
+    stp_set_app_gamma(v, 1.0);
+    stp_set_brightness(v, stp_brightness);
+    stp_set_contrast(v, stp_contrast);
+    stp_set_cyan(v, stp_cyan);
+    stp_set_magenta(v, stp_magenta);
+    stp_set_yellow(v, stp_yellow);
+    stp_set_saturation(v, stp_saturation);
+    stp_set_density(v, stp_density);
+    stp_set_gamma(v, stp_gamma);
     stp_merge_printvars(v, stp_printer_get_printvars(printer));
+
     fprintf(stderr, "DEBUG: stp_get_output_to(v) |%s|\n", stp_get_output_to(v));
     fprintf(stderr, "DEBUG: stp_get_driver(v) |%s|\n", stp_get_driver(v));
     fprintf(stderr, "DEBUG: stp_get_ppd_file(v) |%s|\n", stp_get_ppd_file(v));
@@ -470,10 +497,40 @@ main(int  argc,				/* I - Number of command-line arguments */
     fprintf(stderr, "DEBUG: stp_get_saturation(v) |%.3f|\n", stp_get_saturation(v));
     fprintf(stderr, "DEBUG: stp_get_density(v) |%.3f|\n", stp_get_density(v));
     fprintf(stderr, "DEBUG: stp_get_app_gamma(v) |%.3f|\n", stp_get_app_gamma(v));
+
+    stp_set_page_number(v, cups.page);
+
+    (*stp_printer_get_printfuncs(printer)->media_size)
+      (printer, v, &(cups.width), &(cups.height));
+    (*stp_printer_get_printfuncs(printer)->imageable_area)
+      (printer, v, &(cups.left), &(cups.right), &(cups.bottom), &(cups.top));
+    fprintf(stderr, "DEBUG: GIMP-PRINT %d %d %d  %d %d %d\n",
+	    cups.width, cups.left, cups.right, cups.height, cups.top, cups.bottom);
+    cups.right = cups.width - cups.right;
+    cups.width = cups.width - cups.left - cups.right;
+    cups.width = cups.header.HWResolution[0] * cups.width / 72;
+    cups.left = cups.header.HWResolution[0] * cups.left / 72;
+    cups.right = cups.header.HWResolution[0] * cups.right / 72;
+
+    cups.top = cups.height - cups.top;
+    cups.height = cups.height - cups.top - cups.bottom;
+    cups.height = cups.header.HWResolution[1] * cups.height / 72;
+    cups.top = cups.header.HWResolution[1] * cups.top / 72;
+    cups.bottom = cups.header.HWResolution[1] * cups.bottom / 72;
+    fprintf(stderr, "DEBUG: GIMP-PRINT %d %d %d  %d %d %d\n",
+	    cups.width, cups.left, cups.right, cups.height, cups.top, cups.bottom);
+
+   /*
+    * Print the page...
+    */
+
     if (stp_printer_get_printfuncs(printer)->verify(printer, v))
     {
       signal(SIGTERM, cancel_job);
+      if (cups.page == 0)
+	stp_printer_get_printfuncs(printer)->start_job(printer, &theImage, v);
       stp_printer_get_printfuncs(printer)->print(printer, &theImage, v);
+      fflush(stdout);
     }
     else
       fputs("ERROR: Invalid printer settings!\n", stderr);
@@ -494,9 +551,13 @@ main(int  argc,				/* I - Number of command-line arguments */
 	cups.row ++;
       }
     }
-
-    stp_free_vars(v);
+    cups.page ++;
   }
+
+  if (cups.page > 0)
+    stp_printer_get_printfuncs(printer)->end_job(printer, &theImage, v);
+
+  stp_free_vars(v);
 
  /*
   * Close the raster stream...
@@ -591,6 +652,21 @@ Image_get_appname(stp_image_t *image)		/* I - Image */
  * 'Image_get_row()' - Get one row of the image.
  */
 
+static void
+throwaway_data(int amount, cups_image_t *cups)
+{
+  unsigned char trash[4096];	/* Throwaway */
+  int block_count = amount / 4096;
+  int leftover = amount % 4096;
+  while (block_count > 0)
+    {
+      cupsRasterReadPixels(cups->ras, trash, 4096);
+      block_count--;
+    }
+  if (leftover)
+    cupsRasterReadPixels(cups->ras, trash, leftover);
+}
+
 stp_image_status_t
 Image_get_row(stp_image_t   *image,	/* I - Image */
 	      unsigned char *data,	/* O - Row */
@@ -598,26 +674,66 @@ Image_get_row(stp_image_t   *image,	/* I - Image */
 {
   cups_image_t	*cups;			/* CUPS image */
   int		i;			/* Looping var */
+  int 		bytes_per_line;
+  int		margin;
+  unsigned char *orig = data;
+  static int warned = 0;
 
 
   if ((cups = (cups_image_t *)(image->rep)) == NULL)
     return STP_IMAGE_ABORT;
+  bytes_per_line = cups->width * cups->header.cupsBitsPerPixel / CHAR_BIT;
+  margin = cups->header.cupsBytesPerLine - bytes_per_line;
 
   if (cups->row < cups->header.cupsHeight)
   {
-    cupsRasterReadPixels(cups->ras, data, cups->header.cupsBytesPerLine);
+    fprintf(stderr, "DEBUG: GIMP-PRINT reading %d %d\n",
+	    bytes_per_line, cups->row);
+    cupsRasterReadPixels(cups->ras, data, bytes_per_line);
     cups->row ++;
+    fprintf(stderr, "DEBUG: GIMP-PRINT tossing right %d\n", margin);
+    if (margin)
+      throwaway_data(margin, cups);
 
    /*
     * Invert black data for monochrome output...
     */
 
     if (cups->header.cupsColorSpace == CUPS_CSPACE_K)
-      for (i = cups->header.cupsBytesPerLine; i > 0; i --, data ++)
-        *data = 255 - *data;
+      for (i = bytes_per_line; i > 0; i --, data ++)
+        *data = ((1 << CHAR_BIT) - 1) - *data;
   }
   else
-    memset(data, 255, cups->header.cupsBytesPerLine);
+    {
+      if (cups->header.cupsColorSpace == CUPS_CSPACE_CMYK)
+	memset(data, 0, bytes_per_line);
+      else
+	memset(data, ((1 << CHAR_BIT) - 1), bytes_per_line);
+    }
+
+  /*
+   * This exists to print non-ADSC input which has messed up the job
+   * input, such as that generated by psnup.
+   */
+  data = orig;
+  if (cups->header.cupsBitsPerPixel == 1)
+    {
+      if (warned == 0)
+	{
+	  fprintf(stderr,
+		  "WARNING: GIMP-PRINT detected broken job options.  "
+		  "Output quality is degraded.  Are you using psnup or non-ADSC PostScript?\n");
+	  warned = 1;
+	}
+      for (i = cups->width - 1; i >= 0; i--)
+	{
+	  if ( (data[i/8] >> (7 - i%8)) &0x1)
+	    data[i]=255;
+	  else
+	    data[i]=0;
+	}
+    }
+
   return Image_status;
 }
 
@@ -635,7 +751,8 @@ Image_height(stp_image_t *image)	/* I - Image */
   if ((cups = (cups_image_t *)(image->rep)) == NULL)
     return (0);
 
-  return (cups->header.cupsHeight);
+  fprintf(stderr, "DEBUG: GIMP-PRINT: Image_height %d\n", cups->height);
+  return (cups->height);
 }
 
 
@@ -666,7 +783,8 @@ Image_note_progress(stp_image_t *image,	/* I - Image */
     return;
 
   fprintf(stderr, "INFO: Printing page %d, %.0f%%\n",
-          cups->page, 100.0 * current / total);
+          cups->page +1, 100.0 * current / total);
+    /* cups->page + 1 because users expect 1-based counting */
 }
 
 
@@ -683,7 +801,8 @@ Image_progress_conclude(stp_image_t *image)	/* I - Image */
   if ((cups = (cups_image_t *)(image->rep)) == NULL)
     return;
 
-  fprintf(stderr, "INFO: Finished page %d...\n", cups->page);
+  fprintf(stderr, "INFO: Finished page %d...\n", cups->page + 1);
+  /* cups->page + 1 because users expect 1-based counting */
 }
 
 
@@ -700,7 +819,8 @@ Image_progress_init(stp_image_t *image)/* I - Image */
   if ((cups = (cups_image_t *)(image->rep)) == NULL)
     return;
 
-  fprintf(stderr, "INFO: Starting page %d...\n", cups->page);
+  fprintf(stderr, "INFO: Starting page %d...\n", cups->page + 1);
+  /* cups->page + 1 because users expect 1-based counting */
 }
 
 
@@ -750,10 +870,11 @@ Image_width(stp_image_t *image)	/* I - Image */
   if ((cups = (cups_image_t *)(image->rep)) == NULL)
     return (0);
 
-  return (cups->header.cupsWidth);
+  fprintf(stderr, "DEBUG: GIMP-PRINT: Image_width %d\n", cups->width);
+  return (cups->width);
 }
 
 
 /*
- * End of "$Id: rastertoprinter.c,v 1.19 2001/09/02 13:30:26 rlk Exp $".
+ * End of "$Id: rastertoprinter.c,v 1.19.4.15 2004/03/26 03:29:39 rlk Exp $".
  */

@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.45 2001/11/18 00:05:17 rlk Exp $
+## $Id: Makefile.am,v 1.45.2.12 2003/12/24 12:40:47 rlk Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -41,8 +41,12 @@ cups_modeldir = $(pkgdatadir)/model
 AM_CFLAGS = $(GNUCFLAGS)
 DEFS = @CUPS_CFLAGS@ @DEFS@ -I. -I$(srcdir) -I../.. -DCUPS_DATADIR=\"$(pkgdatadir)\" -DGIMP_PRINT_VERSION=\"$(VERSION)\"
 INCLUDES = @INCLUDES@ $(LIBGIMPPRINT_CFLAGS)
-LIBS = @LIBS@ ../../lib/libprintut.la $(INTLLIBS) ../../lib/libprintut.la
+LIBPRINTUT = $(top_builddir)/lib/libprintut.la
+LIBS = $(INTLLIBS) @LIBS@
 
+if BUILD_GENPPD_STATIC
+STATIC_LDOPTS=-static
+endif
 
 ## Programs
 
@@ -61,23 +65,25 @@ EXTRA_PROGRAMS = cups-calibrate commandtoepson epson genppd rastertoprinter comm
 CUPS_LIBS = @CUPS_LIBS@
 
 cups_calibrate_SOURCES = cups-calibrate.c
-cups_calibrate_LDADD = -lm
+cups_calibrate_LDADD = $(LIBPRINTUT) $(LIBM)
 
 commandtoepson_SOURCES = commandtoepson.c
-commandtoepson_LDADD = $(CUPS_LIBS)
+commandtoepson_LDADD = $(LIBPRINTUT) $(CUPS_LIBS)
 
 canon_SOURCES = canon.c
-canon_LDADD = $(CUPS_LIBS)
+canon_LDADD = $(LIBPRINTUT) $(CUPS_LIBS)
 
 epson_SOURCES = epson.c
-epson_LDADD = $(CUPS_LIBS)
+epson_LDADD = $(LIBPRINTUT) $(CUPS_LIBS)
 
 genppd_SOURCES = genppd.c
-genppd_LDADD = $(CUPS_LIBS) $(LIBGIMPPRINT_LIBS)
+genppd_LDADD = $(LIBPRINTUT) $(CUPS_LIBS) $(LIBGIMPPRINT_LIBS)
+genppd_LDFLAGS= $(STATIC_LDOPTS)
 genppd_DEPENDENCIES = $(LIBGIMPPRINT_LIBS)
 
 rastertoprinter_SOURCES = rastertoprinter.c
-rastertoprinter_LDADD = $(CUPS_LIBS) $(LIBGIMPPRINT_LIBS)
+rastertoprinter_LDADD = $(LIBPRINTUT) $(CUPS_LIBS) $(LIBGIMPPRINT_LIBS)
+rastertoprinter_LDFLAGS= $(STATIC_LDOPTS)
 rastertoprinter_DEPENDENCIES = $(LIBGIMPPRINT_LIBS)
 
 
@@ -95,6 +101,7 @@ endif
 
 if BUILD_TRANSLATED_PPDS
 PPD_NLS = $(PPD_NLS_1)
+LINGUAS = $(ALL_LINGUAS)
 endif
 
 if USE_NLS
@@ -110,26 +117,21 @@ install-data-local: $(INSTALL_DATA_LOCAL_DEPS)
 	    $(mkinstalldirs) $(DESTDIR)$(cups_modeldir)/$$language; \
 	    cd ppd/$$language; \
 	    for ppdfile in * ; do \
-	      $(INSTALL_DATA) $$ppdfile $(DESTDIR)$(cups_modeldir)/$$language ; \
+	      (cd ../..; $(INSTALL_DATA) ppd/$$language/$$ppdfile $(DESTDIR)$(cups_modeldir)/$$language) ; \
 	    done; \
-	    cd ..; \
+	  cd ..; \
 	  done \
 	fi
 
 uninstall-local: $(INSTALL_DATA_LOCAL_DEPS)
 	if test -n "$(INSTALL_DATA_LOCAL_DEPS)" ; then \
-	  $(mkinstalldirs) $(DESTDIR)$(cups_modeldir); \
-	  cd ppd ; \
-	  for language in C $(ALL_LINGUAS) ; do \
-	    cd ..; \
-	    $(mkinstalldirs) $(DESTDIR)$(cups_modeldir)/$$language; \
-	    cd ppd/C ; \
-	    for ppdfile in * ; do \
-	      if test -f "$(DESTDIR)$(cups_modeldir)/$$language/$$ppdfile" ; then \
-	        $(RM) $(DESTDIR)$(cups_modeldir)/$$language/$$ppdfile ; \
+	  for language in C $(LINGUAS) ; do \
+	    echo "Removing $$language locale PPD files..." ; \
+	    for ppdfile in ppd/$$language/* ; do \
+	      if test -f "$(DESTDIR)$(cups_modeldir)/$$language/`basename $$ppdfile`" ; then \
+	        $(RM) -f $(DESTDIR)$(cups_modeldir)/$$language/`basename $$ppdfile` ; \
 	      fi ; \
 	    done; \
-	    cd ..; \
 	  done \
 	fi
 
@@ -153,6 +155,8 @@ refresh-data-local: ppd
 
 install-data-hook:
 # Remove unused directories in install tree
+	-@echo 'Expect a number of "rmdir: Directory not empty" warnings'
+	-@echo 'These messages are harmless and should be ignored.'
 	-rmdir $(DESTDIR)$(cups_modeldir)
 	-rmdir $(DESTDIR)$(pkgdatadir)
 	-rmdir $(DESTDIR)$(cupsexec_backenddir)
@@ -195,7 +199,7 @@ ppd-nls: genppd
 	cd $(top_builddir)/po ; \
 	$(MAKE) ; \
 	$(MAKE) DESTDIR= prefix=$${wdir}/catalog datadir=$${wdir}/catalog/share install
-	for language in $(ALL_LINGUAS) ; do \
+	for language in $(LINGUAS) ; do \
 	  mkdir ppd/$$language ; \
 	  echo "$$language:" ; \
 	  LANGUAGE=$$language ./genppd --prefix=ppd/$$language --catalog=`pwd`/catalog/share/locale ; \

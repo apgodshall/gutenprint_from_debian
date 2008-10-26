@@ -1,5 +1,5 @@
 /*
- * "$Id: escputil.c,v 1.39 2001/10/27 17:16:38 rlk Exp $"
+ * "$Id: escputil.c,v 1.39.2.18 2004/05/08 19:47:36 rlk Exp $"
  *
  *   Printer maintenance utility for EPSON Stylus (R) printers
  *
@@ -29,11 +29,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <fcntl.h>
 #if defined(HAVE_VARARGS_H) && !defined(HAVE_STDARG_H)
 #include <varargs.h>
 #else
 #include <stdarg.h>
+#endif
+#ifdef HAVE_FCNTL_H
+#include <fcntl.h>
 #endif
 #ifdef HAVE_POLL
 #include <sys/poll.h>
@@ -200,9 +202,25 @@ stp_printer_t printer_list[] =
   { "C20ux",	N_("Stylus C20ux"),	3,	15,	0,	2,	9 },
   { "C40sx",	N_("Stylus C40sx"),	3,	15,	0,	2,	9 },
   { "C40ux",	N_("Stylus C40ux"),	3,	15,	0,	2,	9 },
+  { "C41sx",	N_("Stylus C41sx"),	3,	15,	0,	2,	9 },
+  { "C41ux",	N_("Stylus C41ux"),	3,	15,	0,	2,	9 },
+  { "C42sx",	N_("Stylus C42sx"),	3,	15,	0,	2,	9 },
+  { "C42ux",	N_("Stylus C42ux"),	3,	15,	0,	2,	9 },
+  { "C43sx",	N_("Stylus C43sx"),	3,	15,	0,	2,	9 },
+  { "C43ux",	N_("Stylus C43ux"),	3,	15,	0,	2,	9 },
+  { "C44sx",	N_("Stylus C44sx"),	3,	15,	0,	2,	9 },
+  { "C44ux",	N_("Stylus C44ux"),	3,	15,	0,	2,	9 },
+  { "C50",	N_("Stylus C50"),	3,	15,	0,	2,	9 },
   { "C60",	N_("Stylus C60"),	3,	15,	0,	0,	0 },
-  { "C70",	N_("Stylus C70"),	3,	15,	0,	2,	9 },
-  { "C80",	N_("Stylus C80"),	3,	15,	0,	2,	9 },
+  { "C61",	N_("Stylus C61"),	3,	15,	0,	0,	0 },
+  { "C62",	N_("Stylus C62"),	3,	15,	0,	0,	0 },
+  { "C63",	N_("Stylus C63"),	4,	15,	0,	1,	7 },
+  { "C64",	N_("Stylus C64"),	4,	15,	0,	1,	7 },
+  { "C70",	N_("Stylus C70"),	4,	15,	0,	1,	7 },
+  { "C80",	N_("Stylus C80"),	4,	15,	0,	1,	7 },
+  { "C82",	N_("Stylus C82"),	4,	15,	0,	1,	7 },
+  { "C83",	N_("Stylus C83"),	4,	15,	0,	1,	7 },
+  { "C84",	N_("Stylus C84"),	4,	15,	0,	1,	7 },
   { "color",	N_("Stylus Color"),	1,	7,	0,	0,	0 },
   { "pro",	N_("Stylus Color Pro"),	1,	7,	0,	0,	0 },
   { "pro-xl",	N_("Stylus Color Pro XL"),1,	7,	0,	0,	0 },
@@ -241,24 +259,42 @@ stp_printer_t printer_list[] =
   { "790",	N_("Stylus Photo 790"),	3,	15,	0,	0,	0 },
   { "810",	N_("Stylus Photo 810"),	3,	15,	0,	0,	0 },
   { "820",	N_("Stylus Photo 820"),	3,	15,	0,	0,	0 },
+  { "830",	N_("Stylus Photo 830"),	3,	15,	0,	0,	0 },
   { "870",	N_("Stylus Photo 870"),	3,	15,	0,	0,	0 },
   { "875",	N_("Stylus Photo 875"),	3,	15,	0,	0,	0 },
   { "890",	N_("Stylus Photo 890"),	3,	15,	0,	0,	0 },
   { "895",	N_("Stylus Photo 895"),	3,	15,	0,	0,	0 },
+  { "915",	N_("Stylus Photo 915"),	3,	15,	0,	0,	0 },
+  { "925",	N_("Stylus Photo 925"),	3,	15,	0,	0,	0 },
+  { "935",	N_("Stylus Photo 935"),	3,	15,	0,	0,	0 },
+  { "950",	N_("Stylus Photo 950"),	4,	15,	0,	0,	0 },
+  { "960",	N_("Stylus Photo 960"),	4,	15,	0,	0,	0 },
   { "1200",	N_("Stylus Photo 1200"),3,	15,	0,	0,	0 },
   { "1270",	N_("Stylus Photo 1270"),3,	15,	0,	0,	0 },
   { "1280",	N_("Stylus Photo 1280"),3,	15,	0,	0,	0 },
   { "1290",	N_("Stylus Photo 1290"),3,	15,	0,	0,	0 },
   { "2000",	N_("Stylus Photo 2000P"),2,	15,	0,	0,	0 },
+  { "2100",	N_("Stylus Photo 2100"),4,	15,	0,	0,	0 },
+  { "2200",	N_("Stylus Photo 2200"),4,	15,	0,	0,	0 },
   { "5000",	N_("Stylus Pro 5000"),	1,	7,	0,	0,	0 },
   { "5500",	N_("Stylus Pro 5500"),	1,	7,	0,	0,	0 },
   { "7000",	N_("Stylus Pro 7000"),	1,	7,	0,	0,	0 },
   { "7500",	N_("Stylus Pro 7500"),	1,	7,	0,	0,	0 },
+  { "7600",	N_("Stylus Pro 7600"),	3,	15,	0,	0,	0 },
   { "9000",	N_("Stylus Pro 9000"),	1,	7,	0,	0,	0 },
   { "9500",	N_("Stylus Pro 9500"),	1,	7,	0,	0,	0 },
+  { "9600",	N_("Stylus Pro 9600"),	3,	15,	0,	0,	0 },
   { "10000",	N_("Stylus Pro 10000"),	3,	15,	0,	0,	0 },
   { "scan2000",	N_("Stylus Scan 2000"),	3,	15,	0,	0,	0 },
   { "scan2500",	N_("Stylus Scan 2500"),	3,	15,	0,	0,	0 },
+  { "CX3100",	N_("Stylus CX-3100"),	4,	15,	0,	1,	7 },
+  { "CX3200",	N_("Stylus CX-3200"),	4,	15,	0,	1,	7 },
+  { "CX5100",	N_("Stylus CX-5100"),	4,	15,	0,	1,	7 },
+  { "CX5200",	N_("Stylus CX-5200"),	4,	15,	0,	1,	7 },
+  { "CX6300",	N_("Stylus CX-6300"),	4,	15,	0,	1,	7 },
+  { "CX6400",	N_("Stylus CX-6400"),	4,	15,	0,	1,	7 },
+  { "CX8300",	N_("Stylus CX-8300"),	4,	15,	0,	1,	7 },
+  { "CX8400",	N_("Stylus CX-8400"),	4,	15,	0,	1,	7 },
   { NULL,	NULL,			0,	0,	0,	0,	0 },
 };
 
@@ -309,6 +345,13 @@ main(int argc, char **argv)
   int quiet = 0;
   int operation = 0;
   int c;
+
+  /* Set up gettext */
+#ifdef ENABLE_NLS
+  setlocale (LC_ALL, "");
+  bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+#endif
+  
   while (1)
     {
 #ifdef __GNU_LIBRARY__
@@ -450,12 +493,12 @@ do_print_cmd(void)
         if (printer == NULL)
           strcpy(command, "lpr -l");
 	else
-          sprintf(command, "lpr -P%s -l", printer);
+          snprintf(command, 1023, "lpr -P%s -l", printer);
         }
       else if (printer == NULL)
 	strcpy(command, "lp -s -oraw");
       else
-	sprintf(command, "lp -s -oraw -d%s", printer);
+	snprintf(command, 1023, "lp -s -oraw -d%s", printer);
 
       if ((pfile = popen(command, "w")) == NULL)
 	{
@@ -509,21 +552,38 @@ read_from_printer(int fd, char *buf, int bufsize)
   struct pollfd ufds;
 #endif
   int status;
-  int retry = 5;
+  int retry = 10;
+
+#ifdef HAVE_FCNTL_H
+  fcntl(fd, F_SETFL,
+	O_NONBLOCK | fcntl(fd, F_GETFL));
+#endif
+
   memset(buf, 0, bufsize);
+
   do
     {
 #ifdef HAVE_POLL
       ufds.fd = fd;
       ufds.events = POLLIN;
       ufds.revents = 0;
-      (void) poll(&ufds, 1, 1000);
+      if ((status = poll(&ufds, 1, 1000)) < 0)
+	break; /* poll error */
 #endif
       status = read(fd, buf, bufsize - 1);
-      if (status <= 0)
-	sleep(1);
+      if (status == 0 || (status < 0 && errno == EAGAIN))
+	{
+	  sleep(1);
+	  status = 0; /* not an error (read would have blocked) */
+	}
     }
   while ((status == 0) && (--retry != 0));
+
+  if (status == 0 && retry == 0)
+    fprintf(stderr, _("Read from printer timed out\n"));
+  else if (status < 0)
+    fprintf(stderr, _("Cannot read from %s: %s\n"), raw_device, strerror(errno));
+
   return status;
 }
 
@@ -580,6 +640,7 @@ const char *colors[] =
   N_("Yellow"),
   N_("Light Cyan"),
   N_("Light Magenta"),
+  N_("Black/Dark Yellow"),
   0
 };
 
@@ -588,6 +649,7 @@ do_ink_level(void)
 {
   int fd;
   int status;
+  int retry = 6;
   char buf[1024];
   char *ind;
   int i;
@@ -596,41 +658,51 @@ do_ink_level(void)
       fprintf(stderr,_("Obtaining ink levels requires using a raw device.\n"));
       exit(1);
     }
-  fd = open(raw_device, O_RDWR, 0666);
-  if (fd == -1)
-    {
-      fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
-	      strerror(errno));
-      exit(1);
-    }
-  initialize_print_cmd();
-  do_remote_cmd("ST", 2, 0, 1);
-  add_resets(2);
-  if (write(fd, printer_cmd, bufpos) < bufpos)
-    {
-      fprintf(stderr, _("Cannot write to %s: %s\n"), raw_device,
-	      strerror(errno));
-      exit(1);
-    }
-  status = read_from_printer(fd, buf, 1024);
-  if (status < 0)
-    {
-      fprintf(stderr, _("Cannot read from %s: %s\n"),
-	      raw_device,strerror(errno));
-      exit(1);
-    }
-  ind = buf;
   do
-    ind = strchr(ind, 'I');
-  while (ind && ind[1] != 'Q' && (ind[1] != '\0' && ind[2] != ':'));
-  if (!ind || ind[1] != 'Q' || ind[2] != ':')
+    {
+      if (retry <= 4)
+	sleep(1);
+      fd = open(raw_device, O_RDWR, 0666);
+      if (fd == -1)
+	{
+	  fprintf(stderr, _("Cannot open %s read/write: %s\n"), raw_device,
+		  strerror(errno));
+	  exit(1);
+	}
+      add_resets(2);
+      initialize_print_cmd();
+      if (isnew && !(retry & 1))
+	do_remote_cmd("IQ", 1, 1);
+      else
+	do_remote_cmd("ST", 2, 0, 1);
+      add_resets(2);
+      if (write(fd, printer_cmd, bufpos) < bufpos)
+	{
+	  fprintf(stderr, _("Cannot write to %s: %s\n"), raw_device,
+		  strerror(errno));
+	  exit(1);
+	}
+      status = read_from_printer(fd, buf, 1024);
+      if (status < 0)
+	exit(1);
+      (void) close(fd);
+      ind = buf;
+      do
+	ind = strchr(ind, 'I');
+      while (ind && ind[1] != 'Q' && (ind[1] != '\0' && ind[2] != ':'));
+      if (!ind || ind[1] != 'Q' || ind[2] != ':' || ind[3] == ';')
+	{
+	  ind = NULL;
+	}
+    } while (--retry != 0 && !ind);
+  if (!ind)
     {
       fprintf(stderr, _("Cannot parse output from printer\n"));
       exit(1);
     }
   ind += 3;
   printf("%20s    %s\n", _("Ink color"), _("Percent remaining"));
-  for (i = 0; i < 6; i++)
+  for (i = 0; i < 7; i++)
     {
       int val, j;
       if (!ind[0] || ind[0] == ';')
@@ -650,12 +722,6 @@ do_ink_level(void)
       printf("%20s    %3d\n", _(colors[i]), val);
       ind += 2;
     }
-  initialize_print_cmd();
-  do_remote_cmd("ST", 2, 0, 0);
-  add_resets(2);
-  (void) write(fd, printer_cmd, bufpos);
-  (void) read(fd, buf, 1024);
-  (void) close(fd);
   exit(0);
 }
 
@@ -691,11 +757,7 @@ do_identify(void)
     }
   status = read_from_printer(fd, buf, 1024);
   if (status < 0)
-    {
-      fprintf(stderr, _("Cannot read from %s: %s\n"),
-	      raw_device, strerror(errno));
-      exit(1);
-    }
+    exit(1);
   printf("%s\n", buf);
   (void) close(fd);
   exit(0);
@@ -732,16 +794,12 @@ do_status(void)
     }
   status = read_from_printer(fd, buf, 1024);
   if (status < 0)
-    {
-      fprintf(stderr, _("Cannot read from %s: %s\n"),
-	      raw_device, strerror(errno));
-      exit(1);
-    }
+    exit(1);
   initialize_print_cmd();
   do_remote_cmd("ST", 2, 0, 0);
   add_resets(2);
   (void) write(fd, printer_cmd, bufpos);
-  (void) read(fd, buf, 1024);
+  (void) read_from_printer(fd, buf, 1024);
   while ((where = strchr(buf, ';')) != NULL)
     *where = '\n';
   printf("%s\n", buf);
@@ -886,10 +944,7 @@ get_printer(void)
 	}
       status = read_from_printer(fd, buf, 1024);
       if (status < 0)
-	{
-	  printf(_("\nCannot read from %s: %s\n"), raw_device,strerror(errno));
-	  exit(1);
-	}
+	exit(1);
       (void) close(fd);
       pos = strchr(buf, (int) ';');
       if (pos)
@@ -975,16 +1030,19 @@ do_final_alignment(void)
 	  inbuf = do_get_input(_("> "));
 	  if (inbuf[0] == 's' || inbuf[0] == 'S')
 	    {
-	      printf(_("Please insert your alignment test page in the printer once more\n"
-		       "for the final save of your alignment settings.  When the printer\n"
-		       "feeds the page through, your settings have been saved.\n"));
+	      printf(_("About to save settings..."));
 	      fflush(stdout);
 	      initialize_print_cmd();
-	      add_newlines(2);
 	      do_remote_cmd("SV", 0);
-	      add_newlines(2);
 	      if (do_print_cmd())
-		printer_error();
+		{
+		  printf(_("failed!\n"));
+		  printf(_("Your settings were not saved successfully.  You must repeat the\n"
+			   "alignment procedure.\n"));
+		  exit(1);
+		}
+	      printf(_("succeeded!\n"));
+	      printf(_("Your alignment settings have been saved to the printer.\n"));
 	      return 1;
 	    }
 	  break;
@@ -1023,26 +1081,19 @@ do_align(void)
       do_align_help(passes, choices);
       printf(_(printer_msg), _(printer_name));
       inbuf = do_get_input(_("Press enter to continue > "));
+    top:
+      initialize_print_cmd();
+      for (curpass = 0; curpass < passes; curpass++)
+	do_remote_cmd("DT", 3, 0, curpass, 0);
+      if (do_print_cmd())
+	printer_error();
+      printf(_("Please inspect the print, and choose the best pair of lines in each pattern.\n"
+	       "Type a pair number, '?' for help, or 'r' to repeat the procedure.\n"));
       initialize_print_cmd();
       for (curpass = 1; curpass <= passes; curpass ++)
 	{
-	top:
-	  add_newlines(7 * (curpass - 1));
-	  do_remote_cmd("DT", 3, 0, curpass - 1, 0);
-	  if (do_print_cmd())
-	    printer_error();
 	reread:
-	  if (curpass == passes)
-	    printf(_("Please inspect the print, and choose the best pair of lines\n"
-		     "in pattern #%d, and then insert a fresh page in the input tray.\n"
-		     "Type a pair number, '?' for help, or 'r' to retry this pattern.\n"),
-		   curpass);
-	  else
-	    printf(_("Please inspect the print, and choose the best pair of lines\n"
-		     "in pattern #%d, and then reinsert the page in the input tray.\n"
-		     "Type a pair number, '?' for help, or 'r' to retry this pattern.\n"),
-		   curpass);
-	  fflush(stdout);
+	  printf(_("Pass #%d"), curpass);
 	  inbuf = do_get_input(_("> "));
 	  switch (inbuf[0])
 	    {
@@ -1083,19 +1134,19 @@ do_align(void)
 	      fflush(stdout);
 	      goto reread;
 	    }
-	  if (curpass == passes)
-	    {
-	      printf(_("Aligning phase %d, and performing final test.\n"
-		       "Please insert a fresh sheet of paper.\n"), curpass);
-	      (void) do_get_input(_("Press enter to continue > "));
-	    }
-	  else
-	    printf(_("Aligning phase %d, and starting phase %d.\n"), curpass,
-		   curpass + 1);
-	  fflush(stdout);
-	  initialize_print_cmd();
 	  do_remote_cmd("DA", 4, 0, curpass - 1, 0, answer);
 	}
+      printf(_("Attempting to set alignment..."));
+      if (do_print_cmd())
+	printer_error();
+      printf(_("succeeded.\n"));
+      printf(_("Please verify that the alignment is correct.  After the alignment pattern\n"
+	       "is printed again, please ensure that the best pattern for each line is\n"
+	       "pattern %d.  If it is not, you should repeat the process to get the best\n"
+	       "quality printing.\n"), (choices + 1) / 2);
+      printf(_("Please insert a fresh sheet of paper.\n"));
+      (void) do_get_input(_("Press enter to continue > "));
+      initialize_print_cmd();
       for (curpass = 0; curpass < passes; curpass++)
 	do_remote_cmd("DT", 3, 0, curpass, 0);
       if (do_print_cmd())

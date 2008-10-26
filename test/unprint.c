@@ -1,4 +1,4 @@
-/* $Id: unprint.c,v 1.22 2001/09/29 02:32:11 rlk Exp $ */
+/* $Id: unprint.c,v 1.22.4.2 2003/12/02 01:51:01 rlk Exp $ */
 /*
  * Generate PPM files from printer output
  *
@@ -39,7 +39,7 @@
  */
 typedef struct {
   unsigned char unidirectional;
-  unsigned char microweave;
+  unsigned char interleave;
   int page_management_units; /* dpi */
   int relative_horizontal_units; /* dpi */
   int absolute_horizontal_units; /* dpi, assumed to be >= relative */
@@ -63,6 +63,7 @@ typedef struct {
   int right_edge;
   int top_edge;
   int bottom_edge;
+  int quadtone;
 } pstate_t;
 
 /* We'd need about a gigabyte of ram to hold a ppm file of an 8.5 x 11
@@ -234,10 +235,12 @@ static float ink_colors[8][4] =
  { 1,   1, .7,  1 },		/* y */
  { 1,   1,  1,  1 }};
 
+static float quadtone_inks[] = { 0.0, .5, .25, .75 };
+
 static float bpp_shift[] = { 0, 1, 3, 7, 15, 31, 63, 127, 255 };
 
 static inline void
-mix_ink(ppmpixel p, int color, unsigned int amount, float *ink)
+mix_ink(ppmpixel p, int color, unsigned int amount, float *ink, int quadtone)
 {
   /* this is pretty crude */
 
@@ -247,8 +250,12 @@ mix_ink(ppmpixel p, int color, unsigned int amount, float *ink)
       float size;
 
       size = (float) amount / bpp_shift[pstate.bpp];
-      for (i = 0; i < 3; i++)
-	p[i] *= (1 - size) + size * ink[i];
+      if (quadtone)
+	for (i = 0; i < 3; i++)
+	  p[i] *= (1 - size) + size * quadtone_inks[color];
+      else
+	for (i = 0; i < 3; i++)
+	  p[i] *= (1 - size) + size * ink[i];
     }
 }
 
@@ -406,7 +413,8 @@ write_output(FILE *fp_w, int dontwrite)
 		      for (p = lt->startx[c]; p <= lt->stopx[c]; p++)
 			{
 			  amount = get_bits(lt->line[c], p - lt->startx[c]);
-			  mix_ink(out_row[p - left], c, amount, ink);
+			  mix_ink(out_row[p - left], c, amount, ink,
+				  pstate.quadtone);
 			}
 		    }
 		}
@@ -547,7 +555,7 @@ update_page(unsigned char *buf, /* I - pixel data               */
       page = (line_type **) xcalloc(pstate.bottom_margin - pstate.top_margin,
 				    sizeof(line_type *));
     }
-  if (pstate.microweave)
+  if (pstate.interleave)
     sep = 1;
   else
     sep = pstate.nozzle_separation;
@@ -819,7 +827,7 @@ parse_escp2_extended(FILE *fp_r)
       break;
     case 'G': /* select graphics mode */
       /* FIXME: this is supposed to have more side effects */
-      pstate.microweave = 0;
+      pstate.interleave = 0;
       pstate.dotsize = 0;
       pstate.bpp = 1;
       break;
@@ -856,11 +864,11 @@ parse_escp2_extended(FILE *fp_r)
 	  break;
 	}
       break;
-    case 'i': /* set MicroWeave mode */
+    case 'i': /* set Interleave mode */
       if (bufsize != 1)
-	fprintf(stderr,"Malformed microweave setting command.\n");
+	fprintf(stderr,"Malformed interleave setting command.\n");
       else
-	pstate.microweave = buf[0] % 0x30;
+	pstate.interleave = buf[0] % 0x30;
       break;
     case 'e': /* set dot size */
       if ((bufsize != 2) || (buf[0] != 0))
@@ -1093,7 +1101,7 @@ parse_escp2_command(FILE *fp_r)
       else
 	{
 	  pstate.unidirectional = 0;
-	  pstate.microweave = 0;
+	  pstate.interleave = 0;
 	  pstate.dotsize = 0;
 	  pstate.bpp = 1;
 	  pstate.page_management_units = 360;
@@ -1338,7 +1346,7 @@ parse_canon(FILE *fp_r)
 	 continue;
        } else {
 	 pstate.unidirectional=0;
-	 pstate.microweave=0;
+	 pstate.interleave=0;
 	 pstate.dotsize=0;
 	 pstate.bpp=1;
 	 pstate.page_management_units=360;
@@ -1552,6 +1560,9 @@ main(int argc,char *argv[])
 	      break;
 	    case 'q':
 	      no_output = 1;
+	      break;
+	    case 'Q':
+	      pstate.quadtone = 1;
 	      break;
 	    case 'u':
 	      unweave = 1;

@@ -5,7 +5,7 @@
 dnl AM_PATH_GIMPPRINT([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND [, MODULES]]]])
 dnl Test for GIMP-PRINT, and define GIMPPRINT_CFLAGS and GIMPPRINT_LIBS
 dnl
-AC_DEFUN(AM_PATH_GIMPPRINT,
+AC_DEFUN([AM_PATH_GIMPPRINT],
 [dnl
 dnl Get the cflags and libraries from the gimpprint-config script
 dnl
@@ -60,6 +60,7 @@ dnl
 #include <gimp-print/gimp-print.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int
 main ()

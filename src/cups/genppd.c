@@ -1,9 +1,9 @@
 /*
- * "$Id: genppd.c,v 1.36 2001/11/11 21:25:36 rlk Exp $"
+ * "$Id: genppd.c,v 1.36.2.15 2004/06/12 20:04:05 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
- *   Copyright 1993-2001 by Easy Software Products.
+ *   Copyright 1993-2003 by Easy Software Products.
  *
  *   This program is free software; you can redistribute it and/or
  *   modify it under the terms of the GNU General Public License,
@@ -52,7 +52,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#ifdef HAVE_LIBZ
 #include <zlib.h>
+#endif
 
 #include <cups/cups.h>
 #include <cups/raster.h>
@@ -65,8 +67,15 @@
 #include <gimp-print/gimp-print-intl.h>
 #include "../../lib/libprintut.h"
 
+/*
+ * Note:
+ *
+ * The current release of ESP Ghostscript is fully Level 3 compliant,
+ * so we can report Level 3 support by default...
+ */
+
 #ifndef CUPS_PPD_PS_LEVEL
-#define CUPS_PPD_PS_LEVEL 2
+#  define CUPS_PPD_PS_LEVEL 3
 #endif
 
 
@@ -125,10 +134,37 @@ static struct				/**** STP numeric options ****/
   { "stpContrast",	"Contrast" },
   { "stpGamma",		"Gamma" },
   { "stpDensity",	"Density" },
+#ifndef __APPLE__
   { "stpCyan",		"Cyan" },
   { "stpMagenta",	"Magenta" },
   { "stpYellow",	"Yellow" },
   { "stpSaturation",	"Saturation" }
+#else
+  { "stpSaturation",	"Saturation" },
+  { "stpCyan",		"Cyan" },
+  { "stpMagenta",	"Magenta" },
+  { "stpYellow",	"Yellow" }
+#endif /* __APPLE__ */
+};
+
+/*
+ * Mapping between manufacturer names embedded in the printer name and
+ * manufacturer names authorized in the PPD specification.
+ * If printers of other manufacturers are added, this table must
+ * be extended.
+ */
+static struct
+{
+  const char *manufacturer_embedded_name;
+  const char *manufacturer_real_name;
+} stp_manufacturers[] =
+{
+  { "CANON",   "Canon" },
+  { "EPSON",   "Epson" },
+  { "HP",      "HP" },
+  { "LEXMARK", "Lexmark" },
+  { "APPLE",   "Apple" },
+  { NULL,      NULL }
 };
 
 
@@ -140,6 +176,7 @@ void	initialize_stp_options(void);
 void	usage(void);
 int	write_ppd(const stp_printer_t p, const char *prefix,
 	          const char *language, int verbose);
+const char *find_manufacturer_from_name(const char *name);
 
 
 /*
@@ -160,11 +197,11 @@ main(int  argc,			/* I - Number of command-line arguments */
   static struct option long_options[] =
 		{		/* Command-line options */
 		  /* name,	has_arg,		flag	val */
-		  {"help",	no_argument,		0,	0},
-		  {"verbose",	no_argument,		0,	0},
-		  {"quiet",	no_argument,		0,	0},
-		  {"catalog",	required_argument,	0,	0},
-		  {"prefix",	required_argument,	0,	0},
+		  {"help",	no_argument,		0,	(int) 'h'},
+		  {"verbose",	no_argument,		0,	(int) 'v'},
+		  {"quiet",	no_argument,		0,	(int) 'q'},
+		  {"catalog",	required_argument,	0,	(int) 'c'},
+		  {"prefix",	required_argument,	0,	(int) 'p'},
 		  {0,		0,			0,	0}
 		};
 
@@ -181,55 +218,36 @@ main(int  argc,			/* I - Number of command-line arguments */
 
   for (;;)
   {
-    if ((i = getopt_long_only(argc, argv, "", long_options,
-                              &option_index)) == -1)
+    if ((i = getopt_long(argc, argv, "hvqc:p:", long_options,
+			 &option_index)) == -1)
       break;
 
     switch (i)
     {
-      case 0:
-	  /* option already dealt with, so skip to next argv entry */
-          if (long_options[option_index].flag != 0)
-            break;
-
-	  if (strncmp(long_options[option_index].name, "help", 4) == 0)
-          {
-	    usage();
-	    break;
-          }
-	  if (strncmp(long_options[option_index].name, "verbose", 7) == 0)
-          {
-	    verbose = 1;
-	    break;
-          }
-
-	  if (strncmp(long_options[option_index].name, "quiet", 5) == 0)
-          {
-	    verbose = 0;
-	    break;
-          }
-
-	  if (strncmp(long_options[option_index].name, "catalog", 7) == 0)
-          {
-	    catalog = optarg;
+    case 'h':
+      usage();
+      break;
+    case 'v':
+      verbose = 1;
+      break;
+    case 'q':
+      verbose = 0;
+      break;
+    case 'c':
+      catalog = optarg;
 #ifdef DEBUG
-	    fprintf (stderr, "DEBUG: catalog: %s\n", catalog);
+      fprintf (stderr, "DEBUG: catalog: %s\n", catalog);
 #endif
-	    break;
-          }
-
-	  if (strncmp(long_options[option_index].name, "prefix", 6) == 0)
-          {
-	    prefix = optarg;
+      break;
+    case 'p':
+      prefix = optarg;
 #ifdef DEBUG
-	    fprintf (stderr, "DEBUG: prefix: %s\n", prefix);
+      fprintf (stderr, "DEBUG: prefix: %s\n", prefix);
 #endif
-	    break;
-	  }
-
-      default:
-          usage();
-	  break;
+      break;
+    default:
+      usage();
+      break;
     }
   }
 
@@ -239,12 +257,14 @@ main(int  argc,			/* I - Number of command-line arguments */
 
   stp_init();
 
-
  /*
   * Set the language...
   */
 
   setlocale(LC_ALL, "");
+#ifdef LC_NUMERIC
+  setlocale(LC_NUMERIC, "C");
+#endif /* LC_NUMERIC */
 
  /*
   * Set up the catalog
@@ -272,7 +292,6 @@ main(int  argc,			/* I - Number of command-line arguments */
 #endif
   }
 
-
  /*
   * Write PPD files...
   */
@@ -284,6 +303,7 @@ main(int  argc,			/* I - Number of command-line arguments */
     if (printer && write_ppd(printer, prefix, language, verbose))
       return (1);
   }
+
   if (!verbose)
     fprintf(stderr, "\n");
 
@@ -324,6 +344,7 @@ initialize_stp_options(void)
   stp_options[3].defval = 1000 * stp_get_density(defvars);
   stp_options[3].step = 50;
 
+#ifndef __APPLE__
   stp_options[4].low = 1000 * stp_get_cyan(lower);
   stp_options[4].high = 1000 * stp_get_cyan(upper);
   stp_options[4].defval = 1000 * stp_get_cyan(defvars);
@@ -343,6 +364,27 @@ initialize_stp_options(void)
   stp_options[7].high = 1000 * stp_get_saturation(upper);
   stp_options[7].defval = 1000 * stp_get_saturation(defvars);
   stp_options[7].step = 50;
+#else
+  stp_options[4].low = 1000 * stp_get_saturation(lower);
+  stp_options[4].high = 1000 * stp_get_saturation(upper);
+  stp_options[4].defval = 1000 * stp_get_saturation(defvars);
+  stp_options[4].step = 50;
+  
+  stp_options[5].low = 1000 * stp_get_cyan(lower);
+  stp_options[5].high = 1000 * stp_get_cyan(upper);
+  stp_options[5].defval = 1000 * stp_get_cyan(defvars);
+  stp_options[5].step = 50;
+
+  stp_options[6].low = 1000 * stp_get_magenta(lower);
+  stp_options[6].high = 1000 * stp_get_magenta(upper);
+  stp_options[6].defval = 1000 * stp_get_magenta(defvars);
+  stp_options[6].step = 50;
+
+  stp_options[7].low = 1000 * stp_get_yellow(lower);
+  stp_options[7].high = 1000 * stp_get_yellow(upper);
+  stp_options[7].defval = 1000 * stp_get_yellow(defvars);
+  stp_options[7].step = 50;
+#endif /* __APPLE__ */
 }
 
 
@@ -359,6 +401,22 @@ usage(void)
   exit(EXIT_FAILURE);
 }
 
+const char *
+find_manufacturer_from_name(const char *name)
+{
+  int i = 0;
+  while (stp_manufacturers[i].manufacturer_real_name)
+    {
+      if (strncasecmp(name, stp_manufacturers[i].manufacturer_embedded_name,
+		      strlen(stp_manufacturers[i].manufacturer_embedded_name)) == 0)
+	return stp_manufacturers[i].manufacturer_real_name;
+      i++;
+    }
+  fprintf(stderr, "Cannot determine manufacturer of %s\n!", name);
+  abort();
+  return NULL;
+}
+
 
 /*
  * 'write_ppd()' - Write a PPD file.
@@ -373,7 +431,8 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   int		i, j;			/* Looping vars */
   gzFile	fp;			/* File to write to */
   char		filename[1024];		/* Filename */
-  char		manufacturer[64];	/* Manufacturer name */
+  const char	*driverptr;		/* Pointer into driver name */
+  const char	*manufacturer;		/* Manufacturer name */
   int		num_opts;		/* Number of printer options */
   stp_param_t	*opts;			/* Printer options */
   const char	*defopt;		/* Default printer option */
@@ -389,6 +448,11 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   const stp_printfuncs_t *printfuncs;	/* Driver functions */
   paper_t	*the_papers;		/* Media sizes */
   int		cur_opt;		/* Current option */
+  int		variable_sizes;		/* Does the driver support variable sizes? */
+  int		min_width,		/* Min/max custom size */
+		min_height,
+		max_width,
+		max_height;
 
 
  /*
@@ -433,7 +497,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   * Write a standard header...
   */
 
-  sscanf(long_name, "%63s", manufacturer);
+  manufacturer = find_manufacturer_from_name(long_name);
 
   if (verbose)
     fprintf(stderr, "Writing %s...\n", filename);
@@ -441,7 +505,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
     fprintf(stderr, ".");
 
   gzputs(fp, "*PPD-Adobe: \"4.3\"\n");
-  gzputs(fp, "*%PPD file for CUPS/GIMP-print.\n");
+  gzputs(fp, "*%PPD file for CUPS/Gimp-Print.\n");
   gzputs(fp, "*%Copyright 1993-2001 by Easy Software Products, All Rights Reserved.\n");
   gzputs(fp, "*%This PPD file may be freely used and distributed under the terms of\n");
   gzputs(fp, "*%the GNU GPL.\n");
@@ -455,21 +519,66 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   gzprintf(fp, "*LanguageVersion: %s\n", _("English"));
   /* Specify PPD translation encoding e.g. ISOLatin1 */
   gzprintf(fp, "*LanguageEncoding: %s\n", _("ISOLatin1"));
-  gzprintf(fp, "*PCFileName:	\"%s.ppd\"\n", driver);
+
+ /*
+  * Strictly speaking, the PCFileName attribute should be a 12 character
+  * max (12345678.ppd) filename, as a requirement of the old PPD spec.
+  * The following code generates a (hopefully unique) 8.3 filename from
+  * the driver name, and makes the filename all UPPERCASE as well...
+  */
+    
+  gzprintf(fp, "*PCFileName:	\"STP%05d.PPD\"\n",
+	   stp_get_printer_index_by_driver(driver));
+
   gzprintf(fp, "*Manufacturer:	\"%s\"\n", manufacturer);
-  gzputs(fp, "*Product:	\"(GIMP-print v" VERSION ")\"\n");
-  gzprintf(fp, "*ModelName:     \"%s\"\n", driver);
+
+ /*
+  * The Product attribute specifies the string returned by the PostScript
+  * interpreter.  The last one will appear in the CUPS "product" field,
+  * while all instances are available as attributes.
+  */
+
+  gzputs(fp, "*Product:	\"(AFPL Ghostscript)\"\n");
+  gzputs(fp, "*Product:	\"(GNU Ghostscript)\"\n");
+  gzputs(fp, "*Product:	\"(ESP Ghostscript)\"\n");
+
+ /*
+  * The ModelName attribute now provides the long name rather than the
+  * short driver name...  The rastertoprinter driver looks up both...
+  */
+
+  gzprintf(fp, "*ModelName:     \"%s\"\n", long_name);
   gzprintf(fp, "*ShortNickName: \"%s\"\n", long_name);
-  gzprintf(fp, "*NickName:      \"%s, CUPS+GIMP-print v" VERSION "\"\n", long_name);
-  gzputs(fp, "*PSVersion:	\"(3010.000) 550\"\n");
+
+ /*
+  * The Windows driver download stuff has problems with NickName fields
+  * with commas.  Now use a dash instead...
+  */
+
+  gzprintf(fp, "*NickName:      \"%s - CUPS+Gimp-Print v" VERSION "\"\n",
+           long_name);
+#if CUPS_PPD_PS_LEVEL == 2
+  gzputs(fp, "*PSVersion:	\"(2017.000) 550\"\n");
+#else
+  gzputs(fp, "*PSVersion:	\"(3010.000) 705\"\n");
+#endif /* CUPS_PPD_PS_LEVEL == 2 */
   gzprintf(fp, "*LanguageLevel:	\"%d\"\n", CUPS_PPD_PS_LEVEL);
-  gzprintf(fp, "*ColorDevice:	%s\n",
-           stp_get_output_type(printvars) == OUTPUT_COLOR ? "True" : "False");
-  gzprintf(fp, "*DefaultColorSpace: %s\n",
-           stp_get_output_type(printvars) == OUTPUT_COLOR ? "RGB" : "Gray");
+
+  /* Assume that color printers are inkjets and should have pages reversed */
+  if (stp_get_output_type(printvars) == OUTPUT_COLOR)
+    {
+      gzputs(fp, "*ColorDevice:	True\n");
+      gzputs(fp, "*DefaultColorSpace:	RGB\n");
+    }
+  else
+    {
+      gzputs(fp, "*ColorDevice:	False\n");
+      gzputs(fp, "*DefaultColorSpace:	Gray\n");
+    }
   gzputs(fp, "*FileSystem:	False\n");
   gzputs(fp, "*LandscapeOrientation: Plus90\n");
   gzputs(fp, "*TTRasterizer:	Type42\n");
+  gzputs(fp, "*RequiresPageRegion All:	True\n");
 
   gzputs(fp, "*cupsVersion:	1.1\n");
   gzprintf(fp, "*cupsModelNumber: \"%d\"\n", model);
@@ -477,13 +586,14 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   gzputs(fp, "*cupsFilter:	\"application/vnd.cups-raster 100 rastertoprinter\"\n");
   if (strcasecmp(manufacturer, "EPSON") == 0)
     gzputs(fp, "*cupsFilter:	\"application/vnd.cups-command 33 commandtoepson\"\n");
+  gzputs(fp, "\n");
 
  /*
   * Get the page sizes from the driver...
   */
 
   v = stp_allocate_copy(printvars);
-
+  variable_sizes = 0;
   opts = (*(printfuncs->parameters))(p, NULL, "PageSize", &num_opts);
   defopt = (*(printfuncs->default_parameters))(p, NULL, "PageSize");
   the_papers = malloc(sizeof(paper_t) * num_opts);
@@ -495,6 +605,12 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
     if (!papersize)
     {
       printf("Unable to lookup size %s!\n", opts[i].name);
+      continue;
+    }
+
+    if (strcmp(opts[i].name, "Custom") == 0)
+    {
+      variable_sizes = 1;
       continue;
     }
 
@@ -521,35 +637,36 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
     cur_opt++;
   }
 
+ /*
+  * The VariablePaperSize attribute is obsolete, however some popular
+  * applications still look for it to provide custom page size support.
+  */
+
+  gzprintf(fp, "*VariablePaperSize: %s\n\n", variable_sizes ? "true" : "false");
+
   gzputs(fp, "*OpenUI *PageSize: PickOne\n");
   gzputs(fp, "*OrderDependency: 10 AnySetup *PageSize\n");
-  gzputs(fp, "*DefaultPageSize: ");
-  gzputs(fp, defopt);
-  gzputs(fp, "\n");
+  gzprintf(fp, "*DefaultPageSize: %s\n", defopt);
   for (i = 0; i < cur_opt; i ++)
   {
     gzprintf(fp,  "*PageSize %s", the_papers[i].name);
     gzprintf(fp, "/%s:\t\"<</PageSize[%d %d]/ImagingBBox null>>setpagedevice\"\n",
              the_papers[i].text, the_papers[i].width, the_papers[i].height);
   }
-  gzputs(fp, "*CloseUI: *PageSize\n");
+  gzputs(fp, "*CloseUI: *PageSize\n\n");
 
   gzputs(fp, "*OpenUI *PageRegion: PickOne\n");
   gzputs(fp, "*OrderDependency: 10 AnySetup *PageRegion\n");
-  gzputs(fp, "*DefaultPageRegion: ");
-  gzputs(fp, defopt);
-  gzputs(fp, "\n");
+  gzprintf(fp, "*DefaultPageRegion: %s\n", defopt);
   for (i = 0; i < cur_opt; i ++)
   {
     gzprintf(fp,  "*PageRegion %s", the_papers[i].name);
-    gzprintf(fp, "/%s:\t\"<</PageRegion[%d %d]/ImagingBBox null>>setpagedevice\"\n",
+    gzprintf(fp, "/%s:\t\"<</PageSize[%d %d]/ImagingBBox null>>setpagedevice\"\n",
 	     the_papers[i].text, the_papers[i].width, the_papers[i].height);
   }
-  gzputs(fp, "*CloseUI: *PageRegion\n");
+  gzputs(fp, "*CloseUI: *PageRegion\n\n");
 
-  gzputs(fp, "*DefaultImageableArea: ");
-  gzputs(fp, defopt);
-  gzputs(fp, "\n");
+  gzprintf(fp, "*DefaultImageableArea: %s\n", defopt);
   for (i = 0; i < cur_opt; i ++)
   {
     gzprintf(fp,  "*ImageableArea %s", the_papers[i].name);
@@ -557,15 +674,38 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
              the_papers[i].left, the_papers[i].bottom,
 	     the_papers[i].right, the_papers[i].top);
   }
-
-  gzputs(fp, "*DefaultPaperDimension: ");
-  gzputs(fp, defopt);
   gzputs(fp, "\n");
+
+  gzprintf(fp, "*DefaultPaperDimension: %s\n", defopt);
+
   for (i = 0; i < cur_opt; i ++)
   {
     gzprintf(fp, "*PaperDimension %s", the_papers[i].name);
     gzprintf(fp, "/%s:\t\"%d %d\"\n",
 	     the_papers[i].text, the_papers[i].width, the_papers[i].height);
+  }
+  gzputs(fp, "\n");
+
+  if (variable_sizes)
+  {
+    (*(printfuncs->limit))(p, v, &max_width, &max_height,
+			   &min_width, &min_height);
+    stp_set_media_size(v, "Custom");
+    (*(printfuncs->media_size))(p, v, &width, &height);
+    (*(printfuncs->imageable_area))(p, v, &left, &right, &bottom, &top);
+
+    gzprintf(fp, "*MaxMediaWidth:  \"%d\"\n", max_width);
+    gzprintf(fp, "*MaxMediaHeight: \"%d\"\n", max_height);
+    gzprintf(fp, "*HWMargins:      %d %d %d %d\n",
+	     left, bottom, width - right, height - top);
+    gzputs(fp, "*CustomPageSize True: \"pop pop pop <</PageSize[5 -2 roll]/ImagingBBox null>>setpagedevice\"\n");
+    gzprintf(fp, "*ParamCustomPageSize Width:        1 points %d %d\n",
+             min_width, max_width);
+    gzprintf(fp, "*ParamCustomPageSize Height:       2 points %d %d\n",
+             min_height, max_height);
+    gzputs(fp, "*ParamCustomPageSize WidthOffset:  3 points 0 0\n");
+    gzputs(fp, "*ParamCustomPageSize HeightOffset: 4 points 0 0\n");
+    gzputs(fp, "*ParamCustomPageSize Orientation:  5 int 0 0\n\n");
   }
 
   if (opts)
@@ -581,6 +721,10 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 
   if (the_papers)
     free(the_papers);
+
+#ifdef __APPLE__
+  gzputs(fp, "*OpenGroup: MAIN/Basic settings\n");
+#endif
 
  /*
   * Do we support color?
@@ -619,7 +763,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
              CUPS_CSPACE_CMYK, CUPS_ORDER_CHUNKED);
   }
 
-  gzputs(fp, "*CloseUI: *ColorModel\n");
+  gzputs(fp, "*CloseUI: *ColorModel\n\n");
 
  /*
   * Media types...
@@ -644,7 +788,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 
     free(opts);
 
-    gzputs(fp, "*CloseUI: *MediaType\n");
+    gzputs(fp, "*CloseUI: *MediaType\n\n");
   }
 
  /*
@@ -670,7 +814,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 
     free(opts);
 
-    gzputs(fp, "*CloseUI: *InputSlot\n");
+    gzputs(fp, "*CloseUI: *InputSlot\n\n");
   }
 
  /*
@@ -708,13 +852,15 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 
   free(opts);
 
-  gzputs(fp, "*CloseUI: *Resolution\n");
+  gzputs(fp, "*CloseUI: *Resolution\n\n");
 
  /*
   * STP option group...
   */
 
-  gzputs(fp, "*OpenGroup: STP\n");
+#ifndef __APPLE__
+  gzprintf(fp, "*OpenGroup: STP/%s\n", _("GIMP-print"));
+#endif
 
    /*
     * Image types...
@@ -731,7 +877,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
     gzprintf(fp, "*stpImageType Continuous/%s:\t\"<</cupsRowCount 2>>setpagedevice\"\n",
             _("Photograph"));
 
-    gzputs(fp, "*CloseUI: *stpImageType\n");
+    gzputs(fp, "*CloseUI: *stpImageType\n\n");
 
    /*
     * Dithering algorithms...
@@ -745,7 +891,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
       gzprintf(fp, "*stpDither %s/%s: \"<</cupsRowStep %d>>setpagedevice\"\n",
                stp_dither_algorithm_name(i), stp_dither_algorithm_text(i), i);
 
-    gzputs(fp, "*CloseUI: *stpDither\n");
+    gzputs(fp, "*CloseUI: *stpDither\n\n");
 
    /*
     * InkTypes...
@@ -774,19 +920,31 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 
       free(opts);
 
-      gzputs(fp, "*CloseUI: *stpInkType\n");
+      gzputs(fp, "*CloseUI: *stpInkType\n\n");
     }
+    
+#ifdef __APPLE__
+  gzputs(fp, "*CloseGroup: MAIN\n\n");
+  gzputs(fp, "*OpenGroup: STP/Expert adjustments\n");
+#endif /* __APPLE__ */
 
    /*
     * Advanced STP options...
     */
 
     if (stp_get_output_type(printvars) == OUTPUT_COLOR)
+#ifndef __APPLE__
       num_opts = 8;
     else
       num_opts = 4;
 
     for (i = 0; i < num_opts; i ++)
+#else
+    {
+      num_opts = 8;
+
+      for (i = 0; i < 5; i ++)
+#endif /* __APPLE__ */
     {
       gzprintf(fp, "*OpenUI *%s/%s: PickOne\n", stp_options[i].name,
                stp_options[i].text);
@@ -795,14 +953,50 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
            j <= stp_options[i].high;
 	   j += stp_options[i].step)
 	gzprintf(fp, "*%s %d/%.3f: \"\"\n", stp_options[i].name, j, j * 0.001);
-      gzprintf(fp, "*CloseUI *%s\n", stp_options[i].name);
+      gzprintf(fp, "*CloseUI: *%s\n\n", stp_options[i].name);
     }
 
  /*
   * End of STP option group...
   */
 
-  gzputs(fp, "*CloseGroup: STP\n");
+    gzputs(fp, "*CloseGroup: STP\n\n");
+#ifdef __APPLE__
+      gzputs(fp, "*OpenGroup: STPC/Expert color\n");
+
+      for (i = 5; i < num_opts; i ++)
+      {
+      gzprintf(fp, "*OpenUI *%s/%s: PickOne\n", stp_options[i].name,
+               stp_options[i].text);
+      gzprintf(fp, "*Default%s: 1000\n", stp_options[i].name);
+      for (j = stp_options[i].low;
+           j <= stp_options[i].high;
+           j += stp_options[i].step)
+      gzprintf(fp, "*%s %d/%.3f: \"\"\n", stp_options[i].name, j, j * 0.001);
+      gzprintf(fp, "*CloseUI: *%s\n", stp_options[i].name);
+      }
+       
+      gzputs(fp, "*CloseGroup: STPC\n\n");
+    }
+    else
+    {
+      num_opts = 4;
+ 
+      for (i = 0; i < num_opts; i ++)
+      {
+      gzprintf(fp, "*OpenUI *%s/%s: PickOne\n", stp_options[i].name,
+               stp_options[i].text);
+      gzprintf(fp, "*Default%s: 1000\n", stp_options[i].name);
+      for (j = stp_options[i].low;
+           j <= stp_options[i].high;
+           j += stp_options[i].step)
+      gzprintf(fp, "*%s %d/%.3f: \"\"\n", stp_options[i].name, j, j * 0.001);
+      gzprintf(fp, "*CloseUI: *%s\n", stp_options[i].name);
+      }
+       
+      gzputs(fp, "*CloseGroup: STP\n\n");
+    }
+#endif /* __APPLE__ */
 
  /*
   * Fonts...
@@ -845,7 +1039,7 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
   gzputs(fp, "*Font ZapfChancery-MediumItalic: Standard \"(001.007S)\" Standard ROM\n");
   gzputs(fp, "*Font ZapfDingbats: Special \"(001.004S)\" Standard ROM\n");
 
-  gzprintf(fp, "*%%End of %s.ppd\n", driver);
+  gzprintf(fp, "\n*%%End of %s.ppd\n", driver);
 
   gzclose(fp);
 
@@ -854,5 +1048,5 @@ write_ppd(const stp_printer_t p,	/* I - Printer driver */
 }
 
 /*
- * End of "$Id: genppd.c,v 1.36 2001/11/11 21:25:36 rlk Exp $".
+ * End of "$Id: genppd.c,v 1.36.2.15 2004/06/12 20:04:05 rlk Exp $".
  */

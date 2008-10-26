@@ -1,7 +1,7 @@
 # pseudo-XML description of printers known to the Print plugin
 # This file was originally generated.  It should be edited by hand.
 
-# "$Id: printers.xml,v 1.42 2001/11/22 12:39:18 rlk Exp $"
+# "$Id: printers.xml,v 1.42.2.26 2004/06/09 10:29:59 davehill Exp $"
 
 <printer name="PostScript Level 1" driver="ps">
 <color>
@@ -179,6 +179,13 @@
 <language value=canon>
 </printer>
 
+<printer name="CANON S200" driver="bjc-s200">
+<color>
+# model number 4202 is the USB product ID of the Canon S200x
+<model value=4202>
+<language value=canon>
+</printer>
+
 <printer name="CANON S400" driver="bjc-s400">
 <color>
 <model value=3000>
@@ -221,9 +228,9 @@
 <language value=escp2>
 </printer>
 
-<printer name="EPSON Stylus C40SX" driver="escp2-c40sx">
+<printer name="EPSON Stylus C20UX" driver="escp2-c20ux">
 <color>
-<model value=43>
+<model value=42>
 <gamma value=0.585>
 <density value=1.0>
 <magenta value=0.95>
@@ -231,9 +238,9 @@
 <language value=escp2>
 </printer>
 
-<printer name="EPSON Stylus C20UX" driver="escp2-c20ux">
+<printer name="EPSON Stylus C40SX" driver="escp2-c40sx">
 <color>
-<model value=42>
+<model value=43>
 <gamma value=0.585>
 <density value=1.0>
 <magenta value=0.95>
@@ -251,11 +258,139 @@
 <language value=escp2>
 </printer>
 
+<printer name="EPSON Stylus C41SX" driver="escp2-c41sx">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C41UX" driver="escp2-c41ux">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C42SX" driver="escp2-c42sx">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C42UX" driver="escp2-c42ux">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C43SX" driver="escp2-c43sx">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C43UX" driver="escp2-c43ux">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C44SX" driver="escp2-c44sx">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C44UX" driver="escp2-c44ux">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C50" driver="escp2-c50">
+<color>
+<model value=56>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
 <printer name="EPSON Stylus C60" driver="escp2-c60">
 <color>
 <model value=33>
 <gamma value=0.585>
 <density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C61" driver="escp2-c61">
+<color>
+<model value=52>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C62" driver="escp2-c62">
+<color>
+<model value=52>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C63" driver="escp2-c63">
+<color>
+<model value=61>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C64" driver="escp2-c64">
+<color>
+<model value=61>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
 <language value=escp2>
 </printer>
 
@@ -273,6 +408,39 @@
 <printer name="EPSON Stylus C80" driver="escp2-c80">
 <color>
 <model value=44>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C82" driver="escp2-c82">
+<color>
+<model value=55>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C83" driver="escp2-c83">
+<color>
+<model value=60>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus C84" driver="escp2-c84">
+<color>
+<model value=60>
 <gamma value=0.688>
 <density value=1.0>
 <cyan value=0.96>
@@ -533,6 +701,14 @@
 <language value=escp2>
 </printer>
 
+<printer name="EPSON Stylus Photo EX3" driver="escp2-ex3">
+<color>
+<model value=54>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
 <printer name="EPSON Stylus Photo 720" driver="escp2-720">
 <color>
 <model value=20>
@@ -591,6 +767,22 @@
 <language value=escp2>
 </printer>
 
+<printer name="EPSON Stylus Photo 825" driver="escp2-825">
+<color>
+<model value=50>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 830" driver="escp2-830">
+<color>
+<model value=50>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
 <printer name="EPSON Stylus Photo 870" driver="escp2-870">
 <color>
 <model value=22>
@@ -618,6 +810,54 @@
 <printer name="EPSON Stylus Photo 895" driver="escp2-895">
 <color>
 <model value=36>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 900" driver="escp2-ph900">
+<color>
+<model value=62>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 915" driver="escp2-915">
+<color>
+<model value=36>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 925" driver="escp2-925">
+<color>
+<model value=51>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 935" driver="escp2-935">
+<color>
+<model value=51>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 950" driver="escp2-950">
+<color>
+<model value=46>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 960" driver="escp2-960">
+<color>
+<model value=46>
 <gamma value=0.585>
 <density value=1.0>
 <language value=escp2>
@@ -663,6 +903,54 @@
 <language value=escp2>
 </printer>
 
+<printer name="EPSON Stylus Photo 2100" driver="escp2-2100">
+<color>
+<model value=47>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo 2200" driver="escp2-2200">
+<color>
+<model value=47>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo R200" driver="escp2-r200">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo R300" driver="escp2-r300">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo RX500" driver="escp2-rx500">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Photo RX600" driver="escp2-rx600">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
 <printer name="EPSON Stylus Pro 5000" driver="escp2-5000">
 <color>
 <model value=27>
@@ -674,6 +962,7 @@
 <printer name="EPSON Stylus Pro 5500" driver="escp2-5500">
 <color>
 <model value=40>
+<cyan value=0.8>
 <gamma value=0.585>
 <density value=1.0>
 <language value=escp2>
@@ -690,6 +979,15 @@
 <printer name="EPSON Stylus Pro 7500" driver="escp2-7500">
 <color>
 <model value=29>
+<cyan value=0.8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Pro 7600" driver="escp2-7600">
+<color>
+<model value=48>
 <gamma value=0.585>
 <density value=1.0>
 <language value=escp2>
@@ -706,6 +1004,15 @@
 <printer name="EPSON Stylus Pro 9500" driver="escp2-9500">
 <color>
 <model value=31>
+<cyan value=0.8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus Pro 9600" driver="escp2-9600">
+<color>
+<model value=49>
 <gamma value=0.585>
 <density value=1.0>
 <language value=escp2>
@@ -735,6 +1042,506 @@
 <language value=escp2>
 </printer>
 
+<printer name="EPSON Stylus CX-3100" driver="escp2-cx3100">
+<color>
+<model value=52>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-3200" driver="escp2-cx3200">
+<color>
+<model value=52>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-5100" driver="escp2-cx5100">
+<color>
+<model value=55>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-5200" driver="escp2-cx5200">
+<color>
+<model value=55>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-5300" driver="escp2-cx5300">
+<color>
+<model value=55>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-5400" driver="escp2-cx5400">
+<color>
+<model value=55>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-6300" driver="escp2-cx6300">
+<color>
+<model value=60>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-6400" driver="escp2-cx6400">
+<color>
+<model value=60>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-8300" driver="escp2-cx8300">
+<color>
+<model value=60>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON Stylus CX-8400" driver="escp2-cx8400">
+<color>
+<model value=60>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON CL-700" driver="escp2-cl700">
+<color>
+<model value=38>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON CL-750" driver="escp2-cl750">
+<color>
+<model value=43>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON CL-760" driver="escp2-cl760">
+<color>
+<model value=56>
+<gamma value=0.585>
+<density value=1.0>
+<magenta value=0.95>
+<yellow value=0.9>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON EM-900C" driver="escp2-em900c">
+<color>
+<model value=13>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON EM-930C" driver="escp2-em930c">
+<color>
+<model value=34>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MC-2000" driver="escp2-mc2000">
+<color>
+<model value=26>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MC-5000" driver="escp2-mc5000">
+<color>
+<model value=40>
+<cyan value=0.8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MC-7000" driver="escp2-mc7000">
+<color>
+<model value=29>
+<cyan value=0.8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MC-9000" driver="escp2-mc9000">
+<color>
+<model value=31>
+<cyan value=0.8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MC-10000" driver="escp2-mc10000">
+<color>
+<model value=41>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MJ-930C" driver="escp2-mj930c">
+<color>
+<model value=4>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MJ-5100C" driver="escp2-mj5100c">
+<color>
+<model value=39>
+<gamma value=0.597>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MJ-6000C" driver="escp2-mj6000c">
+<color>
+<model value=6>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON MJ-8000C" driver="escp2-mj8000c">
+<color>
+<model value=24>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-700C" driver="escp2-pm700c">
+<color>
+<model value=9>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-730C" driver="escp2-pm730c">
+<color>
+<model value=35>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-740C" driver="escp2-pm740c">
+<color>
+<model value=35>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-750C" driver="escp2-pm750c">
+<color>
+<model value=7>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-760C" driver="escp2-pm760c">
+<color>
+<model value=20>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-770C" driver="escp2-pm770c">
+<color>
+<model value=14>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-780C" driver="escp2-pm780c">
+<color>
+<model value=35>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-790PT" driver="escp2-pm790pt">
+<color>
+<model value=36>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-800C" driver="escp2-pm800c">
+<color>
+<model value=22>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-850PT" driver="escp2-pm850pt">
+<color>
+<model value=51>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-870C" driver="escp2-pm870c">
+<color>
+<model value=36>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-880C" driver="escp2-pm880c">
+<color>
+<model value=36>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-930C" driver="escp2-pm930c">
+<color>
+<model value=58>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-950C" driver="escp2-pm950c">
+<color>
+<model value=53>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-970C" driver="escp2-pm970c">
+<color>
+<model value=57>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-2000C" driver="escp2-pm2000c">
+<color>
+<model value=8>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-2200C" driver="escp2-pm2200c">
+<color>
+<model value=54>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-3000C" driver="escp2-pm3000c">
+<color>
+<model value=15>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-3300C" driver="escp2-pm3300c">
+<color>
+<model value=23>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-3500C" driver="escp2-pm3500c">
+<color>
+<model value=37>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-3700C" driver="escp2-pm3700c">
+<color>
+<model value=37>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-4000PX" driver="escp2-pm4000px">
+<color>
+<model value=47>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-5000C" driver="escp2-pm5000c">
+<color>
+<model value=27>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-7000C" driver="escp2-pm7000c">
+<color>
+<model value=28>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-9000C" driver="escp2-pm9000c">
+<color>
+<model value=30>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-10000" driver="escp2-pm10000">
+<color>
+<model value=41>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-D750" driver="escp2-pmd750">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PM-G700" driver="escp2-pmg700">
+<color>
+<model value=63>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PX-V500" driver="escp2-pxv500">
+<color>
+<model value=61>
+<gamma value=0.688>
+<density value=1.0>
+<cyan value=0.96>
+<magenta value=1.02>
+<yellow value=1.02>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PX-7000" driver="escp2-px7000">
+<color>
+<model value=48>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="EPSON PX-9000" driver="escp2-px9000">
+<color>
+<model value=49>
+<gamma value=0.585>
+<density value=1.0>
+<language value=escp2>
+</printer>
+
+<printer name="APPLE Color StyleWriter 4100" driver="pcl-apple-4100">
+<color>
+<model value=601>	# Uses 600 series driver
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="APPLE Color StyleWriter 4500" driver="pcl-apple-4500">
+<color>
+<model value=690>	# Uses 690 driver
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="APPLE Color StyleWriter 6500" driver="pcl-apple-6500">
+<color>
+<model value=800>	# Uses 850 driver
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
 <printer name="HP DeskJet 340" driver="pcl-340">
 <color>
 <model value=340>
@@ -759,9 +1566,81 @@
 <language value=pcl>
 </printer>
 
+<printer name="HP DesignJet 230" driver="pcl-desnj-230">
+<nocolor>
+<model value=10230>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 250C" driver="pcl-desnj-250">
+<color>
+<model value=10250>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 700" driver="pcl-desnj-700">
+<nocolor>
+<model value=10700>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
 <printer name="HP DesignJet 750C" driver="pcl-750">
 <color>
-<model value=750>
+<model value=10750>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 2500C" driver="pcl-desnj-2500">
+<color>
+<model value=12500>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 3500C" driver="pcl-desnj-3500">
+<color>
+<model value=13500>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 430" driver="pcl-desnj-430">
+<nocolor>
+<model value=10230>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 450C" driver="pcl-desnj-450">
+<color>
+<model value=10250>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 455CA" driver="pcl-desnj-455">
+<color>
+<model value=10250>
+<gamma value=0.818>
+<density value=0.786>
+<language value=pcl>
+</printer>
+
+<printer name="HP DesignJet 488CA" driver="pcl-desnj-488">
+<color>
+<model value=10250>
 <gamma value=0.818>
 <density value=0.786>
 <language value=pcl>
@@ -995,7 +1874,15 @@
 <nocolor>
 <model value=2>
 <gamma value=1.000>
-<density value=0.596>
+<density value=1.000>
+<language value=pcl>
+</printer>
+
+<printer name="HP LaserJet IIP series" driver="pcl-2p">
+<nocolor>
+<model value=21>
+<gamma value=1.000>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1003,7 +1890,7 @@
 <nocolor>
 <model value=3>
 <gamma value=1.000>
-<density value=0.596>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1011,7 +1898,7 @@
 <nocolor>
 <model value=6>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1019,7 +1906,7 @@
 <nocolor>
 <model value=4>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1027,7 +1914,7 @@
 <nocolor>
 <model value=5>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1035,7 +1922,7 @@
 <nocolor>
 <model value=6>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1043,7 +1930,7 @@
 <nocolor>
 <model value=7>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1051,7 +1938,7 @@
 <nocolor>
 <model value=6>
 <gamma value=1.000>
-<density value=0.615>
+<density value=1.000>
 <language value=pcl>
 </printer>
 
@@ -1093,3 +1980,12 @@
 <language value=lexmark>
 </printer>
 
+<printer name="LEXMARK Z53" driver="lexmark-z53">
+<color>
+<model value=10052>
+<gamma value=0.5>
+<density value=2.0>
+<magenta value=0.95>
+<yellow value=1.0>
+<language value=lexmark>
+</printer>

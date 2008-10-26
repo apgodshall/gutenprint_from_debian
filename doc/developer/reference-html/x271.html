@@ -1,14 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >The driver file</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="Adding a new printer"
 HREF="c200.html"><LINK
@@ -17,14 +17,11 @@ TITLE="Adding a new printer"
 HREF="c200.html"><LINK
 REL="NEXT"
 TITLE="ESC/P2"
-HREF="c464.html"></HEAD
+HREF="c464.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,7 +71,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN271"
->4.2. The driver file</A
+>The driver file</A
 ></H1
 ><P
 >&#13;      Adding a new printer to a driver module
@@ -115,7 +112,7 @@ CLASS="filename"
       prefer this; it isn't materially more work for the host to
       compute things like exact paper sizes and such, it allows a lot
       more tweaking, and it may be why Epson has been more open with
-      information&#8212;the communication protocol doesn't really
+      information—the communication protocol doesn't really
       contain very much IP, so they have less reason to keep it
       secret.
     </P
@@ -128,20 +125,20 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN281"
->4.2.1. Epson inkjet printers</A
+>Epson inkjet printers</A
 ></H2
 ><P
->&#13;        The <CODE
+>&#13;        The <VAR
 CLASS="varname"
->model_capabilities</CODE
+>model_capabilities</VAR
 > vector in
         <TT
 CLASS="filename"
 >print-escp2.c</TT
 > contains one entry for each
-        defined printer model.  The <TT
+        defined printer model.  The <VAR
 CLASS="literal"
->model</TT
+>model</VAR
 > parameter
         in <TT
 CLASS="filename"
@@ -167,6 +164,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN291"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >typedef struct escp2_printer
@@ -242,6 +245,9 @@ const double *hue_adjustment;
 const double *sat_adjustment;
 const paperlist_t *paperlist;
 } escp2_printer_t;</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -271,21 +277,21 @@ const paperlist_t *paperlist;
 >&#13;        Most printers can print using either the number of nozzles
         available or any smaller number.  Some printers require that
         all of the nozzles be used.  Those printers will set
-        <CODE
+        <VAR
 CLASS="varname"
->min_nozzles</CODE
+>min_nozzles</VAR
 > and/or
-        <CODE
+        <VAR
 CLASS="varname"
->min_black_nozzles</CODE
+>min_black_nozzles</VAR
 > to the same value as
-        <CODE
+        <VAR
 CLASS="varname"
->nozzles</CODE
+>nozzles</VAR
 > and/or
-        <CODE
+        <VAR
 CLASS="varname"
->black_nozzles</CODE
+>black_nozzles</VAR
 >.
       </P
 ><P
@@ -298,9 +304,9 @@ CLASS="varname"
 ><P
 >&#13;        Most Epson printers, other than the high-end Stylus Pro
         models, cannot print dots spaced more closely than 1/360" or
-        1/720" apart (this is the setting for <CODE
+        1/720" apart (this is the setting for <VAR
 CLASS="varname"
->xres</CODE
+>xres</VAR
 >.
         This is true even for printers that support resolutions of
         1440 or 2880 DPI.  In these cases, the data must be printed in
@@ -314,25 +320,25 @@ CLASS="varname"
         For example, the Stylus Photo EX can normally print with a dot
         spacing of 1/720".  The smallest dot size cannot be printed
         with a dot spacing of less than 1/360", however.  In this
-        case, we use <CODE
+        case, we use <VAR
 CLASS="varname"
->enhanced_xres</CODE
+>enhanced_xres</VAR
 > to specify the
         resolution to be used in this enhanced mode, and
-        <CODE
+        <VAR
 CLASS="varname"
->enhanced_resolution</CODE
+>enhanced_resolution</VAR
 > to specify the printing
         resolution above which we use the
-        <CODE
+        <VAR
 CLASS="varname"
->enhanced_xres</CODE
+>enhanced_xres</VAR
 >.
       </P
 ><P
->&#13;        The <CODE
+>&#13;        The <VAR
 CLASS="varname"
->resolution_scale</CODE
+>resolution_scale</VAR
 > command is used to
         specify scaling factors for the dot separation on newer
         printers.  It should always be 14400 with current printers.
@@ -349,26 +355,26 @@ CLASS="function"
 >INCH</CODE
 > macro defined
         to make specification of the
-        <CODE
+        <VAR
 CLASS="varname"
->max_paper_width</CODE
+>max_paper_width</VAR
 > and
-        <CODE
+        <VAR
 CLASS="varname"
->max_paper_height</CODE
+>max_paper_height</VAR
 > more legible.  It
         multiplies <CODE
 CLASS="constant"
 >72</CODE
 > by the provided expression
         to get the appropriate number of points.  For example, to
-        specify 8.5", <TT
+        specify 8.5", <VAR
 CLASS="literal"
->INCH(17/2)</TT
+>INCH(17/2)</VAR
 > expands to
-        <TT
+        <VAR
 CLASS="literal"
->(72 * 17/2)</TT
+>(72 * 17/2)</VAR
 >, which is evaluated left to
         right, and hence generates the correct value.
       </P
@@ -379,25 +385,25 @@ CLASS="literal"
 CLASS="constant"
 >1</CODE
 > for
-        <CODE
+        <VAR
 CLASS="varname"
->separation_rows</CODE
+>separation_rows</VAR
 > and <CODE
 CLASS="constant"
 >0</CODE
 >
         for the others.  Very, very few printers require (or allow)
-        <CODE
+        <VAR
 CLASS="varname"
->separation_rows</CODE
+>separation_rows</VAR
 > to be anything but
         <CODE
 CLASS="constant"
 >1</CODE
 > and
-        <CODE
+        <VAR
 CLASS="varname"
->pseudo_separation_rows</CODE
+>pseudo_separation_rows</VAR
 > other than
         <CODE
 CLASS="constant"
@@ -408,9 +414,9 @@ CLASS="constant"
         exceptions.
       </P
 ><P
->&#13;        <CODE
+>&#13;        <VAR
 CLASS="varname"
->zero_margin_offset</CODE
+>zero_margin_offset</VAR
 > is used to specify an
         additional negative horizontal offset required to print to the
         edges of the paper on newer Stylus Photo printers.  These must
@@ -477,14 +483,14 @@ CLASS="emphasis"
 ><P
 >&#13;        The lists of dot sizes and densities contain values for 13
         printing modes: 120/180 DPI using printer weaving (single row;
-        incorrectly referred to as &#8220;microweave&#8221;) and
-        &#8220;soft&#8221; weaving (the driver determines the exact
+        incorrectly referred to as “microweave”) and
+        “soft” weaving (the driver determines the exact
         pattern of dot layout), 360 DPI microweave and softweave,
-        720�360 DPI microweave and softweave, 720 DPI microweave
-        and softweave, 1440�720 microweave and softweave,
-        2880�720 microweave and softweave, and 2880�1440
+        720×360 DPI microweave and softweave, 720 DPI microweave
+        and softweave, 1440×720 microweave and softweave,
+        2880×720 microweave and softweave, and 2880×1440
         softweave only.  Printer weaving is referred to as
-        &#8220;microweave&#8221; for historical reasons.
+        “microweave” for historical reasons.
       </P
 ><P
 >&#13;        For the dot sizes, the value for each element in the vector
@@ -581,28 +587,28 @@ CLASS="constant"
 CLASS="constant"
 >0x10</CODE
 > usually works best at
-        1440�720 and <CODE
+        1440×720 and <CODE
 CLASS="constant"
 >0x11</CODE
 > works best at
-        720�720.  Unfortunately, <CODE
+        720×720.  Unfortunately, <CODE
 CLASS="constant"
 >0x10</CODE
 >
         doesn't seem to generate quite enough density at
-        720�720, because if it did the output would be very
-        smooth.  Perhaps it's possible to tweak things&#8230;
+        720×720, because if it did the output would be very
+        smooth.  Perhaps it's possible to tweak things…
       </P
 ><P
 >&#13;        The list of densities is a list of base density values for all
-        of the above listed modes.  &#8220;Density&#8221; refers to
+        of the above listed modes.  “Density” refers to
         the amount of ink deposited when a solid color (or solid
         black) is printed.  So if the density is
         <CODE
 CLASS="constant"
 >0.5</CODE
 >, solid black actually prints only
-        half the possible dots.  &#8220;Base density&#8221; refers to
+        half the possible dots.  “Base density” refers to
         the fact that the density value can be scaled in the GUI or on
         the Ghostscript command line.  The density value specified
         (which is not made visible to the user) is multiplied by the
@@ -626,8 +632,8 @@ CLASS="constant"
         density value that results in solid black (no visible gaps
         under a fairly high power magnifying glass or loupe).  If an
         appropriate density value is found for 720 DPI, it could be
-        divided by 2 for 1440�720, by 4 for 2880�720, and
-        by 8 for 2880�1440.
+        divided by 2 for 1440×720, by 4 for 2880×720, and
+        by 8 for 2880×1440.
       </P
 ><P
 >&#13;        However, for printers that offer a choice of dot size, this
@@ -645,7 +651,7 @@ CLASS="constant"
 >&#13;        The last member is a pointer to a structure containing a list
         of ink values for variable dot size (or 6 color) inks.  We
         model variable dot size inks as producing a certain
-        &#8220;value&#8221; of ink for each available dot size, where
+        “value” of ink for each available dot size, where
         the largest dot size has a value of <CODE
 CLASS="constant"
 >1</CODE
@@ -804,7 +810,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN403"
->4.2.2. Tuning the printer</A
+>Tuning the printer</A
 ></H2
 ><P
 >&#13;        Now, how do you use all this to tune a printer?  There are a
@@ -977,7 +983,7 @@ CLASS="emphasis"
         credit, so too much cyan and magenta is deposited, which
         overwhelms the yellow).  Make sure you do this on very white,
         very high grade inkjet paper that's designed for
-        1440�720 DPI or higher; otherwise the ink will spread on
+        1440×720 DPI or higher; otherwise the ink will spread on
         contact and you'll get values that aren't really true for high
         grade paper.  You can, of course, calibrate for low grade
         paper if that's what you're going to use, but that shouldn't
@@ -1000,7 +1006,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN433"
->4.2.3. Canon inkjet printers</A
+>Canon inkjet printers</A
 ></H2
 ><P
 >&#13;        Basically, a new Canon printer can be added to
@@ -1012,8 +1018,8 @@ CLASS="filename"
         differences are noted here.
       </P
 ><P
->&#13;        In general, Canon printers have more &#8220;built-in
-        intelligence&#8220; than Epson printers which results in the
+>&#13;        In general, Canon printers have more “built-in
+        intelligence“ than Epson printers which results in the
         fact that the driver only has to tell the printing conditions
         like resolutions, dot sizes, etc. to the printer and
         afterwards transfer the raster data line by line for each
@@ -1032,6 +1038,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN440"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >typedef struct canon_caps {
@@ -1053,6 +1065,9 @@ canon_dot_size_t dot_sizes;   /* Vector of dot sizes for resolutions */
 canon_densities_t densities;  /* List of densities for each printer */
 canon_variable_inklist_t *inxs; /* Choices of inks for this printer */
 } canon_cap_t;</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -1060,11 +1075,11 @@ canon_variable_inklist_t *inxs; /* Choices of inks for this printer */
 >&#13;        Since there are Canon printers which print in resolutions of
         2<SUP
 >n</SUP
-> � 150 DPI (e.g. 300, 600,
+> × 150 DPI (e.g. 300, 600,
         1200) and others which support resolutions of
         2<SUP
 >n</SUP
-> � 180 DPI (e.g. 360, 720,
+> × 180 DPI (e.g. 360, 720,
         1440), there's a base resolution (150 or 180, respectively)
         given in the <SPAN
 CLASS="type"
@@ -1128,6 +1143,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN458"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >static const canon_variable_inklist_t canon_ink_myinks[] =
@@ -1143,17 +1164,20 @@ CLASS="programlisting"
   &#38;ci_CMYK_3, &#38;ci_CMYK_3, &#38;ci_CMYK_3,
 },
 };</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;        where the <TT
+>&#13;        where the <VAR
 CLASS="literal"
->&#38;ci_CMYK_1</TT
+>&#38;ci_CMYK_1</VAR
 > and
-        <TT
+        <VAR
 CLASS="literal"
->&#38;ci_CMYK_3</TT
+>&#38;ci_CMYK_3</VAR
 > entries are references to a
         previously defined const of type
         <SPAN
@@ -1188,7 +1212,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

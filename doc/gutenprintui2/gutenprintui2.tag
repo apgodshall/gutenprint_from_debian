@@ -2,7 +2,7 @@
 <tagfile>
   <compound kind="file">
     <name>curve.h</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/gutenprintui2/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprintui2/</path>
     <filename>curve_8h</filename>
     <class kind="struct">_StpuiCurve</class>
     <class kind="struct">_StpuiCurveClass</class>
@@ -141,7 +141,7 @@
   </compound>
   <compound kind="file">
     <name>gammacurve.h</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/gutenprintui2/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprintui2/</path>
     <filename>gammacurve_8h</filename>
     <class kind="struct">_StpuiGammaCurve</class>
     <class kind="struct">_StpuiGammaCurveClass</class>
@@ -218,7 +218,7 @@
   </compound>
   <compound kind="file">
     <name>gutenprintui.h</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/gutenprintui2/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprintui2/</path>
     <filename>gutenprintui_8h</filename>
     <includes id="curve_8h" name="curve.h" local="no" imported="no">gutenprintui2/curve.h</includes>
     <includes id="gammacurve_8h" name="gammacurve.h" local="no" imported="no">gutenprintui2/gammacurve.h</includes>
@@ -656,7 +656,7 @@
   </compound>
   <compound kind="file">
     <name>typebuiltins.h</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/gutenprintui2/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprintui2/</path>
     <filename>typebuiltins_8h</filename>
     <member kind="define">
       <type>#define</type>
@@ -1105,7 +1105,7 @@
   </compound>
   <compound kind="dir">
     <name>include/gutenprintui2/</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/gutenprintui2/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/gutenprintui2/</path>
     <filename>dir_000001.html</filename>
     <file>curve.h</file>
     <file>gammacurve.h</file>
@@ -1114,7 +1114,7 @@
   </compound>
   <compound kind="dir">
     <name>include/</name>
-    <path>/home/rleigh/gutenprint-5.0.0-rc1/include/</path>
+    <path>/home/rlk/sandbox/print-4.3.x/include/</path>
     <filename>dir_000000.html</filename>
     <dir>include/gutenprintui2/</dir>
   </compound>

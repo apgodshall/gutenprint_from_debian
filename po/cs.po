@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gimp-print 4.2.6-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-02 09:44+0100\n"
+"POT-Creation-Date: 2005-07-15 19:53-0400\n"
 "PO-Revision-Date: 2003-05-03 19:43+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -474,58 +474,51 @@ msgid "Printing Output Mode"
 msgstr ""
 
 #: src/main/print-canon.c:1280 src/main/print-escp2.c:412
-#: src/main/print-lexmark.c:325 src/main/print-olympus.c:1221
-#: src/main/print-pcl.c:1218
-msgid "Cyan Balance"
-msgstr ""
+#: src/main/print-lexmark.c:325 src/main/print-pcl.c:1218
+#, fuzzy
+msgid "Cyan Density"
+msgstr "Hustota:"
 
 #: src/main/print-canon.c:1281 src/main/print-escp2.c:413
-#: src/main/print-lexmark.c:326 src/main/print-olympus.c:1222
-#: src/main/print-pcl.c:1219
+#: src/main/print-lexmark.c:326 src/main/print-pcl.c:1219
 #, fuzzy
-msgid "Adjust the cyan balance"
+msgid "Adjust the cyan density"
 msgstr "Upravit vyrovnání modrozelené tisku"
 
 #: src/main/print-canon.c:1288 src/main/print-escp2.c:420
-#: src/main/print-lexmark.c:333 src/main/print-olympus.c:1229
-#: src/main/print-pcl.c:1226
+#: src/main/print-lexmark.c:333 src/main/print-pcl.c:1226
 #, fuzzy
-msgid "Magenta Balance"
+msgid "Magenta Density"
 msgstr "Fialová"
 
 #: src/main/print-canon.c:1289 src/main/print-escp2.c:421
-#: src/main/print-lexmark.c:334 src/main/print-olympus.c:1230
-#: src/main/print-pcl.c:1227
+#: src/main/print-lexmark.c:334 src/main/print-pcl.c:1227
 #, fuzzy
-msgid "Adjust the magenta balance"
+msgid "Adjust the magenta density"
 msgstr "Upravit vyrovnání fialové tisku"
 
 #: src/main/print-canon.c:1296 src/main/print-escp2.c:428
-#: src/main/print-lexmark.c:341 src/main/print-olympus.c:1237
-#: src/main/print-pcl.c:1234
+#: src/main/print-lexmark.c:341 src/main/print-pcl.c:1234
 #, fuzzy
-msgid "Yellow Balance"
-msgstr "Žlutá"
+msgid "Yellow Density"
+msgstr "Hustota:"
 
 #: src/main/print-canon.c:1297 src/main/print-escp2.c:429
-#: src/main/print-lexmark.c:342 src/main/print-olympus.c:1238
-#: src/main/print-pcl.c:1235
+#: src/main/print-lexmark.c:342 src/main/print-pcl.c:1235
 #, fuzzy
-msgid "Adjust the yellow balance"
+msgid "Adjust the yellow density"
 msgstr "Upravit vyrovnání žluté tisku"
 
 #: src/main/print-canon.c:1304 src/main/print-escp2.c:436
-#: src/main/print-lexmark.c:349 src/main/print-olympus.c:1245
-#: src/main/print-pcl.c:1242
+#: src/main/print-lexmark.c:349 src/main/print-pcl.c:1242
 #, fuzzy
-msgid "Black Balance"
-msgstr "Černobíle"
+msgid "Black Density"
+msgstr "Hustota:"
 
 #: src/main/print-canon.c:1305 src/main/print-escp2.c:437
-#: src/main/print-lexmark.c:350 src/main/print-olympus.c:1246
-#: src/main/print-pcl.c:1243
+#: src/main/print-lexmark.c:350 src/main/print-pcl.c:1243
 #, fuzzy
-msgid "Adjust the black balance"
+msgid "Adjust the black density"
 msgstr "Upravit vyrovnání modrozelené tisku"
 
 #: src/main/print-canon.c:1312 src/main/print-canon.c:1313
@@ -597,14 +590,14 @@ msgstr "Fotografické barvy CcMmY"
 msgid "Photo CcMmYK Color"
 msgstr "Fotografické barvy CcMmYK"
 
-#: src/main/print-canon.c:1812 src/main/print-escp2.c:1738
+#: src/main/print-canon.c:1812 src/main/print-escp2.c:1737
 #: src/main/print-lexmark.c:1283 src/main/print-olympus.c:1453
 #: src/main/print-pcl.c:1733 src/main/print-ps.c:167 src/main/print-raw.c:135
 #: src/gutenprintui/panel.c:281 src/gutenprintui2/panel.c:281
 msgid "Color"
 msgstr "Barva"
 
-#: src/main/print-canon.c:1814 src/main/print-escp2.c:1740
+#: src/main/print-canon.c:1814 src/main/print-escp2.c:1739
 #: src/main/print-lexmark.c:1285 src/main/print-pcl.c:1735
 #: src/main/print-ps.c:169 src/main/print-raw.c:137
 #, fuzzy
@@ -672,7 +665,7 @@ msgstr ""
 msgid "KCMY"
 msgstr ""
 
-#: src/main/print-color.c:164 src/main/print-color.c:412
+#: src/main/print-color.c:164 src/main/print-color.c:436
 #, fuzzy
 msgid "Channel "
 msgstr "Zrušit"
@@ -701,7 +694,7 @@ msgid "Color Correction"
 msgstr ""
 
 #: src/main/print-color.c:175 src/main/print-color.c:215
-#: src/main/print-color.c:223 src/main/print-color.c:313
+#: src/main/print-color.c:223 src/main/print-color.c:337
 #: src/main/generic-options.c:68
 msgid "Basic Image Adjustment"
 msgstr ""
@@ -871,12 +864,47 @@ msgstr "Upravit vyrovnání žluté tisku"
 msgid "Adjust the black gamma"
 msgstr "Upravit vyrovnání žluté tisku"
 
-#: src/main/print-color.c:313
+#: src/main/print-color.c:313 src/main/print-olympus.c:1221
+msgid "Cyan Balance"
+msgstr ""
+
+#: src/main/print-color.c:313 src/main/print-color.c:321
+#: src/main/print-color.c:329
+#, fuzzy
+msgid "GrayBalance"
+msgstr "Odstíny šedi"
+
+#: src/main/print-color.c:314
+#, fuzzy
+msgid "Adjust the cyan gray balance"
+msgstr "Upravit vyrovnání modrozelené tisku"
+
+#: src/main/print-color.c:321 src/main/print-olympus.c:1229
+#, fuzzy
+msgid "Magenta Balance"
+msgstr "Fialová"
+
+#: src/main/print-color.c:322
+#, fuzzy
+msgid "Adjust the magenta gray balance"
+msgstr "Upravit vyrovnání fialové tisku"
+
+#: src/main/print-color.c:329 src/main/print-olympus.c:1237
+#, fuzzy
+msgid "Yellow Balance"
+msgstr "Žlutá"
+
+#: src/main/print-color.c:330
+#, fuzzy
+msgid "Adjust the yellow gray balance"
+msgstr "Upravit vyrovnání žluté tisku"
+
+#: src/main/print-color.c:337
 #, fuzzy
 msgid "Saturation"
 msgstr "Sytost:"
 
-#: src/main/print-color.c:314
+#: src/main/print-color.c:338
 msgid ""
 "Adjust the saturation (color balance) of the print\n"
 "Use zero saturation to produce grayscale output using color and black inks"
@@ -885,183 +913,183 @@ msgstr ""
 "Použijte nulovou sytost pro vytvoření výstupu ve stupních šedi pomocí "
 "barevných a černých inkoustů"
 
-#: src/main/print-color.c:324
+#: src/main/print-color.c:348
 #, fuzzy
 msgid "Ink Limit"
 msgstr "Typ inkoustu"
 
-#: src/main/print-color.c:324 src/main/print-color.c:332
-#: src/main/print-color.c:340 src/main/print-color.c:348
-#: src/main/print-color.c:511 src/main/print-escp2.c:332
+#: src/main/print-color.c:348 src/main/print-color.c:356
+#: src/main/print-color.c:364 src/main/print-color.c:372
+#: src/main/print-color.c:535 src/main/print-escp2.c:332
 #: src/main/print-escp2.c:338 src/main/print-escp2.c:344
 #: src/main/print-escp2.c:350 src/main/print-escp2.c:356
 msgid "Advanced Output Control"
 msgstr ""
 
-#: src/main/print-color.c:325
+#: src/main/print-color.c:349
 msgid "Limit the total ink printed to the page"
 msgstr ""
 
-#: src/main/print-color.c:332
+#: src/main/print-color.c:356
 msgid "GCR Transition"
 msgstr ""
 
-#: src/main/print-color.c:333
+#: src/main/print-color.c:357
 msgid "Adjust the gray component transition rate"
 msgstr ""
 
-#: src/main/print-color.c:340
+#: src/main/print-color.c:364
 msgid "GCR Lower Bound"
 msgstr ""
 
-#: src/main/print-color.c:341
+#: src/main/print-color.c:365
 msgid "Lower bound of gray component reduction"
 msgstr ""
 
-#: src/main/print-color.c:348
+#: src/main/print-color.c:372
 msgid "GCR Upper Bound"
 msgstr ""
 
-#: src/main/print-color.c:349
+#: src/main/print-color.c:373
 msgid "Upper bound of gray component reduction"
 msgstr ""
 
-#: src/main/print-color.c:412
+#: src/main/print-color.c:436
 #, fuzzy
 msgid " Curve"
 msgstr "Černá"
 
-#: src/main/print-color.c:413 src/main/print-color.c:423
-#: src/main/print-color.c:431 src/main/print-color.c:439
-#: src/main/print-color.c:447 src/main/print-color.c:455
-#: src/main/print-color.c:463 src/main/print-color.c:471
-#: src/main/print-color.c:479
+#: src/main/print-color.c:437 src/main/print-color.c:447
+#: src/main/print-color.c:455 src/main/print-color.c:463
+#: src/main/print-color.c:471 src/main/print-color.c:479
+#: src/main/print-color.c:487 src/main/print-color.c:495
+#: src/main/print-color.c:503
 #, fuzzy
 msgid "Output Curves"
 msgstr "Typ výstupu:"
 
-#: src/main/print-color.c:413
+#: src/main/print-color.c:437
 msgid "Curve for raw channel "
 msgstr ""
 
-#: src/main/print-color.c:423
+#: src/main/print-color.c:447
 msgid "Cyan Curve"
 msgstr ""
 
-#: src/main/print-color.c:424
+#: src/main/print-color.c:448
 #, fuzzy
 msgid "Cyan curve"
 msgstr "Zrušit"
 
-#: src/main/print-color.c:431
+#: src/main/print-color.c:455
 #, fuzzy
 msgid "Magenta Curve"
 msgstr "Fialová"
 
-#: src/main/print-color.c:432
+#: src/main/print-color.c:456
 #, fuzzy
 msgid "Magenta curve"
 msgstr "Fialová"
 
-#: src/main/print-color.c:439
+#: src/main/print-color.c:463
 #, fuzzy
 msgid "Yellow Curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:440
+#: src/main/print-color.c:464
 #, fuzzy
 msgid "Yellow curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:447
+#: src/main/print-color.c:471
 #, fuzzy
 msgid "Black Curve"
 msgstr "Černá"
 
-#: src/main/print-color.c:448
+#: src/main/print-color.c:472
 #, fuzzy
 msgid "Black curve"
 msgstr "Černá"
 
-#: src/main/print-color.c:455
+#: src/main/print-color.c:479
 #, fuzzy
 msgid "Red Curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:456
+#: src/main/print-color.c:480
 #, fuzzy
 msgid "Red curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:463
+#: src/main/print-color.c:487
 #, fuzzy
 msgid "Green Curve"
 msgstr "Fialová"
 
-#: src/main/print-color.c:464
+#: src/main/print-color.c:488
 #, fuzzy
 msgid "Green curve"
 msgstr "Fialová"
 
-#: src/main/print-color.c:471
+#: src/main/print-color.c:495
 #, fuzzy
 msgid "Blue Curve"
 msgstr "Černá"
 
-#: src/main/print-color.c:472
+#: src/main/print-color.c:496
 #, fuzzy
 msgid "Blue curve"
 msgstr "Černá"
 
-#: src/main/print-color.c:479
+#: src/main/print-color.c:503
 #, fuzzy
 msgid "White Curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:480
+#: src/main/print-color.c:504
 #, fuzzy
 msgid "White curve"
 msgstr "Žlutá"
 
-#: src/main/print-color.c:487
+#: src/main/print-color.c:511
 msgid "Hue Map"
 msgstr ""
 
-#: src/main/print-color.c:487 src/main/print-color.c:495
-#: src/main/print-color.c:503
+#: src/main/print-color.c:511 src/main/print-color.c:519
+#: src/main/print-color.c:527
 msgid "Advanced HSL Curves"
 msgstr ""
 
-#: src/main/print-color.c:488
+#: src/main/print-color.c:512
 msgid "Hue adjustment curve"
 msgstr ""
 
-#: src/main/print-color.c:495
+#: src/main/print-color.c:519
 #, fuzzy
 msgid "Saturation Map"
 msgstr "Sytost:"
 
-#: src/main/print-color.c:496
+#: src/main/print-color.c:520
 msgid "Saturation adjustment curve"
 msgstr ""
 
-#: src/main/print-color.c:503
+#: src/main/print-color.c:527
 msgid "Luminosity Map"
 msgstr ""
 
-#: src/main/print-color.c:504
+#: src/main/print-color.c:528
 msgid "Luminosity adjustment curve"
 msgstr ""
 
-#: src/main/print-color.c:511
+#: src/main/print-color.c:535
 msgid "Gray Component Reduction"
 msgstr ""
 
-#: src/main/print-color.c:512
+#: src/main/print-color.c:536
 msgid "Gray component reduction curve"
 msgstr ""
 
-#: src/main/print-color.c:1599
+#: src/main/print-color.c:1620
 msgid "Traditional Gutenprint color conversion"
 msgstr ""
 
@@ -1155,8 +1183,8 @@ msgstr ""
 #: src/main/print-escp2-data.c:286 src/main/print-escp2-data.c:314
 #: src/main/print-escp2-data.c:351 src/main/print-escp2-data.c:406
 #: src/main/print-escp2-data.c:452 src/main/print-escp2-data.c:545
-#: src/main/print-escp2.c:1494 src/main/print-escp2.c:1591
-#: src/main/print-escp2.c:1603 src/main/print-pcl.c:227
+#: src/main/print-escp2.c:1493 src/main/print-escp2.c:1590
+#: src/main/print-escp2.c:1602 src/main/print-pcl.c:227
 #: src/main/generic-options.c:36 src/gutenprintui/panel.c:2549
 #: src/gutenprintui2/panel.c:2573
 msgid "Standard"
@@ -1443,8 +1471,9 @@ msgid "Adjust the yellow map"
 msgstr "Upravit vyrovnání žluté tisku"
 
 #: src/main/print-escp2.c:350
+#, fuzzy
 msgid "Blue Map"
-msgstr ""
+msgstr "Černobíle"
 
 #: src/main/print-escp2.c:351
 #, fuzzy
@@ -1462,22 +1491,22 @@ msgstr "Upravit vyrovnání žluté tisku"
 
 #: src/main/print-escp2.c:444
 #, fuzzy
-msgid "Red Balance"
-msgstr "Žlutá"
+msgid "Red Density"
+msgstr "Hustota:"
 
 #: src/main/print-escp2.c:445
 #, fuzzy
-msgid "Adjust the red balance"
+msgid "Adjust the red density"
 msgstr "Upravit vyrovnání žluté tisku"
 
 #: src/main/print-escp2.c:452
 #, fuzzy
-msgid "Blue Balance"
-msgstr "Černobíle"
+msgid "Blue Density"
+msgstr "Hustota:"
 
 #: src/main/print-escp2.c:453
 #, fuzzy
-msgid "Adjust the blue balance"
+msgid "Adjust the blue density"
 msgstr "Upravit vyrovnání modrozelené tisku"
 
 #: src/main/print-escp2.c:460
@@ -1551,48 +1580,48 @@ msgstr ""
 msgid "Print To Hub"
 msgstr "Tisknout do souboru?"
 
-#: src/main/print-escp2.c:1441 src/main/generic-options.c:213
+#: src/main/print-escp2.c:1440 src/main/generic-options.c:213
 #: src/main/generic-options.c:230
 #, fuzzy
 msgid "Manual Control"
 msgstr "Ruční"
 
-#: src/main/print-escp2.c:1568 src/cups/genppd.c:1286
+#: src/main/print-escp2.c:1567 src/cups/genppd.c:1286
 #, fuzzy
 msgid "Automatic"
 msgstr "Automaticky"
 
-#: src/main/print-escp2.c:1570
+#: src/main/print-escp2.c:1569
 #, fuzzy
 msgid "Bidirectional"
 msgstr "600 DPI Jednosměrně"
 
-#: src/main/print-escp2.c:1572
+#: src/main/print-escp2.c:1571
 #, fuzzy
 msgid "Unidirectional"
 msgstr "600 DPI Jednosměrně"
 
-#: src/main/print-escp2.c:1605
+#: src/main/print-escp2.c:1604
 msgid "Alternate Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1607
+#: src/main/print-escp2.c:1606
 msgid "Ascending Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1609
+#: src/main/print-escp2.c:1608
 msgid "Descending Fill"
 msgstr ""
 
-#: src/main/print-escp2.c:1611
+#: src/main/print-escp2.c:1610
 msgid "Ascending Double"
 msgstr ""
 
-#: src/main/print-escp2.c:1613
+#: src/main/print-escp2.c:1612
 msgid "Nearest Neighbor Avoidance"
 msgstr ""
 
-#: src/main/print-escp2.c:2011
+#: src/main/print-escp2.c:2010
 #, fuzzy, c-format
 msgid "This printer does not support raw printer output at depth %d\n"
 msgstr "Tiskárna nepodporuje barevný výstup\n"
@@ -1767,6 +1796,31 @@ msgstr "Matný papír"
 #: src/main/print-olympus.c:1186 src/main/print-olympus.c:1187
 msgid "Laminate Pattern"
 msgstr ""
+
+#: src/main/print-olympus.c:1222
+#, fuzzy
+msgid "Adjust the cyan balance"
+msgstr "Upravit vyrovnání modrozelené tisku"
+
+#: src/main/print-olympus.c:1230
+#, fuzzy
+msgid "Adjust the magenta balance"
+msgstr "Upravit vyrovnání fialové tisku"
+
+#: src/main/print-olympus.c:1238
+#, fuzzy
+msgid "Adjust the yellow balance"
+msgstr "Upravit vyrovnání žluté tisku"
+
+#: src/main/print-olympus.c:1245
+#, fuzzy
+msgid "Black Balance"
+msgstr "Černobíle"
+
+#: src/main/print-olympus.c:1246
+#, fuzzy
+msgid "Adjust the black balance"
+msgstr "Upravit vyrovnání modrozelené tisku"
 
 #: src/main/print-pcl.c:182
 msgid "Plain"
@@ -5664,6 +5718,10 @@ msgstr "Špatné parametry; nemohu pokračovat!\n"
 #, fuzzy, c-format
 msgid "ERROR: ijsgutenprint: Get next row failed at %.0f\n"
 msgstr "Získání dalšího řádku selhalo na %.0f\n"
+
+#, fuzzy
+#~ msgid "Red Balance"
+#~ msgstr "Žlutá"
 
 #~ msgid "Printer status requires using a raw device.\n"
 #~ msgstr "Stav tiskárny vyžaduje použití přímého zařízení.\n"

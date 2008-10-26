@@ -1,14 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Appropriate Remote Commands</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="ESC/P2"
 HREF="c464.html"><LINK
@@ -17,14 +17,11 @@ TITLE="Remote Mode Commands"
 HREF="x955.html"><LINK
 REL="NEXT"
 TITLE="Weaving for inkjet printers"
-HREF="c1717.html"></HEAD
+HREF="c1717.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,32 +71,32 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN1669"
->5.3. Appropriate Remote Commands</A
+>Appropriate Remote Commands</A
 ></H1
 ><P
 >&#13;        All of the remote commands described above are wrapped up with
         the usual boilerplate.  The files always start with
-        <TT
+        <VAR
 CLASS="literal"
->00 00 00</TT
-> and the &#8220;magic&#8221;
-        command described above, then two <TT
+>00 00 00</VAR
+> and the “magic”
+        command described above, then two <VAR
 CLASS="literal"
->ESC @</TT
+>ESC @</VAR
 >s to
         reset the printer.  The remote command sequences come next; if
         they print anything that is usually followed by a
-        <TT
+        <VAR
 CLASS="literal"
->FF</TT
-> (<TT
+>FF</VAR
+> (<VAR
 CLASS="literal"
->0C</TT
+>0C</VAR
 > hex) character to
         feed the page, then the file ends with another two
-        <TT
+        <VAR
 CLASS="literal"
->ESC @</TT
+>ESC @</VAR
 >s to get back to the ground state.
     </P
 ><P
@@ -111,9 +108,9 @@ CLASS="literal"
 TYPE="1"
 ><LI
 ><P
->&#13;            Host uses <TT
+>&#13;            Host uses <VAR
 CLASS="literal"
->DT</TT
+>DT</VAR
 > to print an alignment
             sheet.
           </P
@@ -126,24 +123,24 @@ CLASS="literal"
 ></LI
 ><LI
 ><P
->&#13;            Host sends a <TT
+>&#13;            Host sends a <VAR
 CLASS="literal"
->DA</TT
+>DA</VAR
 > command indicating
             which pattern the user chose.
           </P
 ></LI
 ><LI
 ><P
->&#13;            If the user said &#8220;realign&#8221;, meaning he isn't
+>&#13;            If the user said “realign”, meaning he isn't
             done yet, go to step 1.
           </P
 ></LI
 ><LI
 ><P
->&#13;            We are done: host sends a <TT
+>&#13;            We are done: host sends a <VAR
 CLASS="literal"
->SV</TT
+>SV</VAR
 > command
             and exits.
           </P
@@ -160,6 +157,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1693"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >PM 00 00
@@ -167,6 +170,9 @@ SN 00 00 00
 EX 00 00 00 00 05 01
 ST 00 01
 SM 00 02</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -180,6 +186,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1696"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >PM 00 00
@@ -189,6 +201,9 @@ SN 00 01 00
 SN 00 02 01
 EX 00 00 00 00 05 00
 FP 00 00 00</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -202,55 +217,64 @@ CLASS="informalexample"
 ><A
 NAME="AEN1699"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >IR 00 02
 LD</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
 >&#13;        For different paper type settings on the STP 870, the
-        arguments to <TT
+        arguments to <VAR
 CLASS="literal"
->SN</TT
+>SN</VAR
 > vary.  The arguments to the
-        first and third <TT
+        first and third <VAR
 CLASS="literal"
->SN</TT
+>SN</VAR
 > commands are as outlined
-        in the description of the <TT
+        in the description of the <VAR
 CLASS="literal"
->SN</TT
+>SN</VAR
 > command above;
-        the arguments to the second (&#8220;platen gap&#8221;) are
-        <TT
+        the arguments to the second (“platen gap”) are
+        <VAR
 CLASS="literal"
->00 01 01</TT
-> for thick papers (&#8220;matte
-        paper&#8212;heavyweight&#8221;, &#8220;photo paper&#8221; and
-        &#8220;premium glossy photo paper&#8221;) and <TT
+>00 01 01</VAR
+> for thick papers (“matte
+        paper—heavyweight”, “photo paper” and
+        “premium glossy photo paper”) and <VAR
 CLASS="literal"
 >00 01
-        00</TT
+        00</VAR
 > for all others.
     </P
 ><P
 >&#13;        For roll-mode printing, the STP 870's sequence changes as
-        follows.  <TT
+        follows.  <VAR
 CLASS="literal"
->IR</TT
->'s arguments become <TT
+>IR</VAR
+>'s arguments become <VAR
 CLASS="literal"
 >00
-        01</TT
-> in the header, and <TT
+        01</VAR
+> in the header, and <VAR
 CLASS="literal"
->00 00</TT
+>00 00</VAR
 > after
-        the job, and <TT
+        the job, and <VAR
 CLASS="literal"
->EX</TT
+>EX</VAR
 >'s last argument changes
         from <CODE
 CLASS="constant"
@@ -262,12 +286,12 @@ CLASS="constant"
     </P
 ><P
 >&#13;        For zero-margin printing on the STP 870, the arguments to
-        <TT
+        <VAR
 CLASS="literal"
->FP</TT
-> become <TT
+>FP</VAR
+> become <VAR
 CLASS="literal"
->00 0xb0 0xff</TT
+>00 0xb0 0xff</VAR
 >.
         This moves the origin about 5.5mm to the left, to a point one
         tenth of an inch to the left of the left-hand edge of the
@@ -306,7 +330,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

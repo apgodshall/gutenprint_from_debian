@@ -1,14 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Remote Mode Commands</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="ESC/P2"
 HREF="c464.html"><LINK
@@ -17,14 +17,11 @@ TITLE="ESC/P2"
 HREF="c464.html"><LINK
 REL="NEXT"
 TITLE="Appropriate Remote Commands"
-HREF="x1669.html"></HEAD
+HREF="x1669.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,7 +71,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN955"
->5.2. Remote Mode Commands</A
+>Remote Mode Commands</A
 ></H1
 ><P
 >&#13;    The following description of remote commands comes out of an
@@ -96,9 +93,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN959"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >ESC (R BC=8 00 R E M O T E 1</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -113,17 +119,26 @@ CLASS="informalexample"
 ><A
 NAME="AEN962"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >ESC 00 00 00</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
 >&#13;    All remote mode commands must be sent before the initial
-    <TT
+    <VAR
 CLASS="literal"
->ESC (G</TT
+>ESC (G</VAR
 > command is sent.
   </P
 ><P
@@ -163,13 +178,13 @@ CLASS="variablelist"
 ></P
 ><DL
 ><DT
-><TT
+><VAR
 CLASS="literal"
->NC <CODE
+>NC <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-          00</TT
+          00</VAR
 ></DT
 ><DD
 ><P
@@ -177,18 +192,18 @@ CLASS="varname"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->VI <CODE
+>VI <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-          00</TT
+          00</VAR
 ></DT
 ><DD
 ><P
->&#13;          On my 740, prints the following, probably &#8220;version
-          information&#8221;:
+>&#13;          On my 740, prints the following, probably “version
+          information”:
         </P
 ><DIV
 CLASS="informalexample"
@@ -197,24 +212,33 @@ CLASS="informalexample"
 ><A
 NAME="AEN989"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >W01286 I02382\r\n</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* AI <CODE
+>* AI <VAR
 CLASS="varname"
->BC</CODE
->=3 00 00 00</TT
+>BC</VAR
+>=3 00 00 00</VAR
 ></DT
 ><DD
 ><P
->&#13;          Prints a &#8220;printer ID&#8221;.  On one 870, prints the
+>&#13;          Prints a “printer ID”.  On one 870, prints the
           following:
         </P
 ><DIV
@@ -224,9 +248,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN997"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >51-51-50-51-49-48\r\n</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -236,12 +269,12 @@ CLASS="screen"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* LD <CODE
+>* LD <VAR
 CLASS="varname"
->BC</CODE
->=0</TT
+>BC</VAR
+>=0</VAR
 ></DT
 ><DD
 ><P
@@ -249,30 +282,30 @@ CLASS="varname"
           ROM. This apparently does not load factory defaults per
           se, but any settings that are saved.  This is commonly
           used right at the end of each print job after the
-          <TT
+          <VAR
 CLASS="literal"
->ESC @</TT
+>ESC @</VAR
 > printer reset command.
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* CH <CODE
+>* CH <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;          Perform a head cleaning cycle.  The heads to clean are
-          determined by parameter <CODE
+          determined by parameter <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >:
       </P
 ><DIV
@@ -294,9 +327,9 @@ WIDTH="1*"
 TITLE="description"><THEAD
 ><TR
 ><TH
-><CODE
+><VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 ></TH
 ><TH
 >Description</TH
@@ -334,16 +367,16 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;          While <CODE
+>&#13;          While <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > = <CODE
 CLASS="constant"
 >00</CODE
 > is
-          likely supported by all printers, <CODE
+          likely supported by all printers, <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >
           = <CODE
 CLASS="constant"
@@ -356,24 +389,24 @@ CLASS="constant"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* DT <CODE
+>* DT <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=3 00
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
-> 00</TT
+>xx</VAR
+> 00</VAR
 ></DT
 ><DD
 ><P
 >&#13;          Print an alignment pattern.  There are three patterns,
           which are picked via the choice of
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >.  Pattern <CODE
 CLASS="constant"
 >0</CODE
@@ -389,27 +422,27 @@ CLASS="constant"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* DA <CODE
+>* DA <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=4 00
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > 00
-          <CODE
+          <VAR
 CLASS="varname"
->yy</CODE
-></TT
+>yy</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;          Set results for the alignment pattern.
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is the pattern
           (<CODE
 CLASS="constant"
@@ -418,9 +451,9 @@ CLASS="constant"
 CLASS="constant"
 >3</CODE
 >);
-          <CODE
+          <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 > is the best choice from the set
           (<CODE
 CLASS="constant"
@@ -441,12 +474,12 @@ CLASS="constant"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* SV <CODE
+>* SV <VAR
 CLASS="varname"
->BC</CODE
->=0</TT
+>BC</VAR
+>=0</VAR
 ></DT
 ><DD
 ><P
@@ -454,13 +487,13 @@ CLASS="varname"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* RS <CODE
+>* RS <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=1
-          01</TT
+          01</VAR
 ></DT
 ><DD
 ><P
@@ -468,13 +501,13 @@ CLASS="varname"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* IQ <CODE
+>* IQ <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=1
-          01</TT
+          01</VAR
 ></DT
 ><DD
 ><P
@@ -488,9 +521,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN1089"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >IQ:KKCCMMYY</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -504,9 +546,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN1092"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >IQ:KKCCMMYYccmm</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -527,16 +578,16 @@ CLASS="screen"
 CLASS="variablelist"
 ><DL
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* IR <CODE
+>* IR <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
@@ -548,36 +599,36 @@ CLASS="emphasis"
 ></SPAN
 >.  This command has
           been observed on an STP 870 with
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >03</CODE
 > at the start
-          of a job and <CODE
+          of a job and <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >02</CODE
 >
           at the end of a job (where it is followed by an
-          <TT
+          <VAR
 CLASS="literal"
->LD</TT
+>LD</VAR
 > command).  When in roll mode, the
           values change to
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
 > at the start
-          of a job and <CODE
+          of a job and <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
@@ -586,23 +637,23 @@ CLASS="constant"
         </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* FP <CODE
+>* FP <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=3 00
-          <CODE
+          <VAR
 CLASS="varname"
->pos</CODE
->[2]</TT
+>pos</VAR
+>[2]</VAR
 ></DT
 ><DD
 ><P
 >&#13;          Specify the horizontal left margin in units of 1/360 inch.
-          The default value for <CODE
+          The default value for <VAR
 CLASS="varname"
->pos</CODE
+>pos</VAR
 > is
           <CODE
 CLASS="constant"
@@ -632,38 +683,38 @@ CLASS="constant"
 CLASS="variablelist"
 ><DL
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* SN <CODE
+>* SN <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=3 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-> <CODE
+>xx</VAR
+> <VAR
 CLASS="varname"
->yy</CODE
-></TT
+>yy</VAR
+></VAR
 ></DT
 ><DD
 ><P
->&#13;            Select Mechanism Sequence.  <CODE
+>&#13;            Select Mechanism Sequence.  <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >
             controls which sub-operation is performed.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > selects
-            the &#8220;Feed paper sequence setting&#8221;.
-            <CODE
+            the “Feed paper sequence setting”.
+            <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 > can take on the following values
             (on the STP 870, at any rate):
           </P
@@ -686,9 +737,9 @@ WIDTH="1*"
 TITLE="description"><THEAD
 ><TR
 ><TH
-><CODE
+><VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 ></TH
 ><TH
 >Media type</TH
@@ -790,24 +841,24 @@ CLASS="constant"
             presumably to tune it for different types of paper.
           </P
 ><P
->&#13;            <CODE
+>&#13;            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
 > controls
             the platen gap setting;
-            <CODE
+            <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > is the
-            default, <CODE
+            default, <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 >=<CODE
 CLASS="constant"
 >1</CODE
@@ -818,17 +869,17 @@ CLASS="constant"
 > are higher settings.
           </P
 ><P
->&#13;            <CODE
+>&#13;            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >02</CODE
 > controls
             paper loading speed
-            (<CODE
+            (<VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 >=<CODE
 CLASS="constant"
 >0</CODE
@@ -844,12 +895,12 @@ CLASS="constant"
 CLASS="constant"
 >1</CODE
 > is
-            used when printing on &#8220;plain paper&#8221;,
-            &#8220;360dpi ink jet paper&#8221; or &#8220;ink jet
-            transparencies&#8221;, and
-            <CODE
+            used when printing on “plain paper”,
+            “360dpi ink jet paper” or “ink jet
+            transparencies”, and
+            <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
@@ -857,35 +908,35 @@ CLASS="constant"
             other paper type settings.
           </P
 ><P
->&#13;            <CODE
+>&#13;            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >07</CODE
 > controls
             duplex printing for printers with that capability
-            (<CODE
+            (<VAR
 CLASS="varname"
->yy</CODE
->=<CODE
+>yy</VAR
+>=<VAR
 CLASS="varname"
->0</CODE
+>0</VAR
 > is default,
             for non-duplex printing; <CODE
 CLASS="constant"
 >1</CODE
 > is front
-            side of the paper, and <CODE
+            side of the paper, and <VAR
 CLASS="varname"
->2</CODE
+>2</VAR
 > is back
             side).
           </P
 ><P
->&#13;            <CODE
+>&#13;            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >09</CODE
@@ -893,9 +944,9 @@ CLASS="constant"
             zero margin printing on the printers with the capability
             of printing zero-margin on all sides (Stylus Photo
             780/790, 890, and 1280/1290).
-            <CODE
+            <VAR
 CLASS="varname"
->yy</CODE
+>yy</VAR
 >=<CODE
 CLASS="constant"
 >0</CODE
@@ -908,80 +959,80 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* PP <CODE
+>* PP <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=3 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >
-            <CODE
+            <VAR
 CLASS="varname"
->yy</CODE
-></TT
+>yy</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Set Paper Path.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >2</CODE
 > indicates
             manual feed,
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >3</CODE
 > is for roll
-            paper.  <CODE
+            paper.  <VAR
 CLASS="varname"
->yy</CODE
-> selects &#8220;paper path
-            number&#8221;.
+>yy</VAR
+> selects “paper path
+            number”.
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* AC <CODE
+>* AC <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Set Auto Cutting State.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >0</CODE
 > selects
             auto cutting off,
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >1</CODE
 > selects
             auto cutting on, and
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >2</CODE
@@ -996,74 +1047,74 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* DR <CODE
+>* DR <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=4 00 xx
-            <CODE
+            <VAR
 CLASS="varname"
->DT2</CODE
-></TT
+>DT2</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Set Drying Time.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > sets the
-            drying time &#8220;per scan&#8221; (per pass?);
-            <CODE
+            drying time “per scan” (per pass?);
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
 > sets the
-            drying time per page. <CODE
+            drying time per page. <VAR
 CLASS="varname"
->DT</CODE
+>DT</VAR
 > indicates
             the drying time, which is in seconds if page mode is
             used and in milliseconds if scan mode is used.
-            <CODE
+            <VAR
 CLASS="varname"
->DT</CODE
+>DT</VAR
 > must not exceed 3600 seconds in
             per-page mode and 10000 milliseconds in per-scan mode.
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* IK <CODE
+>* IK <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Select Ink Type.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > selects
             dye ink.  Pigment ink is apparently selected by
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
@@ -1072,24 +1123,24 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* PZ BC=2 00 xx</TT
+>* PZ BC=2 00 xx</VAR
 ></DT
 ><DD
 ><P
 >&#13;            Set Pause After Printing.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > selects no
             pause after printing;
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
@@ -1108,30 +1159,30 @@ CLASS="emphasis"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* EX <CODE
+>* EX <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=6 00 00 00 00 0x14
-          <CODE
+          <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Set Vertical Print Page Line Mode.
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >00</CODE
 > is off,
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >=<CODE
 CLASS="constant"
 >01</CODE
@@ -1141,30 +1192,30 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* EX <CODE
+>* EX <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=6 00 00 00 00 0x05
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
->&#13;            Set Roll Paper Mode.  If <CODE
+>&#13;            Set Roll Paper Mode.  If <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is
             <CODE
 CLASS="constant"
 >0</CODE
 >, roll paper mode is off; if
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is <CODE
 CLASS="constant"
 >1</CODE
@@ -1173,70 +1224,70 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* EX <CODE
+>* EX <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=3 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-> <CODE
+>xx</VAR
+> <VAR
 CLASS="varname"
->yy</CODE
-></TT
+>yy</VAR
+></VAR
 ></DT
 ><DD
 ><P
->&#13;            Appears to be a synonym for the <TT
+>&#13;            Appears to be a synonym for the <VAR
 CLASS="literal"
->SN</TT
+>SN</VAR
 >
             command described above.
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* PH <CODE
+>* PH <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Select Paper Thickness.  Set the paper thickness
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > in .1 mm units.  This must not
             exceed <CODE
 CLASS="constant"
 >0x10</CODE
 > (1.6 mm).  If the
-            thickness is set &#8220;more than&#8221; .6 mm (which
-            probably means &#8220;at least&#8221; 0.6 mm, since the
-            other case reads &#8220;less than 0.5 mm&#8221;), the
+            thickness is set “more than” .6 mm (which
+            probably means “at least” 0.6 mm, since the
+            other case reads “less than 0.5 mm”), the
             platen gap is set high irrespective of the
-            <TT
+            <VAR
 CLASS="literal"
->SN</TT
+>SN</VAR
 > command.
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* PM <CODE
+>* PM <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            00</TT
+            00</VAR
 ></DT
 ><DD
 ><P
@@ -1252,27 +1303,27 @@ CLASS="emphasis"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* ST <CODE
+>* ST <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
 >&#13;            Epson's STP 750/1200 programming guide refers to the
-            <TT
+            <VAR
 CLASS="literal"
->ST</TT
-> command as &#8220;Set printer
-            state reply&#8221;.  If <CODE
+>ST</VAR
+> command as “Set printer
+            state reply”.  If <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is
             <CODE
 CLASS="constant"
@@ -1282,9 +1333,9 @@ CLASS="constant"
 >2</CODE
 >, the
             printer will not send status replies.  If
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is <CODE
 CLASS="constant"
 >1</CODE
@@ -1306,6 +1357,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN1341"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >@BDC ST\r
@@ -1318,27 +1375,30 @@ AI:CW:02kkccmmyy, MI:mm
 [TC:tttt;]
 INK:...;
 \f</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;            (<TT
+>&#13;            (<VAR
 CLASS="literal"
->\r</TT
+>\r</VAR
 > is carriage return;
-            <TT
+            <VAR
 CLASS="literal"
->\n</TT
-> is newline; <TT
+>\n</VAR
+> is newline; <VAR
 CLASS="literal"
->\f</TT
+>\f</VAR
 >
             is formfeed.)
           </P
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->ST</TT
+>ST</VAR
 > is the printer status:
           </P
 ><DIV
@@ -1433,9 +1493,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->ER</TT
+>ER</VAR
 >, if provided, is the error status:
           </P
 ><DIV
@@ -1584,9 +1644,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->IQ</TT
+>IQ</VAR
 > is the amount of ink left, as a
             (decimal!)  percentage expressed in hexadecimal.  The
             values are black, cyan, magenta, and yellow.  6 and 7
@@ -1667,9 +1727,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->WR</TT
+>WR</VAR
 >, if provided, is the warning status:
           </P
 ><DIV
@@ -1705,7 +1765,7 @@ CLASS="constant"
 ></TD
 ><TD
 >&#13;                    Black ink low (Photo black on printers using
-                    UltraChrome� ink)
+                    UltraChrome® ink)
                   </TD
 ></TR
 ><TR
@@ -1785,41 +1845,41 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->RV</TT
+>RV</VAR
 > is the firmware revision (one byte
             ASCII).
           </P
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->AI</TT
+>AI</VAR
 > is actuator information.  These
             are two byte ASCII codes that indicate ``ink weight rank
             ID'' of KCMY, respectively.
           </P
 ><P
->&#13;          <TT
+>&#13;          <VAR
 CLASS="literal"
->TC</TT
+>TC</VAR
 >, if provided, is the total time of
           cleaning or ink filling (?).
           </P
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->RC</TT
+>RC</VAR
 >, if provided, is the firmware
             revision.
           </P
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->INK:</TT
-> and <TT
+>INK:</VAR
+> and <VAR
 CLASS="literal"
->MI</TT
+>MI</VAR
 > are
             <SPAN
 CLASS="emphasis"
@@ -1831,26 +1891,26 @@ CLASS="emphasis"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* SM <CODE
+>* SM <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            <CODE
+            <VAR
 CLASS="varname"
->xx</CODE
-></TT
+>xx</VAR
+></VAR
 ></DT
 ><DD
 ><P
->&#13;            Set Status Reply Rate.  <CODE
+>&#13;            Set Status Reply Rate.  <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is the
-            repeat interval in seconds.  If <CODE
+            repeat interval in seconds.  If <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > is
             <CODE
 CLASS="constant"
@@ -1860,13 +1920,13 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* ST <CODE
+>* ST <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=1
-            01</TT
+            01</VAR
 ></DT
 ><DD
 ><P
@@ -1879,30 +1939,39 @@ CLASS="informalexample"
 ><A
 NAME="AEN1556"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
->@BDC PS\r\nST:<CODE
+>@BDC PS\r\nST:<VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >;\f</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->\r</TT
+>\r</VAR
 > is carriage return;
-            <TT
+            <VAR
 CLASS="literal"
->\n</TT
-> is newline; <TT
+>\n</VAR
+> is newline; <VAR
 CLASS="literal"
->\f</TT
+>\f</VAR
 > is
-            formfeed).  If <CODE
+            formfeed).  If <VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 > (the reply value) is
             <CODE
 CLASS="constant"
@@ -1923,13 +1992,13 @@ CLASS="constant"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* SM <CODE
+>* SM <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=1
-            01</TT
+            01</VAR
 ></DT
 ><DD
 ><P
@@ -1943,54 +2012,63 @@ CLASS="informalexample"
 ><A
 NAME="AEN1574"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 >@BDC PS\r\nST:xx;\f</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
 ><P
->&#13;            <TT
+>&#13;            <VAR
 CLASS="literal"
->\r</TT
+>\r</VAR
 > is carriage return;
-            <TT
+            <VAR
 CLASS="literal"
->\n</TT
-> is newline; <TT
+>\n</VAR
+> is newline; <VAR
 CLASS="literal"
->\f</TT
+>\f</VAR
 > is
-            formfeed).  See <TT
+            formfeed).  See <VAR
 CLASS="literal"
 >SM
-              <CODE
+              <VAR
 CLASS="varname"
->BC</CODE
->=2</TT
+>BC</VAR
+>=2</VAR
 > above for the meaning of
             the return value.
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
 >* ??
-            <CODE
+            <VAR
 CLASS="varname"
->BC</CODE
->=<CODE
+>BC</VAR
+>=<VAR
 CLASS="varname"
->xx</CODE
+>xx</VAR
 >
-            <CODE
+            <VAR
 CLASS="varname"
->y</CODE
->[1] &#8230;
-            <CODE
+>y</VAR
+>[1] …
+            <VAR
 CLASS="varname"
->y</CODE
->[xx]</TT
+>y</VAR
+>[xx]</VAR
 ></DT
 ><DD
 ><P
@@ -1998,31 +2076,31 @@ CLASS="varname"
             Commands).  The command string is executed (it would
             appear from the documentation), and the string sent is
             returned using a sequence similar to that described in
-            the <TT
+            the <VAR
 CLASS="literal"
->ST <CODE
+>ST <VAR
 CLASS="varname"
->BC</CODE
->=1</TT
+>BC</VAR
+>=1</VAR
 > and
-            <TT
+            <VAR
 CLASS="literal"
->SM <CODE
+>SM <VAR
 CLASS="varname"
->BC</CODE
->=1</TT
+>BC</VAR
+>=1</VAR
 > commands.
             Note that in this case the number of bytes is variable!
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* SM <CODE
+>* SM <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=2 00
-            02</TT
+            02</VAR
 ></DT
 ><DD
 ><P
@@ -2037,13 +2115,13 @@ CLASS="emphasis"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* JE <CODE
+>* JE <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=1
-            00</TT
+            00</VAR
 ></DT
 ><DD
 ><P
@@ -2065,38 +2143,38 @@ CLASS="emphasis"
           </P
 ></DD
 ><DT
-><TT
+><VAR
 CLASS="literal"
->* CO <CODE
+>* CO <VAR
 CLASS="varname"
->BC</CODE
+>BC</VAR
 >=8 00
-            <CODE
+            <VAR
 CLASS="varname"
->cutter</CODE
->[1] <CODE
+>cutter</VAR
+>[1] <VAR
 CLASS="varname"
->page</CODE
+>page</VAR
 >[1]
-            <CODE
+            <VAR
 CLASS="varname"
->unit</CODE
+>unit</VAR
 >[1]
-            <CODE
+            <VAR
 CLASS="varname"
->position</CODE
->[4]</TT
+>position</VAR
+>[4]</VAR
 ></DT
 ><DD
 ><P
 >&#13;            Specify paper cutting on Stylus Photo 2200 (and perhaps
-            some other printers).  <CODE
+            some other printers).  <VAR
 CLASS="varname"
->cutter</CODE
+>cutter</VAR
 > must be
-            0.  <CODE
+            0.  <VAR
 CLASS="varname"
->page</CODE
+>page</VAR
 > should be one of the
             following:
           </P
@@ -2156,9 +2234,9 @@ CLASS="constant"
 ></TABLE
 ></DIV
 ><P
->&#13;            <CODE
+>&#13;            <VAR
 CLASS="varname"
->unit</CODE
+>unit</VAR
 > should be one of the following:
           </P
 ><DIV
@@ -2218,9 +2296,9 @@ CLASS="constant"
 ></DIV
 ><P
 >&#13;            This command should be used twice.  The first
-            <TT
+            <VAR
 CLASS="literal"
->CO</TT
+>CO</VAR
 > command specifies where the page
             will be cut at the top, and the second specifies where
             the page will be cut at the bottom.  This permits
@@ -2255,7 +2333,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

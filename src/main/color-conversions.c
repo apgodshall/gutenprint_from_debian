@@ -1,5 +1,5 @@
 /*
- * "$Id: color-conversions.c,v 1.18 2005/07/01 01:40:08 rlk Exp $"
+ * "$Id: color-conversions.c,v 1.20 2005/07/04 00:23:54 rlk Exp $"
  *
  *   Gimp-Print color management module - traditional Gimp-Print algorithm.
  *
@@ -363,107 +363,6 @@ short_copy(unsigned short *out, const unsigned short *in, size_t count)
 #else
   (void) memcpy(out, in, count * sizeof(unsigned short));
 #endif
-}
-
-static unsigned
-generic_cmy_to_kcmy(const stp_vars_t *vars, const unsigned short *in,
-		    unsigned short *out)
-{
-  lut_t *lut = (lut_t *)(stp_get_component_data(vars, "Color"));
-  int width = lut->image_width;
-  int step = 65535 / (lut->steps - 1); /* 1 or 257 */
-
-  const unsigned short *gcr_lookup;
-  const unsigned short *black_lookup;
-  int i;
-  int i0 = -1;
-  int i1 = -1;
-  int i2 = -1;
-  unsigned short o0 = 0;
-  unsigned short o1 = 0;
-  unsigned short o2 = 0;
-  unsigned short o3 = 0;
-  unsigned short nz0 = 0;
-  unsigned short nz1 = 0;
-  unsigned short nz2 = 0;
-  unsigned short nz3 = 0;
-
-  stp_curve_resample(stp_curve_cache_get_curve(&(lut->gcr_curve)), lut->steps);
-  gcr_lookup = stp_curve_cache_get_ushort_data(&(lut->gcr_curve));
-  stp_curve_resample(stp_curve_cache_get_curve
-		     (&(lut->channel_curves[CHANNEL_K])), lut->steps);
-  black_lookup =
-    stp_curve_cache_get_ushort_data(&(lut->channel_curves[CHANNEL_K]));
-
-  for (i = 0; i < width; i++, out += 4, in += 3)
-    {
-      if (i0 == in[0] && i1 == in[1] && i2 == in[2])
-	{
-	  out[0] = o0;
-	  out[1] = o1;
-	  out[2] = o2;
-	  out[3] = o3;
-	}
-      else
-	{
-	  int k;
-	  i0 = in[0];
-	  i1 = in[1];
-	  i2 = in[2];
-	  k = FMIN(i0, FMIN(i1, i2));
-	  out[0] = 0;
-	  out[1] = i0;
-	  out[2] = i1;
-	  out[3] = i2;
-	  if (k > 0)
-	    {
-	      int where, resid;
-	      int kk;
-	      if (lut->steps == 65536)
-		kk = gcr_lookup[k];
-	      else
-		{
-		  where = k / step;
-		  resid = k % step;
-		  kk = gcr_lookup[where];
-		  if (resid > 0)
-		    kk += (gcr_lookup[where + 1] - gcr_lookup[where]) * resid /
-		      step;
-		}
-	      if (kk > k)
-		kk = k;
-	      if (kk > 0)
-		{
-		  if (lut->steps == 65536)
-		    out[0] = black_lookup[kk];
-		  else
-		    {
-		      int k_out;
-		      where = kk / step;
-		      resid = kk % step;
-		      k_out = black_lookup[where];
-		      if (resid > 0)
-			k_out +=
-			  (black_lookup[where + 1] - black_lookup[where]) *
-			  resid / step;
-		      out[0] = k_out;
-		    }
-		  out[1] -= kk;
-		  out[2] -= kk;
-		  out[3] -= kk;
-		}
-	    }
-	  o0 = out[0];
-	  o1 = out[1];
-	  o2 = out[2];
-	  o3 = out[3];
-	  nz0 |= o0;
-	  nz1 |= o1;
-	  nz2 |= o2;
-	  nz3 |= o3;
-	}
-    }
-  return (nz0 ? 0 : 1) + (nz1 ? 0 : 2) + (nz2 ? 0 : 4) + (nz3 ? 0 : 8);
 }
 
 static unsigned
@@ -881,20 +780,20 @@ name##_##bits##_to_##name2(const stp_vars_t *vars, const unsigned char *in, \
   return status;							    \
 }
 
-COLOR_TO_KCMY_FUNC(gray, kcmy, color, generic, 8)
-COLOR_TO_KCMY_FUNC(gray, kcmy, color, generic, 16)
+COLOR_TO_KCMY_FUNC(gray, kcmy, color, raw, 8)
+COLOR_TO_KCMY_FUNC(gray, kcmy, color, raw, 16)
 GENERIC_COLOR_FUNC(gray, kcmy)
 
 COLOR_TO_KCMY_FUNC(gray, kcmy_raw, color_raw, raw, 8)
 COLOR_TO_KCMY_FUNC(gray, kcmy_raw, color_raw, raw, 16)
 GENERIC_COLOR_FUNC(gray, kcmy_raw)
 
-COLOR_TO_KCMY_FUNC(color, kcmy, color, generic, 8)
-COLOR_TO_KCMY_FUNC(color, kcmy, color, generic, 16)
+COLOR_TO_KCMY_FUNC(color, kcmy, color, raw, 8)
+COLOR_TO_KCMY_FUNC(color, kcmy, color, raw, 16)
 GENERIC_COLOR_FUNC(color, kcmy)
 
-COLOR_TO_KCMY_FUNC(color, kcmy_fast, color_fast, generic, 8)
-COLOR_TO_KCMY_FUNC(color, kcmy_fast, color_fast, generic, 16)
+COLOR_TO_KCMY_FUNC(color, kcmy_fast, color_fast, raw, 8)
+COLOR_TO_KCMY_FUNC(color, kcmy_fast, color_fast, raw, 16)
 GENERIC_COLOR_FUNC(color, kcmy_fast)
 
 COLOR_TO_KCMY_FUNC(color, kcmy_raw, color_raw, raw, 8)

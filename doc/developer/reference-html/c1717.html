@@ -1,24 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >Weaving for inkjet printers</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="book1.html"><LINK
+HREF="index.html"><LINK
 REL="PREVIOUS"
 TITLE="Appropriate Remote Commands"
 HREF="x1669.html"><LINK
 REL="NEXT"
 TITLE="Weaving algorithms"
-HREF="x1734.html"><META
-http-equiv="Content-Type"
-content="text/html; charset=UTF-8"></HEAD
+HREF="x1734.html"></HEAD
 ><BODY
 CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -70,37 +73,18 @@ NAME="AEN1717"
 ></A
 >Chapter 6. Weaving for inkjet printers</H1
 ><DIV
-CLASS="TOC"
-><DL
-><DT
-><B
->Table of Contents</B
-></DT
-><DT
-><A
-HREF="c1717.html#AEN1719"
->Introduction</A
-></DT
-><DT
-><A
-HREF="x1734.html"
->Weaving algorithms</A
-></DT
-></DL
-></DIV
-><DIV
 CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
 NAME="AEN1719"
->Introduction</A
+>6.1. Introduction</A
 ></H1
 ><P
 >&#13;      The Epson Stylus Color/Photo printers don't have memory to print
       using all of the nozzles in the print head.  For example, the
       Stylus Photo 700/EX has 32 nozzles.  At 720 dpi, with an 8" wide
-      image, a single line requires ((8 × 720 × 6) / 8)
+      image, a single line requires ((8 � 720 � 6) / 8)
       bytes, or 4320 bytes (because the Stylus Photo printers have 6
       ink colors).  To use 32 nozzles per color would require 138240
       bytes.  It's actually worse than that, though, because the
@@ -115,12 +99,12 @@ NAME="AEN1719"
 ><P
 >&#13;      With the newer (740/750 and later) printers it's even worse,
       since these printers support multiple dot sizes; of course, the
-      even newer 2880×720 printers don't help either.
+      even newer 2880�720 printers don't help either.
     </P
 ><P
 >&#13;      Older Epson printers had a mode called
       MicroWeave<SUP
->™</SUP
+>&#8482;</SUP
 >.  In this mode, the
       host fed the printer individual rows of dots, and the printer
       bundled them up and sent them to the print head in the correct
@@ -128,7 +112,7 @@ NAME="AEN1719"
       in new printers, but in some cases the implementation is very
       minimal: the printer uses exactly one nozzle of each color (the
       first one).  This makes printing extremely slow (more than 30
-      minutes for one 8.5×11" page), although the quality is
+      minutes for one 8.5�11" page), although the quality is
       extremely high with no visible banding whatsoever.  It's not
       good for the print head, though, since no ink is flowing through
       the other nozzles.  This leads to drying of ink and possible
@@ -171,11 +155,11 @@ NAME="AEN1719"
 ><P
 >&#13;      Interestingly, apparently the Windows (and presumably Macintosh)
       drivers for most or all Epson printers still list a
-      “microweave” mode.  Experiments have demonstrated
-      that this does not in fact use the “microweave” mode
+      &#8220;microweave&#8221; mode.  Experiments have demonstrated
+      that this does not in fact use the &#8220;microweave&#8221; mode
       of the printer.  Possibly it does nothing, or it uses a
       different weave pattern from what the
-      “non-microweave” mode does.  This is unnecessarily
+      &#8220;non-microweave&#8221; mode does.  This is unnecessarily
       confusing, at least for people who write drivers who try to
       explain them to people who don't.
     </P
@@ -256,7 +240,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="book1.html"
+HREF="index.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

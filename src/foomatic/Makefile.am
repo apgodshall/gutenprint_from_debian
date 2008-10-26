@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.45 2005/04/12 00:45:09 rlk Exp $
+## $Id: Makefile.am,v 1.47 2005/11/22 14:43:05 rleigh Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -17,11 +17,7 @@
 
 ## Process this file with automake to produce Makefile.in.
 
-AUTOMAKE_OPTIONS = 1.4 gnu
-
 @SET_MAKE@
-
-MAINT_CHARSET = latin1
 
 include $(top_srcdir)/scripts/global.mk
 
@@ -82,7 +78,7 @@ install-data-local: $(INSTALL_DATA_LOCAL_DEPS)
 
 install-kit:
 	if test -n "$(DESTDIR)" ; then \
-	  $(mkinstalldirs) $(DESTDIR)`$(FOOMATIC_KITLOAD) -l` ; \
+	  $(mkdir_p) $(DESTDIR)`$(FOOMATIC_KITLOAD) -l` ; \
 	  $(FOOMATIC_KITLOAD) -f -d $(DESTDIR) -k $(FOOMATIC_DB) ; \
 	else \
 	  $(FOOMATIC_KITLOAD) -f -k $(FOOMATIC_DB) ; \

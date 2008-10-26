@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.163 2005/08/25 23:40:40 rlk Exp $"
+ * "$Id: print-canon.c,v 1.167 2005/10/21 13:31:41 faust3 Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -55,7 +55,7 @@
 #ifdef HAVE_LIMITS_H
 #include <limits.h>
 #endif
-
+#include <math.h>
 /* Solaris with gcc has problems because gcc's limits.h doesn't #define */
 /* this */
 #ifndef CHAR_BIT
@@ -763,6 +763,18 @@ typedef struct
   int bits;
   int ydpi;
   color_info_t color_info[9]; /* C,M,Y,K,c,m,y,k,? */
+  int ncolors; /* number of colors to print with */
+  int physical_xdpi, nozzle_ydpi, stepper_ydpi;
+  int nozzles;   /* count of inkjets for one pass */
+  int nozzle_separation;
+  int horizontal_passes;
+  int vertical_passes;
+  int vertical_oversample;
+  int *head_offset;
+  int last_pass_offset;
+  int bidirectional; /* tells us if we are allowed to print bidirectional */
+  int direction;     /* stores the last direction of the print head */
+
 } canon_privdata_t;
 
 static void canon_write_line(stp_vars_t *v);
@@ -805,8 +817,12 @@ static void canon_write_line(stp_vars_t *v);
 #define CANON_CAP_r         0x800ul
 #define CANON_CAP_g         0x1000ul
 #define CANON_CAP_ACKSHORT  0x2000ul
-#define CANON_CAP_extended_t    0x4000ul  /* detailed level and bitdepth settings for every ink*/
-#define CANON_CAP_5pixelin1byte 0x8000ul  /* 5 pixel with 3 levels in 1 byte compression */
+#define CANON_CAP_rr        0x4000ul
+#define CANON_CAP_WEAVE     0x8000ul   /* S200 has to be fed with weaved data */
+                                       /* for Resolutions above 360dpi */
+#define CANON_CAP_extended_t    0x10000ul  /* detailed level and bitdepth settings for every ink*/
+#define CANON_CAP_5pixelin1byte 0x20000ul  /* 5 pixel with 3 levels in 1 byte compression */
+#define CANON_CAP_DUPLEX    0x40000ul
 
 #define CANON_CAP_STD0 (CANON_CAP_b|CANON_CAP_c|CANON_CAP_d|\
                         CANON_CAP_l|CANON_CAP_q|CANON_CAP_t)
@@ -894,6 +910,27 @@ static const canon_cap_t canon_model_capabilities[] =
   /*                                      */
   /* ************************************ */
 
+  { /* Canon S200x *//* heads: BC-24 */
+    4202, 3,
+    618, 936,       /* 8.58" x 13 " */
+    180, 2880, 2880, 4,
+    10, 10, 9, 20,
+    CANON_INK_CMYK | CANON_INK_CMY | CANON_INK_K,
+    CANON_SLOT_ASF1,
+    CANON_CAP_STD1 | CANON_CAP_rr | CANON_CAP_WEAVE,
+    CANON_MODES(canon_nomodes),
+#ifndef EXPERIMENTAL_STUFF
+/*   2880dpi Resolutions: TBD */
+/* 180x180 360x360 720x720 1440x720 1440x1440 2880x2880 */
+    {-1,      0,      0,       0,       0,        -1},
+/*-------  360x360 720x720 1440x720  1440x1440 ---------*/
+    { 1,     2,       1,     0.5,     0.3,        0.2},
+    CANON_INK(canon_ink_standard),
+#endif
+    standard_lum_adjustment,
+    standard_hue_adjustment,
+    standard_sat_adjustment
+  },
 
   { /* Canon  BJ 30   *//* heads: BC-10 */
     30, 1,
@@ -1304,7 +1341,7 @@ static const canon_cap_t canon_model_capabilities[] =
     11, 9, 10, 18,    /*border_left, border_right, border_top, border_bottom */
     CANON_INK_CMYK /*| CANON_INK_CcMmYyK*/, /*canon inks */
     CANON_SLOT_ASF1,  /*paper slot */
-    CANON_CAP_STD0|CANON_CAP_extended_t|CANON_CAP_5pixelin1byte,  /*features */
+    CANON_CAP_STD0|CANON_CAP_extended_t|CANON_CAP_5pixelin1byte|CANON_CAP_DUPLEX,  /*features */
     CANON_MODES(canon_nomodes),
 #ifndef EXPERIMENTAL_STUFF
     {-1,0,0,-1,-1,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
@@ -1375,10 +1412,12 @@ typedef struct {
 typedef struct {
   const canon_cap_t *caps;
   int printing_color;
+  int is_first_page;
   const paper_t *pt;
   int print_head;
   int colormode;
   const char *source_str;
+  const char *duplex_str;
   int xdpi;
   int ydpi;
   int page_width;
@@ -1406,6 +1445,8 @@ static const paper_t canon_paper_list[] = {
 };
 
 static const int paper_type_count = sizeof(canon_paper_list) / sizeof(paper_t);
+static void canon_advance_paper(stp_vars_t *, int);
+static void canon_flush_pass(stp_vars_t *, int, int);
 
 static const stp_parameter_t the_parameters[] =
 {
@@ -1451,6 +1492,12 @@ static const stp_parameter_t the_parameters[] =
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_CORE,
     STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
   },
+  {
+    "Duplex", N_("Double-Sided Printing"), N_("Basic Printer Setup"),
+    N_("Duplex/Tumble Setting"),
+    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_BASIC, 1, 1, -1, 1, 0
+  }
 };
 
 static const int the_parameter_count =
@@ -1529,6 +1576,24 @@ static const float_param_t float_parameters[] =
 static const int float_parameter_count =
 sizeof(float_parameters) / sizeof(const float_param_t);
 
+/*
+ * Duplex support - modes available
+ * Note that the internal names MUST match those in cups/genppd.c else the
+ * PPD files will not be generated correctly
+ *
+ * TODO: Support for DuplexNoTumble, the image has to be rotated 
+ */
+
+static const stp_param_string_t duplex_types[] =
+{
+  { "None",             N_ ("Off") },
+/*  { "DuplexNoTumble", N_ ("Long Edge (Standard)") } , */
+  { "DuplexTumble",     N_ ("Short Edge (Flip)") }
+};
+#define NUM_DUPLEX (sizeof (duplex_types) / sizeof (stp_param_string_t))
+
+
+
 static const paper_t *
 get_media_type(const char *name)
 {
@@ -1566,6 +1631,8 @@ canon_source_type(const char *name, const canon_cap_t * caps)
       if (!strcmp(name,"Auto"))    return 4;
       if (!strcmp(name,"Manual"))    return 0;
       if (!strcmp(name,"ManualNP")) return 1;
+      if (!strcmp(name,"Cassette")) return 8;
+      if (!strcmp(name,"CD")) return 10;
     }
 
   stp_deprintf(STP_DBG_CANON,"canon: Unknown source type '%s' - reverting to auto\n",name);
@@ -1833,7 +1900,9 @@ static const stp_param_string_t media_sources[] =
               {
                 { "Auto",	N_ ("Auto Sheet Feeder") },
                 { "Manual",	N_ ("Manual with Pause") },
-                { "ManualNP",	N_ ("Manual without Pause") }
+                { "ManualNP",	N_ ("Manual without Pause") },
+		{ "Cassette",   N_ ("Cassette") },
+		{ "CD", N_ ("CD tray") }
               };
 
 
@@ -1989,7 +2058,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
   }
   else if (strcmp(name, "InputSlot") == 0)
   {
-    int count = 3;
+    int count = sizeof(media_sources)/sizeof(media_sources[0]);
     description->bounds.str= stp_string_list_create();
     description->deflt.str= media_sources[0].name;
     for (i = 0; i < count; i ++)
@@ -2006,6 +2075,36 @@ canon_parameters(const stp_vars_t *v, const char *name,
       (description->bounds.str, "BW", _("Black and White"));
     description->deflt.str =
       stp_string_list_param(description->bounds.str, 0)->name;
+  } 
+  else if (strcmp(name, "Duplex") == 0)
+  {
+    int offer_duplex=0;
+
+    description->bounds.str = stp_string_list_create();
+
+/*
+ * Don't offer the Duplex/Tumble options if the JobMode parameter is
+ * set to "Page" Mode.
+ * "Page" mode is set by the Gimp Plugin, which only outputs one page at a
+ * time, so Duplex/Tumble is meaningless.
+ */
+
+    if (stp_get_string_parameter(v, "JobMode"))
+        offer_duplex = strcmp(stp_get_string_parameter(v, "JobMode"), "Page");
+    else
+     offer_duplex=1;
+
+    if (offer_duplex && (caps->features & CANON_CAP_DUPLEX))
+    {
+      description->deflt.str = duplex_types[0].name;
+      for (i=0; i < NUM_DUPLEX; i++)
+        {
+          stp_string_list_add_string(description->bounds.str,
+				     duplex_types[i].name,_(duplex_types[i].text));
+        }
+    }
+    else
+      description->is_active = 0;
   }
 }
 
@@ -2136,6 +2235,20 @@ canon_init_resetPrinter(const stp_vars_t *v, canon_init_t *init)
   canon_cmd(v,ESC5b,0x4b, 2, 0x00,0x0f);
 }
 
+/* ESC ($ -- 0x24 -- cmdSetDuplex --:
+ */
+static void
+canon_init_setDuplex(const stp_vars_t *v, canon_init_t *init)
+{
+  if (!(init->caps->features & CANON_CAP_DUPLEX))
+    return;
+  if (strncmp(init->duplex_str, "Duplex", 6)) 
+    return;
+  /* The same command seems to be needed for both Duplex and DuplexTumble
+     no idea about the meanings of the single bytes */
+  canon_cmd(v,ESC28,0x24,9,0x01,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x02);
+}
+
 /* ESC (a -- 0x61 -- cmdSetPageMode --:
  */
 static void
@@ -2165,13 +2278,13 @@ static void
 canon_init_setColor(const stp_vars_t *v, canon_init_t *init)
 {
   unsigned char
-    arg_63_1, arg_63_2, arg_63_3;
-
+    numargs, arg_63[6];
 
   if (!(init->caps->features & CANON_CAP_c))
     return;
 
-  arg_63_1 = init->caps->model_id << 4;						/* MODEL_ID */
+  numargs = 3;
+  arg_63[0] = init->caps->model_id << 4; /* MODEL_ID */
 
   switch ( init->caps->model_id ) {
 
@@ -2180,12 +2293,12 @@ canon_init_setColor(const stp_vars_t *v, canon_init_t *init)
 
   	case 1:			/* 360 dpi series - BJC-4000, BJC-210, BJC-70 and their descendants */
 		if (!init->printing_color)
-    			arg_63_1|= 0x01;					/* PRINT_COLOUR */
+                            arg_63[0]|= 0x01;                                        /* PRINT_COLOUR */
 
-  		arg_63_2 = ((init->pt ? init->pt->media_code : 0) << 4)		/* PRINT_MEDIA */
+                  arg_63[1] = ((init->pt ? init->pt->media_code : 0) << 4)                /* PRINT_MEDIA */
 			+ 1;	/* hardcode to High quality for now */		/* PRINT_QUALITY */
 
-  		canon_cmd(v,ESC28,0x63, 2, arg_63_1, arg_63_2);
+                  canon_cmd(v,ESC28,0x63, 2, arg_63[0], arg_63[1]);
 		break;
 
 	case 2:			/* are any models using this? */
@@ -2193,13 +2306,32 @@ canon_init_setColor(const stp_vars_t *v, canon_init_t *init)
 
 	case 3:			/* 720 dpi series - BJC-3000 and descendants */
 		if (!init->printing_color)
-    			arg_63_1|= 0x01;					/* colour mode */
+                            arg_63[0]|= 0x01;                                        /* colour mode */
 
-  		arg_63_2 = (init->pt) ? init->pt->media_code : 0;		/* print media type */
+                  arg_63[1] = (init->pt) ? init->pt->media_code : 0;                /* print media type */
 
-		arg_63_3 = 2;	/* hardcode to whatever this means for now */	/* quality, apparently */
+                 if (init->caps->model == 4202) /* S200 */
+                   {
+                     if ((init->xdpi == 720) && (init->ydpi == 720 ))
+                       arg_63[2] = 1;
+                     else
+                       arg_63[2] = 4; /* hardcoded: quality 3  (may be 0...4) */
+                     /* bidirectional is controlled via quality: 0..2 is bidi, 3 and 4 uni */
+                     /* not every combination works, no idea about the principle */
+                     if ( (init->xdpi > 360) || (init->ydpi > 360) )
+                       {
+                         numargs = 6;
+                         arg_63[3] = 0x10; arg_63[4] = 6; arg_63[5] = 8; /* arg5 makes a vert. offset for K */
+                         if (!init->printing_color)
+                           arg_63[4] = 1;
+                       }
+                   }
+                 else
+                   arg_63[2] = 2;        /* hardcode to whatever this means for now; quality, apparently */
 
-  		canon_cmd(v,ESC28,0x63, 3, arg_63_1, arg_63_2, arg_63_3);
+                 stp_zprintf(v, "\033\050\143");
+                 stp_put16_le(numargs, v);
+                 stp_zfwrite((const char *)arg_63, numargs, 1, v);
 		break;
   	}
 
@@ -2214,10 +2346,20 @@ canon_init_setResolution(const stp_vars_t *v, canon_init_t *init)
   if (!(init->caps->features & CANON_CAP_d))
     return;
 
+   if (init->caps->model != 4202 || (init->xdpi <= 360))
   canon_cmd(v,ESC28,0x64, 4,
 	    (init->ydpi >> 8 ), (init->ydpi & 255),
 	    (init->xdpi >> 8 ), (init->xdpi & 255));
-}
+   else
+     if (init->xdpi < 2880)
+       canon_cmd(v,ESC28,0x64, 4,
+         (720 >> 8), (720 & 255),
+         (720 >> 8), (720 & 255));
+     else
+       canon_cmd(v,ESC28,0x64, 4,
+         (720 >> 8), (720 & 255),
+         (2880 >> 8), (2880 & 255));
+  }
 
 /* ESC (g -- 0x67 -- cmdSetPageMargins --:
  */
@@ -2266,8 +2408,12 @@ canon_init_setTray(const stp_vars_t *v, canon_init_t *init)
   arg_6c_1|= (source & 0x0f);
 
   if (init->pt) arg_6c_2= init->pt->media_code;
-
-  canon_cmd(v,ESC28,0x6c, 2, arg_6c_1, arg_6c_2);
+  if (!strcmp("CD",init->source_str)) {
+    stp_deprintf(STP_DBG_CANON,"canon: sending special cd setTray command\n");
+    canon_cmd(v,ESC28,0x6c, 3, 0x3a,0x12,0);
+  } else {
+    canon_cmd(v,ESC28,0x6c, 2, arg_6c_1, arg_6c_2);
+  }
 }
 
 /* ESC (m -- 0x6d --  -- :
@@ -2278,7 +2424,8 @@ canon_init_setPrintMode(const stp_vars_t *v, canon_init_t *init)
   unsigned char
     arg_6d_1 = 0x03, /* color printhead? */
     arg_6d_2 = 0x00, /* 00=color  02=b/w */
-    arg_6d_3 = 0x00, /* only 01 for bjc8200 */
+    arg_6d_3 = 0x00, /* only 01 for bjc8200 and S200*/
+                     /* S200:for envelope and t-shirt transfer = 03 */
     arg_6d_a = 0x03, /* A4 paper */
     arg_6d_b = 0x00;
 
@@ -2298,7 +2445,7 @@ canon_init_setPrintMode(const stp_vars_t *v, canon_init_t *init)
   if (!init->printing_color)
     arg_6d_2= 0x02;
 
-  if (init->caps->model==8200)
+  if (init->caps->model==8200 || init->caps->model==4202)
     arg_6d_3= 0x01;
 
   canon_cmd(v,ESC28,0x6d,12, arg_6d_1,
@@ -2326,10 +2473,15 @@ canon_init_setPageMargins2(const stp_vars_t *v, canon_init_t *init)
 
   if (!(init->caps->features & CANON_CAP_p))
     return;
-
-  canon_cmd(v,ESC28,0x70, 8,
-	    arg_70_1, arg_70_2, 0x00, 0x00,
-	    arg_70_3, arg_70_4, 0x00, 0x00);
+  if (!strcmp(init->source_str,"CD")) {
+    canon_cmd(v,ESC28,0x70, 8, 0x00, 0x2a, 0xb0, 0x00,
+		               0x00, 0x01, 0xe0, 0x00);
+    stp_deprintf(STP_DBG_CANON,"sending cd margins\n");
+  } else {
+    canon_cmd(v,ESC28,0x70, 8,
+   	      arg_70_1, arg_70_2, 0x00, 0x00,
+	      arg_70_3, arg_70_4, 0x00, 0x00);
+  }
 }
 
 /* ESC (q -- 0x71 -- setPageID -- :
@@ -2348,10 +2500,24 @@ canon_init_setPageID(const stp_vars_t *v, canon_init_t *init)
 static void
 canon_init_setX72(const stp_vars_t *v, canon_init_t *init)
 {
-  if (!(init->caps->features & CANON_CAP_r))
+  if ( !( (init->caps->features & CANON_CAP_r)
+         || (init->caps->features & CANON_CAP_rr) ) )
     return;
 
-  canon_cmd(v,ESC28,0x72, 1, 0x61); /* whatever for - 8200 needs it */
+  if ( (init->caps->features & CANON_CAP_r)
+       || (init->caps->features & CANON_CAP_rr) )
+      canon_cmd(v,ESC28,0x72, 1, 0x61); /* whatever for - 8200/S200 need it */
+  if (init->caps->features & CANON_CAP_rr)
+      canon_cmd(v,ESC28,0x72, 3, 0x63, 1, 0); /* whatever for - S200 needs it */
+      /* probably to set the print direction of the head */
+}
+
+/* ESC (r -- 0x72 -- ??? set direction ??? -- :
+   only works if quality = 01  (S200) */
+static void
+canon_set_X72(const stp_vars_t *v, int x72arg)
+{
+  canon_cmd(v,ESC28,0x72, 3, 0x63, x72arg, 0);
 }
 
 /* ESC (t -- 0x74 -- cmdSetImage --:
@@ -2366,7 +2532,15 @@ canon_init_setImage(const stp_vars_t *v, canon_init_t *init)
 
   if (!(init->caps->features & CANON_CAP_t))
     return;
-
+  if (init->caps->model==4202) /* 1 bit per pixel (arg 4,7,10,13); */
+                               /* 2 level per pixel (arg 6,9,12,15) for each color */
+                               /* though we print only 1bit/pixel - but this is how */
+                               /* the windows driver works */
+  {
+    canon_cmd(v,ESC28,0x74, 30, 0x80, 4, 1, 1, 0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 2,\
+              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    return;
+  }
   if(init->caps->features & CANON_CAP_extended_t)
   {
     unsigned char buf[30] = {0x80,0x80,0x1,};
@@ -2412,8 +2586,10 @@ canon_init_printer(const stp_vars_t *v, canon_init_t *init)
 {
   int mytop;
   /* init printer */
-
-  canon_init_resetPrinter(v,init);       /* ESC [K */
+  if (init->is_first_page) {
+    canon_init_resetPrinter(v,init);       /* ESC [K */
+    canon_init_setDuplex(v,init);          /* ESC ($ */
+  }
   canon_init_setPageMode(v,init);        /* ESC (a */
   canon_init_setDataCompression(v,init); /* ESC (b */
   canon_init_setPageID(v,init);          /* ESC (q */
@@ -2555,6 +2731,57 @@ set_color_info(const canon_cap_t * caps,const canon_variable_ink_t* ink,color_in
   set_bit_info(caps,small);
 }
 
+static void
+set_mask(unsigned char *cd_mask, int x_center, int scaled_x_where,
+         int limit, int expansion, int invert)
+{
+  int clear_val = invert ? 255 : 0;
+  int set_val = invert ? 0 : 255;
+  int bytesize = 8 / expansion;
+  int byteextra = bytesize - 1;
+  int first_x_on = x_center - scaled_x_where;
+  int first_x_off = x_center + scaled_x_where;
+  if (first_x_on < 0)
+    first_x_on = 0;
+  if (first_x_on > limit)
+    first_x_on = limit;
+  if (first_x_off < 0)
+    first_x_off = 0;
+  if (first_x_off > limit)
+    first_x_off = limit;
+  first_x_on += byteextra;
+  if (first_x_off > (first_x_on - byteextra))
+    {
+      int first_x_on_byte = first_x_on / bytesize;
+      int first_x_on_mod = expansion * (byteextra - (first_x_on % bytesize));
+      int first_x_on_extra = ((1 << first_x_on_mod) - 1) ^ clear_val;
+      int first_x_off_byte = first_x_off / bytesize;
+      int first_x_off_mod = expansion * (byteextra - (first_x_off % bytesize));
+      int first_x_off_extra = ((1 << 8) - (1 << first_x_off_mod)) ^ clear_val;
+      if (first_x_off_byte < first_x_on_byte)
+        {
+          /* This can happen, if 6 or fewer points are turned on */
+          cd_mask[first_x_on_byte] = first_x_on_extra & first_x_off_extra;
+        }
+      else
+        {
+          if (first_x_on_extra != clear_val)
+
+            cd_mask[first_x_on_byte - 1] = first_x_on_extra;
+          if (first_x_off_byte > first_x_on_byte)
+            memset(cd_mask + first_x_on_byte, set_val,
+                   first_x_off_byte - first_x_on_byte);
+          if (first_x_off_extra != clear_val)
+            cd_mask[first_x_off_byte] = first_x_off_extra;
+        }
+    }
+}
+
+
+#define CD_X_OFFSET 0
+#define CD_Y_OFFSET 230
+#define CD_OUTER_RADIUS (329/2)
+#define CD_INNER_RADIUS 56
 /*
  * 'canon_print()' - Print an image to a CANON printer.
  */
@@ -2567,6 +2794,9 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   const char	*resolution = stp_get_string_parameter(v, "Resolution");
   const char	*media_source = stp_get_string_parameter(v, "InputSlot");
   const char    *print_mode = stp_get_string_parameter(v, "PrintingMode");
+  const char    *duplex_mode =stp_get_string_parameter(v, "Duplex");
+  int           page_number = stp_get_int_parameter(v, "PageNumber");
+
   int printing_color = 0;
   const char	*ink_type = stp_get_string_parameter(v, "InkType");
   int		top = stp_get_top(v);
@@ -2598,7 +2828,12 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
                 image_width;
   int           res_code;
   int           use_6color= 0;
+  int           print_cd= (media_source && (!strcmp(media_source, "CD")));
   double        k_upper, k_lower;
+  unsigned char *cd_mask = NULL;
+  double outer_r_sq = 0;
+  double inner_r_sq = 0;
+
   stp_curve_t *lum_adjustment = NULL;
   stp_curve_t *hue_adjustment = NULL;
   stp_curve_t *sat_adjustment = NULL;
@@ -2677,16 +2912,25 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 
   internal_imageable_area(v, 0, &page_left, &page_right,
 			  &page_bottom, &page_top);
-  left -= page_left;
-  top -= page_top;
-  page_width = page_right - page_left;
-  page_height = page_bottom - page_top;
-
+  if (print_cd) {
+    left += CD_X_OFFSET; 
+    top += CD_Y_OFFSET;
+    /*page_width = CD_OUTER_RADIUS*2;
+      page_height = CD_OUTER_RADIUS*2; */
+    stp_default_media_size(v, &page_width, &page_height); 
+    out_width = page_width;
+    out_height = page_height;
+  } else {
+    left -= page_left;
+    top -= page_top;
+    page_width = page_right - page_left;
+    page_height = page_bottom - page_top;
+  }
   image_height = stp_image_height(image);
   image_width = stp_image_width(image);
 
   stp_default_media_size(v, &n, &page_true_height);
-
+  
   PUT("top        ",top,72);
   PUT("left       ",left,72);
   PUT("page_true_height",page_true_height,72);
@@ -2704,6 +2948,8 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   init.print_head = printhead;
   init.colormode = colormode;
   init.source_str = media_source;
+  init.duplex_str = duplex_mode;
+  init.is_first_page = (page_number == 0);
   init.xdpi = xdpi;
   init.ydpi = ydpi;
   init.page_width = page_width;
@@ -2752,7 +2998,7 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   for (i = 0; i < 7; i++)
     privdata.cols[i] = NULL;
 
-  if(xdpi==1440){
+  if((xdpi == 1440) && (model != 4202)){
     privdata.delay[0] = 0;
     privdata.delay[1] = 112;
     privdata.delay[2] = 224;
@@ -2762,6 +3008,16 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
     privdata.delay[6] = 336;
     privdata.delay_max = 336;
     stp_deprintf(STP_DBG_CANON,"canon: delay on!\n");
+  } else if (model ==4202 ){
+    privdata.delay[0]= 0;
+    privdata.delay[1]= 0x30;
+    privdata.delay[2]= 0x50;
+    privdata.delay[3]= 0x70;
+    privdata.delay[4]= 0;
+    privdata.delay[5]= 0;
+    privdata.delay[6]= 0;
+    privdata.delay_max= 0x70;
+    stp_deprintf(STP_DBG_CANON,"canon: delay for S200 on!\n");
   } else {
     for (i = 0; i < 7; i++)
       privdata.delay[i] = 0;
@@ -2788,7 +3044,8 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
     }
   }
 
-  privdata.buf_length = length * max_bits;
+  /* buffer length + 1 extra byte for offset data that might get added in canon_write */
+  privdata.buf_length = length * max_bits + 1;
   privdata.length = length;
   privdata.left = left;
   privdata.bits = bits;
@@ -2922,6 +3179,91 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
     (v, STP_ECOLOR_K, 0,
      get_double_param(v, "BlackDensity") * get_double_param(v, "Density"));
 
+   /* initialize weaving for S200 for resolutions > 360dpi */
+   if ( (init.caps->features & CANON_CAP_WEAVE) && (xdpi > 360) )
+     {
+       privdata.stepper_ydpi = 720;
+       privdata.nozzle_ydpi = 360;
+       if (xdpi == 2880)
+         privdata.physical_xdpi = 2880;
+       else
+         privdata.physical_xdpi = 720;
+
+       stp_deprintf(STP_DBG_CANON,"canon: adjust leftskip: old=%d,\n", privdata.left);
+       privdata.left = (int)( (float)privdata.left * (float)privdata.physical_xdpi / (float)xdpi ); /* adjust left margin */
+       stp_deprintf(STP_DBG_CANON,"canon: adjust leftskip: new=%d,\n", privdata.left);
+
+       privdata.ncolors = 4;
+       privdata.head_offset = stp_zalloc(sizeof(int) * privdata.ncolors);
+       memset(privdata.head_offset, 0, sizeof(privdata.head_offset));
+
+       if ( colormode == COLOR_MONOCHROME )
+           privdata.nozzles = 64; /* black nozzles */
+       else
+           privdata.nozzles = 24; /* color nozzles */
+       if (colormode == COLOR_MONOCHROME)
+         {
+           privdata.ncolors = 1;
+           privdata.head_offset[0] = 0; /* K starts at 0 */
+           privdata.head_offset[1] = 0 ;/* how far C starts after K */
+           privdata.head_offset[2] = 0;/* how far M starts after K */
+           privdata.head_offset[3] = 0;/* how far Y starts after K */
+           top += 11;
+         }
+       else if (colormode == COLOR_CMYK)
+         {
+           privdata.head_offset[0] = 0; /* K starts at 0 */
+           privdata.head_offset[1] = 144 ;/* how far C starts after K */
+           privdata.head_offset[2] = 144 + 64;/* how far M starts after K */
+           privdata.head_offset[3] = 144 + 64 + 64;/* how far Y starts after K */
+           top += 5;
+         }
+       else  /* colormode == CMY */
+         {
+           privdata.head_offset[0] = 0; /* K starts at 0 */
+           privdata.head_offset[1] = 0 ;/* how far C starts after K */
+           privdata.head_offset[2] = 64;/* how far M starts after K */
+           privdata.head_offset[3] = 128;/* how far Y starts after K */
+           top += 18;
+         }
+
+       privdata.nozzle_separation = privdata.stepper_ydpi / privdata.nozzle_ydpi;
+       privdata.horizontal_passes = xdpi / privdata.physical_xdpi;
+       privdata.vertical_passes = 1;
+       privdata.vertical_oversample = privdata.ydpi / privdata.stepper_ydpi;
+       privdata.bidirectional = 1; /* 1: bidirectional; 0: unidirectional  printing */
+       privdata.direction = 1;
+       stp_allocate_component_data(v, "Driver", NULL, NULL, &privdata);
+       stp_deprintf(STP_DBG_CANON,"canon: initializing weaving: nozzles=%d, nozzle_separation=%d,\n"
+                                    "horizontal_passes=%d, vertical_passes=%d,vertical_oversample=%d,\n"
+                                    "ncolors=%d, out_width=%d, out_height=%d\n"
+                                    "weave_top=%d, weave_page_height=%d \n"
+                                    "head_offset=[%d,%d,%d,%d]  \n",
+                                    privdata.nozzles, privdata.nozzle_separation,
+                                    privdata.horizontal_passes, privdata.vertical_passes,
+                                    privdata.vertical_oversample, privdata.ncolors,
+                                    out_width, out_height,
+                                    top * privdata.stepper_ydpi / 72, page_height * privdata.stepper_ydpi / 72,
+                                    privdata.head_offset[0],privdata.head_offset[1],
+                                    privdata.head_offset[2],privdata.head_offset[3]);
+
+       stp_initialize_weave(v, privdata.nozzles, privdata.nozzle_separation,
+                                privdata.horizontal_passes, privdata.vertical_passes,
+                                privdata.vertical_oversample, privdata.ncolors,
+                                1,
+                                out_width, out_height,
+                                top * privdata.stepper_ydpi / 72,
+                                page_height * privdata.stepper_ydpi / 72,
+                                privdata.head_offset,
+                                STP_WEAVE_ZIGZAG,
+                                canon_flush_pass,
+                                stp_fill_uncompressed,
+                                stp_pack_uncompressed,
+                                stp_compute_uncompressed_linewidth);
+       privdata.last_pass_offset = 0;
+     }
+
+
   errdiv  = image_height / out_height;
   errmod  = image_height % out_height;
   errval  = 0;
@@ -2960,6 +3302,11 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   stp_allocate_component_data(v, "Driver", NULL, NULL, &privdata);
 
   privdata.emptylines = 0;
+  if (print_cd) {
+    cd_mask = stp_malloc(1 + (out_width + 7) / 8);
+    outer_r_sq = (double)CD_OUTER_RADIUS * (double)CD_OUTER_RADIUS;
+    inner_r_sq = (double)CD_INNER_RADIUS * (double)CD_INNER_RADIUS;
+  }
   for (y = 0; y < out_height; y ++)
   {
     int duplicate_line = 1;
@@ -2974,9 +3321,36 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 	  break;
 	}
     }
-
-    stp_dither(v, y, duplicate_line, zero_mask, NULL);
-    canon_printfunc(v);
+    if (print_cd) 
+      {
+	int x_center = CD_OUTER_RADIUS * xdpi / 72;
+	int y_distance_from_center =
+	  CD_OUTER_RADIUS - (y * 72 / ydpi);
+	if (y_distance_from_center < 0)
+	  y_distance_from_center = -y_distance_from_center;
+	memset(cd_mask, 0, (out_width + 7) / 8);
+	if (y_distance_from_center < CD_OUTER_RADIUS)
+	  {
+	    double y_sq = (double) y_distance_from_center *
+	      (double) y_distance_from_center;
+	    int x_where = sqrt(outer_r_sq - y_sq) + .5;
+	    int scaled_x_where = x_where * xdpi / 72;
+	    set_mask(cd_mask, x_center, scaled_x_where,
+		     out_width, 1, 0);
+	    if (y_distance_from_center < CD_INNER_RADIUS)
+	      {
+		x_where = sqrt(inner_r_sq - y_sq) + .5;
+		scaled_x_where = x_where * ydpi / 72;
+		set_mask(cd_mask, x_center, scaled_x_where,
+			 out_width, 1, 1);
+	      }
+	  }
+      }
+    stp_dither(v, y, duplicate_line, zero_mask, cd_mask);
+    if ( (init.caps->features & CANON_CAP_WEAVE) && (xdpi > 360) )
+        stp_write_weave(v, privdata.cols);
+    else
+        canon_printfunc(v);
     errval += errmod;
     errline += errdiv;
     if (errval >= out_height)
@@ -2985,6 +3359,14 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
       errline ++;
     }
   }
+
+  if ( (init.caps->features & CANON_CAP_WEAVE) && (xdpi > 360) )
+  {
+      stp_flush_all(v);
+      canon_advance_paper(v, 5);
+  }
+  else
+  {
 
   /*
    * Flush delayed buffers...
@@ -3001,7 +3383,7 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 			     privdata.delay[i]);
     }
   }
-
+  }
   stp_image_conclude(image);
 
  /*
@@ -3011,6 +3393,9 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   for (i = 0; i < 7; i++)
     if (privdata.cols[i])
       stp_free(privdata.cols[i]);
+  
+  if(cd_mask)
+      stp_free(cd_mask);
 
   canon_deinit_printer(v, &init);
   return status;
@@ -3247,22 +3632,31 @@ canon_write(stp_vars_t *v,		/* I - Print file or command */
   if (line[0] == 0 && memcmp(line, line + 1, length - 1) == 0)
     return 0;
 
+  offset2 = offset / 8;
+  bitoffset = offset % 8;
+
   /* fold lsb/msb pairs if drop modulation is active */
 
 
 
   if (bits==2) {
+    int pixels_per_byte = 4;
+    if((caps->features & CANON_CAP_5pixelin1byte) && (pd->color_info[coloridx].level == 3))
+      pixels_per_byte = 5;
     stp_fold(line,length,in_fold);
     in_ptr= in_fold;
     length= (length*8/4); /* 4 pixels in 8bit */
-    offset= (offset*8/4); /* 4 pixels in 8bit  */
+    /* calculate the number of compressed bytes that can be sent directly */
+    offset2 = offset / pixels_per_byte;
+    /* calculate the number of (uncompressed) bits that have to be added to the raster data */
+    bitoffset = (offset % pixels_per_byte) * 2;
   }
   if (bits==3) {
     memset(in_fold,0,length);
     canon_fold_3bit(line,length,in_fold);
     in_ptr= in_fold;
     length= (length*8)/3;
-    offset= (offset/3)*8;
+    offset2 = offset/3;
 #if 0
     switch(offset%3){
     case 0: offset= (offset/3)*8;   break;
@@ -3270,12 +3664,11 @@ canon_write(stp_vars_t *v,		/* I - Print file or command */
     case 2: offset= (offset/3)*8/*+5 CAREFUL! CANNOT SHIFT _AFTER_ RECODING!!*/; break;
     }
 #endif
+    bitoffset= 0;
   }
   /* pack left border rounded to multiples of 8 dots */
 
   comp_data= comp_buf;
-  offset2= offset/8;
-  bitoffset= offset%8;
   while (offset2>0) {
     unsigned char toffset = offset2 > 128 ? 128 : offset2;
     comp_data[0] = 1 - toffset;
@@ -3285,7 +3678,15 @@ canon_write(stp_vars_t *v,		/* I - Print file or command */
   }
   if (bitoffset) {
     if (bitoffset<8)
-      canon_shift_buffer(in_ptr,length,bitoffset);
+    {
+       in_ptr[ length++ ] = 0;
+       canon_shift_buffer(in_ptr,length,bitoffset);
+    }
+    else if (bitoffset == 8)
+    {
+      memmove(in_ptr + 1,in_ptr,length++);
+      in_ptr[0] = 0;
+    }
     else
       stp_deprintf(STP_DBG_CANON,"SEVERE BUG IN print-canon.c::canon_write() "
 	      "bitoffset=%d!!\n",bitoffset);
@@ -3349,6 +3750,98 @@ canon_write_line(stp_vars_t *v)
     pd->emptylines += 1;
 }
 
+static void
+canon_advance_paper(stp_vars_t *v, int advance)
+{
+  if ( advance > 0 )
+    {
+      int a0, a1, a2, a3;
+      stp_deprintf(STP_DBG_CANON,"                      --advance paper %d\n", advance);
+      a0 = advance         & 0xff;
+      a1 = (advance >> 8)  & 0xff;
+      a2 = (advance >> 16) & 0xff;
+      a3 = (advance >> 24) & 0xff;
+      stp_zprintf(v, "\033(e%c%c%c%c%c%c", 4, 0, a3, a2, a1, a0);
+    }
+}
+
+static void
+canon_flush_pass(stp_vars_t *v, int passno, int vertical_subpass)
+{
+  stp_lineoff_t        *lineoffs   = stp_get_lineoffsets_by_pass(v, passno);
+  stp_lineactive_t     *lineactive = stp_get_lineactive_by_pass(v, passno);
+  const stp_linebufs_t *bufs       = stp_get_linebases_by_pass(v, passno);
+  stp_pass_t           *pass       = stp_get_pass_by_pass(v, passno);
+  stp_linecount_t      *linecount  = stp_get_linecount_by_pass(v, passno);
+  canon_privdata_t      *pd         = (canon_privdata_t *) stp_get_component_data(v, "Driver");
+  int                    papershift = (pass->logicalpassstart - pd->last_pass_offset);
+
+  int color, line, written = 0, linelength = 0, lines = 0;
+  int idx[4]={3, 0, 1, 2}; /* color numbering is different between canon_write and weaving */
+
+  stp_deprintf(STP_DBG_CANON,"canon_flush_pass: ----pass=%d,---- \n", passno);
+  (pd->emptylines) = 0;
+
+  for ( color = 0; color < pd->ncolors; color++ ) /* find max. linecount */
+    {
+      if ( linecount[0].v[color] > lines )
+        lines = linecount[0].v[color];
+    }
+
+  for ( line = 0; line < lines; line++ )  /* go through each nozzle f that pass */
+    {
+      stp_deprintf(STP_DBG_CANON,"                      --line=%d\n", line);
+
+      if ( written > 0 )
+        canon_cmd(v,ESC28,0x65, 2, 0, 1); /* go to next nozzle*/
+                                           /* if there was printed some data */
+
+      written = 0;
+      for ( color = 0; color < pd->ncolors; color++ )
+        {
+          if ( line < linecount[0].v[color] )  /* try only existing lines */
+            {
+              if ( lineactive[0].v[color] > 0 )
+                {
+                  linelength = lineoffs[0].v[color] / linecount[0].v[color];
+/*                stp_deprintf(STP_DBG_CANON,"canon_flush_pass: linelength=%d, bufs[0].v[color]=%p,"
+                  "bufs[0].v[color]+line * linelength=%p, empty=%d \n", linelength, bufs[0].v[color],
+                   bufs[0].v[color] + line * linelength, (pd->emptylines));
+*/
+                  if ( pass->logicalpassstart - pd->last_pass_offset > 0 )
+                    {
+                      canon_advance_paper(v, papershift);
+                      pd->last_pass_offset = pass->logicalpassstart;
+                      if (pd->bidirectional)
+                        {
+                         pd->direction = (pd->direction +1) & 1;
+                         canon_set_X72(v, pd->direction);
+                         stp_deprintf(STP_DBG_CANON,"                      --set direction %d\n", pd->direction);
+                        }
+                    }
+
+                  written += canon_write(v, pd->caps,
+                               (unsigned char *)(bufs[0].v[color] + line * linelength),
+                               linelength, idx[color], pd->ydpi,
+                               &(pd->emptylines), pd->out_width,
+                               pd->left, pd->bits);
+                  if (written) stp_deprintf(STP_DBG_CANON,"                        --written color %d,\n", color);
+
+                }
+            }
+        }
+
+      if ( written == 0 ) /* count unused nozzles */
+        (pd->emptylines) += 1;
+    }
+
+  for ( color = 0; color < pd->ncolors; color++ )
+    {
+      lineoffs[0].v[color] = 0;
+      linecount[0].v[color] = 0;
+    }
+  stp_deprintf(STP_DBG_CANON,"                  --ended-- with empty=%d \n", (pd->emptylines));
+}
 
 static stp_family_t print_canon_module_data =
   {

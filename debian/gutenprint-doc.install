@@ -1,0 +1,2 @@
+debian/install/usr/share/gutenprint/doc/*.pdf                usr/share/doc/gutenprint-doc
+debian/install/usr/share/gutenprint/doc/html                 usr/share/doc/gutenprint-doc

@@ -82,7 +82,8 @@
      MODE = 298,
      PAGESIZE = 299,
      MESSAGE = 300,
-     END = 301
+     OUTPUT = 301,
+     END = 302
    };
 #endif
 /* Tokens.  */
@@ -129,7 +130,8 @@
 #define MODE 298
 #define PAGESIZE 299
 #define MESSAGE 300
-#define END 301
+#define OUTPUT 301
+#define END 302
 
 
 

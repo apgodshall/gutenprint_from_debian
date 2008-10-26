@@ -649,7 +649,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "printrcl.l"
 /*		-*-Mode: C-*-
- * "$Id: printrcl.l,v 1.1 2004/09/17 18:38:14 rleigh Exp $"
+ * "$Id: printrcl.l,v 1.10 2004/08/19 03:24:35 rlk Exp $"
  *
  *   printrc parser
  *

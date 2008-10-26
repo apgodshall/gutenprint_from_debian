@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.151.2.2 2007/05/29 01:47:26 rlk Exp $
+dnl $Id: configure.ac,v 1.151.2.5 2007/12/29 20:46:10 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -37,7 +37,7 @@ dnl
 pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [0])
-pushdef([GUTENPRINT_MICRO_VERSION],     [1])
+pushdef([GUTENPRINT_MICRO_VERSION],     [2])
 pushdef([GUTENPRINT_EXTRA_VERSION],     [])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
 pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
@@ -52,7 +52,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.151.2.2 $)
+AC_REVISION($Revision: 1.151.2.5 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -281,7 +281,7 @@ STP_ARG_ENABLE([cups-level3-ppds],
 
 STATIC_GENPPD="$enable_static"
 STP_ARG_ENABLE([static-genppd],
-               [build a statically-linked cups-genppd and rastertogutenprint.  WARNING: Please read the README and NEWS (release notes) CAREFULLY before disabling this!],
+               [build a statically-linked cups-genppd and rastertogutenprint.  WARNING: Please read the README and NEWS (release notes) CAREFULLY before using --disable-static-genppd!],
 	       [STATIC_GENPPD],
 	       [(automatic)])
 
@@ -502,10 +502,13 @@ AC_ISC_POSIX
 AC_PROG_AWK
 AC_PROG_CC
 AM_PROG_CC_STDC
+AM_PROG_CC_C_O
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AM_PROG_LEX
 AC_PROG_YACC
+AC_PATH_PROG([TEST], [test])
+AC_PATH_PROG([TRUE], [true])
 AC_PATH_PROG([FIND], [find])
 AC_PATH_PROG([PERL], [perl])
 AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
@@ -1012,11 +1015,13 @@ AC_CONFIG_FILES([src/cups/Makefile])
 AC_CONFIG_FILES([src/cups/cups-genppdconfig],
                 [chmod +x src/cups/cups-genppdconfig;
 		 rm -f src/cups/cups-genppdconfig.${GUTENPRINT_RELEASE_VERSION};
-		 mv src/cups/cups-genppdconfig src/cups/cups-genppdconfig.${GUTENPRINT_RELEASE_VERSION}])
+		 mv src/cups/cups-genppdconfig src/cups/cups-genppdconfig.${GUTENPRINT_RELEASE_VERSION};
+		 echo "    *** Ignore any warning that may follow that sed can't read src/cups/cups-genppdconfig"])
 AC_CONFIG_FILES([src/cups/cups-genppdupdate],
                 [chmod +x src/cups/cups-genppdupdate;
 		 rm -f src/cups/cups-genppdupdate.${GUTENPRINT_RELEASE_VERSION};
-		 mv src/cups/cups-genppdupdate src/cups/cups-genppdupdate.${GUTENPRINT_RELEASE_VERSION}])
+		 mv src/cups/cups-genppdupdate src/cups/cups-genppdupdate.${GUTENPRINT_RELEASE_VERSION};
+		 echo "    *** Ignore any warning that may follow that sed can't read src/cups/cups-genppdupdate"])
 AC_CONFIG_FILES([src/escputil/Makefile])
 AC_CONFIG_FILES([src/foomatic/Makefile])
 AC_CONFIG_FILES([src/foomatic/foomatic-generator],
@@ -1025,6 +1030,8 @@ AC_CONFIG_FILES([src/foomatic/mk_printerlist],
                 [chmod +x src/foomatic/mk_printerlist])
 AC_CONFIG_FILES([src/testpattern/run-testpattern-2],
                 [chmod +x src/testpattern/run-testpattern-2])
+AC_CONFIG_FILES([src/cups/test-rastertogutenprint],
+                [chmod +x src/cups/test-rastertogutenprint])
 AC_CONFIG_FILES([src/ghost/Makefile])
 AC_CONFIG_FILES([src/testpattern/Makefile])
 AC_CONFIG_FILES([src/gimp/Makefile])
@@ -1088,7 +1095,7 @@ if test "$BUILD_FOOMATIC" != "no" ; then
     echo "        Build Foomatic 3.x data:                $BUILD_FOOMATIC_3"
 fi
 if test "$BUILD_GIMP" != "no" -o "$BUILD_GIMP2" != "no" ; then
-    echo "    Build enhanced Print plugin for the GIMP:   yes"
+    echo "    Build enhanced Print plugin for GIMP:       yes"
     echo "        Build GIMP 1.2 plugin:                  $BUILD_GIMP"
     echo "        Build GIMP 2.x plugin:                  $BUILD_GIMP2"
     if test "$BUILD_GIMP2" != "no" ; then
@@ -1100,7 +1107,7 @@ if test "$BUILD_GIMP" != "no" -o "$BUILD_GIMP2" != "no" ; then
     fi
     echo "        Install plugin(s) in home directory:    $USER_INSTALL"
 else
-    echo "    Build enhanced Print plugin for the GIMP:   no"
+    echo "    Build enhanced Print plugin for GIMP:       no"
 fi
 echo "    Build EPSON Stylus utility:                 $BUILD_ESCPUTIL"
 echo "    Build test programs:                        $BUILD_TEST"

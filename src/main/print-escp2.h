@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.h,v 1.105.6.2 2007/05/29 01:47:29 rlk Exp $"
+ * "$Id: print-escp2.h,v 1.105.6.4 2007/12/29 20:42:28 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -175,8 +175,10 @@ typedef struct
   short color;
   short subchannel;
   short head_offset;
+  short split_channel_count;
   const char *channel_density;
   const char *subchannel_scale;
+  const short split_channels[PHYSICAL_CHANNEL_LIMIT];
 } physical_subchannel_t;
 
 typedef struct
@@ -373,6 +375,7 @@ typedef struct
 #define MODEL_ZEROMARGIN_NO	0x00ul /* zero margin mode? */
 #define MODEL_ZEROMARGIN_YES	0x10ul /* (print to edge of the paper) */
 #define MODEL_ZEROMARGIN_FULL	0x20ul /* (print to edge of the paper) */
+#define MODEL_ZEROMARGIN_H_ONLY	0x30ul /* (print to edge of the paper) */
 
 #define MODEL_VARIABLE_DOT_MASK	0x40ul /* Does this printer support var */
 #define MODEL_VARIABLE_NO	0x00ul /* dot size printing? The newest */
@@ -402,6 +405,10 @@ typedef struct
 #define MODEL_PACKET_MODE_NO	0x0000ul
 #define MODEL_PACKET_MODE_YES	0x1000ul
 
+#define MODEL_INTERCHANGEABLE_INK_MASK	0x2000ul
+#define MODEL_INTERCHANGEABLE_INK_NO	0x0000ul
+#define MODEL_INTERCHANGEABLE_INK_YES	0x1000ul
+
 typedef enum
 {
   MODEL_COMMAND,
@@ -413,6 +420,7 @@ typedef enum
   MODEL_SEND_ZERO_ADVANCE,
   MODEL_SUPPORTS_INK_CHANGE,
   MODEL_PACKET_MODE,
+  MODEL_INTERCHANGEABLE_INK,
   MODEL_LIMIT
 } escp2_model_option_t;
 
@@ -560,6 +568,9 @@ typedef struct
   int unit_scale;		/* Scale factor for units */
   int send_zero_pass_advance;	/* Send explicit command for zero advance */
   int zero_margin_offset;	/* Zero margin offset */
+  int split_channel_count;	/* For split black channels, like C120 */
+  int split_channel_width;	/* Linewidth for split black channels */
+  short *split_channels;
 
   /* Ink parameters */
   int bitwidth;			/* Number of bits per ink drop */
@@ -642,6 +653,7 @@ typedef struct
   int last_color;		/* Last color we printed */
   int last_pass_offset;		/* Starting row of last pass we printed */
   int last_pass;		/* Last pass printed */
+  unsigned char *comp_buf;	/* Compression buffer for C120-type printers */
 
 } escp2_privdata_t;
 
@@ -658,12 +670,12 @@ extern void stpi_escp2_terminate_page(stp_vars_t *v);
 #define PACKFUNC stp_pack_uncompressed
 #else
 #define COMPRESSION (1)
-#define FILLFUNC stp_fill_tiff
-#define COMPUTEFUNC stp_compute_tiff_linewidth
-#define PACKFUNC stp_pack_tiff
+#define FILLFUNC pd->split_channel_count > 0 ? stp_fill_uncompressed : stp_fill_tiff
+#define COMPUTEFUNC pd->split_channel_count > 0 ? stp_compute_uncompressed_linewidth : stp_compute_tiff_linewidth
+#define PACKFUNC pd->split_channel_count > 0 ? stp_pack_uncompressed : stp_pack_tiff
 #endif
 
 #endif /* GUTENPRINT_INTERNAL_ESCP2_H */
 /*
- * End of "$Id: print-escp2.h,v 1.105.6.2 2007/05/29 01:47:29 rlk Exp $".
+ * End of "$Id: print-escp2.h,v 1.105.6.4 2007/12/29 20:42:28 rlk Exp $".
  */

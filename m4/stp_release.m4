@@ -24,6 +24,6 @@
 # Makefiles.
 AC_DEFUN([STP_RELEASE_DATE],
 [dnl Set package release date
-RELEASE_DATE="17 Jun 2007"
+RELEASE_DATE="01 Jan 2008"
 AC_DEFINE_UNQUOTED(RELEASE_DATE, "${RELEASE_DATE}", [Package release date.])
 AC_SUBST(RELEASE_DATE)])

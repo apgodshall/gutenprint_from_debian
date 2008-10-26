@@ -1,5 +1,5 @@
 /*
- * "$Id: testpattern.c,v 1.44 2006/04/18 12:30:57 rlk Exp $"
+ * "$Id: testpattern.c,v 1.44.8.2 2007/12/31 03:37:27 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -40,6 +40,7 @@
 #include <string.h>
 #include "testpattern.h"
 #include <gutenprint/gutenprint-intl.h>
+#include <errno.h>
 
 extern int yyparse(void);
 
@@ -87,6 +88,7 @@ int global_invert_data = 0;
 int global_use_raw_cmyk;
 int global_did_something;
 int global_suppress_output = 0;
+char *global_output = NULL;
 
 static testpattern_t *static_testpatterns;
 
@@ -171,6 +173,8 @@ static void
 writefunc(void *file, const char *buf, size_t bytes)
 {
   FILE *prn = (FILE *)file;
+  if (! file)
+    return;
   if (!global_suppress_output || (file == stderr))
     {
       fwrite(buf, 1, bytes, prn);
@@ -232,6 +236,8 @@ do_print(void)
   int count;
   int i;
   char tmp[32];
+  FILE *output = stdout;
+  int write_to_process = 0;
 
   initialize_global_parameters();
   global_vars = stp_vars_create();
@@ -264,10 +270,42 @@ do_print(void)
 	}
       return 2;
     }
+  if (global_output)
+    {
+      if (strcmp(global_output, "-") == 0)
+	output = stdout;
+      else if (strcmp(global_output, "") == 0)
+	output = NULL;
+      else if (global_output[0] == '|')
+	{
+	  write_to_process = 1;
+	  output = popen(global_output+1, "w");
+	  if (! output)
+	    {
+	      fprintf(stderr, "popen '%s' failed: %s\n", global_output, strerror(errno));
+	      output = NULL;
+	    }
+	  free(global_output);
+	  global_output = NULL;
+	}
+      else
+	{
+	  output = fopen(global_output, "wb");
+	  if (! output)
+	    {
+	      fprintf(stderr, "Create %s failed: %s\n", global_output, strerror(errno));
+	      output = NULL;
+	    }
+	  free(global_output);
+	  global_output = NULL;
+	}
+    }
+  else
+    output = stdout;
   stp_set_printer_defaults(v, the_printer);
   stp_set_outfunc(v, writefunc);
   stp_set_errfunc(v, writefunc);
-  stp_set_outdata(v, stdout);
+  stp_set_outdata(v, output);
   stp_set_errdata(v, stderr);
   stp_set_string_parameter(v, "InputImageType", global_image_type);
   sprintf(tmp, "%d", global_bit_depth);
@@ -286,12 +324,29 @@ do_print(void)
   for (i = 0; i < count; i++)
     {
       const stp_parameter_t *p = stp_parameter_list_param(params, i);
-      const char *val = stp_get_string_parameter(global_vars, p->name);
-      if (p->p_type == STP_PARAMETER_TYPE_STRING_LIST && val && strlen(val) > 0)
-	stp_set_string_parameter(v, p->name, val);
-      stp_set_page_width(v, stp_get_page_width(global_vars));
-      stp_set_page_height(v, stp_get_page_height(global_vars));
+      if (p->p_type == STP_PARAMETER_TYPE_STRING_LIST)
+	{
+	  const char *val = stp_get_string_parameter(global_vars, p->name);
+	  if (val && strlen(val) > 0)
+	    {
+	      stp_set_string_parameter(v, p->name, val);
+	    }
+	}
+      else if (p->p_type == STP_PARAMETER_TYPE_INT &&
+	       stp_check_int_parameter(global_vars, p->name, STP_PARAMETER_ACTIVE))
+	{
+	  int val = stp_get_int_parameter(global_vars, p->name);
+	  stp_set_int_parameter(v, p->name, val);
+	}
+      else if (p->p_type == STP_PARAMETER_TYPE_DOUBLE &&
+	       stp_check_float_parameter(global_vars, p->name, STP_PARAMETER_ACTIVE))
+	{
+	  double val = stp_get_float_parameter(global_vars, p->name);
+	  stp_set_float_parameter(v, p->name, val);
+	}
     }
+  stp_set_page_width(v, stp_get_page_width(global_vars));
+  stp_set_page_height(v, stp_get_page_height(global_vars));
   stp_parameter_list_destroy(params);
 
   stp_get_imageable_area(v, &left, &right, &bottom, &top);
@@ -328,6 +383,13 @@ do_print(void)
   stp_vars_destroy(v);
   stp_free(static_testpatterns);
   static_testpatterns = NULL;
+  if (output && output != stdout)
+    {
+      if (write_to_process)
+	(void) pclose(output);
+      else
+	(void) fclose(output);
+    }
   return 0;
 }
 
@@ -384,6 +446,8 @@ fill_black_##bits(unsigned char *data, size_t len, size_t scount)	\
   int i;								\
   T *s_data = (T *) data;						\
   unsigned black_val = global_ink_limit * ((1 << bits) - 1);		\
+  unsigned blocks = (len / scount) * scount;				\
+  unsigned extra = len - blocks;					\
   if (strcmp(global_image_type, "Raw") == 0)				\
     {									\
       for (i = 0; i < (len / scount) * scount; i++)			\
@@ -402,6 +466,28 @@ fill_black_##bits(unsigned char *data, size_t len, size_t scount)	\
 	    }								\
 	  s_data += global_channel_depth;				\
 	}								\
+      memset(s_data, 0xff, sizeof(T) * extra *				\
+	     global_channel_depth);					\
+    }									\
+  else if (strcmp(global_image_type, "RGB") == 0)			\
+    {									\
+      for (i = 0; i < (len / scount) * scount; i++)			\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 3);				\
+	  s_data += 3;							\
+	}								\
+      memset(s_data, 0xff, sizeof(T) * extra * 3);			\
+    }									\
+  else if (strcmp(global_image_type, "CMY") == 0)			\
+    {									\
+      for (i = 0; i < (len / scount) * scount; i++)			\
+	{								\
+	  s_data[0] = black_val;					\
+	  s_data[1] = black_val;					\
+	  s_data[2] = black_val;					\
+	  s_data += 3;							\
+	}								\
+      memset(s_data, 0, sizeof(T) * extra * 3);				\
     }									\
   else if (strcmp(global_image_type, "CMYK") == 0)			\
     {									\
@@ -411,6 +497,7 @@ fill_black_##bits(unsigned char *data, size_t len, size_t scount)	\
 	  s_data[3] = black_val;					\
 	  s_data += 4;							\
 	}								\
+      memset(s_data, 0, sizeof(T) * extra * 4);				\
     }									\
   else if (strcmp(global_image_type, "KCMY") == 0)			\
     {									\
@@ -420,6 +507,7 @@ fill_black_##bits(unsigned char *data, size_t len, size_t scount)	\
 	  s_data[0] = black_val;					\
 	  s_data += 4;							\
 	}								\
+      memset(s_data, 0, sizeof(T) * extra * 4);				\
     }									\
   else if (strcmp(global_image_type, "Grayscale") == 0)			\
     {									\
@@ -429,6 +517,16 @@ fill_black_##bits(unsigned char *data, size_t len, size_t scount)	\
 	  s_data[0] = black_val;					\
 	  s_data += 1;							\
 	}								\
+      memset(s_data, 0, sizeof(T) * extra);				\
+    }									\
+  else if (strcmp(global_image_type, "Whitescale") == 0)		\
+    {									\
+      for (i = 0; i < (len / scount) * scount; i++)			\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 1);				\
+	  s_data += 1;							\
+	}								\
+      memset(s_data, 0xff, sizeof(T) * extra);				\
     }									\
 }
 
@@ -455,9 +553,64 @@ fill_black(unsigned char *data, size_t len, size_t scount, size_t bytes)
 static void								\
 fill_white_##bits(unsigned char *data, size_t len, size_t scount)	\
 {									\
+  int i;								\
   T *s_data = (T *) data;						\
-  memset(s_data, 0, sizeof(T) * global_channel_depth *			\
-	 ((len / scount) * scount));					\
+  if (strcmp(global_image_type, "Raw") == 0)				\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0, sizeof(T) * global_channel_depth);		\
+	  s_data += global_channel_depth;				\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "RGB") == 0)			\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0xff, sizeof(T) * 3);				\
+	  s_data += 3;							\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "CMY") == 0)			\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 3);				\
+	  s_data += 3;							\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "CMYK") == 0)			\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 4);				\
+	  s_data += 4;							\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "KCMY") == 0)			\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 4);				\
+	  s_data += 4;							\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "Grayscale") == 0)			\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0, sizeof(T) * 1);				\
+	  s_data += 1;							\
+	}								\
+    }									\
+  else if (strcmp(global_image_type, "Whitescale") == 0)		\
+    {									\
+      for (i = 0; i < len; i++)						\
+	{								\
+	  memset(s_data, 0xff, sizeof(T) * 1);				\
+	  s_data += 1;							\
+	}								\
+    }									\
 }
 
 FILL_WHITE_FUNCTION(unsigned short, 16)
@@ -844,6 +997,10 @@ Image_get_row(stp_image_t *image, unsigned char *data,
 	  previous_band = band;
 	  fprintf(stderr, ".");
 	}
+      else
+	fill_pattern(&(static_testpatterns[band]), data,
+		     global_printer_width, global_steps, depth,
+		     global_bit_depth / 8);
     }
   return STP_IMAGE_STATUS_OK;
 }

@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.139 2006/05/12 01:10:19 rlk Exp $
+dnl $Id: configure.ac,v 1.145 2006/07/16 22:59:20 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,7 @@ pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [0])
 pushdef([GUTENPRINT_MICRO_VERSION],     [0])
-pushdef([GUTENPRINT_EXTRA_VERSION],     [-rc3])
+pushdef([GUTENPRINT_EXTRA_VERSION],     [])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
 pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
 pushdef([GUTENPRINT_BINARY_AGE],        [0])
@@ -52,7 +52,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.139 $)
+AC_REVISION($Revision: 1.145 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -265,7 +265,7 @@ STP_ARG_ENABLE([cups-level3-ppds],
 
 STATIC_GENPPD="$enable_static"
 STP_ARG_ENABLE([static-genppd],
-               [build a statically-linked cups-genppd and rastertogutenprint],
+               [build a statically-linked cups-genppd and rastertogutenprint.  WARNING: Please read the README and NEWS (release notes) CAREFULLY before disabling this!],
 	       [STATIC_GENPPD],
 	       [(automatic)])
 
@@ -405,8 +405,14 @@ dnl Quote to protect sed regexes
   [gimptool_check_minor=`echo "$gimptool_check_version" | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
   if test "$gimptool_check_major" -eq 2; then
     BUILD_GIMP2="yes"
+    if test "$gimptool_check_minor" -ge 4 ; then
+      BUILD_GIMP2_AS_GUTENPRINT="yes"
+    else
+      BUILD_GIMP2_AS_GUTENPRINT="no"
+    fi
   else
     BUILD_GIMP2="no"
+    BUILD_GIMP2_AS_GUTENPRINT="no"
   fi
 fi
 
@@ -426,6 +432,11 @@ STP_ARG_WITH([gimp2],
              [BUILD_GIMP2],
              [(automatic)])
 
+STP_ARG_WITH([gimp2-as-gutenprint],
+             [name GIMP 2.x Print plugin gutenprint (requires GIMP 2.2; normally used with GIMP 2.4 or above)],
+             [BUILD_GIMP2_AS_GUTENPRINT],
+             [(automatic)])
+
 STP_ARG_ENABLE([libgutenprintui2],
                [build Gutenprint GTK+-2.0 user interface library],
                [BUILD_LIBGUTENPRINTUI2],
@@ -434,11 +445,6 @@ STP_ARG_ENABLE([libgutenprintui2],
 STP_ARG_ENABLE([samples],
                [install sample images],
                [INSTALL_SAMPLES],
-               [yes])
-
-STP_ARG_ENABLE([user-guide],
-               [install user guide],
-               [INSTALL_USER_GUIDE],
                [yes])
 
 STP_ARG_ENABLE([escputil],
@@ -490,7 +496,7 @@ AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
 AC_PATH_PROG([CONVERT], [convert])
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   if test x${CONVERT} = x ; then
-    AC_MSG_WARN([PostScript user's guide cannot be regenerated!])
+    AC_MSG_WARN([PostScript developer's guide cannot be regenerated!])
   fi
 fi
 AC_PATH_PROG(TEXI2HTML, texi2html)
@@ -508,7 +514,7 @@ fi
 AC_PATH_PROG(DB2PDF, db2pdf)
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   if test x${DB2PDF} = x ; then
-    AC_MSG_WARN([PDF user's guide cannot be regenerated!])
+    AC_MSG_WARN([PDF developer's guide cannot be regenerated!])
   fi
 fi
 AC_PATH_PROGS(DVIPDF, dvipdf dvipdfm)
@@ -520,19 +526,19 @@ fi
 AC_PATH_PROG(DB2PS, db2ps)
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   if test x${DB2PS} = x ; then
-    AC_MSG_WARN([PostScript user's guide cannot be regenerated!])
+    AC_MSG_WARN([PostScript developer's guide cannot be regenerated!])
   fi
 fi
 AC_PATH_PROG(DB2HTML, db2html)
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   if test x${DB2HTML} = x ; then
-    AC_MSG_WARN([HTML user's guide cannot be regenerated!])
+    AC_MSG_WARN([HTML developer's guide cannot be regenerated!])
   fi
 fi
 AC_PATH_PROG(DOXYGEN, doxygen)
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   if test x${DOXYGEN} = x ; then
-    AC_MSG_WARN([HTML user's guide cannot be regenerated!])
+    AC_MSG_WARN([HTML developer's guide cannot be regenerated!])
   fi
 fi
 
@@ -800,6 +806,8 @@ AM_CONDITIONAL(BUILD_GIMP, test x${BUILD_GIMP} = xyes)
 
 AM_CONDITIONAL(BUILD_GIMP2, test x${BUILD_GIMP2} = xyes)
 
+AM_CONDITIONAL(BUILD_GIMP2_AS_GUTENPRINT, test x${BUILD_GIMP2_AS_GUTENPRINT} = xyes)
+
 AM_CONDITIONAL(INSTALL_SAMPLES, test x${INSTALL_SAMPLES} = xyes)
 
 AM_CONDITIONAL(INSTALL_USER_GUIDE, test x${INSTALL_USER_GUIDE} = xyes)
@@ -860,12 +868,6 @@ fi
 AM_CONDITIONAL(BUILD_MODULES, test x$MODULE = xtrue)
 
 AM_CONDITIONAL(BUILD_GENPPD_STATIC, test x"$STATIC_GENPPD" = xyes)
-
-if test "$enable_static" = no -a "$BUILD_CUPS" = yes ; then
-  AC_MSG_WARN([--enable-static is disabled, but CUPS is being built.])
-  AC_MSG_WARN([This may result in a *SILENTLY* incorrect build.])
-  AC_MSG_WARN([Please read the release notes carefully!])
-fi
 
 dnl Define LTLIBOBJS
 AC_CONFIG_COMMANDS_PRE(
@@ -952,7 +954,6 @@ AC_CONFIG_FILES([doc/Makefile])
 AC_CONFIG_FILES([doc/gutenprint.dox])
 AC_CONFIG_FILES([doc/gutenprintui2.dox])
 AC_CONFIG_FILES([doc/developer/Makefile])
-AC_CONFIG_FILES([doc/users_guide/Makefile])
 AC_CONFIG_FILES([include/Makefile])
 AC_CONFIG_FILES([include/gutenprint/Makefile])
 AC_CONFIG_FILES([include/gutenprintui/Makefile])
@@ -1006,13 +1007,15 @@ echo
 
 AC_OUTPUT
 
+warnings_emitted=0
 echo
-echo "Build Summary:"
-echo "----- --------"
+echo "Configuration Summary:"
+echo "------------- --------"
 echo
 echo "If you have any problems, please report the information below to"
 echo "$PACKAGE_BUGREPORT"
 echo
+echo "================================================================"
 echo "  Release: $PACKAGE_STRING generated on $RELEASE_DATE"
 echo
 echo "  Features:"
@@ -1023,10 +1026,15 @@ if test "$BUILD_CUPS" != "no" ; then
     echo "            Build simplified CUPS PPD files:    $BUILD_SIMPLIFIED_CUPS_PPDS"
     echo "            Generate PS level 3 CUPS PPD files: $USE_LEVEL3_PS"
     echo "        Install CUPS PPD files at top level:    $CUPS_PPDS_AT_TOP_LEVEL"
-    if test "$STATIC_GENPPD" = "no" -a "$enable_shared" = "yes" ; then
-        echo "        Build genppd statically:                $STATIC_GENPPD (please read the release notes!)"
-    else
-        echo "        Build genppd statically:                $STATIC_GENPPD"
+    echo "        Build genppd statically:                $STATIC_GENPPD"
+
+    if test "$STATIC_GENPPD" = "no" ; then
+        echo "            ***WARNING: Use of --disable-static-genppd or --disable-static"
+	echo "                        when building CUPS is very dangerous.  The build may"
+	echo "                        fail when building the PPD files, or may *SILENTLY*"
+	echo "                        build incorrect PPD files or cause other problems."
+	echo "                        Please review the README and release notes carefully!"
+	warnings_emitted=1
     fi
 fi
 echo "    Build Ghostscript IJS driver:               $BUILD_GHOSTSCRIPT"
@@ -1034,10 +1042,20 @@ echo "    Build Foomatic data:                        $BUILD_FOOMATIC"
 if test "$BUILD_FOOMATIC" != "no" ; then
     echo "        Build Foomatic 3.x data:                $BUILD_FOOMATIC_3"
 fi
-echo "    Build GIMP 1.2 plugin:                      $BUILD_GIMP"
-echo "    Build GIMP 2.0 plugin:                      $BUILD_GIMP2"
-if test "$BUILD_GIMP" != "no" -o "$BUILD_GIMP2" != no ; then
-    echo "        Install plugin in home directory:       $USER_INSTALL"
+if test "$BUILD_GIMP" != "no" -o "$BUILD_GIMP2" != "no" ; then
+    echo "    Build enhanced Print plugin for the GIMP:   yes"
+    echo "        Build GIMP 1.2 plugin:                  $BUILD_GIMP"
+    echo "        Build GIMP 2.x plugin:                  $BUILD_GIMP2"
+    if test "$BUILD_GIMP2" != "no" ; then
+	if test "$BUILD_GIMP2_AS_GUTENPRINT" != "no" ; then
+	    echo "            GIMP 2.x plugin will be named:      gutenprint"
+	else
+	    echo "            GIMP 2.x plugin will be named:      print"
+	fi
+    fi
+    echo "        Install plugin(s) in home directory:    $USER_INSTALL"
+else
+    echo "    Build enhanced Print plugin for the GIMP:   no"
 fi
 echo "    Build EPSON Stylus utility:                 $BUILD_ESCPUTIL"
 echo "    Build test programs:                        $BUILD_TEST"
@@ -1049,10 +1067,9 @@ echo "    Data directory:                             $PACKAGE_DATA_DIR"
 echo "    Library directory:                          $PACKAGE_LIB_DIR"
 echo "    XML data directory:                         $PKGXMLDATADIR"
 echo "    Module directory:                           $PKGMODULEDIR"
-echo "    Install user guide:                         $INSTALL_USER_GUIDE"
 echo "    Install sample images:                      $INSTALL_SAMPLES"
 echo
-echo "Configuration:"
+echo "General configuration:"
 if test x$ac_compiler_gnu = "xyes"; then
     echo "    Compiler options:                           $CFLAGS $GNUCFLAGS"
 else
@@ -1069,7 +1086,12 @@ if test -n "$EXTRA_LIBREADLINE_DEPS" ; then
 else
     echo "    Use readline libraries:                     $USE_READLINE"
 fi
+echo "================================================================"
+if test $warnings_emitted -ne 0 ; then
+    echo
+    echo '*** NOTE: Please review the warnings shown above carefully!'
+fi
 echo
-echo "Finished configuring."
-echo "Type 'make' to build the package"
+echo "Finished configuring.  Please review the configuration summary above."
+echo "Type 'make clean' followed by 'make' to build the package"
 echo "then 'make install' to install it."

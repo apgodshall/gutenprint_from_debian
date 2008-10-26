@@ -43,7 +43,8 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/scripts/global.mk
-@BUILD_GIMP2_TRUE@gimp2_plug_in_PROGRAMS = print$(EXEEXT)
+@BUILD_GIMP2_AS_GUTENPRINT_FALSE@@BUILD_GIMP2_TRUE@gimp2_plug_in_PROGRAMS = print$(EXEEXT)
+@BUILD_GIMP2_AS_GUTENPRINT_TRUE@@BUILD_GIMP2_TRUE@gimp2_plug_in_PROGRAMS = gutenprint$(EXEEXT)
 subdir = src/gimp2
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
@@ -61,11 +62,15 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(gimp2_plug_indir)"
 gimp2_plug_inPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(gimp2_plug_in_PROGRAMS)
-am_print_OBJECTS = print-image-gimp.$(OBJEXT) print.$(OBJEXT)
-print_OBJECTS = $(am_print_OBJECTS)
+am__objects_1 = print-image-gimp.$(OBJEXT) print.$(OBJEXT)
+am_gutenprint_OBJECTS = $(am__objects_1) print-gutenprint.$(OBJEXT)
+gutenprint_OBJECTS = $(am_gutenprint_OBJECTS)
 am__DEPENDENCIES_1 =
 am__DEPENDENCIES_2 =  \
 	$(top_builddir)/src/gutenprintui2/libgutenprintui2.la
+am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+am_print_OBJECTS = $(am__objects_1) print-print.$(OBJEXT)
+print_OBJECTS = $(am_print_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp =
 am__depfiles_maybe =
@@ -77,8 +82,8 @@ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(print_SOURCES)
-DIST_SOURCES = $(print_SOURCES)
+SOURCES = $(gutenprint_SOURCES) $(print_SOURCES)
+DIST_SOURCES = $(gutenprint_SOURCES) $(print_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -104,6 +109,8 @@ BUILD_GENPPD_STATIC_FALSE = @BUILD_GENPPD_STATIC_FALSE@
 BUILD_GENPPD_STATIC_TRUE = @BUILD_GENPPD_STATIC_TRUE@
 BUILD_GHOSTSCRIPT_FALSE = @BUILD_GHOSTSCRIPT_FALSE@
 BUILD_GHOSTSCRIPT_TRUE = @BUILD_GHOSTSCRIPT_TRUE@
+BUILD_GIMP2_AS_GUTENPRINT_FALSE = @BUILD_GIMP2_AS_GUTENPRINT_FALSE@
+BUILD_GIMP2_AS_GUTENPRINT_TRUE = @BUILD_GIMP2_AS_GUTENPRINT_TRUE@
 BUILD_GIMP2_FALSE = @BUILD_GIMP2_FALSE@
 BUILD_GIMP2_TRUE = @BUILD_GIMP2_TRUE@
 BUILD_GIMP_FALSE = @BUILD_GIMP_FALSE@
@@ -326,15 +333,20 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
 LOCAL_CPPFLAGS = $(GUTENPRINT_CFLAGS) $(GIMP2_CFLAGS)
-print_SOURCES = \
+COMMON_PRINT_SOURCES = \
 	print-image-gimp.c \
 	print-intl.h \
 	print.c \
 	print_gimp.h
 
+print_SOURCES = $(COMMON_PRINT_SOURCES) print-print.c
 print_LDADD = $(GIMP2_LIBS) $(GUTENPRINTUI2_LIBS)
 print_DEPENDENCIES = $(GUTENPRINTUI2_LIBS) $(GUTENPRINT_LIBS)
+gutenprint_SOURCES = $(COMMON_PRINT_SOURCES) print-gutenprint.c
+gutenprint_LDADD = $(print_LDADD)
+gutenprint_DEPENDENCIES = $(print_DEPENDENCIES)
 MAINTAINERCLEANFILES = Makefile.in
+CLEANFILES = print gutenprint
 all: all-am
 
 .SUFFIXES:
@@ -396,6 +408,9 @@ clean-gimp2_plug_inPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
+gutenprint$(EXEEXT): $(gutenprint_OBJECTS) $(gutenprint_DEPENDENCIES) 
+	@rm -f gutenprint$(EXEEXT)
+	$(LINK) $(gutenprint_LDFLAGS) $(gutenprint_OBJECTS) $(gutenprint_LDADD) $(LIBS)
 print$(EXEEXT): $(print_OBJECTS) $(print_DEPENDENCIES) 
 	@rm -f print$(EXEEXT)
 	$(LINK) $(print_LDFLAGS) $(print_OBJECTS) $(print_LDADD) $(LIBS)
@@ -525,6 +540,7 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)

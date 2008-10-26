@@ -122,6 +122,8 @@ BUILD_GENPPD_STATIC_FALSE = @BUILD_GENPPD_STATIC_FALSE@
 BUILD_GENPPD_STATIC_TRUE = @BUILD_GENPPD_STATIC_TRUE@
 BUILD_GHOSTSCRIPT_FALSE = @BUILD_GHOSTSCRIPT_FALSE@
 BUILD_GHOSTSCRIPT_TRUE = @BUILD_GHOSTSCRIPT_TRUE@
+BUILD_GIMP2_AS_GUTENPRINT_FALSE = @BUILD_GIMP2_AS_GUTENPRINT_FALSE@
+BUILD_GIMP2_AS_GUTENPRINT_TRUE = @BUILD_GIMP2_AS_GUTENPRINT_TRUE@
 BUILD_GIMP2_FALSE = @BUILD_GIMP2_FALSE@
 BUILD_GIMP2_TRUE = @BUILD_GIMP2_TRUE@
 BUILD_GIMP_FALSE = @BUILD_GIMP_FALSE@
@@ -347,6 +349,8 @@ DISTDIRS = foomatic-templates-ijs
 LOCAL_CPPFLAGS = $(GUTENPRINT_CFLAGS)
 @BUILD_FOOMATIC_3_TRUE@BUILD_FOOMATIC = 1
 STP_ENV = STP_MODULE_PATH=$(top_builddir)/src/main/.libs:$(top_builddir)/src/main STP_DATA_PATH=$(top_srcdir)/src/main
+LC_C_ENV = LC_ALL=C LANG=C LANGUAGE=C
+FOOMATIC_GENERATOR = $(STP_ENV) $(LC_C_ENV) ./foomatic-generator
 printer_options_SOURCES = printer_options.c
 printer_options_LDADD = $(GUTENPRINT_LIBS)
 printer_margins_SOURCES = printer_margins.c
@@ -660,8 +664,8 @@ foomatic-data: foomatic-stamp
 
 foomatic-stamp: foomatic-generator foomatic-printermap $(noinst_PROGRAMS) mk_printerlist $(top_srcdir)/src/main/printers.xml $(top_srcdir)/src/main/papers.xml
 	-$(RM) -r foomatic-db
-	$(STP_ENV) ./foomatic-generator -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
-	$(STP_ENV) ./foomatic-generator -s -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
+	$(FOOMATIC_GENERATOR) -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
+	$(FOOMATIC_GENERATOR) -s -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
 	touch foomatic-stamp
 
 dist-hook:

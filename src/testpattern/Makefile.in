@@ -20,6 +20,7 @@
 #export STP_DATA_PATH = $(top_srcdir)/src/main
 
 
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -75,6 +76,7 @@ am_testpattern_OBJECTS = testpattern.$(OBJEXT) testpatterny.$(OBJEXT) \
 	testpatternl.$(OBJEXT)
 testpattern_OBJECTS = $(am_testpattern_OBJECTS)
 testpattern_DEPENDENCIES = $(am__DEPENDENCIES_1)
+SCRIPTS = $(noinst_SCRIPTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp =
 am__depfiles_maybe =
@@ -127,6 +129,8 @@ BUILD_GENPPD_STATIC_FALSE = @BUILD_GENPPD_STATIC_FALSE@
 BUILD_GENPPD_STATIC_TRUE = @BUILD_GENPPD_STATIC_TRUE@
 BUILD_GHOSTSCRIPT_FALSE = @BUILD_GHOSTSCRIPT_FALSE@
 BUILD_GHOSTSCRIPT_TRUE = @BUILD_GHOSTSCRIPT_TRUE@
+BUILD_GIMP2_AS_GUTENPRINT_FALSE = @BUILD_GIMP2_AS_GUTENPRINT_FALSE@
+BUILD_GIMP2_AS_GUTENPRINT_TRUE = @BUILD_GIMP2_AS_GUTENPRINT_TRUE@
 BUILD_GIMP2_FALSE = @BUILD_GIMP2_FALSE@
 BUILD_GIMP2_TRUE = @BUILD_GIMP2_TRUE@
 BUILD_GIMP_FALSE = @BUILD_GIMP_FALSE@
@@ -349,6 +353,7 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
 TESTS = run-testpattern run-testpattern-1 run-testpattern-2
+@BUILD_TESTPATTERN_TRUE@noinst_SCRIPTS = run-testpattern-2
 AM_LFLAGS = -i
 AM_YFLAGS = -d
 testpattern_SOURCES = testpattern.c testpatterny.y testpatternl.l testpattern.h
@@ -663,7 +668,7 @@ distdir: $(DISTFILES)
 check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS
 check: check-am
-all-am: Makefile $(PROGRAMS) $(DATA)
+all-am: Makefile $(PROGRAMS) $(SCRIPTS) $(DATA)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgdatadir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \

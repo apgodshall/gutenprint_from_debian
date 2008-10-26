@@ -1,5 +1,5 @@
 /*
- * "$Id: rastertoprinter.c,v 1.99 2006/04/17 02:06:18 rlk Exp $"
+ * "$Id: rastertoprinter.c,v 1.104 2006/07/04 02:19:14 rlk Exp $"
  *
  *   Gutenprint based raster filter for the Common UNIX Printing System.
  *
@@ -290,13 +290,14 @@ validate_options(stp_vars_t *v, cups_image_t *cups)
 	  if (!stp_string_list_is_present
 	      (desc.bounds.str, stp_get_string_parameter(v, desc.name)))
 	    {
+	      const char *val = stp_get_string_parameter(v, desc.name);
 	      fprintf(stderr, "DEBUG: Gutenprint clearing string %s (%s)\n",
-		      desc.name, stp_get_string_parameter(v, desc.name));
+		      desc.name, val ? val : "(null)");
 	      stp_clear_string_parameter(v, desc.name);
-	      if (desc.is_mandatory)
+	      if (!desc.read_only && desc.is_mandatory && desc.is_active)
 		{
 		  fprintf(stderr, "DEBUG: Gutenprint setting default string %s to %s\n",
-			  desc.name, desc.deflt.str);
+			  desc.name, desc.deflt.str ? desc.deflt.str : "(null)");
 		  stp_set_string_parameter(v, desc.name, desc.deflt.str);
 		  if (strcmp(desc.name, "PageSize") == 0)
 		    {
@@ -415,15 +416,23 @@ initialize_page(cups_image_t *cups, const stp_vars_t *default_settings)
   set_string_parameter(v, "JobMode", "Job");
   validate_options(v, cups);
   stp_get_media_size(v, &(cups->width), &(cups->height));
+  stp_get_maximum_imageable_area(v, &tmp_left, &tmp_right,
+				 &tmp_bottom, &tmp_top);
   stp_get_imageable_area(v, &(cups->left), &(cups->right),
 			 &(cups->bottom), &(cups->top));
   fprintf(stderr, "DEBUG: Gutenprint limits w %d l %d r %d  h %d t %d b %d\n",
 	  cups->width, cups->left, cups->right, cups->height, cups->top, cups->bottom);
+  fprintf(stderr, "DEBUG: Gutenprint max limits l %d r %d t %d b %d\n",
+	  tmp_left, tmp_right, tmp_top, tmp_bottom);
 
-  tmp_left = cups->header.ImagingBoundingBox[0];
-  tmp_top = cups->header.ImagingBoundingBox[1];
-  tmp_right = cups->header.ImagingBoundingBox[2];
-  tmp_bottom = cups->header.ImagingBoundingBox[3];
+  if (tmp_left < 0)
+    tmp_left = 0;
+  if (tmp_top < 0)
+    tmp_top = 0;
+  if (tmp_right > tmp_left + cups->width)
+    tmp_right = cups->width;
+  if (tmp_bottom > tmp_top + cups->height)
+    tmp_bottom = cups->height;
   tmp_width = cups->right - cups->left;
   tmp_height = cups->bottom - cups->top;
   if (tmp_left < cups->left)
@@ -624,9 +633,12 @@ set_all_options(stp_vars_t *v, cups_option_t *options, int num_options,
 		  break;
 		}
 	    }
-	  else
-	    fprintf(stderr, "DEBUG: Gutenprint NOT setting %s to %s\n",
+	  else if (val)
+	    fprintf(stderr, "DEBUG: Gutenprint NOT setting %s to '%s'\n",
 		    desc.name, val);
+	  else
+	    fprintf(stderr, "DEBUG: Gutenprint NOT setting %s to (null)\n",
+		    desc.name);
 	}
       stp_parameter_description_destroy(&desc);
       stp_free(ppd_option_name);
@@ -1189,5 +1201,5 @@ Image_width(stp_image_t *image)	/* I - Image */
 
 
 /*
- * End of "$Id: rastertoprinter.c,v 1.99 2006/04/17 02:06:18 rlk Exp $".
+ * End of "$Id: rastertoprinter.c,v 1.104 2006/07/04 02:19:14 rlk Exp $".
  */

@@ -31111,7 +31111,7 @@ cat >>confdefs.h <<_ACEOF
 #define CUPS_PPD_PS_LEVEL ${CUPS_PPD_PS_LEVEL}
 _ACEOF
 
-RELEASE_DATE="13 Aug 2005"
+RELEASE_DATE="27 Aug 2005"
 
 cat >>confdefs.h <<_ACEOF
 #define RELEASE_DATE "${RELEASE_DATE}"

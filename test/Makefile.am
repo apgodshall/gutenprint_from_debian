@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.44 2005/11/21 11:16:23 rleigh Exp $
+## $Id: Makefile.am,v 1.46 2006/05/12 01:10:19 rlk Exp $
 ## Copyright (C) 2000 Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,6 @@ include $(top_srcdir)/scripts/global.mk
 LOCAL_CPPFLAGS = -I$(top_srcdir)/src/main $(GUTENPRINT_CFLAGS)
 
 TESTS = curve run-testdither run-weavetest
-
 
 ## Programs
 

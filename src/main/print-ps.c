@@ -1,5 +1,5 @@
 /*
- * "$Id: print-ps.c,v 1.81 2005/10/10 12:52:29 rlk Exp $"
+ * "$Id: print-ps.c,v 1.84 2006/04/17 02:06:19 rlk Exp $"
  *
  *   Print plug-in Adobe PostScript driver for the GIMP.
  *
@@ -189,6 +189,8 @@ ps_parameters_internal(const stp_vars_t *v, const char *name,
 	    stp_string_list_param(description->bounds.str, 0)->name;
 	  description->is_active = 1;
 	}
+      else if (strcmp(name, "PPDFile") == 0)
+	description->is_active = 1;
       else
 	description->is_active = 0;
       return;
@@ -281,6 +283,7 @@ ps_media_size(const stp_vars_t *v, int *width, int *height)
 
 static void
 ps_imageable_area_internal(const stp_vars_t *v,      /* I */
+			   int  use_max_area, /* I - Use maximum area */
 			   int  *left,	/* O - Left position in points */
 			   int  *right,	/* O - Right position in points */
 			   int  *bottom, /* O - Bottom position in points */
@@ -308,6 +311,17 @@ ps_imageable_area_internal(const stp_vars_t *v,      /* I */
 	  *right  = (int)fright;
 	  *bottom = height - (int)fbottom;
 	  *top    = height - (int)ftop;
+	  if (use_max_area)
+	    {
+	      if (*left > 0)
+		*left = 0;
+	      if (*right < width)
+		*right = width;
+	      if (*top > 0)
+		*top = 0;
+	      if (*bottom < height)
+		*bottom = height;
+	    }
 	}
       else
 	*left = *right = *bottom = *top = 0;
@@ -316,10 +330,10 @@ ps_imageable_area_internal(const stp_vars_t *v,      /* I */
     }
   else
     {
-      *left   = 18;
-      *right  = width - 18;
-      *top    = 36;
-      *bottom = height - 36;
+      *left   = 0;
+      *right  = width;
+      *top    = 0;
+      *bottom = height;
     }
 }
 
@@ -331,7 +345,19 @@ ps_imageable_area(const stp_vars_t *v,      /* I */
                   int  *top)		/* O - Top position in points */
 {
   setlocale(LC_ALL, "C");
-  ps_imageable_area_internal(v, left, right, bottom, top);
+  ps_imageable_area_internal(v, 0, left, right, bottom, top);
+  setlocale(LC_ALL, "");
+}
+
+static void
+ps_maximum_imageable_area(const stp_vars_t *v,      /* I */
+			  int  *left,	/* O - Left position in points */
+			  int  *right,	/* O - Right position in points */
+			  int  *bottom,	/* O - Bottom position in points */
+			  int  *top)	/* O - Top position in points */
+{
+  setlocale(LC_ALL, "C");
+  ps_imageable_area_internal(v, 1, left, right, bottom, top);
   setlocale(LC_ALL, "");
 }
 
@@ -406,6 +432,8 @@ ps_print_internal(const stp_vars_t *v, stp_image_t *image)
 		page_bottom,	/* Bottom of page */
 		page_width,	/* Width of page */
 		page_height,	/* Height of page */
+		paper_width,	/* Width of physical page */
+		paper_height,	/* Height of physical page */
 		out_width,	/* Width of image on page */
 		out_height,	/* Height of image on page */
 		out_channels,	/* Output bytes per pixel */
@@ -452,8 +480,7 @@ ps_print_internal(const stp_vars_t *v, stp_image_t *image)
   out_height = stp_get_height(v);
 
   ps_imageable_area(nv, &page_left, &page_right, &page_bottom, &page_top);
-  left -= page_left;
-  top -= page_top;
+  ps_media_size(v, &paper_width, &paper_height);
   page_width = page_right - page_left;
   page_height = page_bottom - page_top;
 
@@ -466,9 +493,7 @@ ps_print_internal(const stp_vars_t *v, stp_image_t *image)
 
   curtime = time(NULL);
 
-  left += page_left;
-
-  top = page_height - top;
+  top = paper_height - top;
 
   stp_dprintf(STP_DBG_PS, v,
 	      "out_width = %d, out_height = %d\n", out_width, out_height);
@@ -476,6 +501,12 @@ ps_print_internal(const stp_vars_t *v, stp_image_t *image)
 	      "page_left = %d, page_right = %d, page_bottom = %d, page_top = %d\n",
 	      page_left, page_right, page_bottom, page_top);
   stp_dprintf(STP_DBG_PS, v, "left = %d, top = %d\n", left, top);
+  stp_dprintf(STP_DBG_PS, v, "page_width = %d, page_height = %d\n",
+	      page_width, page_height);
+
+  stp_dprintf(STP_DBG_PS, v, "bounding box l %d b %d r %d t %d\n",
+	      page_left, paper_height - page_bottom,
+	      page_right, paper_height - page_top);
 
   stp_puts("%!PS-Adobe-3.0\n", v);
 #ifdef HAVE_CONFIG_H
@@ -487,7 +518,8 @@ ps_print_internal(const stp_vars_t *v, stp_image_t *image)
   stp_zprintf(v, "%%%%CreationDate: %s", ctime(&curtime));
   stp_puts("%Copyright: 1997-2002 by Michael Sweet (mike@easysw.com) and Robert Krawitz (rlk@alum.mit.edu)\n", v);
   stp_zprintf(v, "%%%%BoundingBox: %d %d %d %d\n",
-	      left, top - out_height, left + out_width, top);
+	      page_left, paper_height - page_bottom,
+	      page_right, paper_height - page_top);
   stp_puts("%%DocumentData: Clean7Bit\n", v);
   stp_zprintf(v, "%%%%LanguageLevel: %d\n", model + 1);
   stp_puts("%%Pages: 1\n", v);
@@ -956,6 +988,7 @@ static const stp_printfuncs_t print_ps_printfuncs =
   ps_parameters,
   ps_media_size,
   ps_imageable_area,
+  ps_maximum_imageable_area,
   ps_limit,
   ps_print,
   ps_describe_resolution,

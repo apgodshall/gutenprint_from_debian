@@ -15,6 +15,9 @@
 @SET_MAKE@
 
 # Variables
+
+#export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
+#export STP_DATA_PATH = $(top_srcdir)/src/main
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -265,6 +268,7 @@ USE_NLS = @USE_NLS@
 USE_NLS_FALSE = @USE_NLS_FALSE@
 USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
+WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
@@ -591,7 +595,7 @@ distdir: $(DISTFILES)
 	esac
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/. $(distdir)/doc $(distdir)/include/gutenprint $(distdir)/m4 $(distdir)/man $(distdir)/po $(distdir)/scripts $(distdir)/src/cups $(distdir)/src/foomatic $(distdir)/src/gutenprintui $(distdir)/src/gutenprintui2 $(distdir)/src/main
+	$(mkdir_p) $(distdir)/. $(distdir)/doc $(distdir)/include/gutenprint $(distdir)/m4 $(distdir)/man $(distdir)/po $(distdir)/scripts $(distdir)/src/cups $(distdir)/src/foomatic $(distdir)/src/gutenprintui $(distdir)/src/gutenprintui2 $(distdir)/src/main $(distdir)/src/testpattern
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -826,9 +830,6 @@ uninstall-info: uninstall-info-recursive
 
 
 @SET_MAKE@
-
-export STP_MODULE_PATH = $(top_builddir)/src/main/.libs:$(top_builddir)/src/main
-export STP_DATA_PATH = $(top_srcdir)/src/main
 
 # Rules
 

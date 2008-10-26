@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.167 2005/10/21 13:31:41 faust3 Exp $"
+ * "$Id: print-canon.c,v 1.173 2006/05/12 22:43:23 rlk Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -636,6 +636,16 @@ static const canon_variable_inklist_t canon_ink_standardphoto[] =
     &ci_CcMmYK_2, &ci_CcMmYK_2, &ci_CcMmYK_2,
     &ci_CcMmYK_2, &ci_CcMmYK_2, &ci_CcMmYK_2,
   },
+  {
+    1,7,
+    &ci_CcMmYK_1, &ci_CcMmYK_1, &ci_CcMmYK_1,
+    &ci_CcMmYK_1, &ci_CcMmYK_1, &ci_CcMmYK_1,
+  },
+  {
+    2,7,
+    &ci_CcMmYK_2, &ci_CcMmYK_2, &ci_CcMmYK_2,
+    &ci_CcMmYK_2, &ci_CcMmYK_2, &ci_CcMmYK_2,
+  },
 };
 
 /* Ink set for printers using CMYK and CcMmYK printing, 1 or 3bit/pixel */
@@ -653,6 +663,11 @@ static const canon_variable_inklist_t canon_ink_superphoto[] =
   },
   {
     3,6,
+    &ci_CcMmYK_3, &ci_CcMmYK_3, &ci_CcMmYK_3,
+    &ci_CcMmYK_3, &ci_CcMmYK_3, &ci_CcMmYK_3,
+  },
+  {
+    3,7,
     &ci_CcMmYK_3, &ci_CcMmYK_3, &ci_CcMmYK_3,
     &ci_CcMmYK_3, &ci_CcMmYK_3, &ci_CcMmYK_3,
   },
@@ -963,7 +978,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,-1,1,0,-1,-1},/*090x090 180x180 360x360 720x360 720x720 1440x1440*/
     {1,1,1,1,1,1},    /*------- ------- 360x360 720x360 ------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -982,7 +997,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,1,0,0,-1,-1}, /*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*------- 360x360 720x720 1440x720 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1001,7 +1016,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,-1,0,0,-1,-1},/*090x090 180x180 360x360 720x360 720x720 1440x1440*/
     {1,1,1,1,1,1},    /*------- ------- 360x360 720x360 ------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1194,7 +1209,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,1,0,0,-1,-1}, /*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*------- 360x360 720x720 1440x720 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1212,7 +1227,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,1,0,0,-1,-1}, /*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*------- 360x360 720x720 1440x720 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1230,7 +1245,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,0,0,0,-1,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
     {1,3.5,1.8,1,1,1},/*------- 300x300 600x600 1200x600 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1248,7 +1263,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,0,0,0,-1,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
     {1,1,1,1,1,1},    /*------- 300x300 600x600 1200x600 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1274,7 +1289,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,1,0,0,-1,-1}, /*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*------- 360x360 720x720 1440x720 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1292,7 +1307,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {0,0,-1,-1,-1,-1},/*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*180x180 360x360 ------- -------- --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1310,7 +1325,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,1,0,0,-1,-1}, /*180x180 360x360 720x720 1440x720 1440x1440 2880x2880*/
     {1,1,1,1,1,1},    /*------- 360x360 720x720 1440x720 --------- ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1328,7 +1343,7 @@ static const canon_cap_t canon_model_capabilities[] =
 #ifndef EXPERIMENTAL_STUFF
     {-1,0,0,-1,0,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
     {1,1,1,1,1,1},    /*------- 300x300 600x600 -------- 1200x1200 ---------*/
-    CANON_INK(canon_ink_standard),
+    CANON_INK(canon_ink_standardphoto),
 #endif
     standard_lum_adjustment,
     standard_hue_adjustment,
@@ -1344,7 +1359,7 @@ static const canon_cap_t canon_model_capabilities[] =
     CANON_CAP_STD0|CANON_CAP_extended_t|CANON_CAP_5pixelin1byte|CANON_CAP_DUPLEX,  /*features */
     CANON_MODES(canon_nomodes),
 #ifndef EXPERIMENTAL_STUFF
-    {-1,0,0,-1,-1,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
+    {-1,-1,0,-1,-1,-1}, /*150x150 300x300 600x600 1200x600 1200x1200 2400x2400*/
     {1,1,1,1,1,1},    /*------- 300x300 600x600 1200x600 --------- ---------*/
     CANON_INK(canon_ink_standard_pixma),
 #endif
@@ -1675,14 +1690,16 @@ canon_printhead_colors(const char *name, const canon_cap_t * caps)
       if (!strcmp(name,"PhotoCMYK")) return COLOR_CCMMYYK;
     }
 
-  if (name && *name == 0) {
-    if (caps->inks & CANON_INK_CMYK) return COLOR_CMYK;
-    if (caps->inks & CANON_INK_CMY)  return COLOR_CMY;
-    if (caps->inks & CANON_INK_K)    return COLOR_MONOCHROME;
-  }
-
-  stp_deprintf(STP_DBG_CANON,"canon: Unknown head combo '%s' - reverting to black\n",name);
-  return COLOR_MONOCHROME;
+  if (caps->inks & CANON_INK_CcMmYyK)
+    return COLOR_CCMMYYK;
+  else if (caps->inks & CANON_INK_CcMmYK)
+    return COLOR_CCMMYK;
+  else if (caps->inks & CANON_INK_CMYK)
+    return COLOR_CMYK;
+  else if (caps->inks & CANON_INK_CMY)
+    return COLOR_CMY;
+  else
+    return COLOR_MONOCHROME;
 }
 
 static unsigned char
@@ -1889,6 +1906,8 @@ canon_describe_output(const stp_vars_t *v)
     case COLOR_CMY:
       return "CMY";
     case COLOR_CMYK:
+    case COLOR_CCMMYK:
+    case COLOR_CCMMYYK:
       return "CMYK";
     case COLOR_MONOCHROME:
     default:
@@ -1938,11 +1957,24 @@ canon_parameters(const stp_vars_t *v, const char *name,
   for (i = 0; i < float_parameter_count; i++)
     if (strcmp(name, float_parameters[i].param.name) == 0)
       {
+	const char *print_mode = stp_get_string_parameter(v, "PrintingMode");
+	const char *ink_type = stp_get_string_parameter(v, "InkType");
+	colormode_t colormode = canon_printhead_colors(ink_type,caps);
+	int printhead= canon_printhead_type(ink_type,caps);
+
+	if ((print_mode && strcmp(print_mode, "BW") == 0) ||
+	    printhead == 0 || caps->inks == CANON_INK_K)
+	  colormode = COLOR_MONOCHROME;
+
 	stp_fill_parameter_settings(description,
-				     &(float_parameters[i].param));
+				    &(float_parameters[i].param));
 	description->deflt.dbl = float_parameters[i].defval;
 	description->bounds.dbl.upper = float_parameters[i].max;
 	description->bounds.dbl.lower = float_parameters[i].min;
+	if (colormode != COLOR_MONOCHROME || !float_parameters[i].color_only)
+	  description->is_active = 1;
+	else
+	  description->is_active = 0;
 	return;
       }
 
@@ -2012,21 +2044,21 @@ canon_parameters(const stp_vars_t *v, const char *name,
   {
     description->bounds.str= stp_string_list_create();
     /* used internally: do not translate */
-    if ((caps->inks & CANON_INK_K))
-      stp_string_list_add_string(description->bounds.str,
-			       "Gray", _("Black"));
-    if ((caps->inks & CANON_INK_CMY))
-      stp_string_list_add_string(description->bounds.str,
-			       "RGB", _("CMY Color"));
-    if ((caps->inks & CANON_INK_CMYK))
-      stp_string_list_add_string(description->bounds.str,
-			       "CMYK", _("CMYK Color"));
-    if ((caps->inks & CANON_INK_CcMmYK))
-      stp_string_list_add_string(description->bounds.str,
-			       "PhotoCMY", _("Photo CcMmY Color"));
     if ((caps->inks & CANON_INK_CcMmYyK))
       stp_string_list_add_string(description->bounds.str,
 			       "PhotoCMYK", _("Photo CcMmYK Color"));
+    if ((caps->inks & CANON_INK_CcMmYK))
+      stp_string_list_add_string(description->bounds.str,
+			       "PhotoCMY", _("Photo CcMmY Color"));
+    if ((caps->inks & CANON_INK_CMYK))
+      stp_string_list_add_string(description->bounds.str,
+			       "CMYK", _("CMYK Color"));
+    if ((caps->inks & CANON_INK_CMY))
+      stp_string_list_add_string(description->bounds.str,
+			       "RGB", _("CMY Color"));
+    if ((caps->inks & CANON_INK_K))
+      stp_string_list_add_string(description->bounds.str,
+			       "Gray", _("Black"));
     description->deflt.str =
       stp_string_list_param(description->bounds.str, 0)->name;
   }
@@ -2069,8 +2101,9 @@ canon_parameters(const stp_vars_t *v, const char *name,
   else if (strcmp(name, "PrintingMode") == 0)
   {
     description->bounds.str = stp_string_list_create();
-    stp_string_list_add_string
-      (description->bounds.str, "Color", _("Color"));
+    if (caps->inks != CANON_INK_K)
+      stp_string_list_add_string
+	(description->bounds.str, "Color", _("Color"));
     stp_string_list_add_string
       (description->bounds.str, "BW", _("Black and White"));
     description->deflt.str =
@@ -3417,6 +3450,7 @@ static const stp_printfuncs_t print_canon_printfuncs =
   canon_list_parameters,
   canon_parameters,
   stp_default_media_size,
+  canon_imageable_area,
   canon_imageable_area,
   canon_limit,
   canon_print,

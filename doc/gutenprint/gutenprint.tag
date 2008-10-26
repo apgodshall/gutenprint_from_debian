@@ -3207,172 +3207,172 @@
     </member>
     <member kind="enumeration">
       <name>stp_parameter_type_t</name>
-      <anchor>ga132</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
-      <anchor>gga132a7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_INT</name>
-      <anchor>gga132a8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
-      <anchor>gga132a9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_DOUBLE</name>
-      <anchor>gga132a10</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_CURVE</name>
-      <anchor>gga132a11</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_FILE</name>
-      <anchor>gga132a12</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_RAW</name>
-      <anchor>gga132a13</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_ARRAY</name>
-      <anchor>gga132a14</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_DIMENSION</name>
-      <anchor>gga132a15</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_INVALID</name>
-      <anchor>gga132a16</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumeration">
-      <name>stp_parameter_class_t</name>
       <anchor>ga133</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_FEATURE</name>
-      <anchor>gga133a17</anchor>
+      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
+      <anchor>gga133a7</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_OUTPUT</name>
-      <anchor>gga133a18</anchor>
+      <name>STP_PARAMETER_TYPE_INT</name>
+      <anchor>gga133a8</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_CORE</name>
-      <anchor>gga133a19</anchor>
+      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
+      <anchor>gga133a9</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_INVALID</name>
-      <anchor>gga133a20</anchor>
+      <name>STP_PARAMETER_TYPE_DOUBLE</name>
+      <anchor>gga133a10</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_CURVE</name>
+      <anchor>gga133a11</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_FILE</name>
+      <anchor>gga133a12</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_RAW</name>
+      <anchor>gga133a13</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_ARRAY</name>
+      <anchor>gga133a14</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DIMENSION</name>
+      <anchor>gga133a15</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INVALID</name>
+      <anchor>gga133a16</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_level_t</name>
+      <name>stp_parameter_class_t</name>
       <anchor>ga134</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_BASIC</name>
-      <anchor>gga134a21</anchor>
+      <name>STP_PARAMETER_CLASS_FEATURE</name>
+      <anchor>gga134a17</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
-      <anchor>gga134a22</anchor>
+      <name>STP_PARAMETER_CLASS_OUTPUT</name>
+      <anchor>gga134a18</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
-      <anchor>gga134a23</anchor>
+      <name>STP_PARAMETER_CLASS_CORE</name>
+      <anchor>gga134a19</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
-      <anchor>gga134a24</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
-      <anchor>gga134a25</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
-      <anchor>gga134a26</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
-      <anchor>gga134a27</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
-      <anchor>gga134a28</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_INVALID</name>
-      <anchor>gga134a29</anchor>
+      <name>STP_PARAMETER_CLASS_INVALID</name>
+      <anchor>gga134a20</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_activity_t</name>
+      <name>stp_parameter_level_t</name>
       <anchor>ga135</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_INACTIVE</name>
-      <anchor>gga135a30</anchor>
+      <name>STP_PARAMETER_LEVEL_BASIC</name>
+      <anchor>gga135a21</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_DEFAULTED</name>
-      <anchor>gga135a31</anchor>
+      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
+      <anchor>gga135a22</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_ACTIVE</name>
-      <anchor>gga135a32</anchor>
+      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
+      <anchor>gga135a23</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
+      <anchor>gga135a24</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
+      <anchor>gga135a25</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
+      <anchor>gga135a26</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
+      <anchor>gga135a27</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
+      <anchor>gga135a28</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INVALID</name>
+      <anchor>gga135a29</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_verify_t</name>
+      <name>stp_parameter_activity_t</name>
       <anchor>ga136</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
+      <name>STP_PARAMETER_INACTIVE</name>
+      <anchor>gga136a30</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_DEFAULTED</name>
+      <anchor>gga136a31</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_ACTIVE</name>
+      <anchor>gga136a32</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <name>stp_parameter_verify_t</name>
+      <anchor>ga137</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
       <name>PARAMETER_BAD</name>
-      <anchor>gga136a33</anchor>
+      <anchor>gga137a33</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>PARAMETER_OK</name>
-      <anchor>gga136a34</anchor>
+      <anchor>gga137a34</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>PARAMETER_INACTIVE</name>
-      <anchor>gga136a35</anchor>
+      <anchor>gga137a35</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -4168,86 +4168,93 @@
     </member>
     <member kind="function">
       <type>void</type>
-      <name>stp_get_size_limit</name>
+      <name>stp_get_maximum_imageable_area</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga120</anchor>
+      <arglist>(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_get_size_limit</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ga121</anchor>
       <arglist>(const stp_vars_t *v, int *max_width, int *max_height, int *min_width, int *min_height)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_describe_resolution</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga121</anchor>
+      <anchor>ga122</anchor>
       <arglist>(const stp_vars_t *v, int *x, int *y)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_verify</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga122</anchor>
+      <anchor>ga123</anchor>
       <arglist>(stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>const stp_vars_t *</type>
       <name>stp_default_settings</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga123</anchor>
+      <anchor>ga124</anchor>
       <arglist>(void)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_allocate_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga124</anchor>
+      <anchor>ga125</anchor>
       <arglist>(stp_vars_t *v, const char *name, stp_copy_data_func_t copyfunc, stp_free_data_func_t freefunc, void *data)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_destroy_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga125</anchor>
+      <anchor>ga126</anchor>
       <arglist>(stp_vars_t *v, const char *name)</arglist>
     </member>
     <member kind="function">
       <type>void *</type>
       <name>stp_get_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga126</anchor>
+      <anchor>ga127</anchor>
       <arglist>(const stp_vars_t *v, const char *name)</arglist>
     </member>
     <member kind="function">
       <type>stp_parameter_verify_t</type>
       <name>stp_verify_parameter</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga127</anchor>
+      <anchor>ga128</anchor>
       <arglist>(const stp_vars_t *v, const char *parameter, int quiet)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_get_verified</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga128</anchor>
+      <anchor>ga129</anchor>
       <arglist>(const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_set_verified</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga129</anchor>
+      <anchor>ga130</anchor>
       <arglist>(stp_vars_t *v, int value)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_copy_options</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga130</anchor>
+      <anchor>ga131</anchor>
       <arglist>(stp_vars_t *vd, const stp_vars_t *vs)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_fill_parameter_settings</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga131</anchor>
+      <anchor>ga132</anchor>
       <arglist>(stp_parameter_t *desc, const stp_parameter_t *param)</arglist>
     </member>
   </compound>
@@ -5755,51 +5762,58 @@
     </member>
     <member kind="variable">
       <type>void(*</type>
-      <name>limit</name>
+      <name>maximum_imageable_area</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
       <anchor>o4</anchor>
+      <arglist>)(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>limit</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>o5</anchor>
       <arglist>)(const stp_vars_t *v, int *max_width, int *max_height, int *min_width, int *min_height)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>print</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o5</anchor>
+      <anchor>o6</anchor>
       <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
     </member>
     <member kind="variable">
       <type>void(*</type>
       <name>describe_resolution</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o6</anchor>
+      <anchor>o7</anchor>
       <arglist>)(const stp_vars_t *v, int *x, int *y)</arglist>
     </member>
     <member kind="variable">
       <type>const char *(*</type>
       <name>describe_output</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o7</anchor>
+      <anchor>o8</anchor>
       <arglist>)(const stp_vars_t *v)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>verify</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o8</anchor>
+      <anchor>o9</anchor>
       <arglist>)(stp_vars_t *v)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>start_job</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o9</anchor>
+      <anchor>o10</anchor>
       <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
     </member>
     <member kind="variable">
       <type>int(*</type>
       <name>end_job</name>
       <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>o10</anchor>
+      <anchor>o11</anchor>
       <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
     </member>
   </compound>
@@ -7927,172 +7941,172 @@
     </member>
     <member kind="enumeration">
       <name>stp_parameter_type_t</name>
-      <anchor>ga132</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
-      <anchor>gga132a7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_INT</name>
-      <anchor>gga132a8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
-      <anchor>gga132a9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_DOUBLE</name>
-      <anchor>gga132a10</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_CURVE</name>
-      <anchor>gga132a11</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_FILE</name>
-      <anchor>gga132a12</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_RAW</name>
-      <anchor>gga132a13</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_ARRAY</name>
-      <anchor>gga132a14</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_DIMENSION</name>
-      <anchor>gga132a15</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_TYPE_INVALID</name>
-      <anchor>gga132a16</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumeration">
-      <name>stp_parameter_class_t</name>
       <anchor>ga133</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_FEATURE</name>
-      <anchor>gga133a17</anchor>
+      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
+      <anchor>gga133a7</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_OUTPUT</name>
-      <anchor>gga133a18</anchor>
+      <name>STP_PARAMETER_TYPE_INT</name>
+      <anchor>gga133a8</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_CORE</name>
-      <anchor>gga133a19</anchor>
+      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
+      <anchor>gga133a9</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_CLASS_INVALID</name>
-      <anchor>gga133a20</anchor>
+      <name>STP_PARAMETER_TYPE_DOUBLE</name>
+      <anchor>gga133a10</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_CURVE</name>
+      <anchor>gga133a11</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_FILE</name>
+      <anchor>gga133a12</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_RAW</name>
+      <anchor>gga133a13</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_ARRAY</name>
+      <anchor>gga133a14</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DIMENSION</name>
+      <anchor>gga133a15</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INVALID</name>
+      <anchor>gga133a16</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_level_t</name>
+      <name>stp_parameter_class_t</name>
       <anchor>ga134</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_BASIC</name>
-      <anchor>gga134a21</anchor>
+      <name>STP_PARAMETER_CLASS_FEATURE</name>
+      <anchor>gga134a17</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
-      <anchor>gga134a22</anchor>
+      <name>STP_PARAMETER_CLASS_OUTPUT</name>
+      <anchor>gga134a18</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
-      <anchor>gga134a23</anchor>
+      <name>STP_PARAMETER_CLASS_CORE</name>
+      <anchor>gga134a19</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
-      <anchor>gga134a24</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
-      <anchor>gga134a25</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
-      <anchor>gga134a26</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
-      <anchor>gga134a27</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
-      <anchor>gga134a28</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <name>STP_PARAMETER_LEVEL_INVALID</name>
-      <anchor>gga134a29</anchor>
+      <name>STP_PARAMETER_CLASS_INVALID</name>
+      <anchor>gga134a20</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_activity_t</name>
+      <name>stp_parameter_level_t</name>
       <anchor>ga135</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_INACTIVE</name>
-      <anchor>gga135a30</anchor>
+      <name>STP_PARAMETER_LEVEL_BASIC</name>
+      <anchor>gga135a21</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_DEFAULTED</name>
-      <anchor>gga135a31</anchor>
+      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
+      <anchor>gga135a22</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
-      <name>STP_PARAMETER_ACTIVE</name>
-      <anchor>gga135a32</anchor>
+      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
+      <anchor>gga135a23</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
+      <anchor>gga135a24</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
+      <anchor>gga135a25</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
+      <anchor>gga135a26</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
+      <anchor>gga135a27</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
+      <anchor>gga135a28</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INVALID</name>
+      <anchor>gga135a29</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
-      <name>stp_parameter_verify_t</name>
+      <name>stp_parameter_activity_t</name>
       <anchor>ga136</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
+      <name>STP_PARAMETER_INACTIVE</name>
+      <anchor>gga136a30</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_DEFAULTED</name>
+      <anchor>gga136a31</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_ACTIVE</name>
+      <anchor>gga136a32</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <name>stp_parameter_verify_t</name>
+      <anchor>ga137</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
       <name>PARAMETER_BAD</name>
-      <anchor>gga136a33</anchor>
+      <anchor>gga137a33</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>PARAMETER_OK</name>
-      <anchor>gga136a34</anchor>
+      <anchor>gga137a34</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumvalue">
       <name>PARAMETER_INACTIVE</name>
-      <anchor>gga136a35</anchor>
+      <anchor>gga137a35</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -8888,86 +8902,93 @@
     </member>
     <member kind="function">
       <type>void</type>
-      <name>stp_get_size_limit</name>
+      <name>stp_get_maximum_imageable_area</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga120</anchor>
+      <arglist>(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_get_size_limit</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ga121</anchor>
       <arglist>(const stp_vars_t *v, int *max_width, int *max_height, int *min_width, int *min_height)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_describe_resolution</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga121</anchor>
+      <anchor>ga122</anchor>
       <arglist>(const stp_vars_t *v, int *x, int *y)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_verify</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga122</anchor>
+      <anchor>ga123</anchor>
       <arglist>(stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>const stp_vars_t *</type>
       <name>stp_default_settings</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga123</anchor>
+      <anchor>ga124</anchor>
       <arglist>(void)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_allocate_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga124</anchor>
+      <anchor>ga125</anchor>
       <arglist>(stp_vars_t *v, const char *name, stp_copy_data_func_t copyfunc, stp_free_data_func_t freefunc, void *data)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_destroy_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga125</anchor>
+      <anchor>ga126</anchor>
       <arglist>(stp_vars_t *v, const char *name)</arglist>
     </member>
     <member kind="function">
       <type>void *</type>
       <name>stp_get_component_data</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga126</anchor>
+      <anchor>ga127</anchor>
       <arglist>(const stp_vars_t *v, const char *name)</arglist>
     </member>
     <member kind="function">
       <type>stp_parameter_verify_t</type>
       <name>stp_verify_parameter</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga127</anchor>
+      <anchor>ga128</anchor>
       <arglist>(const stp_vars_t *v, const char *parameter, int quiet)</arglist>
     </member>
     <member kind="function">
       <type>int</type>
       <name>stp_get_verified</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga128</anchor>
+      <anchor>ga129</anchor>
       <arglist>(const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_set_verified</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga129</anchor>
+      <anchor>ga130</anchor>
       <arglist>(stp_vars_t *v, int value)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_copy_options</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga130</anchor>
+      <anchor>ga131</anchor>
       <arglist>(stp_vars_t *vd, const stp_vars_t *vs)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
       <name>stp_fill_parameter_settings</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga131</anchor>
+      <anchor>ga132</anchor>
       <arglist>(stp_parameter_t *desc, const stp_parameter_t *param)</arglist>
     </member>
   </compound>

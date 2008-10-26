@@ -6,17 +6,29 @@ Getopt::Long::Configure("no_ignore_case", "pass_through");
 GetOptions("m=s" => \$opt_m,         # Map file
            "t=s" => \$opt_t,         # Template directory
 	   "f=s" => \$opt_f,         # Foomatic version
-           "d=s" => \@opt_d);        # which Drivers?
+           "d=s" => \@opt_d,         # which Drivers?
+	   "s"   => \$opt_s);        # Generate simplified data
+
 
 # Wherever we put it...
 my $mapfile;
 # $mapfile = "../main/printers.xml";
 $mapfile = $opt_m;
 
+my $simplified = 0;
+my $simplified_subopt = "";
+my $simplified_suffix = "";
+if ($opt_s) {
+    $simplified = 1;
+    $simplified_subopt = "-s";
+    $simplified_suffix = "-simplified";
+}
+    
+
 my $templatedir;
 $templatedir = $opt_t;
 
-my @drivertypes = (ijs);
+my @drivertypes = ("ijs");
 
 exit 0 if ($#drivertypes < 0); # Nothing to be done, exit silently
 
@@ -84,8 +96,8 @@ my $opt_index = 0;
 
 use Data::Dumper;
 
-open PIPE, "./printer_options|" or die "Cannot run printer_options: $!\n";
-print STDERR "Loading options from ./printer_options...";
+open PIPE, "./printer_options $simplified_subopt|" or die "Cannot run printer_options: $!\n";
+print STDERR "Loading options from ./printer_options $simplified_subopt...";
 while(<PIPE>) {
     #print $_;
     next if m!^#!;
@@ -95,8 +107,8 @@ close PIPE or die "Cannot run printer_options: $!\n";
 print STDERR "done.\n";
 
 if ($foomatic3) {
-    open PIPE, "./printer_margins|" or die "Cannot run printer_margins: $!\n";
-    print STDERR "Loading margins from ./printer_margins...";
+    open PIPE, "./printer_margins $simplified_subopt|" or die "Cannot run printer_margins: $!\n";
+    print STDERR "Loading margins from ./printer_margins $simplified_subopt...";
     $code = join('', <PIPE>);
     #print $code;
     close PIPE or die "Cannot run printer_margins: $!\n";
@@ -113,6 +125,53 @@ while(<PIPE>) {
 }
 close PIPE or die "Cannot run printers: $!\n";
 print STDERR "done.\n";
+
+# Step 1: construct a map from Model= values to Foomatic model id's
+# this map is %mapstp.  The inverse from model to Model is %mapdb
+#
+# Foomatic is supposed to be a superset, so
+
+$missing_drivers = 0;
+
+%driverlist = ();
+%foolist = ();
+
+open PRINTERS, $mapfile or die "Cannot open mapfile $mapfile: $!\n";
+for (<PRINTERS>) {
+    if (m!^#\s*gptofoo\s+([^\s]+)\s+([^\s]+)!) {
+	if ($driverlist{$1}) {
+	    $missing_drivers = 1;
+	    warn "Duplicate driver $1\n";
+	}
+	$driverlist{$1} = 1;
+	if ($foolist{$2}) {
+	    $missing_drivers = 1;
+	    warn "Duplicate Foomatic ID $2\n";
+	}
+	$foolist{$2} = 1;
+	push (@{$mapstp{$1}}, $2);
+	$mapfoo{$2} = $1;	# do we need?
+    }
+}
+
+# Are we missing any stp printers?
+for (keys(%stpdata)) {
+    if (!defined($mapstp{$_})) {
+	$missing_drivers = 1;
+	warn "No foomatic printer IDs for gutenprint printer $_.\n";
+    }
+}
+
+for (keys(%mapstp)) {
+    if (!defined($stpdata{$_})) {
+	$missing_drivers = 1;
+	warn "No gutenprint printer for foomatic ID $_.\n";
+    }
+}
+
+if ($missing_drivers) {
+   die "Cannot continue\n";
+}
 
 # OK, now %stpdata is a big honking thing, and %defaults is in there, too.
 
@@ -234,40 +293,6 @@ for $a (keys(%stp_dimension_values)) {
 #print join("\n", @intnumopts_list);
 #print join("\n", @dimensionnumopts_list);
 
-# Step 1: construct a map from Model= values to Foomatic model id's
-# this map is %mapstp.  The inverse from model to Model is %mapdb
-#
-# Foomatic is supposed to be a superset, so
-
-open PRINTERS, $mapfile or die "Cannot open mapfile $mapfile: $!\n";
-for (<PRINTERS>) {
-    if (m!^#\s*gptofoo\s+([^\s]+)\s+([^\s]+)!) {
-	push (@{$mapstp{$1}}, $2);
-	$mapfoo{$2} = $1;	# do we need?
-    }
-}
-
-$missing_drivers = 0;
-
-# Are we missing any stp printers?
-for (keys(%stpdata)) {
-    if (!defined($mapstp{$_})) {
-	$missing_drivers = 1;
-	warn "No foomatic printer IDs for gutenprint printer $_.\n";
-    }
-}
-
-for (keys(%mapstp)) {
-    if (!defined($stpdata{$_})) {
-	$missing_drivers = 1;
-	warn "No gutenprint printer for foomatic ID $_.\n";
-    }
-}
-
-if ($missing_drivers) {
-   die "Cannot continue\n";
-}
-
 # Figure out version etc
 open PIPE, "./gutenprint-version|" or die "Cannot run gutenprint-version: $!\n";
 my $stpvers = <PIPE>;
@@ -382,7 +407,7 @@ my $tmpl;
 for $drivertype (@drivertypes) {
     $drivertypesuffix = "-$drivertype";
     $drivertypesuffix =~ s/-gs//;
-    $drivertypesuffix .= ".$stprel";
+    $drivertypesuffix .= "$simplified_suffix.$stprel";
     my $drvname = "$drivernameprefix$drivertypesuffix";
     $generalsubs->{'DRVNAME'} = $drvname;
     print "Generating Foomatic data for driver \"$drvname\"...\n";

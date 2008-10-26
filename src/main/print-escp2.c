@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.347 2006/01/09 12:20:44 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.350 2006/04/30 21:29:53 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -385,6 +385,7 @@ static const stp_parameter_t the_parameters[] =
   PARAMETER_INT(max_black_resolution),
   PARAMETER_INT(zero_margin_offset),
   PARAMETER_INT(extra_720dpi_separation),
+  PARAMETER_INT(horizontal_position_alignment),
   PARAMETER_INT(physical_channels),
   PARAMETER_INT(left_margin),
   PARAMETER_INT(right_margin),
@@ -665,6 +666,7 @@ DEF_SIMPLE_ACCESSOR(black_initial_vertical_offset, int)
 DEF_SIMPLE_ACCESSOR(max_black_resolution, int)
 DEF_SIMPLE_ACCESSOR(zero_margin_offset, int)
 DEF_SIMPLE_ACCESSOR(extra_720dpi_separation, int)
+DEF_SIMPLE_ACCESSOR(horizontal_position_alignment, unsigned)
 DEF_SIMPLE_ACCESSOR(physical_channels, int)
 DEF_SIMPLE_ACCESSOR(alignment_passes, int)
 DEF_SIMPLE_ACCESSOR(alignment_choices, int)
@@ -1872,6 +1874,7 @@ imax(int a, int b)
 
 static void
 internal_imageable_area(const stp_vars_t *v, int use_paper_margins,
+			int use_maximum_area,
 			int *left, int *right, int *bottom, int *top)
 {
   int	width, height;			/* Size of page */
@@ -1885,7 +1888,7 @@ internal_imageable_area(const stp_vars_t *v, int use_paper_margins,
   const stp_papersize_t *pt = NULL;
   const input_slot_t *input_slot = NULL;
 
-  if (media_size && use_paper_margins)
+  if (media_size)
     pt = stp_get_papersize_by_name(media_size);
 
   input_slot = get_input_slot(v);
@@ -1898,14 +1901,24 @@ internal_imageable_area(const stp_vars_t *v, int use_paper_margins,
   stp_default_media_size(v, &width, &height);
   if (cd)
     {
-      left_margin = 0;
-      right_margin = 0;
-      bottom_margin = 0;
-      top_margin = 0;
+      if (pt)
+	{
+	  left_margin = pt->left;
+	  right_margin = pt->right;
+	  bottom_margin = pt->bottom;
+	  top_margin = pt->top;
+	}
+      else
+	{
+	  left_margin = 0;
+	  right_margin = 0;
+	  bottom_margin = 0;
+	  top_margin = 0;
+	}
     }
   else
     {
-      if (pt)
+      if (pt && use_paper_margins)
 	{
 	  left_margin = pt->left;
 	  right_margin = pt->right;
@@ -1922,14 +1935,21 @@ internal_imageable_area(const stp_vars_t *v, int use_paper_margins,
   *right =	width - right_margin;
   *top =	top_margin;
   *bottom =	height - bottom_margin;
-  if (!cd &&
-      escp2_has_cap(v, MODEL_XZEROMARGIN, MODEL_XZEROMARGIN_YES) &&
-      stp_get_boolean_parameter(v, "FullBleed"))
+  if (escp2_has_cap(v, MODEL_XZEROMARGIN, MODEL_XZEROMARGIN_YES) &&
+      (use_maximum_area ||
+       (!cd && stp_get_boolean_parameter(v, "FullBleed"))))
     {
-      *left -= 80 / (360 / 72);	/* 80 per the Epson manual */
-      *right += 80 / (360 / 72);	/* 80 per the Epson manual */
-      *bottom += escp2_nozzles(v) * escp2_nozzle_separation(v) * 72 /
-	escp2_base_separation(v);
+      if (pt)
+	{
+	  if (pt->left <= 0 && pt->right <= 0 && pt->top <= 0 &&
+	      pt->bottom <= 0)
+	    {
+	      *left -= 80 / (360 / 72);		/* 80 per the Epson manual */
+	      *right += 80 / (360 / 72);	/* 80 per the Epson manual */
+	      *bottom += escp2_nozzles(v) * escp2_nozzle_separation(v) * 72 /
+		escp2_base_separation(v);
+	    }
+	}
     }
 }
 
@@ -1944,7 +1964,17 @@ escp2_imageable_area(const stp_vars_t *v,   /* I */
 		     int  *bottom,	/* O - Bottom position in points */
 		     int  *top)		/* O - Top position in points */
 {
-  internal_imageable_area(v, 1, left, right, bottom, top);
+  internal_imageable_area(v, 1, 0, left, right, bottom, top);
+}
+
+static void
+escp2_maximum_imageable_area(const stp_vars_t *v,   /* I */
+			     int  *left,   /* O - Left position in points */
+			     int  *right,  /* O - Right position in points */
+			     int  *bottom, /* O - Bottom position in points */
+			     int  *top)    /* O - Top position in points */
+{
+  internal_imageable_area(v, 1, 1, left, right, bottom, top);
 }
 
 static void
@@ -2281,12 +2311,15 @@ setup_inks(stp_vars_t *v)
 	    {
 	      stp_erprintf("Not enough shades!\n");
 	    }
-	  if (strcmp(param, "BlackDensity") == 0)
-	    stp_channel_set_black_channel(v, i);
-	  else if (strcmp(param, "GlossDensity") == 0)
+	  if (ink_type->inkset != INKSET_EXTENDED)
 	    {
-	      gloss_scale *= get_double_param(v, param);
-	      gloss_channel = i;
+	      if (strcmp(param, "BlackDensity") == 0)
+		stp_channel_set_black_channel(v, i);
+	      else if (strcmp(param, "GlossDensity") == 0)
+		{
+		  gloss_scale *= get_double_param(v, param);
+		  gloss_channel = i;
+		}
 	    }
 	  stp_dither_set_inks(v, i, 1.0, ink_darknesses[i % 8],
 			      channel->n_subchannels, shades->shades,
@@ -2302,37 +2335,40 @@ setup_inks(stp_vars_t *v)
 		stp_channel_set_cutoff_adjustment(v, i, j,
 						  paper->subchannel_cutoff);
 	    }
-	  if (channel->hue_curve && channel->hue_curve->curve_name)
+	  if (ink_type->inkset != INKSET_EXTENDED)
 	    {
-	      char *hue_curve_name;
-	      const stp_curve_t *curve = NULL;
-	      stp_asprintf(&hue_curve_name, "%sHueCurve",
-			   channel->hue_curve->curve_name);
-	      curve = stp_get_curve_parameter(v, hue_curve_name);
-	      if (curve)
+	      if (channel->hue_curve && channel->hue_curve->curve_name)
 		{
-		  stp_channel_set_curve(v, i, curve);
-		  hue_curve_found = 1;
+		  char *hue_curve_name;
+		  const stp_curve_t *curve = NULL;
+		  stp_asprintf(&hue_curve_name, "%sHueCurve",
+			       channel->hue_curve->curve_name);
+		  curve = stp_get_curve_parameter(v, hue_curve_name);
+		  if (curve)
+		    {
+		      stp_channel_set_curve(v, i, curve);
+		      hue_curve_found = 1;
+		    }
+		  stp_free(hue_curve_name);
 		}
-	      stp_free(hue_curve_name);
-	    }
-	  if (channel->hue_curve && !hue_curve_found)
-	    {
-	      if (!channel->hue_curve->curve_impl)
-		channel->hue_curve->curve_impl =
-		  stp_curve_create_from_string(channel->hue_curve->curve);
-	      if (channel->hue_curve->curve_impl)
+	      if (channel->hue_curve && !hue_curve_found)
 		{
-		  stp_curve_t *curve_tmp =
-		    stp_curve_create_copy(channel->hue_curve->curve_impl);
+		  if (!channel->hue_curve->curve_impl)
+		    channel->hue_curve->curve_impl =
+		      stp_curve_create_from_string(channel->hue_curve->curve);
+		  if (channel->hue_curve->curve_impl)
+		    {
+		      stp_curve_t *curve_tmp =
+			stp_curve_create_copy(channel->hue_curve->curve_impl);
 #if 0
-		  (void) stp_curve_rescale(curve_tmp,
-					   sqrt(1.0 / stp_get_float_parameter(v, "Gamma")),
-					   STP_CURVE_COMPOSE_EXPONENTIATE,
-					   STP_CURVE_BOUNDS_RESCALE);
+		      (void) stp_curve_rescale(curve_tmp,
+					       sqrt(1.0 / stp_get_float_parameter(v, "Gamma")),
+					       STP_CURVE_COMPOSE_EXPONENTIATE,
+					       STP_CURVE_BOUNDS_RESCALE);
 #endif
-		  stp_channel_set_curve(v, i, curve_tmp);
-		  stp_curve_destroy(curve_tmp);
+		      stp_channel_set_curve(v, i, curve_tmp);
+		      stp_curve_destroy(curve_tmp);
+		    }
 		}
 	    }
 	}
@@ -2581,7 +2617,7 @@ setup_resolution(stp_vars_t *v)
 
   if (escp2_use_extended_commands(v, pd->res->softweave))
     {
-      pd->unit_scale = escp2_max_hres(v);
+      pd->unit_scale = MAX(escp2_max_hres(v), escp2_max_vres(v));
       pd->horizontal_units = horizontal;
       pd->micro_units = horizontal;
     }
@@ -2594,6 +2630,7 @@ setup_resolution(stp_vars_t *v)
 	pd->micro_units = horizontal;
       pd->horizontal_units = vertical;
     }
+  /* Note hard-coded 1440 -- from Epson manuals */
   if (escp2_has_cap(v, MODEL_COMMAND, MODEL_COMMAND_1999) &&
       escp2_has_cap(v, MODEL_VARIABLE_DOT, MODEL_VARIABLE_NO))
     pd->micro_units = 1440;
@@ -2739,8 +2776,11 @@ setup_page(stp_vars_t *v)
 				   safe and print 16 mm */
 
   stp_default_media_size(v, &n, &(pd->page_true_height));
-  internal_imageable_area(v, 0, &pd->page_left, &pd->page_right,
+  internal_imageable_area(v, 0, 0, &pd->page_left, &pd->page_right,
 			  &pd->page_bottom, &pd->page_top);
+  /* Don't use full bleed mode if the paper itself has a margin */
+  if (pd->page_left > 0 || pd->page_top > 0)
+    stp_set_boolean_parameter(v, "FullBleed", 0);
 
   if (input_slot && input_slot->is_cd && escp2_cd_x_offset(v) > 0)
     {
@@ -2748,6 +2788,13 @@ setup_page(stp_vars_t *v)
 	stp_get_dimension_parameter(v, "CDXAdjustment");
       int top_center = escp2_cd_y_offset(v) +
 	stp_get_dimension_parameter(v, "CDYAdjustment");
+      pd->page_true_height = pd->page_bottom - pd->page_top;
+      stp_set_left(v, stp_get_left(v) - pd->page_left);
+      stp_set_top(v, stp_get_top(v) - pd->page_top);
+      pd->page_right -= pd->page_left;
+      pd->page_bottom -= pd->page_top;
+      pd->page_top = 0;
+      pd->page_left = 0;
       extra_top = top_center - (pd->page_bottom / 2);
       extra_left = left_center - (pd->page_right / 2);
       pd->cd_inner_radius = hub_size * pd->micro_units * 10 / 254 / 2;
@@ -2771,6 +2818,14 @@ setup_page(stp_vars_t *v)
   pd->image_scaled_width = pd->image_width * pd->res->hres / 72;
   pd->image_printed_width = pd->image_width * pd->res->printed_hres / 72;
   pd->image_left_position = pd->image_left * pd->micro_units / 72;
+  /*
+   * Many printers print extremely slowly if the starting position
+   * is not a multiple of 8
+   */
+  if (escp2_horizontal_position_alignment(v) > 1)
+    pd->image_left_position =
+      (pd->image_left_position / escp2_horizontal_position_alignment(v)) *
+      escp2_horizontal_position_alignment(v);
 
 
   pd->page_bottom += extra_top + 1;
@@ -3012,7 +3067,8 @@ escp2_do_print(stp_vars_t *v, stp_image_t *image, int print_op)
   stp_allocate_component_data(v, "Driver", NULL, NULL, pd);
 
   pd->inkname = get_inktype(v);
-  if (stp_check_boolean_parameter(v, "UseGloss", STP_PARAMETER_ACTIVE) &&
+  if (pd->inkname->inkset != INKSET_EXTENDED &&
+      stp_check_boolean_parameter(v, "UseGloss", STP_PARAMETER_ACTIVE) &&
       stp_get_boolean_parameter(v, "UseGloss"))
     pd->use_aux_channels = 1;
   else
@@ -3081,6 +3137,7 @@ static const stp_printfuncs_t print_escp2_printfuncs =
   escp2_parameters,
   stp_default_media_size,
   escp2_imageable_area,
+  escp2_maximum_imageable_area,
   escp2_limit,
   escp2_print,
   escp2_describe_resolution,

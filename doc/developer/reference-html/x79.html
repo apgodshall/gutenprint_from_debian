@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -8,7 +8,7 @@ NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
 REL="HOME"
 TITLE="The Developer's Guide to Gutenprint"
-HREF="index.html"><LINK
+HREF="book1.html"><LINK
 REL="UP"
 TITLE="Using libgutenprint"
 HREF="c48.html"><LINK
@@ -17,14 +17,11 @@ TITLE="Linking with libgutenprint"
 HREF="x67.html"><LINK
 REL="NEXT"
 TITLE="Reporting Bugs"
-HREF="c194.html"></HEAD
+HREF="c194.html"><META
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8"></HEAD
 ><BODY
 CLASS="sect1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -74,7 +71,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="AEN79"
->2.3. Integrating libgutenprint</A
+>Integrating libgutenprint</A
 ></H1
 ><P
 >&#13;      This section describes how to integrate the compiling and
@@ -102,7 +99,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN86"
->2.3.1. <B
+><B
 CLASS="command"
 >pkg-config</B
 ></A
@@ -152,6 +149,12 @@ CLASS="option"
 >--cflags</CODE
 > option:
       </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 ><SAMP
@@ -162,6 +165,9 @@ CLASS="userinput"
 >pkg-config --cflags gutenprint</KBD
 >
 -I/usr/local/include</PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;	The correct <CODE
 CLASS="varname"
@@ -172,6 +178,12 @@ CLASS="option"
 >--libs</CODE
 > option:
       </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 ><SAMP
@@ -182,6 +194,9 @@ CLASS="userinput"
 >pkg-config --libs gutenprint</KBD
 >
 -L/usr/local/lib -lgutenprint -lm -ldl</PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;        Lastly, the installed version of Gutenprint can be obtained with the
 	<CODE
@@ -189,6 +204,12 @@ CLASS="varname"
 >--version</CODE
 > option:
       </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 ><SAMP
@@ -199,10 +220,19 @@ CLASS="userinput"
 >pkg-config --modversion gutenprint</KBD
 >
 4.3.23</PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;	The command can be used from the shell by enclosing it in
-	backquotes &#8216;`&#8217;:
+	backquotes ‘`’:
       </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="screen"
 ><SAMP
@@ -220,6 +250,9 @@ CLASS="userinput"
 >gcc `pkg-config --libs gutenprint` -o
   stpimage stpimage.o</KBD
 ></PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;	However, this is not the way it it typically used. Normally
 	it is used in a <TT
@@ -238,7 +271,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN123"
->2.3.2. <B
+><B
 CLASS="command"
 >make</B
 ></A
@@ -259,11 +292,20 @@ CLASS="command"
 >make</B
 >:
       </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >GUTENPRINT_VERSION = $(shell pkg-config --version gutenprint)
 GUTENPRINT_CFLAGS = $(shell pkg-config --cflags gutenprint)
 GUTENPRINT_LIBS = $(shell pkg-config --libs gutenprint)</PRE
+></TD
+></TR
+></TABLE
 ><P
 >&#13;	How you choose to use these variables is entirely up to
 	you. See the GNU <B
@@ -279,7 +321,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN133"
->2.3.3. <B
+><B
 CLASS="command"
 >autoconf</B
 ></A
@@ -305,7 +347,7 @@ CLASS="filename"
 CLASS="command"
 >autoconf</B
 > expands
-	the m4 macros into &#8216;real&#8217; shell script.  The
+	the m4 macros into ‘real’ shell script.  The
 	resulting <B
 CLASS="command"
 >configure</B
@@ -342,9 +384,18 @@ CLASS="informalexample"
 ><A
 NAME="AEN148"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >PKG_CHECK_MODULES(GUTENPRINT, gutenprint)</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -355,7 +406,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="AEN150"
->2.3.4. <B
+><B
 CLASS="command"
 >automake</B
 ></A
@@ -515,6 +566,12 @@ CLASS="informalexample"
 ><A
 NAME="AEN189"
 ></A
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
 ><PRE
 CLASS="programlisting"
 >@SET_MAKE@
@@ -526,6 +583,9 @@ stpimage_SOURCES = stpimage.c
 stpimage_LDADD = $(GUTENPRINT_LIBS)
 
 MAINTAINERCLEANFILES = Makefile.in</PRE
+></TD
+></TR
+></TABLE
 ><P
 ></P
 ></DIV
@@ -567,7 +627,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="index.html"
+HREF="book1.html"
 ACCESSKEY="H"
 >Home</A
 ></TD

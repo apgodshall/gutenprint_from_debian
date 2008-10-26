@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-inks.c,v 1.42 2005/10/23 19:43:14 rlk Exp $"
+ * "$Id: escp2-inks.c,v 1.46 2006/01/07 02:43:28 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -115,6 +115,14 @@ static const escp2_dropsize_t escp2_1_5pl_2880_2880_dropsizes =
 static const escp2_dropsize_t escp2_1_5pl_5760_dropsizes =
   { "1_5pl_5760", 1, { 1.0 } };
 
+/* E-100/Picturemate */
+static const escp2_dropsize_t escp2_picturemate_1440_dropsizes =
+  { "picturemate_1440", 3, { 0.4, 0.65, 1.0 } };
+static const escp2_dropsize_t escp2_picturemate_2880_dropsizes =
+  { "picturemate_2880", 2, { 0.615, 1.0 } };
+static const escp2_dropsize_t escp2_picturemate_5760_dropsizes =
+  { "picturemate_5760", 1, { 1.0 } };
+
 /* Stylus Photo R300 */
 static const escp2_dropsize_t escp2_r300_360_dropsizes =
   { "r300_360", 3, { 0.15, 0.3, 1.0 } };
@@ -131,11 +139,11 @@ static const escp2_dropsize_t escp2_r300_2880_1440_dropsizes =
 static const escp2_dropsize_t escp2_r2400_360_dropsizes =
   { "r2400_360", 1, { 1 } };
 static const escp2_dropsize_t escp2_r2400_720_dropsizes =
-  { "r2400_1440", 3, { 0.180, 0.44, 1 } };
+  { "r2400_720", 3, { 0.180, 0.44, 1 } };
 static const escp2_dropsize_t escp2_r2400_1440_dropsizes =
   { "r2400_1440", 3, { 0.180, 0.44, 1 } };
 static const escp2_dropsize_t escp2_r2400_2880_dropsizes =
-  { "r2400_1440", 3, { 0.180, 0.44, 1 } };
+  { "r2400_2880", 3, { 0.180, 0.44, 1 } };
 static const escp2_dropsize_t escp2_r2400_2880_1440_dropsizes =
   { "r2400_2880_1440", 2, { 0.41, 1 } };
 static const escp2_dropsize_t escp2_r2400_2880_2880_dropsizes =
@@ -300,6 +308,19 @@ const escp2_drop_list_t stpi_escp2_variable_r2400_drops =
   &escp2_r2400_2880_1440_dropsizes,
   &escp2_r2400_2880_2880_dropsizes,
   &escp2_r2400_2880_2880_dropsizes,
+};
+
+const escp2_drop_list_t stpi_escp2_variable_picturemate_drops =
+{
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_1440_dropsizes,
+  &escp2_picturemate_2880_dropsizes,
+  &escp2_picturemate_5760_dropsizes,
+  &escp2_picturemate_5760_dropsizes,
 };
 
 const escp2_drop_list_t stpi_escp2_variable_1_5pl_drops =

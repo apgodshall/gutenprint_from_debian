@@ -29,6 +29,14 @@
 /* Define to 1 if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
 
+/* Define to 1 if GCC special attributes are supported */
+#undef HAVE_GCC_ATTRIBUTES
+
+#ifndef HAVE_GCC_ATTRIBUTES
+/* This should really be a C99 anonymous variadic macro. */
+#define __attribute__(attr)
+#endif
+
 /* Define to 1 if you have the <getopt.h> header file. */
 #undef HAVE_GETOPT_H
 

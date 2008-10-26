@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.128 2005/07/15 00:31:54 rlk Exp $
+dnl $Id: configure.ac,v 1.130 2005/08/11 03:10:18 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -52,7 +52,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.128 $)
+AC_REVISION($Revision: 1.130 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -147,7 +147,7 @@ dnl Specify a configuration file.
 AM_CONFIG_HEADER([config.h])
 
 dnl Available languages (translations)
-ALL_LINGUAS="cs da de el en_GB es fr ja nb nl pl pt sk sv"
+ALL_LINGUAS="cs da de el en_GB es fr ja nb nl pl pt sk sv zh_TW"
 AC_SUBST(ALL_LINGUAS)
 
 dnl Set up libtool scripts.
@@ -935,9 +935,11 @@ AC_CONFIG_FILES([src/Makefile])
 AC_CONFIG_FILES([src/cups/Makefile])
 AC_CONFIG_FILES([src/cups/cups-genppdconfig],
                 [chmod +x src/cups/cups-genppdconfig;
+		 rm -f src/cups/cups-genppdconfig.${GUTENPRINT_RELEASE_VERSION};
 		 mv src/cups/cups-genppdconfig src/cups/cups-genppdconfig.${GUTENPRINT_RELEASE_VERSION}])
 AC_CONFIG_FILES([src/cups/cups-genppdupdate],
                 [chmod +x src/cups/cups-genppdupdate;
+		 rm -f src/cups/cups-genppdupdate.${GUTENPRINT_RELEASE_VERSION};
 		 mv src/cups/cups-genppdupdate src/cups/cups-genppdupdate.${GUTENPRINT_RELEASE_VERSION}])
 AC_CONFIG_FILES([src/escputil/Makefile])
 AC_CONFIG_FILES([src/foomatic/Makefile])

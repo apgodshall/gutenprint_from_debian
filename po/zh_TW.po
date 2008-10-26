@@ -1,83 +1,74 @@
-# Slovak translation of GIMP Print
-# Slovenskı preklad GIMP Print
-# Copyright (C) 2002 Free Software Foundation, Inc.
-# Zdenko Podobnı <zdpo@mailbox.sk>, 2002.
+# traditional Chinese translation of gutenprint.
+# Copyright (C) 2005 Free Software Foundation, Inc.
+# Abel Cheung <abelcheung@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: GIMP Print\n"
+"Project-Id-Version: gutenprint 5.0.0-b5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-13 16:29-0400\n"
-"PO-Revision-Date: 2002-05-20 18:08+0100\n"
-"Last-Translator: Zdenko Podobnı <zdpo@mailbox.sk>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"PO-Revision-Date: 2005-08-07 12:56+0800\n"
+"Last-Translator: Abel Cheung <abelcheung@gmail.com>\n"
+"Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
 
 #: src/main/dither-main.c:46 src/main/print-color.c:49
-#, fuzzy
 msgid "Default"
-msgstr "Nastavi» ¹tandardné"
+msgstr "é è¨­"
 
 #: src/main/dither-main.c:47
-#, fuzzy
 msgid "EvenTone"
-msgstr "Obálka"
+msgstr "EvenTone"
 
 #: src/main/dither-main.c:48
-#, fuzzy
 msgid "Hybrid EvenTone"
-msgstr "Obálka"
+msgstr "Hybrid EvenTone"
 
 #: src/main/dither-main.c:54
-#, fuzzy
 msgid "EvenBetter"
-msgstr "Letter"
+msgstr ""
 
 #: src/main/dither-main.c:55
-#, fuzzy
 msgid "Hybrid EvenBetter"
-msgstr "Obálka"
+msgstr ""
 
 #: src/main/dither-main.c:61
-#, fuzzy
 msgid "UniTone"
-msgstr "Obálka"
+msgstr "UniTone"
 
 #: src/main/dither-main.c:62
 msgid "Hybrid UniTone"
-msgstr ""
+msgstr "Hybrid UniTone"
 
 #: src/main/dither-main.c:64
 msgid "Adaptive Hybrid"
-msgstr "Adaptívne hybridnı"
+msgstr "Adaptive Hybrid"
 
 #: src/main/dither-main.c:65
 msgid "Ordered"
-msgstr "Postupnı"
+msgstr "Ordered"
 
 #: src/main/dither-main.c:66
 msgid "Fast"
-msgstr "Rıchly"
+msgstr "Fast"
 
 #: src/main/dither-main.c:67
 msgid "Very Fast"
-msgstr "Veµmi rıchly"
+msgstr "Very Fast"
 
 #: src/main/dither-main.c:68
 msgid "Hybrid Floyd-Steinberg"
-msgstr "Hybridnı Floyd-Steinbergov"
+msgstr "Hybrid Floyd-Steinberg"
 
 #: src/main/dither-main.c:69
 msgid "Predithered Input"
 msgstr ""
 
 #: src/main/dither-main.c:89 src/main/print-color.c:56
-#, fuzzy
 msgid "Density"
-msgstr "Hustota:"
+msgstr "å¯†åº¦"
 
 #: src/main/dither-main.c:89 src/main/print-canon.c:1472
 #: src/main/print-canon.c:1480 src/main/print-canon.c:1488
@@ -100,20 +91,18 @@ msgid ""
 "ink bleeds through the paper or smears; increase the density if black "
 "regions are not solid."
 msgstr ""
-"Nastavte hustotu (mno¾stvo atramentu) pre tlaè. Hustotu zní¾te, ak atrament "
-"teèie po papieri, alebo sa rozmazáva; zvı¹te hustotu, ak èierne oblasti sú "
-"jednoliate."
+"èª¿æ•´åˆ—å°æ™‚å¢¨é»çš„å¯†åº¦ã€‚å¦‚æœå¢¨æ°´å¤ªå¤šï¼Œæ»²é€åˆ°ç´™å¼µèƒŒå¾Œæˆ–è€…å¼„é«’ç´™å¼µï¼Œè«‹æ¸›ä½å¯†åº¦ï¼›"
+"ç›¸ååœ°ï¼Œå¦‚æœé»‘è‰²çœ‹ä¾†ä¸å¤ å¯¦ï¼Œå‰‡æ‡‰å¢åŠ å¯†åº¦ã€‚"
 
 #: src/main/dither-main.c:98
 msgid "Dither Algorithm"
-msgstr "Algoritmus rozptylu"
+msgstr "æ“¬è‰²ç®—æ³•"
 
 #: src/main/dither-main.c:98
 msgid "Screening Adjustment"
 msgstr ""
 
 #: src/main/dither-main.c:99
-#, fuzzy
 msgid ""
 "Choose the dither algorithm to be used.\n"
 "Adaptive Hybrid usually produces the best all-around quality.\n"
@@ -124,13 +113,12 @@ msgid ""
 "art.\n"
 "Hybrid Floyd-Steinberg generally produces inferior output."
 msgstr ""
-"Zvoµte algoritmus rozptylu, ktorı sa pou¾ije pri tlaèi.\n"
-"Prispôsobiteµné mie¹anie roztylu v¹obecne poskytuje najlep¹í vısledok.\n"
-"Postupnı rozptyl je rıchlej¹í a vısledná kvalita je podobná ako je na "
-"fotografiách.\n"
-"Rıchly a veµmi rıchly roztyl je podstatne rıchlej¹í a dobré vısledky "
-"poskytuje pre text a èiarovú grafiku.\n"
-"Mie¹anı Floyd-Steinbergov roztyl v¹eobecne poskytuje menej kvalitnı vıstup."
+"é¸å–æ“¬è‰²æ™‚ä½¿ç”¨çš„ç®—æ³•ã€‚\n"
+"Adaptive Hybrid é€šå¸¸æœƒç”¢ç”Ÿæœ€å¥½çš„æ•ˆæœã€‚\n"
+"EvenTone æ˜¯ä¸€ç¨®æ–°çš„ç®—æ³•ï¼Œç¶“å¸¸æœƒç”¢ç”Ÿç”šä½³çš„æ•ˆæœã€‚\n"
+"Ordered æ¯”è¼ƒå¿«ï¼Œè€Œä¸”åœ¨ç›¸ç‰‡ä¸­çš„æ•ˆæœæœƒå·®ä¸å¤šä¸€æ¨£å¥½ã€‚\n"
+"Fast åŠ Very Fast æ›´å¿«ï¼Œé©ç”¨æ–¼æ–‡å­—åŠç°¡å–®ç·šæ¢åœ–æ¡ˆã€‚\n"
+"Hybrid Floyd-Steinberg çš„æ•ˆæœä¸€èˆ¬ä¾†èªªæ¯”è¼ƒå·®ã€‚"
 
 #: src/main/module.c:52
 msgid "Miscellaneous (unclassified)"
@@ -145,173 +133,147 @@ msgid "Color conversion module"
 msgstr ""
 
 #: src/main/module.c:55
-#, fuzzy
 msgid "Dither algorithm"
-msgstr "Algoritmus rozptylu"
+msgstr "æ“¬è‰²é‹ç®—æ–¹å¼"
 
 #: src/main/print-canon.c:1330
-#, fuzzy
 msgid "90x90 DPI"
-msgstr "600 DPI"
+msgstr "90x90 DPI"
 
 #: src/main/print-canon.c:1330
-#, fuzzy
 msgid "90x90 DPI DMT"
-msgstr "600 DPI"
+msgstr "90x90 DPI DMT"
 
 #: src/main/print-canon.c:1331
-#, fuzzy
 msgid "180x180 DPI"
-msgstr "150x150 DPI"
+msgstr "180x180 DPI"
 
 #: src/main/print-canon.c:1331
-#, fuzzy
 msgid "180x180 DPI DMT"
-msgstr "150x150 DPI"
+msgstr "180x180 DPI DMT"
 
 #: src/main/print-canon.c:1332
-#, fuzzy
 msgid "360x360 DPI"
-msgstr "300x300 DPI"
+msgstr "360x360 DPI"
 
 #: src/main/print-canon.c:1332
-#, fuzzy
 msgid "360x360 DPI DMT"
-msgstr "600x600 DPI"
+msgstr "360x360 DPI DMT"
 
 #: src/main/print-canon.c:1333
-#, fuzzy
 msgid "720x360 DPI"
-msgstr "720 x 360 DPI"
+msgstr "720x360 DPI"
 
 #: src/main/print-canon.c:1333
-#, fuzzy
 msgid "720x360 DPI DMT"
-msgstr "720 x 360 DPI MW2"
+msgstr "720x360 DPI DMT"
 
 #: src/main/print-canon.c:1334
-#, fuzzy
 msgid "720x720 DPI"
-msgstr "2880 x 720 DPI"
+msgstr "720x720 DPI"
 
 #: src/main/print-canon.c:1334
-#, fuzzy
 msgid "720x720 DPI DMT"
-msgstr "2880 x 720 DPI"
+msgstr "720x720 DPI DMT"
 
 #: src/main/print-canon.c:1335
-#, fuzzy
 msgid "1440x720 DPI"
-msgstr "1440 x 720 DPI"
+msgstr "1440x720 DPI"
 
 #: src/main/print-canon.c:1335
-#, fuzzy
 msgid "1440x720 DPI DMT"
-msgstr "1440 x 720 DPI"
+msgstr "1440x720 DPI DMT"
 
 #: src/main/print-canon.c:1336
-#, fuzzy
 msgid "1440x1440 DPI"
-msgstr "1440 x 1440 DPI"
+msgstr "1440x1440 DPI"
 
 #: src/main/print-canon.c:1336
-#, fuzzy
 msgid "1440x1440 DPI DMT"
-msgstr "1440 x 1440 DPI"
+msgstr "1440x1440 DPI DMT"
 
 #: src/main/print-canon.c:1337
-#, fuzzy
 msgid "2880x2880 DPI"
-msgstr "2880 x 720 DPI"
+msgstr "2880x2880 DPI"
 
 #: src/main/print-canon.c:1337
-#, fuzzy
 msgid "2880x2880 DPI DMT"
-msgstr "2880 x 720 DPI"
+msgstr "2880x2880 DPI DMT"
 
 #: src/main/print-canon.c:1338 src/main/print-pcl.c:253
 msgid "150x150 DPI"
 msgstr "150x150 DPI"
 
 #: src/main/print-canon.c:1338
-#, fuzzy
 msgid "150x150 DPI DMT"
-msgstr "150x150 DPI"
+msgstr "150x150 DPI DMT"
 
 #: src/main/print-canon.c:1339 src/main/print-pcl.c:254
 msgid "300x300 DPI"
 msgstr "300x300 DPI"
 
 #: src/main/print-canon.c:1339
-#, fuzzy
 msgid "300x300 DPI DMT"
-msgstr "300x300 DPI"
+msgstr "300x300 DPI DMT"
 
 #: src/main/print-canon.c:1340 src/main/print-pcl.c:255
 msgid "600x300 DPI"
 msgstr "600x300 DPI"
 
 #: src/main/print-canon.c:1340
-#, fuzzy
 msgid "600x300 DPI DMT"
-msgstr "600x300 DPI"
+msgstr "600x300 DPI DMT"
 
 #: src/main/print-canon.c:1341 src/main/print-pcl.c:257
 msgid "600x600 DPI"
 msgstr "600x600 DPI"
 
 #: src/main/print-canon.c:1341
-#, fuzzy
 msgid "600x600 DPI DMT"
-msgstr "600x600 DPI"
+msgstr "600x600 DPI DMT"
 
 #: src/main/print-canon.c:1342 src/main/print-pcl.c:258
 msgid "1200x600 DPI"
 msgstr "1200x600 DPI"
 
 #: src/main/print-canon.c:1342
-#, fuzzy
 msgid "1200x600 DPI DMT"
-msgstr "1200x600 DPI"
+msgstr "1200x600 DPI DMT"
 
 #: src/main/print-canon.c:1343
-#, fuzzy
 msgid "1200x1200 DPI"
-msgstr "1200x600 DPI"
+msgstr "1200x1200 DPI"
 
 #: src/main/print-canon.c:1343
-#, fuzzy
 msgid "1200x1200 DPI DMT"
-msgstr "1200x600 DPI"
+msgstr "1200x1200 DPI DMT"
 
 #: src/main/print-canon.c:1344
-#, fuzzy
 msgid "2400x2400 DPI"
-msgstr "2400x600 DPI"
+msgstr "2400x2400 DPI"
 
 #: src/main/print-canon.c:1344
-#, fuzzy
 msgid "2400x2400 DPI DMT"
-msgstr "2400x600 DPI"
+msgstr "2400x2400 DPI DMT"
 
 #: src/main/print-canon.c:1393 src/main/print-lexmark.c:857
 #: src/main/escp2-papers.c:957 src/main/escp2-papers.c:1001
 #: src/main/escp2-papers.c:1045 src/main/escp2-papers.c:1093
 #: src/main/escp2-papers.c:1137
 msgid "Plain Paper"
-msgstr "Obyèajnı papier"
+msgstr "æ™®é€šç´™å¼µ"
 
 #: src/main/print-canon.c:1394
 #, fuzzy
 msgid "Plain Paper PIXMA"
-msgstr "Obyèajnı papier"
+msgstr "æ™®é€šç´™å¼µ"
 
 #: src/main/print-canon.c:1395 src/main/print-lexmark.c:865
 #: src/main/escp2-papers.c:965 src/main/escp2-papers.c:1009
 #: src/main/escp2-papers.c:1053 src/main/escp2-papers.c:1101
 #: src/main/escp2-papers.c:1145
 msgid "Transparencies"
-msgstr "Priesvitná fólia"
+msgstr "é€æ˜è† ç‰‡"
 
 #: src/main/print-canon.c:1396
 msgid "Back Print Film"
@@ -319,49 +281,53 @@ msgstr ""
 
 #: src/main/print-canon.c:1397
 msgid "Fabric Sheets"
-msgstr "Normálny papier"
+msgstr ""
 
 #: src/main/print-canon.c:1398
 msgid "Envelope"
-msgstr "Obálka"
+msgstr "ä¿¡å°"
 
+# (Abel) from Canon
 #: src/main/print-canon.c:1399
 msgid "High Resolution Paper"
-msgstr "Papier s vysokım rozlí¹ením"
+msgstr "é«˜è§£æåº¦å½©è‰²å°ˆç”¨ç´™"
 
+# (Abel) from www.easyoffice.com.tw
 #: src/main/print-canon.c:1400
 msgid "T-Shirt Transfers"
-msgstr "Na¾ehµovacia fólia"
+msgstr "Tæ¤è½‰å°ç´™"
 
+# (Abel) from Canon
 #: src/main/print-canon.c:1401
 msgid "High Gloss Film"
-msgstr "Vysokolesklı film"
+msgstr "å½±åƒå¯«çœŸå…‰æ¾¤è† ç‰‡"
 
+# (Abel) from Canon
 #: src/main/print-canon.c:1402
 msgid "Glossy Photo Paper"
-msgstr "Lesklı foto papier"
+msgstr "å½±åƒå¯«çœŸå…‰æ¾¤ç´™"
 
 #: src/main/print-canon.c:1403
 msgid "Glossy Photo Cards"
-msgstr "Lesklé foto karty"
+msgstr ""
 
+# (Abel) from Canon
 #: src/main/print-canon.c:1404
 msgid "Photo Paper Pro"
-msgstr "Foto papier pro"
+msgstr "å°ˆæ¥­ç´šç›¸ç´™"
 
 #: src/main/print-canon.c:1405 src/main/print-lexmark.c:905
 #: src/main/escp2-papers.c:993 src/main/escp2-papers.c:1037
 #: src/main/escp2-papers.c:1085 src/main/escp2-papers.c:1129
 #: src/main/escp2-papers.c:1177
 msgid "Other"
-msgstr "Iné"
+msgstr "å…¶å®ƒ"
 
 #: src/main/print-canon.c:1413 src/main/print-escp2.c:177
 #: src/main/print-lexmark.c:266 src/main/print-olympus.c:1156
 #: src/main/print-pcl.c:1153 src/main/print-ps.c:66
-#, fuzzy
 msgid "Page Size"
-msgstr "Veµkos»"
+msgstr "é é¢å°ºå¯¸"
 
 #: src/main/print-canon.c:1413 src/main/print-canon.c:1419
 #: src/main/print-canon.c:1425 src/main/print-canon.c:1431
@@ -378,59 +344,56 @@ msgstr "Veµkos»"
 #: src/main/print-pcl.c:1171 src/main/print-pcl.c:1195 src/main/print-ps.c:66
 #: src/main/print-ps.c:72 src/main/print-ps.c:78 src/main/print-ps.c:84
 #: src/main/print-ps.c:96
-#, fuzzy
 msgid "Basic Printer Setup"
-msgstr "Nastavenie tlaèiarne"
+msgstr "åŸºæœ¬å°è¡¨æ©Ÿè¨­å®š"
 
 #: src/main/print-canon.c:1414 src/main/print-escp2.c:178
 #: src/main/print-lexmark.c:267 src/main/print-olympus.c:1157
 #: src/main/print-pcl.c:1154 src/main/print-ps.c:67
-#, fuzzy
 msgid "Size of the paper being printed to"
-msgstr "Veµkos» papiera, na ktorı chcete tlaèi»"
+msgstr "åˆ—å°æ™‚ä½¿ç”¨çš„ç´™å¼µå°ºå¯¸"
 
 #: src/main/print-canon.c:1419 src/main/print-escp2.c:183
 #: src/main/print-lexmark.c:272 src/main/print-olympus.c:1162
 #: src/main/print-pcl.c:1159 src/main/print-ps.c:72 src/cups/genppd.c:1181
 msgid "Media Type"
-msgstr "Typ média"
+msgstr "ç´™å¼µé¡åˆ¥"
 
 #: src/main/print-canon.c:1420 src/main/print-escp2.c:184
 #: src/main/print-lexmark.c:273 src/main/print-olympus.c:1163
 #: src/main/print-pcl.c:1160 src/main/print-ps.c:73
 msgid "Type of media (plain paper, photo paper, etc.)"
-msgstr ""
+msgstr "ç´™å¼µçš„é¡åˆ¥ (æ™®é€šç´™ã€ç›¸ç´™ç­‰ç­‰)"
 
 #: src/main/print-canon.c:1425 src/main/print-escp2.c:189
 #: src/main/print-lexmark.c:278 src/main/print-olympus.c:1168
 #: src/main/print-pcl.c:1165 src/main/print-ps.c:78 src/cups/genppd.c:1205
 msgid "Media Source"
-msgstr "Zdroj média"
+msgstr "ç´™å¼µä¾†æº"
 
 #: src/main/print-canon.c:1426 src/main/print-escp2.c:190
 #: src/main/print-lexmark.c:279 src/main/print-olympus.c:1169
 #: src/main/print-pcl.c:1166 src/main/print-ps.c:79
-#, fuzzy
 msgid "Source (input slot) of the media"
-msgstr "Zdroj (vstupné miesto) média, na ktoré tlaèíte"
+msgstr "é€ç´™åŒ£æˆ–è€…ç´™å¼µçš„ä¾†æº"
 
 #: src/main/print-canon.c:1431 src/main/print-escp2.c:213
 #: src/main/print-lexmark.c:284 src/main/print-olympus.c:1174
 #: src/main/print-pcl.c:1171 src/main/print-ps.c:84 src/cups/genppd.c:1277
 msgid "Resolution"
-msgstr "Rozlí¹enie"
+msgstr "è§£æåº¦"
 
 #: src/main/print-canon.c:1432 src/main/print-lexmark.c:285
 #: src/main/print-olympus.c:1175 src/main/print-pcl.c:1172
 #: src/main/print-ps.c:85
 msgid "Resolution and quality of the print"
-msgstr "Rozlí¹enie a kvalita tlaèe"
+msgstr "åˆ—å°æ™‚çš„è§£æåº¦åŠå“è³ª"
 
 #: src/main/print-canon.c:1437 src/main/print-escp2.c:224
 #: src/main/print-lexmark.c:290 src/main/print-olympus.c:1180
 #: src/main/print-pcl.c:1177 src/main/print-ps.c:90 src/main/print-raw.c:80
 msgid "Ink Type"
-msgstr "Typ atramentu"
+msgstr "å¢¨æ°´é¡åˆ¥"
 
 #: src/main/print-canon.c:1437 src/main/print-escp2.c:201
 #: src/main/print-escp2.c:207 src/main/print-escp2.c:224
@@ -439,14 +402,14 @@ msgstr "Typ atramentu"
 #: src/main/print-olympus.c:1192 src/main/print-pcl.c:1177
 #: src/main/print-ps.c:90 src/main/print-raw.c:80
 msgid "Advanced Printer Setup"
-msgstr ""
+msgstr "é€²éšå°è¡¨æ©Ÿè¨­å®š"
 
 #: src/main/print-canon.c:1438 src/main/print-escp2.c:225
 #: src/main/print-escp2.c:237 src/main/print-lexmark.c:291
 #: src/main/print-olympus.c:1181 src/main/print-pcl.c:1178
 #: src/main/print-ps.c:91 src/main/print-raw.c:81
 msgid "Type of ink in the printer"
-msgstr "Typ atramentu tlaèiarne"
+msgstr "å°è¡¨æ©Ÿå¢¨æ°´çš„é¡å‹"
 
 #: src/main/print-canon.c:1443 src/main/print-canon.c:1444
 #: src/main/print-escp2.c:308 src/main/print-escp2.c:309
@@ -463,14 +426,13 @@ msgstr ""
 #: src/main/print-escp2.c:308 src/main/print-escp2.c:314
 #: src/main/print-lexmark.c:296 src/main/print-pcl.c:1183
 msgid "Advanced Printer Functionality"
-msgstr ""
+msgstr "é€²éšå°è¡¨æ©ŸåŠŸèƒ½"
 
 #: src/main/print-canon.c:1449 src/main/print-escp2.c:320
 #: src/main/print-lexmark.c:302 src/main/print-olympus.c:1198
 #: src/main/print-pcl.c:1189 src/main/print-ps.c:102 src/main/print-raw.c:86
-#, fuzzy
 msgid "Printing Mode"
-msgstr "Model tlaèiarne:"
+msgstr "åˆ—å°æ¨¡å¼"
 
 #: src/main/print-canon.c:1449 src/main/print-color.c:183
 #: src/main/print-color.c:191 src/main/print-color.c:199
@@ -478,9 +440,8 @@ msgstr "Model tlaèiarne:"
 #: src/main/print-escp2.c:326 src/main/print-lexmark.c:302
 #: src/main/print-olympus.c:1198 src/main/print-pcl.c:1189
 #: src/main/print-ps.c:102 src/main/print-raw.c:86
-#, fuzzy
 msgid "Core Parameter"
-msgstr "Obyèajnı papier"
+msgstr ""
 
 #: src/main/print-canon.c:1450 src/main/print-escp2.c:321
 #: src/main/print-lexmark.c:303 src/main/print-olympus.c:1199
@@ -490,59 +451,50 @@ msgstr ""
 
 #: src/main/print-canon.c:1472 src/main/print-escp2.c:412
 #: src/main/print-lexmark.c:325 src/main/print-pcl.c:1218
-#, fuzzy
 msgid "Cyan Density"
-msgstr "Hustota:"
+msgstr "æ°°è—è‰²å¯†åº¦"
 
 #: src/main/print-canon.c:1473 src/main/print-escp2.c:413
 #: src/main/print-lexmark.c:326 src/main/print-pcl.c:1219
-#, fuzzy
 msgid "Adjust the cyan density"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´æ°°è—è‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-canon.c:1480 src/main/print-escp2.c:420
 #: src/main/print-lexmark.c:333 src/main/print-pcl.c:1226
-#, fuzzy
 msgid "Magenta Density"
-msgstr "Purpurová"
+msgstr "æ´‹ç´…è‰²å¯†åº¦"
 
 #: src/main/print-canon.c:1481 src/main/print-escp2.c:421
 #: src/main/print-lexmark.c:334 src/main/print-pcl.c:1227
-#, fuzzy
 msgid "Adjust the magenta density"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr "èª¿æ•´æ´‹ç´…è‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-canon.c:1488 src/main/print-escp2.c:428
 #: src/main/print-lexmark.c:341 src/main/print-pcl.c:1234
-#, fuzzy
 msgid "Yellow Density"
-msgstr "Hustota:"
+msgstr "é»ƒè‰²å¯†åº¦"
 
 #: src/main/print-canon.c:1489 src/main/print-escp2.c:429
 #: src/main/print-lexmark.c:342 src/main/print-pcl.c:1235
-#, fuzzy
 msgid "Adjust the yellow density"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "èª¿æ•´é»ƒè‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-canon.c:1496 src/main/print-escp2.c:436
 #: src/main/print-lexmark.c:349 src/main/print-pcl.c:1242
-#, fuzzy
 msgid "Black Density"
-msgstr "Hustota:"
+msgstr "é»‘è‰²å¯†åº¦"
 
 #: src/main/print-canon.c:1497 src/main/print-escp2.c:437
 #: src/main/print-lexmark.c:350 src/main/print-pcl.c:1243
-#, fuzzy
 msgid "Adjust the black density"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´é»‘è‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-canon.c:1504 src/main/print-canon.c:1505
 #: src/main/print-escp2.c:468 src/main/print-escp2.c:469
 #: src/main/print-lexmark.c:357 src/main/print-lexmark.c:358
 #: src/main/print-pcl.c:1250 src/main/print-pcl.c:1251
-#, fuzzy
 msgid "Light Cyan Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-canon.c:1504 src/main/print-canon.c:1512
 #: src/main/print-canon.c:1520 src/main/print-escp2.c:468
@@ -559,26 +511,24 @@ msgstr ""
 #: src/main/print-escp2.c:476 src/main/print-escp2.c:477
 #: src/main/print-lexmark.c:365 src/main/print-lexmark.c:366
 #: src/main/print-pcl.c:1258 src/main/print-pcl.c:1259
-#, fuzzy
 msgid "Light Magenta Transition"
-msgstr "Jasná purpurová"
+msgstr ""
 
 #: src/main/print-canon.c:1520 src/main/print-canon.c:1521
-#, fuzzy
 msgid "Light Yellow Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-canon.c:1834 src/main/print-lexmark.c:1118
 msgid "Auto Sheet Feeder"
-msgstr "Automatickı podávaè papiera"
+msgstr "è‡ªå‹•é€ç´™åŒ£"
 
 #: src/main/print-canon.c:1835 src/main/print-lexmark.c:1119
 msgid "Manual with Pause"
-msgstr "Manuálne s preru¹ením"
+msgstr ""
 
 #: src/main/print-canon.c:1836 src/main/print-lexmark.c:1120
 msgid "Manual without Pause"
-msgstr "Manuálne bez preru¹enia"
+msgstr ""
 
 #: src/main/print-canon.c:1948 src/main/print-color.c:305
 #: src/main/print-escp2-data.c:569 src/main/print-escp2-data.c:579
@@ -587,46 +537,44 @@ msgstr "Manuálne bez preru¹enia"
 #: src/main/print-lexmark.c:613 src/gutenprintui/panel.c:2131
 #: src/gutenprintui2/panel.c:2129 src/escputil/escputil.c:861
 msgid "Black"
-msgstr "Èierna"
+msgstr "é»‘"
 
 #: src/main/print-canon.c:1951
 msgid "CMY Color"
-msgstr "CMY farba"
+msgstr "CMY è‰²ç³»"
 
 #: src/main/print-canon.c:1954
 msgid "CMYK Color"
-msgstr "CMYK farba"
+msgstr "CMYK è‰²ç³»"
 
 #: src/main/print-canon.c:1957
 msgid "Photo CcMmY Color"
-msgstr "Fotografická CcMmY farba"
+msgstr ""
 
 #: src/main/print-canon.c:1960
 msgid "Photo CcMmYK Color"
-msgstr "Fotografická CcMmYK farba"
+msgstr ""
 
 #: src/main/print-canon.c:2004 src/main/print-escp2.c:1737
 #: src/main/print-lexmark.c:1283 src/main/print-olympus.c:1453
 #: src/main/print-pcl.c:1733 src/main/print-ps.c:167 src/main/print-raw.c:135
 #: src/gutenprintui/panel.c:281 src/gutenprintui2/panel.c:281
 msgid "Color"
-msgstr "Farebne"
+msgstr "å½©è‰²"
 
 #: src/main/print-canon.c:2006 src/main/print-escp2.c:1739
 #: src/main/print-lexmark.c:1285 src/main/print-pcl.c:1735
 #: src/main/print-ps.c:169 src/main/print-raw.c:137
-#, fuzzy
 msgid "Black and White"
-msgstr "Èiernobielo"
+msgstr "é»‘ç™½"
 
 #: src/main/print-color.c:50
 msgid "High Accuracy"
 msgstr ""
 
 #: src/main/print-color.c:51
-#, fuzzy
 msgid "Bright Colors"
-msgstr "Prispôsobenie farieb pre tlaè"
+msgstr ""
 
 #: src/main/print-color.c:52
 msgid "Correct Hue Only"
@@ -649,46 +597,42 @@ msgid "Raw"
 msgstr ""
 
 #: src/main/print-color.c:58
-#, fuzzy
 msgid "Pre-Dithered"
-msgstr "Tlaèi»"
+msgstr ""
 
 #: src/main/print-color.c:121 src/main/escp2-channels.c:626
 #: src/main/escp2-channels.c:639 src/main/escp2-channels.c:653
 #: src/gutenprintui/panel.c:282 src/gutenprintui2/panel.c:282
 msgid "Grayscale"
-msgstr "V odtieòoch ¹edej"
+msgstr "ç°éš"
 
 #: src/main/print-color.c:123
-#, fuzzy
 msgid "Whitescale"
-msgstr "®ltá"
+msgstr ""
 
 #: src/main/print-color.c:125
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: src/main/print-color.c:127
 msgid "CMY"
-msgstr ""
+msgstr "CMY"
 
 #: src/main/print-color.c:129
 msgid "CMYK"
-msgstr ""
+msgstr "CMYK"
 
 #: src/main/print-color.c:131
 msgid "KCMY"
-msgstr ""
+msgstr "KCMY"
 
 #: src/main/print-color.c:164 src/main/print-color.c:436
-#, fuzzy
 msgid "Channel "
-msgstr "Storno"
+msgstr ""
 
 #: src/main/print-color.c:164
-#, fuzzy
 msgid " Gamma"
-msgstr "Gama:"
+msgstr " Gamma"
 
 #: src/main/print-color.c:164 src/main/print-color.c:239
 #: src/main/print-color.c:249 src/main/print-color.c:257
@@ -696,9 +640,8 @@ msgstr "Gama:"
 #: src/main/print-color.c:281 src/main/print-color.c:289
 #: src/main/print-color.c:297 src/main/print-color.c:305
 #: src/gutenprintui2/gammacurve.c:408
-#, fuzzy
 msgid "Gamma"
-msgstr "Gama:"
+msgstr "Gamma"
 
 #: src/main/print-color.c:165
 msgid "Gamma for raw channel "
@@ -706,7 +649,7 @@ msgstr ""
 
 #: src/main/print-color.c:175
 msgid "Color Correction"
-msgstr ""
+msgstr "è‰²å½©ä¿®æ­£"
 
 #: src/main/print-color.c:175 src/main/print-color.c:215
 #: src/main/print-color.c:223 src/main/print-color.c:337
@@ -727,24 +670,20 @@ msgid "Bit depth per channel"
 msgstr ""
 
 #: src/main/print-color.c:191
-#, fuzzy
 msgid "Input Image Type"
-msgstr "Typ obrázku"
+msgstr "è¼¸å…¥å½±åƒé¡å‹"
 
 #: src/main/print-color.c:192
-#, fuzzy
 msgid "Input image type"
-msgstr "Typ obrázku"
+msgstr "è¼¸å…¥å½±åƒé¡å‹"
 
 #: src/main/print-color.c:199
-#, fuzzy
 msgid "Output Image Type"
-msgstr "Typ vıstupu:"
+msgstr "è¼¸å‡ºå½±åƒé¡å‹"
 
 #: src/main/print-color.c:200
-#, fuzzy
 msgid "Output image type"
-msgstr "Typ vıstupu:"
+msgstr "è¼¸å‡ºå½±åƒé¡å‹"
 
 #: src/main/print-color.c:207 src/main/print-color.c:208
 #: src/main/print-escp2.c:326
@@ -752,32 +691,28 @@ msgid "Raw Channels"
 msgstr ""
 
 #: src/main/print-color.c:215
-#, fuzzy
 msgid "Brightness"
-msgstr "Jas:"
+msgstr "äº®åº¦"
 
 #: src/main/print-color.c:216
-#, fuzzy
 msgid "Brightness of the print"
-msgstr "Nastavi» vı¹ku tlaèe"
+msgstr "åˆ—å°æ™‚çš„äº®åº¦"
 
 #: src/main/print-color.c:223
-#, fuzzy
 msgid "Contrast"
-msgstr "Kontrast:"
+msgstr "åå·®"
 
 #: src/main/print-color.c:224
 msgid "Contrast of the print (0 is solid gray)"
-msgstr ""
+msgstr "åˆ—å°æ™‚çš„åå·® (0 ä»£è¡¨ç´”ç°è‰²)"
 
 #: src/main/print-color.c:231
 msgid "Linear Contrast Adjustment"
 msgstr ""
 
 #: src/main/print-color.c:231
-#, fuzzy
 msgid "Advanced Image Control"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-color.c:232
 msgid "Use linear vs. fixed end point contrast adjustment"
@@ -788,23 +723,20 @@ msgid "Composite Gamma"
 msgstr ""
 
 #: src/main/print-color.c:240
-#, fuzzy
 msgid ""
 "Adjust the gamma of the print. Larger values will produce a generally "
 "brighter print, while smaller values will produce a generally darker print. "
 msgstr ""
-"Nastavenie gamy pre tlaè. Vy¹¹ie hodnoty vyprodukujú v¹eobecne jasnej¹iu "
-"tlaè, kım ni¾¹ie hodnoty vyprodukujú tmav¹iu tlaè. Èierna a biela zostanú "
-"také isté na rozdiel od nastavovania jasu."
+"èª¿æ•´åˆ—å°æ™‚çš„ gamma å€¼ã€‚æ•¸å€¼è¼ƒå¤§æ™‚ï¼Œä¸€èˆ¬æœƒä»¤åˆ—å°å‡ºä¾†çš„å½±åƒè¼ƒå…‰äº®ï¼›ç›¸ååœ°ï¼Œæ•¸å€¼"
+"è¼ƒå°æ™‚ï¼Œåˆ—å°å‡ºä¾†çš„å½±åƒå‰‡è¼ƒæš—ã€‚"
 
 #: src/main/print-color.c:249
-#, fuzzy
 msgid "AppGamma"
-msgstr "Gama:"
+msgstr ""
 
 #: src/main/print-color.c:250
 msgid "Gamma value assumed by application"
-msgstr ""
+msgstr "ç¨‹å¼ä½¿ç”¨çš„ Gamma å€¼"
 
 #: src/main/print-color.c:257 src/main/print-escp2-data.c:570
 #: src/main/print-escp2-data.c:580 src/main/print-escp2-data.c:592
@@ -812,12 +744,11 @@ msgstr ""
 #: src/main/print-escp2-data.c:632 src/gutenprintui/panel.c:2110
 #: src/gutenprintui2/panel.c:2108 src/escputil/escputil.c:864
 msgid "Cyan"
-msgstr "Azúrová"
+msgstr "æ°°è—"
 
 #: src/main/print-color.c:258
-#, fuzzy
 msgid "Adjust the cyan gamma"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´æ°°è—è‰² gamma å€¼"
 
 #: src/main/print-color.c:265 src/main/print-escp2-data.c:571
 #: src/main/print-escp2-data.c:581 src/main/print-escp2-data.c:593
@@ -825,12 +756,11 @@ msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
 #: src/main/print-escp2-data.c:631 src/gutenprintui/panel.c:2117
 #: src/gutenprintui2/panel.c:2115 src/escputil/escputil.c:865
 msgid "Magenta"
-msgstr "Purpurová"
+msgstr "æ´‹ç´…"
 
 #: src/main/print-color.c:266
-#, fuzzy
 msgid "Adjust the magenta gamma"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr "èª¿æ•´æ´‹ç´…è‰² gamma å€¼"
 
 #: src/main/print-color.c:273 src/main/print-escp2-data.c:572
 #: src/main/print-escp2-data.c:582 src/main/print-escp2-data.c:594
@@ -838,109 +768,94 @@ msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
 #: src/main/print-escp2-data.c:630 src/gutenprintui/panel.c:2124
 #: src/gutenprintui2/panel.c:2122 src/escputil/escputil.c:866
 msgid "Yellow"
-msgstr "®ltá"
+msgstr "é»ƒ"
 
 #: src/main/print-color.c:274
-#, fuzzy
 msgid "Adjust the yellow gamma"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "èª¿æ•´é»ƒè‰² gamma å€¼"
 
 #: src/main/print-color.c:281 src/main/print-escp2-data.c:635
 #: src/escputil/escputil.c:872
 msgid "Red"
-msgstr ""
+msgstr "ç´…"
 
 #: src/main/print-color.c:282
-#, fuzzy
 msgid "Adjust the red gamma"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "èª¿æ•´ç´…è‰² gamma å€¼"
 
 #: src/main/print-color.c:289
 msgid "Green"
-msgstr ""
+msgstr "ç¶ "
 
 #: src/main/print-color.c:290
-#, fuzzy
 msgid "Adjust the green gamma"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr "èª¿æ•´ç¶ è‰² gamma å€¼"
 
 #: src/main/print-color.c:297 src/main/print-escp2-data.c:636
 #: src/escputil/escputil.c:873
 msgid "Blue"
-msgstr ""
+msgstr "è—"
 
 #: src/main/print-color.c:298
-#, fuzzy
 msgid "Adjust the blue gamma"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´è—è‰² gamma å€¼"
 
 #: src/main/print-color.c:306
-#, fuzzy
 msgid "Adjust the black gamma"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´é»‘è‰² gamma å€¼"
 
 #: src/main/print-color.c:313 src/main/print-olympus.c:1221
 msgid "Cyan Balance"
-msgstr ""
+msgstr "æ°°è—è‰²å¹³è¡¡"
 
 #: src/main/print-color.c:313 src/main/print-color.c:321
 #: src/main/print-color.c:329
-#, fuzzy
 msgid "GrayBalance"
-msgstr "V odtieòoch ¹edej"
+msgstr ""
 
 #: src/main/print-color.c:314
-#, fuzzy
 msgid "Adjust the cyan gray balance"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-color.c:321 src/main/print-olympus.c:1229
-#, fuzzy
 msgid "Magenta Balance"
-msgstr "Purpurová"
+msgstr "æ´‹ç´…è‰²å¹³è¡¡"
 
 #: src/main/print-color.c:322
-#, fuzzy
 msgid "Adjust the magenta gray balance"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-color.c:329 src/main/print-olympus.c:1237
-#, fuzzy
 msgid "Yellow Balance"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "é»ƒè‰²å¹³è¡¡"
 
 #: src/main/print-color.c:330
-#, fuzzy
 msgid "Adjust the yellow gray balance"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-color.c:337
-#, fuzzy
 msgid "Saturation"
-msgstr "Sıtos»:"
+msgstr "å½©åº¦"
 
 #: src/main/print-color.c:338
 msgid ""
 "Adjust the saturation (color balance) of the print\n"
 "Use zero saturation to produce grayscale output using color and black inks"
 msgstr ""
-"Prispôsobenie sıtosti (farebného vyvá¾enia) tlaèe\n"
-"Pou¾ite nulu na vyprodukovanie vıstupu v odtieòoch ¹edej s pou¾itím "
-"farebného a èierneho atramentu"
+"èª¿æ•´åˆ—å°æ™‚çš„å½©åº¦ (è‰²å½©å¹³è¡¡)\n"
+"å°‡å½©åº¦è¨­å®šç‚º 0ï¼Œè¡¨ç¤ºä½¿ç”¨é¡è‰²å¢¨æ°´åŠé»‘è‰²å¢¨æ°´ç”¢ç”Ÿç°éšå½±åƒ"
 
 #: src/main/print-color.c:348
-#, fuzzy
 msgid "Ink Limit"
-msgstr "Typ atramentu"
+msgstr ""
 
 #: src/main/print-color.c:348 src/main/print-color.c:356
 #: src/main/print-color.c:364 src/main/print-color.c:372
 #: src/main/print-color.c:535 src/main/print-escp2.c:332
 #: src/main/print-escp2.c:338 src/main/print-escp2.c:344
 #: src/main/print-escp2.c:350 src/main/print-escp2.c:356
-#, fuzzy
 msgid "Advanced Output Control"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-color.c:349
 msgid "Limit the total ink printed to the page"
@@ -971,18 +886,16 @@ msgid "Upper bound of gray component reduction"
 msgstr ""
 
 #: src/main/print-color.c:436
-#, fuzzy
 msgid " Curve"
-msgstr "Èierna"
+msgstr ""
 
 #: src/main/print-color.c:437 src/main/print-color.c:447
 #: src/main/print-color.c:455 src/main/print-color.c:463
 #: src/main/print-color.c:471 src/main/print-color.c:479
 #: src/main/print-color.c:487 src/main/print-color.c:495
 #: src/main/print-color.c:503
-#, fuzzy
 msgid "Output Curves"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-color.c:437
 msgid "Curve for raw channel "
@@ -990,82 +903,67 @@ msgstr ""
 
 #: src/main/print-color.c:447
 msgid "Cyan Curve"
-msgstr ""
+msgstr "æ°°è—è‰²æ›²ç·š"
 
 #: src/main/print-color.c:448
-#, fuzzy
 msgid "Cyan curve"
-msgstr "Storno"
+msgstr "æ°°è—è‰²æ›²ç·š"
 
 #: src/main/print-color.c:455
-#, fuzzy
 msgid "Magenta Curve"
-msgstr "Purpurová"
+msgstr "æ´‹ç´…è‰²æ›²ç·š"
 
 #: src/main/print-color.c:456
-#, fuzzy
 msgid "Magenta curve"
-msgstr "Purpurová"
+msgstr "æ´‹ç´…è‰²æ›²ç·š"
 
 #: src/main/print-color.c:463
-#, fuzzy
 msgid "Yellow Curve"
-msgstr "®ltá"
+msgstr "é»ƒè‰²æ›²ç·š"
 
 #: src/main/print-color.c:464
-#, fuzzy
 msgid "Yellow curve"
-msgstr "®ltá"
+msgstr "é»ƒè‰²æ›²ç·š"
 
 #: src/main/print-color.c:471
-#, fuzzy
 msgid "Black Curve"
-msgstr "Èierna"
+msgstr "é»‘è‰²æ›²ç·š"
 
 #: src/main/print-color.c:472
-#, fuzzy
 msgid "Black curve"
-msgstr "Èierna"
+msgstr "é»‘è‰²æ›²ç·š"
 
 #: src/main/print-color.c:479
-#, fuzzy
 msgid "Red Curve"
-msgstr "®ltá"
+msgstr "ç´…è‰²æ›²ç·š"
 
 #: src/main/print-color.c:480
-#, fuzzy
 msgid "Red curve"
-msgstr "®ltá"
+msgstr "ç´…è‰²æ›²ç·š"
 
 #: src/main/print-color.c:487
-#, fuzzy
 msgid "Green Curve"
-msgstr "Purpurová"
+msgstr "ç¶ è‰²æ›²ç·š"
 
 #: src/main/print-color.c:488
-#, fuzzy
 msgid "Green curve"
-msgstr "Purpurová"
+msgstr "ç¶ è‰²æ›²ç·š"
 
 #: src/main/print-color.c:495
-#, fuzzy
 msgid "Blue Curve"
-msgstr "Èierna"
+msgstr "è—è‰²æ›²ç·š"
 
 #: src/main/print-color.c:496
-#, fuzzy
 msgid "Blue curve"
-msgstr "Èierna"
+msgstr "è—è‰²æ›²ç·š"
 
 #: src/main/print-color.c:503
-#, fuzzy
 msgid "White Curve"
-msgstr "®ltá"
+msgstr "ç™½è‰²æ›²ç·š"
 
 #: src/main/print-color.c:504
-#, fuzzy
 msgid "White curve"
-msgstr "®ltá"
+msgstr "ç™½è‰²æ›²ç·š"
 
 #: src/main/print-color.c:511
 msgid "Hue Map"
@@ -1081,9 +979,8 @@ msgid "Hue adjustment curve"
 msgstr ""
 
 #: src/main/print-color.c:519
-#, fuzzy
 msgid "Saturation Map"
-msgstr "Sıtos»:"
+msgstr ""
 
 #: src/main/print-color.c:520
 msgid "Saturation adjustment curve"
@@ -1115,24 +1012,24 @@ msgid "Value must be set for %s\n"
 msgstr ""
 
 #: src/main/printers.c:472 src/main/printers.c:477
-#, fuzzy, c-format
+#, c-format
 msgid "`%s' is not a valid %s\n"
-msgstr "%s nie je platnı parameter pre typ %s\n"
+msgstr ""
 
 #: src/main/printers.c:496
 #, c-format
 msgid "%s must be between %f and %f (is %f)\n"
-msgstr ""
+msgstr "%s å¿…é ˆåœ¨ %f å’Œ %f ä¹‹é–“ (å¯¦éš›ä¸Šæ˜¯ %f)\n"
 
 #: src/main/printers.c:518 src/main/printers.c:542
 #, c-format
 msgid "%s must be between %d and %d (is %d)\n"
-msgstr ""
+msgstr "%s å¿…é ˆåœ¨ %d å’Œ %d ä¹‹é–“ (å¯¦éš›ä¸Šæ˜¯ %d)\n"
 
 #: src/main/printers.c:573
 #, c-format
 msgid "%s bounds must be between %f and %f\n"
-msgstr ""
+msgstr "%s å¿…é ˆåœ¨ %f å’Œ %f ä¹‹é–“\n"
 
 #: src/main/printers.c:581
 #, c-format
@@ -1148,39 +1045,36 @@ msgid "wrap around"
 msgstr ""
 
 #: src/main/printers.c:629
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown type parameter %s (%d)\n"
-msgstr "Neznáma tlaèiareò %s\n"
+msgstr ""
 
 #: src/main/printers.c:642 src/main/printers.c:653
 #, c-format
 msgid "%s out of range (value %d, min %d, max %d)\n"
-msgstr "%s mimo rozsahu (hodnota %d, min %d, max %d)\n"
+msgstr ""
 
 #: src/main/printers.c:711
-#, fuzzy
 msgid "Page size is not valid\n"
-msgstr "Veµkos» obrázka nie je platná\n"
+msgstr "é é¢å°ºå¯¸ç„¡æ•ˆ\n"
 
 #: src/main/printers.c:732
-#, fuzzy, c-format
+#, c-format
 msgid "Top margin must not be less than %d\n"
-msgstr "Hornı okraj nemô¾e by» men¹í ako nula\n"
+msgstr "é ‚éƒ¨é‚Šæ¡†å¯¬åº¦å¿…é ˆä¸å°‘æ–¼ %d\n"
 
 #: src/main/printers.c:738
-#, fuzzy, c-format
+#, c-format
 msgid "Left margin must not be less than %d\n"
-msgstr "¥avı okraj nemô¾e by» men¹í ako nula\n"
+msgstr "å·¦é‚Šé‚Šæ¡†å¯¬åº¦å¿…é ˆä¸å°‘æ–¼ %d\n"
 
 #: src/main/printers.c:744
-#, fuzzy
 msgid "Height must be greater than zero\n"
-msgstr "¥avı okraj nemô¾e by» men¹í ako nula\n"
+msgstr "é«˜åº¦å¿…é ˆå¤§æ–¼é›¶\n"
 
 #: src/main/printers.c:750
-#, fuzzy
 msgid "Width must be greater than zero\n"
-msgstr "Hornı okraj nemô¾e by» men¹í ako nula\n"
+msgstr "å¯¬åº¦å¿…é ˆå¤§æ–¼é›¶\n"
 
 #: src/main/printers.c:756
 #, c-format
@@ -1204,12 +1098,12 @@ msgstr ""
 #: src/main/generic-options.c:36 src/gutenprintui/panel.c:2549
 #: src/gutenprintui2/panel.c:2573
 msgid "Standard"
-msgstr "©tandardnı"
+msgstr "æ¨™æº–"
 
 #: src/main/print-escp2-data.c:295 src/main/print-escp2-data.c:433
 #: src/main/print-escp2-data.c:461
 msgid "Roll Feed"
-msgstr "Kotúèovı podávaè"
+msgstr ""
 
 #: src/main/print-escp2-data.c:323 src/main/print-escp2-data.c:378
 msgid "Roll Feed (cut each page)"
@@ -1220,14 +1114,12 @@ msgid "Roll Feed (do not cut)"
 msgstr ""
 
 #: src/main/print-escp2-data.c:360 src/main/print-escp2-data.c:415
-#, fuzzy
 msgid "Manual Feed"
-msgstr "Manuál"
+msgstr "äººæ‰‹é€ç´™"
 
 #: src/main/print-escp2-data.c:369 src/main/print-escp2-data.c:424
-#, fuzzy
 msgid "Print to CD"
-msgstr "Tlaèi» do súboru?"
+msgstr "åˆ—å°è‡³å…‰ç¢Ÿ"
 
 #: src/main/print-escp2-data.c:480
 msgid "Cut Sheet Bin 1"
@@ -1238,9 +1130,8 @@ msgid "Cut Sheet Bin 2"
 msgstr ""
 
 #: src/main/print-escp2-data.c:498
-#, fuzzy
 msgid "Cut Sheet Autoselect"
-msgstr "Automatickı vıber"
+msgstr ""
 
 #: src/main/print-escp2-data.c:507
 msgid "Manual Selection"
@@ -1259,24 +1150,20 @@ msgid "Draft"
 msgstr ""
 
 #: src/main/print-escp2-data.c:546 src/main/generic-options.c:37
-#, fuzzy
 msgid "High"
-msgstr "Vı¹ka:"
+msgstr ""
 
 #: src/main/print-escp2-data.c:547 src/main/generic-options.c:38
-#, fuzzy
 msgid "Photo"
-msgstr "Fotografia"
+msgstr "ç›¸ç‰‡"
 
 #: src/main/print-escp2-data.c:548 src/main/generic-options.c:39
-#, fuzzy
 msgid "Super Photo"
-msgstr "Stylus Photo"
+msgstr ""
 
 #: src/main/print-escp2-data.c:549 src/main/generic-options.c:40
-#, fuzzy
 msgid "Ultra Photo"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/print-escp2-data.c:550 src/main/generic-options.c:41
 msgid "Best"
@@ -1285,43 +1172,36 @@ msgstr ""
 #: src/main/print-escp2-data.c:583 src/main/print-escp2-data.c:595
 #: src/main/print-escp2-data.c:608 src/main/print-escp2-data.c:621
 #: src/escputil/escputil.c:867
-#, fuzzy
 msgid "Light Cyan"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-escp2-data.c:584 src/main/print-escp2-data.c:596
 #: src/main/print-escp2-data.c:609 src/main/print-escp2-data.c:622
 #: src/escputil/escputil.c:868
-#, fuzzy
 msgid "Light Magenta"
-msgstr "Jasná purpurová"
+msgstr ""
 
 #: src/main/print-escp2-data.c:597 src/escputil/escputil.c:870
-#, fuzzy
 msgid "Light Black"
-msgstr "Èierna"
+msgstr ""
 
 #: src/main/print-escp2-data.c:610 src/escputil/escputil.c:869
-#, fuzzy
 msgid "Dark Yellow"
-msgstr "®ltá"
+msgstr ""
 
 #: src/main/print-escp2-data.c:633 src/main/escp2-channels.c:2054
 #: src/escputil/escputil.c:862
-#, fuzzy
 msgid "Matte Black"
-msgstr "Matnı papier"
+msgstr ""
 
 #: src/main/print-escp2-data.c:634 src/main/escp2-channels.c:2072
 #: src/escputil/escputil.c:863
-#, fuzzy
 msgid "Photo Black"
-msgstr "Fotografickı papier"
+msgstr ""
 
 #: src/main/print-escp2-data.c:637 src/escputil/escputil.c:874
-#, fuzzy
 msgid "Gloss Optimizer"
-msgstr "Lesklı film"
+msgstr ""
 
 #: src/main/print-escp2.c:159
 msgid "Automatic Printing Mode"
@@ -1334,13 +1214,12 @@ msgstr ""
 
 #: src/main/print-escp2.c:160
 msgid "Automatic printing mode"
-msgstr ""
+msgstr "è‡ªå‹•åˆ—å°æ¨¡å¼"
 
 #: src/main/print-escp2.c:171 src/main/print-escp2.c:172
 #: src/main/generic-options.c:62 src/main/generic-options.c:63
-#, fuzzy
 msgid "Print Quality"
-msgstr "720 DPI Najvy¹¹ia kvalita"
+msgstr "åˆ—å°å“è³ª"
 
 #: src/main/print-escp2.c:195
 msgid "CD Hub Size"
@@ -1363,9 +1242,8 @@ msgid "CD Vertical Fine Adjustment"
 msgstr ""
 
 #: src/main/print-escp2.c:214
-#, fuzzy
 msgid "Resolution of the print"
-msgstr "Rozlí¹enie a kvalita tlaèe"
+msgstr "åˆ—å°æ™‚çš„è§£æåº¦"
 
 #: src/main/print-escp2.c:230
 msgid "Enhanced Gloss"
@@ -1376,13 +1254,12 @@ msgid "Add gloss enhancement"
 msgstr ""
 
 #: src/main/print-escp2.c:236
-#, fuzzy
 msgid "Ink Set"
-msgstr "Typ atramentu"
+msgstr ""
 
 #: src/main/print-escp2.c:242
 msgid "Printing Direction"
-msgstr ""
+msgstr "åˆ—å°æ–¹å‘"
 
 #: src/main/print-escp2.c:242 src/main/print-escp2.c:254
 msgid "Advanced Output Adjustment"
@@ -1417,9 +1294,8 @@ msgid "Adjust dot size as necessary to achieve desired density"
 msgstr ""
 
 #: src/main/print-escp2.c:266 src/main/print-escp2.c:267
-#, fuzzy
 msgid "Output Order"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-escp2.c:272 src/main/print-escp2.c:273
 msgid "Alignment Passes"
@@ -1430,9 +1306,8 @@ msgid "Alignment Choices"
 msgstr ""
 
 #: src/main/print-escp2.c:284 src/main/print-escp2.c:285
-#, fuzzy
 msgid "Ink change command"
-msgstr "Neznámy príkaz.\n"
+msgstr ""
 
 #: src/main/print-escp2.c:290 src/main/print-escp2.c:291
 msgid "Alternate Alignment Passes"
@@ -1440,101 +1315,84 @@ msgstr ""
 
 #: src/main/print-escp2.c:296 src/main/print-escp2.c:297
 #: src/main/print-escp2.c:303
-#, fuzzy
 msgid "Alternate Alignment Choices"
-msgstr "Opakujem proces zarovnávania.\n"
+msgstr ""
 
 #: src/main/print-escp2.c:302
 msgid "Supports Packet Mode"
 msgstr ""
 
 #: src/main/print-escp2.c:314 src/main/print-escp2.c:315
-#, fuzzy
 msgid "Channel Names"
-msgstr "Storno"
+msgstr ""
 
 #: src/main/print-escp2.c:327
 msgid "Raw Channel Count"
 msgstr ""
 
 #: src/main/print-escp2.c:332
-#, fuzzy
 msgid "Cyan Map"
-msgstr "Azúrová"
+msgstr ""
 
 #: src/main/print-escp2.c:333
-#, fuzzy
 msgid "Adjust the cyan map"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:338
-#, fuzzy
 msgid "Magenta Map"
-msgstr "Purpurová"
+msgstr ""
 
 #: src/main/print-escp2.c:339
-#, fuzzy
 msgid "Adjust the magenta map"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:344
-#, fuzzy
 msgid "Yellow Map"
-msgstr "®ltá"
+msgstr ""
 
 #: src/main/print-escp2.c:345
-#, fuzzy
 msgid "Adjust the yellow map"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:350
-#, fuzzy
 msgid "Blue Map"
-msgstr "Èiernobielo"
+msgstr ""
 
 #: src/main/print-escp2.c:351
-#, fuzzy
 msgid "Adjust the blue map"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:356
 msgid "Red Map"
 msgstr ""
 
 #: src/main/print-escp2.c:357
-#, fuzzy
 msgid "Adjust the red map"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:444
-#, fuzzy
 msgid "Red Density"
-msgstr "Hustota:"
+msgstr "ç´…è‰²å¯†åº¦"
 
 #: src/main/print-escp2.c:445
-#, fuzzy
 msgid "Adjust the red density"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "èª¿æ•´ç´…è‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-escp2.c:452
-#, fuzzy
 msgid "Blue Density"
-msgstr "Hustota:"
+msgstr "è—è‰²å¯†åº¦"
 
 #: src/main/print-escp2.c:453
-#, fuzzy
 msgid "Adjust the blue density"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´è—è‰²è‰²å½©å¯†åº¦"
 
 #: src/main/print-escp2.c:460
-#, fuzzy
 msgid "Gloss Level"
-msgstr "Lesklı film"
+msgstr ""
 
 #: src/main/print-escp2.c:461
-#, fuzzy
 msgid "Adjust the gloss level"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr ""
 
 #: src/main/print-escp2.c:484 src/main/print-escp2.c:485
 msgid "Dark Yellow Transition"
@@ -1545,24 +1403,20 @@ msgid "Gray Transition"
 msgstr ""
 
 #: src/main/print-escp2.c:500 src/main/print-escp2.c:501
-#, fuzzy
 msgid "Dark Gray Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-escp2.c:508
-#, fuzzy
 msgid "Mid Gray Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-escp2.c:509
-#, fuzzy
 msgid "Medium Gray Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-escp2.c:516 src/main/print-escp2.c:517
-#, fuzzy
 msgid "Light Gray Transition"
-msgstr "Jasná azúrová"
+msgstr ""
 
 #: src/main/print-escp2.c:524
 msgid "Red and Blue Ink Usage"
@@ -1573,9 +1427,8 @@ msgid "Amount of red and blue ink to use"
 msgstr ""
 
 #: src/main/print-escp2.c:1376
-#, fuzzy
 msgid "Full Manual Control"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-escp2.c:1378
 msgid "Automatic Setting Control"
@@ -1583,41 +1436,36 @@ msgstr ""
 
 #: src/main/print-escp2.c:1389 src/main/xmli18n-tmp.h:6
 msgid "CD - 5 inch"
-msgstr ""
+msgstr "5 å‹å…‰ç¢Ÿ"
 
 #: src/main/print-escp2.c:1391 src/main/xmli18n-tmp.h:7
 msgid "CD - 3 inch"
-msgstr ""
+msgstr "3 å‹å…‰ç¢Ÿ"
 
 #: src/main/print-escp2.c:1413
 msgid "Normal"
 msgstr ""
 
 #: src/main/print-escp2.c:1415
-#, fuzzy
 msgid "Print To Hub"
-msgstr "Tlaèi» do súboru?"
+msgstr ""
 
 #: src/main/print-escp2.c:1440 src/main/generic-options.c:213
 #: src/main/generic-options.c:230
-#, fuzzy
 msgid "Manual Control"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/main/print-escp2.c:1567 src/cups/genppd.c:1286
-#, fuzzy
 msgid "Automatic"
-msgstr "Veµkos»"
+msgstr "è‡ªå‹•"
 
 #: src/main/print-escp2.c:1569
-#, fuzzy
 msgid "Bidirectional"
-msgstr "600 DPI Jednosmerne"
+msgstr ""
 
 #: src/main/print-escp2.c:1571
-#, fuzzy
 msgid "Unidirectional"
-msgstr "600 DPI Jednosmerne"
+msgstr ""
 
 #: src/main/print-escp2.c:1604
 msgid "Alternate Fill"
@@ -1640,9 +1488,9 @@ msgid "Nearest Neighbor Avoidance"
 msgstr ""
 
 #: src/main/print-escp2.c:2010
-#, fuzzy, c-format
+#, c-format
 msgid "This printer does not support raw printer output at depth %d\n"
-msgstr "Tlaèiareò nepodporuje farebnı vıstup\n"
+msgstr ""
 
 #: src/main/print-escp2.c:2954 src/main/print-olympus.c:1642
 #: src/main/print-raw.c:217
@@ -1659,11 +1507,11 @@ msgstr "600 DPI"
 
 #: src/main/print-lexmark.c:579 src/main/print-lexmark.c:655
 msgid "600 DPI high quality"
-msgstr "600 DPI Vysoká kvalita"
+msgstr "600 DPI é«˜å“è³ª"
 
 #: src/main/print-lexmark.c:580 src/main/print-lexmark.c:656
 msgid "600 DPI Unidirectional"
-msgstr "600 DPI Jednosmerne"
+msgstr ""
 
 #: src/main/print-lexmark.c:581 src/main/print-lexmark.c:657
 msgid "1200 DPI"
@@ -1671,15 +1519,15 @@ msgstr "1200 DPI"
 
 #: src/main/print-lexmark.c:582 src/main/print-lexmark.c:658
 msgid "1200 DPI high quality"
-msgstr "1200 DPI Vysoká kvalita"
+msgstr ""
 
 #: src/main/print-lexmark.c:583 src/main/print-lexmark.c:659
 msgid "1200 DPI highest quality"
-msgstr "1200 DPI Najvy¹¹ia kvalita"
+msgstr "1200 DPI æœ€é«˜å“è³ª"
 
 #: src/main/print-lexmark.c:584 src/main/print-lexmark.c:660
 msgid "1200 DPI  Unidirectional"
-msgstr "1200 DPI Jednosmerne"
+msgstr ""
 
 #: src/main/print-lexmark.c:585
 msgid "2400 DPI x 1200 DPI"
@@ -1687,15 +1535,15 @@ msgstr "2400 DPI x 1200 DPI"
 
 #: src/main/print-lexmark.c:586
 msgid "2400 DPI x 1200 DPI high quality"
-msgstr "2400 DPI x 1200 DPI Vysoká kvalita"
+msgstr "2400 DPI x 1200 DPI é«˜å“è³ª"
 
 #: src/main/print-lexmark.c:587
 msgid "2400 DPI x 1200 DPI highest quality"
-msgstr "2400 DPI x 1200 DPI Najvy¹¹ia kvalita"
+msgstr "2400 DPI x 1200 DPI æœ€é«˜å“è³ª"
 
 #: src/main/print-lexmark.c:589
 msgid "test print"
-msgstr "Test tlaèe"
+msgstr ""
 
 #: src/main/print-lexmark.c:601 src/main/print-lexmark.c:671
 #: src/main/escp2-channels.c:909 src/main/escp2-channels.c:923
@@ -1704,7 +1552,7 @@ msgstr "Test tlaèe"
 #: src/main/escp2-channels.c:1003 src/main/escp2-channels.c:1017
 #: src/main/escp2-channels.c:1031
 msgid "Four Color Standard"
-msgstr "©tandardnı ¹tvorfarebnı"
+msgstr ""
 
 #: src/main/print-lexmark.c:604 src/main/print-lexmark.c:674
 #: src/main/escp2-channels.c:786 src/main/escp2-channels.c:800
@@ -1712,81 +1560,88 @@ msgstr "©tandardnı ¹tvorfarebnı"
 #: src/main/escp2-channels.c:842 src/main/escp2-channels.c:856
 #: src/main/escp2-channels.c:880 src/main/escp2-channels.c:886
 msgid "Three Color Composite"
-msgstr "Kompozitnı trojfarebnı"
+msgstr ""
 
 #: src/main/print-lexmark.c:607 src/main/print-lexmark.c:677
 #: src/main/escp2-channels.c:1091 src/main/escp2-channels.c:1105
 #: src/main/escp2-channels.c:1295 src/main/escp2-channels.c:1310
 #: src/main/escp2-channels.c:1327
 msgid "Six Color Photo"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/print-lexmark.c:610 src/main/print-lexmark.c:680
 #: src/main/escp2-channels.c:1054 src/main/escp2-channels.c:1068
 #: src/main/escp2-channels.c:1239 src/main/escp2-channels.c:1254
 #: src/main/escp2-channels.c:1271
 msgid "Five Color Photo Composite"
-msgstr "Kompozitnı fotografickı pä»farebnı"
+msgstr ""
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:861 src/main/escp2-papers.c:963
 #: src/main/escp2-papers.c:1007 src/main/escp2-papers.c:1051
 #: src/main/escp2-papers.c:1099 src/main/escp2-papers.c:1143
 msgid "Glossy Film"
-msgstr "Lesklı film"
+msgstr "å…‰é¢è† ç‰‡"
 
 #: src/main/print-lexmark.c:869 src/main/escp2-papers.c:967
 #: src/main/escp2-papers.c:1011 src/main/escp2-papers.c:1055
 #: src/main/escp2-papers.c:1103 src/main/escp2-papers.c:1147
 msgid "Envelopes"
-msgstr "Obálky"
+msgstr "ä¿¡å°"
 
+# (Abel) from fuji, epson
 #: src/main/print-lexmark.c:873 src/main/escp2-papers.c:971
 #: src/main/escp2-papers.c:1015 src/main/escp2-papers.c:1059
 #: src/main/escp2-papers.c:1107 src/main/escp2-papers.c:1151
 msgid "Matte Paper"
-msgstr "Matnı papier"
+msgstr "é›ªé¢éŠ…ç‰ˆç´™"
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:877 src/main/escp2-papers.c:975
 #: src/main/escp2-papers.c:1019 src/main/escp2-papers.c:1063
 #: src/main/escp2-papers.c:1111 src/main/escp2-papers.c:1155
 msgid "Inkjet Paper"
-msgstr "Papier pre atramentovú tlaèiareò"
+msgstr "å™´å¢¨å°ˆç”¨ç´™"
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:881 src/main/escp2-papers.c:977
 #: src/main/escp2-papers.c:1021 src/main/escp2-papers.c:1065
 #: src/main/escp2-papers.c:1113 src/main/escp2-papers.c:1157
 msgid "Photo Quality Inkjet Paper"
-msgstr "Papier s fotografickou kvalitou"
+msgstr "å„ªè³ªå™´å¢¨å°ˆç”¨ç´™"
 
 #: src/main/print-lexmark.c:885 src/main/escp2-papers.c:979
 #: src/main/escp2-papers.c:1023 src/main/escp2-papers.c:1067
 #: src/main/escp2-papers.c:1115 src/main/escp2-papers.c:1159
 msgid "Photo Paper"
-msgstr "Fotografickı papier"
+msgstr "ç›¸ç´™"
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:889 src/main/escp2-papers.c:981
 #: src/main/escp2-papers.c:1025 src/main/escp2-papers.c:1069
 #: src/main/escp2-papers.c:1117 src/main/escp2-papers.c:1161
 msgid "Premium Glossy Photo Paper"
-msgstr "Lesklı foto papier Premium"
+msgstr "é ‚ç´šå…‰é¢ç›¸ç´™"
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:893 src/main/escp2-papers.c:985
 #: src/main/escp2-papers.c:1029 src/main/escp2-papers.c:1073
 #: src/main/escp2-papers.c:1121 src/main/escp2-papers.c:1165
 msgid "Premium Luster Photo Paper"
-msgstr "Ligotavı foto papier Premium"
+msgstr "ç²¾é¸å…‰é¢ç›¸ç´™"
 
+# (Abel) from Epson
 #: src/main/print-lexmark.c:897 src/main/escp2-papers.c:987
 #: src/main/escp2-papers.c:1031 src/main/escp2-papers.c:1079
 #: src/main/escp2-papers.c:1123 src/main/escp2-papers.c:1171
 msgid "Photo Quality Glossy Paper"
-msgstr "Lesklı fotografickı papier"
+msgstr "å…‰é¢ç´™"
 
 #: src/main/print-lexmark.c:901 src/main/escp2-papers.c:989
 #: src/main/escp2-papers.c:1033 src/main/escp2-papers.c:1081
 #: src/main/escp2-papers.c:1125 src/main/escp2-papers.c:1173
 msgid "Ilford Heavy Paper"
-msgstr "Ilford »a¾kı papier"
+msgstr ""
 
 #: src/main/print-olympus.c:264
 msgid "Coated"
@@ -1798,119 +1653,112 @@ msgid "None"
 msgstr ""
 
 #: src/main/print-olympus.c:858
-#, fuzzy
 msgid "Glossy"
-msgstr "Lesklı film"
+msgstr "å…‰é¢"
 
 #: src/main/print-olympus.c:859
 msgid "Texture"
 msgstr ""
 
 #: src/main/print-olympus.c:860
-#, fuzzy
 msgid "Matte"
-msgstr "Matnı papier"
+msgstr ""
 
 #: src/main/print-olympus.c:1186 src/main/print-olympus.c:1187
 msgid "Laminate Pattern"
 msgstr ""
 
 #: src/main/print-olympus.c:1222
-#, fuzzy
 msgid "Adjust the cyan balance"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´æ°°è—è‰²è‰²å½©å¹³è¡¡"
 
 #: src/main/print-olympus.c:1230
-#, fuzzy
 msgid "Adjust the magenta balance"
-msgstr "Prispôsobenie vyvá¾enie purpurovej farby pre tlaè"
+msgstr "èª¿æ•´æ´‹ç´…è‰²è‰²å½©å¹³è¡¡"
 
 #: src/main/print-olympus.c:1238
-#, fuzzy
 msgid "Adjust the yellow balance"
-msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+msgstr "èª¿æ•´é»ƒè‰²è‰²å½©å¹³è¡¡"
 
 #: src/main/print-olympus.c:1245
-#, fuzzy
 msgid "Black Balance"
-msgstr "Èiernobielo"
+msgstr "é»‘è‰²å¹³è¡¡"
 
 #: src/main/print-olympus.c:1246
-#, fuzzy
 msgid "Adjust the black balance"
-msgstr "Prispôsobenie vyvá¾enie azúrovej farby pre tlaè"
+msgstr "èª¿æ•´é»‘è‰²è‰²å½©å¹³è¡¡"
 
 #: src/main/print-pcl.c:182
 msgid "Plain"
-msgstr "Jednoduchá"
+msgstr ""
 
 #: src/main/print-pcl.c:183
 msgid "Bond"
-msgstr "Bond"
+msgstr ""
 
 #: src/main/print-pcl.c:184
 msgid "Premium"
-msgstr "Premium"
+msgstr "é ‚ç´š"
 
 #: src/main/print-pcl.c:185
 msgid "Glossy Photo"
-msgstr "Lesklé foto"
+msgstr "å…‰é¢ç›¸ç´™"
 
 #: src/main/print-pcl.c:186
 msgid "Transparency"
-msgstr "Priesvitné fólie"
+msgstr "é€æ˜åº¦"
 
 #: src/main/print-pcl.c:187
 msgid "Quick-dry Photo"
-msgstr "Rıchloschnúce foto"
+msgstr ""
 
 #: src/main/print-pcl.c:188
 msgid "Quick-dry Transparency"
-msgstr "Rıchloschnúce priesvit. fólie"
+msgstr ""
 
 #: src/main/print-pcl.c:228 src/main/xmli18n-tmp.h:15
 msgid "Manual"
-msgstr "Manuál"
+msgstr "è‡ªé¸"
 
 #: src/main/print-pcl.c:230
 msgid "Tray 1"
-msgstr "Zásobník 1"
+msgstr ""
 
 #: src/main/print-pcl.c:231 src/main/print-pcl.c:237
 msgid "Tray 2"
-msgstr "Zásobník 2"
+msgstr ""
 
 #: src/main/print-pcl.c:232
 msgid "Tray 3"
-msgstr "Zásobník 3"
+msgstr ""
 
 #: src/main/print-pcl.c:233
 msgid "Tray 4"
-msgstr "Zásobník 4"
+msgstr ""
 
 #: src/main/print-pcl.c:234
 msgid "Portable Sheet Feeder"
-msgstr "Prenosnı podávaè papiera"
+msgstr ""
 
 #: src/main/print-pcl.c:235
 msgid "Desktop Sheet Feeder"
-msgstr "Stolovı podávaè papiera"
+msgstr ""
 
 #: src/main/print-pcl.c:236
 msgid "Tray"
-msgstr "Zásobník"
+msgstr ""
 
 #: src/main/print-pcl.c:238
 msgid "Optional Source"
-msgstr "Voliteµnı zdroj"
+msgstr ""
 
 #: src/main/print-pcl.c:239
 msgid "Autoselect"
-msgstr "Automatickı vıber"
+msgstr "è‡ªå‹•é¸æ“‡"
 
 #: src/main/print-pcl.c:256
 msgid "600x600 DPI monochrome"
-msgstr "600x600 DPI monochromaticky"
+msgstr "600x600 DPI å–®è‰²"
 
 #: src/main/print-pcl.c:259
 msgid "2400x600 DPI"
@@ -1918,7 +1766,7 @@ msgstr "2400x600 DPI"
 
 #: src/main/print-pcl.c:1195
 msgid "Double-Sided Printing"
-msgstr ""
+msgstr "é›™é¢åˆ—å°"
 
 #: src/main/print-pcl.c:1196
 msgid "Duplex/Tumble Setting"
@@ -1926,11 +1774,11 @@ msgstr ""
 
 #: src/main/print-pcl.c:1427
 msgid "Color + Black Cartridges"
-msgstr "Farebná + èierna kazeta"
+msgstr ""
 
 #: src/main/print-pcl.c:1428
 msgid "Color + Photo Cartridges"
-msgstr "Farebná + Foto kazeta"
+msgstr ""
 
 #: src/main/print-pcl.c:1439 src/main/escp2-resolutions.c:429
 #: src/main/escp2-resolutions.c:437 src/main/escp2-resolutions.c:448
@@ -1949,22 +1797,20 @@ msgstr ""
 #: src/main/print-ps.c:96
 #, fuzzy
 msgid "PPDFile"
-msgstr "PPD súbor:"
+msgstr "PPD æª”"
 
 #: src/main/print-ps.c:97 src/gutenprintui/panel.c:1735
 #: src/gutenprintui2/panel.c:1734
-#, fuzzy
 msgid "PPD File"
-msgstr "PPD súbor?"
+msgstr "PPD æª”"
 
 #: src/main/print-raw.c:223
 msgid "Image dimensions must match paper dimensions"
 msgstr ""
 
 #: src/main/escp2-channels.c:675 src/main/escp2-channels.c:688
-#, fuzzy
 msgid "Two Level Grayscale"
-msgstr "V odtieòoch ¹edej"
+msgstr ""
 
 #: src/main/escp2-channels.c:710 src/main/escp2-channels.c:723
 #: src/main/escp2-channels.c:736 src/main/escp2-channels.c:749
@@ -1976,85 +1822,72 @@ msgstr ""
 
 #: src/main/escp2-channels.c:1128 src/main/escp2-channels.c:1142
 msgid "Six Color Enhanced Composite"
-msgstr "Kompozitnı roz¹írenı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1165 src/main/escp2-channels.c:1179
 #: src/main/escp2-channels.c:1215
-#, fuzzy
 msgid "Seven Color Photo"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1201
 msgid "Seven Color Enhanced"
-msgstr "Roz¹írenı sedemfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1348 src/main/escp2-channels.c:1354
-#, fuzzy
 msgid "One Color Raw"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1360
-#, fuzzy
 msgid "One Color Raw Enhanced Gloss"
-msgstr "Roz¹írenı sedemfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1373 src/main/escp2-channels.c:1385
-#, fuzzy
 msgid "Two Color Raw"
-msgstr "©tandardnı ¹tvorfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1399 src/main/escp2-channels.c:1413
 #: src/main/escp2-channels.c:1440 src/main/escp2-channels.c:1453
 #: src/main/escp2-channels.c:1466 src/main/escp2-channels.c:1480
 #: src/main/escp2-channels.c:1494
-#, fuzzy
 msgid "Three Color Raw"
-msgstr "Kompozitnı trojfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1427
-#, fuzzy
 msgid "Three Color Raw Gloss"
-msgstr "Kompozitnı trojfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1501 src/main/escp2-channels.c:1507
 #: src/main/escp2-channels.c:1513 src/main/escp2-channels.c:1519
 #: src/main/escp2-channels.c:1525 src/main/escp2-channels.c:1531
 #: src/main/escp2-channels.c:1537 src/main/escp2-channels.c:1543
-#, fuzzy
 msgid "Four Color Raw"
-msgstr "©tandardnı ¹tvorfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1549
-#, fuzzy
 msgid "Four Color Raw Gloss"
-msgstr "©tandardnı ¹tvorfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1564 src/main/escp2-channels.c:1578
-#, fuzzy
 msgid "Five Color Raw"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1594 src/main/escp2-channels.c:1600
 #: src/main/escp2-channels.c:1615
-#, fuzzy
 msgid "Six Color Raw"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1621
-#, fuzzy
 msgid "Six Color Enhanced Gloss Raw"
-msgstr "Kompozitnı roz¹írenı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1636 src/main/escp2-channels.c:1651
 #: src/main/escp2-channels.c:1666
-#, fuzzy
 msgid "Seven Color Raw"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1683
-#, fuzzy
 msgid "Seven Color Enhanced Gloss Raw"
-msgstr "Roz¹írenı sedemfarebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:1815 src/main/escp2-channels.c:1828
 #: src/main/escp2-channels.c:1848 src/main/escp2-channels.c:1851
@@ -2067,9 +1900,8 @@ msgid "EPSON Standard Inks"
 msgstr ""
 
 #: src/main/escp2-channels.c:2009 src/main/escp2-channels.c:2034
-#, fuzzy
 msgid "UltraChrome Photo Black"
-msgstr "Fotografickı ¹es»farebnı"
+msgstr ""
 
 #: src/main/escp2-channels.c:2013 src/main/escp2-channels.c:2038
 msgid "UltraChrome Matte Black"
@@ -2079,13 +1911,13 @@ msgstr ""
 #: src/main/escp2-papers.c:1047 src/main/escp2-papers.c:1095
 #: src/main/escp2-papers.c:1139
 msgid "Plain Paper Fast Load"
-msgstr "Obyèajnı papier rıchle nasadenie"
+msgstr ""
 
 #: src/main/escp2-papers.c:961 src/main/escp2-papers.c:1005
 #: src/main/escp2-papers.c:1049 src/main/escp2-papers.c:1097
 #: src/main/escp2-papers.c:1141 src/main/xmli18n-tmp.h:5
 msgid "Postcard"
-msgstr "Pohµadnica"
+msgstr "æ˜ä¿¡ç‰‡"
 
 #: src/main/escp2-papers.c:969 src/main/escp2-papers.c:1013
 #: src/main/escp2-papers.c:1057 src/main/escp2-papers.c:1105
@@ -2096,122 +1928,104 @@ msgstr ""
 #: src/main/escp2-papers.c:973 src/main/escp2-papers.c:1017
 #: src/main/escp2-papers.c:1061 src/main/escp2-papers.c:1109
 #: src/main/escp2-papers.c:1153
-#, fuzzy
 msgid "Matte Paper Heavyweight"
-msgstr "Matnı papier"
+msgstr ""
 
+# (Abel) from Epson
 #: src/main/escp2-papers.c:983 src/main/escp2-papers.c:1027
 #: src/main/escp2-papers.c:1071 src/main/escp2-papers.c:1119
 #: src/main/escp2-papers.c:1163
-#, fuzzy
 msgid "Premium Semigloss Photo Paper"
-msgstr "Lesklı foto papier Premium"
+msgstr "é ‚ç´šæŸ”å…‰ç›¸ç´™"
 
 #: src/main/escp2-papers.c:991 src/main/escp2-papers.c:1035
 #: src/main/escp2-papers.c:1083 src/main/escp2-papers.c:1127
 #: src/main/escp2-papers.c:1175
-#, fuzzy
 msgid "ColorLife Paper"
-msgstr "Obyèajnı papier"
+msgstr ""
 
 #: src/main/escp2-papers.c:1075 src/main/escp2-papers.c:1167
-#, fuzzy
 msgid "Archival Matte Paper"
-msgstr "Matnı papier"
+msgstr ""
 
+# (Abel) from Epson
 #: src/main/escp2-papers.c:1077 src/main/escp2-papers.c:1169
 msgid "Watercolor Paper - Radiant White"
-msgstr ""
+msgstr "æ°´å½©ç´™-äº®ç™½è‰²"
 
 #: src/main/escp2-resolutions.c:33 src/main/escp2-resolutions.c:36
 msgid "360 x 90 DPI Fast Economy"
 msgstr ""
 
 #: src/main/escp2-resolutions.c:40 src/main/escp2-resolutions.c:43
-#, fuzzy
 msgid "360 x 120 DPI Economy"
-msgstr "600x600 DPI monochromaticky"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:47 src/main/escp2-resolutions.c:50
 msgid "180 DPI Economy"
 msgstr ""
 
 #: src/main/escp2-resolutions.c:54 src/main/escp2-resolutions.c:57
-#, fuzzy
 msgid "360 x 180 DPI Draft"
-msgstr "150x150 DPI"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:61 src/main/escp2-resolutions.c:64
-#, fuzzy
 msgid "360 x 240 DPI Draft"
-msgstr "600x600 DPI"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:68
-#, fuzzy
 msgid "360 DPI High Quality"
-msgstr "1440 x 360 DPI Vysoká kvalita"
+msgstr "360 DPI é«˜å“è³ª"
 
 #: src/main/escp2-resolutions.c:71 src/main/escp2-resolutions.c:74
 #: src/main/escp2-resolutions.c:77
-#, fuzzy
 msgid "360 DPI"
-msgstr "600 DPI"
+msgstr "360 DPI"
 
 #: src/main/escp2-resolutions.c:81 src/main/escp2-resolutions.c:84
-#, fuzzy
 msgid "720 x 360 DPI"
 msgstr "720 x 360 DPI"
 
 #: src/main/escp2-resolutions.c:88 src/main/escp2-resolutions.c:91
-#, fuzzy
 msgid "720 DPI"
-msgstr "1200 DPI"
+msgstr "720 DPI"
 
 #: src/main/escp2-resolutions.c:94
-#, fuzzy
 msgid "720 DPI High Quality"
-msgstr "1200 DPI Vysoká kvalita"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:97
-#, fuzzy
 msgid "720 DPI Highest Quality"
-msgstr "1200 DPI Najvy¹¹ia kvalita"
+msgstr "720 DPI æœ€é«˜å“è³ª"
 
 #: src/main/escp2-resolutions.c:101 src/main/escp2-resolutions.c:104
-#, fuzzy
 msgid "1440 x 720 DPI"
 msgstr "1440 x 720 DPI"
 
 #: src/main/escp2-resolutions.c:107
-#, fuzzy
 msgid "1440 x 720 DPI Highest Quality"
-msgstr "1440 x 360 DPI Najvy¹¹ia kvalita"
+msgstr "1440 x 720 DPI æœ€é«˜å“è³ª"
 
 #: src/main/escp2-resolutions.c:111 src/main/escp2-resolutions.c:114
-#, fuzzy
 msgid "2880 x 720 DPI"
 msgstr "2880 x 720 DPI"
 
 #: src/main/escp2-resolutions.c:117
-#, fuzzy
 msgid "2880 x 720 DPI Highest Quality"
-msgstr "1440 x 360 DPI Najvy¹¹ia kvalita"
+msgstr "2880 x 720 DPI æœ€é«˜å“è³ª"
 
 #: src/main/escp2-resolutions.c:121 src/main/escp2-resolutions.c:124
 #: src/main/escp2-resolutions.c:127
-#, fuzzy
 msgid "1440 x 1440 DPI"
 msgstr "1440 x 1440 DPI"
 
 #: src/main/escp2-resolutions.c:131 src/main/escp2-resolutions.c:134
-#, fuzzy
 msgid "2880 x 1440 DPI"
-msgstr "1440 x 1440 DPI"
+msgstr "2880 x 1440 DPI"
 
 #: src/main/escp2-resolutions.c:138 src/main/escp2-resolutions.c:141
-#, fuzzy
 msgid "2880 x 2880 DPI"
-msgstr "2880 x 720 DPI"
+msgstr "2880 x 2880 DPI"
 
 #: src/main/escp2-resolutions.c:430
 msgid "On"
@@ -2219,9 +2033,8 @@ msgstr ""
 
 #: src/main/escp2-resolutions.c:438 src/main/escp2-resolutions.c:449
 #: src/main/escp2-resolutions.c:461
-#, fuzzy
 msgid "Interleave"
-msgstr "Názov tlaèiarne:"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:439 src/main/escp2-resolutions.c:450
 #: src/main/escp2-resolutions.c:462
@@ -2239,14 +2052,12 @@ msgid "Full Overlap 2"
 msgstr ""
 
 #: src/main/escp2-resolutions.c:453 src/main/escp2-resolutions.c:465
-#, fuzzy
 msgid "Interleave 2"
-msgstr "Názov tlaèiarne:"
+msgstr ""
 
 #: src/main/escp2-resolutions.c:466
-#, fuzzy
 msgid "Eight Pass"
-msgstr "Jas:"
+msgstr ""
 
 #: src/main/generic-options.c:46
 msgid "Text"
@@ -2261,32 +2072,28 @@ msgid "Mixed Text and Graphics"
 msgstr ""
 
 #: src/main/generic-options.c:49
-#, fuzzy
 msgid "Photograph"
-msgstr "Fotografia"
+msgstr "ç›¸ç‰‡"
 
 #: src/main/generic-options.c:50
 msgid "Line Art"
-msgstr "Èiarová grafika"
+msgstr ""
 
 #: src/main/generic-options.c:55
-#, fuzzy
 msgid "Page"
-msgstr "Veµkos»"
+msgstr ""
 
 #: src/main/generic-options.c:56
 msgid "Job"
 msgstr ""
 
 #: src/main/generic-options.c:68
-#, fuzzy
 msgid "Image Type"
-msgstr "Typ obrázku:"
+msgstr ""
 
 #: src/main/generic-options.c:69
-#, fuzzy
 msgid "Type of image being printed"
-msgstr "Typ atramentu tlaèiarne"
+msgstr ""
 
 #: src/main/generic-options.c:74 src/main/generic-options.c:80
 msgid "Job Mode"
@@ -2297,14 +2104,12 @@ msgid "Job vs. page mode"
 msgstr ""
 
 #: src/main/generic-options.c:80
-#, fuzzy
 msgid "Page Number"
-msgstr "Veµkos»"
+msgstr ""
 
 #: src/main/generic-options.c:81
-#, fuzzy
 msgid "Page number"
-msgstr "Veµkos»"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:1
 msgid "Letter"
@@ -2332,7 +2137,7 @@ msgstr "4x6"
 
 #: src/main/xmli18n-tmp.h:10
 msgid "Epson 4x6 Photo Paper"
-msgstr "Epson 4x6 Foto papier"
+msgstr "Epson 4x6 ç›¸ç´™"
 
 #: src/main/xmli18n-tmp.h:11
 msgid "5x7"
@@ -2360,7 +2165,7 @@ msgstr "Super B 13x19"
 
 #: src/main/xmli18n-tmp.h:18
 msgid "Engineering C 17x22"
-msgstr ""
+msgstr "Engineering C 17x22"
 
 #: src/main/xmli18n-tmp.h:19
 msgid "8x12"
@@ -2387,9 +2192,8 @@ msgid "20x30"
 msgstr "20x30"
 
 #: src/main/xmli18n-tmp.h:25
-#, fuzzy
 msgid "22x30"
-msgstr "20x30"
+msgstr "22x30"
 
 #: src/main/xmli18n-tmp.h:26
 msgid "24x30"
@@ -2397,7 +2201,7 @@ msgstr "24x30"
 
 #: src/main/xmli18n-tmp.h:27
 msgid "Super A1 24x36"
-msgstr ""
+msgstr "Super A1 24x36"
 
 #: src/main/xmli18n-tmp.h:28
 msgid "30x40"
@@ -2412,9 +2216,8 @@ msgid "2A"
 msgstr "2A"
 
 #: src/main/xmli18n-tmp.h:31
-#, fuzzy
 msgid "Super A0"
-msgstr "Stylus Photo"
+msgstr "Super A0"
 
 #: src/main/xmli18n-tmp.h:32
 msgid "A0"
@@ -2553,9 +2356,8 @@ msgid "B10 ISO"
 msgstr "B10 ISO"
 
 #: src/main/xmli18n-tmp.h:66
-#, fuzzy
 msgid "Super B0 JIS"
-msgstr "B0 JIS"
+msgstr "Super B0 JIS"
 
 #: src/main/xmli18n-tmp.h:67
 msgid "B0 JIS"
@@ -2699,19 +2501,19 @@ msgstr ""
 
 #: src/main/xmli18n-tmp.h:102
 msgid "American foolscap"
-msgstr "Americké rozmery"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:103
 msgid "European foolscap"
-msgstr "Európske rozmery"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:104
 msgid "Crown Quarto"
-msgstr "Crown Quarto"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:105
 msgid "Large Crown Quarto"
-msgstr "Large Crown Quarto"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:106
 msgid "Demy Quarto"
@@ -2719,12 +2521,11 @@ msgstr "Demy Quarto"
 
 #: src/main/xmli18n-tmp.h:107
 msgid "Royal Quarto"
-msgstr "Royal Quarto"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:108
-#, fuzzy
 msgid "ISO A4"
-msgstr "SRA4"
+msgstr "ISO A4"
 
 #: src/main/xmli18n-tmp.h:109
 msgid "Crown Octavo"
@@ -2732,7 +2533,7 @@ msgstr "Crown Octavo"
 
 #: src/main/xmli18n-tmp.h:110
 msgid "Large Crown Octavo"
-msgstr "Large Crown Octavo"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:111
 msgid "Demy Octavo"
@@ -2740,23 +2541,23 @@ msgstr "Demy Octavo"
 
 #: src/main/xmli18n-tmp.h:112
 msgid "Royal Octavo"
-msgstr "Royal Octavo"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:113
 msgid "ISO A5"
-msgstr ""
+msgstr "ISO A5"
 
 #: src/main/xmli18n-tmp.h:114
 msgid "Small paperback"
-msgstr "Small paperback"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:115
 msgid "Penguin small paperback"
-msgstr "Penguin small paperback"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:116
 msgid "Penguin large paperback"
-msgstr "Penguin large paperback"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:117
 msgid "10cm x 15cm"
@@ -2764,45 +2565,43 @@ msgstr ""
 
 #: src/main/xmli18n-tmp.h:118
 msgid "Hagaki Card"
-msgstr "Hagaki karta"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:119
 msgid "Oufuku Card"
-msgstr "Oufuku karta"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:120
 msgid "Japanese long envelope #3"
-msgstr "Japonská dlhá obálka #3"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:121
 msgid "Japanese long envelope #4"
-msgstr "Japonská dlhá obálka #4"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:122
 msgid "Japanese Kaku envelope #4"
-msgstr "Japonská Kaku obálka #4"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:123
 msgid "Commercial 10"
-msgstr "Commercial 10"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:124
 msgid "A2 Invitation"
-msgstr "A2 pozvánka"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:125
-#, fuzzy
 msgid "Monarch Envelope"
-msgstr "Obálka"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:126
 msgid "4x5 3/8"
-msgstr ""
+msgstr "4x5 3/8"
 
 #: src/main/xmli18n-tmp.h:127
-#, fuzzy
 msgid "4x7"
-msgstr "5x7"
+msgstr "4x7"
 
 #: src/main/xmli18n-tmp.h:128
 msgid "CP_L"
@@ -2813,49 +2612,48 @@ msgid "Card"
 msgstr ""
 
 #: src/main/xmli18n-tmp.h:130
-#, fuzzy
 msgid "Wide Postcard"
-msgstr "Pohµadnica"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:131
 msgid "Custom"
-msgstr "Vlastnı"
+msgstr "è‡ªé¸"
 
 #: src/main/xmli18n-tmp.h:132
 msgid "89 mm Roll Paper"
-msgstr "89 mm rolka papiera"
+msgstr ""
 
 #: src/main/xmli18n-tmp.h:133
 msgid "4 Inch Roll Paper"
-msgstr "4 palcová rolka papiera"
+msgstr "4 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:134
 msgid "5 Inch Roll Paper"
-msgstr "5 palcová rolka papiera"
+msgstr "5 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:135
 msgid "210 mm Roll Paper"
-msgstr "210 mm rolka papiera"
+msgstr "210 æ¯«ç±³æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:136
 msgid "13 Inch Roll Paper"
-msgstr "13 palcová rolka papiera"
+msgstr "13 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:137
 msgid "22 Inch Roll Paper"
-msgstr "22 palcová rolka papiera"
+msgstr "22 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:138
 msgid "24 Inch Roll Paper"
-msgstr "24 palcová rolka papiera"
+msgstr "24 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:139
 msgid "36 Inch Roll Paper"
-msgstr "36 palcová rolka papiera"
+msgstr "36 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:140
 msgid "44 Inch Roll Paper"
-msgstr "44 palcová rolka papiera"
+msgstr "44 å‹æ»¾ç­’ç´™"
 
 #: src/main/xmli18n-tmp.h:141
 msgid "PostScript Level 1"
@@ -2867,1265 +2665,1125 @@ msgstr ""
 
 #: src/main/xmli18n-tmp.h:143
 msgid "Canon BJC 30"
-msgstr ""
+msgstr "Canon BJC 30"
 
 #: src/main/xmli18n-tmp.h:144
 msgid "Canon BJC 50"
-msgstr ""
+msgstr "Canon BJC 50"
 
 #: src/main/xmli18n-tmp.h:145
 msgid "Canon BJC 55"
-msgstr ""
+msgstr "Canon BJC 55"
 
 #: src/main/xmli18n-tmp.h:146
 msgid "Canon BJC 80"
-msgstr ""
+msgstr "Canon BJC 80"
 
 #: src/main/xmli18n-tmp.h:147
 msgid "Canon BJC 85"
-msgstr ""
+msgstr "Canon BJC 85"
 
 #: src/main/xmli18n-tmp.h:148
 msgid "Canon BJC 210"
-msgstr ""
+msgstr "Canon BJC 210"
 
 #: src/main/xmli18n-tmp.h:149
 msgid "Canon BJC 240"
-msgstr ""
+msgstr "Canon BJC 240"
 
 #: src/main/xmli18n-tmp.h:150
 msgid "Canon BJC 250"
-msgstr ""
+msgstr "Canon BJC 250"
 
 #: src/main/xmli18n-tmp.h:151
 msgid "Canon BJC 1000"
-msgstr ""
+msgstr "Canon BJC 1000"
 
 #: src/main/xmli18n-tmp.h:152
 msgid "Canon BJC 2000"
-msgstr ""
+msgstr "Canon BJC 2000"
 
 #: src/main/xmli18n-tmp.h:153
 msgid "Canon BJC 3000"
-msgstr ""
+msgstr "Canon BJC 3000"
 
 #: src/main/xmli18n-tmp.h:154
 msgid "Canon BJC 4300"
-msgstr ""
+msgstr "Canon BJC 4300"
 
 #: src/main/xmli18n-tmp.h:155
+#, fuzzy
 msgid "Canon BJC 4400 photo"
-msgstr ""
+msgstr "Canon BJC 4400 photo"
 
 #: src/main/xmli18n-tmp.h:156
 msgid "Canon BJC 6000"
-msgstr ""
+msgstr "Canon BJC 6000"
 
 #: src/main/xmli18n-tmp.h:157
 msgid "Canon BJC 6100"
-msgstr ""
+msgstr "Canon BJC 6100"
 
 #: src/main/xmli18n-tmp.h:158
 msgid "Canon BJC 6200"
-msgstr ""
+msgstr "Canon BJC 6200"
 
 #: src/main/xmli18n-tmp.h:159
 msgid "Canon BJC 6500"
-msgstr ""
+msgstr "Canon BJC 6500"
 
 #: src/main/xmli18n-tmp.h:160
 msgid "Canon BJC 7000"
-msgstr ""
+msgstr "Canon BJC 7000"
 
 #: src/main/xmli18n-tmp.h:161
 msgid "Canon BJC 7100"
-msgstr ""
+msgstr "Canon BJC 7100"
 
 #: src/main/xmli18n-tmp.h:162
 msgid "Canon BJC 8200"
-msgstr ""
+msgstr "Canon BJC 8200"
 
 #: src/main/xmli18n-tmp.h:163
 msgid "Canon S400"
-msgstr ""
+msgstr "Canon S400"
 
 #: src/main/xmli18n-tmp.h:164
 msgid "Canon S450"
-msgstr ""
+msgstr "Canon S450"
 
 #: src/main/xmli18n-tmp.h:165
 msgid "Canon S800"
-msgstr ""
+msgstr "Canon S800"
 
 #: src/main/xmli18n-tmp.h:166
 msgid "Canon S4500"
-msgstr ""
+msgstr "Canon S4500"
 
 #: src/main/xmli18n-tmp.h:167
+#, fuzzy
 msgid "Canon PIXMA iP4000"
-msgstr ""
+msgstr "Canon S400"
 
 #: src/main/xmli18n-tmp.h:168
-#, fuzzy
 msgid "EPSON Stylus C20SX"
-msgstr "Stylus C20ux"
+msgstr "EPSON Stylus C20SX"
 
 #: src/main/xmli18n-tmp.h:169
-#, fuzzy
 msgid "EPSON Stylus C20UX"
-msgstr "Stylus C20ux"
+msgstr "EPSON Stylus C20UX"
 
 #: src/main/xmli18n-tmp.h:170
-#, fuzzy
 msgid "EPSON Stylus C40SX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C40SX"
 
 #: src/main/xmli18n-tmp.h:171
-#, fuzzy
 msgid "EPSON Stylus C40UX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C40UX"
 
 #: src/main/xmli18n-tmp.h:172
-#, fuzzy
 msgid "EPSON Stylus C41SX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C41SX"
 
 #: src/main/xmli18n-tmp.h:173
-#, fuzzy
 msgid "EPSON Stylus C41UX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C41UX"
 
 #: src/main/xmli18n-tmp.h:174
-#, fuzzy
 msgid "EPSON Stylus C42SX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C42SX"
 
 #: src/main/xmli18n-tmp.h:175
-#, fuzzy
 msgid "EPSON Stylus C42UX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C42UX"
 
 #: src/main/xmli18n-tmp.h:176
-#, fuzzy
 msgid "EPSON Stylus C43SX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C43SX"
 
 #: src/main/xmli18n-tmp.h:177
-#, fuzzy
 msgid "EPSON Stylus C43UX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C43UX"
 
 #: src/main/xmli18n-tmp.h:178
-#, fuzzy
 msgid "EPSON Stylus C44SX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C44SX"
 
 #: src/main/xmli18n-tmp.h:179
-#, fuzzy
 msgid "EPSON Stylus C44UX"
-msgstr "Stylus C40ux"
+msgstr "EPSON Stylus C44UX"
 
 #: src/main/xmli18n-tmp.h:180
-#, fuzzy
 msgid "EPSON Stylus C45"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C45"
 
 #: src/main/xmli18n-tmp.h:181
-#, fuzzy
 msgid "EPSON Stylus C46"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C46"
 
 #: src/main/xmli18n-tmp.h:182
-#, fuzzy
 msgid "EPSON Stylus C50"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C50"
 
 #: src/main/xmli18n-tmp.h:183
-#, fuzzy
 msgid "EPSON Stylus C60"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C60"
 
 #: src/main/xmli18n-tmp.h:184
-#, fuzzy
 msgid "EPSON Stylus C61"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C61"
 
 #: src/main/xmli18n-tmp.h:185
-#, fuzzy
 msgid "EPSON Stylus C62"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C62"
 
 #: src/main/xmli18n-tmp.h:186
-#, fuzzy
 msgid "EPSON Stylus C63"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C63"
 
 #: src/main/xmli18n-tmp.h:187
-#, fuzzy
 msgid "EPSON Stylus C64"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C64"
 
 #: src/main/xmli18n-tmp.h:188
-#, fuzzy
 msgid "EPSON Stylus C65"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C65"
 
 #: src/main/xmli18n-tmp.h:189
-#, fuzzy
 msgid "EPSON Stylus C66"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C66"
 
 #: src/main/xmli18n-tmp.h:190
-#, fuzzy
 msgid "EPSON Stylus C70"
-msgstr "Stylus C70"
+msgstr "EPSON Stylus C70"
 
 #: src/main/xmli18n-tmp.h:191
-#, fuzzy
 msgid "EPSON Stylus C80"
-msgstr "Stylus C80"
+msgstr "EPSON Stylus C80"
 
 #: src/main/xmli18n-tmp.h:192
-#, fuzzy
 msgid "EPSON Stylus C82"
-msgstr "Stylus C80"
+msgstr "EPSON Stylus C82"
 
 #: src/main/xmli18n-tmp.h:193
-#, fuzzy
 msgid "EPSON Stylus C83"
-msgstr "Stylus C80"
+msgstr "EPSON Stylus C83"
 
 #: src/main/xmli18n-tmp.h:194
-#, fuzzy
 msgid "EPSON Stylus C84"
-msgstr "Stylus C80"
+msgstr "EPSON Stylus C84"
 
 #: src/main/xmli18n-tmp.h:195
-#, fuzzy
 msgid "EPSON Stylus C85"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C85"
 
 #: src/main/xmli18n-tmp.h:196
-#, fuzzy
 msgid "EPSON Stylus C86"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus C86"
 
 #: src/main/xmli18n-tmp.h:197
-#, fuzzy
 msgid "EPSON Stylus Color"
-msgstr "Stylus Color"
+msgstr "EPSON Stylus Color"
 
 #: src/main/xmli18n-tmp.h:198
-#, fuzzy
 msgid "EPSON Stylus Color Pro"
-msgstr "Stylus Color Pro"
+msgstr "EPSON Stylus Color Pro"
 
 #: src/main/xmli18n-tmp.h:199
-#, fuzzy
 msgid "EPSON Stylus Color Pro XL"
-msgstr "Stylus Color Pro XL"
+msgstr "EPSON Stylus Color Pro XL"
 
 #: src/main/xmli18n-tmp.h:200
-#, fuzzy
 msgid "EPSON Stylus Color 400"
-msgstr "Stylus Color 400"
+msgstr "EPSON Stylus Color 400"
 
 #: src/main/xmli18n-tmp.h:201
-#, fuzzy
 msgid "EPSON Stylus Color 440"
-msgstr "Stylus Color 440"
+msgstr "EPSON Stylus Color 440"
 
 #: src/main/xmli18n-tmp.h:202
-#, fuzzy
 msgid "EPSON Stylus Color 460"
-msgstr "Stylus Color 460"
+msgstr "EPSON Stylus Color 460"
 
 #: src/main/xmli18n-tmp.h:203
-#, fuzzy
 msgid "EPSON Stylus Color 480"
-msgstr "Stylus Color 480"
+msgstr "EPSON Stylus Color 480"
 
 #: src/main/xmli18n-tmp.h:204
-#, fuzzy
 msgid "EPSON Stylus Color 500"
-msgstr "Stylus Color 500"
+msgstr "EPSON Stylus Color 500"
 
 #: src/main/xmli18n-tmp.h:205
-#, fuzzy
 msgid "EPSON Stylus Color 580"
-msgstr "Stylus Color 580"
+msgstr "EPSON Stylus Color 580"
 
 #: src/main/xmli18n-tmp.h:206
-#, fuzzy
 msgid "EPSON Stylus Color 600"
-msgstr "Stylus Color 600"
+msgstr "EPSON Stylus Color 600"
 
 #: src/main/xmli18n-tmp.h:207
-#, fuzzy
 msgid "EPSON Stylus Color 640"
-msgstr "Stylus Color 640"
+msgstr "EPSON Stylus Color 640"
 
 #: src/main/xmli18n-tmp.h:208
-#, fuzzy
 msgid "EPSON Stylus Color 660"
-msgstr "Stylus Color 660"
+msgstr "EPSON Stylus Color 660"
 
 #: src/main/xmli18n-tmp.h:209
-#, fuzzy
 msgid "EPSON Stylus Color 670"
-msgstr "Stylus Color 670"
+msgstr "EPSON Stylus Color 670"
 
 #: src/main/xmli18n-tmp.h:210
-#, fuzzy
 msgid "EPSON Stylus Color 680"
-msgstr "Stylus Color 680"
+msgstr "EPSON Stylus Color 680"
 
 #: src/main/xmli18n-tmp.h:211
-#, fuzzy
 msgid "EPSON Stylus Color 740"
-msgstr "Stylus Color 740"
+msgstr "EPSON Stylus Color 740"
 
 #: src/main/xmli18n-tmp.h:212
-#, fuzzy
 msgid "EPSON Stylus Color 760"
-msgstr "Stylus Color 760"
+msgstr "EPSON Stylus Color 760"
 
 #: src/main/xmli18n-tmp.h:213
-#, fuzzy
 msgid "EPSON Stylus Color 777"
-msgstr "Stylus Color 777"
+msgstr "EPSON Stylus Color 777"
 
 #: src/main/xmli18n-tmp.h:214
-#, fuzzy
 msgid "EPSON Stylus Color 800"
-msgstr "Stylus Color 800"
+msgstr "EPSON Stylus Color 800"
 
 #: src/main/xmli18n-tmp.h:215
-#, fuzzy
 msgid "EPSON Stylus Color 850"
-msgstr "Stylus Color 850"
+msgstr "EPSON Stylus Color 850"
 
 #: src/main/xmli18n-tmp.h:216
-#, fuzzy
 msgid "EPSON Stylus Color 860"
-msgstr "Stylus Color 860"
+msgstr "EPSON Stylus Color 860"
 
 #: src/main/xmli18n-tmp.h:217
-#, fuzzy
 msgid "EPSON Stylus Color 880"
-msgstr "Stylus Color 880"
+msgstr "EPSON Stylus Color 880"
 
 #: src/main/xmli18n-tmp.h:218
-#, fuzzy
 msgid "EPSON Stylus Color 83"
-msgstr "Stylus Color 83"
+msgstr "EPSON Stylus Color 83"
 
 #: src/main/xmli18n-tmp.h:219
-#, fuzzy
 msgid "EPSON Stylus Color 900"
-msgstr "Stylus Color 900"
+msgstr "EPSON Stylus Color 900"
 
 #: src/main/xmli18n-tmp.h:220
-#, fuzzy
 msgid "EPSON Stylus Color 980"
-msgstr "Stylus Color 980"
+msgstr "EPSON Stylus Color 980"
 
 #: src/main/xmli18n-tmp.h:221
-#, fuzzy
 msgid "EPSON Stylus Color 1160"
-msgstr "Stylus Color 1160"
+msgstr "EPSON Stylus Color 1160"
 
 #: src/main/xmli18n-tmp.h:222
-#, fuzzy
 msgid "EPSON Stylus Color 1500"
-msgstr "Stylus Color 1500"
+msgstr "EPSON Stylus Color 1500"
 
 #: src/main/xmli18n-tmp.h:223
-#, fuzzy
 msgid "EPSON Stylus Color 1520"
-msgstr "Stylus Color 1520"
+msgstr "EPSON Stylus Color 1520"
 
 #: src/main/xmli18n-tmp.h:224
-#, fuzzy
 msgid "EPSON Stylus Color 3000"
-msgstr "Stylus Color 3000"
+msgstr "EPSON Stylus Color 3000"
 
 #: src/main/xmli18n-tmp.h:225
-#, fuzzy
 msgid "EPSON Stylus Photo"
-msgstr "Stylus Photo"
+msgstr "EPSON Stylus Photo"
 
 #: src/main/xmli18n-tmp.h:226
-#, fuzzy
 msgid "EPSON Stylus Photo 700"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo 700"
 
 #: src/main/xmli18n-tmp.h:227
-#, fuzzy
 msgid "EPSON Stylus Photo EX"
-msgstr "Stylus Photo EX"
+msgstr "EPSON Stylus Photo EX"
 
 #: src/main/xmli18n-tmp.h:228
-#, fuzzy
 msgid "EPSON Stylus Photo EX3"
-msgstr "Stylus Photo EX"
+msgstr "EPSON Stylus Photo EX3"
 
 #: src/main/xmli18n-tmp.h:229
-#, fuzzy
 msgid "EPSON Stylus Photo 720"
-msgstr "Stylus Photo 720"
+msgstr "EPSON Stylus Photo 720"
 
 #: src/main/xmli18n-tmp.h:230
-#, fuzzy
 msgid "EPSON Stylus Photo 750"
-msgstr "Stylus Photo 750"
+msgstr "EPSON Stylus Photo 750"
 
 #: src/main/xmli18n-tmp.h:231
-#, fuzzy
 msgid "EPSON Stylus Photo 780"
-msgstr "Stylus Photo 780"
+msgstr "EPSON Stylus Photo 780"
 
 #: src/main/xmli18n-tmp.h:232
-#, fuzzy
 msgid "EPSON Stylus Photo 785EPX"
-msgstr "Stylus Photo 785"
+msgstr "EPSON Stylus Photo 785EPX"
 
 #: src/main/xmli18n-tmp.h:233
-#, fuzzy
 msgid "EPSON Stylus Photo 790"
-msgstr "Stylus Photo 790"
+msgstr "EPSON Stylus Photo 790"
 
 #: src/main/xmli18n-tmp.h:234
-#, fuzzy
 msgid "EPSON Stylus Photo 810"
-msgstr "Stylus Photo 810"
+msgstr "EPSON Stylus Photo 810"
 
 #: src/main/xmli18n-tmp.h:235
-#, fuzzy
 msgid "EPSON Stylus Photo 820"
-msgstr "Stylus Photo 820"
+msgstr "EPSON Stylus Photo 820"
 
 #: src/main/xmli18n-tmp.h:236
-#, fuzzy
 msgid "EPSON Stylus Photo 825"
-msgstr "Stylus Photo 785"
+msgstr "EPSON Stylus Photo 825"
 
 #: src/main/xmli18n-tmp.h:237
-#, fuzzy
 msgid "EPSON Stylus Photo 830"
-msgstr "Stylus Photo 780"
+msgstr "EPSON Stylus Photo 830"
 
 #: src/main/xmli18n-tmp.h:238
-#, fuzzy
 msgid "EPSON Stylus Photo 870"
-msgstr "Stylus Photo 870"
+msgstr "EPSON Stylus Photo 870"
 
 #: src/main/xmli18n-tmp.h:239
-#, fuzzy
 msgid "EPSON Stylus Photo 875"
-msgstr "Stylus Photo 875"
+msgstr "EPSON Stylus Photo 875"
 
 #: src/main/xmli18n-tmp.h:240
-#, fuzzy
 msgid "EPSON Stylus Photo 890"
-msgstr "Stylus Photo 890"
+msgstr "EPSON Stylus Photo 890"
 
 #: src/main/xmli18n-tmp.h:241
-#, fuzzy
 msgid "EPSON Stylus Photo 895"
-msgstr "Stylus Photo 895"
+msgstr "EPSON Stylus Photo 895"
 
 #: src/main/xmli18n-tmp.h:242
-#, fuzzy
 msgid "EPSON Stylus Photo 900"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo 900"
 
 #: src/main/xmli18n-tmp.h:243
-#, fuzzy
 msgid "EPSON Stylus Photo 915"
-msgstr "Stylus Photo 895"
+msgstr "EPSON Stylus Photo 915"
 
 #: src/main/xmli18n-tmp.h:244
-#, fuzzy
 msgid "EPSON Stylus Photo 925"
-msgstr "Stylus Photo 895"
+msgstr "EPSON Stylus Photo 925"
 
 #: src/main/xmli18n-tmp.h:245
-#, fuzzy
 msgid "EPSON Stylus Photo 935"
-msgstr "Stylus Photo 895"
+msgstr "EPSON Stylus Photo 935"
 
 #: src/main/xmli18n-tmp.h:246
-#, fuzzy
 msgid "EPSON Stylus Photo 950"
-msgstr "Stylus Photo 750"
+msgstr "EPSON Stylus Photo 950"
 
 #: src/main/xmli18n-tmp.h:247
-#, fuzzy
 msgid "EPSON Stylus Photo 960"
-msgstr "Stylus Photo 790"
+msgstr "EPSON Stylus Photo 960"
 
 #: src/main/xmli18n-tmp.h:248
-#, fuzzy
 msgid "EPSON Stylus Photo 1200"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo 1200"
 
 #: src/main/xmli18n-tmp.h:249
-#, fuzzy
 msgid "EPSON Stylus Photo 1270"
-msgstr "Stylus Photo 1270"
+msgstr "EPSON Stylus Photo 1270"
 
 #: src/main/xmli18n-tmp.h:250
-#, fuzzy
 msgid "EPSON Stylus Photo 1280"
-msgstr "Stylus Photo 1280"
+msgstr "EPSON Stylus Photo 1280"
 
 #: src/main/xmli18n-tmp.h:251
-#, fuzzy
 msgid "EPSON Stylus Photo 1290"
-msgstr "Stylus Photo 1290"
+msgstr "EPSON Stylus Photo 1290"
 
 #: src/main/xmli18n-tmp.h:252
-#, fuzzy
 msgid "EPSON Stylus Photo 2000P"
-msgstr "Stylus Photo 2000P"
+msgstr "EPSON Stylus Photo 2000P"
 
 #: src/main/xmli18n-tmp.h:253
-#, fuzzy
 msgid "EPSON Stylus Photo 2100"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo 2100"
 
 #: src/main/xmli18n-tmp.h:254
-#, fuzzy
 msgid "EPSON Stylus Photo 2200"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo 2200"
 
 #: src/main/xmli18n-tmp.h:255
-#, fuzzy
 msgid "EPSON Stylus Photo R200"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo R200"
 
 #: src/main/xmli18n-tmp.h:256
-#, fuzzy
 msgid "EPSON Stylus Photo R210"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo R210"
 
 #: src/main/xmli18n-tmp.h:257
-#, fuzzy
 msgid "EPSON Stylus Photo R300"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo R300"
 
 #: src/main/xmli18n-tmp.h:258
-#, fuzzy
 msgid "EPSON Stylus Photo R310"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo R310"
 
 #: src/main/xmli18n-tmp.h:259
-#, fuzzy
 msgid "EPSON Stylus Photo RX400"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX400"
 
 #: src/main/xmli18n-tmp.h:260
-#, fuzzy
 msgid "EPSON Stylus Photo RX420"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo RX420"
 
 #: src/main/xmli18n-tmp.h:261
-#, fuzzy
 msgid "EPSON Stylus Photo RX425"
-msgstr "Stylus Photo 1200"
+msgstr "EPSON Stylus Photo RX425"
 
 #: src/main/xmli18n-tmp.h:262
-#, fuzzy
 msgid "EPSON Stylus Photo RX430"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX430"
 
 #: src/main/xmli18n-tmp.h:263
-#, fuzzy
 msgid "EPSON Stylus Photo RX500"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX500"
 
 #: src/main/xmli18n-tmp.h:264
-#, fuzzy
 msgid "EPSON Stylus Photo RX510"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX510"
 
 #: src/main/xmli18n-tmp.h:265
-#, fuzzy
 msgid "EPSON Stylus Photo RX600"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX600"
 
 #: src/main/xmli18n-tmp.h:266
-#, fuzzy
 msgid "EPSON Stylus Photo RX620"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX620"
 
 #: src/main/xmli18n-tmp.h:267
-#, fuzzy
 msgid "EPSON Stylus Photo RX630"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo RX630"
 
 #: src/main/xmli18n-tmp.h:268
-#, fuzzy
 msgid "EPSON Stylus Photo R800"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo R800"
 
 #: src/main/xmli18n-tmp.h:269
-#, fuzzy
 msgid "EPSON Stylus Photo R1800"
-msgstr "Stylus Photo 700"
+msgstr "EPSON Stylus Photo R1800"
 
 #: src/main/xmli18n-tmp.h:270
-#, fuzzy
 msgid "EPSON Stylus Pro 5000"
-msgstr "Stylus Pro 5000"
+msgstr "EPSON Stylus Pro 5000"
 
 #: src/main/xmli18n-tmp.h:271
-#, fuzzy
 msgid "EPSON Stylus Pro 5500"
-msgstr "Stylus Pro 5500"
+msgstr "EPSON Stylus Pro 5500"
 
 #: src/main/xmli18n-tmp.h:272
-#, fuzzy
 msgid "EPSON Stylus Pro 7000"
-msgstr "Stylus Pro 7000"
+msgstr "EPSON Stylus Pro 7000"
 
 #: src/main/xmli18n-tmp.h:273
-#, fuzzy
 msgid "EPSON Stylus Pro 7500"
-msgstr "Stylus Pro 7500"
+msgstr "EPSON Stylus Pro 7500"
 
 #: src/main/xmli18n-tmp.h:274
-#, fuzzy
 msgid "EPSON Stylus Pro 7600"
-msgstr "Stylus Pro 7000"
+msgstr "EPSON Stylus Pro 7600"
 
 #: src/main/xmli18n-tmp.h:275
-#, fuzzy
 msgid "EPSON Stylus Pro 9000"
-msgstr "Stylus Pro 9000"
+msgstr "EPSON Stylus Pro 9000"
 
 #: src/main/xmli18n-tmp.h:276
-#, fuzzy
 msgid "EPSON Stylus Pro 9500"
-msgstr "Stylus Pro 9500"
+msgstr "EPSON Stylus Pro 9500"
 
 #: src/main/xmli18n-tmp.h:277
-#, fuzzy
 msgid "EPSON Stylus Pro 9600"
-msgstr "Stylus Pro 9000"
+msgstr "EPSON Stylus Pro 9600"
 
 #: src/main/xmli18n-tmp.h:278
-#, fuzzy
 msgid "EPSON Stylus Pro 10000"
-msgstr "Stylus Pro 10000"
+msgstr "EPSON Stylus Pro 10000"
 
 #: src/main/xmli18n-tmp.h:279
-#, fuzzy
 msgid "EPSON Stylus Scan 2000"
-msgstr "Stylus Scan 2000"
+msgstr "EPSON Stylus Scan 2000"
 
 #: src/main/xmli18n-tmp.h:280
-#, fuzzy
 msgid "EPSON Stylus Scan 2500"
-msgstr "Stylus Scan 2500"
+msgstr "EPSON Stylus Scan 2500"
 
 #: src/main/xmli18n-tmp.h:281
-#, fuzzy
 msgid "EPSON Stylus CX1500"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX1500"
 
 #: src/main/xmli18n-tmp.h:282
-#, fuzzy
 msgid "EPSON Stylus CX3100"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX3100"
 
 #: src/main/xmli18n-tmp.h:283
-#, fuzzy
 msgid "EPSON Stylus CX3200"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX3200"
 
 #: src/main/xmli18n-tmp.h:284
-#, fuzzy
 msgid "EPSON Stylus CX3500"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX3500"
 
 #: src/main/xmli18n-tmp.h:285
-#, fuzzy
 msgid "EPSON Stylus CX3600"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX3600"
 
 #: src/main/xmli18n-tmp.h:286
-#, fuzzy
 msgid "EPSON Stylus CX3650"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX3650"
 
 #: src/main/xmli18n-tmp.h:287
-#, fuzzy
 msgid "EPSON Stylus CX4600"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX4600"
 
 #: src/main/xmli18n-tmp.h:288
-#, fuzzy
 msgid "EPSON Stylus CX5100"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus CX5100"
 
 #: src/main/xmli18n-tmp.h:289
-#, fuzzy
 msgid "EPSON Stylus CX5200"
-msgstr "Stylus C60"
+msgstr "EPSON Stylus CX5200"
 
 #: src/main/xmli18n-tmp.h:290
-#, fuzzy
 msgid "EPSON Stylus CX5300"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX5300"
 
 #: src/main/xmli18n-tmp.h:291
-#, fuzzy
 msgid "EPSON Stylus CX5400"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX5400"
 
 #: src/main/xmli18n-tmp.h:292
-#, fuzzy
 msgid "EPSON Stylus CX6300"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX6300"
 
 #: src/main/xmli18n-tmp.h:293
-#, fuzzy
 msgid "EPSON Stylus CX6400"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX6400"
 
 #: src/main/xmli18n-tmp.h:294
-#, fuzzy
 msgid "EPSON Stylus CX6500"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX6500"
 
 #: src/main/xmli18n-tmp.h:295
-#, fuzzy
 msgid "EPSON Stylus CX6600"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX6600"
 
 #: src/main/xmli18n-tmp.h:296
-#, fuzzy
 msgid "EPSON Stylus CX8300"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX8300"
 
 #: src/main/xmli18n-tmp.h:297
-#, fuzzy
 msgid "EPSON Stylus CX8400"
-msgstr "Stylus C20sx"
+msgstr "EPSON Stylus CX8400"
 
 #: src/main/xmli18n-tmp.h:298
 msgid "EPSON CL-700"
-msgstr ""
+msgstr "EPSON CL-700"
 
 #: src/main/xmli18n-tmp.h:299
 msgid "EPSON CL-750"
-msgstr ""
+msgstr "EPSON CL-750"
 
 #: src/main/xmli18n-tmp.h:300
 msgid "EPSON CL-760"
-msgstr ""
+msgstr "EPSON CL-760"
 
 #: src/main/xmli18n-tmp.h:301
 msgid "EPSON EM-900C"
-msgstr ""
+msgstr "EPSON EM-900C"
 
 #: src/main/xmli18n-tmp.h:302
 msgid "EPSON EM-930C"
-msgstr ""
+msgstr "EPSON EM-930C"
 
 #: src/main/xmli18n-tmp.h:303
 msgid "EPSON MC-2000"
-msgstr ""
+msgstr "EPSON MC-2000"
 
 #: src/main/xmli18n-tmp.h:304
 msgid "EPSON MC-5000"
-msgstr ""
+msgstr "EPSON MC-5000"
 
 #: src/main/xmli18n-tmp.h:305
 msgid "EPSON MC-7000"
-msgstr ""
+msgstr "EPSON MC-7000"
 
 #: src/main/xmli18n-tmp.h:306
 msgid "EPSON MC-9000"
-msgstr ""
+msgstr "EPSON MC-9000"
 
 #: src/main/xmli18n-tmp.h:307
 msgid "EPSON MC-10000"
-msgstr ""
+msgstr "EPSON MC-10000"
 
 #: src/main/xmli18n-tmp.h:308
 msgid "EPSON MJ-930C"
-msgstr ""
+msgstr "EPSON MJ-930C"
 
 #: src/main/xmli18n-tmp.h:309
 msgid "EPSON MJ-5100C"
-msgstr ""
+msgstr "EPSON MJ-5100C"
 
 #: src/main/xmli18n-tmp.h:310
 msgid "EPSON MJ-6000C"
-msgstr ""
+msgstr "EPSON MJ-6000C"
 
 #: src/main/xmli18n-tmp.h:311
 msgid "EPSON MJ-8000C"
-msgstr ""
+msgstr "EPSON MJ-8000C"
 
 #: src/main/xmli18n-tmp.h:312
 msgid "EPSON PM-700C"
-msgstr ""
+msgstr "EPSON PM-700C"
 
 #: src/main/xmli18n-tmp.h:313
 msgid "EPSON PM-730C"
-msgstr ""
+msgstr "EPSON PM-730C"
 
 #: src/main/xmli18n-tmp.h:314
 msgid "EPSON PM-740C"
-msgstr ""
+msgstr "EPSON PM-740C"
 
 #: src/main/xmli18n-tmp.h:315
 msgid "EPSON PM-750C"
-msgstr ""
+msgstr "EPSON PM-750C"
 
 #: src/main/xmli18n-tmp.h:316
 msgid "EPSON PM-760C"
-msgstr ""
+msgstr "EPSON PM-760C"
 
 #: src/main/xmli18n-tmp.h:317
 msgid "EPSON PM-770C"
-msgstr ""
+msgstr "EPSON PM-770C"
 
 #: src/main/xmli18n-tmp.h:318
 msgid "EPSON PM-780C"
-msgstr ""
+msgstr "EPSON PM-780C"
 
 #: src/main/xmli18n-tmp.h:319
 msgid "EPSON PM-790PT"
-msgstr ""
+msgstr "EPSON PM-790PT"
 
 #: src/main/xmli18n-tmp.h:320
 msgid "EPSON PM-800C"
-msgstr ""
+msgstr "EPSON PM-800C"
 
 #: src/main/xmli18n-tmp.h:321
 msgid "EPSON PM-850PT"
-msgstr ""
+msgstr "EPSON PM-850PT"
 
 #: src/main/xmli18n-tmp.h:322
 msgid "EPSON PM-870C"
-msgstr ""
+msgstr "EPSON PM-870C"
 
 #: src/main/xmli18n-tmp.h:323
 msgid "EPSON PM-880C"
-msgstr ""
+msgstr "EPSON PM-880C"
 
 #: src/main/xmli18n-tmp.h:324
 msgid "EPSON PM-930C"
-msgstr ""
+msgstr "EPSON PM-930C"
 
 #: src/main/xmli18n-tmp.h:325
 msgid "EPSON PM-940C"
-msgstr ""
+msgstr "EPSON PM-940C"
 
 #: src/main/xmli18n-tmp.h:326
 msgid "EPSON PM-950C"
-msgstr ""
+msgstr "EPSON PM-950C"
 
 #: src/main/xmli18n-tmp.h:327
 msgid "EPSON PM-970C"
-msgstr ""
+msgstr "EPSON PM-970C"
 
 #: src/main/xmli18n-tmp.h:328
 msgid "EPSON PM-980C"
-msgstr ""
+msgstr "EPSON PM-980C"
 
 #: src/main/xmli18n-tmp.h:329
 msgid "EPSON PM-2000C"
-msgstr ""
+msgstr "EPSON PM-2000C"
 
 #: src/main/xmli18n-tmp.h:330
 msgid "EPSON PM-2200C"
-msgstr ""
+msgstr "EPSON PM-2200C"
 
 #: src/main/xmli18n-tmp.h:331
 msgid "EPSON PM-3000C"
-msgstr ""
+msgstr "EPSON PM-3000C"
 
 #: src/main/xmli18n-tmp.h:332
 msgid "EPSON PM-3300C"
-msgstr ""
+msgstr "EPSON PM-3300C"
 
 #: src/main/xmli18n-tmp.h:333
 msgid "EPSON PM-3500C"
-msgstr ""
+msgstr "EPSON PM-3500C"
 
 #: src/main/xmli18n-tmp.h:334
 msgid "EPSON PM-3700C"
-msgstr ""
+msgstr "EPSON PM-3700C"
 
 #: src/main/xmli18n-tmp.h:335
 msgid "EPSON PM-4000PX"
-msgstr ""
+msgstr "EPSON PM-4000PX"
 
 #: src/main/xmli18n-tmp.h:336
 msgid "EPSON PM-5000C"
-msgstr ""
+msgstr "EPSON PM-5000C"
 
 #: src/main/xmli18n-tmp.h:337
 msgid "EPSON PM-7000C"
-msgstr ""
+msgstr "EPSON PM-7000C"
 
 #: src/main/xmli18n-tmp.h:338
 msgid "EPSON PM-9000C"
-msgstr ""
+msgstr "EPSON PM-9000C"
 
 #: src/main/xmli18n-tmp.h:339
 msgid "EPSON PM-10000"
-msgstr ""
+msgstr "EPSON PM-10000"
 
 #: src/main/xmli18n-tmp.h:340
-#, fuzzy
 msgid "EPSON PM-D750"
-msgstr "Stylus C60"
+msgstr "EPSON PM-D750"
 
 #: src/main/xmli18n-tmp.h:341
-#, fuzzy
 msgid "EPSON PM-D770"
-msgstr "Stylus C60"
+msgstr "EPSON PM-D770"
 
 #: src/main/xmli18n-tmp.h:342
-#, fuzzy
 msgid "EPSON PM-D1000"
-msgstr "Stylus C60"
+msgstr "EPSON PM-D1000"
 
 #: src/main/xmli18n-tmp.h:343
-#, fuzzy
 msgid "EPSON PM-G700"
-msgstr "Stylus C60"
+msgstr "EPSON PM-G700"
 
 #: src/main/xmli18n-tmp.h:344
-#, fuzzy
 msgid "EPSON PM-G720"
-msgstr "Stylus C60"
+msgstr "EPSON PM-G720"
 
 #: src/main/xmli18n-tmp.h:345
-#, fuzzy
 msgid "EPSON PM-G800"
-msgstr "Stylus C60"
+msgstr "EPSON PM-G800"
 
 #: src/main/xmli18n-tmp.h:346
-#, fuzzy
 msgid "EPSON PM-G820"
-msgstr "Stylus C60"
+msgstr "EPSON PM-G820"
 
 #: src/main/xmli18n-tmp.h:347
-#, fuzzy
 msgid "EPSON PX-G900"
-msgstr "Stylus C60"
+msgstr "EPSON PX-G900"
 
 #: src/main/xmli18n-tmp.h:348
-#, fuzzy
 msgid "EPSON PX-G920"
-msgstr "Stylus C60"
+msgstr "EPSON PX-G920"
 
 #: src/main/xmli18n-tmp.h:349
-#, fuzzy
 msgid "EPSON PX-G5000"
-msgstr "Stylus C60"
+msgstr "EPSON PX-G5000"
 
 #: src/main/xmli18n-tmp.h:350
-#, fuzzy
 msgid "EPSON PX-V500"
-msgstr "Stylus C60"
+msgstr "EPSON PX-V500"
 
 #: src/main/xmli18n-tmp.h:351
-#, fuzzy
 msgid "EPSON PX-V600"
-msgstr "Stylus C60"
+msgstr "EPSON PX-V600"
 
 #: src/main/xmli18n-tmp.h:352
 msgid "EPSON PX-7000"
-msgstr ""
+msgstr "EPSON PX-7000"
 
 #: src/main/xmli18n-tmp.h:353
 msgid "EPSON PX-9000"
-msgstr ""
+msgstr "EPSON PX-9000"
 
 #: src/main/xmli18n-tmp.h:354
 msgid "Apple Color StyleWriter 4100"
-msgstr ""
+msgstr "Apple Color StyleWriter 4100"
 
 #: src/main/xmli18n-tmp.h:355
 msgid "Apple Color StyleWriter 4500"
-msgstr ""
+msgstr "Apple Color StyleWriter 4500"
 
 #: src/main/xmli18n-tmp.h:356
 msgid "Apple Color StyleWriter 6500"
-msgstr ""
+msgstr "Apple Color StyleWriter 6500"
 
 #: src/main/xmli18n-tmp.h:357
 msgid "HP DeskJet 340"
-msgstr ""
+msgstr "HP DeskJet 340"
 
 #: src/main/xmli18n-tmp.h:358
 msgid "HP DeskJet 400"
-msgstr ""
+msgstr "HP DeskJet 400"
 
 #: src/main/xmli18n-tmp.h:359
 msgid "HP DeskJet 500"
-msgstr ""
+msgstr "HP DeskJet 500"
 
 #: src/main/xmli18n-tmp.h:360
 msgid "HP DesignJet 230"
-msgstr ""
+msgstr "HP DesignJet 230"
 
 #: src/main/xmli18n-tmp.h:361
 msgid "HP DesignJet 250C"
-msgstr ""
+msgstr "HP DesignJet 250C"
 
 #: src/main/xmli18n-tmp.h:362
 msgid "HP DesignJet 700"
-msgstr ""
+msgstr "HP DesignJet 700"
 
 #: src/main/xmli18n-tmp.h:363
 msgid "HP DesignJet 750C"
-msgstr ""
+msgstr "HP DesignJet 750C"
 
 #: src/main/xmli18n-tmp.h:364
 msgid "HP DesignJet 2500C"
-msgstr ""
+msgstr "HP DesignJet 2500C"
 
 #: src/main/xmli18n-tmp.h:365
 msgid "HP DesignJet 3500C"
-msgstr ""
+msgstr "HP DesignJet 3500C"
 
 #: src/main/xmli18n-tmp.h:366
 msgid "HP DesignJet 430"
-msgstr ""
+msgstr "HP DesignJet 430"
 
 #: src/main/xmli18n-tmp.h:367
 msgid "HP DesignJet 450C"
-msgstr ""
+msgstr "HP DesignJet 450C"
 
 #: src/main/xmli18n-tmp.h:368
 msgid "HP DesignJet 455CA"
-msgstr ""
+msgstr "HP DesignJet 455CA"
 
 #: src/main/xmli18n-tmp.h:369
 msgid "HP DesignJet 488CA"
-msgstr ""
+msgstr "HP DesignJet 488CA"
 
 #: src/main/xmli18n-tmp.h:370
 msgid "HP DeskJet 500C"
-msgstr ""
+msgstr "HP DeskJet 500C"
 
 #: src/main/xmli18n-tmp.h:371
 msgid "HP DeskJet 520"
-msgstr ""
+msgstr "HP DeskJet 520"
 
 #: src/main/xmli18n-tmp.h:372
 msgid "HP DeskJet 540C"
-msgstr ""
+msgstr "HP DeskJet 540C"
 
 #: src/main/xmli18n-tmp.h:373
 msgid "HP DeskJet 550C"
-msgstr ""
+msgstr "HP DeskJet 550C"
 
 #: src/main/xmli18n-tmp.h:374
 msgid "HP DeskJet 560C"
-msgstr ""
+msgstr "HP DeskJet 560C"
 
 #: src/main/xmli18n-tmp.h:375
 msgid "HP DeskJet 600/600C"
-msgstr ""
+msgstr "HP DeskJet 600/600C"
 
 #: src/main/xmli18n-tmp.h:376
 msgid "HP DeskJet 600 series"
-msgstr ""
+msgstr "HP DeskJet 600 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:377
 msgid "HP DeskJet 690 series"
-msgstr ""
+msgstr "HP DeskJet 690 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:378
 msgid "HP DeskJet 810C"
-msgstr ""
+msgstr "HP DeskJet 810C"
 
 #: src/main/xmli18n-tmp.h:379
 msgid "HP DeskJet 812C"
-msgstr ""
+msgstr "HP DeskJet 812C"
 
 #: src/main/xmli18n-tmp.h:380
 msgid "HP DeskJet 840C"
-msgstr ""
+msgstr "HP DeskJet 840C"
 
 #: src/main/xmli18n-tmp.h:381
 msgid "HP DeskJet 842C"
-msgstr ""
+msgstr "HP DeskJet 842C"
 
 #: src/main/xmli18n-tmp.h:382
 msgid "HP DeskJet 845C"
-msgstr ""
+msgstr "HP DeskJet 845C"
 
 #: src/main/xmli18n-tmp.h:383
 msgid "HP DeskJet 850C"
-msgstr ""
+msgstr "HP DeskJet 850C"
 
 #: src/main/xmli18n-tmp.h:384
 msgid "HP DeskJet 855C"
-msgstr ""
+msgstr "HP DeskJet 855C"
 
 #: src/main/xmli18n-tmp.h:385
 msgid "HP DeskJet 870C"
-msgstr ""
+msgstr "HP DeskJet 870C"
 
 #: src/main/xmli18n-tmp.h:386
 msgid "HP DeskJet 890C"
-msgstr ""
+msgstr "HP DeskJet 890C"
 
 #: src/main/xmli18n-tmp.h:387
 msgid "HP DeskJet 895C"
-msgstr ""
+msgstr "HP DeskJet 895C"
 
 #: src/main/xmli18n-tmp.h:388
 msgid "HP DeskJet 900 series"
-msgstr ""
+msgstr "HP DeskJet 900 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:389
 msgid "HP DeskJet 1100C"
-msgstr ""
+msgstr "HP DeskJet 1100C"
 
 #: src/main/xmli18n-tmp.h:390
 msgid "HP DeskJet 1120C"
-msgstr ""
+msgstr "HP DeskJet 1120C"
 
 #: src/main/xmli18n-tmp.h:391
 msgid "HP DeskJet 1200C"
-msgstr ""
+msgstr "HP DeskJet 1200C"
 
 #: src/main/xmli18n-tmp.h:392
 msgid "HP DeskJet 1220C"
-msgstr ""
+msgstr "HP DeskJet 1220C"
 
 #: src/main/xmli18n-tmp.h:393
 msgid "HP DeskJet 1600C"
-msgstr ""
+msgstr "HP DeskJet 1600C"
 
 #: src/main/xmli18n-tmp.h:394
 msgid "HP DeskJet 2000 series"
-msgstr ""
+msgstr "HP DeskJet 2000 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:395
 msgid "HP DeskJet 2500 series"
-msgstr ""
+msgstr "HP DeskJet 2500 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:396
 msgid "HP PhotoSmart P1000"
-msgstr ""
+msgstr "HP PhotoSmart P1000"
 
 #: src/main/xmli18n-tmp.h:397
 msgid "HP PhotoSmart P1100"
-msgstr ""
+msgstr "HP PhotoSmart P1100"
 
 #: src/main/xmli18n-tmp.h:398
 msgid "HP LaserJet II series"
-msgstr ""
+msgstr "HP LaserJet II ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:399
 msgid "HP LaserJet IIP series"
-msgstr ""
+msgstr "HP LaserJet IIP ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:400
 msgid "HP LaserJet III series"
-msgstr ""
+msgstr "HP LaserJet III ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:401
 msgid "HP LaserJet 4 series"
-msgstr ""
+msgstr "HP LaserJet 4 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:402
 msgid "HP LaserJet 4L"
-msgstr ""
+msgstr "HP LaserJet 4L"
 
 #: src/main/xmli18n-tmp.h:403
 msgid "HP LaserJet 4V"
-msgstr ""
+msgstr "HP LaserJet 4V"
 
 #: src/main/xmli18n-tmp.h:404
 msgid "HP LaserJet 4Si"
-msgstr ""
+msgstr "HP LaserJet 4Si"
 
 #: src/main/xmli18n-tmp.h:405
 msgid "HP LaserJet 5 series"
-msgstr ""
+msgstr "HP LaserJet 5 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:406
 msgid "HP LaserJet 5Si"
-msgstr ""
+msgstr "HP LaserJet 5Si"
 
 #: src/main/xmli18n-tmp.h:407
 msgid "HP LaserJet 6 series"
-msgstr ""
+msgstr "HP LaserJet 6 ç³»åˆ—"
 
 #: src/main/xmli18n-tmp.h:408
 msgid "Lexmark 4076"
-msgstr ""
+msgstr "Lexmark 4076"
 
 #: src/main/xmli18n-tmp.h:409
 msgid "Lexmark Z42"
-msgstr ""
+msgstr "Lexmark Z42"
 
 #: src/main/xmli18n-tmp.h:410
 msgid "Lexmark Z43"
-msgstr ""
+msgstr "Lexmark Z43"
 
 #: src/main/xmli18n-tmp.h:411
 msgid "Lexmark Z52"
-msgstr ""
+msgstr "Lexmark Z52"
 
 #: src/main/xmli18n-tmp.h:412
 msgid "Lexmark Z53"
-msgstr ""
+msgstr "Lexmark Z53"
 
 #: src/main/xmli18n-tmp.h:413
 msgid "Olympus P10"
-msgstr ""
+msgstr "Olympus P10"
 
 #: src/main/xmli18n-tmp.h:414
 msgid "Olympus P200"
-msgstr ""
+msgstr "Olympus P200"
 
 #: src/main/xmli18n-tmp.h:415
 msgid "Olympus P300"
-msgstr ""
+msgstr "Olympus P300"
 
 #: src/main/xmli18n-tmp.h:416
 msgid "Olympus P400"
-msgstr ""
+msgstr "Olympus P400"
 
 #: src/main/xmli18n-tmp.h:417
 msgid "Olympus P440"
-msgstr ""
+msgstr "Olympus P440"
 
 #: src/main/xmli18n-tmp.h:418
 msgid "Canon CP100"
-msgstr ""
+msgstr "Canon CP100"
 
 #: src/main/xmli18n-tmp.h:419
 msgid "Canon CP220"
-msgstr ""
+msgstr "Canon CP220"
 
 #: src/main/xmli18n-tmp.h:420
 msgid "Sony UP-DP10"
-msgstr ""
+msgstr "Sony UP-DP10"
 
 #: src/main/xmli18n-tmp.h:421
 msgid "Fujifilm Printpix CX-400"
-msgstr ""
+msgstr "Fujifilm Printpix CX-400"
 
 #: src/main/xmli18n-tmp.h:422
 msgid "Fujifilm Printpix CX-550"
-msgstr ""
+msgstr "Fujifilm Printpix CX-550"
 
 #: src/main/xmli18n-tmp.h:423
 msgid "RAW DATA 16 bit"
@@ -4137,93 +3795,85 @@ msgstr ""
 
 #: src/gutenprintui/panel.c:266 src/gutenprintui2/panel.c:266
 msgid "Inch"
-msgstr "palce"
+msgstr "è‹±å‹"
 
 #: src/gutenprintui/panel.c:266 src/gutenprintui2/panel.c:266
 msgid "Set the base unit of measurement to inches"
-msgstr "Nastavi» palce ako základnú mernú jednotku"
+msgstr "ä»¥è‹±å‹ä½œç‚ºé•·åº¦å–®ä½"
 
 #: src/gutenprintui/panel.c:268 src/gutenprintui2/panel.c:268
 msgid "cm"
-msgstr "cm"
+msgstr "å…¬åˆ†"
 
 #: src/gutenprintui/panel.c:268 src/gutenprintui2/panel.c:268
 msgid "Set the base unit of measurement to centimetres"
-msgstr "Nastavi» centimetre ako základnú mernú jednotku"
+msgstr "ä»¥å…¬åˆ†ä½œç‚ºé•·åº¦å–®ä½"
 
 #: src/gutenprintui/panel.c:270 src/gutenprintui2/panel.c:270
-#, fuzzy
 msgid "Points"
-msgstr "Tlaèi»"
+msgstr ""
 
 #: src/gutenprintui/panel.c:270 src/gutenprintui2/panel.c:270
-#, fuzzy
 msgid "Set the base unit of measurement to points (1/72\")"
-msgstr "Nastavi» palce ako základnú mernú jednotku"
+msgstr ""
 
 #: src/gutenprintui/panel.c:272 src/gutenprintui2/panel.c:272
 msgid "mm"
-msgstr ""
+msgstr "æ¯«ç±³"
 
 #: src/gutenprintui/panel.c:272 src/gutenprintui2/panel.c:272
-#, fuzzy
 msgid "Set the base unit of measurement to millimetres"
-msgstr "Nastavi» centimetre ako základnú mernú jednotku"
+msgstr "ä»¥æ¯«ç±³ä½œç‚ºé•·åº¦å–®ä½"
 
 #: src/gutenprintui/panel.c:274 src/gutenprintui2/panel.c:274
 msgid "Pica"
-msgstr ""
+msgstr "é‰›é»"
 
 #: src/gutenprintui/panel.c:274 src/gutenprintui2/panel.c:274
-#, fuzzy
 msgid "Set the base unit of measurement to picas (1/12\")"
-msgstr "Nastavi» palce ako základnú mernú jednotku"
+msgstr "ä»¥é‰›é» (1/12\") ä½œç‚ºé•·åº¦å–®ä½"
 
 #: src/gutenprintui/panel.c:281 src/gutenprintui2/panel.c:281
 msgid "Color output"
-msgstr "Farebnı vıstup"
+msgstr "ä½¿ç”¨å½©è‰²åˆ—å°"
 
 #: src/gutenprintui/panel.c:283 src/gutenprintui2/panel.c:283
 msgid "Print in shades of gray using black ink"
-msgstr "Tlaèi» v odtieòoch ¹edej s pou¾itím èiernej farby"
+msgstr "ä½¿ç”¨é»‘è‰²å¢¨æ°´ä¾†åˆ—å°ç°éšè‰²å½©"
 
 #: src/gutenprintui/panel.c:295 src/gutenprintui2/panel.c:295
-#, fuzzy
 msgid "Standard Command"
-msgstr "©tandardnı"
+msgstr "æ¨™æº–æŒ‡ä»¤"
 
 #: src/gutenprintui/panel.c:295 src/gutenprintui2/panel.c:295
 msgid "Use standard print command"
-msgstr ""
+msgstr "ä½¿ç”¨æ¨™æº–åˆ—å°æŒ‡ä»¤"
 
 #: src/gutenprintui/panel.c:296 src/gutenprintui2/panel.c:296
-#, fuzzy
 msgid "Custom Command"
-msgstr "Príkaz:"
+msgstr "è‡ªé¸æŒ‡ä»¤"
 
 #: src/gutenprintui/panel.c:296 src/gutenprintui2/panel.c:296
 msgid "Use custom print command"
-msgstr ""
+msgstr "ä½¿ç”¨è‡ªè¡ŒæŒ‡å®šçš„åˆ—å°æŒ‡ä»¤"
 
 #: src/gutenprintui/panel.c:297 src/gutenprintui/plist.c:660
 #: src/gutenprintui/plist.c:743 src/gutenprintui2/panel.c:297
 #: src/gutenprintui2/plist.c:656 src/gutenprintui2/plist.c:739
 msgid "File"
-msgstr "Súbor"
+msgstr "æª”æ¡ˆ"
 
 #: src/gutenprintui/panel.c:297 src/gutenprintui2/panel.c:297
-#, fuzzy
 msgid "Print to a file"
-msgstr "Tlaèi» do súboru?"
+msgstr "åˆ—å°è‡³æª”æ¡ˆ"
 
 #: src/gutenprintui/panel.c:513 src/gutenprintui2/panel.c:513
 msgid "Edit Curve..."
 msgstr ""
 
 #: src/gutenprintui/panel.c:524 src/gutenprintui2/panel.c:524
-#, fuzzy
 msgid "Set Default"
-msgstr "Nastavi» ¹tandardné"
+msgstr ""
 
 #: src/gutenprintui/panel.c:526 src/gutenprintui2/panel.c:526
 msgid "Restore Previous"
@@ -4234,47 +3884,47 @@ msgstr ""
 #: src/gutenprintui2/panel.c:528 src/gutenprintui2/panel.c:1514
 #: src/gutenprintui2/panel.c:1753 src/gutenprintui2/panel.c:1785
 msgid "OK"
-msgstr "OK"
+msgstr "ç¢ºå®š"
 
 #: src/gutenprintui/panel.c:530 src/gutenprintui/panel.c:1178
 #: src/gutenprintui/panel.c:1516 src/gutenprintui/panel.c:1756
 #: src/gutenprintui2/panel.c:530 src/gutenprintui2/panel.c:1179
 #: src/gutenprintui2/panel.c:1516 src/gutenprintui2/panel.c:1755
 msgid "Cancel"
-msgstr "Storno"
+msgstr "å–æ¶ˆ"
 
 #: src/gutenprintui/panel.c:1161 src/gutenprintui2/panel.c:1162
 #, c-format
 msgid "%s -- Print v%s"
-msgstr "%s -- Tlaè v%s"
+msgstr "%s -- åˆ—å°å¢æ•ˆæ¨¡çµ„ %s ç‰ˆæœ¬"
 
 #: src/gutenprintui/panel.c:1170 src/gutenprintui2/panel.c:1171
 msgid "About"
-msgstr "O programe"
+msgstr "é—œæ–¼"
 
 #: src/gutenprintui/panel.c:1172 src/gutenprintui2/panel.c:1173
 msgid ""
 "Print and\n"
 "Save Settings"
 msgstr ""
-"Ulo¾i» nastavenia\n"
-"a vytlaèi»"
+"åˆ—å°ä¸¦\n"
+"å„²å­˜è¨­å®š"
 
 #: src/gutenprintui/panel.c:1174 src/gutenprintui2/panel.c:1175
 msgid ""
 "Save\n"
 "Settings"
 msgstr ""
-"Ulo¾i»\n"
-"nastavenia"
+"å„²å­˜\n"
+"è¨­å®š"
 
 #: src/gutenprintui/panel.c:1176 src/gutenprintui2/panel.c:1177
 msgid "Print"
-msgstr "Tlaèi»"
+msgstr "åˆ—å°"
 
 #: src/gutenprintui/panel.c:1228 src/gutenprintui2/panel.c:1229
 msgid "Preview"
-msgstr "Náhµad"
+msgstr "é è¦½"
 
 #: src/gutenprintui/panel.c:1253 src/gutenprintui2/panel.c:1254
 msgid ""
@@ -4289,265 +3939,245 @@ msgid ""
 "If you click another button while dragging the mouse, the image will return "
 "to its original position."
 msgstr ""
-"Pozícia obrázku na strane.\n"
-"Kliknite a potiahnite primárne tlaèítko na pozíciu obrázku.\n"
-"Kliknite a potiahnite sekundárne tlaèítko pohybu obrázku s jemnej¹ou "
-"presnos»ou; ka¾dá jednotka pohybu posunie obrázok o jeden bod (1/72\")\n"
-"Kliknite a potiahnite so strednım tlaèítkom na pohyb v jednotkách veµkosti "
-"obrázku.\n"
-"Ak pri klikaní a »ahaní podr¾íte klávesu Shift obmedzíte pohyb obrázku iba "
-"na vodorovnı a zvislı pohyb.\n"
-"Ak poèas »ahania obrázku my¹ou kliknete inım tlaèítkom, obrázok sa vráti na "
-"pôvodnú pozíciu."
+"è«‹åœ¨é é¢ä¸­æŒ‡å®šå½±åƒä½ç½®ã€‚\n"
+"é»é¸å½±åƒå¾Œï¼ŒæŒ‰å®šæ»‘é¼ ç¬¬ä¸€å€‹æŒ‰éˆ•ä¾†æ‹–æ›³å½±åƒå¯ä»¥æ›´æ”¹å½±åƒä½ç½®ã€‚\n"
+"é»é¸å½±åƒå¾Œï¼ŒæŒ‰å®šæ»‘é¼ ç¬¬äºŒå€‹æŒ‰éˆ•ä¾†æ‹–æ›³å½±åƒå¯ä»¥ç²¾ç¢ºåœ°æ›´æ”¹å½±åƒä½ç½®ï¼›æ¯æ¬¡ç§»å‹•çš„å–®"
+"ä½ç‚ºä¸€é» (1/72 è‹±å‹)ã€‚\n"
+"é»é¸å½±åƒå¾Œï¼ŒæŒ‰å®šæ»‘é¼ ç¬¬ä¸‰å€‹(ä¸­å¤®)æŒ‰éˆ•ä¾†æ‹–æ›³å½±åƒï¼Œæ¯æ¬¡ç§»å‹•çš„å–®ä½å‰‡æ˜¯å½±åƒå°ºå¯¸æœ¬"
+"èº«ã€‚\n"
+"æ‹–æ›³å½±åƒæ™‚æŒ‰ä¸‹ shift éµï¼Œæœƒé™åˆ¶å½±åƒåªå‘æ°´å¹³æˆ–å‚ç›´æ–¹å‘ç§»å‹•ã€‚\n"
+"å¦‚æœæ‹–æ›³çš„æ™‚å€™å†æŒ‰å¤šä¸€å€‹æ»‘é¼ æŒ‰éˆ•ï¼Œå½±åƒæœƒé‚„åŸè‡³åŸä¾†ä½ç½®ã€‚"
 
 #: src/gutenprintui/panel.c:1300 src/gutenprintui2/panel.c:1301
-#, fuzzy
 msgid "Paper Size"
-msgstr "Veµkos»"
+msgstr "ç´™å¼µå°ºå¯¸"
 
 #: src/gutenprintui/panel.c:1323 src/gutenprintui2/panel.c:1324
 msgid "Show All Paper Sizes"
-msgstr ""
+msgstr "é¡¯ç¤ºæ‰€æœ‰ç´™å¼µå°ºå¯¸"
 
 #: src/gutenprintui/panel.c:1339 src/gutenprintui2/panel.c:1340
 msgid "Dimensions:"
-msgstr "Rozmery:"
+msgstr "å°ºå¯¸ï¼š"
 
 #: src/gutenprintui/panel.c:1344 src/gutenprintui/panel.c:2020
 #: src/gutenprintui2/panel.c:1345 src/gutenprintui2/panel.c:2018
 msgid "Width:"
-msgstr "©írka:"
+msgstr "å¯¬åº¦ï¼š"
 
 #: src/gutenprintui/panel.c:1345 src/gutenprintui2/panel.c:1346
 msgid "Width of the paper that you wish to print to"
-msgstr "©írka papiera, na ktorı chcete tlaèi»"
+msgstr "åˆ—å°æ™‚çš„ç´™å¼µå¯¬åº¦"
 
 #: src/gutenprintui/panel.c:1349 src/gutenprintui/panel.c:2022
 #: src/gutenprintui2/panel.c:1350 src/gutenprintui2/panel.c:2020
 msgid "Height:"
-msgstr "Vı¹ka:"
+msgstr "é«˜åº¦ï¼š"
 
 #: src/gutenprintui/panel.c:1350 src/gutenprintui2/panel.c:1351
 msgid "Height of the paper that you wish to print to"
-msgstr "Vı¹ka papiera, na ktorı chcete tlaèi»"
+msgstr "åˆ—å°æ™‚çš„ç´™å¼µé«˜åº¦"
 
 #: src/gutenprintui/panel.c:1355 src/gutenprintui2/panel.c:1356
-#, fuzzy
 msgid "Automatic Paper Size"
-msgstr "Veµkos»"
+msgstr ""
 
 #: src/gutenprintui/panel.c:1373 src/gutenprintui2/panel.c:1373
 msgid "Number of Copies"
-msgstr ""
+msgstr "ä»½æ•¸"
 
 #: src/gutenprintui/panel.c:1385 src/gutenprintui2/panel.c:1385
 msgid "Select the number of copies to print; a value between 1 and 100"
-msgstr ""
+msgstr "è«‹é¸æ“‡åˆ—å°å¤šå°‘ä»½ (1-100 ä¹‹é–“)"
 
 #: src/gutenprintui/panel.c:1417 src/gutenprintui2/panel.c:1417
-#, fuzzy
 msgid "Image Position"
-msgstr "Pozícia"
+msgstr "å½±åƒä½ç½®"
 
 #: src/gutenprintui/panel.c:1434 src/gutenprintui2/panel.c:1434
 msgid "Auto"
-msgstr "Automaticky"
+msgstr "è‡ªå‹•"
 
 #: src/gutenprintui/panel.c:1436 src/gutenprintui2/panel.c:1436
 msgid "Portrait"
-msgstr "Na vı¹ku"
+msgstr "ç›´å‘"
 
 #: src/gutenprintui/panel.c:1438 src/gutenprintui2/panel.c:1438
 msgid "Landscape"
-msgstr "Na ¹írku"
+msgstr "æ©«å‘"
 
 #: src/gutenprintui/panel.c:1440 src/gutenprintui2/panel.c:1440
 msgid "Upside down"
-msgstr "Hore nohami"
+msgstr "ç›´å‘å€’ç½®"
 
 #: src/gutenprintui/panel.c:1442 src/gutenprintui2/panel.c:1442
 msgid "Seascape"
-msgstr "Na ¹írku"
+msgstr "æ©«å‘å€’ç½®"
 
 #: src/gutenprintui/panel.c:1446 src/gutenprintui2/panel.c:1446
 msgid ""
 "Select the orientation: portrait, landscape, upside down, or seascape "
 "(upside down landscape)"
-msgstr ""
-"Zvoµte orientáciu: na vı¹ku, na ¹írku, hore nohami, na ¹írku hore nohami "
+msgstr "æŒ‡å®šåˆ—å°æ™‚çš„æ–¹å‘ï¼šç›´å‘ã€æ©«å‘ã€ç›´å‘å€’ç½®ã€æ©«å‘å€’ç½®"
 
 #: src/gutenprintui/panel.c:1448 src/gutenprintui2/panel.c:1448
 msgid "Orientation:"
-msgstr "Orientácia:"
+msgstr "æ–¹å‘ï¼š"
 
 #: src/gutenprintui/panel.c:1459 src/gutenprintui2/panel.c:1459
 msgid "Left:"
-msgstr "¥avı:"
+msgstr "å·¦ï¼š"
 
 #: src/gutenprintui/panel.c:1460 src/gutenprintui2/panel.c:1460
 msgid "Distance from the left of the paper to the image"
-msgstr "Vzdialenos» od µavého okraja papiera k obrázku"
+msgstr "å¾ç´™å¼µå·¦é‚Šé‚Šç·£è‡³å½±åƒä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1463 src/gutenprintui/panel.c:1467
 #: src/gutenprintui2/panel.c:1463 src/gutenprintui2/panel.c:1467
 msgid "Right:"
-msgstr "Pravı:"
+msgstr "å³ï¼š"
 
 #: src/gutenprintui/panel.c:1464 src/gutenprintui2/panel.c:1464
 msgid "Distance from the left of the paper to the right of the image"
-msgstr "Vzdialenos» od µavého okraja papiera k pravému okraju obrázku"
+msgstr "å¾ç´™å¼µå·¦é‚Šé‚Šç·£è‡³å½±åƒå³é‚Šé‚Šç·£ä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1468 src/gutenprintui2/panel.c:1468
 msgid "Distance from the right of the paper to the image"
-msgstr "Vzdialenos» od pravého okraja papiera k obrázku"
+msgstr "å¾ç´™å¼µå³é‚Šé‚Šç·£è‡³å½±åƒä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1470 src/gutenprintui2/panel.c:1470
 msgid "Top:"
-msgstr "Hornı:"
+msgstr "ä¸Šï¼š"
 
 #: src/gutenprintui/panel.c:1471 src/gutenprintui2/panel.c:1471
 msgid "Distance from the top of the paper to the image"
-msgstr "Vzdialenos» od horného okraja papiera k obrázku"
+msgstr "å¾ç´™å¼µé ‚éƒ¨é‚Šç·£è‡³å½±åƒä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1474 src/gutenprintui/panel.c:1478
 #: src/gutenprintui2/panel.c:1474 src/gutenprintui2/panel.c:1478
 msgid "Bottom:"
-msgstr "Dolnı:"
+msgstr "ä¸‹ï¼š"
 
 #: src/gutenprintui/panel.c:1475 src/gutenprintui2/panel.c:1475
-#, fuzzy
 msgid "Distance from the top of the paper to bottom of the image"
-msgstr "Vzdialenos» od horného okraja papiera k dolnému okraju obrázku"
+msgstr "å¾ç´™å¼µé ‚éƒ¨é‚Šç·£è‡³å½±åƒåº•éƒ¨é‚Šç·£ä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1479 src/gutenprintui2/panel.c:1479
 msgid "Distance from the bottom of the paper to the image"
-msgstr "Vzdialenos» od dolného okraja papiera k obrázku"
+msgstr "å¾ç´™å¼µåº•éƒ¨é‚Šç·£è‡³å½±åƒä¹‹é–“çš„è·é›¢"
 
 #: src/gutenprintui/panel.c:1489 src/gutenprintui2/panel.c:1489
 msgid "Center:"
-msgstr "Centrovanie:"
+msgstr "ç½®ä¸­ï¼š"
 
 #: src/gutenprintui/panel.c:1492 src/gutenprintui2/panel.c:1492
-#, fuzzy
 msgid "Horizontal"
-msgstr "Vodorovne"
+msgstr "æ°´å¹³"
 
 #: src/gutenprintui/panel.c:1493 src/gutenprintui2/panel.c:1493
 msgid "Center the image horizontally on the paper"
-msgstr "Vycentrova» vodorovne obrázok na papieri"
+msgstr "å°‡å½±åƒçš„æ°´å¹³ä½ç½®èª¿æ•´è‡³ç´™å¼µä¸­é–“"
 
 #: src/gutenprintui/panel.c:1495 src/gutenprintui2/panel.c:1495
 msgid "Both"
-msgstr "Oboje"
+msgstr "å…©è€…"
 
 #: src/gutenprintui/panel.c:1496 src/gutenprintui2/panel.c:1496
 msgid "Center the image on the paper"
-msgstr "Vycentrova» obrázok na papieri"
+msgstr "å°‡å½±åƒæ”¾ç½®åœ¨ç´™å¼µä¸­é–“"
 
 #: src/gutenprintui/panel.c:1498 src/gutenprintui2/panel.c:1498
-#, fuzzy
 msgid "Vertical"
-msgstr "Zvislo"
+msgstr "å‚ç›´"
 
 #: src/gutenprintui/panel.c:1499 src/gutenprintui2/panel.c:1499
 msgid "Center the image vertically on the paper"
-msgstr "Vycentrova» obrázok zvisle na papieri"
+msgstr "å°‡å½±åƒçš„å‚ç›´ä½ç½®èª¿æ•´è‡³ç´™å¼µä¸­é–“"
 
 #: src/gutenprintui/panel.c:1512 src/gutenprintui2/panel.c:1512
 msgid "Setup Printer"
-msgstr "Nastavi» tlaèiareò"
+msgstr "è¨­å®šå°è¡¨æ©Ÿ"
 
 #: src/gutenprintui/panel.c:1537 src/gutenprintui2/panel.c:1536
-#, fuzzy
 msgid "Printer Make:"
-msgstr "Názov tlaèiarne:"
+msgstr ""
 
 #: src/gutenprintui/panel.c:1548 src/gutenprintui2/panel.c:1547
-#, fuzzy
 msgid "Select the make of your printer"
-msgstr "Vyberte model va¹ej tlaèiarne"
+msgstr ""
 
 #: src/gutenprintui/panel.c:1566 src/gutenprintui/panel.c:1857
 #: src/gutenprintui2/panel.c:1565 src/gutenprintui2/panel.c:1856
 msgid "Printer Model:"
-msgstr "Model tlaèiarne:"
+msgstr "å°è¡¨æ©Ÿå‹è™Ÿï¼š"
 
 #: src/gutenprintui/panel.c:1577 src/gutenprintui2/panel.c:1576
 msgid "Select your printer model"
-msgstr "Vyberte model va¹ej tlaèiarne"
+msgstr "è«‹é¸å–å°è¡¨æ©Ÿå‹è™Ÿ"
 
 #: src/gutenprintui/panel.c:1625 src/gutenprintui2/panel.c:1624
 msgid "PPD File:"
-msgstr "PPD súbor:"
+msgstr "PPD æª”ï¼š"
 
 #: src/gutenprintui/panel.c:1639 src/gutenprintui2/panel.c:1638
 msgid "Enter the correct PPD filename for your printer"
-msgstr "Vlo¾te správny PPD názov súboru pre va¹u tlaèiareò"
+msgstr "è«‹è¼¸å…¥é©åˆæ‚¨çš„å°è¡¨æ©Ÿä½¿ç”¨çš„ PPD æª”æ¡ˆåç¨±"
 
 #: src/gutenprintui/panel.c:1641 src/gutenprintui/panel.c:1708
 #: src/gutenprintui2/panel.c:1640 src/gutenprintui2/panel.c:1707
 msgid "Browse"
-msgstr "Prechádza»"
+msgstr "ç€è¦½"
 
 #: src/gutenprintui/panel.c:1648 src/gutenprintui2/panel.c:1647
 msgid "Choose the correct PPD filename for your printer"
-msgstr "Zvoµte správny PPD názov súboru pre va¹u tlaèiareò"
+msgstr "è«‹é¸æ“‡é©åˆæ‚¨çš„å°è¡¨æ©Ÿä½¿ç”¨çš„ PPD æª”æ¡ˆåç¨±"
 
 #: src/gutenprintui/panel.c:1677 src/gutenprintui2/panel.c:1676
-#, fuzzy
 msgid ""
 "Select the name of the output queue (not the type, or model, of printer) "
 "that you wish to print to"
 msgstr ""
-"Zvoµte si názov tlaèiarne (nie typ alebo model tlaèiarne), na ktorej chcete "
-"tlaèi»"
 
 #: src/gutenprintui/panel.c:1679 src/gutenprintui2/panel.c:1678
-#, fuzzy
 msgid "Printer Queue:"
-msgstr "Názov tlaèiarne:"
+msgstr "å°è¡¨æ©Ÿä½‡åˆ—ï¼š"
 
 #: src/gutenprintui/panel.c:1695 src/gutenprintui2/panel.c:1694
-#, fuzzy
 msgid "Enter the correct command to print to your printer. "
-msgstr "Vlo¾te správny PPD názov súboru pre va¹u tlaèiareò"
+msgstr "è«‹è¼¸å…¥åˆ—å°æ‰€ä½¿ç”¨çš„æŒ‡ä»¤ã€‚"
 
 #: src/gutenprintui/panel.c:1706 src/gutenprintui2/panel.c:1705
 msgid "Enter the file to print to. "
-msgstr ""
+msgstr "è«‹è¼¸å…¥åˆ—å°æ™‚å¯«å…¥çš„æª”æ¡ˆã€‚"
 
 #: src/gutenprintui/panel.c:1714 src/gutenprintui2/panel.c:1713
-#, fuzzy
 msgid "File to print to"
-msgstr "Test tlaèe"
+msgstr ""
 
 #: src/gutenprintui/panel.c:1722 src/gutenprintui2/panel.c:1721
-#, fuzzy
 msgid "Print To File"
-msgstr "Tlaèi» do súboru?"
+msgstr "åˆ—å°è‡³æª”æ¡ˆ"
 
 #: src/gutenprintui/panel.c:1752 src/gutenprintui2/panel.c:1751
 msgid "Define New Printer"
-msgstr "Definovanie novej tlaèiarne"
+msgstr "å®šç¾©æ–°çš„å°è¡¨æ©Ÿ"
 
 #: src/gutenprintui/panel.c:1770 src/gutenprintui/panel.c:1854
 #: src/gutenprintui2/panel.c:1769 src/gutenprintui2/panel.c:1853
 msgid "Printer Name:"
-msgstr "Názov tlaèiarne:"
+msgstr "å°è¡¨æ©Ÿåç¨±ï¼š"
 
 #: src/gutenprintui/panel.c:1774 src/gutenprintui2/panel.c:1773
 msgid "Enter the name you wish to give this logical printer"
-msgstr "Vlo¾te oznaèenie, ktoré chcete da» tejto logickej tlaèiarni"
+msgstr "ç‚ºé€™å€‹è™›æ“¬å°è¡¨æ©Ÿå‘½å"
 
 #: src/gutenprintui/panel.c:1784 src/gutenprintui2/panel.c:1783
-#, fuzzy
 msgid "About Gutenprint "
-msgstr "O Gimp-Print "
+msgstr "é—œæ–¼ Gutenprint "
 
 #: src/gutenprintui/panel.c:1791 src/gutenprintui2/panel.c:1790
-#, fuzzy
 msgid "Gutenprint Version "
-msgstr "Verzia Gimp-Print"
+msgstr "Gutenprint ç‰ˆæœ¬ "
 
 #: src/gutenprintui/panel.c:1791 src/gutenprintui2/panel.c:1790
 #, fuzzy
@@ -4575,74 +4205,60 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Copyright (C) 1997-2001 Michael Sweet, Robert Krawitz,\n"
-"a zvy¹ok vıvojového tímu  Gimp-Print.\n"
+"ç‰ˆæ¬Šæ‰€æœ‰ Â© 1997-2003 Michael Sweetã€Robert Krawitz\n"
+"åŠæ•´å€‹ Gutenprint é–‹ç™¼éšŠä¼ã€‚\n"
 "\n"
-"Nav¹tívte prosím webovskú stánku http://gimp-print.sourceforge.net.\n"
+"è«‹ç€è¦½æˆ‘å€‘çš„ç¶²é ï¼š http://gimp-print.sourceforge.net\n"
 "\n"
-"Tento program je slobodnı softvér; mô¾ete ho nedistribuova» a/alebo meni»\n"
-"v súlade so V¹eobecnou verejnou licenciou GNU publikovanou\n"
-"vo Free Software Foundation; èi u¾ verzie 2 alebo\n"
-"(podµa va¹ej voµby) akoukoµvek nov¹ou.\n"
-"\n"
-"Tento program je ¹írenı v nádeji, ¾e bude u¾itoènı, av¹ak\n"
-"BEZ AKEJKO¥VEK ZÁRUKY; neposkytujú sa ani odvodené záruky\n"
-"PREDAJNOSTI alebo VHODNOSTI PRE URÈITİ ÚÈEL.\n"
-"Ïal¹ie podrobnosti hµadajte vo V¹eobecnej verejnej licencii GNU.\n"
-"\n"
-"S tımto programom by ste mali získa» kópiu V¹eobecnej verejnej\n"
-"licencie GNU; ak tomu tak nie je, napí¹te do Free Software\n"
-"Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
-"MA 02111-1307, USA.\n"
+"æœ¬ç¨‹å¼ç‚ºè‡ªç”±è»Ÿé«”ï¼›æ‚¨å¯ä¾æ“šè‡ªç”±è»Ÿé«”åŸºé‡‘æœƒæ‰€ç™¼è¡¨çš„GNUé€šç”¨å…¬å…±æˆæ¬Šæ¢æ¬¾è¦å®šï¼Œå°±æœ¬"
+"ç¨‹å¼å†ç‚ºæ•£å¸ƒèˆ‡ï¼æˆ–ä¿®æ”¹ï¼›ç„¡è«–æ‚¨ä¾æ“šçš„æ˜¯æœ¬æˆæ¬Šçš„ç¬¬äºŒç‰ˆæˆ–ï¼ˆæ‚¨è‡ªè¡Œé¸æ“‡çš„ï¼‰ä»»ä¸€æ—¥"
+"å¾Œç™¼è¡Œçš„ç‰ˆæœ¬ã€‚\n"
+"æœ¬ç¨‹å¼ä¿‚åŸºæ–¼ä½¿ç”¨ç›®çš„è€ŒåŠ ä»¥æ•£å¸ƒï¼Œç„¶è€Œä¸è² ä»»ä½•æ“”ä¿è²¬ä»»ï¼›äº¦ç„¡å°é©å”®æ€§æˆ–ç‰¹å®šç›®çš„"
+"é©ç”¨æ€§æ‰€ç‚ºçš„é»˜ç¤ºæ€§æ“”ä¿ã€‚è©³æƒ…è«‹åƒç…§ GNU é€šç”¨å…¬å…±æˆæ¬Šã€‚\n"
+"æ‚¨æ‡‰å·²æ”¶åˆ°é™„éš¨æ–¼æœ¬ç¨‹å¼çš„GNUé€šç”¨å…¬å…±æˆæ¬Šçš„å‰¯æœ¬ï¼›å¦‚ç„¡ï¼Œè«‹å¯«ä¿¡è‡³è‡ªç”±è»Ÿé«”åŸºé‡‘æœƒï¼š"
+"59 Temple Place â€“ Suite 330, Boston, Ma 02111-1307, USAã€‚\n"
 
 #: src/gutenprintui/panel.c:1839 src/gutenprintui2/panel.c:1838
 msgid "Printer Settings"
-msgstr "Nastavenie tlaèiarne"
+msgstr "å°è¡¨æ©Ÿè¨­å®š"
 
 #: src/gutenprintui/panel.c:1852 src/gutenprintui2/panel.c:1851
 msgid ""
 "Select the name of the printer (not the type, or model, of printer) that you "
 "wish to print to"
-msgstr ""
-"Zvoµte si názov tlaèiarne (nie typ alebo model tlaèiarne), na ktorej chcete "
-"tlaèi»"
+msgstr "æŒ‡å®šå°è¡¨æ©Ÿåç¨± (ä¸æ˜¯å°è¡¨æ©Ÿé¡å‹æˆ–è€…å‹è™Ÿ)"
 
 #: src/gutenprintui/panel.c:1870 src/gutenprintui2/panel.c:1868
 msgid "Setup Printer..."
-msgstr "Nastavenie tlaèiarne..."
+msgstr "è¨­å®šå°è¡¨æ©Ÿ..."
 
 #: src/gutenprintui/panel.c:1872 src/gutenprintui2/panel.c:1870
 msgid ""
 "Choose the printer model, PPD file, and command that is used to print to "
 "this printer"
-msgstr ""
-"Voµba model tlaèiarne, PPD súboru a príkaz, ktorı sa pou¾íva pre tlaè na "
-"tejto tlaèiarni"
+msgstr "é¸å–åˆ—å°æ™‚ä½¿ç”¨çš„å°è¡¨æ©Ÿå‹è™Ÿã€PPD æª”åŠæŒ‡ä»¤"
 
 #: src/gutenprintui/panel.c:1885 src/gutenprintui2/panel.c:1883
 msgid "New Printer..."
-msgstr "Nová tlaèiareò..."
+msgstr "æ–°å¢å°è¡¨æ©Ÿ..."
 
 #: src/gutenprintui/panel.c:1886 src/gutenprintui2/panel.c:1884
 msgid ""
 "Define a new logical printer. This can be used to name a collection of "
 "settings that you wish to remember for future use."
-msgstr ""
-"Definovanie novej logickej tlaèiarne. Toto mô¾e by» pou¾ité na pomenovanie "
-"zbierky nastavení, ktoré si prajete zapamäta» a v budúcnosti pou¾íva»."
+msgstr "å®šç¾©æ–°çš„è™›æ“¬å°è¡¨æ©Ÿã€‚é€™å€‹ã€Œå°è¡¨æ©Ÿã€å…¶å¯¦æ˜¯ä»£è¡¨ä¸€çµ„è¨­å®šï¼Œä»¥ä¾¿å°‡ä¾†ä½¿ç”¨ã€‚"
 
 #: src/gutenprintui/panel.c:1929 src/gutenprintui2/panel.c:1927
-#, fuzzy
 msgid "Image Size"
-msgstr "Veµkos»"
+msgstr "å½±åƒå°ºå¯¸"
 
 #: src/gutenprintui/panel.c:1954 src/gutenprintui2/panel.c:1952
 msgid "Scaling:"
-msgstr "Zmena:"
+msgstr "ç¸®æ”¾ï¼š"
 
 #: src/gutenprintui/panel.c:1958 src/gutenprintui2/panel.c:1956
 msgid "Set the scale (size) of the image"
-msgstr "Nastavi» zväè¹enie (veµkos») obrázku"
+msgstr "æŒ‡å®šå½±åƒçš„ç¸®æ”¾æ¯”ä¾‹ (å°ºå¯¸)"
 
 #: src/gutenprintui/panel.c:1980 src/gutenprintui2/panel.c:1978
 msgid "Scale by:"
@@ -4652,17 +4268,15 @@ msgstr ""
 msgid ""
 "Select whether scaling is measured as percent of available page size or "
 "number of output dots per inch"
-msgstr ""
-"Zvoµte, èi zmena veµkosti bude vyjadrená ako percento dostupnej veµkosti "
-"stránky, alebo ako èíslo vıstupného DPI"
+msgstr "æŒ‡å®šæ”¾å¤§ç¸®å°å½±åƒæ™‚çš„å–®ä½ï¼Œæ˜¯é é¢å°ºå¯¸çš„ç™¾åˆ†æ¯”ï¼Œé‚„æ˜¯æ¯è‹±å‹æœ‰å¤šå°‘é»"
 
 #: src/gutenprintui/panel.c:1988 src/gutenprintui2/panel.c:1986
 msgid "Percent"
-msgstr "Percentá"
+msgstr "ç™¾åˆ†æ¯”"
 
 #: src/gutenprintui/panel.c:1993 src/gutenprintui2/panel.c:1991
 msgid "Scale the print to the size of the page"
-msgstr "Zmeni» veµkos» tlaèe podµa rozmerov strany"
+msgstr "æŒ‡å®šåˆ—å°æ™‚çš„å½±åƒå°ºå¯¸ç‚ºé é¢å°ºå¯¸çš„æŸå€‹ç™¾åˆ†æ¯”"
 
 #: src/gutenprintui/panel.c:1997 src/gutenprintui2/panel.c:1995
 msgid "PPI"
@@ -4670,132 +4284,125 @@ msgstr "PPI"
 
 #: src/gutenprintui/panel.c:2002 src/gutenprintui2/panel.c:2000
 msgid "Scale the print to the number of dots per inch"
-msgstr "Zmeni» veµkos» tlaèe podµa poètu bodov na palec"
+msgstr "åˆ—å°æ™‚ï¼Œé€éæŒ‡å®šæ¯è‹±å‹æœ‰å¤šå°‘é»ä¾†æ”¾å¤§ç¸®å°å½±åƒ"
 
 #: src/gutenprintui/panel.c:2020 src/gutenprintui2/panel.c:2018
 msgid "Set the width of the print"
-msgstr "Nastavi» ¹írku tlaèe"
+msgstr "æŒ‡å®šåˆ—å°æ™‚çš„å½±åƒå¯¬åº¦"
 
 #: src/gutenprintui/panel.c:2022 src/gutenprintui2/panel.c:2020
 msgid "Set the height of the print"
-msgstr "Nastavi» vı¹ku tlaèe"
+msgstr "æŒ‡å®šåˆ—å°æ™‚çš„å½±åƒé«˜åº¦"
 
 #: src/gutenprintui/panel.c:2028 src/gutenprintui2/panel.c:2026
 msgid ""
 "Use Original\n"
 "Image Size"
 msgstr ""
-"Pou¾i» pôvodnú\n"
-"veµkos» obrázka"
+"ä½¿ç”¨å½±åƒ\n"
+"åŸä¾†çš„å°ºå¯¸"
 
 #: src/gutenprintui/panel.c:2034 src/gutenprintui2/panel.c:2032
 msgid "Set the print size to the size of the image"
-msgstr "Nastavenie veµkosti tlaèe na veµkos» obrázku"
+msgstr "å°‡åˆ—å°æ™‚çš„å½±åƒå°ºå¯¸è¨­å®šç‚ºå½±åƒåŸä¾†çš„å°ºå¯¸"
 
 #: src/gutenprintui/panel.c:2057 src/gutenprintui2/panel.c:2056
 msgid "Print Color Adjust"
-msgstr "Prispôsobenie farieb pre tlaè"
+msgstr "åˆ—å°è‰²å½©èª¿æ•´"
 
 #: src/gutenprintui/panel.c:2060 src/gutenprintui2/panel.c:2059
 msgid "Set Defaults"
-msgstr "Nastavi» ¹tandardné"
+msgstr ""
 
 #: src/gutenprintui/panel.c:2062 src/gutenprintui2/panel.c:2061
 msgid "Close"
-msgstr "Zatvori»"
+msgstr "é—œé–‰"
 
 #: src/gutenprintui/panel.c:2092 src/gutenprintui2/panel.c:2090
 msgid "Image preview"
-msgstr "Náhµad obrázku"
+msgstr "å½±åƒé è¦½"
 
 #: src/gutenprintui/panel.c:2106 src/gutenprintui2/panel.c:2104
 msgid "View Output Channels:"
 msgstr ""
 
 #: src/gutenprintui/panel.c:2170 src/gutenprintui2/panel.c:2174
-#, fuzzy
 msgid "Output"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/gutenprintui/panel.c:2198 src/gutenprintui2/panel.c:2202
 msgid "Output Type:"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/gutenprintui/panel.c:2202 src/gutenprintui2/panel.c:2206
 msgid "Select the desired output type"
-msgstr "Zvoµte vytú¾enı typ vıstupu"
+msgstr "æŒ‡å®šè¼¸å‡ºé¡å‹ï¼š"
 
 #: src/gutenprintui/panel.c:2223 src/gutenprintui2/panel.c:2227
 msgid "Adjust Output..."
-msgstr "Prispôsobi» vıstup..."
+msgstr "èª¿æ•´è¼¸å‡ºçµæœ..."
 
 #: src/gutenprintui/panel.c:2232 src/gutenprintui2/panel.c:2236
 msgid ""
 "Adjust color balance, brightness, contrast, saturation, and dither algorithm"
-msgstr ""
-"Nastavenie farebného vyvá¾enia, kontrastu, sıtosti a algoritmu rozptylu"
+msgstr "èª¿æ•´è‰²å½©å¹³è¡¡ã€å…‰åº¦ã€åå·®ã€å½©åº¦åŠæ“¬è‰²çš„é‹ç®—æ–¹å¼"
 
 #: src/gutenprintui/panel.c:2250 src/gutenprintui2/panel.c:2255
-#, fuzzy
 msgid "Size Units:"
-msgstr "Jednotky:"
+msgstr "å°ºå¯¸å–®ä½ï¼š"
 
 #: src/gutenprintui/panel.c:2253 src/gutenprintui2/panel.c:2258
-#, fuzzy
 msgid " "
-msgstr "> "
+msgstr ""
 
 #: src/gutenprintui/panel.c:2277 src/gutenprintui2/panel.c:2282
 msgid "Units:"
-msgstr "Jednotky:"
+msgstr "å–®ä½ï¼š"
 
 #: src/gutenprintui/panel.c:2282 src/gutenprintui2/panel.c:2287
 msgid "Select the base unit of measurement for printing"
-msgstr "Zvoli» základnú mernú jednotku pre tlaè"
+msgstr "æŒ‡å®šåˆ—å°æ™‚çš„åŸºæœ¬é•·åº¦å–®ä½"
 
 #: src/gutenprintui/plist.c:90 src/gutenprintui/plist.c:99
 #: src/gutenprintui2/plist.c:90 src/gutenprintui2/plist.c:99
 msgid "System V lp"
-msgstr ""
+msgstr "System V lp"
 
 #: src/gutenprintui/plist.c:96 src/gutenprintui2/plist.c:96
 msgid "CUPS"
-msgstr ""
+msgstr "CUPS"
 
 #: src/gutenprintui/plist.c:102 src/gutenprintui2/plist.c:102
 msgid "Berkeley lpd (/etc/lpc)"
-msgstr ""
+msgstr "Berkeley lpd (/etc/lpc)"
 
 #: src/gutenprintui/plist.c:105 src/gutenprintui2/plist.c:105
 msgid "Berkeley lpd (/usr/bsd/lpc)"
-msgstr ""
+msgstr "Berkeley lpd (/usr/bsd/lpc)"
 
 #: src/gutenprintui/plist.c:108 src/gutenprintui2/plist.c:108
 msgid "Berkeley lpd (/usr/etc/lpc"
-msgstr ""
+msgstr "Berkeley lpd (/usr/etc/lpc"
 
 #: src/gutenprintui/plist.c:111 src/gutenprintui2/plist.c:111
 msgid "Berkeley lpd (/usr/libexec/lpc)"
-msgstr ""
+msgstr "Berkeley lpd (/usr/libexec/lpc)"
 
 #: src/gutenprintui/plist.c:114 src/gutenprintui2/plist.c:114
 msgid "Berkeley lpd (/usr/sbin/lpc)"
-msgstr ""
+msgstr "Berkeley lpd (/usr/sbin/lpc)"
 
 #: src/gutenprintui/plist.c:996 src/gutenprintui2/plist.c:992
-#, fuzzy
 msgid "Printer"
-msgstr "Tlaèi»"
+msgstr "å°è¡¨æ©Ÿ"
 
 #: src/gutenprintui/plist.c:1183 src/gutenprintui2/plist.c:1179
-#, fuzzy
 msgid "(Default Printer)"
-msgstr "Nastavi» tlaèiareò"
+msgstr "(é è¨­å°è¡¨æ©Ÿ)"
 
 #: src/gutenprintui2/curve.c:130
-#, fuzzy
 msgid "Curve type"
-msgstr "Èierna"
+msgstr ""
 
 #: src/gutenprintui2/curve.c:131
 msgid "Is this curve linear, spline interpolated, or free-form"
@@ -4803,7 +4410,7 @@ msgstr ""
 
 #: src/gutenprintui2/curve.c:139
 msgid "Minimum X"
-msgstr ""
+msgstr "X ä¸‹é™"
 
 #: src/gutenprintui2/curve.c:140
 msgid "Minimum possible value for X"
@@ -4811,7 +4418,7 @@ msgstr ""
 
 #: src/gutenprintui2/curve.c:149
 msgid "Maximum X"
-msgstr ""
+msgstr "X ä¸Šé™"
 
 #: src/gutenprintui2/curve.c:150
 msgid "Maximum possible X value"
@@ -4819,7 +4426,7 @@ msgstr ""
 
 #: src/gutenprintui2/curve.c:159
 msgid "Minimum Y"
-msgstr ""
+msgstr "Y ä¸‹é™"
 
 #: src/gutenprintui2/curve.c:160
 msgid "Minimum possible value for Y"
@@ -4827,7 +4434,7 @@ msgstr ""
 
 #: src/gutenprintui2/curve.c:169
 msgid "Maximum Y"
-msgstr ""
+msgstr "Y ä¸Šé™"
 
 #: src/gutenprintui2/curve.c:170
 msgid "Maximum possible value for Y"
@@ -4835,42 +4442,35 @@ msgstr ""
 
 #: src/gutenprintui2/gammacurve.c:418
 msgid "_Gamma value"
-msgstr ""
+msgstr "_Gamma å€¼"
 
 #: src/cups/genppd.c:136
-#, fuzzy
 msgid "Printer Features"
-msgstr "Nastavenie tlaèiarne"
+msgstr "å°è¡¨æ©ŸåŠŸèƒ½"
 
 #: src/cups/genppd.c:137
-#, fuzzy
 msgid "Output Control"
-msgstr "Typ vıstupu:"
+msgstr ""
 
 #: src/cups/genppd.c:142
-#, fuzzy
 msgid "Common"
-msgstr "Príkaz:"
+msgstr ""
 
 #: src/cups/genppd.c:143
-#, fuzzy
 msgid "Extra 1"
-msgstr "Zásobník 1"
+msgstr ""
 
 #: src/cups/genppd.c:144
-#, fuzzy
 msgid "Extra 2"
-msgstr "Zásobník 2"
+msgstr ""
 
 #: src/cups/genppd.c:145
-#, fuzzy
 msgid "Extra 3"
-msgstr "Zásobník 3"
+msgstr ""
 
 #: src/cups/genppd.c:146
-#, fuzzy
 msgid "Extra 4"
-msgstr "Zásobník 4"
+msgstr ""
 
 #: src/cups/genppd.c:147
 msgid "Extra 5"
@@ -4878,25 +4478,24 @@ msgstr ""
 
 #. TRANSLATORS: "Gutenprint" is a proper name, not a description
 #: src/cups/genppd.c:192 src/cups/genppd.c:201
-#, fuzzy
 msgid "Gutenprint"
-msgstr "Test tlaèe"
+msgstr "Gutenprint"
 
 #: src/cups/genppd.c:870
 msgid "English"
-msgstr "Slovak"
+msgstr ""
 
 #: src/cups/genppd.c:872
 msgid "ISOLatin1"
-msgstr "ISOLatin1"
+msgstr ""
 
 #: src/cups/genppd.c:1419
 msgid "No"
-msgstr ""
+msgstr "å¦"
 
 #: src/cups/genppd.c:1421
 msgid "Yes"
-msgstr ""
+msgstr "æ˜¯"
 
 #: src/cups/genppd.c:1449
 msgid "Fine Adjustment"
@@ -4904,21 +4503,15 @@ msgstr ""
 
 #: src/escputil/escputil.c:69
 msgid "Escputil version "
-msgstr "Verzia Escputil "
+msgstr "Escputil ç‰ˆæœ¬ "
 
 #: src/escputil/escputil.c:70
-#, fuzzy
 msgid ""
 ", Copyright (C) 2000-2003 Robert Krawitz\n"
 "Escputil comes with ABSOLUTELY NO WARRANTY; for details type 'escputil -l'\n"
 "This is free software, and you are welcome to redistribute it\n"
 "under certain conditions; type 'escputil -l' for details.\n"
 msgstr ""
-", Copyright (C) 2000-2001 Robert Krawitz\n"
-"Escputil prichádza bez AKİCHKO¥VEK GARANCIÍ; detaily získate po napísaní "
-"'escputil -l'\n"
-"Toto je slobodnı softvér a jeho redistribúcia je za istıch podmienok\n"
-"vítaná; viac informácií získate po napísaní 'escputil -l'.\n"
 
 #: src/escputil/escputil.c:75
 msgid ""
@@ -4938,28 +4531,8 @@ msgid ""
 "along with this program; if not, write to the Free Software\n"
 "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n"
 msgstr ""
-"Copyright 2000 Robert Krawitz (rlk@alum.mit.edu)\n"
-"\n"
-"Toto je iba orientaènı preklad licencie, ktorá platí v originálnom anglickom "
-"znení.\n"
-"\n"
-"Tento program je voµne ¹íriteµnı; mô¾ete ho redistribuova» a meni»\n"
-"v súlade so V¹eobecnou verejnou licenciou GNU publikovanou\n"
-"vo Free Software Foundation; buï licenciou verzie 2 alebo\n"
-"(podµa va¹ej voµby) akoukoµvek nov¹ou.\n"
-"\n"
-"Tento program je ¹írenı v nádeji, ¾e bude u¾itoènı, av¹ak\n"
-"BEZ AKEJKO¥VEK ZÁRUKY; neposkytujú sa ani odvodené záruky\n"
-"PREDAJNOSTI alebo VHODNOSTI PRE URÈITİ ÚÈEL.\n"
-"Ïal¹ie podrobnosti hµadajte vo V¹eobecnej verejnej licencii GNU.\n"
-"\n"
-"S tımto programom by ste mali získa» kópiu V¹eobecnej verejnej\n"
-"licencie GNU; ak tomu tak nie je, napí¹te do Free Software\n"
-"Foundation, Inc., 59 Temple Place - Suite 330, Boston,\n"
-"MA 02111-1307, USA.\n"
 
 #: src/escputil/escputil.c:116
-#, fuzzy
 msgid ""
 "Usage: escputil [-c | -n | -a | -i | -e | -s | -d | -l | -M]\n"
 "                [-P printer | -r device] [-u] [-q] [-m model] [ -S ]\n"
@@ -5001,55 +4574,8 @@ msgid ""
 "    -m|--model         Specify the precise printer model for head "
 "alignment.\n"
 msgstr ""
-"Pou¾itie: escputil [-c | -n | -a | -i | -o | -s | -d | -l | -M]\n"
-"                [-P tlaèiareò | -r zariadenie] [-u] [-q] [-m model]\n"
-"Vykoná údr¾bu tlaèiarní EPSON Stylus (R).\n"
-"Príklad: escputil --clean-head --printer stpex-na-druhom-poschodí\n"
-"         escputil --ink-level --new --raw-device /dev/lp0\n"
-"\n"
-"  Príkazy:\n"
-"    -c|--clean-head    Èistí tlaèovú hlavu.\n"
-"    -n|--nozzle-check  Vytlaèí testovaciu vzorku na otvory.\n"
-"                       ©pinavé alebo upchaté otvory budú zobrazené ako "
-"medzery\n"
-"                       vo vzorke. Ak uvidíte nejaké medzery, mali by ste\n"
-"                       oèisti» tlaèovú hlavu.\n"
-"    -a|--align-head    Zarovnanie tlaèovej hlavy.  UPOZORNENIE: Nesprávne\n"
-"                       pou¾itie tohoto nástroja bude ma» za následok nízku\n"
-"                       kvalitu tlaèe a/alebo po¹kodenie tlaèiarne.\n"
-"    -o|--align-color   Zarovnanie farebnej hlavy ( iba pre Stylus Color 480 "
-"a\n"
-"                       580 UPOZORNENIE: Nesprávne pou¾itie tohoto nástroja "
-"bude\n"
-"                       ma» za následok nízku kvalitu tlaèe a/alebo "
-"po¹kodenie\n"
-" \t\t\ttlaèiarne.\n"
-"    -s|--status        Informácie o stave tlaèiarne.\n"
-"    -i|--ink-level     Získanie o informácie o úrovni atramentu z "
-"tlaèiarne.\n"
-"\t\t\tToto vy¾aduje prístup èítanie/zápis na základné\n"
-"                       zariadenie tlaèiarne.\n"
-"    -d|--identify      Po¾iadavka na tlaèiareò o informácie o modely.\n"
-"                       Toto vy¾aduje prístup èítanie/zápis na základné\n"
-"                       zariadenie tlaèiarne.\n"
-"    -l|--license       Zobrazenie licencie/podmienok záruky tohoto "
-"programu.\n"
-"    -M|--list-models   Zoznam dostupnıch modelov tlaèiarní.\n"
-"    -h|--help          Zobrazí tieto informácie.\n"
-"\n"
-"  Voµby:\n"
-"    -P|--printer-name  Urèenie názvu tlaèiarne, s ktorou sa bude pracova».\n"
-"                       ©tandardne sa pou¾ije systémová tlaèiareò.\n"
-"    -r|--raw-device    Urèenie názvu zariadenia pre priamy zápis, ne¾ by sa\n"
-"                       mal pou¾i» tlaèovı front.\n"
-"    -u|--new           Tlaèiareò je nová tlaèiareò (Stylus Color 740 alebo\n"
-"                       nov¹ia).\n"
-"    -q|--quiet         zakázanie nápisu.\n"
-"    -m|--model         Urèenie presného modelu tlaèiarne pre zarovnanie "
-"hlavy.\n"
 
 #: src/escputil/escputil.c:155
-#, fuzzy
 msgid ""
 "Usage: escputil [OPTIONS] [COMMAND]\n"
 "Usage: escputil [-c | -n | -a | -i | -e | -s | -d | -l | -M]\n"
@@ -5089,62 +4615,26 @@ msgid ""
 "    -S Print the short name of the printer with -d.\n"
 "    -m Specify the precise printer model for head alignment.\n"
 msgstr ""
-"Pou¾itie: escputil [VO¥BA] [PRÍKAZ]\n"
-"Pou¾itie: escputil [-c | -n | -a | -i | -o | -s | -d | -l | -M]\n"
-"                [-P tlaèiareò | -r zariadenie] [-u] [-q] [-m model]\n"
-"Vykoná údr¾bu na tlaèiarni EPSON Stylus (R).\n"
-"Príklady: escputil -c -P stpex-na-druhom-poschodí\n"
-"          escputil -i -u -r /dev/lp0\n"
-"\n"
-"  Príkazy:\n"
-"    -c Èistí tlaèovú hlavu.\n"
-"    -n Vytlaèí testovaciu vzorku na otvory.\n"
-"          ©pinavé alebo upchaté otvory budú zobrazené ako medzery\n"
-"          vo vzorke. Ak uvidíte nejaké medzery, mali by ste oèisti»\n"
-"          tlaèovú hlavu.\n"
-"    -a Zarovnanie tlaèovej hlavy.  UPOZORNENIE: Nesprávne pou¾itie\n"
-"          tohoto nástroja bude ma» za následok nízku kvalitu tlaèe\n"
-"          a/alebo po¹kodenie tlaèiarne.\n"
-"    -o Zarovnanie farebnej hlavy ( iba pre Stylus Color 480 a 580\n"
-"          UPOZORNENIE: Nesprávne pou¾itie tohoto nástroja bude ma»\n"
-"          za následok nízku kvalitu tlaèe a/alebo po¹kodenie tlaèiarne.\n"
-"    -s Informácie o stave tlaèiarne.\n"
-"    -i Získanie o informácie o úrovni atramentu z tlaèiarne. Toto vy¾aduje\n"
-"          prístup na èítanie/zápis na základné zariadenie tlaèiarne.\n"
-"    -d Po¾iadavka na tlaèiareò o informácie o modely. Toto vy¾aduje prístup\n"
-"          èítanie/zápis na základné zariadenie tlaèiarne.\n"
-"    -l Zobrazenie licencie/podmienok záruky tohoto programu.\n"
-"    -M Zoznam dostupnıch modelov tlaèiarní.\n"
-"    -h Zobrazí tieto informácie.\n"
-"\n"
-"  Voµby:\n"
-"    -P Urèenie názvu tlaèiarne, s ktorou sa bude pracova».\n"
-"          ¹tandardne sa pou¾ije systémová tlaèiareò.\n"
-"    -r Urèenie názvu zariadenia pre priamy zápis, ne¾ by sa\n"
-"          mal pou¾i» tlaèovı front.\n"
-"    -u Tlaèiareò je nová tlaèiareò (Stylus Color 740 alebo nov¹ia).\n"
-"    -q zakázanie nápisu.\n"
-"    -m Urèenie presného modelu tlaèiarne pre zarovnanie hlavy.\n"
 
 #: src/escputil/escputil.c:316 src/escputil/escputil.c:324
 #, c-format
 msgid "You may only specify one printer or raw device."
-msgstr "Mô¾ete ¹pecifikova» len jednu tlaèiareò alebo prvotné zariadenie."
+msgstr ""
 
 #: src/escputil/escputil.c:332
 #, c-format
 msgid "You may only specify one printer model."
-msgstr "Je mo¾né zvoli» len jeden model tlaèiarne."
+msgstr ""
 
 #: src/escputil/escputil.c:354
 #, c-format
 msgid "Unknown option %c\n"
-msgstr "Neznáme nastavenie %c\n"
+msgstr "é¸é … %c ä¸æ˜\n"
 
 #: src/escputil/escputil.c:362
 #, c-format
 msgid "Usage: %s [OPTIONS] command\n"
-msgstr ""
+msgstr "ç”¨æ³•ï¼š%s [é¸é …] æŒ‡ä»¤\n"
 
 #: src/escputil/escputil.c:364
 #, c-format
@@ -5159,17 +4649,17 @@ msgstr ""
 #: src/escputil/escputil.c:414
 #, c-format
 msgid "Cannot open device %s: %s\n"
-msgstr "Nie je mo¾né otvori» zariadenie %s: %s\n"
+msgstr "ç„¡æ³•é–‹å•Ÿè£ç½® %sï¼š%s\n"
 
 #: src/escputil/escputil.c:437
 #, c-format
 msgid "Cannot print to printer %s with %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/escputil/escputil.c:450 src/escputil/escputil.c:460
 #, c-format
 msgid "Unable to send command to printer\n"
-msgstr "Nie je mo¾né posla» príkaz na tlaèiareò\n"
+msgstr "ç„¡æ³•å°‡æŒ‡ä»¤é€å‡ºè‡³å°è¡¨æ©Ÿ\n"
 
 #: src/escputil/escputil.c:515
 #, c-format
@@ -5179,18 +4669,18 @@ msgstr ""
 #: src/escputil/escputil.c:520
 #, c-format
 msgid "Cannot read from %s: %s\n"
-msgstr "Nie je mo¾né èíta» z %s: %s\n"
+msgstr "ç„¡æ³•ç”± %s è®€å–è³‡æ–™ï¼š%s\n"
 
 #: src/escputil/escputil.c:659 src/escputil/escputil.c:932
 #: src/escputil/escputil.c:1163
 #, c-format
 msgid "Cannot open %s read/write: %s\n"
-msgstr "Nie je mo¾né otvori» %s pre èítanie/zápis: %s\n"
+msgstr ""
 
 #: src/escputil/escputil.c:677 src/escputil/escputil.c:1051
 #, c-format
 msgid "Cannot write to %s: %s\n"
-msgstr "Nie je mo¾né zapisova» do %s: %s\n"
+msgstr "ç„¡æ³•å¯«å…¥ %sï¼š%s\n"
 
 #: src/escputil/escputil.c:733 src/escputil/escputil.c:1030
 #, c-format
@@ -5199,7 +4689,7 @@ msgid ""
 "Cannot write to %s: %s\n"
 msgstr ""
 "\n"
-"Nie je mo¾né zapisova» do %s: %s\n"
+"ç„¡æ³•å¯«å…¥ %sï¼š%s\n"
 
 #: src/escputil/escputil.c:739 src/escputil/escputil.c:1037
 #, c-format
@@ -5215,9 +4705,6 @@ msgid ""
 "Cannot detect printer type.\n"
 "Please use -m to specify your printer model.\n"
 msgstr ""
-"\n"
-"Nie je mo¾né zisti» typ tlaèiarne.\n"
-"Pou¾ite prosím -m na urèenie modelu va¹ej tlaèiarne.\n"
 
 #: src/escputil/escputil.c:871
 msgid "unknown"
@@ -5229,41 +4716,41 @@ msgstr ""
 
 #: src/escputil/escputil.c:901
 msgid "status"
-msgstr ""
+msgstr "ç‹€æ…‹"
 
 #: src/escputil/escputil.c:906
-#, fuzzy, c-format
+#, c-format
 msgid "Obtaining %s requires using a raw device.\n"
-msgstr "Získanie úrovne atramentu vy¾aduje pou¾itie základného zariadenia.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:915 src/escputil/escputil.c:1154
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot identify printer!\n"
-msgstr "Nie je mo¾né analyzova» vıstup z tlaèiarne\n"
+msgstr "ç„¡æ³•è­˜åˆ¥å°è¡¨æ©Ÿï¼\n"
 
 #: src/escputil/escputil.c:925
-#, fuzzy, c-format
+#, c-format
 msgid "Printer does not support listing ink types!\n"
-msgstr "Tlaèiareò nepodporuje farebnı vıstup\n"
+msgstr ""
 
 #: src/escputil/escputil.c:974 src/escputil/escputil.c:1088
 #: src/escputil/escputil.c:1201
 msgid "Ink color"
-msgstr "Farebnı atrament"
+msgstr "å¢¨æ°´é¡è‰²"
 
 #: src/escputil/escputil.c:974 src/escputil/escputil.c:1088
 #: src/escputil/escputil.c:1201
 msgid "Percent remaining"
-msgstr "Zostávajúce percentá"
+msgstr ""
 
 #: src/escputil/escputil.c:998
 msgid "Unknown"
-msgstr ""
+msgstr "ä¸è©³"
 
 #: src/escputil/escputil.c:1147
-#, fuzzy, c-format
+#, c-format
 msgid "Obtaining extended ink information requires using a raw device.\n"
-msgstr "Získanie úrovne atramentu vy¾aduje pou¾itie základného zariadenia.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1201
 msgid "Part number"
@@ -5271,27 +4758,27 @@ msgstr ""
 
 #: src/escputil/escputil.c:1202
 msgid "Date"
-msgstr ""
+msgstr "æ—¥æœŸ"
 
 #: src/escputil/escputil.c:1238
 #, c-format
 msgid "Printer identification requires using a raw device.\n"
-msgstr "Identifikácia tlaèiarne vy¾aduje pou¾ívanie základného zariadenia.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1254
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot identify printer model.\n"
-msgstr "Je mo¾né zvoli» len jeden model tlaèiarne."
+msgstr "ç„¡æ³•è­˜åˆ¥å°è¡¨æ©Ÿå‹è™Ÿã€‚\n"
 
 #: src/escputil/escputil.c:1273
 #, c-format
 msgid "Cleaning heads...\n"
-msgstr "Èistenie hláv...\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1284
 #, c-format
 msgid "Running nozzle check, please ensure paper is in the printer.\n"
-msgstr "Spú¹»am kontrolu trysiek, uistite sa, ¾e v tlaèiarni je papier.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1288
 #, c-format
@@ -5331,42 +4818,6 @@ msgid ""
 "It is essential that you not turn your printer off during this procedure.\n"
 "\n"
 msgstr ""
-"Prosím, veµmi pozorne si preèítajte tieto in¹trukcie skôr, ako bude "
-"pokraèova».\n"
-"\n"
-"Tento nástroj vám umo¾ní zarovna» tlaèovú hlavu atramentovej tlaèiarne\n"
-"Epson Stylus. Jeho nesprávne pou¾itie mô¾e spôsobi» zní¾enie kvality tlaèe\n"
-"a mô¾e po¹kodi» samotnú tlaèiareò. Tento nástroj nebol otestovanı\n"
-"spoloènos»ou Seiko Epson a je ponúknutı bez akejkoµvek záruky. Celé\n"
-"riziko za pou¾itie toho nástroja le¾í na vás.\n"
-"\n"
-"Bude vytlaèenıch %d testovacích vzoriek. V¹etky vzorky sú veµmi podobné.\n"
-"Vzorky obsahujú série zvislıch èiar, ktoré sa budú prekrıva» Pod ka¾dım "
-"párom je èíslo\n"
-"od %d do %d.\n"
-"\n"
-"Keï si prezriete páry èiar, mali by ste vybra» takı pár èiar, ktorı je "
-"najlep¹ie\n"
-"zarovnanı. Veµmi pozorne si ich prezrite. Pre najkritickej¹ie rozhodovanie\n"
-"pou¾ite lupu alebo zväè¹ovacie sklíèko. Tie¾ vám odporúèame pou¾i» na tento\n"
-"test vysokokvalitnı papier, aby sa èiary nerozpíjali na papieri, ale mali\n"
-"správny tvar. Pred napísaním èísla najlep¹ieho páru èiar, vlo¾te stanu spä»\n"
-"do tlaèiarne.\n"
-"\n"
-"Ka¾dá vzorka je podobná, ale posledné vzorky pou¾ívajú jemnej¹ie bodky\n"
-"pre kritickej¹ie zarovnanie. Musíte prejs» v¹etkımi fázami zarovnávania,\n"
-"aby va¹a tlaèiareò bola správne zarovnaná.  Po absolvovaní v¹etkıch fáz\n"
-"bude zarovnávacia vzorka vytlaèená e¹te raz. Mali by ste zisti», ¾e vzorka\n"
-"v strede (#%d z %d) je najlep¹ia zo v¹etkıch,\n"
-"\n"
-"Po vytlaèení ïal¹ej vzorky vám bude ponúknutá mo¾nos» (s) - ulo¾i» vısledky\n"
-"do tlaèiarne, (r) - zopakova» proces, alebo (q) - ukonèi» bez ulo¾enia.\n"
-"Ukonèenie neobnoví pôvodné nastavenie, ale vypnutie a následné zapnutie\n"
-"tlaèiarne áno. Pokiaµ ukonèíte bez ulo¾enia, budete musie» zopakova» celı\n"
-"proces opä», ak budete chcie» svoje vısledky ulo¾i». Je dôle¾ité, aby ste "
-"poèas\n"
-"toho procesu nevypli tlaèiareò\n"
-"\n"
 
 #: src/escputil/escputil.c:1323
 #, c-format
@@ -5403,45 +4854,11 @@ msgid ""
 "this procedure.\n"
 "\n"
 msgstr ""
-"Prosím, veµmi pozorne si preèítajte tieto in¹trukcie skôr, ako bude "
-"pokraèova».\n"
-"\n"
-"Tento nástroj vám umo¾ní zarovna» tlaèovú hlavu atramentovej tlaèiarne Epson "
-"Stylus.\n"
-"Jeho nesprávne pou¾itie mô¾e spôsobi» zní¾enie kvality tlaèe a mô¾e "
-"po¹kodi»\n"
-"samotnú tlaèiareò. Tento nástroj nebol otestovanı spoloènos»ou Seiko Epson\n"
-"a je ponúknutı bez akejkoµvek záruky. Celé riziko za pou¾itie toho nástroja\n"
-"le¾í na vás.\n"
-"\n"
-"Bude vytlaèená testovacia vzorka, ktorá bude obsahova» sériu párov zvislıch\n"
-"èiar, ktoré **overlap. Pod ka¾dım párom èiar je èíslo od %d do %d.\n"
-"\n"
-"Keï si prezriete vzorky, mali by ste vybra» takı pár èiar, ktorı je "
-"najlep¹ie\n"
-"zarovnanı. Veµmi pozorne si ich prezrite. Pre najkritickej¹ie rozhodovanie\n"
-"pou¾ite lupu alebo zväè¹ovacie sklíèko. Tie¾ vám odporúèame pou¾i» na tento\n"
-"test vysokokvalitnı papier, aby sa èiary nerozpíjali na papieri, ale mali\n"
-"správny tvar. Pred napísaním èísla najlep¹ieho páru èiar, vlo¾te stanu spä»\n"
-"do tlaèiarne.\n"
-"\n"
-"Zarovnávacia vzorka bude vytlaèená e¹te raz. V tomto prípade by najlep¹ím\n"
-"párom (#%d z %d) mal by» ten uprostred. Potom vám bude ponúknutá mo¾nos»\n"
-"(s) - ulo¾i» vısledky do tlaèiarne, (r) - zopakova» proces, alebo (q) - "
-"ukonèi»\n"
-"bez ulo¾enia.  Ukonèenie neobnoví pôvodné nastavenie, ale vypnutie a "
-"následné\n"
-"zapnutie tlaèiarne áno.\n"
-"Pokiaµ ukonèíte bez ulo¾enia, budete musie» zopakova» celı proces opä», ak\n"
-"budete chcie» svoje vısledky ulo¾i». Je dôle¾ité, aby ste poèas toho "
-"procesu \n"
-"nevypli tlaèiareò\n"
-"\n"
 
 #: src/escputil/escputil.c:1367
 #, c-format
 msgid "Unable to send command to the printer, exiting.\n"
-msgstr "Nie je mo¾né odosla» príkaz pre tlaèiareò, koniec.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1377
 #, c-format
@@ -5454,13 +4871,6 @@ msgid ""
 "You will then be asked to confirm your choice.\n"
 "What do you want to do (s, q, r)?\n"
 msgstr ""
-"Preskúmajte vısledok tlaèe veµmi pozorne a uistite sa,\n"
-"¾e va¹a tlaèiareò má správne zarovnanie. Teraz mô¾ete:\n"
-"  (s) ulo¾i» vısledok do tlaèiarne,\n"
-"  (q) ukonèi» bez ulo¾enia vısledku, alebo\n"
-"  (r) zopakova» celı proces od zaèiatku.\n"
-"Potom bude po¾iadanı potvrdi» va¹u voµbu.\n"
-"Èo chcete spravi»? (s,q,r)?\n"
 
 #: src/escputil/escputil.c:1385 src/escputil/escputil.c:1392
 #: src/escputil/escputil.c:1405 src/escputil/escputil.c:1421
@@ -5473,7 +4883,6 @@ msgstr "> "
 msgid ""
 "Please confirm by typing 'q' again that you wish to quit without saving:\n"
 msgstr ""
-"Potvrïte prosím opätovnım stlaèením 'q', ¾e si ¾eláte ukonèi» bez ulo¾enia:\n"
 
 #: src/escputil/escputil.c:1395
 #, c-format
@@ -5481,8 +4890,6 @@ msgid ""
 "OK, your printer is aligned, but the alignment has not been saved.\n"
 "If you wish to save the alignment, you must repeat this process.\n"
 msgstr ""
-"V poriadku, va¹a tlaèiareò je  zarovnaná, ale zarovnanie nebolo ulo¾ené.\n"
-"Ak si ¾eláte ulo¾i» zarovnanie, musíte tento proces zopakova».\n"
 
 #: src/escputil/escputil.c:1402
 #, c-format
@@ -5490,13 +4897,11 @@ msgid ""
 "Please confirm by typing 'r' again that you wish to repeat the\n"
 "alignment process:\n"
 msgstr ""
-"Opätovnım stlaèení 'r' potvrïte, ¾e si prajete zopakova» proces "
-"zarovnávania:\n"
 
 #: src/escputil/escputil.c:1408
 #, c-format
 msgid "Repeating the alignment process.\n"
-msgstr "Opakujem proces zarovnávania.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1414
 #, c-format
@@ -5507,21 +4912,16 @@ msgid ""
 "Please confirm by typing 's' again that you wish to save the settings\n"
 "to your printer:\n"
 msgstr ""
-"Toto natrvalo zmení nastavenie va¹ej tlaèiarne.\n"
-"VAROVANIE: táto procedúra nebola odsúhlasená spoloènos»ou Seiko Epson\n"
-"a mô¾e po¹kodi» va¹u tlaèiareò. Pokraèova»?\n"
-"Potvrïte opätovnım stlaèením 's', ¾e si prajete ulo¾i» nastavenie\n"
-"va¹ej tlaèiarne:\n"
 
 #: src/escputil/escputil.c:1424
 #, c-format
 msgid "About to save settings..."
-msgstr "O nastaveniach ukladania..."
+msgstr "æº–å‚™å„²å­˜è¨­å®š..."
 
 #: src/escputil/escputil.c:1430
 #, c-format
 msgid "failed!\n"
-msgstr "zlyhalo!\n"
+msgstr "å¤±æ•—ï¼\n"
 
 #: src/escputil/escputil.c:1431
 #, c-format
@@ -5529,28 +4929,26 @@ msgid ""
 "Your settings were not saved successfully.  You must repeat the\n"
 "alignment procedure.\n"
 msgstr ""
-"Va¹e nastavenie sa nepodarilo úspe¹ne ulo¾i». Musíte zopakova»\n"
-"procedúru zarovnávania.\n"
 
 #: src/escputil/escputil.c:1435
 #, c-format
 msgid "succeeded!\n"
-msgstr "úspe¹ne!\n"
+msgstr "æˆåŠŸï¼\n"
 
 #: src/escputil/escputil.c:1436
 #, c-format
 msgid "Your alignment settings have been saved to the printer.\n"
-msgstr "Va¹e nastavenia zarovnávania boli ulo¾ené do tlaèiarne.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1441
 #, c-format
 msgid "Unrecognized command.\n"
-msgstr "Neznámy príkaz.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1444
 #, c-format
 msgid "Final command was not confirmed.\n"
-msgstr "Závereènı príkaz nebol potvrdenı.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1449
 #, c-format
@@ -5562,17 +4960,11 @@ msgid ""
 "Please place a sheet of paper in your printer to begin the head\n"
 "alignment procedure.\n"
 msgstr ""
-"Táto procedúra prepokladá, ¾e va¹a tlaèiareò je Epson %s.\n"
-"Ak toto nie je model va¹ej tlaèiarne, stlaète teraz prosím control-C\n"
-"a zvoµte vá¹ súèasnı model tlaèiarne.\n"
-"\n"
-"Vlo¾te prosím hárok papiera do va¹ej tlaèiarne, aby sa mohla zaèa»\n"
-"procedúra zarovnávania hlavy.\n"
 
 #: src/escputil/escputil.c:1509 src/escputil/escputil.c:1531
 #: src/escputil/escputil.c:1574
 msgid "Press enter to continue > "
-msgstr "Pre pokraèovanie stlaète enter > "
+msgstr "è«‹æŒ‰ enter ç¹¼çºŒ > "
 
 #: src/escputil/escputil.c:1516
 #, c-format
@@ -5581,43 +4973,41 @@ msgid ""
 "pattern.\n"
 "Type a pair number, '?' for help, or 'r' to repeat the procedure.\n"
 msgstr ""
-"Preskúmajte pozorne vıtlaèok a zvoµte najlep¹í pár èiar v ka¾dej vzorke.\n"
-"Stlaète èíslo páru, '?' pre pomoc alebo 'r' pre zopakovanie procedúry.\n"
 
 #: src/escputil/escputil.c:1522
 #, c-format
 msgid "Pass #%d"
-msgstr "Prechod #%d"
+msgstr "ç¬¬ %d æ¬¡"
 
 #: src/escputil/escputil.c:1528 src/escputil/escputil.c:1573
 #, c-format
 msgid "Please insert a fresh sheet of paper.\n"
-msgstr "Vlo¾te prosím novı hárok papiera.\n"
+msgstr "è«‹æ”¾å…¥ç™½ç´™ã€‚\n"
 
 #: src/escputil/escputil.c:1547
 #, c-format
 msgid "Number out of range!\n"
-msgstr "Èíslo je mimo rozsahu!\n"
+msgstr "æ•¸å­—è¶…å‡ºç¯„åœä»¥å¤–ï¼\n"
 
 #: src/escputil/escputil.c:1552
 #, c-format
 msgid "I cannot understand what you typed!\n"
-msgstr "Nedoká¾em pochopi», èo ste napísali!\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1558
 #, c-format
 msgid "The best pair of lines should be numbered between 1 and %d.\n"
-msgstr "Najlep¹í pár èiar by mal ma» èíslo z rozpätia 1 a %d.\n"
+msgstr ""
 
 #: src/escputil/escputil.c:1565
 #, c-format
 msgid "Attempting to set alignment..."
-msgstr "Pokú¹am sa nastavi» zarovnávanie..."
+msgstr ""
 
 #: src/escputil/escputil.c:1568
 #, c-format
 msgid "succeeded.\n"
-msgstr "úspe¹né.\n"
+msgstr "æˆåŠŸã€‚\n"
 
 #: src/escputil/escputil.c:1569
 #, c-format
@@ -5627,23 +5017,19 @@ msgid ""
 "pattern %d.  If it is not, you should repeat the process to get the best\n"
 "quality printing.\n"
 msgstr ""
-"Prekontrolujte prosím, èi je zarovnávanie správne. Potom, èo bude vzorka\n"
-"opä» vytlaèená, uistite sa, èi najlep¹ia vzorka pre ka¾dı riadok je vzorka %"
-"d. Ak nie je, mali by ste zopakova» tento proces, aby ste dostali najlep¹ie "
-"vısledky pri tlaèi.\n"
 
 #: src/escputil/escputil.c:1615
 #, c-format
 msgid "Error in input\n"
-msgstr "Chyba na vstupe\n"
+msgstr ""
 
 #: src/gimp/print-image-gimp.c:225 src/gimp2/print-image-gimp.c:225
 msgid "Printing..."
-msgstr "Tlaèím..."
+msgstr "åˆ—å°ä¸­..."
 
 #: src/gimp/print.c:132 src/gimp2/print.c:136
 msgid "<Image>/File/Print..."
-msgstr "<Image>/Súbor/Tlaè..."
+msgstr "<Image>/æª”æ¡ˆ/åˆ—å°..."
 
 #: src/ghost/ijsgutenprint.c:93
 #, c-format
@@ -5658,734 +5044,211 @@ msgid ""
 msgstr ""
 
 #: src/ghost/ijsgutenprint.c:182
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Bad color space: bps %d channels %d space %s\n"
-msgstr "Zlı farebnı priestor: bps %d kanály %d priestor %s\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:190
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: No row buffer\n"
-msgstr "Neexistuje riadkovı bufer\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:217 src/ghost/ijsgutenprint.c:237
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "ERROR: ijsgutenprint: Unable to parse parameter %s=%s (expect a number)\n"
-msgstr "Nie je mo¾né analyzova» parameter %s=%s (oèakáva sa èíslo)\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:489
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Printer must be specified with -sDeviceModel\n"
-msgstr "Tlaèiareò musí by» urèené pomocou -sModel\n"
+msgstr "éŒ¯èª¤ï¼šijsgutenprintï¼šå°è¡¨æ©Ÿå¿…é ˆç”¨ -sDeviceModel é¸é …æŒ‡å®š\n"
 
 #: src/ghost/ijsgutenprint.c:491
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Printer %s is not a known model\n"
-msgstr "Tlaèiareò %s nie je známy model\n"
+msgstr "éŒ¯èª¤ï¼šijsgutenprintï¼šå°è¡¨æ©Ÿ %s ä¸å±¬æ–¼å·²çŸ¥çš„å‹è™Ÿ\n"
 
 #: src/ghost/ijsgutenprint.c:618
 #, c-format
 msgid "ijsgutenprint: unknown DeviceModel %s\n"
-msgstr ""
+msgstr "ijsgutenprintï¼šDeviceModel %s ä¸æ˜\n"
 
 #: src/ghost/ijsgutenprint.c:645
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse TopLeft %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:668
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse PaperSize %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:739
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse curve %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:746
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse %s float %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:753
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse %s int %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:760
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse %s dimension %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:774
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: cannot parse %s boolean %s\n"
-msgstr "Na tlaèiarni %s s %s nie je mo¾né tlaèi» \n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:785
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Bad parameter %s %d\n"
-msgstr "Neznáma tlaèiareò %s\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:811
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: bad key code %d\n"
-msgstr "Získanie nasledujúceho riadku zlyhalo na %d\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1221
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: ijs_server_get_page_header failed %d\n"
-msgstr "Získanie nasledujúceho riadku zlyhalo na %d\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1232
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: image_init failed %d\n"
-msgstr "image_init zlyhalo %d\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1243
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Unable to open file descriptor: %s\n"
-msgstr "Nepodarilo sa otvori» popis súboru: %s\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1255
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Unable to open %s: %s\n"
-msgstr "Nie je mo¾né otvori» %s: %s\n"
+msgstr "éŒ¯èª¤ï¼šijsgutenprintï¼šç„¡æ³•é–‹å•Ÿ %sï¼š%s\n"
 
 #: src/ghost/ijsgutenprint.c:1267
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Unknown printer %s\n"
-msgstr "Neznáma tlaèiareò %s\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1346
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Bad parameters; cannot continue!\n"
-msgstr "Zlé parametre; nie je mo¾né pokraèova»!\n"
+msgstr ""
 
 #: src/ghost/ijsgutenprint.c:1356
-#, fuzzy, c-format
+#, c-format
 msgid "ERROR: ijsgutenprint: Get next row failed at %.0f\n"
-msgstr "Získanie nasledujúceho riadku zlyhalo na %d\n"
+msgstr ""
 
-#, fuzzy
 #~ msgid "Red Balance"
-#~ msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
+#~ msgstr "ç´…è‰²å¹³è¡¡"
 
-#~ msgid "Printer status requires using a raw device.\n"
-#~ msgstr "Stav tlaèiarne vy¾aduje pou¾ívanie základného zariadenia.\n"
-
-#, fuzzy
-#~ msgid "Gloss Balance"
-#~ msgstr "Prispôsobenie vyvá¾enie ¾ltej farby pre tlaè"
-
-#~ msgid ""
-#~ "Printer alignment must be done with a raw device or else\n"
-#~ "the -m option must be used to specify a printer.\n"
-#~ msgstr ""
-#~ "Zarovnanie tlaèiarne musí by» vykonané so základného zariadením alebo\n"
-#~ "pomocou voµby -m musíte urèi» tlaèiareò.\n"
-
-#~ msgid "Attempting to detect printer model..."
-#~ msgstr "Pokú¹am sa zisti» model tlaèiarne..."
-
-#~ msgid ""
-#~ "\n"
-#~ "Cannot open %s read/write: %s\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Nie je mo¾né otvori» %s pre èítanie/zápis: %s\n"
-
-#~ msgid "Printer model %s is not known.\n"
-#~ msgstr "Neznámy typ tlaèiarne %s.\n"
-
-#, fuzzy
-#~ msgid "Gimp-Print"
-#~ msgstr "O Gimp-Print "
-
-#, fuzzy
-#~ msgid "Brightness of the print (0 is solid black, 2 is solid white)"
-#~ msgstr ""
-#~ "Nastavenie jasu tlaèe.\n"
-#~ "0 je jednoliatu èiernu, 2 pre jednoliatu bielu"
-
-#~ msgid ""
-#~ "Enter the correct command to print to your printer. Note: Please do not "
-#~ "remove the `-l' or `-oraw' from the command string, or printing will "
-#~ "probably fail!"
-#~ msgstr ""
-#~ "Vlo¾te správny príkaz pre tlaè na va¹ej tlaèiarni. Poznámka: Neodstráòte "
-#~ "prosím z re»azca pre tlaè prepínaèe `-l' alebo `-oraw', lebo tlaè "
-#~ "pravdepodobne nebude úspe¹ná!"
-
-#~ msgid "PPD File?"
-#~ msgstr "PPD súbor?"
+#~ msgid "Blue Balance"
+#~ msgstr "è—è‰²å¹³è¡¡"
 
 #~ msgid "%s: option `%s' is ambiguous\n"
-#~ msgstr "%s: voµba `%s' je viacznaèná\n"
+#~ msgstr "%sï¼šé¸é … â€˜%sâ€™ ä¸æ˜ç¢º\n"
 
 #~ msgid "%s: option `--%s' doesn't allow an argument\n"
-#~ msgstr "%s: voµba `--%s' nedovoµuje pou¾i» argument\n"
+#~ msgstr "%sï¼šé¸é … â€˜--%sâ€™ ä¸å¯é…åˆåƒæ•¸ä½¿ç”¨\n"
 
 #~ msgid "%s: option `%c%s' doesn't allow an argument\n"
-#~ msgstr "%s: voµba `%c%s' nedovoµuje pou¾i» argument\n"
+#~ msgstr "%sï¼šé¸é … â€˜%c%sâ€™ ä¸å¯é…åˆåƒæ•¸ä½¿ç”¨\n"
 
 #~ msgid "%s: option `%s' requires an argument\n"
-#~ msgstr "%s: voµba `%s' vy¾aduje argument\n"
+#~ msgstr "%sï¼šé¸é … â€˜%sâ€™ éœ€è¦åƒæ•¸\n"
 
 #~ msgid "%s: unrecognized option `--%s'\n"
-#~ msgstr "%s: neznáma voµba `--%s'\n"
+#~ msgstr "%sï¼šâ€˜--%sâ€™ é¸é …ç„¡æ³•è¾¨è­˜\n"
 
 #~ msgid "%s: unrecognized option `%c%s'\n"
-#~ msgstr "%s: neznáma voµba `%c%s'\n"
+#~ msgstr "%sï¼šâ€˜%c%sâ€™ é¸é …ç„¡æ³•è¾¨è­˜\n"
 
 #~ msgid "%s: illegal option -- %c\n"
-#~ msgstr "%s: neplatná voµba -- %c\n"
+#~ msgstr "%sï¼šä¸åˆæ³•çš„é¸é … â”€ %c\n"
 
 #~ msgid "%s: invalid option -- %c\n"
-#~ msgstr "%s: neplatná voµba -- %c\n"
+#~ msgstr "%sï¼šç„¡æ•ˆçš„é¸é … â”€ %c\n"
 
 #~ msgid "%s: option requires an argument -- %c\n"
-#~ msgstr "%s: voµba vy¾aduje argument -- %c\n"
+#~ msgstr "%sï¼šé¸é …éœ€è¦åƒæ•¸ â”€ %c\n"
 
 #~ msgid "%s: option `-W %s' is ambiguous\n"
-#~ msgstr "%s: voµba `-W %s` je viacznaèná\n"
+#~ msgstr "%sï¼šé¸é … â€˜-W %sâ€™ ä¸æ˜ç¢º\n"
 
 #~ msgid "%s: option `-W %s' doesn't allow an argument\n"
-#~ msgstr "%s: voµba `-W %s' nedovoµuje pou¾i» argument\n"
-
-#, fuzzy
-#~ msgid "Bright"
-#~ msgstr "Jas:"
-
-#, fuzzy
-#~ msgid "Image is too wide for the page\n"
-#~ msgstr "Zmeni» veµkos» tlaèe podµa rozmerov strany"
-
-#, fuzzy
-#~ msgid "Full Bleed"
-#~ msgstr "Kotúèovı podávaè"
-
-#, fuzzy
-#~ msgid "traditional"
-#~ msgstr "600 DPI Jednosmerne"
-
-#~ msgid "24x36"
-#~ msgstr "24x36"
-
-#~ msgid "%.0f of %.0f\n"
-#~ msgstr "%.0f z %.0f\n"
-
-#~ msgid "ps2"
-#~ msgstr "ps2"
-
-#, fuzzy
-#~ msgid "Optimize the settings for the type of image to be printed"
-#~ msgstr "Optimalizova» vıstup podµa typu tlaèeného obrázku"
-
-#~ msgid "Solid Colors"
-#~ msgstr "Jednoliate farby"
-
-#~ msgid "Stylus C20sx"
-#~ msgstr "Stylus C20sx"
-
-#~ msgid "Stylus C20ux"
-#~ msgstr "Stylus C20ux"
-
-#~ msgid "Stylus C40sx"
-#~ msgstr "Stylus C40sx"
-
-#~ msgid "Stylus C40ux"
-#~ msgstr "Stylus C40ux"
-
-#, fuzzy
-#~ msgid "Stylus C41sx"
-#~ msgstr "Stylus C40sx"
-
-#, fuzzy
-#~ msgid "Stylus C41ux"
-#~ msgstr "Stylus C40ux"
-
-#, fuzzy
-#~ msgid "Stylus C42sx"
-#~ msgstr "Stylus C40sx"
-
-#, fuzzy
-#~ msgid "Stylus C42ux"
-#~ msgstr "Stylus C40ux"
-
-#, fuzzy
-#~ msgid "Stylus C50"
-#~ msgstr "Stylus C60"
-
-#~ msgid "Stylus C60"
-#~ msgstr "Stylus C60"
-
-#, fuzzy
-#~ msgid "Stylus C61"
-#~ msgstr "Stylus C60"
-
-#, fuzzy
-#~ msgid "Stylus C62"
-#~ msgstr "Stylus C60"
-
-#~ msgid "Stylus C70"
-#~ msgstr "Stylus C70"
-
-#~ msgid "Stylus C80"
-#~ msgstr "Stylus C80"
-
-#, fuzzy
-#~ msgid "Stylus C82"
-#~ msgstr "Stylus C80"
-
-#~ msgid "Stylus Color"
-#~ msgstr "Stylus Color"
-
-#~ msgid "Stylus Color Pro"
-#~ msgstr "Stylus Color Pro"
-
-#~ msgid "Stylus Color Pro XL"
-#~ msgstr "Stylus Color Pro XL"
-
-#~ msgid "Stylus Color 400"
-#~ msgstr "Stylus Color 400"
-
-#~ msgid "Stylus Color 440"
-#~ msgstr "Stylus Color 440"
-
-#~ msgid "Stylus Color 460"
-#~ msgstr "Stylus Color 460"
-
-#~ msgid "Stylus Color 480"
-#~ msgstr "Stylus Color 480"
-
-#~ msgid "Stylus Color 500"
-#~ msgstr "Stylus Color 500"
-
-#~ msgid "Stylus Color 580"
-#~ msgstr "Stylus Color 580"
-
-#~ msgid "Stylus Color 600"
-#~ msgstr "Stylus Color 600"
-
-#~ msgid "Stylus Color 640"
-#~ msgstr "Stylus Color 640"
-
-#~ msgid "Stylus Color 660"
-#~ msgstr "Stylus Color 660"
-
-#~ msgid "Stylus Color 670"
-#~ msgstr "Stylus Color 670"
-
-#~ msgid "Stylus Color 680"
-#~ msgstr "Stylus Color 680"
-
-#~ msgid "Stylus Color 740"
-#~ msgstr "Stylus Color 740"
-
-#~ msgid "Stylus Color 760"
-#~ msgstr "Stylus Color 760"
-
-#~ msgid "Stylus Color 777"
-#~ msgstr "Stylus Color 777"
-
-#~ msgid "Stylus Color 800"
-#~ msgstr "Stylus Color 800"
-
-#~ msgid "Stylus Color 850"
-#~ msgstr "Stylus Color 850"
-
-#~ msgid "Stylus Color 860"
-#~ msgstr "Stylus Color 860"
-
-#~ msgid "Stylus Color 880"
-#~ msgstr "Stylus Color 880"
-
-#~ msgid "Stylus Color 83"
-#~ msgstr "Stylus Color 83"
-
-#~ msgid "Stylus Color 900"
-#~ msgstr "Stylus Color 900"
-
-#~ msgid "Stylus Color 980"
-#~ msgstr "Stylus Color 980"
-
-#~ msgid "Stylus Color 1160"
-#~ msgstr "Stylus Color 1160"
-
-#~ msgid "Stylus Color 1500"
-#~ msgstr "Stylus Color 1500"
-
-#~ msgid "Stylus Color 1520"
-#~ msgstr "Stylus Color 1520"
-
-#~ msgid "Stylus Color 3000"
-#~ msgstr "Stylus Color 3000"
-
-#~ msgid "Stylus Photo"
-#~ msgstr "Stylus Photo"
-
-#~ msgid "Stylus Photo 700"
-#~ msgstr "Stylus Photo 700"
-
-#~ msgid "Stylus Photo EX"
-#~ msgstr "Stylus Photo EX"
-
-#~ msgid "Stylus Photo 720"
-#~ msgstr "Stylus Photo 720"
-
-#~ msgid "Stylus Photo 750"
-#~ msgstr "Stylus Photo 750"
-
-#~ msgid "Stylus Photo 780"
-#~ msgstr "Stylus Photo 780"
-
-#~ msgid "Stylus Photo 785"
-#~ msgstr "Stylus Photo 785"
-
-#~ msgid "Stylus Photo 790"
-#~ msgstr "Stylus Photo 790"
-
-#~ msgid "Stylus Photo 810"
-#~ msgstr "Stylus Photo 810"
-
-#~ msgid "Stylus Photo 820"
-#~ msgstr "Stylus Photo 820"
-
-#, fuzzy
-#~ msgid "Stylus Photo 830"
-#~ msgstr "Stylus Photo 780"
-
-#~ msgid "Stylus Photo 870"
-#~ msgstr "Stylus Photo 870"
-
-#~ msgid "Stylus Photo 875"
-#~ msgstr "Stylus Photo 875"
-
-#~ msgid "Stylus Photo 890"
-#~ msgstr "Stylus Photo 890"
-
-#~ msgid "Stylus Photo 895"
-#~ msgstr "Stylus Photo 895"
-
-#, fuzzy
-#~ msgid "Stylus Photo 900"
-#~ msgstr "Stylus Photo 700"
-
-#, fuzzy
-#~ msgid "Stylus Photo 915"
-#~ msgstr "Stylus Photo 895"
-
-#, fuzzy
-#~ msgid "Stylus Photo 925"
-#~ msgstr "Stylus Photo 895"
-
-#, fuzzy
-#~ msgid "Stylus Photo 950"
-#~ msgstr "Stylus Photo 750"
-
-#, fuzzy
-#~ msgid "Stylus Photo 960"
-#~ msgstr "Stylus Photo 790"
-
-#~ msgid "Stylus Photo 1200"
-#~ msgstr "Stylus Photo 1200"
-
-#~ msgid "Stylus Photo 1270"
-#~ msgstr "Stylus Photo 1270"
-
-#~ msgid "Stylus Photo 1280"
-#~ msgstr "Stylus Photo 1280"
-
-#~ msgid "Stylus Photo 1290"
-#~ msgstr "Stylus Photo 1290"
-
-#~ msgid "Stylus Photo 2000P"
-#~ msgstr "Stylus Photo 2000P"
-
-#, fuzzy
-#~ msgid "Stylus Photo 2100"
-#~ msgstr "Stylus Photo 1200"
-
-#, fuzzy
-#~ msgid "Stylus Photo 2200"
-#~ msgstr "Stylus Photo 1200"
-
-#~ msgid "Stylus Pro 5000"
-#~ msgstr "Stylus Pro 5000"
-
-#~ msgid "Stylus Pro 5500"
-#~ msgstr "Stylus Pro 5500"
-
-#~ msgid "Stylus Pro 7000"
-#~ msgstr "Stylus Pro 7000"
-
-#~ msgid "Stylus Pro 7500"
-#~ msgstr "Stylus Pro 7500"
-
-#, fuzzy
-#~ msgid "Stylus Pro 7600"
-#~ msgstr "Stylus Pro 7000"
-
-#~ msgid "Stylus Pro 9000"
-#~ msgstr "Stylus Pro 9000"
-
-#~ msgid "Stylus Pro 9500"
-#~ msgstr "Stylus Pro 9500"
-
-#, fuzzy
-#~ msgid "Stylus Pro 9600"
-#~ msgstr "Stylus Pro 9000"
-
-#~ msgid "Stylus Pro 10000"
-#~ msgstr "Stylus Pro 10000"
-
-#~ msgid "Stylus Scan 2000"
-#~ msgstr "Stylus Scan 2000"
-
-#~ msgid "Stylus Scan 2500"
-#~ msgstr "Stylus Scan 2500"
+#~ msgstr "%sï¼šé¸é … â€˜-W %sâ€™ ä¸å¯é…åˆåƒæ•¸ä½¿ç”¨\n"
 
 #~ msgid ""
-#~ "Please read these instructions very carefully before proceeding.\n"
-#~ "\n"
-#~ "This utility lets you align the color print head of your Epson Stylus "
-#~ "inkjet\n"
-#~ "printer.  Misuse of this utility may cause your print quality to degrade\n"
-#~ "and possibly damage your printer.  This utility has not been reviewed by\n"
-#~ "Seiko Epson for correctness, and is offered with no warranty at all.  "
-#~ "The\n"
-#~ "entire risk of using this utility lies with you.\n"
-#~ "\n"
-#~ "This utility prints %d overprinting test patterns on one piece of paper.\n"
-#~ "That is, it prints one pattern and ejects the page.  You must then "
-#~ "reinsert\n"
-#~ "the same page, and it will print another pattern.  Each pattern consists "
-#~ "of\n"
-#~ "a set of choices numbered between %d and %d.\n"
-#~ "\n"
-#~ "When you inspect the patterns, you should find one patch to have the\n"
-#~ "smoothest texture (least ``grain'').  You should inspect the patches "
-#~ "very\n"
-#~ "carefully to choose the best one.  We suggest using Photo Quality Inkjet\n"
-#~ "Paper or a similar high quality paper for this test.  If you do not find\n"
-#~ "a smooth pattern, you should repeat the test.\n"
-#~ "\n"
-#~ "After you inspect the choices and select a patch, you will be offered "
-#~ "the\n"
-#~ "choices of (s)aving the result in the printer, (r)epeating the process,\n"
-#~ "or (q)uitting without saving.  Quitting will not restore the previous\n"
-#~ "settings, but powering the printer off and back on will.  If you quit,\n"
-#~ "you must repeat the entire process if you wish to later save the "
-#~ "results.\n"
-#~ "It is essential that you not turn your printer off during this "
-#~ "procedure.\n"
-#~ "\n"
-#~ "WARNING: THIS FUNCTION IS NOT YET TESTED!  It may not work, and it may\n"
-#~ "damage your printer!\n"
+#~ "Set the brightness of the print.\n"
+#~ "0 is solid black, 2 is solid white"
 #~ msgstr ""
-#~ "Prosím, veµmi pozorne si preèítajte tieto in¹trukcie pred tım, ako bude "
-#~ "pokraèova».\n"
-#~ "\n"
-#~ "Tento nástroj vám pomô¾e so zarovnávaním tlaèovej hlavy pre farebnú tlaè "
-#~ "atramentovej tlaèiarne Epson Stylus.\n"
-#~ "Jeho nesprávne pou¾itie mô¾e spôsobi» zní¾enie kvality tlaèe a mô¾e "
-#~ "po¹kodi»\n"
-#~ "samotnú tlaèiareò. Tento nástroj nebol odobrenı spoloènos»ou Seiko Epson\n"
-#~ "a je ponúknutı bez akejkoµvek záruky. Celé riziko za pou¾itie toho "
-#~ "nástroja\n"
-#~ "le¾í na vás.\n"
-#~ "\n"
-#~ "Nástroj vytlaèí %d pretlaè testovacích vzoriek na jeden kúsok papiera.\n"
-#~ "Najprv sa vytlaèí jedna vzorka a papier bude vysunutı. Potom musíte ten "
-#~ "istı\n"
-#~ "papier vlo¾i» do tlaèiarne, aby sa naò vytlaèila ïal¹ia vzorka. Ka¾dá "
-#~ "vzorka\n"
-#~ "obsahuje sadu mo¾ností oèíslovanıch od %d do %d.\n"
-#~ "\n"
-#~ "Keï si prezriete vzorky, mali by ste nájs» tú s najhlad¹ou textúrou "
-#~ "(najmenej\n"
-#~ "''zrnitou''). Mali by ste ich veµmi pozorne prezrie» a  vybra» tú "
-#~ "najlep¹iu.\n"
-#~ "Odporúèame vám pou¾i» papier pre tlaè vo foto kvalite alebo podobne "
-#~ "vysokokvalitnı\n"
-#~ "typ papiera. Pokiaµ nenájdete hladkú vzorku, mali by ste test zopakova».\n"
-#~ "\n"
-#~ "Po preskúmaní mo¾ností a vıbere pásky, vám budú ponúknuté tieto "
-#~ "mo¾nosti:\n"
-#~ "(s) - ulo¾i» vısledky do tlaèiarne, (r) - zopakova» proces, alebo (q) - "
-#~ "ukonèi»\n"
-#~ "bez ulo¾enia.  Ukonèenie neobnoví pôvodné nastavenie, ale vypnutie a "
-#~ "následné\n"
-#~ "zapnutie tlaèiarne áno.. Pokiaµ ukonèíte bez ulo¾enia, budete musie» "
-#~ "zopakova»\n"
-#~ "celı proces opä», ak budete chcie» svoje vısledky ulo¾i».\n"
-#~ "Je dôle¾ité, aby ste poèas toho procesu nevypli tlaèiareò\n"
-#~ "\n"
-#~ "VAROVANIE: TÁTO FUNKCIA NIE JE E©TE OTESTOVANÁ!  Mo¾no nebude fungova» a "
-#~ "mo¾no\n"
-#~ "vám po¹kodí tlaèiareò!\n"
+#~ "æŒ‡å®šåˆ—å°æ™‚çš„äº®åº¦ã€‚\n"
+#~ "0 è¡¨ç¤ºå…¨é»‘ï¼Œ2 è¡¨ç¤ºå…¨ç™½"
 
-#~ msgid "Printer %s does not require color head alignment.\n"
-#~ msgstr "Tlaèiareò %s nevy¾aduje zarovnanie farebnej hlavy.\n"
+#~ msgid "Set the contrast of the print"
+#~ msgstr "æŒ‡å®šåˆ—å°æ™‚çš„åå·®åº¦"
 
-#, fuzzy
-#~ msgid ""
-#~ "Please inspect the print, and choose the pattern in each set.\n"
-#~ "Type a pattern number, '?' for help, or 'r' to repeat the procedure.\n"
-#~ msgstr ""
-#~ "Preskúmajte pozorne vıtlaèok a zvoµte najlep¹í pár èiar v ka¾dej vzorke.\n"
-#~ "Stlaète èíslo páru, '?' pre pomoc alebo 'r' pre zopakovanie procedúry.\n"
+#~ msgid "Cyan:"
+#~ msgstr "æ°°è—ï¼š"
 
-#, fuzzy
-#~ msgid "Model %d out of range.\n"
-#~ msgstr "Èíslo je mimo rozsahu!\n"
+#~ msgid "Magenta:"
+#~ msgstr "æ´‹ç´…ï¼š"
+
+#~ msgid "Yellow:"
+#~ msgstr "é»ƒï¼š"
 
 #~ msgid "Right Border:"
-#~ msgstr "Pravı okraj:"
+#~ msgstr "å³é‚Šé‚Šç•Œï¼š"
 
 #~ msgid "Bottom Border:"
-#~ msgstr "Dolnı okraj:"
-
-#~ msgid "Size"
-#~ msgstr "Veµkos»"
-
-#~ msgid "Image / Output Settings"
-#~ msgstr "Obrázok / Vıstupné nastavenia"
-
-#, fuzzy
-#~ msgid "GIMP-print"
-#~ msgstr "Tlaèi»"
-
-#, fuzzy
-#~ msgid "Resolutions"
-#~ msgstr "Rozlí¹enie"
-
-#~ msgid "Media Type:"
-#~ msgstr "Typ média:"
-
-#~ msgid "Type of media you're printing to"
-#~ msgstr "Typ média na ktorı bude tlaèené"
+#~ msgstr "åº•éƒ¨é‚Šç•Œï¼š"
 
 #~ msgid "Media Size:"
-#~ msgstr "Veµkos» média:"
+#~ msgstr "ç´™å¼µå°ºå¯¸ï¼š"
 
-#~ msgid "Size of paper that you wish to print to"
-#~ msgstr "Veµkos» papiera, na ktorı chcete tlaèi»"
-
-#~ msgid "Media Source:"
-#~ msgstr "Zdroj média:"
-
-#~ msgid "Source (input slot) of media you're printing to"
-#~ msgstr "Zdroj (vstupné miesto) média, na ktoré tlaèíte"
-
-#~ msgid "Ink Type:"
-#~ msgstr "Typ atramentu:"
+#~ msgid "Type of media you're printing to"
+#~ msgstr "åˆ—å°æ™‚ä½¿ç”¨çš„ç´™å¼µå°ºå¯¸"
 
 #~ msgid "Resolution:"
-#~ msgstr "Rozlí¹enie:"
+#~ msgstr "è§£æåº¦ï¼š"
 
-#~ msgid "Print in black and white (no color, and no shades of gray)"
-#~ msgstr "Tlaèi» èiernou a bielou (bez farieb a bez odtieòov ¹edej)"
+#~ msgid "Image / Output Settings"
+#~ msgstr "å½±åƒ / è¼¸å‡ºé¸é …"
+
+#~ msgid "Optimize the output for the type of image being printed"
+#~ msgstr "åˆ—å°æ™‚å°‡è¼¸å‡ºçµæœå„ªåŒ–"
 
 #~ msgid "Fastest and brightest color for text and line art"
-#~ msgstr "Najrıchlej¹ie a jasnej¹ie farby pre text a èiarovú grafiku"
+#~ msgstr "å°æ–¼æ–‡å­—åŠç°¡å–®ç·šæ¢åœ–æ¡ˆä¾†èªªï¼Œé€™ç¨®æ–¹å¼æ˜¯æœ€å¿«ï¼Œé¡è‰²æœ€é®®æ˜çš„"
 
 #~ msgid "Best for images dominated by regions of solid color"
-#~ msgstr "Najlep¹ie pre obrázky s dominatnımi oblas»ami jednej farby"
+#~ msgstr "æœ€é©åˆåˆ—å°ä¸€å¤§ç‰‡æ·¨è‰²çš„å€åŸŸ"
 
 #~ msgid ""
 #~ "Slowest, but most accurate and smoothest color for continuous tone images "
 #~ "and photographs"
-#~ msgstr ""
-#~ "Najpomal¹ie, ale najpresnej¹ie a najhlad¹ie farby pre plynulé odtiene "
-#~ "obrázkov a fotografií"
+#~ msgstr "æœ€æ…¢ï¼Œä½†åœ¨é€£çºŒè‰²å½©çš„å½±åƒåŠç›¸ç‰‡ä¸­ï¼Œæ•ˆæœæœ€æº–ç¢ºï¼Œè‰²å½©ä¹Ÿæœƒè¼ƒå¹³æ»‘"
 
-#~ msgid "Dither Algorithm:"
-#~ msgstr "Algoritmus rozptylu:"
-
-#~ msgid ""
-#~ "\n"
-#~ "Cannot read from %s: %s\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Nie je mo¾né èíta» z %s: %s\n"
-
-#~ msgid "%s out of range (value %f, min %f, max %f)\n"
-#~ msgstr "%s mimo rozsahu (hodnota %f, min %f, max %f)\n"
-
-#~ msgid "%s is not a valid dither algorithm\n"
-#~ msgstr "%s nie je platnı algoritmus rozptylu\n"
-
-#~ msgid ""
-#~ "Please re-insert the same alignment sheet in the printer when it is\n"
-#~ "finished printing.\n"
-#~ msgstr ""
-#~ "Opätovne vlo¾te prosím ten istı hárok papiera na zarovnanie\n"
-#~ "do tlaèiarne po dokonèení tlaèenia.\n"
-
-#~ msgid ""
-#~ "Inspect the alignment sheet, and determine which pattern is the "
-#~ "smoothest.\n"
-#~ "This pattern will appear to have the least ``grain''.\n"
-#~ "If you cannot find a smooth pattern, please select the number for the\n"
-#~ "best pattern, and repeat the procedure.\n"
-#~ "Type a pattern number, or '?' for help.\n"
-#~ msgstr ""
-#~ "Preskúmajte zarovnanie papiera a urèite, ktorá vzorka je najhlad¹ia.\n"
-#~ "Táto vzorka má najmenej ``zrniek''.\n"
-#~ "Ak nemô¾ete nájs» hladkú vzorku, zvoµte prosím èíslo najlep¹ej vzorky\n"
-#~ "a zopakujte túto procedúru.\n"
-#~ "Vlo¾te èíslo vzorky, alebo '?' pre pomoc.\n"
-
-#~ msgid "The best pattern should be numbered between 1 and %d.\n"
-#~ msgstr "Najlep¹ia vzorka by mala ma» èíslo od 1 po %d.\n"
-
-#~ msgid "Set the contrast of the print"
-#~ msgstr "Nastavi» kontrast tlaèe"
-
-#~ msgid "Cyan:"
-#~ msgstr "Azúrová:"
-
-#~ msgid "Magenta:"
-#~ msgstr "Purpurová:"
-
-#~ msgid "Yellow:"
-#~ msgstr "®ltá:"
-
-#~ msgid "Parameter %s out of range (value %f, min %f, max %f)\n"
-#~ msgstr "Parameter %s je mimo rozsahu (hodnota %f, min %f, max %f)\n"
-
-#~ msgid "Parameter %s out of range (value %d, min %d, max %d)\n"
-#~ msgstr "Parameter %s je mimo rozsahu (hodnota %d, min %d, max %d)\n"
+#~ msgid "Print in black and white (no color, and no shades of gray)"
+#~ msgstr "ä»¥é»‘ç™½æ¨¡å¼åˆ—å° (æ²’æœ‰è‰²å½©ï¼Œä¹Ÿä¸ä½¿ç”¨ä»»ä½•ç°éš)"
 
 #~ msgid "Unknown option %s\n"
-#~ msgstr "Neznáme nastavenie %s\n"
+#~ msgstr "ä¸æ˜é¸é … %s\n"
 
-#~ msgid "1440 x 360 DPI"
-#~ msgstr "1440 x 360 DPI"
-
-#~ msgid "1440 x 360 DPI Unidirectional"
-#~ msgstr "1440 x 360 DPI Jednosmerne"
-
-#~ msgid "1440 x 360 DPI High Quality Uni"
-#~ msgstr "1440 x 360 DPI Vysoká kvalita jed."
-
-#~ msgid "13x19"
-#~ msgstr "13x19"
-
-#~ msgid "Monarch"
-#~ msgstr "Monarch"
-
-#~ msgid "Long 3"
-#~ msgstr "Long 3"
-
-#~ msgid "Long 4"
-#~ msgstr "Long 4"
-
-#~ msgid "Kaku"
-#~ msgstr "Kaku"
-
-#~ msgid "HP Greeting Card"
-#~ msgstr "HP pohµadnica"
+#~ msgid "%.0f of %.0f\n"
+#~ msgstr "%2$.0f ä¹‹ %1$.0f\n"

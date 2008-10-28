@@ -1,3 +1,3 @@
 debian/install/usr/lib/libgutenprint.so.*  usr/lib
 debian/install/usr/lib/gutenprint          usr/lib
-debian/install/usr/share/gutenprint/5.1    usr/share/gutenprint
+debian/install/usr/share/gutenprint/5.2    usr/share/gutenprint

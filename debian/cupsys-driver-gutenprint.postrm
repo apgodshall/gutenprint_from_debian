@@ -19,9 +19,9 @@ set -e
 if [ "$1" = remove ]; then
     # Remove generated PPDs
     # (note: user-generated now we no longer generate them automatically)
-    rm -rf /usr/share/cups/model/gutenprint/5.1
+    rm -rf /usr/share/cups/model/gutenprint/5.2
     rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
-    rm -rf /usr/share/ppd/gutenprint/5.1
+    rm -rf /usr/share/ppd/gutenprint/5.2
     rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
     [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
 fi

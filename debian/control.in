@@ -3,7 +3,7 @@ Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 Build-Depends: libcupsys2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline5-dev, libijs-dev (>= 0.35), debhelper (>= 5.0.0), zlib1g-dev, flex, gettext (>= 0.11.5), foomatic-db-engine (>= 3.0.1), chrpath (>= 0.12), dpatch
 
 Package: gimp-gutenprint

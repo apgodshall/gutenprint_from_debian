@@ -11,8 +11,9 @@ gutenprint (5.2.1-1) experimental; urgency=low
   * debian/control: Remove unnecessary version information in package
     descriptions.
   * debian/rules: Remove library soname substitution in package names. 
+  * debian/README.building: Remove old outdated instructions. 
 
- -- Roger Leigh <rleigh@debian.org>  Wed, 29 Oct 2008 23:38:55 +0000
+ -- Roger Leigh <rleigh@debian.org>  Wed, 29 Oct 2008 23:42:03 +0000
 
 gutenprint (5.1.98.2-2) experimental; urgency=low
 

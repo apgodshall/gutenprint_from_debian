@@ -6,8 +6,9 @@ gutenprint (5.2.1-1) experimental; urgency=low
 
   [ Roger Leigh ]
   * New upstream stable release.
+  * debian/control.in: Add Vcs-Browser and Vcs-Git fields. 
 
- -- Roger Leigh <rleigh@debian.org>  Tue, 28 Oct 2008 23:40:45 +0000
+ -- Roger Leigh <rleigh@debian.org>  Wed, 29 Oct 2008 20:11:46 +0000
 
 gutenprint (5.1.98.2-2) experimental; urgency=low
 

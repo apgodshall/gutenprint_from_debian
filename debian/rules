@@ -134,9 +134,4 @@ binary-arch: build install
 
 binary: binary-indep binary-arch
 
-SEDPATTERN = -e "s/\#UPSTREAM_VERSION\#/$(UPSTREAM_VERSION)/g" -e "s/\#LIBRARY_VERSION\#/$(LIBRARY_VERSION)/g" -e "s/\#LIBRARYUI_VERSION\#/$(LIBRARYUI_VERSION)/g"
-
-debian/control: debian/control.in debian/changelog debian/rules
-	sed $(SEDPATTERN) <$< >$@
-
 .PHONY: build clean binary-indep binary-arch binary install autoconfigure patch unpatch

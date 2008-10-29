@@ -8,8 +8,9 @@ gutenprint (5.2.1-1) experimental; urgency=low
   * New upstream stable release.
   * debian/control.in: Add Vcs-Browser and Vcs-Git fields. 
   * debian/control.in: Remove, leaving debian/control. 
+  * debian/rules: Remove library soname substitution in package names.
 
- -- Roger Leigh <rleigh@debian.org>  Wed, 29 Oct 2008 20:15:10 +0000
+ -- Roger Leigh <rleigh@debian.org>  Wed, 29 Oct 2008 23:35:59 +0000
 
 gutenprint (5.1.98.2-2) experimental; urgency=low
 

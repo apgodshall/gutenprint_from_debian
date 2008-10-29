@@ -23,18 +23,8 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 
-# Get upstream version, and define libgutenprint suffix
-UPSTREAM_VERSION = $(shell dpkg-parsechangelog | grep ^Version | sed "s/.* //" | sed "s/-[^-]*$$//")
-#UPSTREAM_VERSION = 5.1.0
-UPSTREAM_VERSION_COMPACT = $(shell echo '$(UPSTREAM_VERSION)' | sed "s/\(.*\..*\)\..*/\1/"
-#LIBRARY_VERSION =  -$(UPSTREAM_VERSION)
-LIBRARY_VERSION = 2
-LIBRARYUI_VERSION = 1
-
-GENERATED_FILES =
-
 autoconfigure: autoconfigure-stamp
-autoconfigure-stamp: debian/control $(GENERATED_FILES)
+autoconfigure-stamp: debian/control
 	dh_testdir
 	mkdir debian/build; \
 	cd debian/build; \
@@ -75,8 +65,6 @@ realclean: debian/control
 	rm -rf debian/build debian/install
 
 	[ ! -f Makefile ] || $(MAKE) distclean
-
-	rm -f $(GENERATED_FILES)
 
 	dh_clean
 
@@ -127,7 +115,7 @@ binary-arch: build install
 	find debian/cupsys-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
 	dh_makeshlibs -a -V -X usr/lib/gutenprint
 	dh_installdeb -a
-	dh_shlibdeps -a -X usr/lib/gutenprint -l$(CURDIR)/debian/libgutenprint$(LIBRARY_VERSION)/usr/lib:$(CURDIR)/debian/libgutenprintui2-$(LIBRARYUI_VERSION)/usr/lib
+	dh_shlibdeps -a -X usr/lib/gutenprint -l$(CURDIR)/debian/libgutenprint2/usr/lib:$(CURDIR)/debian/libgutenprintui2-1/usr/lib
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a

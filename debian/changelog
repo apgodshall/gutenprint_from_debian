@@ -8,8 +8,10 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/compat: Update to debhelper v7 compatibility.
   * debian/rules: realclean: Remove redundant removal of -stamp files.
   * debian/control: Add W. van den Akker to Uploaders.
+  * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
+    upgrade of print queue backends.
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 21:58:46 +0000
+ -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 22:08:37 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

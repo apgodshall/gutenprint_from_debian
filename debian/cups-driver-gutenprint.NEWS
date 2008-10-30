@@ -1,0 +1,12 @@
+gutenprint (5.2.1-2) experimental; urgency=low
+
+  * The CUPS "canon" and "epson" backends are obsolete in Gutenprint 5.2,
+    and have been removed by the upstream developers.  Users of these
+    backends need to migrate their print queues to use the standard
+    backends such as "usb", "parallel" and "socket", which now contain the
+    functionality of the old backends.  The package postinst script will
+    attempt to automatically upgrade your print queues to use the
+    appropriate backend, but the queues should be checked to make sure
+    that the correct backend has been selected.
+
+ -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 22:04:00 +0000

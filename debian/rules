@@ -55,7 +55,6 @@ build-stamp: patch-stamp autoconfigure-stamp
 clean: realclean unpatch
 realclean: debian/control
 	dh_testdir
-	rm -f build-stamp autoconfigure-stamp
 
 	[ ! -r /usr/share/misc/config.sub ] || \
 	  cp -f /usr/share/misc/config.sub scripts/config.sub

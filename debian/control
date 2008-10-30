@@ -28,7 +28,6 @@ Architecture: any
 Section: graphics
 Depends: ${shlibs:Depends}, perl (>= 5.8.0), cups (>= 1.3.0)
 Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
-Replaces: cupsys-driver-gutenprint
 Conflicts: cupsys-driver-gutenprint
 Replaces: cupsys-driver-gutenprint
 Description: printer drivers for CUPS

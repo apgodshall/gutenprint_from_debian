@@ -1,3 +1,13 @@
+gutenprint (5.2.1-2) experimental; urgency=low
+
+  [ Roger Leigh ]
+  * debian/cups-driver-gutenprint.postinst: Automatically upgrade print
+    queues using the obsolete canon and epson backends.  Attempt to
+    determine the most appropriate alternative backend from the device
+    name.
+
+ -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 20:53:55 +0000
+
 gutenprint (5.2.1-1) experimental; urgency=low
 
   [ W. van den Akker ]

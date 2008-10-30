@@ -25,10 +25,35 @@ set -e
 #s/^if\s+\[\s+"\$1"\s+=\s+"configure"\s+\];\s+then\s+ldconfig\b//m;
 
 if [ "$1" = "configure" ]; then
+
   # Upgrade in-use PPD files
   /usr/sbin/cups-genppdupdate
   # Restart CUPSys (to register new and updated PPDs)
   [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
+
+  # Upgrade from obsolete epson and canon backends
+  LC_ALL=C lpstat -v |
+  while read devinfo; do
+      printer=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);\1;')
+      backend=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);\2;')
+      device=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);/\3;')
+
+      if [ "$backend" = "epson" ] || [ "$backend" = "canon" ]; then
+	  echo "Backend $backend used by printer $printer is obsolete."
+	  newbackend='parallel'
+	  if ! echo "$device" | grep -q '^/dev'; then
+	      newbackend='socket'
+	  elif echo "$device" | grep -q 'usb'; then
+	      newbackend='usb'
+	  fi
+	  echo "Updating $printer to use $newbackend backend: $newbackend:$device"
+	  lpadmin -p "$printer" -v "$newbackend:$device"
+	  lpstat -v "$printer"
+      else
+	  echo "Backend $backend used by printer $printer is current."
+      fi
+  done
+
 elif [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] || [ "$1" = "abort-deconfigure" ]; then
   :
 else

@@ -12,11 +12,13 @@ gutenprint (5.2.1-1) experimental; urgency=low
     descriptions.
   * debian/control: Rename cupsys-driver-gutenprint to
     cups-driver-gutenprint (already done in 5.0 branch).
+  * debian/control: Remove dependencies prior to Lenny, including
+    unneeded versioning and old transitional dependencies.
   * debian/rules: Remove library soname substitution in package names. 
   * debian/README.building: Remove old outdated instructions. 
   * debian/patches/20_fix_gimpprint_menu_entry.dpatch: Make executable. 
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 00:12:18 +0000
+ -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 00:27:41 +0000
 
 gutenprint (5.1.98.2-2) experimental; urgency=low
 

@@ -1,5 +1,5 @@
 #! /bin/sh
-# preinst script for cupsys-driver-gutenprint
+# preinst script for cups-driver-gutenprint
 #
 # see: dh_installdeb(1)
 

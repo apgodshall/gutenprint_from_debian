@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for cupsys-driver-gutenprint
+# postinst script for cups-driver-gutenprint
 #
 # see: dh_installdeb(1)
 
@@ -28,8 +28,8 @@ if [ "$1" = "configure" ]; then
 
   # Upgrade in-use PPD files
   /usr/sbin/cups-genppdupdate
-  # Restart CUPSys (to register new and updated PPDs)
-  [ -x /etc/init.d/cupsys ] && invoke-rc.d cupsys force-reload || true
+  # Restart CUPS (to register new and updated PPDs)
+  [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
 
   # Upgrade from obsolete epson and canon backends
   LC_ALL=C lpstat -v |

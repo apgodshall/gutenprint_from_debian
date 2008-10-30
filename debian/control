@@ -177,6 +177,7 @@ Package: ijsgutenprint
 Architecture: any
 Section: text
 Depends: ${shlibs:Depends}, ghostscript (>= 8.61)
+Recommends: foomatic-db-gutenprint
 Description: inkjet server - Ghostscript driver for Gutenprint
  This package contains the ijsgutenprint binary which provides
  Ghostscript with a Gutenprint driver, including all printers

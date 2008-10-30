@@ -145,7 +145,7 @@ Section: libs
 Description: locale data files for Gutenprint
  This package contains the i18n files of Gutenprint, used by
  libgutenprint2, cups-driver-gutenprint and escputil.  It is also
- used by the GIMP Print plugin.
+ used by the Print plugin for the GIMP, gimp-gutenprint.
  .
  They are needed when you want the programs in Gutenprint to print
  their messages in other languages than US English.

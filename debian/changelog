@@ -10,10 +10,12 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/control:
     + Add W. van den Akker to Uploaders.
     + ijsgutenprint: Recommend foomatic-db-gutenprint.
+    + Update description of GIMP Print plugin.
   * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
     upgrade of print queue backends. 
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 23:29:20 +0000
+ -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 23:48:20 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

@@ -101,7 +101,7 @@ binary-arch: build install
 	dh_testdir -a
 	dh_testroot -a
 	dh_installdocs -a
-	  cp src/cups/README debian/cupsys-driver-gutenprint/usr/share/doc/cupsys-driver-gutenprint/README.cups
+	  cp src/cups/README debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint/README.cups
 	  mv debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1 debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.5.2.1
 	  ln -s ijsgutenprint.5.2.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
 	  ln -s ijsgutenprint.5.2 debian/ijsgutenprint/usr/bin/ijsgutenprint
@@ -112,7 +112,7 @@ binary-arch: build install
 	dh_compress -a -X.pdf -X.odt
 	dh_fixperms -a
 # Strip DT_RPATH from CUPS binaries.
-	find debian/cupsys-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
+	find debian/cups-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
 	dh_makeshlibs -a -V -X usr/lib/gutenprint
 	dh_installdeb -a
 	dh_shlibdeps -a -X usr/lib/gutenprint -l$(CURDIR)/debian/libgutenprint2/usr/lib:$(CURDIR)/debian/libgutenprintui2-1/usr/lib

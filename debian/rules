@@ -82,7 +82,7 @@ install: build debian/control
 	dh_installdirs
 
 	cd debian/build; \
-	$(MAKE) DESTDIR=`pwd`/../install install
+	$(MAKE) DESTDIR=$(CURDIR)/debian/install install
 
 	dh_install
 

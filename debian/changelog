@@ -13,6 +13,7 @@ gutenprint (5.2.1-2) experimental; urgency=low
       + Remove redundant removal of -stamp files.
       + Save and restore config.sub and config.guess.  Thanks to
         Till Kamppeter.
+    - install: Replace use of pwd with $(CURDIR).
   * debian/control:
     - Add W. van den Akker to Uploaders.
     - ijsgutenprint: Recommend foomatic-db-gutenprint.
@@ -21,7 +22,7 @@ gutenprint (5.2.1-2) experimental; urgency=low
     upgrade of print queue backends. 
   * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:13:35 +0000
+ -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:44:26 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

@@ -31,15 +31,12 @@ autoconfigure-stamp: debian/control
 	../../configure --host=$(DEB_HOST_GNU_TYPE) \
 	  --build=$(DEB_BUILD_GNU_TYPE) \
 	  --prefix=/usr --mandir=\$${prefix}/share/man \
-	  --disable-static --enable-shared --disable-rpath \
+	  --disable-static --enable-shared --disable-rpath --disable-static-genppd \
 	  --with-modules=dlopen \
-	  --disable-libgutenprintui --enable-libgutenprintui2 \
-	  --without-gimp --with-gimp2 --with-cups --with-ijs \
-	  --with-foomatic --with-foomatic3 \
-	  --disable-test \
-	  --enable-cups-level3-ppds --disable-translated-cups-ppds \
-	  --disable-cups-level3-ps --disable-static-genppd \
-	  DIALOG=/usr/bin/dialog
+	  --enable-libgutenprintui2 --with-gimp2 \
+	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
+	  --with-ijs --with-foomatic --with-foomatic3 \
+	  --disable-test
 	touch autoconfigure-stamp
 
 

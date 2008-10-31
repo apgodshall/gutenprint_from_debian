@@ -6,7 +6,10 @@ gutenprint (5.2.1-2) experimental; urgency=low
     determine the most appropriate alternative backend from the device
     name.
   * debian/compat: Update to debhelper v7 compatibility.
-  * debian/rules: realclean: Remove redundant removal of -stamp files.
+  * debian/rules:
+    + autoconfigure-stamp: Update configure options to create globalised
+      CUPS PPDs, and remove obsolete options.
+    + realclean: Remove redundant removal of -stamp files.
   * debian/control:
     + Add W. van den Akker to Uploaders.
     + ijsgutenprint: Recommend foomatic-db-gutenprint.
@@ -14,8 +17,9 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
     upgrade of print queue backends. 
   * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 23:55:47 +0000
+ -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:09:15 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

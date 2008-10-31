@@ -53,6 +53,11 @@ clean: realclean unpatch
 realclean: debian/control
 	dh_testdir
 
+	[ -r scripts/config.sub.orig ] || \
+	  cp -f scripts/config.sub scripts/config.sub.orig
+	[ -r scripts/config.guess.orig ] || \
+	  cp -f scripts/config.guess scripts/config.guess.orig
+
 	[ ! -r /usr/share/misc/config.sub ] || \
 	  cp -f /usr/share/misc/config.sub scripts/config.sub
 	[ ! -r /usr/share/misc/config.guess ] || \
@@ -61,6 +66,11 @@ realclean: debian/control
 	rm -rf debian/build debian/install
 
 	[ ! -f Makefile ] || $(MAKE) distclean
+
+	[ ! -r scripts/config.guess.orig ] || \
+	  mv -f scripts/config.guess.orig scripts/config.guess || :
+	[ ! -r scripts/config.sub.orig ] || \
+	  mv -f scripts/config.sub.orig scripts/config.sub || :
 
 	dh_clean
 

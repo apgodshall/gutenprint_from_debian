@@ -7,19 +7,21 @@ gutenprint (5.2.1-2) experimental; urgency=low
     name.
   * debian/compat: Update to debhelper v7 compatibility.
   * debian/rules:
-    + autoconfigure-stamp: Update configure options to create globalised
+    - autoconfigure-stamp: Update configure options to create globalised
       CUPS PPDs, and remove obsolete options.
-    + realclean: Remove redundant removal of -stamp files.
+    - realclean:
+      + Remove redundant removal of -stamp files.
+      + Save and restore config.sub and config.guess.  Thanks to
+        Till Kamppeter.
   * debian/control:
-    + Add W. van den Akker to Uploaders.
-    + ijsgutenprint: Recommend foomatic-db-gutenprint.
-    + Update description of GIMP Print plugin.
+    - Add W. van den Akker to Uploaders.
+    - ijsgutenprint: Recommend foomatic-db-gutenprint.
+    - Update description of GIMP Print plugin.
   * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
     upgrade of print queue backends. 
   * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
-  * 
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:09:15 +0000
+ -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:13:35 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

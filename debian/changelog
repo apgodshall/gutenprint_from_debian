@@ -21,8 +21,14 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
     upgrade of print queue backends. 
   * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
+  * debian/patches/10_cups_modeldir.dpatch: Remove.
+  * debian/patches/20_fix_gimpprint_menu_entry.dpatch: Remove.  Not needed,
+    and no longer compiled with GIMP >= 2.4.
+  * debian/patches/21_gutenprintui_plist_localefix.dpatch: Remove.  Since
+    PPD files are no longer generated, we don't need to patch the source
+    to use /usr/share/ppd.
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 00:44:26 +0000
+ -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 20:20:43 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

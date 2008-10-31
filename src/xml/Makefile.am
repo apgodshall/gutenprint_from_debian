@@ -50,9 +50,8 @@ xml-stamp: $(pkgxmldata_DATA) escp2/xml-stamp Makefile.am
 all-local: xmli18n-tmp.h xml-stamp
 
 
-xmli18n-tmp.h: xml-stamp extract-strings
-	./extract-strings `cat xml-stamp | sed -e 's/^/$(srcdir)/` > xmli18n-tmp2.h
-	mv xmli18n-tmp2.h xmli18n-tmp.h
+xmli18n-tmp.h:  xml-stamp extract-strings
+	./extract-strings `cat xml-stamp` > xmli18n-tmp.h
 
 
 dist-hook: xmli18n-tmp.h
@@ -60,7 +59,7 @@ dist-hook: xmli18n-tmp.h
 
 ## Clean
 
-CLEANFILES = xmli18n-tmp.h xmli18n-tmp2.h xml-stamp
+CLEANFILES = xmli18n-tmp.h xml-stamp
 
 EXTRA_DIST = $(pkgxmldata_DATA)
 

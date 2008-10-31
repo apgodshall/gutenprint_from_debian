@@ -42,7 +42,14 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @BUILD_ESCPUTIL_TRUE@bin_PROGRAMS = escputil$(EXEEXT)
 subdir = src/escputil
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/isc-posix.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/nls.m4 \
+	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
+	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
+	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
@@ -101,6 +108,7 @@ DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DVIPDF = @DVIPDF@
@@ -118,7 +126,6 @@ FOOMATIC_CONFIGURE = @FOOMATIC_CONFIGURE@
 FOOMATIC_KITLOAD = @FOOMATIC_KITLOAD@
 FOOMATIC_PPDFILE = @FOOMATIC_PPDFILE@
 GENPPD_LIBS = @GENPPD_LIBS@
-GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GIMP2_CFLAGS = @GIMP2_CFLAGS@
 GIMP2_LIBS = @GIMP2_LIBS@
 GIMPTOOL2_CHECK = @GIMPTOOL2_CHECK@
@@ -195,6 +202,7 @@ PKG_CONFIG = @PKG_CONFIG@
 PLUG_IN_PATH = @PLUG_IN_PATH@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
+RELEASE_DATE = @RELEASE_DATE@
 RM = @RM@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -208,7 +216,6 @@ VERSION = @VERSION@
 WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 XGETTEXT_015 = @XGETTEXT_015@
-XGETTEXT_EXTRA_OPTIONS = @XGETTEXT_EXTRA_OPTIONS@
 YACC = @YACC@
 YFLAGS = @YFLAGS@
 abs_builddir = @abs_builddir@

@@ -47,7 +47,14 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @BUILD_FOOMATIC_TRUE@	printers$(EXEEXT)
 subdir = src/foomatic
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
+	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/isc-posix.m4 \
+	$(top_srcdir)/m4/lib-ld.m4 $(top_srcdir)/m4/lib-link.m4 \
+	$(top_srcdir)/m4/lib-prefix.m4 $(top_srcdir)/m4/nls.m4 \
+	$(top_srcdir)/m4/po.m4 $(top_srcdir)/m4/progtest.m4 \
+	$(top_srcdir)/m4/stp.m4 $(top_srcdir)/m4/stp_cups.m4 \
+	$(top_srcdir)/m4/stp_gimp.m4 $(top_srcdir)/m4/stp_option.m4 \
+	$(top_srcdir)/m4/stp_release.m4 $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
@@ -119,6 +126,7 @@ DB2PDF = @DB2PDF@
 DB2PS = @DB2PS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+DIALOG = @DIALOG@
 DOXYGEN = @DOXYGEN@
 DSYMUTIL = @DSYMUTIL@
 DVIPDF = @DVIPDF@
@@ -136,7 +144,6 @@ FOOMATIC_CONFIGURE = @FOOMATIC_CONFIGURE@
 FOOMATIC_KITLOAD = @FOOMATIC_KITLOAD@
 FOOMATIC_PPDFILE = @FOOMATIC_PPDFILE@
 GENPPD_LIBS = @GENPPD_LIBS@
-GETTEXT_MACRO_VERSION = @GETTEXT_MACRO_VERSION@
 GIMP2_CFLAGS = @GIMP2_CFLAGS@
 GIMP2_LIBS = @GIMP2_LIBS@
 GIMPTOOL2_CHECK = @GIMPTOOL2_CHECK@
@@ -213,6 +220,7 @@ PKG_CONFIG = @PKG_CONFIG@
 PLUG_IN_PATH = @PLUG_IN_PATH@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
+RELEASE_DATE = @RELEASE_DATE@
 RM = @RM@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
@@ -226,7 +234,6 @@ VERSION = @VERSION@
 WHICH_PPDS = @WHICH_PPDS@
 XGETTEXT = @XGETTEXT@
 XGETTEXT_015 = @XGETTEXT_015@
-XGETTEXT_EXTRA_OPTIONS = @XGETTEXT_EXTRA_OPTIONS@
 YACC = @YACC@
 YFLAGS = @YFLAGS@
 abs_builddir = @abs_builddir@
@@ -637,7 +644,7 @@ clean-local:
 
 foomatic-data: foomatic-stamp
 
-foomatic-stamp: foomatic-generator foomatic-printermap $(noinst_PROGRAMS) mk_printerlist $(top_builddir)/src/xml/xml-stamp
+foomatic-stamp: foomatic-generator foomatic-printermap $(noinst_PROGRAMS) mk_printerlist $(top_srcdir)/src/xml/xml-stamp
 	-$(RM) -r foomatic-db
 	$(FOOMATIC_GENERATOR) -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
 	$(FOOMATIC_GENERATOR) -s -m $(srcdir)/foomatic-printermap -t $(srcdir)/foomatic-templates $(FOOMATIC_GENERATOR_EXTRA_OPTS) $(FOOMATIC_GENERATOR_FOOMATIC_3_OPTS)
@@ -654,9 +661,6 @@ dist-hook:
 	    done \
 	  fi \
 	done
-
-$(top_builddir)/src/xml/xml-stamp:
-	cd $(top_builddir)/src/xml; $(MAKE) xml-stamp
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

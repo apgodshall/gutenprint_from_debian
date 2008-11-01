@@ -9,4 +9,26 @@ gutenprint (5.2.1-2) experimental; urgency=low
     appropriate backend, but the queues should be checked to make sure
     that the correct backend has been selected.
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 30 Oct 2008 22:04:00 +0000
+    In particular, USB printers will require the print queue to be
+    modified to use the correct IEEE-1284 device ID.  The device IDs
+    for the USB printers currently connected to the system may be viewed
+    by running
+
+      /usr/lib/cups/backend/usb
+
+    or for all printers with
+
+      lpinfo -v
+
+    and set with
+
+      lpadmin -p PRINTER -v 'usb://DEVICE-ID'
+
+    Alternatively, this may be done using the CUPS web interface by browsing to
+
+      https://localhost:631/printers
+
+    and then choosing "Modify Printer" for each printer in question.
+    The available printers will be shown in a list.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:40:05 +0000

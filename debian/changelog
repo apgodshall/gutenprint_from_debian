@@ -1,10 +1,11 @@
 gutenprint (5.2.1-2) experimental; urgency=low
 
   [ Roger Leigh ]
-  * debian/cups-driver-gutenprint.postinst: Automatically upgrade print
-    queues using the obsolete canon and epson backends.  Attempt to
-    determine the most appropriate alternative backend from the device
-    name.
+  * debian/cups-driver-gutenprint.postinst:
+    + Automatically upgrade print queues using the obsolete canon and epson
+      backends.  Attempt to determine the most appropriate alternative
+      backend from the device name.
+    + Document USB backend device ID upgrade problems.
   * debian/compat: Update to debhelper v7 compatibility.
   * debian/rules:
     - autoconfigure-stamp: Update configure options to create globalised
@@ -22,8 +23,9 @@ gutenprint (5.2.1-2) experimental; urgency=low
     - Add W. van den Akker to Uploaders.
     - ijsgutenprint: Recommend foomatic-db-gutenprint.
     - Update description of GIMP Print plugin.
-  * debian/cups-driver-gutenprint.NEWS: New file.  Document automatic
-    upgrade of print queue backends. 
+  * debian/cups-driver-gutenprint.NEWS: New file.
+    - Document automatic upgrade of print queue backends.
+    - Document USB backend device ID upgrade problems.
   * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
   * debian/patches/10_cups_modeldir.dpatch: Remove.
   * debian/patches/20_fix_gimpprint_menu_entry.dpatch: Remove.  Not needed,
@@ -31,10 +33,8 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/patches/21_gutenprintui_plist_localefix.dpatch: Remove.  Since
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
-  * 
-  * 
 
- -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:26:03 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:43:27 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

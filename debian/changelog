@@ -1,12 +1,12 @@
 gutenprint (5.2.1-2) experimental; urgency=low
 
   [ Roger Leigh ]
-  * debian/cups-driver-gutenprint.postinst:
-    + Automatically upgrade print queues using the obsolete canon and epson
-      backends.  Attempt to determine the most appropriate alternative
-      backend from the device name.
-    + Document USB backend device ID upgrade problems.
   * debian/compat: Update to debhelper v7 compatibility.
+  * debian/control:
+    - Add W. van den Akker to Uploaders.
+    - ijsgutenprint: Recommend foomatic-db-gutenprint.
+    - Update description of GIMP Print plugin.
+    - Build-Depend upon quilt instead of dpatch.
   * debian/rules:
     - autoconfigure-stamp: Update configure options to create globalised
       CUPS PPDs, and remove obsolete options.
@@ -21,24 +21,23 @@ gutenprint (5.2.1-2) experimental; urgency=low
       series from patches branch in git.
     - Create -stamp files in the debian/ directory, so no new files are
       created outside the debian directory.
-  * debian/control:
-    - Add W. van den Akker to Uploaders.
-    - ijsgutenprint: Recommend foomatic-db-gutenprint.
-    - Update description of GIMP Print plugin.
-    - Build-Depend upon quilt instead of dpatch.
+  * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
+  * debian/cups-driver-gutenprint.postinst:
+    - Automatically upgrade print queues using the obsolete canon and epson
+      backends.  Attempt to determine the most appropriate alternative
+      backend from the device name.
+    - Document USB backend device ID upgrade problems.
   * debian/cups-driver-gutenprint.NEWS: New file.
     - Document automatic upgrade of print queue backends.
     - Document USB backend device ID upgrade problems.
-  * debian/cups-driver-gutenprint.*: Replace use of cupsys with cups.
   * debian/patches/10_cups_modeldir.dpatch: Remove.
   * debian/patches/20_fix_gimpprint_menu_entry.dpatch: Remove.  Not needed,
     and no longer compiled with GIMP >= 2.4.
   * debian/patches/21_gutenprintui_plist_localefix.dpatch: Remove.  Since
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
-  * 
 
- -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 17:16:09 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 18:47:26 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

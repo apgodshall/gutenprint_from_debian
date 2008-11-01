@@ -14,6 +14,8 @@ gutenprint (5.2.1-2) experimental; urgency=low
       + Save and restore config.sub and config.guess.  Thanks to
         Till Kamppeter.
     - install: Replace use of pwd with $(CURDIR).
+    - Use quilt in place of dpatch, and add rule to generate quilt patch
+      series from patches branch in git.
   * debian/control:
     - Add W. van den Akker to Uploaders.
     - ijsgutenprint: Recommend foomatic-db-gutenprint.
@@ -27,8 +29,9 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/patches/21_gutenprintui_plist_localefix.dpatch: Remove.  Since
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 31 Oct 2008 20:20:43 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:24:11 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

@@ -8,7 +8,7 @@
 export DH_OPTIONS
 
 # Use dpatch.
-include /usr/share/dpatch/dpatch.make
+include /usr/share/quilt/quilt.make
 
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
@@ -22,6 +22,17 @@ endif
 ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
+
+update-patch-series:
+	mkdir -p $(CURDIR)/debian/patches
+	rm -f $(CURDIR)/debian/patches/*.patch
+	git format-patch -o $(CURDIR)/debian/patches patches ^upstream | \
+	  xargs -n 1 basename > $(CURDIR)/debian/patches/series
+	for patch in $$(ls $(CURDIR)/debian/patches/*.patch); do \
+	  lines=$$(cat $$patch | wc -l); \
+	  head -n $$(($$lines - 3)) $$patch > $${patch}.chomped; \
+	  mv $${patch}.chomped $$patch; \
+	done
 
 autoconfigure: autoconfigure-stamp
 autoconfigure-stamp: debian/control
@@ -41,7 +52,7 @@ autoconfigure-stamp: debian/control
 
 
 build: build-stamp debian/control
-build-stamp: patch-stamp autoconfigure-stamp
+build-stamp: patch autoconfigure-stamp
 	dh_testdir
 
 	cd debian/build; \
@@ -128,4 +139,4 @@ binary-arch: build install
 
 binary: binary-indep binary-arch
 
-.PHONY: build clean binary-indep binary-arch binary install autoconfigure patch unpatch
+.PHONY: build clean binary-indep binary-arch binary install autoconfigure patch unpatch update-patch-series

@@ -25,6 +25,7 @@ gutenprint (5.2.1-2) experimental; urgency=low
     - Add W. van den Akker to Uploaders.
     - ijsgutenprint: Recommend foomatic-db-gutenprint.
     - Update description of GIMP Print plugin.
+    - Build-Depend upon quilt instead of dpatch.
   * debian/cups-driver-gutenprint.NEWS: New file.
     - Document automatic upgrade of print queue backends.
     - Document USB backend device ID upgrade problems.
@@ -35,8 +36,9 @@ gutenprint (5.2.1-2) experimental; urgency=low
   * debian/patches/21_gutenprintui_plist_localefix.dpatch: Remove.  Since
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 17:14:50 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 17:16:09 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

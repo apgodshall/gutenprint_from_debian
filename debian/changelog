@@ -19,6 +19,8 @@ gutenprint (5.2.1-2) experimental; urgency=low
     - install: Replace use of pwd with $(CURDIR).
     - Use quilt in place of dpatch, and add rule to generate quilt patch
       series from patches branch in git.
+    - Create -stamp files in the debian/ directory, so no new files are
+      created outside the debian directory.
   * debian/control:
     - Add W. van den Akker to Uploaders.
     - ijsgutenprint: Recommend foomatic-db-gutenprint.
@@ -34,7 +36,7 @@ gutenprint (5.2.1-2) experimental; urgency=low
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
 
- -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:43:27 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 17:14:50 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

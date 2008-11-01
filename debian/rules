@@ -34,8 +34,8 @@ update-patch-series:
 	  mv $${patch}.chomped $$patch; \
 	done
 
-autoconfigure: autoconfigure-stamp
-autoconfigure-stamp: debian/control
+autoconfigure: debian/autoconfigure-stamp
+debian/autoconfigure-stamp: debian/control
 	[ -r scripts/config.sub.orig ] || \
 	  cp -f scripts/config.sub scripts/config.sub.orig
 	[ -r scripts/config.guess.orig ] || \
@@ -58,25 +58,24 @@ autoconfigure-stamp: debian/control
 	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
 	  --with-ijs --with-foomatic --with-foomatic3 \
 	  --disable-test
-	touch autoconfigure-stamp
+	touch debian/autoconfigure-stamp
 
 
-build: build-stamp debian/control
-build-stamp: patch autoconfigure-stamp
+build: debian/build-stamp debian/control
+debian/build-stamp: patch debian/autoconfigure-stamp
 	dh_testdir
 
 	cd debian/build; \
 	$(MAKE)
 
-	touch build-stamp
+	touch debian/build-stamp
 
 clean: realclean unpatch
 realclean: debian/control
 	dh_testdir
 
+	rm -rf debian/build-stamp debian/autoconfigure-stamp
 	rm -rf debian/build debian/install
-
-	[ ! -f Makefile ] || $(MAKE) distclean
 
 	[ ! -r scripts/config.guess.orig ] || \
 	  mv -f scripts/config.guess.orig scripts/config.guess || :

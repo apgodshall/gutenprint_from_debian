@@ -36,6 +36,16 @@ update-patch-series:
 
 autoconfigure: autoconfigure-stamp
 autoconfigure-stamp: debian/control
+	[ -r scripts/config.sub.orig ] || \
+	  cp -f scripts/config.sub scripts/config.sub.orig
+	[ -r scripts/config.guess.orig ] || \
+	  cp -f scripts/config.guess scripts/config.guess.orig
+
+	[ ! -r /usr/share/misc/config.sub ] || \
+	  cp -f /usr/share/misc/config.sub scripts/config.sub
+	[ ! -r /usr/share/misc/config.guess ] || \
+	  cp -f /usr/share/misc/config.guess scripts/config.guess
+
 	dh_testdir
 	mkdir debian/build; \
 	cd debian/build; \
@@ -63,16 +73,6 @@ build-stamp: patch autoconfigure-stamp
 clean: realclean unpatch
 realclean: debian/control
 	dh_testdir
-
-	[ -r scripts/config.sub.orig ] || \
-	  cp -f scripts/config.sub scripts/config.sub.orig
-	[ -r scripts/config.guess.orig ] || \
-	  cp -f scripts/config.guess scripts/config.guess.orig
-
-	[ ! -r /usr/share/misc/config.sub ] || \
-	  cp -f /usr/share/misc/config.sub scripts/config.sub
-	[ ! -r /usr/share/misc/config.guess ] || \
-	  cp -f /usr/share/misc/config.guess scripts/config.guess
 
 	rm -rf debian/build debian/install
 

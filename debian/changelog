@@ -13,6 +13,8 @@ gutenprint (5.2.1-2) experimental; urgency=low
       + Remove redundant removal of -stamp files.
       + Save and restore config.sub and config.guess.  Thanks to
         Till Kamppeter.
+      + Move copying of new config.sub and config.guess to
+        autoconfigure-stamp, or else saving and restoring has no effect.
     - install: Replace use of pwd with $(CURDIR).
     - Use quilt in place of dpatch, and add rule to generate quilt patch
       series from patches branch in git.
@@ -30,8 +32,9 @@ gutenprint (5.2.1-2) experimental; urgency=low
     PPD files are no longer generated, we don't need to patch the source
     to use /usr/share/ppd.
   * 
+  * 
 
- -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:24:11 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 01 Nov 2008 16:26:03 +0000
 
 gutenprint (5.2.1-1) experimental; urgency=low
 

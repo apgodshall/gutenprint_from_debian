@@ -69,7 +69,7 @@ Description: development files for the Gutenprint printer driver library
 Package: libgutenprint-doc
 Architecture: all
 Section: doc
-Suggests: libgutenprint-dev (= ${binary:Version})
+Suggests: libgutenprint-dev (= ${source:Version})
 Description: documentation for the Gutenprint printer driver library
  This package contains lots of info-files, DVI docs and other
  documentation about the Gutenprint library for photo-quality
@@ -203,7 +203,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
 Package: foomatic-db-gutenprint
 Architecture: all
 Section: text
-Depends: foomatic-db, ijsgutenprint (>= ${binary:Version})
+Depends: foomatic-db, ijsgutenprint (>= ${source:Version})
 Description: OpenPrinting printer support - database for Gutenprint printer drivers
  Foomatic is a printing system designed to make it easier to set up
  common printers for use with Debian (and other operating systems).
@@ -226,7 +226,7 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
 Package: gutenprint-doc
 Architecture: all
 Section: doc
-Suggests: cups-driver-gutenprint (>= ${binary:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-gutenprint (>= ${binary:Version}), ijsgutenprint (>= ${binary:Version})
+Suggests: cups-driver-gutenprint (>= ${source:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-gutenprint (>= ${source:Version}), ijsgutenprint (>= ${source:Version})
 Description: users' guide for Gutenprint and CUPS
  This package contains a user guide for programs using the
  Gutenprint library for photographic quality printing.  Currently

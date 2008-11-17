@@ -353,7 +353,7 @@ stpui_public_h_sources = \
 	../../include/gutenprintui2/gammacurve.h
 
 @MAINTAINER_MODE_TRUE@typebuiltins_extra_deps = Makefile
-MAINTAINERCLEANFILES = Makefile.in typebuiltins.c printrcl.c printrcy.c printrcy.h
+MAINTAINERCLEANFILES = Makefile.in typebuiltins.c typebuiltins.c.tmp printrcl.c printrcy.c printrcy.h
 all: all-am
 
 .SUFFIXES:
@@ -765,7 +765,8 @@ $(srcdir)/typebuiltins.c: $(typebuiltins_extra_deps)
 			--vhead "GType\n@enum_name@_get_type (void)\n{\n  static GType etype = 0;\n  if (etype == 0) {\n    static const G@Type@Value values[] = {" \
 			--vprod "      { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
 			--vtail "      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n  return etype;\n}\n" \
-		$(stpui_public_h_sources) ) > $@
+		$(stpui_public_h_sources) ) > $@.tmp
+	mv $@.tmp $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -1,4 +1,171 @@
 ===============================================================================
+Name: gutenprint-5_2_2
+
+2008-11-15	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.401) (+8 -2)
+		src/foomatic/foomatic-printermap (1.181) (+3 -0)
+		src/xml/escp2/model/Makefile.am (1.13) (+3 -2)
+		src/xml/escp2/model/model_96.xml (1.1) (added)
+		src/xml/printers.xml (1.22) (+10 -7)
+
+	Fix definition of Artisan printers based on specs
+
+2008-11-15	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.13) (+2 -2)
+
+	Remove unnecessarily aggressive quoting.
+
+2008-11-14	<rlk@sourceforge.net>
+
+	Files:	po/it.po (1.4) (+2898 -2679)
+
+	Update translation
+
+2008-11-14	<rlk@sourceforge.net>
+
+	Files:	po/it.po (1.3) (+2686 -2905)
+
+	Fix translation from the translation service
+
+2008-11-14	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.12) (+13 -5)
+		src/testpattern/run-testpattern (1.25) (+10 -2)
+		src/testpattern/run-testpattern-1 (1.11) (+10 -2)
+		src/testpattern/run-testpattern-2.in (1.32) (+13 -2)
+		test/run-testdither (1.14) (+10 -2)
+		test/run-weavetest (1.28) (+10 -2)
+
+	Fix tests for VPATH builds
+
+2008-11-13	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.54) (+1869 -1857)
+		po/da.po (1.95) (+1869 -1857)
+		po/de.po (1.68) (+1869 -1857)
+		po/el.po (1.69) (+1869 -1857)
+		po/en_GB.po (1.162) (+1869 -1857)
+		po/es.po (1.67) (+1869 -1857)
+		po/fr.po (1.95) (+1869 -1857)
+		po/hu.po (1.26) (+1869 -1857)
+		po/it.po (1.2) (+2898 -2679)
+		po/ja.po (1.63) (+1869 -1857)
+		po/nb.po (1.28) (+1869 -1857)
+		po/nl.po (1.78) (+1869 -1857)
+		po/pl.po (1.73) (+1869 -1857)
+		po/pt.po (1.68) (+1869 -1857)
+		po/sk.po (1.72) (+1869 -1857)
+		po/sv.po (1.98) (+1870 -1858)
+		po/zh_TW.po (1.28) (+1869 -1857)
+
+	Gutenprint 5.2.2 release
+
+2008-11-11	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.400) (+25 -5)
+
+	Update release notes.
+
+2008-11-11	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.207) (+3 -3)
+		po/it.po (1.1) (added)
+
+	Add Italian translation
+
+2008-11-10	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/Makefile.am (1.12) (+2 -2)
+
+	Correct new model file.
+
+2008-11-10	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.180) (+1 -0)
+		src/xml/escp2/model/Makefile.am (1.11) (+2 -1)
+		src/xml/escp2/model/model_65.xml (1.13) (+4 -4)
+		src/xml/escp2/model/model_95.xml (1.1) (added)
+		src/xml/printers.xml (1.21) (+14 -13)
+
+	Correct printer definition for a number of Epson MFP devices
+
+2008-11-02	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_91.xml (1.8) (+6 -6)
+
+	[ 2214593 ] Stylus Photo R1900 output unaligned
+
+2008-11-02	<rlk@sourceforge.net>
+
+	Files:	src/ghost/ijsgutenprint.c (1.22) (+2 -2)
+
+	[ 2217057 ] obvious error in ijsgutenprint.c
+
+2008-11-01	<rleigh@sourceforge.net>
+
+	Files:	src/xml/Makefile.am (1.4) (+3 -3)
+
+	src/xml/Makefile.am: Fix quoting issue in sed substitution
+	Remove removed file from CLEANFILES
+
+2008-10-29	<easysw@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.97) (+7 -7)
+		src/main/channel.c (1.31) (+2 -2)
+		src/main/curve.c (1.54) (+16 -16)
+		src/main/escp2-channels.c (1.87) (+2 -2)
+		src/main/print-lexmark.c (1.158) (+2 -2)
+		src/main/print-weave.c (1.72) (+3 -3)
+		src/main/sequence.c (1.27) (+4 -4)
+
+	Fix 64-bit compile problems - %d doesn't work with size_t, so instead use
+	%ld and casts to long.
+
+2008-10-24	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.399) (+10 -111)
+		README (1.197) (+7 -7)
+
+	Advance version
+
+2008-10-24	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.206) (+3 -3)
+
+	Bump version.
+
+2008-10-24	<rleigh@sourceforge.net>
+
+	Files:	Makefile.am (1.155) (+15 -15)
+		include/gutenprintui2/Makefile.am (1.4) (+4 -3)
+		src/foomatic/Makefile.am (1.52) (+4 -2)
+		src/gutenprintui2/Makefile.am (1.8) (+4 -3)
+		src/xml/Makefile.am (1.3) (+10 -8)
+		src/xml/escp2/Makefile.am (1.8) (+11 -10)
+		src/xml/escp2/inks/Makefile.am (1.6) (+6 -5)
+		src/xml/escp2/inputslots/Makefile.am (1.3) (+6 -5)
+		src/xml/escp2/media/Makefile.am (1.9) (+6 -5)
+		src/xml/escp2/mediasizes/Makefile.am (1.3) (+6 -5)
+		src/xml/escp2/model/Makefile.am (1.10) (+6 -5)
+		src/xml/escp2/qualitypresets/Makefile.am (1.3) (+6 -5)
+		src/xml/escp2/weaves/Makefile.am (1.2) (+6 -5)
+
+	Fix VPATH build
+
+	Correct use of srcdir and builddir in XML data directories.
+	All Makefiles use temporary files when using shell I/O redirection to files,
+	so make behaves idempotently on failure (the target is only created on
+	success).
+
+2008-10-24	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.20) (+1 -2)
+
+	Remove duplicate entry.
+
+===============================================================================
 Name: gutenprint-5_2_1
 
 2008-10-19	<rlk@sourceforge.net>

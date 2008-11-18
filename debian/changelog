@@ -2,18 +2,13 @@ gutenprint (5.2.2-1) experimental; urgency=low
 
   [ Roger Leigh ]
   * New upstream stable release.
-
- -- Roger Leigh <rleigh@debian.org>  Tue, 18 Nov 2008 00:05:39 +0000
-
-gutenprint (5.2.1-3) experimental; urgency=low
-
   * debian/control: Use ${source:Version} in place of ${binary:Version}
     for all dependencies except for shared library dependencies in
     library -dev packages.  This relaxes the dependencies so that a
     specific debian revision of a package is not strictly required.
     Thanks to Amaya Rodrigo Sastre.
 
- -- Roger Leigh <rleigh@debian.org>  Fri, 07 Nov 2008 23:23:19 +0000
+ -- Roger Leigh <rleigh@debian.org>  Tue, 18 Nov 2008 00:34:04 +0000
 
 gutenprint (5.2.1-2) experimental; urgency=low
 

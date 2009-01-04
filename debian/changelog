@@ -1,4 +1,4 @@
-gutenprint (5.2.2-1) experimental; urgency=low
+gutenprint (5.2.3-1) experimental; urgency=low
 
   [ Roger Leigh ]
   * New upstream stable release.
@@ -19,6 +19,13 @@ gutenprint (5.2.2-1) experimental; urgency=low
     - Split install into install-arch and install-indep with common
       install-common rule.
     - For binary-arch, use -s in place of -a.
+
+ -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 18:19:28 +0000
+
+gutenprint (5.2.2-1) experimental; urgency=low
+
+  [ Roger Leigh ]
+  * New upstream stable release.
 
  -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 13:05:13 +0000
 

@@ -7,8 +7,10 @@ gutenprint (5.2.2-1) experimental; urgency=low
     library -dev packages.  This relaxes the dependencies so that a
     specific debian revision of a package is not strictly required.
     Thanks to Amaya Rodrigo Sastre.
+  * ijsgutenprint no longer depends on obsolete ghostscript packages
+    (Closes: #447533). 
 
- -- Roger Leigh <rleigh@debian.org>  Tue, 18 Nov 2008 00:34:04 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 11:58:23 +0000
 
 gutenprint (5.2.1-2) experimental; urgency=low
 

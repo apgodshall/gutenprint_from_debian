@@ -27,7 +27,7 @@ set -e
 if [ "$1" = "configure" ]; then
 
   # Upgrade in-use PPD files
-  /usr/sbin/cups-genppdupdate
+  cups-genppdupdate
   # Restart CUPS (to register new and updated PPDs)
   [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
 
@@ -73,5 +73,4 @@ fi
 #DEBHELPER#
 
 exit 0
-
 

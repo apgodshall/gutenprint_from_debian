@@ -9,8 +9,10 @@ gutenprint (5.2.2-1) experimental; urgency=low
     Thanks to Amaya Rodrigo Sastre.
   * ijsgutenprint no longer depends on obsolete ghostscript packages
     (Closes: #447533). 
+  * debian/cups-driver-gutenprint.postinst: Don't use full path
+    when running cups-genppdupdate (fix Lintian warning).
 
- -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 11:58:23 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 12:07:27 +0000
 
 gutenprint (5.2.1-2) experimental; urgency=low
 

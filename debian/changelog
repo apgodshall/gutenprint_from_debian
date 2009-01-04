@@ -2,19 +2,21 @@ gutenprint (5.2.2-1) experimental; urgency=low
 
   [ Roger Leigh ]
   * New upstream stable release.
-  * debian/control: Use ${source:Version} in place of ${binary:Version}
-    for all dependencies except for shared library dependencies in
-    library -dev packages.  This relaxes the dependencies so that a
-    specific debian revision of a package is not strictly required.
-    Thanks to Amaya Rodrigo Sastre.
-  * ijsgutenprint no longer depends on obsolete ghostscript packages
-    (Closes: #447533). 
+  * debian/control:
+    - Use ${source:Version} in place of ${binary:Version} for all
+      dependencies except for shared library dependencies in library
+      -dev packages.  This relaxes the dependencies so that a specific
+      debian revision of a package is not strictly required. Thanks to
+      Amaya Rodrigo Sastre.
+    - ijsgutenprint no longer depends on obsolete ghostscript packages
+      (Closes: #447533).
+    - Build-Depend on debhelper v7.
   * debian/cups-driver-gutenprint.postinst: Don't use full path
     when running cups-genppdupdate (fix Lintian warning).
   * debian/rules: update-patch-series: Use xargs -r to cope with null
     input. 
 
- -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 12:13:37 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 12:17:10 +0000
 
 gutenprint (5.2.1-2) experimental; urgency=low
 

@@ -11,8 +11,10 @@ gutenprint (5.2.2-1) experimental; urgency=low
     (Closes: #447533). 
   * debian/cups-driver-gutenprint.postinst: Don't use full path
     when running cups-genppdupdate (fix Lintian warning).
+  * debian/rules: update-patch-series: Use xargs -r to cope with null
+    input. 
 
- -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 12:07:27 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sun, 04 Jan 2009 12:13:37 +0000
 
 gutenprint (5.2.1-2) experimental; urgency=low
 

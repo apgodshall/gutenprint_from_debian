@@ -274,6 +274,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS
 GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
 pkgxmldatadir = $(pkgdatadir)/@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@/xml/escp2/inputslots
 pkgxmldata_DATA = \
+	artisan.xml				\
 	b500.xml				\
 	cd_cutter_roll_feed.xml			\
 	cd_roll_feed.xml			\
@@ -282,6 +283,7 @@ pkgxmldata_DATA = \
 	pro_roll_feed.xml			\
 	r1800.xml				\
 	r2400.xml				\
+	rx680.xml				\
 	rx700.xml				\
 	spro5000.xml				\
 	standard_roll_feed.xml

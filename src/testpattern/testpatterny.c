@@ -217,6 +217,7 @@ static color_t color_map[] =
     { "l_cyan", 5 },
     { "l_magenta", 6 },
     { "d_yellow", 4 },
+    { "l_l_black", 7 },
     { NULL, -1 }
   };
 
@@ -270,7 +271,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 274 "testpatterny.c"
+#line 275 "testpatterny.c"
 
 #ifdef short
 # undef short
@@ -603,20 +604,20 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   144,   144,   144,   144,   144,   145,   145,   145,   145,
-     147,   147,   150,   162,   174,   186,   198,   210,   222,   234,
-     234,   234,   234,   234,   234,   234,   237,   240,   250,   259,
-     269,   278,   285,   292,   299,   308,   317,   326,   326,   329,
-     339,   348,   357,   366,   380,   380,   380,   380,   380,   382,
-     389,   396,   403,   410,   417,   425,   433,   448,   448,   451,
-     451,   454,   457,   471,   484,   484,   487,   487,   490,   490,
-     493,   493,   496,   511,   514,   529,   540,   557,   563,   570,
-     578,   587,   598,   598,   598,   598,   598,   601,   604,   613,
-     618,   618,   621,   624,   628,   632,   632,   632,   632,   632,
-     632,   633,   633,   633,   633,   633,   633,   633,   634,   634,
-     634,   634,   634,   634,   635,   635,   635,   638,   642,   642,
-     642,   642,   645,   649,   649,   652,   656,   656,   659,   659,
-     662,   662,   667,   666
+       0,   145,   145,   145,   145,   145,   146,   146,   146,   146,
+     148,   148,   151,   163,   175,   187,   199,   211,   223,   235,
+     235,   235,   235,   235,   235,   235,   238,   241,   251,   260,
+     270,   279,   286,   293,   300,   309,   318,   327,   327,   330,
+     340,   349,   358,   367,   381,   381,   381,   381,   381,   383,
+     390,   397,   404,   411,   418,   426,   434,   449,   449,   452,
+     452,   455,   458,   472,   485,   485,   488,   488,   491,   491,
+     494,   494,   497,   512,   515,   530,   541,   558,   564,   571,
+     579,   588,   599,   599,   599,   599,   599,   602,   605,   614,
+     619,   619,   622,   625,   629,   633,   633,   633,   633,   633,
+     633,   634,   634,   634,   634,   634,   634,   634,   635,   635,
+     635,   635,   635,   635,   636,   636,   636,   639,   643,   643,
+     643,   643,   646,   650,   650,   653,   657,   657,   660,   660,
+     663,   663,   668,   667
 };
 #endif
 
@@ -1671,7 +1672,7 @@ yyreduce:
   switch (yyn)
     {
         case 12:
-#line 151 "testpatterny.y"
+#line 152 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>cmykspec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1684,7 +1685,7 @@ yyreduce:
     break;
 
   case 13:
-#line 163 "testpatterny.y"
+#line 164 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>kcmyspec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1697,7 +1698,7 @@ yyreduce:
     break;
 
   case 14:
-#line 175 "testpatterny.y"
+#line 176 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>rgbspec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1710,7 +1711,7 @@ yyreduce:
     break;
 
   case 15:
-#line 187 "testpatterny.y"
+#line 188 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>cmyspec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1723,7 +1724,7 @@ yyreduce:
     break;
 
   case 16:
-#line 199 "testpatterny.y"
+#line 200 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>grayspec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1736,7 +1737,7 @@ yyreduce:
     break;
 
   case 17:
-#line 211 "testpatterny.y"
+#line 212 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>whitespec %d\n", (yyvsp[(2) - (2)].ival));
@@ -1749,7 +1750,7 @@ yyreduce:
     break;
 
   case 18:
-#line 223 "testpatterny.y"
+#line 224 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>extendedspec %d\n", (yyvsp[(2) - (3)].ival));
@@ -1762,7 +1763,7 @@ yyreduce:
     break;
 
   case 27:
-#line 241 "testpatterny.y"
+#line 242 "testpatterny.y"
     {
 	  int channel = find_color((yyvsp[(2) - (3)]).sval);
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
@@ -1773,7 +1774,7 @@ yyreduce:
     break;
 
   case 28:
-#line 251 "testpatterny.y"
+#line 252 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>channel_level %d %f\n", (yyvsp[(2) - (3)].ival), (yyvsp[(3) - (3)]).dval);
@@ -1783,7 +1784,7 @@ yyreduce:
     break;
 
   case 29:
-#line 260 "testpatterny.y"
+#line 261 "testpatterny.y"
     {
 	  int channel = find_color((yyvsp[(2) - (3)]).sval);
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
@@ -1794,7 +1795,7 @@ yyreduce:
     break;
 
   case 30:
-#line 270 "testpatterny.y"
+#line 271 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>channel_gamma %d %f\n", (yyvsp[(2) - (3)].ival), (yyvsp[(3) - (3)]).dval);
@@ -1804,7 +1805,7 @@ yyreduce:
     break;
 
   case 31:
-#line 279 "testpatterny.y"
+#line 280 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>global_gamma %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1813,7 +1814,7 @@ yyreduce:
     break;
 
   case 32:
-#line 286 "testpatterny.y"
+#line 287 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>steps %d\n", (yyvsp[(2) - (2)].ival));
@@ -1822,7 +1823,7 @@ yyreduce:
     break;
 
   case 33:
-#line 293 "testpatterny.y"
+#line 294 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>ink_limit %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1831,7 +1832,7 @@ yyreduce:
     break;
 
   case 34:
-#line 300 "testpatterny.y"
+#line 301 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>printer %s\n", (yyvsp[(2) - (2)].sval));
@@ -1841,7 +1842,7 @@ yyreduce:
     break;
 
   case 35:
-#line 309 "testpatterny.y"
+#line 310 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>page_size_name %s\n", (yyvsp[(2) - (2)].sval));
@@ -1851,7 +1852,7 @@ yyreduce:
     break;
 
   case 36:
-#line 318 "testpatterny.y"
+#line 319 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>page_size_custom %d %d\n", (yyvsp[(2) - (3)].ival), (yyvsp[(3) - (3)].ival));
@@ -1861,7 +1862,7 @@ yyreduce:
     break;
 
   case 39:
-#line 330 "testpatterny.y"
+#line 331 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>parameter_string %s %s\n", (yyvsp[(2) - (3)].sval), (yyvsp[(3) - (3)].sval));
@@ -1872,7 +1873,7 @@ yyreduce:
     break;
 
   case 40:
-#line 340 "testpatterny.y"
+#line 341 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>parameter_int %s %d\n", (yyvsp[(2) - (3)].sval), (yyvsp[(3) - (3)].ival));
@@ -1882,7 +1883,7 @@ yyreduce:
     break;
 
   case 41:
-#line 349 "testpatterny.y"
+#line 350 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>parameter_bool %s %d\n", (yyvsp[(2) - (3)].sval), (yyvsp[(3) - (3)].ival));
@@ -1892,7 +1893,7 @@ yyreduce:
     break;
 
   case 42:
-#line 358 "testpatterny.y"
+#line 359 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>parameter_float %s %f\n", (yyvsp[(2) - (3)].sval), (yyvsp[(3) - (3)]).dval);
@@ -1902,7 +1903,7 @@ yyreduce:
     break;
 
   case 43:
-#line 367 "testpatterny.y"
+#line 368 "testpatterny.y"
     {
 	  stp_curve_t *curve = stp_curve_create_from_string((yyvsp[(3) - (3)].sval));
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
@@ -1917,7 +1918,7 @@ yyreduce:
     break;
 
   case 49:
-#line 383 "testpatterny.y"
+#line 384 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>density %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1926,7 +1927,7 @@ yyreduce:
     break;
 
   case 50:
-#line 390 "testpatterny.y"
+#line 391 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>top %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1935,7 +1936,7 @@ yyreduce:
     break;
 
   case 51:
-#line 397 "testpatterny.y"
+#line 398 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
  	    fprintf(stderr, ">>>left %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1944,7 +1945,7 @@ yyreduce:
     break;
 
   case 52:
-#line 404 "testpatterny.y"
+#line 405 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>hsize %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1953,7 +1954,7 @@ yyreduce:
     break;
 
   case 53:
-#line 411 "testpatterny.y"
+#line 412 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>vsize %f\n", (yyvsp[(2) - (2)]).dval);
@@ -1962,7 +1963,7 @@ yyreduce:
     break;
 
   case 54:
-#line 418 "testpatterny.y"
+#line 419 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>blackline %d\n", (yyvsp[(2) - (2)].ival));
@@ -1971,7 +1972,7 @@ yyreduce:
     break;
 
   case 55:
-#line 426 "testpatterny.y"
+#line 427 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>noscale %d\n", (yyvsp[(2) - (2)].ival));
@@ -1980,7 +1981,7 @@ yyreduce:
     break;
 
   case 56:
-#line 434 "testpatterny.y"
+#line 435 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>color_block1 %f %f %f (%d)\n", (yyvsp[(1) - (3)]).dval, (yyvsp[(2) - (3)]).dval, (yyvsp[(3) - (3)]).dval,
@@ -1996,7 +1997,7 @@ yyreduce:
     break;
 
   case 62:
-#line 458 "testpatterny.y"
+#line 459 "testpatterny.y"
     {
 	  int channel = find_color((yyvsp[(1) - (4)]).sval);
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
@@ -2011,7 +2012,7 @@ yyreduce:
     break;
 
   case 63:
-#line 472 "testpatterny.y"
+#line 473 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>color_block2b %d %f %f %f\n", (yyvsp[(2) - (5)].ival), (yyvsp[(3) - (5)]).dval, (yyvsp[(4) - (5)]).dval, (yyvsp[(5) - (5)]).dval);
@@ -2025,7 +2026,7 @@ yyreduce:
     break;
 
   case 72:
-#line 497 "testpatterny.y"
+#line 498 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>patvars %f %f %f %f %f\n", (yyvsp[(1) - (5)]).dval, (yyvsp[(2) - (5)]).dval, (yyvsp[(3) - (5)]).dval, (yyvsp[(4) - (5)]).dval, (yyvsp[(5) - (5)]).dval);
@@ -2041,7 +2042,7 @@ yyreduce:
     break;
 
   case 74:
-#line 515 "testpatterny.y"
+#line 516 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>xpattern\n");
@@ -2057,7 +2058,7 @@ yyreduce:
     break;
 
   case 75:
-#line 530 "testpatterny.y"
+#line 531 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>grid %d\n", (yyvsp[(2) - (2)].ival));
@@ -2069,7 +2070,7 @@ yyreduce:
     break;
 
   case 76:
-#line 541 "testpatterny.y"
+#line 542 "testpatterny.y"
     {
 	  if (getenv("STP_TESTPATTERN_DEBUG"))
 	    fprintf(stderr, ">>>image %d %d\n", (yyvsp[(2) - (3)].ival), (yyvsp[(3) - (3)].ival));
@@ -2087,7 +2088,7 @@ yyreduce:
     break;
 
   case 77:
-#line 558 "testpatterny.y"
+#line 559 "testpatterny.y"
     {
 	  fprintf(stderr,"%s",(yyvsp[(2) - (2)].sval));
 	  free((yyvsp[(2) - (2)].sval));
@@ -2095,7 +2096,7 @@ yyreduce:
     break;
 
   case 78:
-#line 564 "testpatterny.y"
+#line 565 "testpatterny.y"
     {
 	  fprintf(stderr,"%s%s", (yyvsp[(2) - (3)].sval), (yyvsp[(3) - (3)].sval));
 	  free((yyvsp[(2) - (3)].sval));
@@ -2104,7 +2105,7 @@ yyreduce:
     break;
 
   case 79:
-#line 571 "testpatterny.y"
+#line 572 "testpatterny.y"
     {
 	  fprintf(stderr,"%s%s%s", (yyvsp[(2) - (4)].sval), (yyvsp[(3) - (4)].sval), (yyvsp[(4) - (4)].sval));
 	  free((yyvsp[(2) - (4)].sval));
@@ -2114,7 +2115,7 @@ yyreduce:
     break;
 
   case 80:
-#line 579 "testpatterny.y"
+#line 580 "testpatterny.y"
     {
 	  fprintf(stderr, "%s%s%s%s", (yyvsp[(2) - (5)].sval), (yyvsp[(3) - (5)].sval), (yyvsp[(4) - (5)].sval), (yyvsp[(5) - (5)].sval));
 	  free((yyvsp[(2) - (5)].sval));
@@ -2125,7 +2126,7 @@ yyreduce:
     break;
 
   case 81:
-#line 588 "testpatterny.y"
+#line 589 "testpatterny.y"
     {
 	  fprintf(stderr, "%s%s%s%s%s", (yyvsp[(2) - (6)].sval), (yyvsp[(3) - (6)].sval), (yyvsp[(4) - (6)].sval), (yyvsp[(5) - (6)].sval), (yyvsp[(6) - (6)].sval));
 	  free((yyvsp[(2) - (6)].sval));
@@ -2137,7 +2138,7 @@ yyreduce:
     break;
 
   case 88:
-#line 605 "testpatterny.y"
+#line 606 "testpatterny.y"
     {
 	  close_output();
 	  if (global_output)
@@ -2148,44 +2149,44 @@ yyreduce:
     break;
 
   case 89:
-#line 614 "testpatterny.y"
+#line 615 "testpatterny.y"
     {
 	  global_output = (yyvsp[(2) - (2)].sval);
 	}
     break;
 
   case 93:
-#line 625 "testpatterny.y"
+#line 626 "testpatterny.y"
     { start_job = 1; }
     break;
 
   case 94:
-#line 629 "testpatterny.y"
+#line 630 "testpatterny.y"
     { end_job = 1; }
     break;
 
   case 117:
-#line 639 "testpatterny.y"
+#line 640 "testpatterny.y"
     { global_did_something = 1; }
     break;
 
   case 122:
-#line 646 "testpatterny.y"
+#line 647 "testpatterny.y"
     { global_did_something = 1; }
     break;
 
   case 125:
-#line 653 "testpatterny.y"
+#line 654 "testpatterny.y"
     { global_did_something = 1; }
     break;
 
   case 131:
-#line 663 "testpatterny.y"
+#line 664 "testpatterny.y"
     { return 0; }
     break;
 
   case 132:
-#line 667 "testpatterny.y"
+#line 668 "testpatterny.y"
     {
 	  current_testpattern = get_next_testpattern();
 	}
@@ -2193,7 +2194,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2197 "testpatterny.c"
+#line 2198 "testpatterny.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2407,6 +2408,6 @@ yyreturn:
 }
 
 
-#line 673 "testpatterny.y"
+#line 674 "testpatterny.y"
 
 

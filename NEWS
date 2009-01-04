@@ -1,6 +1,6 @@
-Welcome to Gutenprint 5.2.2, a stable release of Gutenprint 5.2.  This
-release has minor bug fixes over 5.2.1.  Please read these release
-notes carefully.
+Welcome to Gutenprint 5.2.3, a stable release of Gutenprint 5.2.  This
+release has bug fixes over 5.2.2.  Please read these release notes
+carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
@@ -21,6 +21,7 @@ These release notes contain the following sections:
 I)    General Requirements
 II)   Critical Upgrade Note
 III)  Changes from Previous Releases
+        * Changes from 5.2.2
         * Changes from 5.2.1
 IV)   Overall changes from 5.0.2 to 5.2
 	A) General User-visible Changes
@@ -244,6 +245,60 @@ device.  We have determined that the data is in fact written by the
 ================================================================
 
 III) MAJOR CHANGES FROM PREVIOUS RELEASES
+
+* Changes from 5.2.2
+
+   1) CUPS PPD files in non-English locales are now generated
+      correctly when the CUPS driver interface is used (with CUPS 1.2
+      and above).
+
+   2) Epson inkjet printers that support duplex printing now use less
+      restrictive margins (allowing use of more of the page) when
+      duplex printing is not used.
+
+   3) Printing to the following Epson printers has been corrected:
+
+      EPSON Artisan 700
+      EPSON Artisan 800
+      EPSON BX300F
+      EPSON EP-801A
+      EPSON EP-901A
+      EPSON EP-901F
+      EPSON ME 300
+      EPSON ME Office 360
+      EPSON PX-401A
+      EPSON Stylus NX100
+      EPSON Stylus NX105
+      EPSON Stylus Photo PX700FW
+      EPSON Stylus Photo PX800FW
+      EPSON Stylus Photo TX700W
+      EPSON Stylus Photo TX800W
+      EPSON Stylus S20
+      EPSON Stylus SX100
+      EPSON Stylus SX105
+      EPSON Stylus T20
+      EPSON Stylus TX100
+      EPSON Stylus TX101
+      EPSON Stylus TX102
+      EPSON Stylus TX103
+      EPSON Stylus TX105
+      EPSON Stylus TX106
+      EPSON Stylus TX109
+      EPSON TX300F
+
+      These printers should all be fully functional, but may be
+      further tuned in the future.
+
+   4) Duplex printing has been enabled on the Epson Stylus RX680,
+      RX685, RX690, PM-A940, and PM-T960.  Support for these printers
+      is still considered experimental.
+
+   5) Support has been added for the Canon MULTIPASS MP220.
+
+   6) Preliminary support has been added for the Canon PIXMA iP4600.
+
+
+----------------
 
 * Changes from 5.2.1
 

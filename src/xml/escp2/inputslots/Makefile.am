@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.3 2008/10/24 00:37:14 rleigh Exp $
+## $Id: Makefile.am,v 1.5 2008/12/10 00:44:12 rlk Exp $
 ## Copyright (C) 2008 Robert Krawitz
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -26,6 +26,7 @@ include $(top_srcdir)/scripts/global.mk
 pkgxmldatadir = $(pkgdatadir)/@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@/xml/escp2/inputslots
 
 pkgxmldata_DATA =				\
+	artisan.xml				\
 	b500.xml				\
 	cd_cutter_roll_feed.xml			\
 	cd_roll_feed.xml			\
@@ -34,6 +35,7 @@ pkgxmldata_DATA =				\
 	pro_roll_feed.xml			\
 	r1800.xml				\
 	r2400.xml				\
+	rx680.xml				\
 	rx700.xml				\
 	spro5000.xml				\
 	standard_roll_feed.xml

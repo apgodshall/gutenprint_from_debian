@@ -1,3 +1,11 @@
+gutenprint (5.2.3-2) unstable; urgency=low
+
+  * debian/rules: Update build and build-stamp dependencies (it doesn't
+    matter if debian/control is changed when build is called).  This
+    is already taken care of through the autoconfigure-stamp dependency.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 21 Feb 2009 12:49:23 +0000
+
 gutenprint (5.2.3-1) experimental; urgency=low
 
   [ Roger Leigh ]

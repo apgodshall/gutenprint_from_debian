@@ -62,7 +62,7 @@ debian/autoconfigure-stamp: debian/control
 	touch $@
 
 
-build: debian/build-stamp debian/control
+build: debian/build-stamp
 debian/build-stamp: patch debian/autoconfigure-stamp
 	dh_testdir
 

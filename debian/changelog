@@ -1,3 +1,10 @@
+gutenprint (5.2.3-3) unstable; urgency=low
+
+  * debian/control: cups-driver-gutenprint: Depend on cups-client since
+    lpadmin and lpstat are used during postinst (Closes: #532880).
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 13 Jun 2009 10:43:09 +0100
+
 gutenprint (5.2.3-2) unstable; urgency=low
 
   * debian/rules: Update build and build-stamp dependencies (it doesn't

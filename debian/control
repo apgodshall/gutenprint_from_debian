@@ -26,7 +26,7 @@ Description: print plugin for the GIMP
 Package: cups-driver-gutenprint
 Architecture: any
 Section: graphics
-Depends: ${shlibs:Depends}, perl (>= 5.8.0), cups (>= 1.3.0), cups-client (>= 1.3.0)
+Depends: ${shlibs:Depends}, perl (>= 5.8.0), cups (>= 1.3.0), cups-client (>= 1.3.0), ghostscript-cups
 Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
 Conflicts: cupsys-driver-gutenprint
 Replaces: cupsys-driver-gutenprint

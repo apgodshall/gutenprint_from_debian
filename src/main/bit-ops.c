@@ -1,5 +1,5 @@
 /*
- * "$Id: bit-ops.c,v 1.12 2007/03/08 13:34:27 faust3 Exp $"
+ * "$Id: bit-ops.c,v 1.14 2009/06/07 15:21:22 rlk Exp $"
  *
  *   Softweave calculator for Gutenprint.
  *
@@ -49,7 +49,7 @@ stp_fold(const unsigned char *line,
       unsigned char l1 = line[single_length];
       if (l0 || l1)
 	{
-	  outbuf[0] =
+	  outbuf[0] =		/* B7 A7 B6 A6 B5 A5 B4 A4 */
 	    ((l0 & (1 << 7)) >> 1) +
 	    ((l0 & (1 << 6)) >> 2) +
 	    ((l0 & (1 << 5)) >> 3) +
@@ -58,7 +58,7 @@ stp_fold(const unsigned char *line,
 	    ((l1 & (1 << 6)) >> 1) +
 	    ((l1 & (1 << 5)) >> 2) +
 	    ((l1 & (1 << 4)) >> 3);
-	  outbuf[1] =
+	  outbuf[1] =		/* B3 A3 B2 A2 B1 A1 B0 A0 */
 	    ((l0 & (1 << 3)) << 3) +
 	    ((l0 & (1 << 2)) << 2) +
 	    ((l0 & (1 << 1)) << 1) +
@@ -80,34 +80,41 @@ stp_fold_3bit(const unsigned char *line,
 {
   int i;
   memset(outbuf, 0, single_length * 3);
-  for (i = 0; i < single_length; i++) {
-    outbuf[0] =
-      ((line[0] & (1 << 7)) >> 2) |
-      ((line[0] & (1 << 6)) >> 4) |
-      ((line[single_length] & (1 << 7)) >> 1) |
-      ((line[single_length] & (1 << 6)) >> 3) |
-      ((line[single_length] & (1 << 5)) >> 5) |
-      ((line[2*single_length] & (1 << 7)) << 0) |
-      ((line[2*single_length] & (1 << 6)) >> 2) |
-      ((line[2*single_length] & (1 << 5)) >> 4);
-    outbuf[1] =
-      ((line[0] & (1 << 5)) << 2) |
-      ((line[0] & (1 << 4)) << 0) |
-      ((line[0] & (1 << 3)) >> 2) |
-      ((line[single_length] & (1 << 4)) << 1) |
-      ((line[single_length] & (1 << 3)) >> 1) |
-      ((line[2*single_length] & (1 << 4)) << 2) |
-      ((line[2*single_length] & (1 << 3)) << 0) |
-      ((line[2*single_length] & (1 << 2)) >> 2);
-    outbuf[2] =
-      ((line[0] & (1 << 2)) << 4) |
-      ((line[0] & (1 << 1)) << 2) |
-      ((line[0] & (1 << 0)) << 0) |
-      ((line[single_length] & (1 << 2)) << 5) |
-      ((line[single_length] & (1 << 1)) << 3) |
-      ((line[single_length] & (1 << 0)) << 1) |
-      ((line[2*single_length] & (1 << 1)) << 4) |
-      ((line[2*single_length] & (1 << 0)) << 2);
+  for (i = 0; i < single_length; i++)
+    {
+      unsigned char l0 = line[0];
+      unsigned char l1 = line[single_length];
+      unsigned char l2 = line[single_length * 2];
+      if (l0 || l1 || l2)
+	{
+	  outbuf[0] =		/* C7 B7 A7 C6 B6 A6 C5 B5  */
+	    ((l0 & (1 << 7)) >> 2) |
+	    ((l0 & (1 << 6)) >> 4) |
+	    ((l1 & (1 << 7)) >> 1) |
+	    ((l1 & (1 << 6)) >> 3) |
+	    ((l1 & (1 << 5)) >> 5) |
+	    ((l2 & (1 << 7)) << 0) |
+	    ((l2 & (1 << 6)) >> 2) |
+	    ((l2 & (1 << 5)) >> 4);
+	  outbuf[1] =		/* A5 C4 B4 A4 C3 B3 A3 C2 */
+	    ((l0 & (1 << 5)) << 2) |
+	    ((l0 & (1 << 4)) << 0) |
+	    ((l0 & (1 << 3)) >> 2) |
+	    ((l1 & (1 << 4)) << 1) |
+	    ((l1 & (1 << 3)) >> 1) |
+	    ((l2 & (1 << 4)) << 2) |
+	    ((l2 & (1 << 3)) << 0) |
+	    ((l2 & (1 << 2)) >> 2);
+	  outbuf[2] =		/* B2 A2 C1 B1 A1 C0 B0 A0 */
+	    ((l0 & (1 << 2)) << 4) |
+	    ((l0 & (1 << 1)) << 2) |
+	    ((l0 & (1 << 0)) << 0) |
+	    ((l1 & (1 << 2)) << 5) |
+	    ((l1 & (1 << 1)) << 3) |
+	    ((l1 & (1 << 0)) << 1) |
+	    ((l2 & (1 << 1)) << 4) |
+	    ((l2 & (1 << 0)) << 2);
+	}
     line++;
     outbuf += 3;
   }
@@ -115,100 +122,101 @@ stp_fold_3bit(const unsigned char *line,
 
 void
 stp_fold_3bit_323(const unsigned char *line,
-		int single_length,
-		unsigned char *outbuf)
+		  int single_length,
+		  unsigned char *outbuf)
 {
-  unsigned char A0,A1,A2,B0,B1,B2,C0,C1,C2;
-  const unsigned char *last= line+single_length;
+  const unsigned char *last= line + single_length;
   memset(outbuf, 0, single_length * 3);
-  for (; line < last; line+=3, outbuf+=8) {
+  for (; line < last; line += 3)
+    {
+      unsigned char A0 = line[0];
+      unsigned char B0 = line[single_length];
+      unsigned char C0 = line[2*single_length];
+      unsigned char A1 = (line < last - 2) ? line[1] : 0;
+      unsigned char B1 = (line < last - 2) ? line[single_length + 1] : 0;
+      unsigned char C1 = (line < last - 2) ? line[(single_length * 2) + 1] : 0;
+      unsigned char A2 = (line < last - 1) ? line[2] : 0;
+      unsigned char B2 = (line < last - 1) ? line[single_length + 2] : 0;
+      unsigned char C2 = (line < last - 1) ? line[(single_length * 2) + 2] : 0;
 
-    A0= line[0]; B0= line[single_length]; C0= line[2*single_length];
-
-    if (line<last-2) {
-      A1= line[1]; B1= line[single_length+1]; C1= line[2*single_length+1];
-    } else {
-      A1= 0; B1= 0; C1= 0;
+      if (A0 || A1 || A2 || B0 || B1 || B2 || C0 || C1 || C2)
+	{
+	  /* Missing: C0_6, C0_3, C0_0, C1_5, C1_2, C2_7, C2_4, C2_1 ??? */
+	  outbuf[0] =		/* C0_7 B0_7 A0_7 B0_6 A0_6 C0_5 B0_5 A0_5 */
+	    ((C0 & (1 << 7)) >> 0) |
+	    ((B0 & (1 << 7)) >> 1) |
+	    ((A0 & (1 << 7)) >> 2) |
+	    ((B0 & (1 << 6)) >> 2) |
+	    ((A0 & (1 << 6)) >> 3) |
+	    ((C0 & (1 << 5)) >> 3) |
+	    ((B0 & (1 << 5)) >> 4) |
+	    ((A0 & (1 << 5)) >> 5);
+	  outbuf[1] =		/* C0_4 B0_4 A0_4 B0_3 A0_3 C0_2 B0_2 A0_2 */
+	    ((C0 & (1 << 4)) << 3) |
+	    ((B0 & (1 << 4)) << 2) |
+	    ((A0 & (1 << 4)) << 1) |
+	    ((B0 & (1 << 3)) << 1) |
+	    ((A0 & (1 << 3)) << 0) |
+	    ((C0 & (1 << 2)) >> 0) |
+	    ((B0 & (1 << 2)) >> 1) |
+	    ((A0 & (1 << 2)) >> 2);
+	  outbuf[2] =		/* C0_1 B0_1 A0_1 B0_0 A0_0 C1_7 B1_7 A1_7 */
+	    ((C0 & (1 << 1)) << 6) |
+	    ((B0 & (1 << 1)) << 5) |
+	    ((A0 & (1 << 1)) << 4) |
+	    ((B0 & (1 << 0)) << 4) |
+	    ((A0 & (1 << 0)) << 3) |
+	    ((C1 & (1 << 7)) >> 5) |
+	    ((B1 & (1 << 7)) >> 6) |
+	    ((A1 & (1 << 7)) >> 7);
+	  outbuf[3] =		/* C1_6 B1_6 A1_6 B1_5 A1_5 C1_4 B1_4 A1_4 */
+	    ((C1 & (1 << 6)) << 1) |
+	    ((B1 & (1 << 6)) << 0) |
+	    ((A1 & (1 << 6)) >> 1) |
+	    ((B1 & (1 << 5)) >> 1) |
+	    ((A1 & (1 << 5)) >> 2) |
+	    ((C1 & (1 << 4)) >> 2) |
+	    ((B1 & (1 << 4)) >> 3) |
+	    ((A1 & (1 << 4)) >> 4);
+	  outbuf[4] =		/* C1_3 B1_3 A1_3 B1_2 A1_2 C1_1 B1_1 A1_1 */
+	    ((C1 & (1 << 3)) << 4) |
+	    ((B1 & (1 << 3)) << 3) |
+	    ((A1 & (1 << 3)) << 2) |
+	    ((B1 & (1 << 2)) << 2) |
+	    ((A1 & (1 << 2)) << 1) |
+	    ((C1 & (1 << 1)) << 1) |
+	    ((B1 & (1 << 1)) >> 0) |
+	    ((A1 & (1 << 1)) >> 1);
+	  outbuf[5] =		/* C1_0 B1_0 A1_0 B2_7 A2_7 C2_6 B2_6 A2_6 */
+	    ((C1 & (1 << 0)) << 7) |
+	    ((B1 & (1 << 0)) << 6) |
+	    ((A1 & (1 << 0)) << 5) |
+	    ((B2 & (1 << 7)) >> 3) |
+	    ((A2 & (1 << 7)) >> 4) |
+	    ((C2 & (1 << 6)) >> 4) |
+	    ((B2 & (1 << 6)) >> 5) |
+	    ((A2 & (1 << 6)) >> 6);
+	  outbuf[6] =		/* C2_5 B2_5 A2_5 B2_4 A2_4 C2_3 B2_3 A2_3 */
+	    ((C2 & (1 << 5)) << 2) |
+	    ((B2 & (1 << 5)) << 1) |
+	    ((A2 & (1 << 5)) << 0) |
+	    ((B2 & (1 << 4)) >> 0) |
+	    ((A2 & (1 << 4)) >> 1) |
+	    ((C2 & (1 << 3)) >> 1) |
+	    ((B2 & (1 << 3)) >> 2) |
+	    ((A2 & (1 << 3)) >> 3);
+	  outbuf[7] =		/* C2_2 B2_2 A2_2 B2_1 A2_1 C2_0 B2_0 A2_0 */
+	    ((C2 & (1 << 2)) << 5) |
+	    ((B2 & (1 << 2)) << 4) |
+	    ((A2 & (1 << 2)) << 3) |
+	    ((B2 & (1 << 1)) << 3) |
+	    ((A2 & (1 << 1)) << 2) |
+	    ((C2 & (1 << 0)) << 2) |
+	    ((B2 & (1 << 0)) << 1) |
+	    ((A2 & (1 << 0)) << 0);
+	}
+      outbuf += 8;
     }
-    if (line<last-1) {
-      A2= line[2]; B2= line[single_length+2]; C2= line[2*single_length+2];
-    } else {
-      A2= 0; B2= 0; C2= 0;
-    }
-
-    outbuf[0] =
-      ((C0 & 0x80) >> 0) |
-      ((B0 & 0x80) >> 1) |
-      ((A0 & 0x80) >> 2) |
-      ((B0 & 0x40) >> 2) |
-      ((A0 & 0x40) >> 3) |
-      ((C0 & 0x20) >> 3) |
-      ((B0 & 0x20) >> 4) |
-      ((A0 & 0x20) >> 5);
-    outbuf[1] =
-      ((C0 & 0x10) << 3) |
-      ((B0 & 0x10) << 2) |
-      ((A0 & 0x10) << 1) |
-      ((B0 & 0x08) << 1) |
-      ((A0 & 0x08) << 0) |
-      ((C0 & 0x04) >> 0) |
-      ((B0 & 0x04) >> 1) |
-      ((A0 & 0x04) >> 2);
-    outbuf[2] =
-      ((C0 & 0x02) << 6) |
-      ((B0 & 0x02) << 5) |
-      ((A0 & 0x02) << 4) |
-      ((B0 & 0x01) << 4) |
-      ((A0 & 0x01) << 3) |
-      ((C1 & 0x80) >> 5) |
-      ((B1 & 0x80) >> 6) |
-      ((A1 & 0x80) >> 7);
-    outbuf[3] =
-      ((C1 & 0x40) << 1) |
-      ((B1 & 0x40) << 0) |
-      ((A1 & 0x40) >> 1) |
-      ((B1 & 0x20) >> 1) |
-      ((A1 & 0x20) >> 2) |
-      ((C1 & 0x10) >> 2) |
-      ((B1 & 0x10) >> 3) |
-      ((A1 & 0x10) >> 4);
-    outbuf[4] =
-      ((C1 & 0x08) << 4) |
-      ((B1 & 0x08) << 3) |
-      ((A1 & 0x08) << 2) |
-      ((B1 & 0x04) << 2) |
-      ((A1 & 0x04) << 1) |
-      ((C1 & 0x02) << 1) |
-      ((B1 & 0x02) >> 0) |
-      ((A1 & 0x02) >> 1);
-    outbuf[5] =
-      ((C1 & 0x01) << 7) |
-      ((B1 & 0x01) << 6) |
-      ((A1 & 0x01) << 5) |
-      ((B2 & 0x80) >> 3) |
-      ((A2 & 0x80) >> 4) |
-      ((C2 & 0x40) >> 4) |
-      ((B2 & 0x40) >> 5) |
-      ((A2 & 0x40) >> 6);
-    outbuf[6] =
-      ((C2 & 0x20) << 2) |
-      ((B2 & 0x20) << 1) |
-      ((A2 & 0x20) << 0) |
-      ((B2 & 0x10) >> 0) |
-      ((A2 & 0x10) >> 1) |
-      ((C2 & 0x08) >> 1) |
-      ((B2 & 0x08) >> 2) |
-      ((A2 & 0x08) >> 3);
-    outbuf[7] =
-      ((C2 & 0x04) << 5) |
-      ((B2 & 0x04) << 4) |
-      ((A2 & 0x04) << 3) |
-      ((B2 & 0x02) << 3) |
-      ((A2 & 0x02) << 2) |
-      ((C2 & 0x01) << 2) |
-      ((B2 & 0x01) << 1) |
-      ((A2 & 0x01) << 0);
-  }
 }
 
 void
@@ -218,158 +226,120 @@ stp_fold_4bit(const unsigned char *line,
 {
   int i;
   memset(outbuf, 0, single_length * 4);
-  for (i = 0; i < single_length; i++){
-    unsigned char l0 = line[0];
-    unsigned char l1 = line[single_length];
-    unsigned char l2 = line[single_length*2];
-    unsigned char l3 = line[single_length*3];
-    if(l0 || l1 || l2 || l3){
-      outbuf[0] =
-            ((l3 & (1<<7)) >> 0)|
-            ((l2 & (1<<7)) >> 1)|
-            ((l1 & (1<<7)) >> 2)|
-            ((l0 & (1<<7)) >> 3)|
-            ((l3 & (1<<6)) >> 3)|
-            ((l2 & (1<<6)) >> 4)|
-            ((l1 & (1<<6)) >> 5)|
-            ((l0 & (1<<6)) >> 6);
+  for (i = 0; i < single_length; i++)
+    {
+      unsigned char l0 = line[0];
+      unsigned char l1 = line[single_length];
+      unsigned char l2 = line[single_length*2];
+      unsigned char l3 = line[single_length*3];
+      if (l0 || l1 || l2 || l3)
+	{
+	  outbuf[0] =		/* D7 C7 B7 A7 D6 C6 B6 A6 */
+            ((l3 & (1 << 7)) >> 0)|
+            ((l2 & (1 << 7)) >> 1)|
+            ((l1 & (1 << 7)) >> 2)|
+            ((l0 & (1 << 7)) >> 3)|
+            ((l3 & (1 << 6)) >> 3)|
+            ((l2 & (1 << 6)) >> 4)|
+            ((l1 & (1 << 6)) >> 5)|
+            ((l0 & (1 << 6)) >> 6);
 
-      outbuf[1] =
-            ((l3 & (1<<5)) << 2)|
-            ((l2 & (1<<5)) << 1)|
-            ((l1 & (1<<5)) << 0)|
-            ((l0 & (1<<5)) >> 1)|
-            ((l3 & (1<<4)) >> 1)|
-            ((l2 & (1<<4)) >> 2)|
-            ((l1 & (1<<4)) >> 3)|
-            ((l0 & (1<<4)) >> 4);
+	  outbuf[1] =		/* D5 C5 B5 A5 D4 C4 B4 A4 */
+            ((l3 & (1 << 5)) << 2)|
+            ((l2 & (1 << 5)) << 1)|
+            ((l1 & (1 << 5)) << 0)|
+            ((l0 & (1 << 5)) >> 1)|
+            ((l3 & (1 << 4)) >> 1)|
+            ((l2 & (1 << 4)) >> 2)|
+            ((l1 & (1 << 4)) >> 3)|
+            ((l0 & (1 << 4)) >> 4);
 
-       outbuf[2] =
-            ((l3 & (1<<3)) << 4)|
-            ((l2 & (1<<3)) << 3)|
-            ((l1 & (1<<3)) << 2)|
-            ((l0 & (1<<3)) << 1)|
-            ((l3 & (1<<2)) << 1)|
-            ((l2 & (1<<2)) << 0)|
-            ((l1 & (1<<2)) >> 1)|
-            ((l0 & (1<<2)) >> 2);
-       outbuf[3] =
-            ((l3 & (1<<1)) << 6)|
-            ((l2 & (1<<1)) << 5)|
-            ((l1 & (1<<1)) << 4)|
-            ((l0 & (1<<1)) << 3)|
-            ((l3 & (1<<0)) << 3)|
-            ((l2 & (1<<0)) << 2)|
-            ((l1 & (1<<0)) << 1)|
-            ((l0 & (1<<0)) << 0);
+	  outbuf[2] =		/* D3 C3 B3 A3 D2 C2 B2 A2 */
+            ((l3 & (1 << 3)) << 4)|
+            ((l2 & (1 << 3)) << 3)|
+            ((l1 & (1 << 3)) << 2)|
+            ((l0 & (1 << 3)) << 1)|
+            ((l3 & (1 << 2)) << 1)|
+            ((l2 & (1 << 2)) << 0)|
+            ((l1 & (1 << 2)) >> 1)|
+            ((l0 & (1 << 2)) >> 2);
+
+	  outbuf[3] =		/* D1 C1 B1 A1 D0 C0 B0 A0 */
+            ((l3 & (1 << 1)) << 6)|
+            ((l2 & (1 << 1)) << 5)|
+            ((l1 & (1 << 1)) << 4)|
+            ((l0 & (1 << 1)) << 3)|
+            ((l3 & (1 << 0)) << 3)|
+            ((l2 & (1 << 0)) << 2)|
+            ((l1 & (1 << 0)) << 1)|
+            ((l0 & (1 << 0)) << 0);
+	}
+      line++;
+      outbuf += 4;
     }
-    line++;
-    outbuf += 4;
-  }
 }
 
-static void
-stpi_split_2_1(int length,
-	       const unsigned char *in,
-	       unsigned char *outhi,
-	       unsigned char *outlo)
+#define SPLIT_MASK(k, b) (((1 << (b)) - 1) << ((k) * (b)))
+
+#define SPLIT_STEP(k, b, i, o, in, r, inc, rl)	\
+do						\
+  {						\
+    if (in & SPLIT_MASK(k, b))			\
+      {						\
+	o[r][i] |= SPLIT_MASK(k, b) & in;	\
+	r += inc;				\
+	if (r >= rl)				\
+	  r = 0;				\
+      }						\
+  } while (0)
+
+void
+stp_split(int length,
+	  int bits,
+	  int n,
+	  const unsigned char *in,
+	  int increment,
+	  unsigned char **outs)
 {
-  unsigned char *outs[2];
-  int i;
   int row = 0;
-  int limit = length;
-  outs[0] = outhi;
-  outs[1] = outlo;
-  memset(outs[1], 0, limit);
-  for (i = 0; i < limit; i++)
+  int limit = length * bits;
+  int rlimit = n * increment;
+  int i;
+  for (i = 1; i < n; i++)
+    memset(outs[i * increment], 0, limit);
+
+  if (bits == 1)
     {
-      unsigned char inbyte = in[i];
-      outs[0][i] = 0;
-      if (inbyte == 0)
-	continue;
-      /* For some reason gcc isn't unrolling this, even with -funroll-loops */
-      if (inbyte & 1)
+      for (i = 0; i < limit; i++)
 	{
-	  outs[row][i] |= 1 & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 1))
-	{
-	  outs[row][i] |= (1 << 1) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 2))
-	{
-	  outs[row][i] |= (1 << 2) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 3))
-	{
-	  outs[row][i] |= (1 << 3) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 4))
-	{
-	  outs[row][i] |= (1 << 4) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 5))
-	{
-	  outs[row][i] |= (1 << 5) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 6))
-	{
-	  outs[row][i] |= (1 << 6) & inbyte;
-	  row = row ^ 1;
-	}
-      if (inbyte & (1 << 7))
-	{
-	  outs[row][i] |= (1 << 7) & inbyte;
-	  row = row ^ 1;
+	  unsigned char inbyte = in[i];
+	  outs[0][i] = 0;
+	  if (inbyte == 0)
+	    continue;
+	  /* For some reason gcc isn't unrolling this, even with -funroll-loops */
+	  SPLIT_STEP(0, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(1, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(2, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(3, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(4, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(5, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(6, 1, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(7, 1, i, outs, inbyte, row, increment, rlimit);
 	}
     }
-}
-
-static void
-stp_split_2_2(int length,
-	      const unsigned char *in,
-	      unsigned char *outhi,
-	      unsigned char *outlo)
-{
-  unsigned char *outs[2];
-  int i;
-  unsigned row = 0;
-  int limit = length * 2;
-  outs[0] = outhi;
-  outs[1] = outlo;
-  memset(outs[1], 0, limit);
-  for (i = 0; i < limit; i++)
+  else
     {
-      unsigned char inbyte = in[i];
-      outs[0][i] = 0;
-      if (inbyte == 0)
-	continue;
-      /* For some reason gcc isn't unrolling this, even with -funroll-loops */
-      if (inbyte & 3)
+      for (i = 0; i < limit; i++)
 	{
-	  outs[row][i] |= (3 & inbyte);
-	  row = row ^ 1;
-	}
-      if (inbyte & (3 << 2))
-	{
-	  outs[row][i] |= ((3 << 2) & inbyte);
-	  row = row ^ 1;
-	}
-      if (inbyte & (3 << 4))
-	{
-	  outs[row][i] |= ((3 << 4) & inbyte);
-	  row = row ^ 1;
-	}
-      if (inbyte & (3 << 6))
-	{
-	  outs[row][i] |= ((3 << 6) & inbyte);
-	  row = row ^ 1;
+	  unsigned char inbyte = in[i];
+	  outs[0][i] = 0;
+	  if (inbyte == 0)
+	    continue;
+	  /* For some reason gcc isn't unrolling this, even with -funroll-loops */
+	  SPLIT_STEP(0, 2, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(1, 2, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(2, 2, i, outs, inbyte, row, increment, rlimit);
+	  SPLIT_STEP(3, 2, i, outs, inbyte, row, increment, rlimit);
 	}
     }
 }
@@ -381,128 +351,10 @@ stp_split_2(int length,
 	    unsigned char *outhi,
 	    unsigned char *outlo)
 {
-  if (bits == 2)
-    stp_split_2_2(length, in, outhi, outlo);
-  else
-    stpi_split_2_1(length, in, outhi, outlo);
-}
-
-static void
-stpi_split_4_1(int length,
-	       const unsigned char *in,
-	       unsigned char *out0,
-	       unsigned char *out1,
-	       unsigned char *out2,
-	       unsigned char *out3)
-{
-  unsigned char *outs[4];
-  int i;
-  int row = 0;
-  int limit = length;
-  outs[0] = out0;
-  outs[1] = out1;
-  outs[2] = out2;
-  outs[3] = out3;
-  memset(outs[1], 0, limit);
-  memset(outs[2], 0, limit);
-  memset(outs[3], 0, limit);
-  for (i = 0; i < limit; i++)
-    {
-      unsigned char inbyte = in[i];
-      outs[0][i] = 0;
-      if (inbyte == 0)
-	continue;
-      /* For some reason gcc isn't unrolling this, even with -funroll-loops */
-      if (inbyte & 1)
-	{
-	  outs[row][i] |= 1 & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 1))
-	{
-	  outs[row][i] |= (1 << 1) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 2))
-	{
-	  outs[row][i] |= (1 << 2) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 3))
-	{
-	  outs[row][i] |= (1 << 3) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 4))
-	{
-	  outs[row][i] |= (1 << 4) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 5))
-	{
-	  outs[row][i] |= (1 << 5) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 6))
-	{
-	  outs[row][i] |= (1 << 6) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (1 << 7))
-	{
-	  outs[row][i] |= (1 << 7) & inbyte;
-	  row = (row + 1) & 3;
-	}
-    }
-}
-
-static void
-stpi_split_4_2(int length,
-	       const unsigned char *in,
-	       unsigned char *out0,
-	       unsigned char *out1,
-	       unsigned char *out2,
-	       unsigned char *out3)
-{
-  unsigned char *outs[4];
-  int i;
-  int row = 0;
-  int limit = length * 2;
-  outs[0] = out0;
-  outs[1] = out1;
-  outs[2] = out2;
-  outs[3] = out3;
-  memset(outs[1], 0, limit);
-  memset(outs[2], 0, limit);
-  memset(outs[3], 0, limit);
-  for (i = 0; i < limit; i++)
-    {
-      unsigned char inbyte = in[i];
-      outs[0][i] = 0;
-      if (inbyte == 0)
-	continue;
-      /* For some reason gcc isn't unrolling this, even with -funroll-loops */
-      if (inbyte & 3)
-	{
-	  outs[row][i] |= 3 & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (3 << 2))
-	{
-	  outs[row][i] |= (3 << 2) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (3 << 4))
-	{
-	  outs[row][i] |= (3 << 4) & inbyte;
-	  row = (row + 1) & 3;
-	}
-      if (inbyte & (3 << 6))
-	{
-	  outs[row][i] |= (3 << 6) & inbyte;
-	  row = (row + 1) & 3;
-	}
-    }
+  unsigned char *outs[2];
+  outs[0] = outhi;
+  outs[1] = outlo;
+  stp_split(length, bits, 2, in, 1, outs);
 }
 
 void
@@ -514,26 +366,19 @@ stp_split_4(int length,
 	    unsigned char *out2,
 	    unsigned char *out3)
 {
-  if (bits == 2)
-    stpi_split_4_2(length, in, out0, out1, out2, out3);
-  else
-    stpi_split_4_1(length, in, out0, out1, out2, out3);
+  unsigned char *outs[4];
+  outs[0] = out0;
+  outs[1] = out1;
+  outs[2] = out2;
+  outs[3] = out3;
+  stp_split(length, bits, 4, in, 1, outs);
 }
 
-
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-#define SH20 0
-#define SH21 8
-#else
-#define SH20 8
-#define SH21 0
-#endif
 
 static void
 stpi_unpack_2_1(int length,
 		const unsigned char *in,
-		unsigned char *out0,
-		unsigned char *out1)
+		unsigned char **outs)
 {
   unsigned char	tempin, bit, temp0, temp1;
 
@@ -570,8 +415,8 @@ stpi_unpack_2_1(int length,
       else
       {
         bit     = 128;
-	*out0++ = temp0;
-	*out1++ = temp1;
+	*outs[0]++ = temp0;
+	*outs[1]++ = temp1;
 
 	temp0   = 0;
 	temp1   = 0;
@@ -580,16 +425,15 @@ stpi_unpack_2_1(int length,
 
   if (bit < 128)
     {
-      *out0++ = temp0;
-      *out1++ = temp1;
+      *outs[0]++ = temp0;
+      *outs[1]++ = temp1;
     }
 }
 
 static void
 stpi_unpack_2_2(int length,
-	       const unsigned char *in,
-	       unsigned char *out0,
-	       unsigned char *out1)
+		const unsigned char *in,
+		unsigned char **outs)
 {
   if (length <= 0)
     return;
@@ -600,11 +444,11 @@ stpi_unpack_2_2(int length,
       ti0 = in[0];
       ti1 = in[1];
 
-      *out0++  = (ti0 & 0xc0) << 0
+      *outs[0]++  = (ti0 & 0xc0) << 0
 	| (ti0 & 0x0c) << 2
 	| (ti1 & 0xc0) >> 4
 	| (ti1 & 0x0c) >> 2;
-      *out1++  = (ti0 & 0x30) << 2
+      *outs[1]++  = (ti0 & 0x30) << 2
 	| (ti0 & 0x03) << 4
 	| (ti1 & 0x30) >> 2
 	| (ti1 & 0x03) >> 0;
@@ -612,38 +456,10 @@ stpi_unpack_2_2(int length,
     }
 }
 
-void
-stp_unpack_2(int length,
-	     int bits,
-	     const unsigned char *in,
-	     unsigned char *outlo,
-	     unsigned char *outhi)
-{
-  if (bits == 1)
-    stpi_unpack_2_1(length, in, outlo, outhi);
-  else
-    stpi_unpack_2_2(length, in, outlo, outhi);
-}
-
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-#define SH40 0
-#define SH41 8
-#define SH42 16
-#define SH43 24
-#else
-#define SH40 24
-#define SH41 16
-#define SH42 8
-#define SH43 0
-#endif
-
 static void
 stpi_unpack_4_1(int length,
 		 const unsigned char *in,
-		 unsigned char *out0,
-		 unsigned char *out1,
-		 unsigned char *out2,
-		 unsigned char *out3)
+		 unsigned char **outs)
 {
   unsigned char	tempin, bit, temp0, temp1, temp2, temp3;
 
@@ -678,10 +494,10 @@ stpi_unpack_4_1(int length,
       else
       {
         bit     = 128;
-	*out0++ = temp0;
-	*out1++ = temp1;
-	*out2++ = temp2;
-	*out3++ = temp3;
+	*outs[0]++ = temp0;
+	*outs[1]++ = temp1;
+	*outs[2]++ = temp2;
+	*outs[3]++ = temp3;
 
 	temp0   = 0;
 	temp1   = 0;
@@ -692,20 +508,17 @@ stpi_unpack_4_1(int length,
 
   if (bit < 128)
     {
-      *out0++ = temp0;
-      *out1++ = temp1;
-      *out2++ = temp2;
-      *out3++ = temp3;
+      *outs[0]++ = temp0;
+      *outs[1]++ = temp1;
+      *outs[2]++ = temp2;
+      *outs[3]++ = temp3;
     }
 }
 
 static void
 stpi_unpack_4_2(int length,
 		 const unsigned char *in,
-		 unsigned char *out0,
-		 unsigned char *out1,
-		 unsigned char *out2,
-		 unsigned char *out3)
+		 unsigned char **outs)
 {
   unsigned char	tempin,
 		shift,
@@ -741,10 +554,10 @@ stpi_unpack_4_2(int length,
       else
       {
         shift   = 0;
-	*out0++ = temp0;
-	*out1++ = temp1;
-	*out2++ = temp2;
-	*out3++ = temp3;
+	*outs[0]++ = temp0;
+	*outs[1]++ = temp1;
+	*outs[2]++ = temp2;
+	*outs[3]++ = temp3;
 
 	temp0   = 0;
 	temp1   = 0;
@@ -755,39 +568,17 @@ stpi_unpack_4_2(int length,
 
   if (shift)
     {
-      *out0++ = temp0;
-      *out1++ = temp1;
-      *out2++ = temp2;
-      *out3++ = temp3;
+      *outs[0]++ = temp0;
+      *outs[1]++ = temp1;
+      *outs[2]++ = temp2;
+      *outs[3]++ = temp3;
     }
-}
-
-void
-stp_unpack_4(int length,
-	     int bits,
-	     const unsigned char *in,
-	     unsigned char *out0,
-	     unsigned char *out1,
-	     unsigned char *out2,
-	     unsigned char *out3)
-{
-  if (bits == 1)
-    stpi_unpack_4_1(length, in, out0, out1, out2, out3);
-  else
-    stpi_unpack_4_2(length, in, out0, out1, out2, out3);
 }
 
 static void
 stpi_unpack_8_1(int length,
 		const unsigned char *in,
-		unsigned char *out0,
-		unsigned char *out1,
-		unsigned char *out2,
-		unsigned char *out3,
-		unsigned char *out4,
-		unsigned char *out5,
-		unsigned char *out6,
-		unsigned char *out7)
+		unsigned char **outs)
 {
   unsigned char	tempin, bit, temp0, temp1, temp2, temp3, temp4, temp5, temp6,
     temp7;
@@ -824,14 +615,14 @@ stpi_unpack_8_1(int length,
       else
       {
         bit     = 128;
-	*out0++ = temp0;
-	*out1++ = temp1;
-	*out2++ = temp2;
-	*out3++ = temp3;
-	*out4++ = temp4;
-	*out5++ = temp5;
-	*out6++ = temp6;
-	*out7++ = temp7;
+	*outs[0]++ = temp0;
+	*outs[1]++ = temp1;
+	*outs[2]++ = temp2;
+	*outs[3]++ = temp3;
+	*outs[4]++ = temp4;
+	*outs[5]++ = temp5;
+	*outs[6]++ = temp6;
+	*outs[7]++ = temp7;
 
 	temp0   = 0;
 	temp1   = 0;
@@ -846,28 +637,21 @@ stpi_unpack_8_1(int length,
 
   if (bit < 128)
     {
-      *out0++ = temp0;
-      *out1++ = temp1;
-      *out2++ = temp2;
-      *out3++ = temp3;
-      *out4++ = temp4;
-      *out5++ = temp5;
-      *out6++ = temp6;
-      *out7++ = temp7;
+      *outs[0]++ = temp0;
+      *outs[1]++ = temp1;
+      *outs[2]++ = temp2;
+      *outs[3]++ = temp3;
+      *outs[4]++ = temp4;
+      *outs[5]++ = temp5;
+      *outs[6]++ = temp6;
+      *outs[7]++ = temp7;
     }
 }
 
 static void
 stpi_unpack_8_2(int length,
 		const unsigned char *in,
-		unsigned char *out0,
-		unsigned char *out1,
-		unsigned char *out2,
-		unsigned char *out3,
-		unsigned char *out4,
-		unsigned char *out5,
-		unsigned char *out6,
-		unsigned char *out7)
+		unsigned char **outs)
 {
   unsigned char	tempin,
 		shift,
@@ -918,14 +702,14 @@ stpi_unpack_8_2(int length,
       else
       {
         shift   = 0;
-	*out0++ = temp0;
-	*out1++ = temp1;
-	*out2++ = temp2;
-	*out3++ = temp3;
-	*out4++ = temp4;
-	*out5++ = temp5;
-	*out6++ = temp6;
-	*out7++ = temp7;
+	*outs[0]++ = temp0;
+	*outs[1]++ = temp1;
+	*outs[2]++ = temp2;
+	*outs[3]++ = temp3;
+	*outs[4]++ = temp4;
+	*outs[5]++ = temp5;
+	*outs[6]++ = temp6;
+	*outs[7]++ = temp7;
 
 	temp0   = 0;
 	temp1   = 0;
@@ -940,61 +724,25 @@ stpi_unpack_8_2(int length,
 
   if (shift)
     {
-      *out0++ = temp0;
-      *out1++ = temp1;
-      *out2++ = temp2;
-      *out3++ = temp3;
-      *out4++ = temp4;
-      *out5++ = temp5;
-      *out6++ = temp6;
-      *out7++ = temp7;
+      *outs[0]++ = temp0;
+      *outs[1]++ = temp1;
+      *outs[2]++ = temp2;
+      *outs[3]++ = temp3;
+      *outs[4]++ = temp4;
+      *outs[5]++ = temp5;
+      *outs[6]++ = temp6;
+      *outs[7]++ = temp7;
     }
 }
-
-void
-stp_unpack_8(int length,
-	     int bits,
-	     const unsigned char *in,
-	     unsigned char *out0,
-	     unsigned char *out1,
-	     unsigned char *out2,
-	     unsigned char *out3,
-	     unsigned char *out4,
-	     unsigned char *out5,
-	     unsigned char *out6,
-	     unsigned char *out7)
-{
-  if (bits == 1)
-    stpi_unpack_8_1(length, in, out0, out1, out2, out3,
-		     out4, out5, out6, out7);
-  else
-    stpi_unpack_8_2(length, in, out0, out1, out2, out3,
-		     out4, out5, out6, out7);
-}
-
 
 static void
 stpi_unpack_16_1(int length,
 		 const unsigned char *in,
-		 unsigned char *out0,
-		 unsigned char *out1,
-		 unsigned char *out2,
-		 unsigned char *out3,
-		 unsigned char *out4,
-		 unsigned char *out5,
-		 unsigned char *out6,
-		 unsigned char *out7,
-		 unsigned char *out8,
-		 unsigned char *out9,
-		 unsigned char *out10,
-		 unsigned char *out11,
-		 unsigned char *out12,
-		 unsigned char *out13,
-		 unsigned char *out14,
-		 unsigned char *out15)
+		 unsigned char **outs)
 {
   unsigned char	tempin, bit;
   unsigned char temp[16];
+  int j;
 
   if (length <= 0)
     return;
@@ -1046,70 +794,26 @@ stpi_unpack_16_1(int length,
       else
 	{
 	  bit     = 128;
-	  *out0++ = temp[0];
-	  *out1++ = temp[1];
-	  *out2++ = temp[2];
-	  *out3++ = temp[3];
-	  *out4++ = temp[4];
-	  *out5++ = temp[5];
-	  *out6++ = temp[6];
-	  *out7++ = temp[7];
-	  *out8++ = temp[8];
-	  *out9++ = temp[9];
-	  *out10++ = temp[10];
-	  *out11++ = temp[11];
-	  *out12++ = temp[12];
-	  *out13++ = temp[13];
-	  *out14++ = temp[14];
-	  *out15++ = temp[15];
+	  for (j = 0; j < 16; j++)
+	    *outs[j]++ = temp[j];
 
 	  memset(temp, 0, 16);
 	}
     }
 
   if (bit < 128)
-    {
-      *out0++ = temp[0];
-      *out1++ = temp[1];
-      *out2++ = temp[2];
-      *out3++ = temp[3];
-      *out4++ = temp[4];
-      *out5++ = temp[5];
-      *out6++ = temp[6];
-      *out7++ = temp[7];
-      *out8++ = temp[8];
-      *out9++ = temp[9];
-      *out10++ = temp[10];
-      *out11++ = temp[11];
-      *out12++ = temp[12];
-      *out13++ = temp[13];
-      *out14++ = temp[14];
-      *out15++ = temp[15];
-    }
+    for (j = 0; j < 16; j++)
+      *outs[j]++ = temp[j];
 }
 
 static void
 stpi_unpack_16_2(int length,
 		 const unsigned char *in,
-		 unsigned char *out0,
-		 unsigned char *out1,
-		 unsigned char *out2,
-		 unsigned char *out3,
-		 unsigned char *out4,
-		 unsigned char *out5,
-		 unsigned char *out6,
-		 unsigned char *out7,
-		 unsigned char *out8,
-		 unsigned char *out9,
-		 unsigned char *out10,
-		 unsigned char *out11,
-		 unsigned char *out12,
-		 unsigned char *out13,
-		 unsigned char *out14,
-		 unsigned char *out15)
+		 unsigned char **outs)
 {
   unsigned char	tempin, shift;
   unsigned char temp[16];
+  int j;
 
   if (length <= 0)
     return;
@@ -1175,46 +879,120 @@ stpi_unpack_16_2(int length,
       else
 	{
 	  shift   = 0;
-	  *out0++ = temp[0];
-	  *out1++ = temp[1];
-	  *out2++ = temp[2];
-	  *out3++ = temp[3];
-	  *out4++ = temp[4];
-	  *out5++ = temp[5];
-	  *out6++ = temp[6];
-	  *out7++ = temp[7];
-	  *out8++ = temp[8];
-	  *out9++ = temp[9];
-	  *out10++ = temp[10];
-	  *out11++ = temp[11];
-	  *out12++ = temp[12];
-	  *out13++ = temp[13];
-	  *out14++ = temp[14];
-	  *out15++ = temp[15];
+	  for (j = 0; j < 16; j++)
+	    *outs[j]++ = temp[j];
 
 	  memset(temp, 0, 16);
 	}
     }
 
   if (shift)
-    {
-      *out0++ = temp[0];
-      *out1++ = temp[1];
-      *out2++ = temp[2];
-      *out3++ = temp[3];
-      *out4++ = temp[4];
-      *out5++ = temp[5];
-      *out6++ = temp[6];
-      *out7++ = temp[7];
-      *out8++ = temp[8];
-      *out9++ = temp[9];
-      *out10++ = temp[10];
-      *out11++ = temp[11];
-      *out12++ = temp[12];
-      *out13++ = temp[13];
-      *out14++ = temp[14];
-      *out15++ = temp[15];
-    }
+    for (j = 0; j < 16; j++)
+      *outs[j]++ = temp[j];
+}
+
+void
+stp_unpack(int length,
+	   int bits,
+	   int n,
+	   const unsigned char *in,
+	   unsigned char **outs)
+{
+  unsigned char **touts;
+  int i;
+  if (n < 2)
+    return;
+  touts = stp_malloc(sizeof(unsigned char *) * n);
+  for (i = 0; i < n; i++)
+    touts[i] = outs[i];
+  if (bits == 1)
+    switch (n)
+      {
+      case 2:
+	stpi_unpack_2_1(length, in, touts);
+	break;
+      case 4:
+	stpi_unpack_4_1(length, in, touts);
+	break;
+      case 8:
+	stpi_unpack_8_1(length, in, touts);
+	break;
+      case 16:
+	stpi_unpack_16_1(length, in, touts);
+	break;
+      }
+  else
+    switch (n)
+      {
+      case 2:
+	stpi_unpack_2_2(length, in, touts);
+	break;
+      case 4:
+	stpi_unpack_4_2(length, in, touts);
+	break;
+      case 8:
+	stpi_unpack_8_2(length, in, touts);
+	break;
+      case 16:
+	stpi_unpack_16_2(length, in, touts);
+	break;
+      }
+  stp_free(touts);
+}
+
+void
+stp_unpack_2(int length,
+	     int bits,
+	     const unsigned char *in,
+	     unsigned char *outhi,
+	     unsigned char *outlo)
+{
+  unsigned char *outs[2];
+  outs[0] = outhi;
+  outs[1] = outlo;
+  stp_unpack(length, bits, 2, in, outs);
+}
+
+void
+stp_unpack_4(int length,
+	     int bits,
+	     const unsigned char *in,
+	     unsigned char *out0,
+	     unsigned char *out1,
+	     unsigned char *out2,
+	     unsigned char *out3)
+{
+  unsigned char *outs[4];
+  outs[0] = out0;
+  outs[1] = out1;
+  outs[2] = out2;
+  outs[3] = out3;
+  stp_unpack(length, bits, 4, in, outs);
+}
+
+void
+stp_unpack_8(int length,
+	     int bits,
+	     const unsigned char *in,
+	     unsigned char *out0,
+	     unsigned char *out1,
+	     unsigned char *out2,
+	     unsigned char *out3,
+	     unsigned char *out4,
+	     unsigned char *out5,
+	     unsigned char *out6,
+	     unsigned char *out7)
+{
+  unsigned char *outs[8];
+  outs[0] = out0;
+  outs[1] = out1;
+  outs[2] = out2;
+  outs[3] = out3;
+  outs[4] = out4;
+  outs[5] = out5;
+  outs[6] = out6;
+  outs[7] = out7;
+  stp_unpack(length, bits, 8, in, outs);
 }
 
 void
@@ -1238,14 +1016,24 @@ stp_unpack_16(int length,
 	      unsigned char *out14,
 	      unsigned char *out15)
 {
-  if (bits == 1)
-    stpi_unpack_16_1(length, in,
-		     out0, out1, out2, out3, out4, out5, out6, out7,
-		     out8, out9, out10, out11, out12, out13, out14, out15);
-  else
-    stpi_unpack_16_2(length, in,
-		     out0, out1, out2, out3, out4, out5, out6, out7,
-		     out8, out9, out10, out11, out12, out13, out14, out15);
+  unsigned char *outs[16];
+  outs[0] = out0;
+  outs[1] = out1;
+  outs[2] = out2;
+  outs[3] = out3;
+  outs[4] = out4;
+  outs[5] = out5;
+  outs[6] = out6;
+  outs[7] = out7;
+  outs[8] = out8;
+  outs[9] = out9;
+  outs[10] = out10;
+  outs[11] = out11;
+  outs[12] = out12;
+  outs[13] = out13;
+  outs[14] = out14;
+  outs[15] = out15;
+  stp_unpack(length, bits, 16, in, outs);
 }
 
 static void

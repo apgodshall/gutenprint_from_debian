@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.416 2008/11/22 20:34:29 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.424 2009/07/21 11:07:06 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -314,6 +314,12 @@ static const stp_parameter_t the_parameters[] =
     "InkChannels", N_("Ink Channels"), N_("Advanced Printer Functionality"),
     N_("Ink Channels"),
     STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_INTERNAL, 0, 0, STP_CHANNEL_NONE, 0, 0
+  },
+  {
+    "RawChannelNames", N_("Raw Channel Names"), N_("Advanced Printer Functionality"),
+    N_("Raw Channel Names"),
+    STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
     STP_PARAMETER_LEVEL_INTERNAL, 0, 0, STP_CHANNEL_NONE, 0, 0
   },
   {
@@ -740,6 +746,126 @@ static const float_param_t float_parameters[] =
   },
   {
     {
+      "HGray5Value", N_("Hextone Gray 5 Value"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 5 (Darkest) Value"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray5Trans", N_("Hextone Gray 5 Transition"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 5 (Darkest) Transition"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray5Scale", N_("Hextone Gray 5 Density Scale"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 5 (Darkest) Density Scale"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray4Value", N_("Hextone Gray 4 Value"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 4 Value"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray4Trans", N_("Hextone Gray 4 Transition"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 4 Transition"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray4Scale", N_("Hextone Gray 4 Density Scale"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 4 Density Scale"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray3Value", N_("Hextone Gray 3 Value"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 3 Value"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray3Trans", N_("Hextone Gray 3 Transition"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 3 Transition"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray3Scale", N_("Hextone Gray 3 Density Scale"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 3 Density Scale"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray2Value", N_("Hextone Gray 2 Value"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 2 Value"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray2Trans", N_("Hextone Gray 2 Transition"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 2 Transition"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray2Scale", N_("Hextone Gray 2 Density Scale"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 2 Density Scale"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray1Value", N_("Hextone Gray 1 Value"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 1 (Lightest) Value"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray1Trans", N_("Hextone Gray 1 Transition"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 1 (Lightest) Transition"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
+      "HGray1Scale", N_("Hextone Gray 1 Density Scale"), N_("Advanced Ink Adjustment"),
+      N_("Hextone Gray 1 (Lightest) Density Scale"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0.0, 5.0, 1.0, 1
+  },
+  {
+    {
       "BlackTrans", N_("GCR Transition"), N_("Advanced Output Control"),
       N_("Adjust the gray component transition rate"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
@@ -796,6 +922,14 @@ static const int_param_t int_parameters[] =
 {
   {
     {
+      "QualityEnhancement", N_("Quality Enhancement"), N_("Advanced Printer Functionality"),
+      N_("Enhance print quality by additional passes"),
+      STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
+      STP_PARAMETER_LEVEL_ADVANCED2, 0, 1, STP_CHANNEL_NONE, 1, 0
+    }, 0, 4, 0
+  },
+  {
+    {
       "PaperThickness", N_("Paper Thickness"), N_("Advanced Printer Functionality"),
       N_("Set printer paper thickness"),
       STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
@@ -837,6 +971,7 @@ static const int_param_t int_parameters[] =
   {
     {
       "FeedAdjustment", N_("Feed Adjustment"), N_("Advanced Printer Functionality"),
+      /* xgettext:no-c-format */
       N_("Set paper feed adjustment (0.01% units)"),
       STP_PARAMETER_TYPE_INT, STP_PARAMETER_CLASS_FEATURE,
       STP_PARAMETER_LEVEL_ADVANCED3, 0, 1, STP_CHANNEL_NONE, 1, 0
@@ -1544,6 +1679,40 @@ get_inktype(const stp_vars_t *v)
   return &(ink_list->inknames[0]);
 }
 
+static const inkname_t *
+get_inktype_only(const stp_vars_t *v)
+{
+  const char	*ink_type = stp_get_string_parameter(v, "InkType");
+
+  if (!ink_type)
+    return NULL;
+  else
+    return get_inktype(v);
+}
+
+static int
+printer_supports_inkset(const stp_vars_t *v, inkset_id_t inkset)
+{
+  const inkgroup_t *ink_group = escp2_inkgroup(v);
+  int i;
+  for (i = 0; i < ink_group->n_inklists; i++)
+    {
+      const inklist_t *ink_list = &(ink_group->inklists[i]);
+      if (ink_list)
+	{
+	  int j;
+	  for (j = 0; j < ink_list->n_inks; j++)
+	    {
+	      if (ink_list->inknames[j].inkset == inkset)
+		{
+		  return 1;
+		}
+	    }
+	}
+    }
+  return 0;
+}
+
 static const stp_vars_t *
 get_media_adjustment(const stp_vars_t *v)
 {
@@ -1680,9 +1849,13 @@ set_gray_value_parameter(const stp_vars_t *v,
 			 stp_parameter_t *description,
 			 int expected_channels)
 {
-  const inkname_t *ink_name = get_inktype(v);
+  const inkname_t *ink_name = get_inktype_only(v);
   description->is_active = 0;
-  if (ink_name && 
+  if (!ink_name &&
+      ((expected_channels == 4 && printer_supports_inkset(v, INKSET_QUADTONE)) ||
+       (expected_channels == 6 && printer_supports_inkset(v, INKSET_HEXTONE))))
+    fill_value_parameters(v, description, STP_ECOLOR_K);
+  else if (ink_name && 
       (ink_name->channels[STP_ECOLOR_K].n_subchannels ==
        expected_channels))
     fill_value_parameters(v, description, STP_ECOLOR_K);
@@ -1727,8 +1900,12 @@ set_gray_transition_parameter(const stp_vars_t *v,
 			      stp_parameter_t *description,
 			      int expected_channels)
 {
-  const inkname_t *ink_name = get_inktype(v);
+  const inkname_t *ink_name = get_inktype_only(v);
   description->is_active = 0;
+  if (!ink_name &&
+      ((expected_channels == 4 && printer_supports_inkset(v, INKSET_QUADTONE)) ||
+       (expected_channels == 6 && printer_supports_inkset(v, INKSET_HEXTONE))))
+    fill_transition_parameters(v, description, STP_ECOLOR_K);
   if (ink_name && 
       (ink_name->channels[STP_ECOLOR_K].n_subchannels ==
        expected_channels))
@@ -1768,8 +1945,12 @@ set_gray_scale_parameter(const stp_vars_t *v,
 			      stp_parameter_t *description,
 			      int expected_channels)
 {
-  const inkname_t *ink_name = get_inktype(v);
+  const inkname_t *ink_name = get_inktype_only(v);
   description->is_active = 0;
+  if (!ink_name &&
+      ((expected_channels == 4 && printer_supports_inkset(v, INKSET_QUADTONE)) ||
+       (expected_channels == 6 && printer_supports_inkset(v, INKSET_HEXTONE))))
+    fill_transition_parameters(v, description, STP_ECOLOR_K);
   if (ink_name &&
       (ink_name->channels[STP_ECOLOR_K].n_subchannels ==
        expected_channels))
@@ -1939,6 +2120,30 @@ find_resolution_from_quality(const stp_vars_t *v, const char *quality,
 	return find_default_resolution(v, q, strict);
     }
   return NULL;
+}
+
+static const inkname_t *
+get_raw_inktype(const stp_vars_t *v)
+{
+  if (strcmp(stp_get_string_parameter(v, "InputImageType"), "Raw") == 0)
+    {
+      const inklist_t *inks = stp_escp2_inklist(v);
+      int ninktypes = inks->n_inks;
+      int i;
+      const char *channel_name = stp_get_string_parameter(v, "RawChannels");
+      const channel_count_t *count;
+      if (!channel_name)
+	goto none;
+      count = get_channel_count_by_name(channel_name);
+      if (!count)
+	goto none;
+      for (i = 0; i < ninktypes; i++)
+	if (inks->inknames[i].inkset == INKSET_EXTENDED &&
+	    (inks->inknames[i].channel_count == count->count))
+	  return &(inks->inknames[i]);
+    }
+ none:
+  return get_inktype(v);
 }
 
 static void
@@ -2455,7 +2660,7 @@ escp2_parameters(const stp_vars_t *v, const char *name,
       const inklist_t *inks = stp_escp2_inklist(v);
       int ninktypes = inks->n_inks;
       description->bounds.str = stp_string_list_create();
-      if (ninktypes > 1)
+      if (ninktypes >= 1)
 	{
 	  stp_string_list_add_string(description->bounds.str, "None", "None");
 	  for (i = 0; i < ninktypes; i++)
@@ -2470,8 +2675,40 @@ escp2_parameters(const stp_vars_t *v, const char *name,
 	  description->deflt.str =
 	    stp_string_list_param(description->bounds.str, 0)->name;
 	}
-      if (ninktypes <= 1)
+      else
 	description->is_active = 0;
+    }
+  else if (strcmp(name, "RawChannelNames") == 0)
+    {
+      const inkname_t *ink_name = get_raw_inktype(v);
+      if (ink_name)
+	{
+	  description->bounds.str = stp_string_list_create();
+	  for (i = 0; i < ink_name->channel_count; i++)
+	    {
+	      int j;
+	      const ink_channel_t *ic = &(ink_name->channels[i]);
+	      if (ic)
+		for (j = 0; j < ic->n_subchannels; j++)
+		  if (ic->subchannels[j].name)
+		    stp_string_list_add_string(description->bounds.str,
+					       ic->subchannels[j].name,
+					       gettext(ic->subchannels[j].text));
+	    }
+	  for (i = 0; i < ink_name->aux_channel_count; i++)
+	    {
+	      int j;
+	      const ink_channel_t *ic = &(ink_name->aux_channels[i]);
+	      if (ic)
+		for (j = 0; j < ic->n_subchannels; j++)
+		  if (ic->subchannels[j].name)
+		    stp_string_list_add_string(description->bounds.str,
+					       ic->subchannels[j].name,
+					       gettext(ic->subchannels[j].text));
+	    }
+	  description->deflt.str =
+	    stp_string_list_param(description->bounds.str, 0)->name;
+	}
     }
   else if (strcmp(name, "MultiChannelLimit") == 0)
     {
@@ -2499,6 +2736,10 @@ escp2_parameters(const stp_vars_t *v, const char *name,
       description->is_active = 0;
       if (stp_escp2_has_media_feature(v, name))
 	description->is_active = 1;
+    }
+  else if (strcmp(name, "QualityEnhancement") == 0)
+    {
+      description->is_active = 1;
     }
 }
 
@@ -2790,6 +3031,7 @@ escp2_describe_output(const stp_vars_t *v)
 	  switch (ink_type->inkset)
 	    {
 	    case INKSET_QUADTONE:
+	    case INKSET_HEXTONE:
 	      return "Grayscale";
 	    case INKSET_OTHER:
 	    case INKSET_CMYK:
@@ -3638,6 +3880,7 @@ setup_printer_weave_parameters(stp_vars_t *v)
   pd->nozzle_start = 0;
   pd->min_nozzles = 1;
   pd->use_black_parameters = 0;
+  pd->extra_vertical_passes = 1;
 }
 
 static void
@@ -3665,6 +3908,7 @@ setup_head_parameters(stp_vars_t *v)
 
   pd->printer_weave = get_printer_weave(v);
 
+  pd->extra_vertical_passes = 1 << stp_get_int_parameter(v, "QualityEnhancement");
   if (stp_escp2_has_cap(v, MODEL_FAST_360, MODEL_FAST_360_YES) &&
       (pd->inkname->inkset == INKSET_CMYK || pd->physical_channels == 1) &&
       pd->res->hres == pd->physical_xdpi && pd->res->vres == 360)
@@ -3806,7 +4050,11 @@ setup_page(stp_vars_t *v)
     }
   else
     {
-      pd->page_extra_height = 0;
+      if (input_slot)
+	pd->page_extra_height = input_slot->extra_height *
+	  pd->page_management_units / escp2_base_separation(v);
+      else
+	pd->page_extra_height = 0;
       pd->paper_extra_bottom = escp2_paper_extra_bottom(v);
     }
   internal_imageable_area(v, 0, 0, &pd->page_left, &pd->page_right,
@@ -4051,7 +4299,7 @@ escp2_print_page(stp_vars_t *v, stp_image_t *image)
      pd->nozzles,
      pd->nozzle_separation * pd->res->vres / escp2_base_separation(v),
      pd->horizontal_passes,
-     pd->res->vertical_passes,
+     pd->res->vertical_passes * pd->extra_vertical_passes,
      1,
      pd->channels_in_use,
      pd->bitwidth,
@@ -4133,6 +4381,12 @@ escp2_do_print(stp_vars_t *v, stp_image_t *image, int print_op)
       strcmp(stp_get_string_parameter(v, "PrintingMode"), "BW") != 0)
     {
       stp_eprintf(v, "Warning: Quadtone inkset only available in MONO\n");
+      stp_set_string_parameter(v, "PrintingMode", "BW");
+    }
+  if (pd->inkname && pd->inkname->inkset == INKSET_HEXTONE &&
+      strcmp(stp_get_string_parameter(v, "PrintingMode"), "BW") != 0)
+    {
+      stp_eprintf(v, "Warning: Hextone inkset only available in MONO\n");
       stp_set_string_parameter(v, "PrintingMode", "BW");
     }
   pd->channels_in_use = count_channels(pd->inkname, pd->use_aux_channels);

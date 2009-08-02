@@ -1,3 +1,686 @@
+2009-07-26	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.413) (+23 -10)
+		README (1.203) (+20 -18)
+		configure.ac (1.214) (+5 -5)
+
+	Bump to 5.2.4.
+
+2009-07-21	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-papers.c (1.118) (+4 -1)
+		src/main/print-escp2.c (1.424) (+6 -2)
+		src/main/print-escp2.h (1.137) (+3 -2)
+		src/xml/escp2/inputslots/r2400.xml (1.4) (+1 -0)
+
+	Fix printing to manual sheet guide on R2400
+
+2009-07-18	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.178) (+5 -5)
+
+	Fix the translation of resolutions in global PPD files.
+
+	Correct the data type of int parameters in the *ParamCustom declaration.
+
+2009-07-12	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.423) (+7 -1)
+
+	Export ChannelNames parameter so escputil can correctly print ink
+	warnings.
+
+2009-06-30	<rlk@sourceforge.net>
+
+	Files:	po/da.po (1.97) (+5154 -4292)
+
+	Update Danish translation
+
+2009-06-30	<rlk@sourceforge.net>
+
+	Files:	po/ru.po (1.2) (+1815 -1773)
+
+	Updated Russian translation
+
+2009-06-24	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.213) (+3 -3)
+		po/ru.po (1.1) (added)
+
+	Add Russian translation
+
+2009-06-22	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.94) (+5 -1)
+
+	Add comment explaining laminate pattern.
+
+2009-06-22	<rlk@sourceforge.net>
+
+	Files:	po/it.po (1.7) (+11 -5)
+
+	Update Italian translation
+
+2009-06-22	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.177) (+3 -3)
+
+	Hide the fine adjustment option, not the primary option.
+
+2009-06-21	<rlk@sourceforge.net>
+
+	Files:	po/it.po (1.6) (+5542 -4410)
+
+	Update Italian translation
+
+2009-06-20	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.422) (+2 -1)
+
+	Flag string for not a printf string, per Marco Poletti.
+
+2009-06-20	<faust3@sourceforge.net>
+
+	Files:	NEWS (1.412) (+1 -0)
+		src/foomatic/foomatic-printermap (1.192) (+1 -0)
+		src/xml/printers.xml (1.37) (+2 -1)
+
+	According to https://bugs.launchpad.net/bugs/389014
+	the PIXMA iX4000 can be used with the iX5000 driver
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.80) (+5157 -4316)
+
+	Updated Dutch translation
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatterny.y (1.39) (+9 -38)
+
+	Allow arbitrary number of string arguments to message command.
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatterny.y (1.38) (+3 -3)
+
+	Rename Output to Print to avoid possible confusion.
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatterny.y (1.37) (+1 -2)
+
+	Remove unused token declaration.
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatterny.y (1.36) (+3 -9)
+
+	A few minor simplifications.
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.57) (+5 -2)
+		src/testpattern/testpatternl.l (1.25) (+3 -10)
+		src/testpattern/testpatterny.y (1.35) (+29 -41)
+
+	Eliminate bison warnings.
+
+	Allow mode specification without bit depth.
+
+	Print out number of passing cases as well as failures and skipped.
+
+===============================================================================
+Name: gutenprint-5_2_4_rc1
+
+2009-06-14	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.411) (+3 -3)
+		README (1.202) (+13 -13)
+		configure.ac (1.212) (+4 -4)
+
+	Prep for 5.2.4-rc1
+
+2009-06-08	<rlk@sourceforge.net>
+
+	Files:	test/run-weavetest (1.30) (+1 -1)
+
+	Remove some particularly long-running cases that are not likely to be
+	used in real life.
+
+2009-06-08	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.410) (+44 -3)
+		README (1.201) (+11 -11)
+		src/main/print-escp2.c (1.421) (+3 -3)
+		src/testpattern/run-testpattern-2.in (1.35) (+8 -5)
+		src/testpattern/testpattern.c (1.56) (+44 -12)
+		test/run-weavetest (1.29) (+1 -1)
+
+	Testpattern shouldn't fail if it provides a combination of arguments that
+	fails validation during automatic run.
+
+	Epson driver should be more consistent about accepting RawChannels
+	argument.
+
+	Testpattern generator should reset page count for each argument.
+
+	Weave pattern test generator should test additional cases.
+
+	Update top level doc for release.
+
+2009-06-07	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.211) (+16 -14)
+		scripts/autogen.sh (1.37) (+1 -1)
+		src/main/bit-ops.c (1.14) (+179 -168)
+
+	Minor code cleanup in bit-ops.c
+
+	Don't include --enable-compiler-warnings in autogen.sh (no longer needed)
+
+	Bump version, make warning about missing devel package more obvious.
+
+2009-06-07	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.57) (+36 -35)
+		src/cups/genppd.c (1.176) (+5 -4)
+
+	Improve command names for genppd speedup
+
+2009-06-03	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatternl.l (1.24) (+2 -2)
+
+	Accept double-quoted strings with zero characters
+
+2009-06-02	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpatternl.l (1.23) (+5 -2)
+		src/testpattern/testpatterny.y (1.34) (+49 -46)
+
+	Fix compatibility with Bison 2.4
+
+2009-05-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/Makefile.am (1.5) (+2 -2)
+		src/xml/escp2/Makefile.am (1.9) (+3 -1)
+		src/xml/escp2/inks/Makefile.am (1.9) (+2 -1)
+		src/xml/escp2/inputslots/Makefile.am (1.7) (+2 -1)
+		src/xml/escp2/media/Makefile.am (1.13) (+2 -1)
+		src/xml/escp2/mediasizes/Makefile.am (1.4) (+2 -1)
+		src/xml/escp2/model/Makefile.am (1.16) (+2 -1)
+		src/xml/escp2/qualitypresets/Makefile.am (1.4) (+2 -1)
+		src/xml/escp2/weaves/Makefile.am (1.3) (+2 -1)
+
+	dist-hook needs xml-stamp to be created
+
+2009-05-24	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.191) (+1 -0)
+		src/xml/printers.xml (1.36) (+2 -1)
+
+	Add Epson DX4000
+
+2009-05-24	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.175) (+16 -6)
+
+	Fix calls to putenv, which must use permanent memory.
+
+2009-05-24	<rlk@sourceforge.net>
+
+	Files:	src/main/print-weave.c (1.75) (+2 -2)
+
+	Fix printf warning
+
+2009-05-24	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.18) (+8 -2)
+
+	Fix error with reporting date, time, and author.
+
+2009-05-23	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_96.xml (1.5) (+1 -1)
+
+	Send job start sequence for Artisan printers per recommendation.
+
+2009-05-23	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.34) (+51 -1)
+
+	Add help
+
+2009-05-20	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/f360_ultrachrome_k3v.xml (1.3) (+149 -149)
+
+	Fix Print Methods based on manual.
+
+2009-05-17	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/f360_ultrachrome_k3v.xml (1.5) (+3 -3)
+
+	Retune light inks on R2880.
+
+2009-05-17	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/bit-ops.h (1.4) (+84 -1)
+		src/cups/cups-genppdupdate.in (1.56) (+36 -5)
+		src/cups/genppd.c (1.174) (+21 -0)
+		src/main/bit-ops.c (1.13) (+259 -482)
+		src/main/print-escp2.c (1.420) (+16 -2)
+		src/main/print-escp2.h (1.136) (+3 -2)
+		src/main/print-weave.c (1.74) (+8 -40)
+		src/xml/escp2/inks/f360_ultrachrome_k3v.xml (1.4) (+2 -2)
+
+	Speed up cups-genppdupdate by reusing server binary
+
+2009-04-21	<m0m@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.93) (+2 -2)
+
+	fixed memory leak in dyesub_print_row()
+
+	    dnp-ds40
+	        Color+300x300..............................................==5555== Invalid read of size 2
+	    ==5555==    at 0x476427: dyesub_print (print-olympus.c:2485)
+	    ==5555==    by 0x404450: main (in /home/rlk/sandbox/print-5.1/src/testpattern/testpattern)
+	    ==5555==  Address 0x6c56ea8 is 0 bytes after a block of size 11,520 alloc'd
+	    ==5555==    at 0x4C256AE: malloc (in /usr/lib64/valgrind/amd64-linux/vgpreload_memcheck.so)
+	    ==5555==    by 0x413209: stp_malloc (print-util.c:427)
+	    ==5555==    by 0x475A95: dyesub_print (print-olympus.c:2447)
+	    ==5555==    by 0x404450: main (in /home/rlk/sandbox/print-5.1/src/testpattern/testpattern)
+
+2009-04-14	<rlk@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.7) (+3 -3)
+
+	Fix definition of L photo paper.
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inputslots/r2880.xml (1.2) (+1 -0)
+		src/xml/escp2/model/model_98.xml (1.4) (+1 -1)
+
+	Fix CD definition for R2880
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.55) (+3 -34)
+
+	Back out unintended change
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.54) (+35 -4)
+		src/cups/genppd.c (1.173) (+14 -13)
+		src/cups/i18n.c (1.8) (+4 -4)
+		src/cups/i18n.h (1.3) (+4 -4)
+
+	Fix memory leaks
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.172) (+5 -5)
+		src/cups/i18n.c (1.7) (+5 -3)
+		src/cups/i18n.h (1.2) (+3 -3)
+
+	Fix memory leaks
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.92) (+7 -7)
+
+	Fix up declaration syntax
+
+2009-04-11	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.119) (+3 -2)
+
+	2661138 Parallel build breaks for cups/ppd
+
+2009-04-08	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.17) (+35 -8)
+
+	Handle newer version of CVS.
+
+2009-04-08	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.16) (+12 -7)
+
+	Remove spurious printout.
+
+2009-04-08	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.15) (+41 -13)
+
+	Allow use of RCS filename.
+
+	Simplify print logic a bit.
+
+2009-04-08	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.14) (+17 -19)
+
+	Print last file correctly.
+
+2009-04-05	<rleigh@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.35) (+2 -2)
+
+	Correct typo in Epson Stylus Office TX300F name
+
+2009-03-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/f360_ultrachrome_k3v.xml (1.3) (+2 -2)
+
+	Revert black shades to previous.
+
+2009-03-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/f360_ultrachrome_k3v.xml (1.2) (+195 -195)
+
+	Tune photo black ink.
+
+2009-03-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_98.xml (1.3) (+8 -8)
+
+	Improve the density; fix some other parameters.
+
+2009-03-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/f360_ultrachrome_k3v.xml (1.2) (+6 -6)
+
+	Retune inks.  Photo black is tested; matte black is not.
+
+2009-03-27	<tillkamppeter@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.190) (+61 -133)
+		src/xml/printers.xml (1.34) (+62 -134)
+
+	Syncronized model names of Ricoh and OEM printers with the names in the OpenPrinting database/Ricoh's PPDs.
+
+2009-03-22	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.189) (+1 -0)
+		src/xml/escp2/inputslots/Makefile.am (1.6) (+2 -1)
+		src/xml/escp2/inputslots/r2880.xml (1.1) (added)
+		src/xml/escp2/model/model_98.xml (1.2) (+14 -14)
+		src/xml/printers.xml (1.33) (+2 -1)
+
+	Partial tuning of R2880
+
+2009-03-22	<rlk@sourceforge.net>
+
+	Files:	README (1.200) (+57 -4)
+		configure.ac (1.210) (+13 -3)
+
+	Try to make it more clear that development packages often have to be
+	installed to compile GIMP plugin or CUPS driver.
+
+2009-03-22	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.188) (+1 -0)
+		src/xml/escp2/inks/Makefile.am (1.8) (+2 -1)
+		src/xml/escp2/inks/f360_ultrachrome_k3v.xml (1.1) (added)
+		src/xml/escp2/media/Makefile.am (1.12) (+2 -1)
+		src/xml/escp2/media/f360_ultrachrome_k3v.xml (1.1) (added)
+		src/xml/escp2/model/Makefile.am (1.15) (+3 -2)
+		src/xml/escp2/model/model_98.xml (1.1) (added)
+		src/xml/printers.xml (1.32) (+2 -1)
+
+	Preliminary support for Epson Stylus Photo R2880
+
+2009-03-22	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.100) (+14 -14)
+
+	Widen field for ink cartridge name for Stylus Photo R2880.
+
+2009-03-16	<rlk@sourceforge.net>
+
+	Files:	test/parse-escp2 (1.25) (+3 -1)
+
+	Suppress (minor) undesired output.
+
+2009-03-15	<rlk@sourceforge.net>
+
+	Files:	scripts/mkchlog (1.13) (+6 -2)
+
+	Add option to reverse output.
+
+	Handle whitespace in filenames.
+
+2009-03-15	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inputslots/artisan.xml (1.2) (+2 -2)
+
+	Change names of trays to match what Epson calls them.
+
+2009-03-15	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/Makefile.am (1.11) (+2 -1)
+
+	Add new media definitions for Artisan printers.
+
+2009-03-14	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/media/artisan.xml (1.1) (added)
+		src/xml/escp2/model/model_96.xml (1.4) (+1 -1)
+
+	Correct paper definitions for Artisan printers
+
+2009-03-07	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.89) (+3 -1)
+		src/main/print-escp2.c (1.419) (+139 -6)
+		src/main/print-escp2.h (1.135) (+5 -4)
+		src/xml/escp2/inks/c64.xml (1.7) (+36 -1)
+		src/xml/escp2/inks/c80.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/c82.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/cx3650.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/f360.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/photo_gen0.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/photo_gen1.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/photo_gen2.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/photo_gen3.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/pro_gen1.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/pro_gen2.xml (1.8) (+82 -0)
+		src/xml/escp2/inks/standard.xml (1.8) (+35 -0)
+		src/xml/escp2/inks/standard_gen0.xml (1.8) (+35 -0)
+		src/xml/escp2/media/c64.xml (1.8) (+323 -0)
+		src/xml/escp2/media/c80.xml (1.8) (+323 -0)
+		src/xml/escp2/media/c82.xml (1.8) (+323 -0)
+		src/xml/escp2/media/cx3650.xml (1.8) (+323 -0)
+		src/xml/escp2/media/f360.xml (1.8) (+323 -0)
+		src/xml/escp2/media/photo_gen0.xml (1.8) (+751 -105)
+		src/xml/escp2/media/photo_gen1.xml (1.8) (+766 -120)
+		src/xml/escp2/media/photo_gen2.xml (1.8) (+780 -134)
+		src/xml/escp2/media/photo_gen3.xml (1.8) (+1152 -183)
+		src/xml/escp2/media/photo_gen3_4.xml (1.8) (+778 -132)
+		src/xml/escp2/media/pro_gen1.xml (1.8) (+788 -142)
+		src/xml/escp2/media/pro_gen2.xml (1.8) (+746 -100)
+		src/xml/escp2/media/standard.xml (1.8) (+323 -0)
+		src/xml/escp2/media/standard_gen0.xml (1.8) (+323 -0)
+		test/unprint.c (1.44) (+32 -13)
+
+	Add MIS quadtone and six tone inksets.
+
+2009-03-07	<rlk@sourceforge.net>
+
+	Files:	src/main/print-weave.c (1.73) (+62 -6)
+
+	Add more debugging in case of error.
+
+2009-03-07	<rlk@sourceforge.net>
+
+	Files:	scripts/autogen.sh (1.36) (+1 -1)
+
+	Correctly check version for newer versions of libtool.  E. g.
+
+	$ libtool --version
+	ltmain.sh (GNU libtool) 2.2.6
+
+	in addition to
+
+	$ libtool --version
+	ltmain.sh (GNU libtool) 1.5.26 (1.1220.2.492 2008/01/30 06:40:56)
+
+2009-03-05	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.418) (+45 -5)
+
+	Put quadtone ink parameters in PPD files, so that quadtone users can
+	adjust ink settings.
+
+2009-03-04	<m0m@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.187) (+2 -0)
+		src/main/print-olympus.c (1.91) (+121 -2)
+		src/xml/printers.xml (1.31) (+3 -1)
+
+	applied DNP dyesub printer driver patch from jordi <jordif.starblitz@gmail.com>
+
+2009-03-02	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/c80.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/c82.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/cx3650.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/f360.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/photo_gen0.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/photo_gen1.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/photo_gen2.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/photo_gen3.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/pro_gen1.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/pro_gen2.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/standard.xml (1.7) (+4 -4)
+		src/xml/escp2/inks/standard_gen0.xml (1.7) (+4 -4)
+
+	Fix gray transition parameter names for quadtone inks
+
+2009-03-01	<rlk@sourceforge.net>
+
+	Files:	test/unprint.c (1.43) (+2 -2)
+
+	Reorder quadtone inks to get correct constants.
+
+2009-03-01	<rlk@sourceforge.net>
+
+	Files:	src/main/channel.c (1.32) (+4 -4)
+
+	Add appropriate newlines in debug output.
+
+2009-01-21	<m0m@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.186) (+1 -0)
+		src/main/print-olympus.c (1.90) (+48 -1)
+		src/xml/printers.xml (1.30) (+2 -1)
+
+	added support for Canon SELPHY CP-520
+	patch submited by Simon Waid
+
+2009-01-07	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_95.xml (1.2) (+1 -1)
+
+	2473672 Print quality poor at paper borders, Epson DX4800
+
+2009-01-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.6) (+11 -1)
+
+	Add L-size paper with tear-off borders.
+
+2009-01-04	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/inks/cmykrb.xml (1.9) (+9 -9)
+		src/xml/escp2/inks/cmykro.xml (1.7) (+10 -10)
+
+	Change Gloss to Gloss Optimizer
+
+2009-01-03	<rlk@sourceforge.net>
+
+	Files:	src/main/escp2-channels.c (1.88) (+7 -1)
+		src/main/print-escp2.c (1.417) (+59 -3)
+		src/main/print-escp2.h (1.134) (+4 -2)
+		src/xml/escp2/inks/artisan.xml (1.2) (+37 -37)
+		src/xml/escp2/inks/b500.xml (1.5) (+15 -15)
+		src/xml/escp2/inks/c120.xml (1.5) (+15 -15)
+		src/xml/escp2/inks/c64.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/c80.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/c82.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/claria.xml (1.6) (+37 -37)
+		src/xml/escp2/inks/cmy.xml (1.5) (+3 -3)
+		src/xml/escp2/inks/cmykrb.xml (1.8) (+84 -84)
+		src/xml/escp2/inks/cmykro.xml (1.6) (+84 -84)
+		src/xml/escp2/inks/cx3650.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/defaultblack.xml (1.3) (+1 -1)
+		src/xml/escp2/inks/f360.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/f360_photo.xml (1.6) (+37 -37)
+		src/xml/escp2/inks/f360_photo7_japan.xml (1.6) (+66 -66)
+		src/xml/escp2/inks/f360_ultrachrome.xml (1.6) (+127 -112)
+		src/xml/escp2/inks/f360_ultrachrome_k3.xml (1.7) (+100 -82)
+		src/xml/escp2/inks/nx100.xml (1.2) (+15 -15)
+		src/xml/escp2/inks/photo_gen0.xml (1.6) (+42 -42)
+		src/xml/escp2/inks/photo_gen1.xml (1.6) (+41 -41)
+		src/xml/escp2/inks/photo_gen2.xml (1.6) (+42 -41)
+		src/xml/escp2/inks/photo_gen3.xml (1.6) (+41 -41)
+		src/xml/escp2/inks/photo_gen3_4.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/photo_gen4.xml (1.6) (+37 -37)
+		src/xml/escp2/inks/photo_pigment.xml (1.6) (+37 -37)
+		src/xml/escp2/inks/picturemate_4.xml (1.5) (+8 -8)
+		src/xml/escp2/inks/picturemate_6.xml (1.7) (+20 -20)
+		src/xml/escp2/inks/pro_gen1.xml (1.6) (+41 -41)
+		src/xml/escp2/inks/pro_gen2.xml (1.6) (+41 -41)
+		src/xml/escp2/inks/pro_pigment.xml (1.6) (+37 -37)
+		src/xml/escp2/inks/pro_ultrachrome.xml (1.6) (+125 -110)
+		src/xml/escp2/inks/pro_ultrachrome_k3.xml (1.8) (+100 -82)
+		src/xml/escp2/inks/standard.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/standard_gen0.xml (1.6) (+19 -19)
+		src/xml/escp2/inks/ultrachrome.xml (1.6) (+125 -110)
+		src/xml/escp2/inks/wf40.xml (1.2) (+15 -15)
+		src/xml/escp2/inks/wf500.xml (1.2) (+15 -15)
+		src/xml/escp2/inks/x80.xml (1.5) (+15 -15)
+
+	Add RawChannels parameter to enable fetching names of each channel
+
+2009-01-03	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.33) (+6 -5)
+
+	Combine raw channels and ink set, since we want to check all
+	combinations.
+
+	Be more selective about omitting raw channels.
+
+2009-01-03	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.55) (+4 -3)
+
+	Make sure we free everything even if we can't print for some reason.
+
+2009-01-03	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-printermap (1.185) (+2 -2)
+		src/xml/printers.xml (1.29) (+3 -3)
+
+	Correct names of P/TX 700/800 (700W, 800FW).
+
+===============================================================================
+Name: gutenprint-5_2_bp
+
+2009-01-01	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_77.xml (1.10) (+15 -8)
+
+	Try to fix PM-D600 (bug 1575384)
+
 ===============================================================================
 Name: gutenprint-5_2_3
 
@@ -6395,7 +7078,6 @@ Name: gutenprint-5_1_2
 	Files:	src/main/escp2-inks.c (1.52) (+2 -2)
 		src/main/escp2-papers.c (1.104) (+5 -5)
 		src/main/print-escp2-data.c (1.219) (+5 -5)
-		src/main/print-escp2-data.c (1.220) (+2 -2)
 
 	Further RX580 tuning
 
@@ -24593,7 +25275,6 @@ Name: gimp-print-4_3_6
 		configure.ac (1.26) (+3 -2)
 		man/Makefile.am (1.12) (+7 -2)
 		man/ijsgimpprint.1 (1.1) (added)
-		man/ijsgimpprint.1 (1.2) (removed)
 		man/ijsgimpprint.1.in (1.2) (+1332 -0)
 
 	Add ijsgimpprint.1.in manual page
@@ -24733,9 +25414,7 @@ Name: gimp-print-4_3_5
 2002-09-26	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.76) (+506 -17)
-		NEWS (1.77) (+1 -1)
 		README (1.105) (+39 -46)
-		README (1.106) (+1 -1)
 		debian/README.Debian (1.28) (+1 -1)
 		src/ghost/README (1.79) (+43 -5)
 
@@ -35521,10 +36200,8 @@ Name: print-4_1_3
 		scripts/.cvsignore (1.1) (added)
 		src/.cvsignore (1.1) (added)
 		src/cups/.cvsignore (1.1) (added)
-		src/cups/.cvsignore (1.2) (+9 -0)
 		src/escputil/.cvsignore (1.1) (added)
 		src/ghost/.cvsignore (1.1) (added)
-		src/ghost/.cvsignore (1.2) (+14 -0)
 		src/gimp/.cvsignore (1.1) (added)
 		src/include/.cvsignore (1.1) (added)
 		src/main/.cvsignore (1.1) (added)

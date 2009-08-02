@@ -1,5 +1,5 @@
 /*
- * "$Id: print-olympus.c,v 1.89 2008/08/14 01:01:41 rlk Exp $"
+ * "$Id: print-olympus.c,v 1.94 2009/06/22 11:58:34 rlk Exp $"
  *
  *   Print plug-in DyeSub driver (formerly Olympus driver) for the GIMP.
  *
@@ -50,6 +50,7 @@
 #define DYESUB_FEATURE_BORDERLESS	0x00000008
 #define DYESUB_FEATURE_WHITE_BORDER	0x00000010
 #define DYESUB_FEATURE_PLANE_INTERLACE	0x00000020
+#define DYESUB_FEATURE_PLANE_LEFTTORIGHT	0x00000040
 
 #define DYESUB_PORTRAIT	0
 #define DYESUB_LANDSCAPE	1
@@ -168,6 +169,7 @@ typedef struct {
   int prnh_px, prnw_px, prnt_px, prnb_px, prnl_px, prnr_px;
   int print_mode;	/* portrait or landscape */
   int image_rows;
+  int plane_lefttoright;
 } dyesub_print_vars_t;
 
 typedef struct /* printer specific parameters */
@@ -851,6 +853,37 @@ static const dyesub_printsize_t cp220_printsize[] =
 
 LIST(dyesub_printsize_list_t, cp220_printsize_list, dyesub_printsize_t, cp220_printsize);
 
+
+/* Canon SELPHY CP-520 */
+static void cp520_printer_init_func(stp_vars_t *v)
+{
+  char pg = (strcmp(privdata.pagesize, "Postcard") == 0 ? '\1' :
+		(strcmp(privdata.pagesize, "w253h337") == 0 ? '\2' :
+		(strcmp(privdata.pagesize, "w155h244") == 0 ? '\3' :
+		(strcmp(privdata.pagesize, "w283h566") == 0 ? '\4' : 
+		 '\1' ))));
+
+  stp_put16_be(0x4000, v);
+  stp_putc('\0', v);
+  stp_putc(pg, v);
+  dyesub_nputc(v, '\0', 8); 
+  /* The CP520 does not want the printer_init and plane_init command to be sent
+     in the same USB-packet so we fill up first USB-Packet  with '\0'. */
+  dyesub_nputc(v, '\0', 1012); 
+}
+
+static void cp520_plane_init_func(stp_vars_t *v)
+{
+  stp_put16_be(0x4001, v);
+  stp_putc(3 - privdata.plane, v);  /* The CP520 differs from the cp-printer
+                                       in that it reqires the plane in the 3rd
+                                       byte not in the 4th */
+  stp_putc('\0', v);
+  stp_put32_le(privdata.w_size * privdata.h_size, v);
+  dyesub_nputc(v, '\0', 4);
+}
+
+
 /* Canon SELPHY ES series */
 static void es1_printer_init_func(stp_vars_t *v)
 {
@@ -1406,6 +1439,89 @@ static void shinko_chcs9045_printer_init(stp_vars_t *v)
 }
 
 
+/* Dai Nippon Printing DS40 */
+static const dyesub_pagesize_t dnpds40_dock_page[] =
+{
+  { "w288h432", "4x6", PT(1920,300)+1, PT(1240,300)+1, 0, 0, 0, 0,
+						DYESUB_PORTRAIT},
+  { "w432h576", "6x9", PT(1920,300)+1, PT(2740,300)+1, 0, 0, 0, 0,
+							DYESUB_PORTRAIT},
+  { "A5", "6x8", PT(1920,300)+1, PT(2436,300)+1, 0, 0, 0, 0,
+						DYESUB_PORTRAIT},
+};
+
+LIST(dyesub_pagesize_list_t, dnpds40_dock_page_list, dyesub_pagesize_t, dnpds40_dock_page);
+
+static const dyesub_printsize_t dnpds40_dock_printsize[] =
+{
+  { "300x300", "w288h432", 1920, 1240},
+  { "300x300", "w432h576", 1920, 2740},
+  { "300x300", "A5", 1920, 2436},
+};
+
+LIST(dyesub_printsize_list_t, dnpds40_dock_printsize_list, dyesub_printsize_t, dnpds40_dock_printsize);
+
+static void dnpds40_printer_end(stp_vars_t *v)
+{
+  stp_zprintf(v, "\033PCNTRL START"); dyesub_nputc(v, ' ', 19);
+}
+
+static void dnpds40_plane_init(stp_vars_t *v)
+{
+  char p = (privdata.plane == 3 ? 'Y' :
+	    (privdata.plane == 2 ? 'M' :
+	     'C' ));
+
+  long RFSize = (privdata.w_size*privdata.h_size) + 1024 + 54;
+  long AdSize = (32 - (RFSize % 32));
+  long FSize = RFSize + AdSize;
+
+  stp_zprintf(v, "\033PCNTRL RETENTION       0000000800000000");
+  stp_zprintf(v, "\033PIMAGE %cPLANE", p); dyesub_nputc(v, ' ', 10);
+
+  stp_zprintf(v, "0%ld", FSize);
+  stp_zprintf(v, "BM");
+  stp_put32_le(FSize, v);
+  dyesub_nputc(v, '\0', 4);
+  stp_put32_le(1088, v);
+  stp_put32_le(40, v);
+  stp_put32_le(privdata.w_size, v);
+  stp_put32_le(privdata.h_size, v);
+  stp_put16_le(1, v);
+  stp_put16_le(8, v);
+  dyesub_nputc(v, '\0', 24);
+  dyesub_nputc(v, '\0', 1024);   /*RGB Array*/
+  dyesub_nputc(v, '\0', AdSize); /*Locate to 32bit border */
+}
+
+
+
+/* Dai Nippon Printing DS80 */
+static const dyesub_pagesize_t dnpds80_dock_page[] =
+{
+  { "c8x10", "8x10", PT(2560,300)+1, PT(3036,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+  { "C6", "8x4", PT(2560,300)+1, PT(1236,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},/* 8x4 */
+  { "C5", "8x5", PT(2560,300)+1, PT(1536,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+  { "C4", "8x6", PT(2560,300)+1, PT(1836,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+  { "C3", "8x8", PT(2560,300)+1, PT(2436,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+  { "C2", "8x12", PT(2560,300)+1, PT(3636,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+  { "C1", "A4 Length", PT(2560,300)+1, PT(3544,300)+1, 0, 0, 0, 0, DYESUB_PORTRAIT},
+};
+
+LIST(dyesub_pagesize_list_t, dnpds80_dock_page_list, dyesub_pagesize_t, dnpds80_dock_page);
+
+static const dyesub_printsize_t dnpds80_dock_printsize[] =
+{
+  { "300x300", "c8x10", 2560, 3036},
+  { "300x300", "C6", 2560, 1236},
+  { "300x300", "C5", 2560, 1536},
+  { "300x300", "C4", 2560, 1836},
+  { "300x300", "C3", 2560, 2436},
+  { "300x300", "C2", 2560, 3636},
+  { "300x300", "C1", 2560, 3544},
+};
+
+LIST(dyesub_printsize_list_t, dnpds80_dock_printsize_list, dyesub_printsize_t, dnpds80_dock_printsize);
 
 /* Model capabilities */
 
@@ -1545,6 +1661,22 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
       | DYESUB_FEATURE_PLANE_INTERLACE,
     &cpx00_printer_init_func, NULL,
     &cpx00_plane_init_func, NULL,
+    NULL, NULL,
+    cpx00_adj_cyan, cpx00_adj_magenta, cpx00_adj_yellow,
+    NULL,
+  },
+  { /* Canon CP-520 */
+    1004,
+    &ymc_ink_list,
+    &res_300dpi_list,
+    &cp220_page_list,
+    &cp220_printsize_list,
+    SHRT_MAX,
+    DYESUB_FEATURE_FULL_WIDTH | DYESUB_FEATURE_FULL_HEIGHT
+      | DYESUB_FEATURE_BORDERLESS | DYESUB_FEATURE_WHITE_BORDER
+      | DYESUB_FEATURE_PLANE_INTERLACE,
+    &cp520_printer_init_func, NULL,
+    &cp520_plane_init_func, NULL,
     NULL, NULL,
     cpx00_adj_cyan, cpx00_adj_magenta, cpx00_adj_yellow,
     NULL,
@@ -1696,6 +1828,36 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     NULL, NULL, NULL,
     NULL,
   },
+  { /* Dai Nippon Printing DS40 */
+    6000,
+    &rgb_ink_list,
+    &res_300dpi_list,
+    &dnpds40_dock_page_list,
+    &dnpds40_dock_printsize_list,
+    SHRT_MAX,
+    DYESUB_FEATURE_FULL_WIDTH | DYESUB_FEATURE_FULL_HEIGHT
+      | DYESUB_FEATURE_PLANE_INTERLACE | DYESUB_FEATURE_PLANE_LEFTTORIGHT,
+    NULL, &dnpds40_printer_end,
+    &dnpds40_plane_init, NULL,
+    NULL, NULL,
+    NULL, NULL, NULL,
+    NULL,
+  },
+  { /* Dai Nippon Printing DS80 */
+    6001,
+    &rgb_ink_list,
+    &res_300dpi_list,
+    &dnpds80_dock_page_list,
+    &dnpds80_dock_printsize_list,
+    SHRT_MAX,
+    DYESUB_FEATURE_FULL_WIDTH | DYESUB_FEATURE_FULL_HEIGHT
+      | DYESUB_FEATURE_PLANE_INTERLACE | DYESUB_FEATURE_PLANE_LEFTTORIGHT,
+    NULL, &dnpds40_printer_end,
+    &dnpds40_plane_init, NULL,
+    NULL, NULL,
+    NULL, NULL, NULL,
+    NULL,
+  },
 };
 
 static const stp_parameter_t the_parameters[] =
@@ -1731,6 +1893,10 @@ static const stp_parameter_t the_parameters[] =
     STP_PARAMETER_LEVEL_BASIC, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
+    /* TRANSLATORS: Some dye sublimation printers are able achieve */
+    /* better durability of output by covering it with transparent */
+    /* laminate surface. This surface can be of different patterns: */
+    /* common are matte, glossy or texture. */
     "Laminate", N_("Laminate Pattern"), N_("Advanced Printer Setup"),
     N_("Laminate Pattern"),
     STP_PARAMETER_TYPE_STRING_LIST, STP_PARAMETER_CLASS_FEATURE,
@@ -2365,7 +2531,10 @@ dyesub_print_row(stp_vars_t *v,
   for (w = 0; w < pv->outw_px; w++)
     {
       col = dyesub_interpolate(w, pv->outw_px, pv->imgw_px);
-      ret = dyesub_print_pixel(v, pv, row, col, plane);
+      if (pv->plane_lefttoright)
+	ret = dyesub_print_pixel(v, pv, row, pv->imgw_px - col - 1, plane);
+      else
+	ret = dyesub_print_pixel(v, pv, row, col, plane);
       if (ret > 1)
       	break;
     }
@@ -2553,6 +2722,7 @@ dyesub_do_print(stp_vars_t *v, stp_image_t *image)
  		(strcmp(ink_type, "RGB") == 0 || strcmp(ink_type, "BGR") == 0)
 		? '\xff' : '\0');
   pv.plane_interlacing = dyesub_feature(caps, DYESUB_FEATURE_PLANE_INTERLACE);
+  pv.plane_lefttoright = dyesub_feature(caps, DYESUB_FEATURE_PLANE_LEFTTORIGHT);
   pv.print_mode = page_mode;
   if (!pv.image_data)
     {

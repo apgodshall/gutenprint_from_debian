@@ -1,5 +1,5 @@
 /*
- * "$Id: i18n.c,v 1.6 2008/08/16 16:56:06 rlk Exp $"
+ * "$Id: i18n.c,v 1.8 2009/04/11 19:05:12 rlk Exp $"
  *
  *   Internationalization functions for CUPS drivers.
  *
@@ -87,7 +87,7 @@ static stpi_i18n_t	*stpi_pocache = NULL;
  * 'stp_i18n_load()' - Load a message catalog for a locale.
  */
 
-stp_string_list_t *			/* O - Message catalog */
+const stp_string_list_t *		/* O - Message catalog */
 stp_i18n_load(const char *locale)	/* I - Locale name */
 {
   stp_string_list_t	*po;		/* Message catalog */
@@ -385,6 +385,8 @@ stp_i18n_load(const char *locale)	/* I - Locale name */
     stpi_pocache  = pocache;
   }
   
+  if (ic)
+    iconv_close(ic);
   return (po);
 }
 
@@ -395,7 +397,7 @@ stp_i18n_load(const char *locale)	/* I - Locale name */
 
 const char *				/* O - Localized message */
 stp_i18n_lookup(
-    stp_string_list_t *po,		/* I - Message catalog */
+    const stp_string_list_t *po,		/* I - Message catalog */
     const char        *message)		/* I - Message */
 {
   stp_param_string_t	*param;		/* Matching message */
@@ -414,7 +416,7 @@ stp_i18n_lookup(
 
 void
 stp_i18n_printf(
-    stp_string_list_t *po,		/* I - Message catalog */
+    const stp_string_list_t *po,		/* I - Message catalog */
     const char        *message,		/* I - Printf-style message */
     ...)				/* I - Additional arguments as needed */
 {
@@ -477,5 +479,5 @@ stpi_unquote(char *s)		/* IO - Original string */
 
 
 /*
- * End of "$Id: i18n.c,v 1.6 2008/08/16 16:56:06 rlk Exp $".
+ * End of "$Id: i18n.c,v 1.8 2009/04/11 19:05:12 rlk Exp $".
  */

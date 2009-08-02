@@ -124,6 +124,13 @@
     </member>
     <member kind="function">
       <type>void</type>
+      <name>stp_split</name>
+      <anchorfile>bit-ops_8h.html</anchorfile>
+      <anchor>8509200fc0bff8d1f5928f04bf1edd2b</anchor>
+      <arglist>(int height, int bits, int n, const unsigned char *in, int stride, unsigned char **outs)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
       <name>stp_split_2</name>
       <anchorfile>bit-ops_8h.html</anchorfile>
       <anchor>260a00a6551c9e27e56ea1fab9444d80</anchor>
@@ -135,6 +142,13 @@
       <anchorfile>bit-ops_8h.html</anchorfile>
       <anchor>6d93a70fcc820df08fcf8d380b9743f5</anchor>
       <arglist>(int height, int bits, const unsigned char *in, unsigned char *out0, unsigned char *out1, unsigned char *out2, unsigned char *out3)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_unpack</name>
+      <anchorfile>bit-ops_8h.html</anchorfile>
+      <anchor>6512fc112307407fa2f30468b80ef69d</anchor>
+      <arglist>(int height, int bits, int n, const unsigned char *in, unsigned char **outs)</arglist>
     </member>
     <member kind="function">
       <type>void</type>

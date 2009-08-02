@@ -1,5 +1,5 @@
-/*
- * "$Id: genppd.c,v 1.171 2008/12/05 03:27:20 easysw Exp $"
+ /*
+ * "$Id: genppd.c,v 1.178 2009/07/18 00:55:45 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -161,7 +161,7 @@ const char *parameter_level_names[] =
  */
 
 #ifdef CUPS_DRIVER_INTERFACE
-static int	cat_ppd(int argc, char **argv);
+static int	cat_ppd(const char *uri);
 static int	list_ppds(const char *argv0);
 #else  /* !CUPS_DRIVER_INTERFACE */
 static int	generate_ppd(const char *prefix, int verbose,
@@ -176,10 +176,12 @@ static char	**getlangs(void);
 static int	is_special_option(const char *name);
 static void	print_group_close(gzFile fp, stp_parameter_class_t p_class,
 				  stp_parameter_level_t p_level,
-				  const char *language, stp_string_list_t *po);
+				  const char *language,
+				  const stp_string_list_t *po);
 static void	print_group_open(gzFile fp, stp_parameter_class_t p_class,
 				 stp_parameter_level_t p_level,
-				 const char *language, stp_string_list_t *po);
+				 const char *language,
+				 const stp_string_list_t *po);
 static int	write_ppd(gzFile fp, const stp_printer_t *p,
 		          const char *language, const char *ppd_location,
 			  int simplified);
@@ -196,6 +198,13 @@ static int	write_ppd(gzFile fp, const stp_printer_t *p,
  * 'main()' - Process files on the command-line...
  */
 
+const char slang_c[] = "LANG=C";
+const char slcall_c[] = "LC_ALL=C";
+const char slcnumeric_c[] = "LC_NUMERIC=C";
+char lang_c[sizeof(slang_c) + 1];
+char lcall_c[sizeof(slcall_c) + 1];
+char lcnumeric_c[sizeof(slcnumeric_c) + 1];
+
 int				    /* O - Exit status */
 main(int  argc,			    /* I - Number of command-line arguments */
      char *argv[])		    /* I - Command-line arguments */
@@ -204,9 +213,12 @@ main(int  argc,			    /* I - Number of command-line arguments */
   * Force POSIX locale, since stp_init incorrectly calls setlocale...
   */
 
-  putenv((char *)"LANG=C");
-  putenv((char *)"LC_ALL=C");
-  putenv((char *)"LC_NUMERIC=C");
+  strcpy(lang_c, slang_c);
+  strcpy(lcall_c, slcall_c);
+  strcpy(lcnumeric_c, slcnumeric_c);
+  putenv(lang_c);
+  putenv(lcall_c);
+  putenv(lcnumeric_c);
 
  /*
   * Initialise libgutenprint
@@ -221,10 +233,32 @@ main(int  argc,			    /* I - Number of command-line arguments */
   if (argc == 2 && !strcmp(argv[1], "list"))
     return (list_ppds(argv[0]));
   else if (argc == 3 && !strcmp(argv[1], "cat"))
-    return (cat_ppd(argc, argv));
+    return (cat_ppd(argv[2]));
+  else if (argc == 2 && !strcmp(argv[1], "org.gutenprint.multicat"))
+    {
+      char buf[1024];
+      int status = 0;
+      while (status == 0 && fgets(buf, sizeof(buf) - 1, stdin))
+	{
+	  size_t len = strlen(buf);
+	  if (len == 0)
+	    continue;
+	  if (buf[len - 1] == '\n')
+	    buf[len - 1] = '\0';
+	  status = cat_ppd(buf);
+	  fputs("*%*%EOFEOF\n", stdout);
+	  (void) fflush(stdout);
+	}
+      return status;
+    }
   else if (argc == 2 && !strcmp(argv[1], "VERSION"))
     {
       printf("%s\n", VERSION);
+      return (0);
+    }
+  else if (argc == 2 && !strcasecmp(argv[1], "org.gutenprint.extensions"))
+    {
+      printf("org.gutenprint.multicat");
       return (0);
     }
   else
@@ -241,9 +275,8 @@ main(int  argc,			    /* I - Number of command-line arguments */
  */
 
 static int				/* O - Exit status */
-cat_ppd(int argc, char **argv)	/* I - Driver URI */
+cat_ppd(const char *uri)	/* I - Driver URI */
 {
-  const char		*uri = argv[2];
   char			scheme[64],	/* URI scheme */
 			userpass[32],	/* URI user/pass (unused) */
 			hostname[32],	/* URI hostname */
@@ -800,7 +833,7 @@ print_group(
     stp_parameter_class_t p_class,	/* I - Option class */
     stp_parameter_level_t p_level,	/* I - Option level */
     const char		  *language,	/* I - Language */
-    stp_string_list_t     *po)		/* I - Message catalog */
+    const stp_string_list_t     *po)		/* I - Message catalog */
 {
   char buf[64];
   const char *class = stp_i18n_lookup(po, parameter_class_names[p_class]);
@@ -816,7 +849,7 @@ print_group(
 
       for (langnum = 0; all_langs[langnum]; langnum ++)
 	{
-	  stp_string_list_t *altpo;
+	  const stp_string_list_t *altpo;
 
 	  lang = all_langs[langnum];
 
@@ -846,7 +879,7 @@ print_group_close(
     stp_parameter_class_t p_class,	/* I - Option class */
     stp_parameter_level_t p_level,	/* I - Option level */
     const char		 *language,	/* I - language */
-    stp_string_list_t    *po)		/* I - Message catalog */
+    const stp_string_list_t    *po)		/* I - Message catalog */
 {
   print_group(fp, "Close", p_class, p_level, NULL, NULL);
 }
@@ -862,7 +895,7 @@ print_group_open(
     stp_parameter_class_t p_class,	/* I - Option class */
     stp_parameter_level_t p_level,	/* I - Option level */
     const char		 *language,	/* I - language */
-    stp_string_list_t    *po)		/* I - Message catalog */
+    const stp_string_list_t    *po)		/* I - Message catalog */
 {
   print_group(fp, "Open", p_class, p_level, language ? language : "C", po);
 }
@@ -911,7 +944,7 @@ write_ppd(
   char		*default_resolution = NULL;  /* Default resolution mapped name */
   stp_string_list_t *resolutions = stp_string_list_create();
   char		**all_langs = getlangs();/* All languages */
-  stp_string_list_t	*po = stp_i18n_load(language);
+  const stp_string_list_t	*po = stp_i18n_load(language);
 					/* Message catalog */
 
 
@@ -1535,7 +1568,7 @@ write_ppd(
 		  !stp_string_list_is_present(res_list, res_name))
 		{
 		  resolution_ok = 1;
-		  stp_string_list_add_string(res_list, res_name, res_name);
+		  stp_string_list_add_string(res_list, res_name, opt->text);
 		}
 	      else if (tmp_ydpi > tmp_xdpi &&
 		       tmp_ydpi < MAXIMUM_SAFE_PPD_Y_RESOLUTION)
@@ -1548,7 +1581,7 @@ write_ppd(
 	      else
 		tmp_xdpi /= 2;
 	    } while (!resolution_ok);
-	  stp_string_list_add_string(resolutions, res_name, res_name);
+	  stp_string_list_add_string(resolutions, res_name, opt->text);
 	  gzprintf(fp, "*Resolution %s/%s:\t\"<</HWResolution[%d %d]/cupsCompression %d>>setpagedevice\"\n",
 		   res_name, stp_i18n_lookup(po, opt->text), xdpi, ydpi, i + 1);
 	  if (strcmp(res_name, opt->name) != 0)
@@ -1760,7 +1793,7 @@ write_ppd(
 			{
 			  gzprintf(fp, "*OpenUI *StpFine%s/%s %s: PickOne\n",
 				   desc.name, stp_i18n_lookup(po, desc.text), _("Fine Adjustment"));
-			  gzprintf(fp, "*OPOptionHints Stp%s: \"hide\"\n",
+			  gzprintf(fp, "*OPOptionHints StpFine%s: \"hide\"\n",
 				   lparam->name);
 			  gzprintf(fp, "*StpStpFine%s: %d %d %d %d %d %.3f %.3f %.3f\n",
 				   desc.name, STP_PARAMETER_TYPE_INVALID, 0,
@@ -1860,7 +1893,7 @@ write_ppd(
 		      */
 
 		      gzprintf(fp, "*CustomStp%s True: \"pop\"\n", desc.name);
-		      gzprintf(fp, "*ParamCustomStp%s Value/%s: 1 points %d %d\n\n",
+		      gzprintf(fp, "*ParamCustomStp%s Value/%s: 1 int %d %d\n\n",
 		               desc.name, _("Value"),
 			       desc.bounds.dimension.lower,
 			       desc.bounds.dimension.upper);
@@ -1878,6 +1911,7 @@ write_ppd(
 	    print_group_close(fp, j, k, language, po);
 	}
     }
+  stp_parameter_list_destroy(param_list);
   stp_describe_parameter(v, "ImageType", &desc);
   if (desc.is_active && desc.p_type == STP_PARAMETER_TYPE_STRING_LIST)
     {
@@ -1906,7 +1940,7 @@ write_ppd(
     */
 
     const char *lang;
-    stp_string_list_t *altpo;
+    const stp_string_list_t *altpo;
     int langnum;
 
     for (langnum = 0; all_langs[langnum]; langnum ++)
@@ -2240,6 +2274,7 @@ write_ppd(
 		}
 	    }
 	}
+      stp_parameter_list_destroy(param_list);
       stp_describe_parameter(v, "ImageType", &desc);
       if (desc.is_active && desc.p_type == STP_PARAMETER_TYPE_STRING_LIST)
 	{
@@ -2261,8 +2296,6 @@ write_ppd(
   if (has_quality_parameter)
     stp_free(default_resolution);
   stp_string_list_destroy(resolutions);
-
-  stp_parameter_list_destroy(param_list);
 
 #undef _
 #define _(x) x
@@ -2320,5 +2353,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.171 2008/12/05 03:27:20 easysw Exp $".
+ * End of "$Id: genppd.c,v 1.178 2009/07/18 00:55:45 rlk Exp $".
  */

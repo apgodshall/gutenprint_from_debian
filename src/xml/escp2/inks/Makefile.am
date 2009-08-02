@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.7 2008/12/07 20:03:09 rlk Exp $
+## $Id: Makefile.am,v 1.9 2009/05/30 14:10:32 rlk Exp $
 ## Copyright (C) 2008 Robert Krawitz
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -43,6 +43,7 @@ pkgxmldata_DATA =				\
 	f360_photo7_japan.xml			\
 	f360_ultrachrome.xml			\
 	f360_ultrachrome_k3.xml			\
+	f360_ultrachrome_k3v.xml		\
 	nx100.xml				\
 	photo_gen0.xml				\
 	photo_gen1.xml				\
@@ -73,6 +74,7 @@ xml-stamp: $(pkgxmldata_DATA) Makefile.am
 
 all-local: xml-stamp
 
+dist-hook: xml-stamp
 CLEANFILES = xmli18n-tmp.h xml-stamp xml-stamp.tmp
 
 EXTRA_DIST = $(pkgxmldata_DATA)

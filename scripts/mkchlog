@@ -14,9 +14,17 @@ use strict;
 my $emailsuffix;
 my $symbolic_name_regexp;
 my (@ignoreprefix);
+my $reverse = 0;
+my $use_rcs_filename = 0;
+my $print_each_file = 0;
+my $print_time = 0;
 
 GetOptions("e:s" => \$emailsuffix,
 	   "X=s" => \@ignoreprefix,
+	   "r!"  => \$reverse,
+	   "R!"  => \$use_rcs_filename,
+	   "v!"  => \$print_each_file,
+	   "t!"  => \$print_time,
 	   "s:s" => \$symbolic_name_regexp);
 
 my %logmsgs = ();			# Index by date, time, and author
@@ -44,7 +52,7 @@ foreach my $d (@cvsdirs) {
     }
 }
 
-sub compare_versions
+sub compare_versions($$)
 {
     # vw: version of the working file
     # vl: version from the log
@@ -135,6 +143,7 @@ sub compare_versions
 }
 
 my ($in_header) = 0;
+my ($has_rcs_file) = 0;
 my (%symbols);
 my $revision;
 my $ignore;
@@ -144,10 +153,32 @@ my $currentbasefile;
 my %symbols_printed = ();
 
 while (<>) {
-    if (/^Working file: /) {
+    if (/^RCS file: /) {
+	next if (! $use_rcs_filename);
+	$in_header = 1;
+	$has_rcs_file = 1;
+	chomp;
+	$currentfile = $_;
+	$currentfile =~ s,/RCS/,/,;
+	$currentfile =~ s,^RCS file: *\./,,;
+	$currentfile =~ s/,v$//;
+	$currentfile =~ s/\s/\000/g;
+	if (grep { $currentfile =~ /^$_/ } @ignoreprefix) {
+	    $skipfile = 1;
+	} else {
+	    $skipfile = 0;
+	}
+	$symbols{$currentfile} = {};
+	next;
+    } elsif (/^Working file: /) {
+	if ($has_rcs_file) {
+	    $has_rcs_file = 0;
+	    next;
+	}
 	$in_header = 1;
 	chomp;
-	($ignore, $ignore, $currentfile) = split;
+	($ignore, $ignore, $currentfile) = split(/\s+/, $_, 3);
+	$currentfile =~ s/\s/\000/g;
 	if (grep { $currentfile =~ /^$_/ } @ignoreprefix) {
 	    $skipfile = 1;
 	} else {
@@ -196,11 +227,29 @@ while (<>) {
 	    $skipme = 1;
 	}
     } elsif (! $in_header && $_ =~ /^date: /) {
-	my ($ignore, $date, $time, $ignore, $author, $ignore, $state,
-	    $ignore, $plus, $minus, $ignore) = split;
+	my (@stuff) = split;
+	my ($date, $time, $author, $state, $plus, $minus);
+	if ($stuff[3] =~ /^[-+][0-9][0-9][0-9][0-9]/) {
+	    $date = $stuff[1];
+	    $time = $stuff[2];
+	    $author = $stuff[5];
+	    $state = $stuff[7];
+	    $plus = $stuff[9];
+	    $minus = $stuff[10];
+	} else {
+	    $date = $stuff[1];
+	    $time = $stuff[2];
+	    $author = $stuff[4];
+	    $state = $stuff[6];
+	    $plus = $stuff[8];
+	    $minus = $stuff[9];
+	}
 #	$time =~ s/[0-9]:[0-9][0-9];$//;
 #	$time =~ s/[0-9][0-9];$//;
+	$time =~ s/;$//;
 	$author =~ s/;$//;
+	$plus =~ s/;$//;
+	$minus =~ s/;$//;
 	my $body = "";
 	my $firstline = 1;
 	while (<>) {
@@ -238,13 +287,46 @@ while (<>) {
 }
 
 my $prevmsg="";
+my $prevdate="";
+my $prevtime="";
+my $prevauthor="";
 my $header="";
-my @fileinfo = ();
+my %deltainfo = ();
+my %revinfo = ();
 
-my @chlog = reverse sort keys %logmsgs;
+my @chlog = $reverse ? sort keys %logmsgs : reverse sort keys %logmsgs;
 my %filenames_printed = ();
 my ($date, $time, $author, $junk, $file, $revision, @symbols);
 my $filestuff;
+
+sub printmsg($$$$$\%\%)
+{
+    my ($date, $time, $author, $emailsuffix, $prevmsg, $revinfo, $deltainfo) = @_;
+    if ($print_time) {
+	$time = " $time";
+    } else {
+	$time = "";
+    }
+    print "$date$time\t<$author$emailsuffix>\n\n";
+    my $filestuff = join "", (map { "\t\t$_ ($$revinfo{$_}) ($$deltainfo{$_})\n" } sort keys %revinfo);
+    $filestuff =~ s/\000/ /g;
+    $filestuff =~ s/\t/\tFiles:/;
+    print "$filestuff\n";
+    $prevmsg =~ s/^/\t/g;
+    $prevmsg =~ s/\n/\n\t/g;
+    $prevmsg =~ s/[ \t]+\n/\n/g;
+    $prevmsg =~ s/[ \t]+$//g;
+    print "$prevmsg\n";
+}
+
+sub printsyms(@) {
+    my (@symbols_to_print) = @_;
+    print "===============================================================================\n";
+    map {
+	print "Name: $_\n";
+    } @symbols_to_print;
+    print "\n";
+}
 
 foreach (@chlog) {
     ($date, $time, $author, $junk, $file, $revision, @symbols) = split;
@@ -256,25 +338,23 @@ foreach (@chlog) {
     } else {
 	$delta = "$plus{$_} $minus{$_}";
     }
-    if ($prevmsg eq $msg && !$filenames_printed{$file}) {
-	push @fileinfo, "\t\t$file ($revision) ($delta)\n";
+    if (! $print_each_file && $prevmsg eq $msg && !$filenames_printed{$file}) {
+	$deltainfo{$file} = $delta;
+	$revinfo{$file} = $revision;
     } else {
-	if ($prevmsg ne "" || $#fileinfo >= 0) {
-	    print $header;
-	    $filestuff = join "", sort @fileinfo;
-	    $filestuff =~ s/\t/\tFiles:/;
-	    print "$filestuff\n";
-	    $prevmsg =~ s/^/\t/g;
-	    $prevmsg =~ s/\n/\n\t/g;
-	    $prevmsg =~ s/[ \t]+\n/\n/g;
-	    $prevmsg =~ s/[ \t]+$//g;
-	    print "$prevmsg\n";
+	if ($prevmsg ne "" || keys %deltainfo > 0) {
+	    printmsg($prevdate, $prevtime, $prevauthor, $emailsuffix, $prevmsg, %revinfo, %deltainfo);
 	    %filenames_printed = ();
 	}
 	$header = "$date\t<$author$emailsuffix>\n\n";
 	$prevmsg = $msg;
-	@fileinfo = ();
-	push @fileinfo, "\t\t$file ($revision) ($delta)\n";
+	$prevdate = $date;
+	$prevauthor = $author;
+	$prevtime = $time;
+	%deltainfo = ();
+	%revinfo = ();
+	$deltainfo{$file} = $delta;
+	$revinfo{$file} = $revision;
 	$filenames_printed{$file} = 1;
     }
     my (@symbols_to_print);
@@ -285,22 +365,10 @@ foreach (@chlog) {
 	}
     }
     if (@symbols_to_print) {
-	print "===============================================================================\n";
-	map {
-	    print "Name: $_\n";
-	} @symbols_to_print;
-	print "\n";
+	printsyms(@symbols_to_print);
     }
 }
 
-if ($prevmsg ne "" or $#fileinfo >= 0) {
-    print "$date\t<$author$emailsuffix>\n\n";
-    $filestuff = join "", sort @fileinfo;
-    $filestuff =~ s/\t/\tFiles:/;
-    print "$filestuff\n";
-    $prevmsg =~ s/^/\t/g;
-    $prevmsg =~ s/\n/\n\t/g;
-    $prevmsg =~ s/[ \t]+\n/\n/g;
-    $prevmsg =~ s/[ \t]+$//g;
-    print "$prevmsg\n";
+if ($prevmsg ne "" || keys %deltainfo > 0) {
+    printmsg($prevdate, $prevtime, $prevauthor, $emailsuffix, $prevmsg, %revinfo, %deltainfo);
 }

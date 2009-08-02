@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.5 2008/12/10 00:44:12 rlk Exp $
+## $Id: Makefile.am,v 1.7 2009/05/30 14:10:32 rlk Exp $
 ## Copyright (C) 2008 Robert Krawitz
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -35,6 +35,7 @@ pkgxmldata_DATA =				\
 	pro_roll_feed.xml			\
 	r1800.xml				\
 	r2400.xml				\
+	r2880.xml				\
 	rx680.xml				\
 	rx700.xml				\
 	spro5000.xml				\
@@ -48,6 +49,7 @@ xml-stamp: $(pkgxmldata_DATA) Makefile.am
 
 all-local: xml-stamp
 
+dist-hook: xml-stamp
 CLEANFILES = xmli18n-tmp.h xml-stamp xml-stamp.tmp
 
 EXTRA_DIST = $(pkgxmldata_DATA)

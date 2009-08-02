@@ -42,104 +42,88 @@
      tINT = 258,
      tDOUBLE = 259,
      tSTRING = 260,
-     CYAN = 261,
-     L_CYAN = 262,
-     MAGENTA = 263,
-     L_MAGENTA = 264,
-     YELLOW = 265,
-     D_YELLOW = 266,
-     BLACK = 267,
-     L_BLACK = 268,
-     GAMMA = 269,
-     LEVEL = 270,
-     STEPS = 271,
-     INK_LIMIT = 272,
-     PRINTER = 273,
-     PARAMETER = 274,
-     PARAMETER_INT = 275,
-     PARAMETER_BOOL = 276,
-     PARAMETER_FLOAT = 277,
-     PARAMETER_CURVE = 278,
-     DENSITY = 279,
-     TOP = 280,
-     LEFT = 281,
-     HSIZE = 282,
-     VSIZE = 283,
-     BLACKLINE = 284,
-     NOSCALE = 285,
-     PATTERN = 286,
-     XPATTERN = 287,
-     EXTENDED = 288,
-     IMAGE = 289,
-     GRID = 290,
-     SEMI = 291,
-     CHANNEL = 292,
-     CMYK = 293,
-     KCMY = 294,
-     RGB = 295,
-     CMY = 296,
-     GRAY = 297,
-     WHITE = 298,
-     RAW = 299,
-     MODE = 300,
-     PAGESIZE = 301,
-     MESSAGE = 302,
-     OUTPUT = 303,
-     START_JOB = 304,
-     END_JOB = 305,
-     END = 306
+     COLOR = 261,
+     GAMMA = 262,
+     LEVEL = 263,
+     STEPS = 264,
+     INK_LIMIT = 265,
+     PRINTER = 266,
+     PARAMETER = 267,
+     PARAMETER_INT = 268,
+     PARAMETER_BOOL = 269,
+     PARAMETER_FLOAT = 270,
+     PARAMETER_CURVE = 271,
+     DENSITY = 272,
+     TOP = 273,
+     LEFT = 274,
+     HSIZE = 275,
+     VSIZE = 276,
+     BLACKLINE = 277,
+     NOSCALE = 278,
+     PATTERN = 279,
+     XPATTERN = 280,
+     EXTENDED = 281,
+     IMAGE = 282,
+     GRID = 283,
+     SEMI = 284,
+     CHANNEL = 285,
+     CMYK = 286,
+     KCMY = 287,
+     RGB = 288,
+     CMY = 289,
+     GRAY = 290,
+     WHITE = 291,
+     MODE = 292,
+     PAGESIZE = 293,
+     MESSAGE = 294,
+     OUTPUT = 295,
+     START_JOB = 296,
+     END_JOB = 297,
+     END = 298
    };
 #endif
 /* Tokens.  */
 #define tINT 258
 #define tDOUBLE 259
 #define tSTRING 260
-#define CYAN 261
-#define L_CYAN 262
-#define MAGENTA 263
-#define L_MAGENTA 264
-#define YELLOW 265
-#define D_YELLOW 266
-#define BLACK 267
-#define L_BLACK 268
-#define GAMMA 269
-#define LEVEL 270
-#define STEPS 271
-#define INK_LIMIT 272
-#define PRINTER 273
-#define PARAMETER 274
-#define PARAMETER_INT 275
-#define PARAMETER_BOOL 276
-#define PARAMETER_FLOAT 277
-#define PARAMETER_CURVE 278
-#define DENSITY 279
-#define TOP 280
-#define LEFT 281
-#define HSIZE 282
-#define VSIZE 283
-#define BLACKLINE 284
-#define NOSCALE 285
-#define PATTERN 286
-#define XPATTERN 287
-#define EXTENDED 288
-#define IMAGE 289
-#define GRID 290
-#define SEMI 291
-#define CHANNEL 292
-#define CMYK 293
-#define KCMY 294
-#define RGB 295
-#define CMY 296
-#define GRAY 297
-#define WHITE 298
-#define RAW 299
-#define MODE 300
-#define PAGESIZE 301
-#define MESSAGE 302
-#define OUTPUT 303
-#define START_JOB 304
-#define END_JOB 305
-#define END 306
+#define COLOR 261
+#define GAMMA 262
+#define LEVEL 263
+#define STEPS 264
+#define INK_LIMIT 265
+#define PRINTER 266
+#define PARAMETER 267
+#define PARAMETER_INT 268
+#define PARAMETER_BOOL 269
+#define PARAMETER_FLOAT 270
+#define PARAMETER_CURVE 271
+#define DENSITY 272
+#define TOP 273
+#define LEFT 274
+#define HSIZE 275
+#define VSIZE 276
+#define BLACKLINE 277
+#define NOSCALE 278
+#define PATTERN 279
+#define XPATTERN 280
+#define EXTENDED 281
+#define IMAGE 282
+#define GRID 283
+#define SEMI 284
+#define CHANNEL 285
+#define CMYK 286
+#define KCMY 287
+#define RGB 288
+#define CMY 289
+#define GRAY 290
+#define WHITE 291
+#define MODE 292
+#define PAGESIZE 293
+#define MESSAGE 294
+#define OUTPUT 295
+#define START_JOB 296
+#define END_JOB 297
+#define END 298
 
 
 

@@ -1,5 +1,5 @@
 /*
- * "$Id: escp2-channels.c,v 1.87 2008/10/29 00:10:42 easysw Exp $"
+ * "$Id: escp2-channels.c,v 1.89 2009/03/07 19:38:00 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -47,6 +47,12 @@ load_subchannel(stp_mxml_node_t *node, stp_mxml_node_t *root, physical_subchanne
   name = stp_mxmlElementGetAttr(node, "headOffset");
   if (name)
     icl->head_offset = stp_xmlstrtol(name);
+  name = stp_mxmlElementGetAttr(node, "name");
+  if (name)
+    icl->name = stp_strdup(name);
+  name = stp_mxmlElementGetAttr(node, "text");
+  if (name)
+    icl->text = stp_strdup(name);
   while (child)
     {
       if (child->type == STP_MXML_ELEMENT)
@@ -234,6 +240,8 @@ load_inkname(stp_mxml_node_t *node, stp_mxml_node_t *root, inkname_t *inl)
 	inl->inkset = INKSET_CcMmYKk;
       else if (!strcmp(name, "Quadtone"))
 	inl->inkset = INKSET_QUADTONE;
+      else if (!strcmp(name, "Hextone"))
+	inl->inkset = INKSET_HEXTONE;
       else if (!strcmp(name, "OTHER"))
 	inl->inkset = INKSET_OTHER;
       else if (!strcmp(name, "Extended"))

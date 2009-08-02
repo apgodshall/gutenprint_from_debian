@@ -1,5 +1,5 @@
 /*
- * "$Id: i18n.h,v 1.1 2008/08/13 07:35:52 easysw Exp $"
+ * "$Id: i18n.h,v 1.3 2009/04/11 19:05:12 rlk Exp $"
  *
  *   Internationalization definitions for CUPS drivers.
  *
@@ -35,13 +35,13 @@
  * Prototypes...
  */
 
-extern stp_string_list_t	*stp_i18n_load(const char *locale);
-extern const char		*stp_i18n_lookup(stp_string_list_t *po,
+extern const stp_string_list_t	*stp_i18n_load(const char *locale);
+extern const char		*stp_i18n_lookup(const stp_string_list_t *po,
 				                 const char *message);
-extern void			stp_i18n_printf(stp_string_list_t *po,
+extern void			stp_i18n_printf(const stp_string_list_t *po,
 				                const char *message, ...);
 
 
 /*
- * End of "$Id: i18n.h,v 1.1 2008/08/13 07:35:52 easysw Exp $".
+ * End of "$Id: i18n.h,v 1.3 2009/04/11 19:05:12 rlk Exp $".
  */

@@ -15,10 +15,11 @@ my $retval = 0;
 my $testpattern_command;
 my @printer_list = ();
 my @special_options = ();
-my @standard_options = qw(InkType InkSet DitherAlgorithm Duplex MediaType InputSlot ColorCorrection ImageType FullBleed Quality UseGloss Weave RawChannels PrintingDirection Density CyanDensity);
+my @standard_options = qw(InkType InkSet,RawChannels DitherAlgorithm Duplex MediaType InputSlot ColorCorrection ImageType FullBleed Quality UseGloss Weave PrintingDirection Density CyanDensity);
 my $global_status = 1;
 my $run_installed = 0;
 my $use_min_res = 0;
+my $help = 0;
 my $output = undef;
 
 my @extras = ();
@@ -32,6 +33,7 @@ my %models;
 my %families;
 my $skip_duplicate_printers = 0;
 my $std_pages = 1;
+my $duplex_pages = 4;
 my $skip_resolutions = 0;
 my $quiet = 0;
 my $single = 0;
@@ -49,6 +51,7 @@ GetOptions("v+"  => \$valgrind,
 	   "g"   => \$gdb_attach,
 	   "n"   => \$dontrun,
 	   "p:i" => \$std_pages,
+	   "P:i" => \$duplex_pages,
 	   "s!"  => \$skip_duplicate_printers,
 	   "S!"  => \$single,
 	   "i!"  => \$run_installed,
@@ -60,7 +63,58 @@ GetOptions("v+"  => \$valgrind,
 	   "O=s" => \$output,
 	   "d=s" => \@default_options,
 	   "m:s" => \$calc_md5_dir,
-	   "M:s" => \$calc_md5_file);
+	   "M:s" => \$calc_md5_file,
+	   "h"   => \$help);
+
+if ($help) {
+    my $options = join("\n                        ", sort @standard_options);
+    print STDERR <<EOF;
+Usage: run-testpattern-2 [opts] [model ...]
+
+  Options:
+    -c              Use callgrind (incompatible with -v)
+    -f family       Test printers only in the specified family.  Multiple
+                    families may be tested.  By default, all printer families
+		    are tested.
+    -g              Attach testpattern job to gdb
+    -i              Use the installed Gutenprint libraries rather than
+                    source tree
+    -m md5_dir      Generate MD5 checksums and place them in the specified
+                    directory, one file per run.  Directory will be created
+		    if necessary.
+    -M md5_file     Generate MD5 checksums and place them in the specified
+                    file, one line per run.
+    -n              Do not actually run testpattern
+    -O out_dir      Generate actual output and place it in the specified
+                    directory, one file per run.  Directory will be created
+		    if necessary.
+    -o option       Test this option.  Multiple -o options may be specified.
+                    option1,option2 indicates to test each value of option1
+		    in combination with each value of option2.  For floating
+		    point and integer options, a selection of values is
+		    tested.
+		    Default:
+		        $options
+    -p page count   Specify number of pages to print per printer.  Default $std_pages.
+    -P page count   Specify number of pages to print per printer when testing
+                    duplex mode.  Default $duplex_pages.
+    -q              Do not print progress messages
+    -r              Do not test each resolution (test only the default)
+    -R              Use the minimum resolution (rather than the default)
+                    to test other options.
+    -RR             Use only the minimum resolution, and do not test other
+                    resolutions.
+    -s              Skip duplicate printers (with the same model number
+                    in printers.xml)
+    -S              Run a separate testpattern command for each printer
+    -v[v[v[v]]]     Use valgrind.  Number of -v options controls usage:
+                    -v    Basic valgrind checking, no leak checking
+                    -vv   Additional leak checking
+                    -vvv  Show reachable data also
+                    -vvvv Minimal checks only
+EOF
+exit 1;
+}
 
 my $pages = $std_pages;
 
@@ -412,10 +466,6 @@ sub do_printer($$) {
 		    @job_extras = ();
 		    @messages = ();
 		    @global_messages = ();
-		    if ($first_time) {
-			set_global_message("$printer\n");
-			$first_time = 0;
-		    }
 		    set_opt("PrintingMode", $pmode, $printer);
 		    if ($use_min_res) {
 			set_opt("Resolution", $min_res_name, $printer);
@@ -426,6 +476,7 @@ sub do_printer($$) {
 			my $k = $subkeys[$_];
 			my $v = $subopts[$_];
 			if ($k eq "RawChannels") {
+			    next if ($v ne "None" && $pmode ne "Color");
 			    $rawval = $v;
 			} else {
 			    set_opt($k, $v, $printer);
@@ -433,15 +484,18 @@ sub do_printer($$) {
 			push @mvals, "${k}_${v}";
 			push @ovals, "${k}=${v}";
 		    } (0..$#subkeys);
+		    if ($first_time) {
+			set_global_message("$printer\n");
+			$first_time = 0;
+		    }
 		    # FIXME! need to handle Duplex as a subkey
 		    map {
+			$pages = $std_pages;
 			if ($key ne $_) {
 			    set_opt($_, $base_settings{$_}, $printer);
 			    if ($key eq "Duplex") {
 				set_opt("JobMode", "Job", $printer);
-				$pages = 4;
-			    } else {
-				$pages = $std_pages;
+				$pages = $duplex_pages;
 			    }
 			}
 		    } keys %base_settings;
@@ -520,7 +574,7 @@ if ($dontrun) {
 	$suppress = '-n';
     }
     my ($qopt) = $quiet ? "-q" : "";
-    $testpattern_command = "$valgrind_command ./testpattern $suppress $qopt";
+    $testpattern_command = "$valgrind_command ./testpattern -y $suppress $qopt";
     if ($single) {
 	foreach my $printer (@printer_list) {
 	    open TESTPATTERN, "|$testpattern_command" or

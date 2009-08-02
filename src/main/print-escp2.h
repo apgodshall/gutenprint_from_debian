@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.h,v 1.133 2008/11/22 20:28:04 rlk Exp $"
+ * "$Id: print-escp2.h,v 1.137 2009/07/21 11:07:06 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -161,6 +161,8 @@ typedef struct
   const char *subchannel_transition;
   const char *subchannel_value;
   const char *subchannel_scale;
+  const char *name;
+  const char *text;
   short *split_channels;
 } physical_subchannel_t;
 
@@ -180,8 +182,9 @@ typedef enum
   INKSET_CcMmYyK          = 2,
   INKSET_CcMmYKk          = 3,
   INKSET_QUADTONE         = 4,
-  INKSET_OTHER		  = 5,
-  INKSET_EXTENDED	  = 6
+  INKSET_HEXTONE          = 5,
+  INKSET_OTHER		  = 6,
+  INKSET_EXTENDED	  = 7
 } inkset_id_t;
 
 typedef struct
@@ -241,6 +244,7 @@ typedef struct
   short is_cd;
   short is_roll_feed;
   short duplex;
+  short extra_height;
   unsigned roll_feed_cut_flags;
   const stp_raw_t *init_sequence;
   const stp_raw_t *deinit_sequence;
@@ -555,6 +559,7 @@ typedef struct
   const res_t *res;		/* Description of the printing resolution */
   const stp_raw_t *printer_weave; /* Printer weave parameters */
   int use_printer_weave;	/* Use the printer weaving mechanism */
+  int extra_vertical_passes;	/* Quality enhancement */
 
   /* page parameters */		/* Indexed from top left */
   int page_left;		/* Left edge of page (points) */
@@ -614,5 +619,5 @@ extern void stpi_escp2_terminate_page(stp_vars_t *v);
 
 #endif /* GUTENPRINT_INTERNAL_ESCP2_H */
 /*
- * End of "$Id: print-escp2.h,v 1.133 2008/11/22 20:28:04 rlk Exp $".
+ * End of "$Id: print-escp2.h,v 1.137 2009/07/21 11:07:06 rlk Exp $".
  */

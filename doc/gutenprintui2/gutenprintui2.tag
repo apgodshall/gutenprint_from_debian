@@ -669,6 +669,53 @@
     </member>
   </compound>
   <compound kind="file">
+    <name>t.h</name>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprintui2/</path>
+    <filename>t_8h</filename>
+    <member kind="define">
+      <type>#define</type>
+      <name>STPUI_TYPE_ORIENT_T</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>7c68a632b60b65d497e2933fa1b78a77</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>STPUI_TYPE_COMMAND_T</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>b213314f887b8b4f48f9aa1531673a9c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
+      <name>STPUI_TYPE_CURVE_TYPE</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>f0561b03a3bfb203b40c37f9bb373ffb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>G_BEGIN_DECLS GType</type>
+      <name>orient_t_orient_t_get_type</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>b05fb37a6c79f2b6b417ff107d9bb881</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>GType</type>
+      <name>command_t_command_t_get_type</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>5e6b50173b88263be23734e76f4a39f2</anchor>
+      <arglist>(void)</arglist>
+    </member>
+    <member kind="function">
+      <type>GType</type>
+      <name>stpui_curve_type_get_type</name>
+      <anchorfile>t_8h.html</anchorfile>
+      <anchor>1252245c3967f9e655de3d62c3999230</anchor>
+      <arglist>(void)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
     <name>typebuiltins.h</name>
     <path>/home/rlk/sandbox/print-5.1/include/gutenprintui2/</path>
     <filename>typebuiltins_8h</filename>

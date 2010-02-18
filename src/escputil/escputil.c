@@ -1,5 +1,5 @@
 /*
- * "$Id: escputil.c,v 1.100 2009/03/22 01:35:18 rlk Exp $"
+ * "$Id: escputil.c,v 1.102 2009/12/23 20:13:54 rlk Exp $"
  *
  *   Printer maintenance utility for EPSON Stylus (R) printers
  *
@@ -381,6 +381,7 @@ main(int argc, char **argv)
 	      printf(_("Alignment choices must be at least 1."));
 	      do_help(1);
 	    }
+	  break;
 	case 'p':
 	  alignment_passes = atoi(optarg);
 	  if (alignment_passes < 1)
@@ -388,6 +389,7 @@ main(int argc, char **argv)
 	      printf(_("Alignment passes must be at least 1."));
 	      do_help(1);
 	    }
+	  break;
 	default:
 	  printf("%s\n", gettext(banner));
 	  fprintf(stderr, _("Unknown option %c\n"), c);
@@ -1017,8 +1019,8 @@ static const char *aux_colors[] =
     N_("Cyan"),			/* 1 */
     N_("Magenta"),		/* 2 */
     N_("Yellow"),		/* 3 */
-    NULL,			/* 4 */
-    NULL,			/* 5 */
+    N_("Light Cyan"),		/* 4 */
+    N_("Light Magenta"),	/* 5 */
     NULL,			/* 6 */
     NULL,			/* 7 */
     NULL,			/* 8 */
@@ -1334,6 +1336,9 @@ do_new_status(status_cmd_t cmd, char *buf, int bytes,
 	  printf("%20s    %20s\n", _("Ink color"), _("Percent remaining"));
 	  for (j = 0; j < count; j++)
 	    {
+	      STP_DEBUG(fprintf(stderr, "    Ink %d: ind[0] %d ind[1] %d ind[2] %d interchangeable %d param %d count %d aux %d\n",
+				j, ind[0], ind[1], ind[2], interchangeable_inks,
+				param, color_count, aux_color_count));
 	      if (ind[0] < color_count && param == 3 &&
 		  (interchangeable_inks || ind[1] >= aux_color_count ||
 		   ! aux_colors[(int) ind[1]]))

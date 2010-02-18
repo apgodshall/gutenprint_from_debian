@@ -2467,6 +2467,13 @@
     </member>
     <member kind="function">
       <type>const stp_printer_t *</type>
+      <name>stp_get_printer_by_device_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gdce65b83e3dd0ffcb75591ed3ba81155</anchor>
+      <arglist>(const char *device_id)</arglist>
+    </member>
+    <member kind="function">
+      <type>const stp_printer_t *</type>
       <name>stp_get_printer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc649c4b3d0a93f26f99deb4b081305c1</anchor>
@@ -2491,6 +2498,13 @@
       <name>stp_printer_get_driver</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc345b8cf8cd78da98fdb4c6b2d9cf7ca</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_device_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>g7bbd6440baa533d99616eccb5f449354</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">
@@ -6321,6 +6335,13 @@
     </member>
     <member kind="function">
       <type>const stp_printer_t *</type>
+      <name>stp_get_printer_by_device_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gdce65b83e3dd0ffcb75591ed3ba81155</anchor>
+      <arglist>(const char *device_id)</arglist>
+    </member>
+    <member kind="function">
+      <type>const stp_printer_t *</type>
       <name>stp_get_printer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc649c4b3d0a93f26f99deb4b081305c1</anchor>
@@ -6345,6 +6366,13 @@
       <name>stp_printer_get_driver</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc345b8cf8cd78da98fdb4c6b2d9cf7ca</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_device_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>g7bbd6440baa533d99616eccb5f449354</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">

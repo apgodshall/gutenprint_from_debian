@@ -69,7 +69,8 @@ Description: development files for the Gutenprint printer driver library
 Package: libgutenprint-doc
 Architecture: all
 Section: doc
-Suggests: ${misc:Depends}, libgutenprint-dev (= ${source:Version})
+Depends: ${misc:Depends}
+Suggests: libgutenprint-dev (= ${source:Version})
 Description: documentation for the Gutenprint printer driver library
  This package contains lots of info-files, DVI docs and other
  documentation about the Gutenprint library for photo-quality

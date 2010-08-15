@@ -53,7 +53,7 @@ debian/autoconfigure-stamp: debian/control
 	  --with-modules=dlopen \
 	  --enable-libgutenprintui2 --with-gimp2 \
 	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
-	  --with-ijs --with-foomatic --with-foomatic3 \
+	  --with-foomatic --with-foomatic3 \
 	  --disable-test
 
 	touch $@

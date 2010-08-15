@@ -7,9 +7,6 @@
 # This has to be exported to make some magic below work.
 export DH_OPTIONS
 
-# Use dpatch.
-include /usr/share/quilt/quilt.make
-
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE       ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
@@ -63,7 +60,7 @@ debian/autoconfigure-stamp: debian/control
 
 
 build: debian/build-stamp
-debian/build-stamp: patch debian/autoconfigure-stamp
+debian/build-stamp: debian/autoconfigure-stamp
 	dh_testdir
 
 	cd debian/build; \
@@ -71,7 +68,7 @@ debian/build-stamp: patch debian/autoconfigure-stamp
 
 	touch $@
 
-clean: realclean unpatch
+clean: realclean
 realclean: debian/control
 	dh_testdir
 
@@ -148,4 +145,4 @@ binary-arch: install-arch
 
 binary: binary-indep binary-arch
 
-.PHONY: build clean binary-indep binary-arch binary install install-arch install-indep install-common autoconfigure patch unpatch update-patch-series
+.PHONY: build clean binary-indep binary-arch binary install install-arch install-indep install-common autoconfigure update-patch-series

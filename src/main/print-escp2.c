@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.426 2009/11/15 01:50:50 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.431 2010/08/04 00:33:57 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -213,6 +213,12 @@ static const stp_parameter_t the_parameters[] =
     "CDYAdjustment", N_("CD Vertical Fine Adjustment"), N_("Advanced Printer Setup"),
     N_("Fine adjustment to horizontal position for CD printing"),
     STP_PARAMETER_TYPE_DIMENSION, STP_PARAMETER_CLASS_FEATURE,
+    STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
+  },
+  {
+    "CDAllowOtherMedia", N_("CD Allow Other Media Sizes"), N_("Advanced Printer Setup"),
+    N_("Allow non-CD media sizes when printing to CD"),
+    STP_PARAMETER_TYPE_BOOLEAN, STP_PARAMETER_CLASS_FEATURE,
     STP_PARAMETER_LEVEL_ADVANCED, 1, 1, STP_CHANNEL_NONE, 1, 0
   },
   {
@@ -1321,12 +1327,7 @@ stp_escp2_inklist(const stp_vars_t *v)
 	    return &(inkgroup->inklists[i]);
 	}
     }
-  if (!inkgroup)
-    {
-      stp_erprintf("Cannot find inks for printer %s!\n",
-		   stp_get_driver(v));
-      stp_abort();
-    }
+  STPI_ASSERT(inkgroup, v);
   return &(inkgroup->inklists[0]);
 }
 
@@ -1383,7 +1384,8 @@ supports_borderless(const stp_vars_t *v)
 {
   return (stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_YES) ||
 	  stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_FULL) ||
-	  stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_H_ONLY));
+	  stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_H_ONLY) ||
+	  stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_RESTR));
 }
 
 static int
@@ -2204,7 +2206,8 @@ escp2_parameters(const stp_vars_t *v, const char *name,
       int papersizes = stp_known_papersizes();
       const input_slot_t *slot = stp_escp2_get_input_slot(v);
       description->bounds.str = stp_string_list_create();
-      if (slot && slot->is_cd)
+      if (slot && slot->is_cd &&
+	  !stp_get_boolean_parameter(v, "CDAllowOtherMedia"))
 	{
 	  stp_string_list_add_string
 	    (description->bounds.str, "CD5Inch", _("CD - 5 inch"));
@@ -2225,6 +2228,15 @@ escp2_parameters(const stp_vars_t *v, const char *name,
 	}
       description->deflt.str =
 	stp_string_list_param(description->bounds.str, 0)->name;
+    }
+  else if (strcmp(name, "CDAllowOtherMedia") == 0)
+    {
+      const input_slot_t *slot = stp_escp2_get_input_slot(v);
+      if (stp_escp2_printer_supports_print_to_cd(v) &&
+	  (!slot || slot->is_cd))
+	description->is_active = 1;
+      else
+	description->is_active = 0;
     }
   else if (strcmp(name, "CDInnerRadius") == 0 )
     {
@@ -2934,15 +2946,23 @@ internal_imageable_area(const stp_vars_t *v, int use_paper_margins,
 		  right_margin = delta; /* positioned correctly */
 		  if (width - right_margin - 3 > width_limit)
 		    right_margin = width - width_limit - 3;
-		  top_margin = -7;
-		  bottom_margin = -7;
+		  if (! stp_escp2_has_cap(v, MODEL_ZEROMARGIN,
+					  MODEL_ZEROMARGIN_H_ONLY))
+		    {
+		      top_margin = -7;
+		      bottom_margin = -7;
+		    }
 		}
 	      else
 		{
 		  left_margin = 0;
 		  right_margin = 0;
-		  top_margin = 0;
-		  bottom_margin = 0;
+		  if (! stp_escp2_has_cap(v, MODEL_ZEROMARGIN,
+					  MODEL_ZEROMARGIN_H_ONLY))
+		    {
+		      top_margin = 0;
+		      bottom_margin = 0;
+		    }
 		}
 	    }
 	}
@@ -3376,10 +3396,7 @@ setup_inks(stp_vars_t *v)
 	  const char *param = channel->subchannels[0].channel_density;
 	  shade_t *shades = escp2_copy_shades(v, i);
 	  double userval = get_double_param(v, param);
-	  if (shades->n_shades < channel->n_subchannels)
-	    {
-	      stp_erprintf("Not enough shades\n");
-	    }
+	  STPI_ASSERT(shades->n_shades >= channel->n_subchannels, v);
 	  if (ink_type->inkset != INKSET_EXTENDED)
 	    {
 	      if (strcmp(param, "BlackDensity") == 0)
@@ -3455,10 +3472,7 @@ setup_inks(stp_vars_t *v)
 	      const char *param = channel->subchannels[0].channel_density;
 	      shade_t *shades = escp2_copy_shades(v, ch);
 	      double userval = get_double_param(v, param);
-	      if (shades->n_shades < channel->n_subchannels)
-		{
-		  stp_erprintf("Not enough shades!\n");
-		}
+	      STPI_ASSERT(shades->n_shades >= channel->n_subchannels, v);
 	      if (strcmp(param, "GlossDensity") == 0)
 		{
 		  gloss_scale *= get_double_param(v, param);
@@ -3879,7 +3893,10 @@ setup_printer_weave_parameters(stp_vars_t *v)
   pd->nozzle_separation = 1;
   pd->nozzle_start = 0;
   pd->min_nozzles = 1;
-  pd->use_black_parameters = 0;
+  if (pd->physical_channels == 1)
+    pd->use_black_parameters = 1;
+  else
+    pd->use_black_parameters = 0;
   pd->extra_vertical_passes = 1;
 }
 
@@ -4037,7 +4054,7 @@ setup_page(stp_vars_t *v)
 	escp2_zero_margin_offset(v) * pd->page_management_units /
 	escp2_base_separation(v);
     }
-  else if (stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_H_ONLY) &&
+  else if (stp_escp2_has_cap(v, MODEL_ZEROMARGIN, MODEL_ZEROMARGIN_RESTR) &&
 	   (stp_get_boolean_parameter(v, "FullBleed")) &&
 	   ((!input_slot || !(input_slot->is_cd))))
     {
@@ -4117,7 +4134,7 @@ setup_page(stp_vars_t *v)
   pd->image_left_position = pd->image_left * pd->micro_units / 72;
   pd->zero_margin_offset = escp2_zero_margin_offset(v);
   if (supports_borderless(v) &&
-      pd->advanced_command_set && pd->command_set != MODEL_COMMAND_PRO &&
+      pd->advanced_command_set &&
       ((!input_slot || !(input_slot->is_cd)) &&
        stp_get_boolean_parameter(v, "FullBleed")))
     {

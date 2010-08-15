@@ -47,6 +47,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gdce65b83e3dd0ffcb75591ed3ba81155">stp_get_printer_by_device_id</a> (const char *device_id)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get a printer model by its IEEE 1284 device ID.  <a href="#gdce65b83e3dd0ffcb75591ed3ba81155"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gcd449b7863a5fcddb6bdb602079448f8">stp_get_printer_by_foomatic_id</a> (const char *foomatic_id)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get a printer model by its foomatic ID.  <a href="#gcd449b7863a5fcddb6bdb602079448f8"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gc649c4b3d0a93f26f99deb4b081305c1">stp_get_printer</a> (const <a class="el" href="group__vars.html#g2d49c94847d18d8b62a214995b14680f">stp_vars_t</a> *v)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the printer model from a vars object.  <a href="#gc649c4b3d0a93f26f99deb4b081305c1"></a><br></td></tr>
@@ -68,6 +71,9 @@
 <tr><td class="memItemLeft" nowrap align="right" valign="top">const char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gb99dd05c42aed848d1567f2b346fb4f4">stp_printer_get_manufacturer</a> (const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *p)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get a printer model's manufacturer's name.  <a href="#gb99dd05c42aed848d1567f2b346fb4f4"></a><br></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const char *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gac52d241cc86a10965046afc0a8c8a41">stp_printer_get_foomatic_id</a> (const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *p)</td></tr>
+
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get a printer model's foomatic ID.  <a href="#gac52d241cc86a10965046afc0a8c8a41"></a><br></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__printer.html#gae84d3fb263c4a171b7b63b6d93a940e">stp_printer_get_model</a> (const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *p)</td></tr>
 
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get a printer model's model number.  <a href="#gae84d3fb263c4a171b7b63b6d93a940e"></a><br></td></tr>
@@ -376,6 +382,34 @@ Get a printer model by its short name.
 
 </div>
 </div><p>
+<a class="anchor" name="gcd449b7863a5fcddb6bdb602079448f8"></a><!-- doxytag: member="printers.h::stp_get_printer_by_foomatic_id" ref="gcd449b7863a5fcddb6bdb602079448f8" args="(const char *foomatic_id)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a>* stp_get_printer_by_foomatic_id           </td>
+          <td>(</td>
+          <td class="paramtype">const char *&nbsp;</td>
+          <td class="paramname"> <em>foomatic_id</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Get a printer model by its foomatic ID. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>foomatic_id</em>&nbsp;</td><td>the printer model's foomatic ID </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>a pointer to the printer model, or NULL on failure. The pointer should not be freed. </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="g440501ca226e0a9ac1335c7e52ee55a6"></a><!-- doxytag: member="printers.h::stp_get_printer_by_index" ref="g440501ca226e0a9ac1335c7e52ee55a6" args="(int idx)" -->
 <div class="memitem">
 <div class="memproto">
@@ -667,6 +701,34 @@ The family name is the name of the modular "family" driver this model uses. <dl 
 
 </div>
 </div><p>
+<a class="anchor" name="gac52d241cc86a10965046afc0a8c8a41"></a><!-- doxytag: member="printers.h::stp_printer_get_foomatic_id" ref="gac52d241cc86a10965046afc0a8c8a41" args="(const stp_printer_t *p)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* stp_printer_get_foomatic_id           </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__printer.html#gcddc2ce7fa4e0a68fcc30c123503738f">stp_printer_t</a> *&nbsp;</td>
+          <td class="paramname"> <em>p</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Get a printer model's foomatic ID. 
+<p>
+<dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>p</em>&nbsp;</td><td>the printer model to use. </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>the foomatic ID or NULL (should never be freed) </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="g11804fb9b8d87ed1f2a3acbd39f5f85a"></a><!-- doxytag: member="printers.h::stp_printer_get_long_name" ref="g11804fb9b8d87ed1f2a3acbd39f5f85a" args="(const stp_printer_t *p)" -->
 <div class="memitem">
 <div class="memproto">
@@ -928,7 +990,7 @@ Start a print job.
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Thu Feb 11 20:12:56 2010 for libgutenprint API Reference by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Tue Aug 10 20:32:51 2010 for libgutenprint API Reference by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.6 </small></address>
 </body>

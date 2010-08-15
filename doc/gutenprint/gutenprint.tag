@@ -2474,6 +2474,13 @@
     </member>
     <member kind="function">
       <type>const stp_printer_t *</type>
+      <name>stp_get_printer_by_foomatic_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gcd449b7863a5fcddb6bdb602079448f8</anchor>
+      <arglist>(const char *foomatic_id)</arglist>
+    </member>
+    <member kind="function">
+      <type>const stp_printer_t *</type>
       <name>stp_get_printer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc649c4b3d0a93f26f99deb4b081305c1</anchor>
@@ -2519,6 +2526,13 @@
       <name>stp_printer_get_manufacturer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gb99dd05c42aed848d1567f2b346fb4f4</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_foomatic_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gac52d241cc86a10965046afc0a8c8a41</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">
@@ -3115,6 +3129,13 @@
     </member>
     <member kind="define">
       <type>#define</type>
+      <name>STP_DBG_ASSERTIONS</name>
+      <anchorfile>group__util.html</anchorfile>
+      <anchor>gef83832f5488d7be5f6e75a5bc022360</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
       <name>STP_SAFE_FREE</name>
       <anchorfile>group__util.html</anchorfile>
       <anchor>ga5a86efbbd3e2eb391718d82a1d7ffcc</anchor>
@@ -3168,6 +3189,13 @@
       <anchorfile>group__util.html</anchorfile>
       <anchor>g183d8f36f187530f9d7acdb176be3409</anchor>
       <arglist>(const char *buf, size_t bytes, size_t nitems, const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_write_raw</name>
+      <anchorfile>group__util.html</anchorfile>
+      <anchor>gaace483bb815cde40e15bee42be1e24d</anchor>
+      <arglist>(const stp_raw_t *raw, const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>
@@ -6342,6 +6370,13 @@
     </member>
     <member kind="function">
       <type>const stp_printer_t *</type>
+      <name>stp_get_printer_by_foomatic_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gcd449b7863a5fcddb6bdb602079448f8</anchor>
+      <arglist>(const char *foomatic_id)</arglist>
+    </member>
+    <member kind="function">
+      <type>const stp_printer_t *</type>
       <name>stp_get_printer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gc649c4b3d0a93f26f99deb4b081305c1</anchor>
@@ -6387,6 +6422,13 @@
       <name>stp_printer_get_manufacturer</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gb99dd05c42aed848d1567f2b346fb4f4</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_foomatic_id</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>gac52d241cc86a10965046afc0a8c8a41</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">
@@ -6891,6 +6933,13 @@
     </member>
     <member kind="define">
       <type>#define</type>
+      <name>STP_DBG_ASSERTIONS</name>
+      <anchorfile>group__util.html</anchorfile>
+      <anchor>gef83832f5488d7be5f6e75a5bc022360</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="define">
+      <type>#define</type>
       <name>STP_SAFE_FREE</name>
       <anchorfile>group__util.html</anchorfile>
       <anchor>ga5a86efbbd3e2eb391718d82a1d7ffcc</anchor>
@@ -6944,6 +6993,13 @@
       <anchorfile>group__util.html</anchorfile>
       <anchor>g183d8f36f187530f9d7acdb176be3409</anchor>
       <arglist>(const char *buf, size_t bytes, size_t nitems, const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_write_raw</name>
+      <anchorfile>group__util.html</anchorfile>
+      <anchor>gaace483bb815cde40e15bee42be1e24d</anchor>
+      <arglist>(const stp_raw_t *raw, const stp_vars_t *v)</arglist>
     </member>
     <member kind="function">
       <type>void</type>

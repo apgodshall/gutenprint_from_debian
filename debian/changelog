@@ -4,8 +4,10 @@ gutenprint (5.2.6-1) unstable; urgency=low
   * Use source format 3.0 (quilt), drop dpatch support.
   * Upgrade to Standards Version 3.9.1 (no changes).
   * Drop unused --with-ijs configure argument.
+  * debian/rules install-stamp rule depends on build-stamp
+    rather than build (which is phony).
 
- -- Roger Leigh <rleigh@debian.org>  Sun, 15 Aug 2010 12:18:34 +0100
+ -- Roger Leigh <rleigh@debian.org>  Sun, 15 Aug 2010 14:15:09 +0100
 
 gutenprint (5.2.5-1) unstable; urgency=low
 

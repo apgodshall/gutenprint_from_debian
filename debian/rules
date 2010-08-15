@@ -98,7 +98,7 @@ install-common: debian/install-stamp
 	dh_installdirs
 	dh_install
 
-debian/install-stamp: build debian/control
+debian/install-stamp: debian/build-stamp debian/control
 	cd debian/build; \
 	$(MAKE) DESTDIR=$(CURDIR)/debian/install install
 

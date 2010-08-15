@@ -88,7 +88,7 @@ am__libgutenprint_la_SOURCES_DIST = array.c bit-ops.c channel.c \
 	print-version.c print-weave.c printers.c sequence.c \
 	string-list.c xml.c mxml-attr.c mxml-file.c mxml-node.c \
 	mxml-search.c dither-impl.h dither-inlined-functions.h \
-	generic-options.h gutenprint-internal.h util.h print-color.c \
+	generic-options.h gutenprint-internal.h print-color.c \
 	color-conversion.h color-conversions.c print-canon.c \
 	print-canon.h canon-inks.h canon-media.h canon-modes.h \
 	canon-printers.h print-escp2.c escp2-driver.c print-escp2.h \
@@ -478,8 +478,7 @@ libgutenprint_headers = \
 	dither-impl.h				\
 	dither-inlined-functions.h		\
 	generic-options.h			\
-	gutenprint-internal.h			\
-	util.h
+	gutenprint-internal.h
 
 libgutenprint_la_SOURCES = \
 	array.c					\

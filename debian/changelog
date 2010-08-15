@@ -1,6 +1,8 @@
 gutenprint (5.2.6-1) unstable; urgency=low
 
   * New upstream stable release.
+  * Use source format 3.0 (quilt).
+  * Upgrade to Standards Version 3.9.1 (no changes).
 
  -- Roger Leigh <rleigh@debian.org>  Sun, 15 Aug 2010 11:56:22 +0100
 

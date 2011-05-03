@@ -1,8 +1,10 @@
 gutenprint (5.2.7-1) unstable; urgency=low
 
   * New upstream stable release.
+  * Upgrade to Standards Version 3.9.2 (no changes).
+  * Drop inactive maintainers from Uploaders.
 
- -- Roger Leigh <rleigh@debian.org>  Tue, 03 May 2011 10:34:22 +0100
+ -- Roger Leigh <rleigh@debian.org>  Tue, 03 May 2011 10:43:09 +0100
 
 gutenprint (5.2.6-1) unstable; urgency=low
 

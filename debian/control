@@ -2,8 +2,8 @@ Source: gutenprint
 Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
-Uploaders: Roger Leigh <rleigh@debian.org>, W. van den Akker <wvdakker@wilsoft.nl>
-Standards-Version: 3.9.1
+Uploaders: Roger Leigh <rleigh@debian.org>
+Standards-Version: 3.9.2
 Build-Depends: libcups2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline-dev, libijs-dev, debhelper (>= 7.0.0), zlib1g-dev, flex, gettext, foomatic-db-engine, chrpath, quilt
 Vcs-Browser: http://git.debian.org/?p=collab-maint/gutenprint.git
 Vcs-Git: git://git.debian.org/git/collab-maint/gutenprint

@@ -42,7 +42,9 @@ update-patch-series:
 
 override_dh_auto_configure: debian/build/config.status
 debian/build/config.status: configure debian/control
+# Note: manually specifying libdir to work around bug in configure script
 	dh_auto_configure -- \
+	  --libdir=/usr/lib/x86_64-linux-gnu \
 	  --disable-static --enable-shared --disable-rpath \
 	  --disable-static-genppd \
 	  --with-modules=dlopen \

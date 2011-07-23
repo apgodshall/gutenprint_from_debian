@@ -4,14 +4,12 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-# This has to be exported to make some magic below work.
-export DH_OPTIONS
-
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE       ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE      ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+LIBDIR = usr/lib/$(DEB_HOST_MULTIARCH)
 
 ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
 	CFLAGS += -g
@@ -19,6 +17,17 @@ endif
 ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
+
+DH_OPTIONS = --with autotools_dev --builddirectory=debian/build
+
+DH_INSTALL_FILES = $(basename $(wildcard debian/*.install.in))
+
+# Use debhelper's dh
+%:
+	dh $@ $(DH_OPTIONS)
+
+%.install: %.install.in
+	sed -e 's;@LIBDIR@;$(LIBDIR);g' <$< >$@
 
 update-patch-series:
 	mkdir -p $(CURDIR)/debian/patches
@@ -31,118 +40,58 @@ update-patch-series:
 	  mv $${patch}.chomped $$patch; \
 	done
 
-autoconfigure: debian/autoconfigure-stamp
-debian/autoconfigure-stamp: debian/control
-	[ -r scripts/config.sub.orig ] || \
-	  cp -f scripts/config.sub scripts/config.sub.orig
-	[ -r scripts/config.guess.orig ] || \
-	  cp -f scripts/config.guess scripts/config.guess.orig
-
-	[ ! -r /usr/share/misc/config.sub ] || \
-	  cp -f /usr/share/misc/config.sub scripts/config.sub
-	[ ! -r /usr/share/misc/config.guess ] || \
-	  cp -f /usr/share/misc/config.guess scripts/config.guess
-
-	dh_testdir
-	mkdir debian/build; \
-	cd debian/build; \
-	../../configure --host=$(DEB_HOST_GNU_TYPE) \
-	  --build=$(DEB_BUILD_GNU_TYPE) \
-	  --prefix=/usr --mandir=\$${prefix}/share/man \
-	  --disable-static --enable-shared --disable-rpath --disable-static-genppd \
+override_dh_auto_configure: debian/build/config.status
+debian/build/config.status: configure debian/control
+	dh_auto_configure -- \
+	  --disable-static --enable-shared --disable-rpath \
+	  --disable-static-genppd \
 	  --with-modules=dlopen \
 	  --enable-libgutenprintui2 --with-gimp2 \
 	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
 	  --with-foomatic --with-foomatic3 \
 	  --disable-test
 
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f $(DH_INSTALL_FILES)
+	rm -rf debian/install debian/install-stamp
+
+override_dh_auto_build:
+	$(MAKE) -C debian/build
+
+override_dh_auto_test:
+# Testsuite takes too long to run per-build, so skip.
+
+override_dh_auto_install: debian/install-stamp
+debian/install-stamp:
+	$(MAKE) -C debian/build DESTDIR=$(CURDIR)/debian/install install
 	touch $@
 
+install-arch: build-arch $(DH_INSTALL_FILES)
+	dh $@ $(DH_OPTIONS)
+	find debian/cups-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
 
-build: debian/build-stamp
-debian/build-stamp: debian/autoconfigure-stamp
-	dh_testdir
+install-indep: build-indep $(DH_INSTALL_FILES)
+	dh $@ $(DH_OPTIONS)
 
-	cd debian/build; \
-	$(MAKE)
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS
 
-	touch $@
+override_dh_compress:
+	dh_compress -X.pdf -X.odt
 
-clean: realclean
-realclean: debian/control
-	dh_testdir
-
-	rm -rf debian/install-stamp debian/install
-	rm -rf debian/build-stamp debian/build
-	rm -rf debian/autoconfigure-stamp
-
-	[ ! -r scripts/config.guess.orig ] || \
-	  mv -f scripts/config.guess.orig scripts/config.guess || :
-	[ ! -r scripts/config.sub.orig ] || \
-	  mv -f scripts/config.sub.orig scripts/config.sub || :
-
-	dh_clean
-
-install: install-indep install-arch
-
-install-indep:
-	$(MAKE) -f debian/rules DH_OPTIONS=-i install-common
-
-install-arch:
-	$(MAKE) -f debian/rules DH_OPTIONS=-s install-common
-
-install-common: debian/install-stamp
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs
-	dh_install
-
-debian/install-stamp: debian/build-stamp debian/control
-	cd debian/build; \
-	$(MAKE) DESTDIR=$(CURDIR)/debian/install install
-
-	touch $@
-
-# Build architecture-independent files here.
-binary-indep: install-indep
-	dh_testdir -i
-	dh_testroot -i
-	dh_installdocs -i
-	dh_installexamples -i
-	dh_installchangelogs -i NEWS
-	dh_link -i
-	dh_compress -i -X.pdf -X.odt
-	dh_fixperms -i
-	dh_installdeb -i
-	dh_gencontrol -i
-	dh_md5sums -i
-	dh_builddeb -i
-
-# Build architecture-dependent files here.
-binary-arch: install-arch
-	dh_testdir -s
-	dh_testroot -s
-	dh_installdocs -s
+override_dh_installdocs:
+ifneq (,$(shell dh_listpackages -a 2>/dev/null))
 	  cp src/cups/README debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint/README.cups
 	  mv debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1 debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.5.2.1
 	  ln -s ijsgutenprint.5.2.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
 	  ln -s ijsgutenprint.5.2 debian/ijsgutenprint/usr/bin/ijsgutenprint
-	dh_installexamples -s
-	dh_installchangelogs -s NEWS
-	dh_strip -s
-	dh_link -s
-	dh_compress -s -X.pdf -X.odt
-	dh_fixperms -s
-# Strip DT_RPATH from CUPS binaries.
-	find debian/cups-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
+endif
+
+override_dh_makeshlibs:
 	dh_makeshlibs -s -V -X usr/lib/gutenprint
-	dh_installdeb -s
+
+override_dh_shlibdeps:
 	dh_shlibdeps -s -X usr/lib/gutenprint -l$(CURDIR)/debian/libgutenprint2/usr/lib:$(CURDIR)/debian/libgutenprintui2-1/usr/lib
-	dh_gencontrol -s
-	dh_md5sums -s
-	dh_builddeb -s
 
-binary: binary-indep binary-arch
-
-.PHONY: build clean binary-indep binary-arch binary install install-arch install-indep install-common autoconfigure update-patch-series
+.PHONY: install-arch install-indep update-patch-series override_dh_auto_configure override_dh_auto_clean override_dh_auto_build override_dh_auto_test override_dh_auto_install override_dh_installchangelogs override_dh_compress override_dh_installdocs override_dh_makeshlibs override_dh_shlibdeps

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
 Standards-Version: 3.9.2
-Build-Depends: libcups2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline-dev, libijs-dev, debhelper (>= 8.1.0), zlib1g-dev, flex, gettext, foomatic-db-engine, chrpath, quilt
+Build-Depends: libcups2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline-dev, libijs-dev, debhelper (>= 8.1.3), zlib1g-dev, flex, gettext, foomatic-db-engine, chrpath, quilt
 Vcs-Browser: http://git.debian.org/?p=collab-maint/gutenprint.git
 Vcs-Git: git://git.debian.org/git/collab-maint/gutenprint
 
@@ -89,6 +89,7 @@ Description: documentation for the Gutenprint printer driver library
 Package: libgutenprint2
 Architecture: any
 Section: libs
+Pre-Depends: multiarch-support
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Suggests: gutenprint-locales (>= ${source:Version})
 Description: runtime for the Gutenprint printer driver library
@@ -126,6 +127,7 @@ Description: development files for the Gutenprint printer driver user interface 
 Package: libgutenprintui2-1
 Architecture: any
 Section: libs
+Pre-Depends: multiarch-support
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: gutenprint-locales (>= ${source:Version})
 Description: runtime for the Gutenprint printer driver user interface library

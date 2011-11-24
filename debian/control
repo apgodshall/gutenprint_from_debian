@@ -4,14 +4,30 @@ Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
 Standards-Version: 3.9.2
-Build-Depends: libcups2-dev, libcupsimage2-dev, libgimp2.0-dev, libreadline-dev, libijs-dev, debhelper (>= 8.1.3), autotools-dev, zlib1g-dev, flex, gettext, foomatic-db-engine, chrpath, quilt
+Build-Depends:
+ debhelper (>= 8.1.3),
+ autotools-dev,
+ libcups2-dev,
+ libcupsimage2-dev,
+ libgimp2.0-dev,
+ libreadline-dev,
+ libijs-dev,
+ zlib1g-dev,
+ flex,
+ gettext,
+ foomatic-db-engine,
+ chrpath,
 Vcs-Browser: http://git.debian.org/?p=collab-maint/gutenprint.git
 Vcs-Git: git://git.debian.org/git/collab-maint/gutenprint
 
 Package: gimp-gutenprint
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, gimp (>= 2.4.0~rc1-1)
-Suggests: gutenprint-doc (>= ${source:Version}), gutenprint-locales (>= ${source:Version})
+Depends:
+ ${misc:Depends}, ${shlibs:Depends},
+ gimp (>= 2.4.0~rc1-1)
+Suggests:
+ gutenprint-doc (>= ${source:Version}),
+ gutenprint-locales (>= ${source:Version})
 Enhances: gimp
 Description: print plugin for the GIMP
  This package includes the Gutenprint Print plugin for the GIMP.
@@ -75,7 +91,10 @@ Description: printer drivers for CUPS
 Package: libgutenprint-dev
 Architecture: any
 Section: libdevel
-Depends: ${misc:Depends}, libgutenprint2 (= ${binary:Version}), pkg-config
+Depends:
+ ${misc:Depends},
+ libgutenprint2 (= ${binary:Version}),
+ pkg-config
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver library
  This package contains the header files for the Gutenprint library,
@@ -131,7 +150,10 @@ Description: runtime for the Gutenprint printer driver library
 Package: libgutenprintui2-dev
 Architecture: any
 Section: libdevel
-Depends: ${misc:Depends}, libgutenprintui2-1 (= ${binary:Version}), pkg-config
+Depends:
+ ${misc:Depends},
+ libgutenprintui2-1 (= ${binary:Version}),
+ pkg-config
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver user interface library
  This package contains the header files for the libgutenprintui
@@ -205,7 +227,9 @@ Description: maintenance utility for Epson Stylus printers
 Package: ijsgutenprint
 Architecture: any
 Section: text
-Depends: ${misc:Depends}, ${shlibs:Depends}, ghostscript (>= 8.61)
+Depends:
+ ${misc:Depends}, ${shlibs:Depends},
+ ghostscript (>= 8.61)
 Recommends: foomatic-db-gutenprint
 Description: inkjet server - Ghostscript driver for Gutenprint
  This package contains the ijsgutenprint binary which provides
@@ -232,7 +256,10 @@ Description: inkjet server - Ghostscript driver for Gutenprint
 Package: foomatic-db-gutenprint
 Architecture: all
 Section: text
-Depends: ${misc:Depends}, foomatic-db, ijsgutenprint (>= ${source:Version})
+Depends:
+ ${misc:Depends},
+ foomatic-db,
+ ijsgutenprint (>= ${source:Version})
 Description: OpenPrinting printer support - database for Gutenprint printer drivers
  Foomatic is a printing system designed to make it easier to set up
  common printers for use with Debian (and other operating systems).
@@ -256,7 +283,11 @@ Package: gutenprint-doc
 Architecture: all
 Section: doc
 Depends: ${misc:Depends}
-Suggests: cups-driver-gutenprint (>= ${source:Version}), foomatic-db-gutenprint (>= ${source:Version}), gimp-gutenprint (>= ${source:Version}), ijsgutenprint (>= ${source:Version})
+Suggests:
+ cups-driver-gutenprint (>= ${source:Version}),
+ foomatic-db-gutenprint (>= ${source:Version}),
+ gimp-gutenprint (>= ${source:Version}),
+ ijsgutenprint (>= ${source:Version})
 Description: users' guide for Gutenprint and CUPS
  This package contains a user guide for programs using the
  Gutenprint library for photographic quality printing.  Currently

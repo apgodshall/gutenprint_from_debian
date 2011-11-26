@@ -3,10 +3,9 @@ gutenprint (5.2.7-3) unstable; urgency=low
   * Add printer-driver-gutenprint package to replace
     cups-driver-gutenprint.  cups-driver-gutenprint is a
     transitional package.
-  * debian/control:
-    - Use multiline dependencies.
+  * debian/control: Use multiline dependencies.
 
- -- Roger Leigh <rleigh@debian.org>  Thu, 24 Nov 2011 21:10:31 +0000
+ -- Roger Leigh <rleigh@debian.org>  Sat, 26 Nov 2011 17:51:58 +0000
 
 gutenprint (5.2.7-2) unstable; urgency=low
 

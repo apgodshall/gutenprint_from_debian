@@ -41,7 +41,8 @@ Description: print plugin for the GIMP
 
 Package: cups-driver-gutenprint
 Architecture: all
-Section: graphics
+Section: oldlibs
+Priority: extra
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
  printer-driver-gutenprint

@@ -42,7 +42,9 @@ Description: print plugin for the GIMP
 Package: cups-driver-gutenprint
 Architecture: all
 Section: graphics
-Depends: printer-driver-gutenprint
+Depends:
+ ${misc:Depends}, ${shlibs:Depends},
+ printer-driver-gutenprint
 Description: printer drivers for CUPS (transitional package)
  This is a transitional package to install the CUPS driver based on
  Gutenprint, which has been renamed to printer-driver-gutenprint.

@@ -1,0 +1,49 @@
+From 008adc3d897a4844edbaef4d045b2c9f63744f61 Mon Sep 17 00:00:00 2001
+From: Roger Leigh <rleigh@debian.org>
+Date: Thu, 24 Nov 2011 21:40:54 +0000
+Subject: [PATCH] patch: stdio.h is required by commandtoepson and
+ commandtocanon
+
+---
+ src/cups/commandtocanon.c |    1 +
+ src/cups/commandtoepson.c |    5 +++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/cups/commandtocanon.c b/src/cups/commandtocanon.c
+index db5bc92..b7b7ef2 100644
+--- a/src/cups/commandtocanon.c
++++ b/src/cups/commandtocanon.c
+@@ -14,6 +14,7 @@
+ #include <cups/cups.h>
+ #include <ctype.h>
+ #include <stdlib.h>
++#include <stdio.h>
+ 
+ 
+ /*
+diff --git a/src/cups/commandtoepson.c b/src/cups/commandtoepson.c
+index b907a2d..e2d03b2 100644
+--- a/src/cups/commandtoepson.c
++++ b/src/cups/commandtoepson.c
+@@ -1,5 +1,5 @@
+ /*
+- * "$Id: commandtoepson.c,v 1.3 2007/12/23 17:31:51 easysw Exp $"
++ * "$Id: commandtoepson.c,v 1.4 2011/08/13 16:24:17 rlk Exp $"
+  *
+  *   EPSON ESC/P2 command filter for the Common UNIX Printing System.
+  *
+@@ -32,6 +32,7 @@
+ #include <ctype.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <stdio.h>
+ 
+ /*
+  * Macros...
+@@ -229,5 +230,5 @@ main(int  argc,		/* I - Number of command-line arguments */
+ 
+ 
+ /*
+- * End of "$Id: commandtoepson.c,v 1.3 2007/12/23 17:31:51 easysw Exp $".
++ * End of "$Id: commandtoepson.c,v 1.4 2011/08/13 16:24:17 rlk Exp $".
+  */

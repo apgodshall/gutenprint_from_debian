@@ -5,4 +5,4 @@ debian/install/usr/lib/cups                            usr/lib
 debian/install/usr/share/cups/calibrate.ppm            usr/share/cups
 debian/install/usr/share/man/man8/cups-calibrate.8     usr/share/man/man8
 debian/install/usr/share/man/man8/cups-genppdupdate.8  usr/share/man/man8
-samples/profile.jpg                                    usr/share/doc/cups-driver-gutenprint/samples
+samples/profile.jpg                                    usr/share/doc/printer-driver-gutenprint/samples

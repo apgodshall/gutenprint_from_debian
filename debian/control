@@ -195,7 +195,7 @@ Section: libs
 Depends: ${misc:Depends}
 Description: locale data files for Gutenprint
  This package contains the i18n files of Gutenprint, used by
- libgutenprint2, cups-driver-gutenprint and escputil.  It is also
+ libgutenprint2, printer-driver-gutenprint and escputil.  It is also
  used by the Print plugin for the GIMP, gimp-gutenprint.
  .
  They are needed when you want the programs in Gutenprint to print
@@ -242,7 +242,7 @@ Description: inkjet server - Ghostscript driver for Gutenprint
  .
  If you wish to print using Ghostscript and the Gutenprint drivers,
  install this package.  This is typical for LPRng setups.  If you
- are using CUPS, cups-driver-gutenprint is a better choice, but
+ are using CUPS, printer-driver-gutenprint is a better choice, but
  this package will still work with the appropriate foomatic setup
  if you wish to make use of foomatic.
  .
@@ -284,7 +284,7 @@ Architecture: all
 Section: doc
 Depends: ${misc:Depends}
 Suggests:
- cups-driver-gutenprint (>= ${source:Version}),
+ printer-driver-gutenprint (>= ${source:Version}),
  foomatic-db-gutenprint (>= ${source:Version}),
  gimp-gutenprint (>= ${source:Version}),
  ijsgutenprint (>= ${source:Version})

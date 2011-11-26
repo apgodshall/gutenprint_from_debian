@@ -1,5 +1,5 @@
 #! /bin/sh
-# postinst script for cups-driver-gutenprint
+# postinst script for printer-driver-gutenprint
 #
 # see: dh_installdeb(1)
 

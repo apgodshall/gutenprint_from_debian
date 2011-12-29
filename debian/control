@@ -46,7 +46,7 @@ Priority: extra
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
  printer-driver-gutenprint
-Description: printer drivers for CUPS (transitional package)
+Description: transitional dummy package for gutenprint printer driver
  This is a transitional package to install the CUPS driver based on
  Gutenprint, which has been renamed to printer-driver-gutenprint.
  .

@@ -31,35 +31,6 @@ if [ "$1" = "configure" ]; then
   # Restart CUPS (to register new and updated PPDs)
   [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
 
-  # Upgrade from obsolete epson and canon backends
-
-  # Note that the current CUPS usb backend, unlike the epson and canon
-  # backends, does not allow direct use of device names, so these devices will
-  # require manual modification of the device URI; we can't get the correct
-  # IEEE-1284 device ID for a given device node without digging into the CUPS
-  # internals.
-  LC_ALL=C lpstat -v |
-  while read devinfo; do
-      printer=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);\1;')
-      backend=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);\2;')
-      device=$(echo $devinfo | sed -e 's;device for \(..*\): \(..*\):/\(.*\);/\3;')
-
-      if [ "$backend" = "epson" ] || [ "$backend" = "canon" ]; then
-	  echo "Backend $backend used by printer $printer is obsolete."
-	  newbackend='parallel'
-	  if ! echo "$device" | grep -q '^/dev'; then
-	      newbackend='socket'
-	  elif echo "$device" | grep -q 'usb'; then
-	      newbackend='usb'
-	  fi
-	  echo "Updating $printer to use $newbackend backend: $newbackend:$device"
-	  lpadmin -p "$printer" -v "$newbackend:$device"
-	  lpstat -v "$printer"
-      else
-	  echo "Backend $backend used by printer $printer is current."
-      fi
-  done
-
 elif [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ] || [ "$1" = "abort-deconfigure" ]; then
   :
 else

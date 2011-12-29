@@ -17,20 +17,7 @@ set -e
 # for details, see /usr/doc/packaging-manual/
 
 if [ "$1" = remove ]; then
-    # Remove generated PPDs
-    # (note: user-generated now we no longer generate them automatically)
-    rm -rf /usr/share/cups/model/gutenprint/5.2
-    rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
-    rm -rf /usr/share/ppd/gutenprint/5.2
-    rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
     [ -x /etc/init.d/cups ] && invoke-rc.d cups force-reload || true
-fi
-
-if [ "$1" = purge ]; then
-    # Remove directories if empty
-    rmdir /etc/cups 2>/dev/null || true
-    rmdir /usr/share/cups/model/gutenprint 2>/dev/null || true
-    rmdir /usr/share/ppd/gutenprint 2>/dev/null || true
 fi
 
 # dh_installdeb will replace this with shell code automatically

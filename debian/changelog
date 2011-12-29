@@ -1,3 +1,10 @@
+gutenprint (5.2.7-4) unstable; urgency=low
+
+  * printer-driver-gutenprint has versioned Conflicts and Replaces
+    on cups-driver-gutenprint (Closes: 651507).
+
+ -- Roger Leigh <rleigh@debian.org>  Thu, 29 Dec 2011 11:29:22 +0000
+
 gutenprint (5.2.7-3) unstable; urgency=low
 
   * Add printer-driver-gutenprint package to replace

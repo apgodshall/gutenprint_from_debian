@@ -72,8 +72,8 @@ Suggests:
  gutenprint-doc (>= ${source:Version}),
  gutenprint-locales (>= ${source:Version})
 Provides: cups-driver-gutenprint
-Conflicts: cups-driver-gutenprint
-Replaces: cups-driver-gutenprint
+Conflicts: cups-driver-gutenprint (<< 5.2.7-3)
+Replaces: cups-driver-gutenprint (<< 5.2.7-3)
 Description: printer drivers for CUPS
  This package includes a CUPS driver based on Gutenprint.
  .

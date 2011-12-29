@@ -75,6 +75,9 @@ install-arch: build-arch $(DH_INSTALL_FILES)
 install-indep: build-indep $(DH_INSTALL_FILES)
 	dh $@ $(DH_OPTIONS)
 
+	rm -r debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint/
+	ln -s printer-driver-gutenprint debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint
+
 override_dh_install-arch:
 	dh_install
 # Remove rpath

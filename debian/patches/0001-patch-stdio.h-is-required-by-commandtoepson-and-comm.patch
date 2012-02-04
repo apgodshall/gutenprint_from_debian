@@ -1,7 +1,7 @@
-From 008adc3d897a4844edbaef4d045b2c9f63744f61 Mon Sep 17 00:00:00 2001
+From bf99e94f197ef5390356e42b7a83e75c1535fb32 Mon Sep 17 00:00:00 2001
 From: Roger Leigh <rleigh@debian.org>
 Date: Thu, 24 Nov 2011 21:40:54 +0000
-Subject: [PATCH] patch: stdio.h is required by commandtoepson and
+Subject: [PATCH 1/2] patch: stdio.h is required by commandtoepson and
  commandtocanon
 
 ---

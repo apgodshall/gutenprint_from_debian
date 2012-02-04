@@ -1,3 +1,13 @@
+gutenprint (5.2.7-5) unstable; urgency=low
+
+  * Apply patch to fix cups-genppd on Linux (and all non-Apple)
+    platforms by not using Apple-specific paths for ICC profiles.
+    The patch removes all ICC profile information from the
+    generated PPDs (Closes: #625925).  Thanks to Julien Cristau
+    for the patch.
+
+ -- Roger Leigh <rleigh@debian.org>  Sat, 04 Feb 2012 10:57:44 +0000
+
 gutenprint (5.2.7-4) unstable; urgency=low
 
   * printer-driver-gutenprint has versioned Conflicts and Replaces

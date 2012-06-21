@@ -2,6 +2,8 @@ gutenprint (5.2.8-1) UNRELEASED; urgency=low
 
   * New upstream stable release.
   * debian/README.building: Document git workflow.
+  * Upgrade Standards-Version to 3.9.3
+  * Require debhelper >= 9.
 
  -- Roger Leigh <rleigh@debian.org>  Thu, 21 Jun 2012 23:31:35 +0100
 

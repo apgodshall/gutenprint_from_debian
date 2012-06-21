@@ -3,9 +3,9 @@ Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
 Uploaders: Roger Leigh <rleigh@debian.org>
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Build-Depends:
- debhelper (>= 8.9.10),
+ debhelper (>= 9),
  autotools-dev,
  libcups2-dev,
  libcupsimage2-dev,

@@ -36,4 +36,11 @@ Upgrading to a new upstream release
 5. Push all branches and tags.
 
 
+Building
+--------
+
+Run
+
+  git-buildpackage --git-tag --git-sign-tags --git-pristine-tar
+
  -- Roger Leigh <rleigh@debian.org>, Thu, 21 Jun 2012 23:36:42 +0100

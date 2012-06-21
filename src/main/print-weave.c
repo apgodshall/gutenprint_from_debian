@@ -1,5 +1,5 @@
 /*
- * "$Id: print-weave.c,v 1.76 2010/08/04 00:33:57 rlk Exp $"
+ * "$Id: print-weave.c,v 1.81 2012/05/26 16:03:19 rlk Exp $"
  *
  *   Softweave calculator for Gutenprint.
  *
@@ -1473,8 +1473,8 @@ initialize_row(stp_vars_t *v, stpi_softweave_t *sw,
 }
 
 static void
-add_to_row(stp_vars_t *v, stpi_softweave_t *sw, int row, unsigned char *buf,
-	   size_t nbytes, int color, int setactive, int h_pass)
+add_to_row_1(stp_vars_t *v, stpi_softweave_t *sw, int row, unsigned char *buf,
+	     size_t nbytes, int color, int setactive, int h_pass)
 {
   const stp_linebufs_t *bufs =
     stpi_get_linebases(v, sw, sw->lineno, h_pass, sw->head_offset[color]);
@@ -1535,6 +1535,19 @@ add_to_row(stp_vars_t *v, stpi_softweave_t *sw, int row, unsigned char *buf,
 }
 
 static void
+add_to_row(stp_vars_t *v, stpi_softweave_t *sw, int row, unsigned char *buf,
+	   size_t nbytes, int color, int setactive, int h_pass)
+{
+  if (!sw->head_offset)
+    {
+      stp_eprintf(v, "ERROR: %s\n", _("Fatal error!"));
+      stp_eprintf(v, "ERROR: add_to_row: sw->head_offset == NULL\n");
+      return;
+    }
+  add_to_row_1(v, sw, row, buf, nbytes, color, setactive, h_pass);
+}
+
+static void
 stpi_flush_passes(stp_vars_t *v, int flushall)
 {
   stpi_softweave_t *sw = get_sw(v);
@@ -1592,11 +1605,7 @@ stp_write_weave(stp_vars_t *v, unsigned char *const cols[])
 {
   stpi_softweave_t *sw = get_sw(v);
   int length = (sw->linewidth + 7) / 8;
-  stp_lineoff_t *lineoffs[STP_MAX_WEAVE];
-  stp_lineactive_t *lineactives[STP_MAX_WEAVE];
-  stp_linecount_t *linecounts[STP_MAX_WEAVE];
   stp_linebounds_t *linebounds[STP_MAX_WEAVE];
-  const stp_linebufs_t *bufs[STP_MAX_WEAVE];
   int xlength = (length + sw->horizontal_weave - 1) / sw->horizontal_weave;
   int ylength = xlength * sw->horizontal_weave;
   unsigned char *comp_ptr;
@@ -1640,16 +1649,8 @@ stp_write_weave(stp_vars_t *v, unsigned char *const cols[])
 	      if (!sw->s[i])
 		sw->s[i] = stp_zalloc(sw->bitwidth *
 				      (sw->compute_linewidth)(v, ylength));
-	      lineoffs[i] =
-		stpi_get_lineoffsets(v, sw, sw->lineno, pass, offset);
-	      linecounts[i] =
-		stpi_get_linecount(v, sw, sw->lineno, pass, offset);
-	      lineactives[i] =
-		stpi_get_lineactive(v, sw, sw->lineno, pass,offset);
 	      linebounds[i] =
 		stpi_get_linebounds(v, sw, sw->lineno, pass, offset);
-	      bufs[i] =
-		stpi_get_linebases(v, sw, sw->lineno, pass, offset);
 	    }
 
 	  if (sw->bitwidth == 2)

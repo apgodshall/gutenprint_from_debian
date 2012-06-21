@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='ISO-8859-1' standalone='yes' ?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile>
   <compound kind="file">
     <name>curve.h</name>
@@ -1163,5 +1163,21 @@
       <anchor>afbdf87548a3132b7270aa88ffcf52a8a</anchor>
       <arglist></arglist>
     </member>
+  </compound>
+  <compound kind="dir">
+    <name>include/gutenprintui2/</name>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprintui2/</path>
+    <filename>dir_6692d22cad271f22063fae9b501c7ab3.html</filename>
+    <file>curve.h</file>
+    <file>gammacurve.h</file>
+    <file>gutenprintui.h</file>
+    <file>t.h</file>
+    <file>typebuiltins.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>include/</name>
+    <path>/home/rlk/sandbox/print-5.1/include/</path>
+    <filename>dir_d44c64559bbebec7f509842c48db8b23.html</filename>
+    <dir>include/gutenprintui2/</dir>
   </compound>
 </tagfile>

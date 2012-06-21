@@ -20,13 +20,20 @@ Upgrading to a new upstream release
    and commit.
 
 4. Drop or add any patches from the patches branch.  This is used to
-   create the quilt patch series.  Run:
+   create the quilt patch series.  You'll want to rebase this branch
+   against the new upstream release first:
+
+     git rebase -i upstream/$version
+
+   to remove any patches incorporated upstream.  Then add any new
+   patches needed.  Finally, run:
 
      debian/rules update-patch-series
 
-   to regenerate the patches
+   to regenerate the patches.  Commit the changes to the master
+   branch.
 
-5. Push all branches.
+5. Push all branches and tags.
 
 
  -- Roger Leigh <rleigh@debian.org>, Thu, 21 Jun 2012 23:36:42 +0100

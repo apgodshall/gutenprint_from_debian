@@ -1,17 +1,32 @@
 Building the gutenprint Debian packages	                 -*- mode: text -*-
 =======================================
 
-Making changes
---------------
+Upgrading to a new upstream release
+-----------------------------------
 
-If any source changes are required, please use dpatch, and place
-the patch under debian/patches.  Once you have created a diff,
-create a dpatch as follows:
+1. Make sure that you clone the git repository, and then check out the
+   master, debian and pristine-tar branches.  Also check out the
+   patches branch if you need to drop or add and additional patches
+   against upstream.
 
-dpatch patch-template -p '0n_patch_name' "Patch description" \
-< mypatch.diff > debian/patches/0n_patch_name.dpatch
+2. Import upstream sources:
 
-and add "0n_patch_name.dpatch" to debian/patches/00list
+     git-import-orig --upstream-version=$version --sign-tags --pristine-tar $tar
+
+3. Update debian changelog on the master branch:
+
+     dch -v $version
+
+   and commit.
+
+4. Drop or add any patches from the patches branch.  This is used to
+   create the quilt patch series.  Run:
+
+     debian/rules update-patch-series
+
+   to regenerate the patches
+
+5. Push all branches.
 
 
- -- Roger Leigh <rleigh@debian.org>, Wed, 29 Oct 2008 23:41:09 +0000
+ -- Roger Leigh <rleigh@debian.org>, Thu, 21 Jun 2012 23:36:42 +0100

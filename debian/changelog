@@ -1,3 +1,9 @@
+gutenprint (5.2.8-1) UNRELEASED; urgency=low
+
+  * New upstream stable release.
+
+ -- Roger Leigh <rleigh@debian.org>  Thu, 21 Jun 2012 23:31:35 +0100
+
 gutenprint (5.2.7-5) unstable; urgency=low
 
   * Apply patch to fix cups-genppd on Linux (and all non-Apple)

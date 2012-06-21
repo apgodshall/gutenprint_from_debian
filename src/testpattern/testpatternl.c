@@ -751,7 +751,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "testpatternl.l"
 /*
- * "$Id: testpatternl.l,v 1.26 2010/09/06 17:08:39 rlk Exp $"
+ * "$Id: testpatternl.l,v 1.27 2012/05/11 13:16:12 rlk Exp $"
  *
  *   Test pattern generator for Gimp-Print
  *
@@ -786,6 +786,8 @@ char *yytext;
 
 int mylineno = 1;
 
+extern YYSTYPE yylval;
+
 static char *
 c_strstrip(char *s)
 {
@@ -811,7 +813,7 @@ do							\
  while (0)
 
 
-#line 815 "testpatternl.c"
+#line 817 "testpatternl.c"
 
 #define INITIAL 0
 
@@ -993,10 +995,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 77 "testpatternl.l"
+#line 79 "testpatternl.l"
 
 
-#line 1000 "testpatternl.c"
+#line 1002 "testpatternl.c"
 
 	if ( !(yy_init) )
 		{
@@ -1081,267 +1083,267 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 79 "testpatternl.l"
+#line 81 "testpatternl.l"
 DBG(GAMMA); return GAMMA;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 80 "testpatternl.l"
+#line 82 "testpatternl.l"
 DBG(LEVEL); return LEVEL;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 81 "testpatternl.l"
+#line 83 "testpatternl.l"
 DBG(STEPS); return STEPS;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 82 "testpatternl.l"
+#line 84 "testpatternl.l"
 DBG(INK_LIMIT); return INK_LIMIT;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 83 "testpatternl.l"
+#line 85 "testpatternl.l"
 DBG(PRINTER); return PRINTER;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 84 "testpatternl.l"
+#line 86 "testpatternl.l"
 DBG(PARAMETER); return PARAMETER;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 85 "testpatternl.l"
+#line 87 "testpatternl.l"
 DBG(PARAMETER_INT); return PARAMETER_INT;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 86 "testpatternl.l"
+#line 88 "testpatternl.l"
 DBG(PARAMETER_BOOL); return PARAMETER_BOOL;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 87 "testpatternl.l"
+#line 89 "testpatternl.l"
 DBG(PARAMETER); return PARAMETER;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 88 "testpatternl.l"
+#line 90 "testpatternl.l"
 DBG(PARAMETER_FLOAT); return PARAMETER_FLOAT;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 89 "testpatternl.l"
+#line 91 "testpatternl.l"
 DBG(PARAMETER_CURVE); return PARAMETER_CURVE;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 90 "testpatternl.l"
+#line 92 "testpatternl.l"
 DBG(DENSITY); return DENSITY;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 91 "testpatternl.l"
+#line 93 "testpatternl.l"
 DBG(TOP); return TOP;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 92 "testpatternl.l"
+#line 94 "testpatternl.l"
 DBG(LEFT); return LEFT;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 93 "testpatternl.l"
+#line 95 "testpatternl.l"
 DBG(SIZE_MODE); return SIZE_MODE;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 94 "testpatternl.l"
+#line 96 "testpatternl.l"
 DBG(RELATIVE); return RELATIVE;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 95 "testpatternl.l"
+#line 97 "testpatternl.l"
 DBG(PT); return PT;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 96 "testpatternl.l"
+#line 98 "testpatternl.l"
 DBG(IN); return IN;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 97 "testpatternl.l"
+#line 99 "testpatternl.l"
 DBG(MM); return MM;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 98 "testpatternl.l"
+#line 100 "testpatternl.l"
 DBG(HSIZE); return HSIZE;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 99 "testpatternl.l"
+#line 101 "testpatternl.l"
 DBG(VSIZE); return VSIZE;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 100 "testpatternl.l"
+#line 102 "testpatternl.l"
 DBG(BLACKLINE); return BLACKLINE;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 101 "testpatternl.l"
+#line 103 "testpatternl.l"
 DBG(PATTERN); return PATTERN;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 102 "testpatternl.l"
+#line 104 "testpatternl.l"
 DBG(XPATTERN); return XPATTERN;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 103 "testpatternl.l"
+#line 105 "testpatternl.l"
 DBG(IMAGE); return IMAGE;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 104 "testpatternl.l"
+#line 106 "testpatternl.l"
 DBG(EXTENDED); return EXTENDED;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 105 "testpatternl.l"
+#line 107 "testpatternl.l"
 DBG(GRID); return GRID;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 106 "testpatternl.l"
+#line 108 "testpatternl.l"
 DBG(CHANNEL); return CHANNEL;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 107 "testpatternl.l"
+#line 109 "testpatternl.l"
 DBG(PAGESIZE); return PAGESIZE;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 108 "testpatternl.l"
+#line 110 "testpatternl.l"
 DBG(SEMI); return SEMI;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 109 "testpatternl.l"
+#line 111 "testpatternl.l"
 DBG(MODE); return MODE;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 110 "testpatternl.l"
+#line 112 "testpatternl.l"
 yylval.ival = CMYK;DBG(CMYK); return CMYK;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 111 "testpatternl.l"
+#line 113 "testpatternl.l"
 yylval.ival = CMYK;DBG(KCMY); return KCMY;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 112 "testpatternl.l"
+#line 114 "testpatternl.l"
 yylval.ival = RGB;DBG(RGB); return RGB;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 113 "testpatternl.l"
+#line 115 "testpatternl.l"
 yylval.ival = RGB;DBG(CMY); return CMY;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 114 "testpatternl.l"
+#line 116 "testpatternl.l"
 yylval.ival = GRAY;DBG(GRAY); return GRAY;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 115 "testpatternl.l"
+#line 117 "testpatternl.l"
 yylval.ival = GRAY;DBG(GRAY); return GRAY;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 116 "testpatternl.l"
+#line 118 "testpatternl.l"
 yylval.ival = WHITE;DBG(WHITE); return WHITE;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 117 "testpatternl.l"
+#line 119 "testpatternl.l"
 DBG(OUTPUT); return OUTPUT;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 118 "testpatternl.l"
+#line 120 "testpatternl.l"
 DBG(MESSAGE); return MESSAGE;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 119 "testpatternl.l"
+#line 121 "testpatternl.l"
 DBG(NOSCALE); return NOSCALE;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 120 "testpatternl.l"
+#line 122 "testpatternl.l"
 DBG(START_JOB); return START_JOB;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 121 "testpatternl.l"
+#line 123 "testpatternl.l"
 DBG(END_JOB); return END_JOB;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 122 "testpatternl.l"
+#line 124 "testpatternl.l"
 DBG(END); return END;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 124 "testpatternl.l"
+#line 126 "testpatternl.l"
 yylval.sval = yytext;DBG(COLOR); return COLOR;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 125 "testpatternl.l"
+#line 127 "testpatternl.l"
 yylval.ival = strtol(yytext, NULL, 0); yylval.dval = (double) yylval.ival; DBG(tINT); return tINT;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 126 "testpatternl.l"
+#line 128 "testpatternl.l"
 yylval.dval = strtod(yytext, NULL); DBG(tDOUBLE); return tDOUBLE;
 	YY_BREAK
 case 48:
 /* rule 48 can match eol */
 YY_RULE_SETUP
-#line 127 "testpatternl.l"
+#line 129 "testpatternl.l"
 yylval.sval = c_strstrip(yytext); DBG(tSTRING); return tSTRING;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 128 "testpatternl.l"
+#line 130 "testpatternl.l"
 DBG(whitespace); 	/* Skip blanks/tabs */
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 129 "testpatternl.l"
+#line 131 "testpatternl.l"
 DBG(comment); 	/* Skip comments */
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 130 "testpatternl.l"
+#line 132 "testpatternl.l"
 DBG(newline); mylineno++;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 131 "testpatternl.l"
+#line 133 "testpatternl.l"
 ECHO;
 	YY_BREAK
-#line 1345 "testpatternl.c"
+#line 1347 "testpatternl.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2339,4 +2341,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 131 "testpatternl.l"
+#line 133 "testpatternl.l"

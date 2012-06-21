@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='ISO-8859-1' standalone='yes' ?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile>
   <compound kind="file">
     <name>array.h</name>
@@ -120,6 +120,13 @@
       <name>stp_fold_4bit</name>
       <anchorfile>bit-ops_8h.html</anchorfile>
       <anchor>a62ac3ec2651afff5fbe6c63544a13c66</anchor>
+      <arglist>(const unsigned char *line, int single_length, unsigned char *outbuf)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_fold_8bit</name>
+      <anchorfile>bit-ops_8h.html</anchorfile>
+      <anchor>a4aa21720b86de29d9834cb3ee782491a</anchor>
       <arglist>(const unsigned char *line, int single_length, unsigned char *outbuf)</arglist>
     </member>
     <member kind="function">
@@ -3888,6 +3895,13 @@
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga086303d36b835d539e75f16187e99e8f</anchor>
       <arglist>(stp_vars_t *user, const stp_vars_t *print)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>stp_copy_vars_from</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gadb632ed2afb82e30c6f1583a69d4a8ce</anchor>
+      <arglist>(stp_vars_t *to, const stp_vars_t *from)</arglist>
     </member>
     <member kind="function">
       <type>stp_parameter_list_t</type>
@@ -7712,6 +7726,13 @@
       <arglist>(stp_vars_t *user, const stp_vars_t *print)</arglist>
     </member>
     <member kind="function">
+      <type>void</type>
+      <name>stp_copy_vars_from</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gadb632ed2afb82e30c6f1583a69d4a8ce</anchor>
+      <arglist>(stp_vars_t *to, const stp_vars_t *from)</arglist>
+    </member>
+    <member kind="function">
       <type>stp_parameter_list_t</type>
       <name>stp_get_parameter_list</name>
       <anchorfile>group__vars.html</anchorfile>
@@ -9817,5 +9838,41 @@
       <anchor>a3041aa5f7a90d0d7d82d1b2406044bb3</anchor>
       <arglist></arglist>
     </member>
+  </compound>
+  <compound kind="dir">
+    <name>include/gutenprint/</name>
+    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
+    <filename>dir_1aca62f7c2d1ca2bd7aa79274e259f3c.html</filename>
+    <file>array.h</file>
+    <file>bit-ops.h</file>
+    <file>channel.h</file>
+    <file>color.h</file>
+    <file>curve-cache.h</file>
+    <file>curve.h</file>
+    <file>dither.h</file>
+    <file>gutenprint-intl-internal.h</file>
+    <file>gutenprint-intl.h</file>
+    <file>gutenprint-module.h</file>
+    <file>gutenprint-version.h</file>
+    <file>gutenprint.h</file>
+    <file>image.h</file>
+    <file>list.h</file>
+    <file>module.h</file>
+    <file>mxml.h</file>
+    <file>paper.h</file>
+    <file>path.h</file>
+    <file>printers.h</file>
+    <file>sequence.h</file>
+    <file>string-list.h</file>
+    <file>util.h</file>
+    <file>vars.h</file>
+    <file>weave.h</file>
+    <file>xml.h</file>
+  </compound>
+  <compound kind="dir">
+    <name>include/</name>
+    <path>/home/rlk/sandbox/print-5.1/include/</path>
+    <filename>dir_d44c64559bbebec7f509842c48db8b23.html</filename>
+    <dir>include/gutenprint/</dir>
   </compound>
 </tagfile>

@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.224 2011/05/02 01:20:49 rlk Exp $
+dnl $Id: configure.ac,v 1.233 2012/06/05 01:51:22 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -37,10 +37,10 @@ dnl
 pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [2])
-pushdef([GUTENPRINT_MICRO_VERSION],     [7])
+pushdef([GUTENPRINT_MICRO_VERSION],     [8])
 pushdef([GUTENPRINT_EXTRA_VERSION],     [])
-pushdef([GUTENPRINT_CURRENT_INTERFACE], [2])
-pushdef([GUTENPRINT_INTERFACE_AGE],     [8])
+pushdef([GUTENPRINT_CURRENT_INTERFACE], [3])
+pushdef([GUTENPRINT_INTERFACE_AGE],     [0])
 pushdef([GUTENPRINT_BINARY_AGE],        [0])
 pushdef([GUTENPRINTUI2_CURRENT_INTERFACE], [1])
 pushdef([GUTENPRINTUI2_INTERFACE_AGE],     [0])
@@ -49,7 +49,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.224 $)
+AC_REVISION($Revision: 1.233 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -139,7 +139,7 @@ dnl Specify a configuration file.
 AM_CONFIG_HEADER([config.h])
 
 dnl Available languages (translations)
-ALL_LINGUAS="cs da de el en_GB es fi fr hu it ja nb nl pl pt ru sk sl sv zh_TW"
+ALL_LINGUAS="cs da de el en_GB es fi fr gl hu it ja nb nl pl pt ru sk sl sv uk zh_CN zh_TW"
 AC_SUBST(ALL_LINGUAS)
 
 dnl Set up libtool scripts.
@@ -161,6 +161,7 @@ AM_MAINTAINER_MODE
 if test x${USE_MAINTAINER_MODE} = xyes ; then
   MAINTAINER_MODE="true"
   BUILD_TEST="yes"
+  BUILD_DOC="yes"
   AC_DEFINE(HAVE_MAINTAINER_MODE,, [Define if maintainer-mode is to be used.])
 fi
 
@@ -452,6 +453,11 @@ STP_ARG_ENABLE([test],
                [build test programs],
                [BUILD_TEST],
                [yes])
+
+STP_ARG_WITH([doc],
+	     [build Gutenprint documentation],
+	     [BUILD_DOC],
+	     [yes])
 
 if test "$BUILD_TEST" = "yes" ; then
   BUILD_TESTPATTERN="yes"
@@ -814,6 +820,8 @@ AM_CONDITIONAL(BUILD_LIBGUTENPRINTUI2, test x${BUILD_LIBGUTENPRINTUI2} = xyes)
 
 AM_CONDITIONAL(BUILD_GIMP2, test x${BUILD_GIMP2} = xyes)
 
+AM_CONDITIONAL(BUILD_DOC, test x${BUILD_DOC} = xyes)
+
 AM_CONDITIONAL(BUILD_GIMP2_AS_GUTENPRINT, test x${BUILD_GIMP2_AS_GUTENPRINT} = xyes)
 
 AM_CONDITIONAL(INSTALL_SAMPLES, test x${INSTALL_SAMPLES} = xyes)
@@ -1074,6 +1082,7 @@ echo "    Build testpattern generator:                $BUILD_TESTPATTERN"
 echo
 echo "  Installation summary:"
 echo "    Installation prefix:                        $prefix"
+echo "    Exec prefix:                                $exec_prefix"
 echo "    Data directory:                             $PACKAGE_DATA_DIR"
 echo "    Library directory:                          $PACKAGE_LIB_DIR"
 echo "    XML data directory:                         $PKGXMLDATADIR"

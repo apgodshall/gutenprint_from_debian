@@ -1,5 +1,5 @@
 /*
- * "$Id: mxml-file.c,v 1.10 2008/07/20 01:12:15 easysw Exp $"
+ * "$Id: mxml-file.c,v 1.13 2012/01/19 13:26:48 m0m Exp $"
  *
  * File loading code for mini-XML, a small XML-like file parsing library.
  *
@@ -39,7 +39,8 @@
 
 #include <gutenprint/mxml.h>
 #include "config.h"
-
+#define MXML_BUFSIZE (64)
+#define ENTITY_BUFSIZE (64)
 
 /*
  * Local functions...
@@ -390,13 +391,13 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
   * Read elements and other nodes from the file...
   */
 
-  if ((buffer = malloc(64)) == NULL)
+  if ((buffer = malloc(MXML_BUFSIZE)) == NULL)
   {
     fputs("Unable to allocate string buffer!\n", stderr);
     return (NULL);
   }
 
-  bufsize    = 64;
+  bufsize    = MXML_BUFSIZE;
   bufptr     = buffer;
   parent     = top;
   whitespace = 0;
@@ -492,7 +493,6 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	  break;
 	else if (mxml_add_char(ch, &bufptr, &buffer, &bufsize))
 	{
-          free(buffer);
 	  return (NULL);
 	}
 	else if ((bufptr - buffer) == 3 && !strncmp(buffer, "!--", 3))
@@ -513,7 +513,6 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	    break;
 	  else if (mxml_add_char(ch, &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	}
@@ -554,7 +553,6 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	    break;
 	  else if (mxml_add_char(ch, &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	}
@@ -685,7 +683,7 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
       * support &lt;, &amp;, &gt;, &nbsp;, &quot;, &#nnn;, and &#xXXXX;...
       */
 
-      char	entity[64],		/* Entity string */
+      char	entity[ENTITY_BUFSIZE],		/* Entity string */
 		*entptr;		/* Pointer into entity */
 
 
@@ -745,7 +743,6 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 
 	if (mxml_add_char(ch, &bufptr, &buffer, &bufsize))
 	{
-          free(buffer);
 	  return (NULL);
 	}
       }
@@ -759,12 +756,10 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	{
 	  if (mxml_add_char(0xc0 | (ch >> 6), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | (ch & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
         }
@@ -772,17 +767,14 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	{
 	  if (mxml_add_char(0xe0 | (ch >> 12), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | ((ch >> 6) & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | (ch & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	}
@@ -790,22 +782,18 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 	{
 	  if (mxml_add_char(0xf0 | (ch >> 18), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | ((ch >> 12) & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | ((ch >> 6) & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	  if (mxml_add_char(0x80 | (ch & 63), &bufptr, &buffer, &bufsize))
 	  {
-            free(buffer);
 	    return (NULL);
 	  }
 	}
@@ -819,7 +807,6 @@ mxml_load_data(stp_mxml_node_t *top,	/* I - Top node */
 
       if (mxml_add_char(ch, &bufptr, &buffer, &bufsize))
       {
-        free(buffer);
 	return (NULL);
       }
     }
@@ -868,22 +855,22 @@ mxml_parse_element(stp_mxml_node_t *node,	/* I - Element node */
   * Initialize the name and value buffers...
   */
 
-  if ((name = malloc(64)) == NULL)
+  if ((name = malloc(MXML_BUFSIZE)) == NULL)
   {
     fputs("Unable to allocate memory for name!\n", stderr);
     return (EOF);
   }
 
-  namesize = 64;
+  namesize = MXML_BUFSIZE;
 
-  if ((value = malloc(64)) == NULL)
+  if ((value = malloc(MXML_BUFSIZE)) == NULL)
   {
     free(name);
     fputs("Unable to allocate memory for value!\n", stderr);
     return (EOF);
   }
 
-  valsize = 64;
+  valsize = MXML_BUFSIZE;
 
  /*
   * Loop until we hit a >, /, ?, or EOF...
@@ -938,7 +925,6 @@ mxml_parse_element(stp_mxml_node_t *node,	/* I - Element node */
         break;
       else if (mxml_add_char(ch, &ptr, &name, &namesize))
       {
-        free(name);
 	free(value);
 	return (EOF);
       }
@@ -955,6 +941,8 @@ mxml_parse_element(stp_mxml_node_t *node,	/* I - Element node */
       {
         fprintf(stderr, "Missing value for attribute '%s' in element %s!\n",
 	        name, node->value.element.name);
+	free(name);
+	free(value);
         return (EOF);
       }
 
@@ -973,7 +961,6 @@ mxml_parse_element(stp_mxml_node_t *node,	/* I - Element node */
 	  else if (mxml_add_char(ch, &ptr, &value, &valsize))
 	  {
             free(name);
-	    free(value);
 	    return (EOF);
 	  }
 
@@ -994,7 +981,6 @@ mxml_parse_element(stp_mxml_node_t *node,	/* I - Element node */
 	  else if (mxml_add_char(ch, &ptr, &value, &valsize))
 	  {
             free(name);
-	    free(value);
 	    return (EOF);
 	  }
 
@@ -1477,5 +1463,5 @@ mxml_write_ws(stp_mxml_node_t *node,	/* I - Current node */
 
 
 /*
- * End of "$Id: mxml-file.c,v 1.10 2008/07/20 01:12:15 easysw Exp $".
+ * End of "$Id: mxml-file.c,v 1.13 2012/01/19 13:26:48 m0m Exp $".
  */

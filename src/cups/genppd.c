@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.186 2011/03/13 19:28:50 rlk Exp $"
+ * "$Id: genppd.c,v 1.192 2012/03/25 17:54:32 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -80,6 +80,8 @@ static const char *gzext = "";
 #include <cups/raster.h>
 
 #include "i18n.h"
+
+static int use_base_version = 0;
 
 /*
  * Some applications use the XxYdpi tags rather than the actual
@@ -249,18 +251,17 @@ main(int  argc,			    /* I - Number of command-line arguments */
     {
       char buf[1024];
       int status = 0;
-      while (status == 0 && fgets(buf, sizeof(buf) - 1, stdin))
+      while (fgets(buf, sizeof(buf) - 1, stdin))
 	{
 	  size_t len = strlen(buf);
 	  if (len == 0)
 	    continue;
 	  if (buf[len - 1] == '\n')
 	    buf[len - 1] = '\0';
-	  status = cat_ppd(buf);
+	  status |= cat_ppd(buf);
 	  fputs("*%*%EOFEOF\n", stdout);
 	  (void) fflush(stdout);
 	}
-      return status;
     }
   else if (argc == 2 && !strcmp(argv[1], "VERSION"))
     {
@@ -273,11 +274,12 @@ main(int  argc,			    /* I - Number of command-line arguments */
       return (0);
     }
   else
-  {
-    fprintf(stderr, "Usage: %s list\n", argv[0]);
-    fprintf(stderr, "       %s cat URI\n", argv[0]);
-    return (1);
-  }
+    {
+      fprintf(stderr, "Usage: %s list\n", argv[0]);
+      fprintf(stderr, "       %s cat URI\n", argv[0]);
+      return (1);
+    }
+  return (0);
 }
 
 
@@ -457,7 +459,7 @@ main(int  argc,			    /* I - Number of command-line arguments */
 
   for (;;)
   {
-    if ((i = getopt(argc, argv, "23hvqc:p:l:LMVd:saNC")) == -1)
+    if ((i = getopt(argc, argv, "23hvqc:p:l:LMVd:saNCb")) == -1)
       break;
 
     switch (i)
@@ -527,6 +529,9 @@ main(int  argc,			    /* I - Number of command-line arguments */
 	   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
 	   "GNU General Public License for more details.\n");
       exit(EXIT_SUCCESS);
+      break;
+    case 'b':
+      use_base_version = 1;
       break;
     default:
       usage();
@@ -944,7 +949,10 @@ print_ppd_header(gzFile fp, ppd_type_t ppd_type, int model, const char *driver,
   gzputs(fp, "*% Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n");
   gzputs(fp, "*%\n");
   gzputs(fp, "*FormatVersion:	\"4.3\"\n");
-  gzputs(fp, "*FileVersion:	\"" VERSION "\"\n");
+  if (use_base_version)
+    gzputs(fp, "*FileVersion:	\"" BASE_VERSION "\"\n");
+  else
+    gzputs(fp, "*FileVersion:	\"" VERSION "\"\n");
   /* Specify language of PPD translation */
   /* TRANSLATORS: Specify the language of the PPD translation.
    * Use the English name of your language here, e.g. "Swedish" instead of
@@ -986,11 +994,6 @@ print_ppd_header(gzFile fp, ppd_type_t ppd_type, int model, const char *driver,
   strncpy(short_long_name, long_name, PPD_MAX_SHORT_NICKNAME);
   short_long_name[PPD_MAX_SHORT_NICKNAME] = '\0';
   gzprintf(fp, "*ShortNickName: \"%s\"\n", short_long_name);
-
- /*
-  * The Windows driver download stuff has problems with NickName fields
-  * with commas.  Now use a dash instead...
-  */
 
  /*
   * NOTE - code in rastertoprinter looks for this version string.
@@ -1245,7 +1248,7 @@ print_color_setup(gzFile fp, int simplified, int printer_is_color,
   gzputs(fp, "*ColorKeyWords: \"ColorModel\"\n");
   gzprintf(fp, "*OpenUI *ColorModel/%s: PickOne\n", _("Color Model"));
   gzputs(fp, "*OPOptionHints ColorModel: \"radiobuttons\"\n");
-  gzputs(fp, "*OrderDependency: 10 AnySetup *ColorModel\n");
+  gzputs(fp, "*OrderDependency: 2 AnySetup *ColorModel\n");
 
   if (printer_is_color)
     {
@@ -1314,7 +1317,7 @@ print_color_setup(gzFile fp, int simplified, int printer_is_color,
       gzputs(fp, "*ColorKeyWords: \"StpColorPrecision\"\n");
       gzprintf(fp, "*OpenUI *StpColorPrecision/%s: PickOne\n", _("Color Precision"));
       gzputs(fp, "*OPOptionHints StpColorPrecision: \"radiobuttons\"\n");
-      gzputs(fp, "*OrderDependency: 10 AnySetup *StpColorPrecision\n");
+      gzputs(fp, "*OrderDependency: 1 AnySetup *StpColorPrecision\n");
       gzputs(fp, "*DefaultStpColorPrecision: Normal\n");
       gzputs(fp, "*StpDefaultStpColorPrecision: Normal\n");
       gzprintf(fp, "*StpColorPrecision Normal/%s:\t\"<<"
@@ -1874,12 +1877,15 @@ write_ppd(
 		   all_langs);
 
   /* Macintosh color management */
+
+#ifdef __APPLE__
   gzputs(fp, "*cupsICCProfile Gray../Grayscale:	\"/System/Library/ColorSync/Profiles/sRGB Profile.icc\"\n");
   gzputs(fp, "*cupsICCProfile RGB../Color:	\"/System/Library/ColorSync/Profiles/sRGB Profile.icc\"\n");
   gzputs(fp, "*cupsICCProfile CMYK../Color:	\"/System/Library/ColorSync/Profiles/Generic CMYK Profile.icc\"\n");
   gzputs(fp, "*APSupportsCustomColorMatching: true\n");
   gzputs(fp, "*APDefaultCustomColorMatchingProfile: sRGB\n");
   gzputs(fp, "*APCustomColorMatchingProfile: sRGB\n");
+#endif
 
   gzputs(fp, "\n");
 
@@ -2157,6 +2163,7 @@ write_ppd(
 	}
 
       stp_string_list_destroy(res_list);
+      stp_clear_string_parameter(v, "Resolution");
       gzputs(fp, "*CloseUI: *Resolution\n\n");
     }
 
@@ -2563,5 +2570,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.186 2011/03/13 19:28:50 rlk Exp $".
+ * End of "$Id: genppd.c,v 1.192 2012/03/25 17:54:32 rlk Exp $".
  */

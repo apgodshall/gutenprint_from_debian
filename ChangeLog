@@ -1,3 +1,4572 @@
+2012-06-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.578) (+7 -7)
+
+	Fix numbering.
+
+2012-06-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.577) (+7 -8)
+
+	Tweaks
+
+2012-06-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.576) (+284 -247)
+
+	Draft release notes, out for review.
+
+2012-06-05	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.575) (+3 -3)
+		README (1.213) (+20 -20)
+		configure.ac (1.233) (+3 -3)
+
+	Bump version
+
+2012-06-02	<rlk@sourceforge.net>
+
+	Files:	doc/gutenprint-users-manual.odt (1.6) (+379 -424)
+		doc/gutenprint-users-manual.pdf (1.6) (+2424 -4265)
+
+	Remove printer list
+
+2012-05-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.574) (+25 -12)
+
+	Added comment on PIXUS models to NEWS file.
+
+2012-05-27	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.247) (+1 -2)
+
+	Removed duplicate Canon iP2700 printer entry in printers.xml
+
+2012-05-26	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.232) (+10 -2)
+		doc/Makefile.am (1.50) (+5 -1)
+		doc/developer/Makefile.am (1.23) (+5 -1)
+
+	Add --with/without-doc
+
+2012-05-26	<rlk@sourceforge.net>
+
+	Files:	src/main/print-weave.c (1.81) (+16 -9)
+
+	Fix compiler warning
+
+2012-05-26	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/printer_options.c (1.53) (+2 -1)
+		src/testpattern/printer_options.c (1.6) (+2 -1)
+
+	Clear resolution after setting it to ensure that it doesn't pollute
+	the option choices.
+
+2012-05-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.523) (+143 -72)
+		src/main/print-weave.c (1.80) (+1 -8)
+
+	Fixed weave code in Canon backend to avoid accessing uninitialized variables. Created new function for finding correct InkType in canon_check_current_mode, and added debug statements to clarify changes before and after processing of canon_check_current_mode.
+
+2012-05-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.522) (+11 -11)
+
+	Changed some debug printf casting in Canon backend
+
+2012-05-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.521) (+28 -2)
+		src/main/print-weave.c (1.79) (+8 -1)
+
+	Added initialization to some weave code in Canon backend
+
+2012-05-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.520) (+3 -3)
+
+	Set ncolors correctly for CMY inktype in Canon weave mode.
+
+2012-05-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.377) (+1 -1)
+		src/main/print-canon.c (1.519) (+20 -11)
+
+	Fixed missing Color cartridge support flag in Canon iP6210D mode.
+
+2012-05-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.518) (+6 -4)
+
+	Changed number of inks for CMY inktype in S200 weave code in Canon backend.
+
+2012-05-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.517) (+20 -8)
+
+	Added debug statements to Canon backend
+
+2012-05-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.160) (+6 -6)
+		src/main/canon-modes.h (1.376) (+4 -4)
+
+	Removed color(-only) inkset (cartridge) support from plain, envelope, hagaki media for Canon iP90 and iP100. Known InkTypes for these printers do not yet permit this inkset (cartridge) to be used.
+
+2012-05-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.516) (+12 -8)
+
+	Added setting of local variable for each PrintingMode setting change in Canon backend canon_check_current_mode.
+
+2012-05-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.515) (+518 -28)
+
+	Corrected InkType matching and substitution in Canon backend canon_check_current_mode function.
+
+2012-05-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.375) (+58 -57)
+		src/main/print-canon.c (1.514) (+150 -88)
+
+	In Canon backend, fixed checking routine for PrintingMode and InkType parameter consistency when mode is known.
+
+2012-05-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.513) (+3 -1)
+
+	Added debug lines to Canon backend
+
+2012-05-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.573) (+41 -31)
+		src/main/print-canon.c (1.512) (+7 -2)
+		src/xml/printers.xml (1.246) (+6 -5)
+
+	Moved Resolution modification in canon_do_print to check_current_mode in Canon backend. Updated and rewrote NEWS.
+
+2012-05-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.511) (+28 -9)
+
+	Bug fix to Canon backend: made sure Resolution is set to match that of current mode after mode replacement.
+
+2012-05-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.510) (+19 -4)
+
+	Removed parameter verification outside of the Canon backend for InkType, InkSet and PrintingMode.
+
+2012-05-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.509) (+22 -8)
+
+	added more debug statements to Canon backend. Made canon_check_current_mode an unconditional call(bugfix).
+
+2012-05-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.508) (+3 -3)
+
+	Fix a couple of minor compiler warnings
+
+2012-05-18	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.507) (+7 -4)
+
+	Added some debug lines for Canon printhead color function
+
+2012-05-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.306) (+3 -3)
+		src/main/print-canon.c (1.506) (+13 -8)
+		src/main/print-canon.h (1.9) (+5 -5)
+
+	Added flag to Canon backend for printers without black ink only cartridge support.
+
+2012-05-17	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.572) (+13 -9)
+
+	Minor updates.
+
+2012-05-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.505) (+10 -16)
+
+	Changed fullbleed margins in Canon backend to match Windows ones.
+
+2012-05-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.504) (+91 -71)
+
+	Provisional working support for borderless printing with Canon backend (WIP).
+
+2012-05-11	<rlk@sourceforge.net>
+
+	Files:	src/gutenprintui2/printrcl.l (1.2) (+3 -1)
+		src/testpattern/testpatternl.l (1.27) (+3 -1)
+
+	Add extern declaration for yylval; some versions of bison apparently do not
+
+2012-05-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.159) (+26 -26)
+		src/main/canon-modes.h (1.374) (+4 -4)
+		src/main/print-canon.c (1.503) (+10 -17)
+
+	Added partial support for Color InkSet in Canon iP90 and iP100 (known as 'black save', with two different settings of which only 1 is implemented at this stage).
+
+2012-05-09	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.571) (+18 -21)
+		src/main/canon-modes.h (1.373) (+50 -50)
+		src/main/canon-printers.h (1.305) (+2 -2)
+
+	Corrected some notation in Canon mode names. Updated NEWS file.
+
+2012-05-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.158) (+239 -162)
+		src/main/canon-modes.h (1.372) (+27 -0)
+		src/main/canon-printers.h (1.304) (+3 -3)
+
+	Checked and corrected Canon InkSet and Duplex capabilities for various media. Set duplex capability for Hagaki media even where Windows driver does not expose such capability. Corrected Canon iP6600D printer modes and media definitions.
+
+2012-05-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.157) (+7 -7)
+		src/main/canon-modes.h (1.371) (+2 -2)
+
+	Added flags to several Canon MX series media-mode data.
+
+2012-05-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.502) (+57 -34)
+
+	Modified Canon backend code to comply with compiler warnings.
+
+2012-05-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.156) (+14 -14)
+		src/main/canon-printers.h (1.303) (+3 -5)
+		src/xml/printers.xml (1.245) (+3 -1)
+
+	Added remaining support for Canon E500 and E600.
+
+2012-05-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.155) (+59 -0)
+
+	Added partial media-mode data (less flags) for Canon E500.
+
+2012-05-08	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.570) (+2 -0)
+		src/main/canon-modes.h (1.370) (+18 -0)
+		src/main/canon-printers.h (1.302) (+34 -0)
+		src/main/print-canon.c (1.501) (+2 -1)
+
+	Added partial code for Canon E500 and E600 multi-function pritners.
+
+2012-05-08	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.569) (+2 -0)
+		src/main/canon-modes.h (1.369) (+1 -1)
+		src/xml/printers.xml (1.244) (+2 -1)
+
+	Added Canon iP6320D (same as iP6310D).
+
+2012-05-08	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.243) (+2 -1)
+		test/pixma_parse.c (1.33) (+1 -1)
+
+	Added Canon MP260 (clone of MP240). Added newline in pixma_parse output.
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.301) (+3 -3)
+
+	changed max paper dimensions for Canon MP360, MP370, MP375R, MP390; MP700, MP730; and MP710, MP740.
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.300) (+2 -2)
+
+	changed max paper dimensions for Canon MP493 and MP990.
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.299) (+34 -34)
+		src/xml/printers.xml (1.242) (+3 -3)
+
+	changed max paper dimensions for Canon MP series printers. Added some printer aliases, removed duplicates.
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.298) (+7 -7)
+
+	Corrected maximum paper sizes for several Canon modes (MP series).
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.297) (+67 -67)
+		src/xml/printers.xml (1.241) (+4 -1)
+
+	Corrected maximum paper sizes for several Canon modes (iP series). Fixed erroroneous page width for previous commits. Added several Canon printer aliases.
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.296) (+14 -14)
+
+	Corrected maximum paper sizes for several Canon modes (MX series).
+
+2012-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.295) (+34 -34)
+
+	Corrected maximum paper sizes for several Canon modes (i series).
+
+2012-05-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.500) (+12 -1)
+
+	Added missing function prototype declarations to canon-print.c
+
+2012-05-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.294) (+4 -4)
+
+	changed max paper dimensions for Canon iX series printers.
+
+2012-05-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.293) (+32 -36)
+		src/main/print-canon.c (1.499) (+29 -29)
+
+	changed max paper dimensions and margins for several Canon models.
+
+2012-05-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.498) (+3 -2)
+
+	correct Canon get_current_mode to return NULL if no mode selected (regression).
+
+2012-05-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.292) (+51 -0)
+		src/main/print-canon.c (1.497) (+417 -811)
+
+	Wrote various sub-functions for Canon backend mode replacement code.
+
+2012-05-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.496) (+10 -10)
+
+	Settled constant declarations in Canon backend.
+
+2012-05-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.495) (+58 -4)
+
+	Replaced canon_get_current_mode in Canon backend with original one, and created new canon_replace_current_mode to be called in canon_do_print. WIP.
+
+2012-05-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.291) (+1 -1)
+
+	Added cassette to Canon i990 and 990i media sources.
+
+2012-04-30	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.568) (+2 -0)
+		src/main/canon-media-mode.h (1.154) (+105 -0)
+		src/main/canon-modes.h (1.368) (+39 -2)
+		src/main/canon-printers.h (1.290) (+16 -0)
+		src/main/print-canon.c (1.494) (+3 -3)
+		src/xml/printers.xml (1.240) (+3 -1)
+
+	Added Canon i990, and corresponding Japan model 990i. Fixed CD mode flags for i9900.
+
+2012-04-30	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.567) (+1 -0)
+		src/xml/printers.xml (1.239) (+2 -1)
+
+	Added Canon i9950, clone of i9900.
+
+2012-04-30	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.566) (+2 -0)
+		src/main/canon-media-mode.h (1.153) (+19 -11)
+		src/main/canon-media.h (1.130) (+37 -1)
+		src/main/canon-modes.h (1.367) (+10 -0)
+		src/main/canon-printers.h (1.289) (+3 -3)
+		src/xml/printers.xml (1.238) (+3 -1)
+
+	Added inkjet Hagaki modes to Canon i9100 and i9900, and CD support to i9900. Added corresponding Japan models 9100i and 9900i.
+
+2012-04-29	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.565) (+1 -0)
+		src/xml/printers.xml (1.237) (+4 -1)
+
+	Added Canon i965, clone of i960 (Europe). Updated printers.xml.
+
+2012-04-29	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.564) (+2 -0)
+		src/main/canon-media-mode.h (1.152) (+47 -27)
+		src/main/canon-media.h (1.129) (+20 -0)
+		src/main/canon-modes.h (1.366) (+25 -12)
+		src/main/canon-printers.h (1.288) (+3 -3)
+
+	Added Hagaki, inkjet Hagaki, CD to i950 and i960. Added corresponding Japan models 950i and 960i.
+
+2012-04-28	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.563) (+2 -0)
+		src/main/canon-media-mode.h (1.151) (+19 -4)
+		src/main/canon-modes.h (1.365) (+9 -2)
+		src/main/canon-printers.h (1.287) (+2 -2)
+		src/xml/printers.xml (1.236) (+4 -2)
+
+	Added Hagaki, inkjet Hagaki, CD to i900D. Added corresponding Japan model 900PD. Also added i905D which seems to be clone of i900D (although missing high resolution for CD in Windows driver).
+
+2012-04-28	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.562) (+2 -0)
+		src/main/canon-media-mode.h (1.150) (+0 -82)
+		src/main/canon-media.h (1.128) (+2 -27)
+		src/main/canon-modes.h (1.364) (+0 -31)
+		src/main/canon-printers.h (1.286) (+1 -17)
+		src/xml/printers.xml (1.235) (+3 -2)
+
+	Removed separate driver for Canon i865, as it is same as i860. Added corresponding Japan model 865R.
+
+2012-04-28	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.561) (+2 -0)
+		src/main/canon-media-mode.h (1.149) (+29 -15)
+		src/main/canon-modes.h (1.363) (+13 -10)
+		src/main/canon-printers.h (1.285) (+2 -2)
+		src/xml/printers.xml (1.234) (+2 -1)
+
+	Added inkjet Hagaki, Hagaki, and CD media types and corresponding modes to Canon i860, and added Japan model 860i.
+
+2012-04-28	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.560) (+10 -3)
+		src/main/canon-media-mode.h (1.148) (+13 -3)
+		src/main/canon-media.h (1.127) (+20 -1)
+		src/main/canon-modes.h (1.362) (+13 -7)
+		src/main/canon-printers.h (1.284) (+19 -19)
+		src/xml/printers.xml (1.233) (+2 -1)
+
+	Added inkjet Hagaki, Hagaki, and CD media types and corresponding modes to Canon i560, and added Japan model 560i. Also added borderless option to all Canon i* and *i series printers.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.232) (+5 -1)
+
+	Added Canon modes i450X, i455X, i550X and i560X, which are clones of the non-X models sold by some European media outlets. Distinguished only by different cover color.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.559) (+3 -0)
+		src/xml/printers.xml (1.231) (+4 -1)
+
+	Added Japan model Canon 470PD and 475PD, corresponding to non-Japan models i470D and i475D, which are PictBridge-enabled versions of the 450i and 455i, and i450 and i455 respectively.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.558) (+1 -0)
+		src/main/canon-media.h (1.126) (+1 -1)
+		src/main/canon-modes.h (1.361) (+1 -0)
+		src/xml/printers.xml (1.230) (+2 -1)
+
+	Added separate driver for Japan model Canon 850i. The non-Japan model i850 gets support for inkjet Hagaki and Hagaki media.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.557) (+5 -0)
+		src/main/canon-media.h (1.125) (+1 -1)
+		src/main/canon-modes.h (1.360) (+1 -0)
+		src/xml/printers.xml (1.229) (+3 -1)
+
+	Added separate drivers for Japan models Canon 6100i and 6500i. The non-Japan models i6100 and i6500 get support for inkjet Hagaki and Hagaki media.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.147) (+14 -2)
+		src/main/canon-media.h (1.124) (+21 -5)
+		src/main/canon-modes.h (1.359) (+11 -4)
+		src/main/canon-printers.h (1.283) (+1 -1)
+		src/xml/printers.xml (1.228) (+4 -1)
+
+	Added separate inkjet Hagaki modes to Canon i450, i455, i550. Added separate drivers for Japan models 450i, 455i, 550i.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.556) (+6 -1)
+		src/main/canon-media-mode.h (1.146) (+19 -6)
+		src/main/canon-media.h (1.123) (+2 -2)
+		src/main/canon-modes.h (1.358) (+6 -1)
+		src/main/canon-printers.h (1.282) (+1 -1)
+		src/xml/printers.xml (1.227) (+5 -4)
+
+	added inkjet Hagaki and Hagaki support to Canon i80. Added missing mode for plusGlossy photo paper. Created new printer for Japanese model 80i.
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.32) (+0 -1)
+
+	fixed output for ESC (l command in parser
+
+2012-04-27	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.226) (+7 -7)
+
+	Corrected entry for Canon 50i
+
+2012-04-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.493) (+4 -3)
+
+	Commented out Canon borderless deactivation in case of paper margins. Need to fix.
+
+2012-04-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.145) (+2 -72)
+		src/main/canon-media.h (1.122) (+0 -17)
+		src/main/canon-modes.h (1.357) (+3 -25)
+		src/main/canon-printers.h (1.281) (+1 -16)
+		src/main/print-canon.c (1.492) (+3 -3)
+		src/xml/printers.xml (1.225) (+2 -2)
+
+	Updated Canon 50i modes. i70 is the non-Japanese counterpart, so removed definitions for i70 and used 50i driver instead. Updated some debugging statements.
+
+2012-04-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.491) (+74 -77)
+
+	Changed debug statements in Canon backend.
+
+2012-04-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.555) (+1 -0)
+		src/xml/printers.xml (1.224) (+2 -1)
+
+	Added Canon MX320, same as MX330.
+
+2012-04-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.490) (+12 -10)
+
+	further debug statement changes to Canon backend.
+
+2012-04-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.489) (+39 -15)
+
+	more debugging statement to Canon backend for borderless printing debugging.
+
+2012-04-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.488) (+16 -9)
+
+	debugging Canon borderless printing. Commented out problematic code.
+
+2012-04-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.487) (+35 -13)
+
+	smal changes to borderless printing of Canon backend, part of debugging attempt.
+
+2012-04-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.486) (+42 -14)
+
+	Added corrections for borderless printing. page_height is still incorrect.
+
+2012-04-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.280) (+103 -103)
+		src/main/print-canon.c (1.485) (+121 -35)
+
+	borderless printing for Canon backend partially implemented. Writing area_right and area_top (negative values) to printjob header not yet working. use_aximum_area condition not yet implemented.
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.554) (+2 -0)
+		src/main/canon-media-mode.h (1.144) (+70 -0)
+		src/main/canon-modes.h (1.356) (+23 -0)
+		src/main/canon-printers.h (1.279) (+16 -0)
+		src/xml/printers.xml (1.223) (+3 -1)
+
+	Added support for Canon MX710 (and MX890).
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.553) (+1 -0)
+		src/main/canon-media-mode.h (1.143) (+57 -0)
+		src/main/canon-modes.h (1.355) (+23 -5)
+		src/main/canon-printers.h (1.278) (+16 -0)
+		src/main/print-canon.c (1.484) (+2 -2)
+		src/xml/printers.xml (1.222) (+2 -1)
+
+	Added provisional support for Canon MX510. Color-only cartridge selection does not work yet.
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.552) (+2 -0)
+		src/main/canon-media-mode.h (1.142) (+57 -1)
+		src/main/canon-modes.h (1.354) (+17 -0)
+		src/main/canon-printers.h (1.277) (+16 -0)
+		src/xml/printers.xml (1.221) (+3 -1)
+
+	Added provisional support for Canon MX370 (and MX430). Color-only cartridge selection does not work yet.
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.141) (+7 -1)
+		src/main/canon-modes.h (1.353) (+86 -75)
+
+	Corrected flags for CD modes for all Canon models.
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.551) (+1 -0)
+		src/main/canon-media-mode.h (1.140) (+67 -7)
+		src/main/canon-printers.h (1.276) (+5 -5)
+		src/main/print-canon.c (1.483) (+73 -3)
+		src/xml/printers.xml (1.220) (+2 -1)
+
+	Added experimental support for Canon iP90 and iP100, with ESC (S command. ESC (T variations not yet fully implemented. Also, printjob format is still uncertain, as the parser segfaults on the print data.
+
+2012-04-22	<gernot2270@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.31) (+97 -91)
+
+	Changed parse output of pixma_parse to go to stderr, to help debug printjobs where the parser segfaults.
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.550) (+2 -0)
+		src/main/canon-printers.h (1.275) (+158 -154)
+
+	Adjusted top margin of most Canon models.
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.549) (+3 -0)
+		src/main/canon-inks.h (1.115) (+32 -0)
+		src/main/canon-media-mode.h (1.139) (+9 -5)
+		src/main/canon-modes.h (1.352) (+3 -3)
+		src/main/print-canon.c (1.482) (+18 -5)
+
+	Added experimental support for high quality photo modes with Canon iP6210D, iP6220D, and iP6310D.
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.138) (+5 -6)
+		src/main/canon-modes.h (1.351) (+1 -1)
+
+	Added 8-bit ink modes to Canon MX300 (and MX310).
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.548) (+2 -0)
+		src/main/canon-media-mode.h (1.137) (+72 -0)
+		src/main/canon-modes.h (1.350) (+1 -1)
+		src/main/canon-printers.h (1.274) (+1 -1)
+		src/xml/printers.xml (1.219) (+3 -1)
+
+	Added experimental support for Canon iP90, iP90v. Still need to check orientation of print (may need vertical dimension reversed).
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.136) (+8 -12)
+		src/main/canon-modes.h (1.349) (+1 -1)
+		src/main/canon-printers.h (1.273) (+2 -2)
+
+	Added 8-bit ink modes to Canon MP190. Adjusted top margin on MP190, MP210 models.
+
+2012-04-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.547) (+3 -0)
+		src/main/canon-media-mode.h (1.135) (+24 -24)
+		src/main/canon-modes.h (1.348) (+16 -7)
+		src/main/canon-printers.h (1.272) (+1 -1)
+
+	Added 8-bit ink modes to Canon i80, i450, i455 models. Adjusted top margin on MP150 model.
+
+2012-04-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.347) (+4 -7)
+
+	Activated 8-bit modes in unsupported printers for completeness.
+
+2012-04-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.134) (+5 -2)
+		src/main/canon-modes.h (1.346) (+1 -1)
+
+	Activated 8-bit ink mode in Canon iP6210D model.
+
+2012-04-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.133) (+17 -27)
+		src/main/canon-modes.h (1.345) (+2 -2)
+
+	Activated 8-bit ink modes in Canon MP210 and MP470 models.
+
+2012-04-19	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.546) (+3 -0)
+		src/main/canon-printers.h (1.271) (+481 -162)
+		src/main/print-canon.c (1.481) (+21 -46)
+
+	Added length of ESC (P command to printer definitions in Canon backend.
+
+2012-04-19	<gernot2270@sourceforge.net>
+
+	Files:	include/gutenprint/bit-ops.h (1.5) (+12 -1)
+		src/main/bit-ops.c (1.15) (+104 -1)
+		src/main/print-canon.c (1.480) (+32 -33)
+		test/pixma_parse.c (1.30) (+6 -2)
+
+	Completed support for 8-bit inks in Canon backend. Mode present in Canon MP150 model. To be added to other models.
+
+2012-04-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.479) (+43 -33)
+
+	added initial support code (WIP) for 8-bpp inks to Canon backend in canon_compress function.
+
+2012-04-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.132) (+17 -17)
+		src/main/canon-modes.h (1.344) (+1 -1)
+		src/main/print-canon.c (1.478) (+24 -7)
+
+	activated 600x600dpi_photohigh mode with 13_c9m9y9 inkset in Canon backend in order to debug the incorrect image width. This mode is used by several printer families for high quality photo printing.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.545) (+7 -2)
+		src/main/canon-printers.h (1.270) (+161 -160)
+		src/main/print-canon.c (1.477) (+7 -9)
+
+	Implemented correct ESC (l command length for Canon printers.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.131) (+401 -401)
+		src/main/canon-printers.h (1.269) (+165 -0)
+		src/main/print-canon.c (1.476) (+1244 -1733)
+
+	Implemented mode and media cross-checking for Canon backend: only modes permitted for given media will be used, replacing as necessary. Supports: duplex mode substitution, black and color-only cartridge mode substitution, and photo cartridge mode substitution.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.130) (+75 -0)
+		src/main/print-canon.c (1.475) (+9 -5)
+
+	Added Canon BJC S900 to media-mode combinations.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.129) (+70 -0)
+		src/main/print-canon.c (1.474) (+9 -5)
+
+	Added Canon BJC S820 to media-mode combinations.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.128) (+83 -0)
+		src/main/print-canon.c (1.473) (+9 -5)
+
+	Added Canon BJC S800 to media-mode combinations.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.127) (+72 -0)
+		src/main/canon-modes.h (1.343) (+2 -2)
+		src/main/print-canon.c (1.472) (+9 -5)
+
+	Added Canon BJC S750 to media-mode combinations.
+
+2012-04-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.126) (+75 -0)
+		src/main/print-canon.c (1.471) (+9 -5)
+
+	Added Canon BJC S600 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.125) (+74 -0)
+		src/main/print-canon.c (1.470) (+9 -5)
+
+	Added Canon BJC S520 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.124) (+68 -0)
+		src/main/canon-modes.h (1.342) (+1 -1)
+		src/main/print-canon.c (1.469) (+9 -5)
+
+	Added Canon BJC S500 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.123) (+65 -0)
+		src/main/print-canon.c (1.468) (+9 -5)
+
+	Added Canon BJC S330 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.122) (+60 -23)
+		src/main/print-canon.c (1.467) (+9 -5)
+
+	Added Canon BJC S300 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.121) (+370 -0)
+		src/xml/printers.xml (1.218) (+2 -2)
+
+	added all remaining distinct Canon BJC printers to media-mode data. No data available to choose modes per media, so all modes qualify for all media.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.120) (+38 -0)
+		src/main/print-canon.c (1.466) (+9 -5)
+
+	Added Canon BJC 4550 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.119) (+60 -0)
+		src/main/print-canon.c (1.465) (+9 -5)
+
+	Added Canon BJC 4300 to media-mode combinations.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.118) (+80 -0)
+		src/main/canon-printers.h (1.268) (+2 -2)
+		src/main/print-canon.c (1.464) (+414 -25)
+
+	Added Canon BJC 3000 to media-mode combinations. Added support for photo and full-color ink cartridge selection for BJC series.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.117) (+71 -0)
+		src/main/canon-modes.h (1.341) (+31 -0)
+		src/main/canon-printers.h (1.267) (+1 -1)
+		src/main/print-canon.c (1.463) (+9 -5)
+
+	Added Canon MG3100 to media-mode combinations. Separated out mode definitions from MG2100.
+
+2012-04-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.116) (+70 -0)
+		src/main/canon-modes.h (1.340) (+14 -14)
+		src/main/print-canon.c (1.462) (+9 -5)
+
+	Added Canon MG2100 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.115) (+93 -0)
+		src/main/canon-modes.h (1.339) (+2 -2)
+		src/main/print-canon.c (1.461) (+9 -5)
+
+	Added Canon MG8200 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.114) (+93 -0)
+		src/main/canon-modes.h (1.338) (+2 -2)
+		src/main/print-canon.c (1.460) (+9 -5)
+
+	Added Canon MG6200 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.113) (+78 -0)
+		src/main/canon-modes.h (1.337) (+2 -2)
+		src/main/print-canon.c (1.459) (+9 -5)
+
+	Added Canon MG5300 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.112) (+93 -0)
+		src/main/canon-modes.h (1.336) (+2 -2)
+		src/main/print-canon.c (1.458) (+9 -5)
+
+	Added Canon MG8100 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.111) (+92 -0)
+		src/main/canon-modes.h (1.335) (+1 -1)
+		src/main/print-canon.c (1.457) (+9 -5)
+
+	Added Canon MG6100 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.110) (+79 -0)
+		src/main/canon-modes.h (1.334) (+1 -1)
+		src/main/print-canon.c (1.456) (+9 -5)
+
+	Added Canon MG5200 to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.109) (+70 -8)
+		src/main/canon-media.h (1.121) (+1 -0)
+		src/main/canon-modes.h (1.333) (+2 -2)
+		src/main/print-canon.c (1.455) (+9 -5)
+
+	Added Canon MG5100 to media-mode combinations. Also added missing media type to Canon pro9500 Mk.II.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.108) (+80 -0)
+		src/main/print-canon.c (1.454) (+9 -5)
+
+	Added Canon MP750 (and MP760, MP770, MP780, MP790) to media-mode combinations.
+
+2012-04-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.107) (+92 -0)
+		src/main/print-canon.c (1.453) (+9 -5)
+
+	Added Canon MP710 (and MP740) to mode-media data.
+
+2012-04-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.106) (+92 -0)
+		src/main/print-canon.c (1.452) (+9 -5)
+
+	Added Canon MP700 (and MP730) to media-mode combinations.
+
+2012-04-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.105) (+105 -0)
+		src/main/canon-modes.h (1.332) (+9 -9)
+		src/main/print-canon.c (1.451) (+9 -5)
+
+	Added Canon MP950 to media-mode combinations.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.104) (+82 -0)
+		src/main/canon-modes.h (1.331) (+19 -19)
+		src/main/print-canon.c (1.450) (+9 -5)
+
+	Added Canon MP490 to media-mode combinations.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.103) (+100 -0)
+		src/main/canon-modes.h (1.330) (+23 -19)
+		src/main/print-canon.c (1.449) (+9 -5)
+
+	Added Canon MP470 to media-mode combinations.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.102) (+102 -0)
+		src/main/print-canon.c (1.448) (+9 -5)
+
+	Added Canon MP900 to media-mode combinations.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.101) (+70 -0)
+		src/main/print-canon.c (1.447) (+9 -5)
+
+	Added Canon MP360 (and MP370, MP375R, MP390) to media-mode combinations.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.100) (+105 -1)
+		src/main/canon-modes.h (1.329) (+1 -1)
+		src/main/print-canon.c (1.446) (+9 -5)
+
+	Added Canon iP9910 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.99) (+106 -0)
+		src/main/canon-modes.h (1.328) (+1 -1)
+		src/main/print-canon.c (1.445) (+9 -5)
+
+	Added Canon iP8600 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.98) (+116 -4)
+		src/main/canon-modes.h (1.327) (+2 -2)
+		src/main/print-canon.c (1.444) (+9 -5)
+
+	Added Canon iP8100 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.97) (+7226 -7128)
+		src/main/canon-modes.h (1.326) (+1 -1)
+		src/main/print-canon.c (1.443) (+9 -5)
+
+	Added Canon iP7100 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.96) (+69 -0)
+		src/main/print-canon.c (1.442) (+9 -5)
+
+	Added Canon iP3600 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.95) (+68 -0)
+		src/main/print-canon.c (1.441) (+9 -5)
+
+	Added Canon iP3300 to mode-media data.
+
+2012-04-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.94) (+85 -1)
+		src/main/canon-modes.h (1.325) (+2 -2)
+		src/main/print-canon.c (1.440) (+9 -5)
+
+	Added Canon MP560 to mode-media data.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.93) (+85 -0)
+		src/main/canon-modes.h (1.324) (+1 -1)
+		src/main/print-canon.c (1.439) (+9 -5)
+
+	Added Canon MP640 to media-mode combinations.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.92) (+82 -0)
+		src/main/canon-modes.h (1.323) (+2 -2)
+		src/main/print-canon.c (1.438) (+9 -5)
+
+	Added Canon MP630  to media-mode combinations.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.91) (+69 -0)
+		src/main/print-canon.c (1.437) (+9 -5)
+
+	Added Canon MP620 to mode-media data.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.90) (+86 -0)
+		src/main/print-canon.c (1.436) (+9 -5)
+
+	Added Canon iP6100D to mode-media data.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.89) (+86 -0)
+		src/main/canon-modes.h (1.322) (+3 -3)
+		src/main/print-canon.c (1.435) (+9 -5)
+
+	Added Canon MP980 to mode-media data.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.88) (+90 -0)
+		src/main/print-canon.c (1.434) (+9 -5)
+
+	Added Canon MP810 to mode-media data.
+
+2012-04-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.87) (+80 -0)
+		src/main/canon-modes.h (1.321) (+1 -1)
+		src/main/print-canon.c (1.433) (+13 -9)
+
+	Added Canon MP800 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.86) (+128 -0)
+		src/main/canon-modes.h (1.320) (+1 -1)
+		src/main/print-canon.c (1.432) (+14 -9)
+
+	Added Canon Pro9500 Mk.II  to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.85) (+130 -0)
+		src/main/canon-modes.h (1.319) (+2 -2)
+		src/main/print-canon.c (1.431) (+5 -5)
+
+	Added Canon Pro9500 to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.84) (+9 -2)
+		src/main/print-canon.c (1.430) (+9 -5)
+
+	Added transparency modes to iX4000 media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.83) (+73 -2)
+		src/main/canon-modes.h (1.318) (+24 -0)
+		src/main/canon-printers.h (1.266) (+1 -1)
+		src/main/print-canon.c (1.429) (+9 -5)
+
+	Added Canon MX880 to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.82) (+49 -0)
+		src/main/print-canon.c (1.428) (+9 -5)
+
+	Added Canon MX7600 to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.81) (+72 -0)
+		src/main/print-canon.c (1.427) (+9 -5)
+
+	Added Canon MX870 to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.80) (+70 -0)
+		src/main/canon-modes.h (1.317) (+1 -1)
+		src/main/print-canon.c (1.426) (+9 -5)
+
+	Added Canon MX860 to media-mode combinations.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.79) (+86 -0)
+		src/main/canon-media.h (1.120) (+1 -1)
+		src/main/print-canon.c (1.425) (+9 -5)
+
+	Added Canon MX850 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.78) (+69 -0)
+		src/main/print-canon.c (1.424) (+9 -5)
+
+	Added Canon MX700 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.77) (+80 -0)
+		src/main/canon-modes.h (1.316) (+20 -20)
+		src/main/print-canon.c (1.423) (+9 -5)
+
+	Added Canon MX340 (and MX350) to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.76) (+78 -0)
+		src/main/canon-modes.h (1.315) (+20 -20)
+		src/main/print-canon.c (1.422) (+9 -5)
+
+	Added Canon MX330 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.75) (+92 -0)
+		src/main/canon-modes.h (1.314) (+23 -23)
+		src/main/print-canon.c (1.421) (+9 -5)
+
+	Added Canon MX300 (and MX310) to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.74) (+93 -0)
+		src/main/canon-media.h (1.119) (+2 -2)
+		src/main/canon-modes.h (1.313) (+2 -1)
+		src/main/print-canon.c (1.420) (+9 -5)
+
+	Added Canon MP990 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.73) (+83 -0)
+		src/main/print-canon.c (1.419) (+9 -5)
+
+	Added Canon MP600 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.72) (+69 -0)
+		src/main/print-canon.c (1.418) (+9 -5)
+
+	Added Canon MP520 (and MP510) to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.71) (+77 -0)
+		src/main/print-canon.c (1.417) (+9 -5)
+
+	Added Canon MP480 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.70) (+81 -0)
+		src/main/canon-modes.h (1.312) (+21 -21)
+		src/main/print-canon.c (1.416) (+9 -5)
+
+	Added Canon MP280 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.69) (+52 -0)
+		src/main/print-canon.c (1.415) (+9 -5)
+
+	Added Canon mini320 (and mini360) to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.68) (+50 -0)
+		src/main/canon-modes.h (1.311) (+1 -1)
+		src/main/print-canon.c (1.414) (+9 -5)
+
+	Added Canon mini220 to mode-media data.
+
+2012-04-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.67) (+80 -0)
+		src/main/canon-media.h (1.118) (+1 -1)
+		src/main/print-canon.c (1.413) (+9 -5)
+
+	Added Canon MP493 to mode-media data.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.66) (+63 -0)
+		src/main/canon-modes.h (1.310) (+5 -0)
+		src/main/print-canon.c (1.412) (+9 -5)
+
+	Added Canon PIXMA iX7000 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.65) (+50 -0)
+		src/main/canon-modes.h (1.309) (+1 -1)
+		src/main/print-canon.c (1.411) (+9 -5)
+
+	Added Canon SELPHY DS810 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.64) (+52 -0)
+		src/main/canon-modes.h (1.308) (+1 -1)
+		src/main/print-canon.c (1.410) (+9 -5)
+
+	Added Canon SELPHY DS700 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.63) (+80 -0)
+		src/main/canon-media.h (1.117) (+3 -2)
+		src/main/canon-modes.h (1.307) (+56 -19)
+		src/main/canon-printers.h (1.265) (+1 -1)
+		src/main/print-canon.c (1.409) (+9 -5)
+
+	Added Canon MX420 to media-mode combinations. Added missing paper type and created custom mode definition.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.62) (+73 -0)
+		src/main/print-canon.c (1.408) (+9 -5)
+
+	Added Canon PIXMA iX6500 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.61) (+96 -0)
+		src/main/print-canon.c (1.407) (+9 -5)
+
+	Added Canon BJC i9900 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.60) (+86 -0)
+		src/main/print-canon.c (1.406) (+9 -5)
+
+	Added Canon BJC i9100 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.59) (+83 -0)
+		src/main/canon-modes.h (1.306) (+1 -1)
+		src/main/print-canon.c (1.405) (+9 -5)
+
+	Added Canon BJC i6610 (and i6500) to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.58) (+82 -0)
+		src/main/canon-modes.h (1.305) (+1 -1)
+		src/main/print-canon.c (1.404) (+9 -5)
+
+	Added Canon BJC i865 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.57) (+83 -0)
+		src/main/print-canon.c (1.403) (+9 -5)
+
+	Added Canon BJC i560 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.56) (+71 -0)
+		src/main/print-canon.c (1.402) (+9 -5)
+
+	Added Canon BJC i70 to media-mode combinations.
+
+2012-04-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.55) (+72 -0)
+		src/main/print-canon.c (1.401) (+9 -5)
+
+	Added Canon BJC i80 to media-mode combinations.
+
+2012-04-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.54) (+69 -1)
+		src/main/canon-modes.h (1.304) (+3 -3)
+		src/main/print-canon.c (1.400) (+9 -5)
+
+	Added Canon BJC i900 to media-mode combinations.
+
+2012-04-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.53) (+102 -0)
+		src/main/canon-modes.h (1.303) (+1 -1)
+		src/main/print-canon.c (1.399) (+9 -5)
+
+	Added Canon BJC i960 to media-mode combinations.
+
+2012-04-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.52) (+93 -0)
+		src/main/canon-modes.h (1.302) (+3 -3)
+		src/main/canon-printers.h (1.264) (+1 -1)
+		src/main/print-canon.c (1.398) (+9 -5)
+
+	Added Canon BJC i950 to media-mode combinations.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.51) (+72 -0)
+		src/main/print-canon.c (1.397) (+9 -5)
+
+	Added Canon BJC i860 to media-mode combinations.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.50) (+96 -0)
+		src/main/canon-modes.h (1.301) (+1 -1)
+		src/main/print-canon.c (1.396) (+9 -5)
+
+	Added Canon BJC i850 to media-mode combinations.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.49) (+90 -0)
+		src/main/canon-modes.h (1.300) (+3 -3)
+		src/main/print-canon.c (1.395) (+9 -5)
+
+	Added Canon BJC i550 to media-mode combinations.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.48) (+83 -1)
+		src/main/canon-media.h (1.116) (+1 -1)
+		src/main/print-canon.c (1.394) (+9 -5)
+
+	Added Canon BJC i455 to media-mode combinations.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.47) (+78 -0)
+		src/main/print-canon.c (1.393) (+9 -5)
+
+	Added Canon BJC i450 to mode-media data.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.46) (+76 -0)
+		src/main/canon-modes.h (1.299) (+1 -1)
+		src/main/print-canon.c (1.392) (+9 -5)
+
+	Added Canon BJC i50 to mode-media data.
+
+2012-04-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.45) (+78 -0)
+		src/main/canon-modes.h (1.298) (+2 -2)
+		src/main/print-canon.c (1.391) (+9 -5)
+
+	Added Canon iP5000 to mode-media data.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.44) (+87 -0)
+		src/main/print-canon.c (1.390) (+9 -6)
+
+	Added Canon iP7500 to media-mode combinations.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.43) (+80 -0)
+		src/main/canon-modes.h (1.297) (+21 -21)
+		src/main/print-canon.c (1.389) (+9 -5)
+
+	Added Canon MP240 to media-mode combinations.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.42) (+100 -1)
+		src/main/canon-modes.h (1.296) (+22 -22)
+		src/main/print-canon.c (1.388) (+9 -5)
+
+	Added Canon MP210 to media-mode combinations.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.41) (+93 -1)
+		src/main/canon-modes.h (1.295) (+22 -22)
+		src/main/print-canon.c (1.387) (+9 -5)
+
+	Added Canon MP190 to mode-media data.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.40) (+69 -0)
+		src/main/print-canon.c (1.386) (+9 -5)
+
+	Added Canon MP540 to mode-media data.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.39) (+71 -0)
+		src/main/print-canon.c (1.385) (+9 -5)
+
+	Added Canon iX4000 to mode-media data.
+
+2012-04-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.38) (+89 -0)
+		src/main/print-canon.c (1.384) (+17 -9)
+
+	Added Canon iP3100 to mode-media data.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.37) (+79 -0)
+		src/main/canon-modes.h (1.294) (+2 -2)
+		src/main/print-canon.c (1.383) (+9 -7)
+
+	Added Canon iP2000 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.36) (+88 -1)
+		src/main/canon-modes.h (1.293) (+5 -5)
+		src/main/print-canon.c (1.382) (+16 -9)
+
+	Added Canon MP970 (although no mono modes are yet added) to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.35) (+74 -3)
+		src/main/canon-modes.h (1.292) (+13 -13)
+		src/main/print-canon.c (1.381) (+9 -5)
+		src/xml/printers.xml (1.217) (+4 -1)
+
+	Added Canon iP2700 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.34) (+75 -0)
+		src/main/canon-modes.h (1.291) (+2 -2)
+		src/main/print-canon.c (1.380) (+9 -5)
+
+	Added Canon MP530 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.33) (+80 -0)
+		src/main/canon-modes.h (1.290) (+11 -11)
+		src/main/print-canon.c (1.379) (+30 -26)
+
+	Added Canon iP46210D (incl. iP6220D, iP6310D) to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.32) (+62 -0)
+		src/main/canon-modes.h (1.289) (+3 -0)
+		src/main/print-canon.c (1.378) (+9 -5)
+
+	Added Canon iP4300 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.31) (+88 -3)
+		src/main/canon-media.h (1.115) (+1 -0)
+		src/main/print-canon.c (1.377) (+10 -6)
+
+	Added Canon iP4100 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.30) (+78 -0)
+		src/main/canon-modes.h (1.288) (+3 -3)
+		src/main/print-canon.c (1.376) (+9 -5)
+
+	Added Canon iP4900 to media-mode combinations.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.29) (+189 -105)
+		src/main/canon-modes.h (1.287) (+9 -6)
+		src/main/print-canon.c (1.375) (+9 -5)
+
+	Added Canon iP4600 to mode-media data. Fixed several missing duplex-specific entries in media-mode data.
+
+2012-04-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.28) (+85 -0)
+		src/main/canon-modes.h (1.286) (+4 -4)
+		src/main/print-canon.c (1.374) (+9 -5)
+
+	Added Canon iP4500 to mode-media data.
+
+2012-04-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.27) (+9 -12)
+
+	Added remaining data for Canon MP250 to media-mode combinations.
+
+2012-04-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.26) (+89 -0)
+		src/main/canon-modes.h (1.285) (+23 -23)
+		src/main/print-canon.c (1.373) (+9 -5)
+
+	Added Canon MP250 (some checks of color-only modes required) to mode-media data.
+
+2012-04-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.25) (+130 -20)
+		src/main/canon-media.h (1.114) (+94 -94)
+		src/main/canon-modes.h (1.284) (+7 -7)
+		src/main/print-canon.c (1.372) (+23 -17)
+
+	Added Canon MP960 to mode-media data. Corrected several more printer models in print-canon.c, and corrected conditional statement. Commented out unused variables.
+
+2012-04-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.24) (+144 -0)
+		src/main/canon-modes.h (1.283) (+2 -0)
+		src/main/print-canon.c (1.371) (+20 -16)
+
+	Added Canon Pro9000 Mk.II to mode-media data. Also fixed several printer names conditional statements in print-canon.c: the strings must match the printer name definitions in canon-printers.h.
+
+2012-04-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.23) (+37 -5)
+		src/main/canon-modes.h (1.282) (+1 -1)
+
+	Added remaining settings of Canon Pro9000 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.22) (+125 -7)
+		src/main/print-canon.c (1.370) (+9 -6)
+
+	Added Canon Pro9000 (partial data) to media-mode combinations.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.21) (+3 -3)
+
+	Revised slightly Canon iP4700, iP4800 in media-mode combinations.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.20) (+86 -0)
+		src/main/canon-media.h (1.113) (+25 -25)
+		src/main/canon-modes.h (1.281) (+2 -2)
+		src/main/print-canon.c (1.369) (+9 -5)
+
+	Added Canon iP4700, iP4800 to media-mode combinations.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.19) (+90 -0)
+		src/main/canon-modes.h (1.280) (+1 -1)
+		src/main/print-canon.c (1.368) (+9 -5)
+
+	Added Canon iP8500 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.18) (+84 -0)
+		src/main/print-canon.c (1.367) (+9 -5)
+
+	Added Canon iP6700 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.17) (+85 -0)
+		src/main/print-canon.c (1.366) (+11 -7)
+
+	Added Canon iP5300 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.16) (+75 -6)
+		src/main/canon-media.h (1.112) (+1 -0)
+		src/main/print-canon.c (1.365) (+9 -5)
+
+	Added Canon MP830 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.15) (+79 -0)
+		src/main/print-canon.c (1.364) (+9 -5)
+
+	Added Canon iX5000 to mode-media data.
+
+2012-04-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.14) (+72 -1)
+		src/main/print-canon.c (1.363) (+12 -5)
+
+	Added Canon iP4200 to mode-media data.
+
+2012-04-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.13) (+65 -0)
+		src/main/print-canon.c (1.362) (+21 -17)
+
+	Added Canon MP550 toia-mode combinations.
+
+2012-04-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.12) (+115 -25)
+		src/main/print-canon.c (1.361) (+19 -11)
+
+	Added Canon iP3000 to media-mode combinations.
+
+2012-03-31	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.11) (+79 -0)
+		src/main/canon-modes.h (1.279) (+30 -29)
+		src/main/print-canon.c (1.360) (+21 -8)
+
+	Corrected Canon MX360 mode names and added media-mode combinations.
+
+2012-03-31	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.359) (+174 -56)
+
+	Completed addition of PrintingMode option in mode replacement support in Canon backend
+
+2012-03-31	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.358) (+32 -9)
+
+	Increased priority of PrintingMode to that of InkSet in mode replacement support in Canon backend (partial implementation).
+
+2012-03-31	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.357) (+349 -29)
+
+	Completed duplex mode replacement support in Canon backend.
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.356) (+14 -55)
+
+	Removed duplicate code, cleaned up comments in duplex mode substitution for Canon backend (still some sections remaining to be completed).
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.355) (+122 -25)
+
+	Added further support for duplex mode substitution for Canon backend.
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.10) (+1 -0)
+		src/main/print-canon.c (1.354) (+8 -5)
+
+	fixed Canon iP6000D media-mode data.
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.9) (+87 -0)
+		src/main/canon-modes.h (1.278) (+2 -2)
+
+	Added Canon iP6000D media-mode data, corrected a photo mode name.
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.8) (+90 -1)
+
+	Added Canon iP4000 media-mode data.
+
+2012-03-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.353) (+72 -33)
+
+	Added partial support for duplex mode replacement to Canon backend.
+
+2012-03-29	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.352) (+192 -91)
+
+	Added (possibly only partial) support for ink cartridge-specific mode selection to Canon backend.
+
+2012-03-29	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.277) (+3 -2)
+		src/main/print-canon.c (1.351) (+13 -1)
+
+	Updated flags for inkset support, duplex support and corresponding replacement modes to Canon backend data files.
+
+2012-03-29	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.7) (+26 -15)
+		src/main/canon-modes.h (1.276) (+16 -13)
+		src/main/print-canon.c (1.350) (+3 -3)
+
+	Added flags for inkset support and replacement modes to Canon backend data files. Currently only PIXMA MP450.
+
+2012-03-28	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.349) (+29 -14)
+
+	Added PrintingMode setting to Canon backend get_current_mode logic.
+
+2012-03-28	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.348) (+7 -6)
+
+	Fixed undeclared ink_type handling bug in Canon backend get_current_mode logic
+
+2012-03-28	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.6) (+92 -1)
+		src/main/print-canon.c (1.347) (+149 -20)
+
+	Added experimental logic to Canon backend get_current_mode function to find a mode if the one currently active is not for the media selected. Added MP450 mode-media data.
+
+2012-03-28	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.346) (+16 -12)
+
+	Corrected bug in Canon backend get_current_mode logic regarding InkSet.
+
+2012-03-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.345) (+181 -14)
+
+	Added major portion of decision logic for mode selection and replacement based on media type, ink set (cartridge selection), ink type, to Canon backend. Still missing: duplex mode replacement, enhance logic for replacing an existing mode.
+
+2012-03-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.344) (+35 -14)
+
+	Canon backend: added comments in preparation for further option decision logic to print-canon.c
+
+2012-03-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.343) (+17 -2)
+
+	Canon backend: added InkType adjustment based on InkSet selection to canon_do_print. Currently sets InkType to Gray for Black InkSet, and to RGB(CMY) for Color InkSet. Devices with such cartridge selections do not use more complex ink sets in the modes (as far as is currently known).
+
+2012-03-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.5) (+3 -0)
+		src/main/print-canon.c (1.342) (+41 -1)
+
+	Added InkSet adjustment in do_print for Canon backend. Limited to MP610 for testing.
+
+2012-03-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.341) (+3 -7)
+
+	Corrected InkType parameter and InkSet parameter in canon_do_print.
+
+2012-03-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.340) (+7 -1)
+
+	Added InkType parameter to privdata in canon_do_print routine.
+
+2012-03-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.339) (+20 -6)
+
+	Added InkSet parameter to privdata in canon_do_print routine. Removed several noisy debug statements.
+
+2012-03-25	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.122) (+8 -6)
+		src/cups/genppd.c (1.192) (+12 -4)
+		src/cups/test-ppds (1.7) (+1 -1)
+
+	Generate PPD files without extra_version when running test-ppds
+
+2012-03-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.338) (+235 -42)
+
+	Updated canon_printhead_colors function to highest possible colors for a given mode, or the highest possible for a given printer, if black is not specifically selected by printing mode or inkset (cartridge) selection. As a fallback, the lowest (previously black) amount of colors is returned, although this case should not occur.
+
+2012-03-25	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.191) (+3 -2)
+
+	Clear resolution before enumerating other options.
+
+2012-03-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.337) (+2 -1)
+
+	Corrected missing default ink type setting
+
+2012-03-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.275) (+108 -108)
+
+	Set default modes for most Canon printers to be standard rather than high-quality.
+
+2012-03-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.336) (+32 -34)
+
+	Set default ink type in Canon backend to be that of default mode (color if present). Changed debug statements to respect debug flags.
+
+2012-03-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.335) (+12 -18)
+
+	Removed comments and debug statements
+
+2012-03-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.334) (+11 -10)
+
+	Testing version of print-canon.c with default mode setting switched back on, and resolution disabled in ink type enumeration in canon_parameters.
+
+2012-03-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.333) (+56 -38)
+
+	Testing version of print-canon.c with default mode setting switched off.
+
+2012-03-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.332) (+37 -13)
+
+	changed function to get current mode to return NULL when no modes found.
+
+2012-03-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.331) (+26 -8)
+
+	Modified InkType code to return all inks for all modes: but first need to fix get_current_mode to return NULL instead of default mode.
+
+2012-03-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.330) (+18 -19)
+
+	Modified printhead_colors code to check for mode. Cleaned up comments.
+
+2012-03-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.329) (+3 -3)
+
+	moved one debug statement into Canon MP610-specific block
+
+2012-03-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.328) (+4 -5)
+
+	Corrected conditional logic in mode replacement code for Canon backend
+
+2012-03-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.327) (+43 -68)
+
+	Cleaned up comments in mode replacement code
+
+2012-03-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.4) (+30 -133)
+		src/main/print-canon.c (1.326) (+41 -31)
+
+	Working mode replacement code committed: limited to Canon MP610 for now.
+
+2012-03-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.3) (+28 -10)
+		src/main/print-canon.c (1.325) (+74 -4)
+
+	added to media and mode checking code, simplified for debugging.
+
+2012-03-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.2) (+3 -3)
+		src/main/print-canon.c (1.324) (+2 -2)
+
+	Corrected addition of canon-media-mode.h to code.
+
+2012-03-18	<gernot2270@sourceforge.net>
+
+	Files:	src/main/Makefile.am (1.105) (+3 -2)
+		src/main/canon-media-mode.h (1.1) (added +10663 -0)
+		src/main/canon-modes.h (1.274) (+1 -1)
+		src/main/print-canon.c (1.323) (+31 -3)
+
+	Adding canon-media-mode.h header file for recording relationship between media types and permitted modes.
+
+2012-03-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.322) (+2 -19)
+
+	reverted changed to ESC (L command for Canon i80: all components are present.
+
+2012-03-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.273) (+2 -1)
+		src/main/print-canon.c (1.321) (+21 -4)
+
+	added corrections to ESC (l and ESC (L commands for Canon i80. Added a further transparency modes for i80.
+
+2012-03-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.272) (+8 -3)
+
+	Added Env/Hagaki modes to Canon i80.
+
+2012-03-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.271) (+2 -2)
+
+	corrected mode names for Canon i80
+
+2012-03-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.111) (+32 -32)
+		src/main/canon-modes.h (1.270) (+2 -4)
+
+	corrected a mode name for Canon MP610, and Canon media name PhotoPlusGloss2
+
+2012-03-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.320) (+22 -3)
+
+	debug statements added for page width and length. Correction to conditional statement where incorrect printer model name was typed.
+
+2012-03-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.114) (+8 -150)
+
+	cleaned up comments
+
+2012-03-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.269) (+8 -8)
+
+	removed Canon 13_c9m9y9 mode since page width is incorrectly set, reason currently unknown.
+
+2012-02-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.319) (+82 -10)
+
+	Initial addition of CUPS option InkSet for Canon backend to select ink cartridge for 2-cartridge printers where options both, black-only, color-only are available.
+
+2012-02-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.113) (+36 -40)
+		src/main/canon-modes.h (1.268) (+22 -22)
+
+	Corrected use of inkset 9_C4M4Y4K2c4m4y4 for plain (with K) and photo media modes (no K) on Canon printers.
+
+2012-02-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.267) (+7 -7)
+
+	Reordered modes for Canon iP90, iP100. ESC S) command still unsupported.
+
+2012-02-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.266) (+4 -4)
+
+	Corrected non-unique mode names for Canon iP6210D, iP6220D, and iP6310D.
+
+2012-02-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.265) (+22 -15)
+		src/main/print-canon.c (1.318) (+26 -1)
+
+	Added several cmy and CMYcmy modes to Canon iP6210D, iP6220D, and iP6310D printers. Some modes still not supportable.
+
+2012-02-18	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.112) (+34 -0)
+		src/main/canon-modes.h (1.264) (+20 -14)
+		src/main/print-canon.c (1.317) (+2 -2)
+
+	Added mode using cmy inks to Canon MG2100, MG3100, MG4100.
+
+2012-02-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.111) (+1 -0)
+		src/main/canon-modes.h (1.263) (+5 -3)
+
+	Added support for cmy and 1200dpi photo modes on Canon mini220.
+
+2012-02-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.316) (+2 -2)
+
+	Added support for cmy and 1200dpi photo mode on Canon MP495.
+
+2012-02-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.262) (+23 -18)
+		src/main/print-canon.c (1.315) (+2 -2)
+
+	Added cmy and 1200dpi photo mode on Canon MP480, MP490.
+
+2012-02-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.261) (+9 -5)
+		src/main/print-canon.c (1.314) (+2 -2)
+
+	Added cmy and 1200dpi photo modes on Canon MP470.
+
+2012-02-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.110) (+14 -15)
+		src/main/canon-modes.h (1.260) (+7 -8)
+
+	Corrected photo modes on Canon MP360, MP370, MP375R, MP390. cmy and CMYcmy modes now supported.
+
+2012-02-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.259) (+5 -4)
+
+	Corrected cmy modes for Canon iP2000 (these modes, no 0x60 subtraction in ink names).
+
+2012-02-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.258) (+31 -20)
+		src/main/print-canon.c (1.313) (+2 -2)
+
+	Added 1200dpi cmy mode to Canon MX330, MX340, MX350, MX360, MX410.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.257) (+10 -8)
+		src/main/print-canon.c (1.312) (+2 -2)
+
+	Add 1200dpi mode support to Canon iP2700.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.256) (+9 -7)
+
+	added cmy and 1200dpi modes to Canon MX300 and MX310.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.255) (+18 -14)
+		src/main/print-canon.c (1.311) (+2 -2)
+
+	Added 1200dpi mode to Canon MP280, and added support for cmy modes to print-canon.c for MP240, MP250, MP270, MP280.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.254) (+34 -23)
+
+	Added 1200dpi mode to Canon MP240 and MP250.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.253) (+0 -41)
+		src/main/canon-printers.h (1.263) (+0 -13)
+		src/xml/printers.xml (1.216) (+2 -2)
+
+	Added cmy modes and 1200dpi mode, then consolidated Canon MP210 and MP220 into one driver.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.252) (+7 -4)
+
+	Added cmy and 1200dpi mode support to Canon MP220 (incomplete).
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.251) (+17 -7)
+		src/main/print-canon.c (1.310) (+2 -2)
+
+	Added cmy and 1200dpi mode support to Canon MP210.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.250) (+9 -3)
+
+	Added modes with cmy inks to Canon MP190, including 1200dpi mode.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.110) (+2 -2)
+		src/main/canon-printers.h (1.262) (+47 -47)
+
+	changed slotlist name for MP150-clones.
+
+2012-02-15	<gernot2270@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.81) (+0 -1)
+		src/main/canon-media.h (1.109) (+0 -17)
+		src/main/canon-modes.h (1.249) (+4 -45)
+		src/main/canon-printers.h (1.261) (+3 -29)
+		src/xml/printers.xml (1.215) (+5 -5)
+
+	consolidated Canon MP140, MP150, MP160, MP170, MP180 into single driver with identical modes, sources and media.
+
+2012-02-14	<tillkamppeter@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-templates-ijs/gutenprint.xml (1.7) (+1 -1)
+
+	Add the "-dNOINTERPOLATE" option to the Ghostscript command line used
+	for the IJS flavor of Gutenprint. This makes rendering of pages
+	containing bitmaps significantly faster. The interpolation also does
+	not visibly enhance the print quality at the high resolutions we need.
+
+2012-02-14	<tillkamppeter@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.80) (+0 -2)
+
+	Removed unneeded import of the Data::Dumper module. The
+	foomatic-generator script does not use it. Also this removes unneeded
+	Perl library dependencies.
+
+2012-02-14	<tillkamppeter@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.60) (+19 -5)
+
+	Use Getopt::Long instead of Getopt::Std. This reduces Perl library
+	dependencies and makes it easier this way to use Gutenprint in
+	space-restricted environments (Live CDs, routers, ...). The command
+	line syntax of cups-genppdupdate does not change by this step.
+
+2012-02-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.109) (+4 -12)
+		src/main/canon-modes.h (1.248) (+15 -10)
+		src/main/print-canon.c (1.309) (+3 -2)
+
+	Continued adding cmy and CMYcmy inksets to Canon MP150 printer modes.
+
+2012-02-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.108) (+1 -1)
+		src/main/canon-modes.h (1.247) (+28 -25)
+		src/main/print-canon.c (1.308) (+11 -13)
+		test/pixma_parse.c (1.29) (+2 -2)
+
+	add support in Canon printers for cmy inksets, and inksets containing cmy, where 0x60 is subtracted from the inkname in the printjob header. Applied currently to following models: MP140, MP150, MP160, MP170, MP180, MP190, MP220, MP450, MP460, MX300, MX310. To be extended to other printers (need to add such modes to canon-modes.h).
+
+2012-01-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.107) (+1 -1)
+		src/main/canon-modes.h (1.246) (+11 -11)
+		src/main/print-canon.c (1.307) (+23 -6)
+		src/main/print-canon.h (1.8) (+5 -1)
+
+	added support for a couple mofr modes in Canon MP150, MP170, MP220 among others, that use CMYcmk inksets.
+
+2012-01-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.245) (+8 -8)
+
+	added previously commented-out CMYKcmy modes for several Canon printers
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.108) (+3 -1)
+		src/gutenprintui2/ui-utils.c (1.4) (+3 -3)
+
+	Error: VARARGS
+	gutenprint-5.2.6/src/escputil/escputil.c:616: va_init: Initializing va_list "args".
+	gutenprint-5.2.6/src/escputil/escputil.c:637: missing_va_end: va_end was not called for "args".
+
+	Error: VARARGS
+	gutenprint-5.2.6/src/escputil/escputil.c:644: va_init: Initializing va_list "args".
+	gutenprint-5.2.6/src/escputil/escputil.c:663: missing_va_end: va_end was not called for "args".
+
+	Error: VARARGS
+	gutenprint-5.2.6/src/gutenprintui2/ui-utils.c:217: va_init: Initializing va_list "args".
+	gutenprint-5.2.6/src/gutenprintui2/ui-utils.c:219: missing_va_end: va_end was not called for "args".
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/mxml-file.c (1.13) (+2 -19)
+
+	Error: USE_AFTER_FREE
+	gutenprint-5.2.6/src/main/mxml-file.c:939: freed_arg: "mxml_add_char" frees "name".
+	gutenprint-5.2.6/src/main/mxml-file.c:326: freed_arg: "free" frees parameter "*buffer".
+	gutenprint-5.2.6/src/main/mxml-file.c:941: double_free: Calling "free" frees pointer "name" which has already been freed.
+
+	Error: USE_AFTER_FREE
+	gutenprint-5.2.6/src/main/mxml-file.c:968: alias: Assigning: "ptr" = "value". Now both point to the same storage.
+	gutenprint-5.2.6/src/main/mxml-file.c:973: freed_arg: "mxml_add_char" frees "value".
+	gutenprint-5.2.6/src/main/mxml-file.c:326: freed_arg: "free" frees parameter "*buffer".
+	gutenprint-5.2.6/src/main/mxml-file.c:976: double_free: Calling "free" frees pointer "value" which has already been freed.
+
+	Error: USE_AFTER_FREE
+	gutenprint-5.2.6/src/main/mxml-file.c:760: freed_arg: "mxml_add_char" frees "buffer".
+	gutenprint-5.2.6/src/main/mxml-file.c:326: freed_arg: "free" frees parameter "*buffer".
+	gutenprint-5.2.6/src/main/mxml-file.c:762: double_free: Calling "free" frees pointer "buffer" which has already been freed.
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.306) (+2 -2)
+
+	Error: SIZEOF_MISMATCH
+	gutenprint-5.2.6/src/main/print-canon.c:1962: suspicious_sizeof: Passing argument "privdata.head_offset" of type "int *" and argument "sizeof (privdata.head_offset) /*8*/" to function "memset" is suspicious.  Did you intend to use "sizeof(*privdata.head_offset)" instead of "sizeof (privdata.head_offset)" ?
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.438) (+2 -2)
+		src/main/print-weave.c (1.78) (+7 -1)
+
+	Error: REVERSE_INULL
+	gutenprint-5.2.6/src/main/print-escp2.c:4394: deref_ptr: Directly dereferencing pointer "pd->inkname".
+	gutenprint-5.2.6/src/main/print-escp2.c:4400: check_after_deref: Dereferencing "pd->inkname" before a null check.
+
+	Error: REVERSE_INULL
+	gutenprint-5.2.6/src/main/print-weave.c:1479: deref_ptr: Directly dereferencing pointer "sw->head_offset".
+	gutenprint-5.2.6/src/main/print-weave.c:1509: check_after_deref: Dereferencing "sw->head_offset" before a null check.
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/mxml-file.c (1.12) (+4 -2)
+
+	Error: RESOURCE_LEAK
+	gutenprint-5.2.6/src/main/mxml-file.c:879: alloc_fn: Calling allocation function "malloc".
+	gutenprint-5.2.6/src/main/mxml-file.c:879: var_assign: Assigning: "value" =  storage returned from "malloc(64UL)".
+	gutenprint-5.2.6/src/main/mxml-file.c:958: leaked_storage: Variable "value" going out of scope leaks the storage it points to.
+
+	Error: RESOURCE_LEAK
+	gutenprint-5.2.6/src/main/mxml-file.c:871: alloc_fn: Calling allocation function "malloc".
+	gutenprint-5.2.6/src/main/mxml-file.c:871: var_assign: Assigning: "name" =  storage returned from "malloc(64UL)".
+	gutenprint-5.2.6/src/main/mxml-file.c:934: var_assign: Assigning: "ptr" = "name".
+	gutenprint-5.2.6/src/main/mxml-file.c:956: noescape: Variable "name" is not freed or pointed-to in function "fprintf".
+	gutenprint-5.2.6/src/main/mxml-file.c:958: leaked_storage: Variable "ptr" going out of scope leaks the storage it points to.
+	gutenprint-5.2.6/src/main/mxml-file.c:958: leaked_storage: Variable "name" going out of scope leaks the storage it points to.
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/print-vars.c (1.94) (+8 -3)
+
+	Error: NULL_RETURNS
+	gutenprint-5.2.6/src/main/print-vars.c:1664: returned_null: Function "stp_list_get_item_by_index" returns null (checked 4 out of 5 times).
+	gutenprint-5.2.6/src/main/print-list.c:254: return_null: Explicitly returning NULL.
+	gutenprint-5.2.6/src/main/color.c:91: example_assign: Assigning: "color" = return value from "stp_list_get_item_by_index(color_list, idx)".
+	gutenprint-5.2.6/src/main/color.c:92: example_checked: "color" has its value checked in "color == NULL".
+	gutenprint-5.2.6/src/main/print-papers.c:154: example_assign: Assigning: "paper" = return value from "stp_list_get_item_by_index(paper_list, idx)".
+	gutenprint-5.2.6/src/main/print-papers.c:155: example_checked: "paper" has its value checked in "paper".
+	gutenprint-5.2.6/src/main/printers.c:123: example_assign: Assigning: "printer" = return value from "stp_list_get_item_by_index(printer_list, idx)".
+	gutenprint-5.2.6/src/main/printers.c:124: example_checked: "printer" has its value checked in "printer == NULL".
+	gutenprint-5.2.6/src/main/string-list.c:85: example_assign: Assigning: "answer" = return value from "stp_list_get_item_by_index((stp_list_t const *)list, element)".
+	gutenprint-5.2.6/src/main/string-list.c:87: example_checked: "answer" has its value checked in "answer".
+	gutenprint-5.2.6/src/main/print-vars.c:1664: dereference: Dereferencing a pointer that might be null "stp_list_get_item_by_index(ilist, item)" when calling "stp_list_item_get_data".
+	gutenprint-5.2.6/src/main/print-list.c:697: deref_parm: Directly dereferencing parameter "item".
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/gimp2/print.c (1.9) (+2 -1)
+		src/main/print-lexmark.c (1.161) (+3 -1)
+
+	Error: MISSING_BREAK
+	gutenprint-5.2.6/src/gimp2/print.c:296: unterminated_default: The default case is not terminated by a 'break' statement.
+	gutenprint-5.2.6/src/gimp2/print.c:298: fallthrough: The above case falls through to this one.
+
+	Error: MISSING_BREAK
+	gutenprint-5.2.6/src/main/print-lexmark.c:1406: unterminated_case: This case (value 10052) is not terminated by a 'break' statement.
+	gutenprint-5.2.6/src/main/print-lexmark.c:1412: fallthrough: The above case falls through to this one.
+
+2012-01-19	<m0m@sourceforge.net>
+
+	Files:	src/main/escp2-driver.c (1.58) (+2 -2)
+		src/main/module.c (1.27) (+3 -2)
+		src/main/print-canon.c (1.305) (+11 -8)
+		src/main/print-color.c (1.145) (+3 -3)
+		src/main/print-escp2.c (1.437) (+8 -5)
+		src/main/print-list.c (1.26) (+5 -5)
+		src/main/print-ps.c (1.105) (+3 -3)
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-list.c:352: var_compare_op: Comparing "name" to null implies that "name" might be null.
+	gutenprint-5.2.6/src/main/print-list.c:385: var_deref_model: Passing null variable "name" to function "stp_list_get_item_by_name_internal", which dereferences it.
+	gutenprint-5.2.6/src/main/print-list.c:333: deref_parm_in_call: Function "strcmp" dereferences parameter "name". (The dereference is assumed on the basis of the 'nonnull' parameter attribute.)
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-list.c:426: var_compare_op: Comparing "long_name" to null implies that "long_name" might be null.
+	gutenprint-5.2.6/src/main/print-list.c:459: var_deref_model: Passing null variable "long_name" to function "stp_list_get_item_by_long_name_internal", which dereferences it.
+	gutenprint-5.2.6/src/main/print-list.c:407: deref_parm_in_call: Function "strcmp" dereferences parameter "long_name". (The dereference is assumed on the basis of the 'nonnull' parameter attribute.)
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/escp2-driver.c:246: var_compare_op: Comparing "pd->input_slot" to null implies that "pd->input_slot" might be null.
+	gutenprint-5.2.6/src/main/escp2-driver.c:276: var_deref_op: Dereferencing null variable "pd->input_slot".
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/module.c:96: var_compare_op: Comparing "module" to null implies that "module" might be null.
+	gutenprint-5.2.6/src/main/module.c:99: var_deref_op: Dereferencing null variable "module".
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-canon.c:380: var_compare_op: Comparing "caps->paperlist" to null implies that "caps->paperlist" might be null.
+	gutenprint-5.2.6/src/main/print-canon.c:387: var_deref_op: Dereferencing null variable "caps->paperlist".
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-color.c:1566: var_compare_op: Comparing "color_description" to null implies that "color_description" might be null.
+	gutenprint-5.2.6/src/main/print-color.c:1577: var_deref_op: Dereferencing null variable "color_description".
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-escp2.c:1660: var_compare_op: Comparing "ink_list" to null implies that "ink_list" might be null.
+	gutenprint-5.2.6/src/main/print-escp2.c:1673: var_deref_op: Dereferencing null variable "ink_list".
+
+	Error: FORWARD_NULL
+	gutenprint-5.2.6/src/main/print-ps.c:826: var_compare_op: Comparing "node->child" to null implies that "node->child" might be null.
+	gutenprint-5.2.6/src/main/print-ps.c:841: var_deref_op: Dereferencing null variable "node->child".
+
+2012-01-18	<m0m@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.107) (+12 -6)
+
+	fixed NULL pointer access in escputil
+
+2012-01-18	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.106) (+12 -12)
+
+	Modified experimental Canon inksets using only sub-channel outputs.
+
+2012-01-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.244) (+13 -5)
+		src/main/print-canon.c (1.304) (+2 -2)
+
+	modified modes for Canon BJC-4300, added support for one photo cartridge mode. WIP.
+
+2012-01-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.303) (+3 -6)
+
+	reverted CANON_CD_X and Y in print-canon.c from previous commit
+
+2012-01-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.243) (+13 -14)
+		src/main/print-canon.c (1.302) (+26 -13)
+
+	adjusted Canon BJC-4550 modes to use 4 inks. Added photo mode.
+
+2012-01-10	<gernot2270@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.28) (+9 -5)
+
+	added printout of inks used for 1-bpp modes in pixma_parse
+
+2012-01-08	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.544) (+3 -0)
+		src/xml/printers.xml (1.214) (+4 -1)
+
+	Add support for Epson SX420 and related
+
+2012-01-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.301) (+25 -24)
+
+	changed code to use extended page setting command even for CD media for selected printers.
+
+2012-01-02	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.543) (+20 -5)
+		src/xml/printers.xml (1.213) (+2 -2)
+
+	corrected printers.xml printer name with trailing spaces. Added latest CD support to NEWS file.
+
+2012-01-02	<rlk@sourceforge.net>
+
+	Files:	po/POTFILES.in (1.26) (+1 -0)
+
+	3468320 POTFILES.in needs fixing
+
+2012-01-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.260) (+12 -12)
+		src/main/print-canon.c (1.300) (+4 -4)
+
+	Added support for second ESC (r command for CD media only (Canon PIXMA MP980, MP990, MG6100, MG8100) and single ESC (r command in case of CD media only (MG5200, MG5300, MG6200, MG8200).
+
+2012-01-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.259) (+8 -8)
+		src/main/print-canon.c (1.299) (+16 -3)
+
+	Added support for second ESC (r command for CD media only (Canon PIXMA iP4600, iP4700, iP4800) and single ESC (r command in case of CD media only (iP4900).
+
+2012-01-01	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.542) (+5 -2)
+		src/xml/printers.xml (1.212) (+4 -4)
+
+	Try again to fix printing to the NX200, SX200, and SX205.  The SX215
+	(and presumably SX210) appear to be different from the SX200.
+
+2012-01-01	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.541) (+16 -13)
+		src/cups/genppd.c (1.190) (+4 -2)
+
+	3299815 CUPS PPD broken on Linux
+
+2012-01-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.298) (+158 -95)
+		src/main/print-canon.h (1.7) (+3 -2)
+
+	Added support for correct CD and FineArt media codes in ESC (P command
+
+2011-12-31	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.540) (+5 -5)
+
+	updated NEWS with SELPHY series corrected names
+
+2011-12-31	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.211) (+17 -17)
+
+	updated Canon SELPHY series names
+
+2011-12-31	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.539) (+1 -0)
+
+	updated NEWS for SELPHY series without CP-600
+
+2011-12-31	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.210) (+3 -1)
+
+	removed Canon SELPHY CP-600 from supported printers
+
+2011-12-30	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.209) (+2 -2)
+
+	corrected foomatic driver for Canon MX310
+
+2011-12-30	<rlk@sourceforge.net>
+
+	Files:	src/cups/cups-genppdupdate.in (1.59) (+22 -5)
+		src/cups/genppd.c (1.189) (+10 -10)
+
+	Make genppdupdate more robust against missing drivers
+
+2011-12-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.208) (+3 -3)
+
+	Fix driver names for Pixma MG4100 and MX350.
+
+2011-12-30	<rlk@sourceforge.net>
+
+	Files:	src/main/channel.c (1.35) (+5 -3)
+
+	Fix a couple of potential null pointer derefs (from stpere@gmail.com).
+
+2011-12-27	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.538) (+4 -2)
+
+	Fix a few typos, add a few printers.
+
+===============================================================================
+Name: gutenprint-5_2_8-pre1
+
+2011-12-27	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.62) (+3776 -3402)
+		po/da.po (1.105) (+3817 -3409)
+		po/de.po (1.77) (+3819 -3411)
+		po/el.po (1.77) (+3771 -3401)
+		po/en_GB.po (1.170) (+3819 -3411)
+		po/es.po (1.75) (+3775 -3401)
+		po/fi.po (1.7) (+3815 -3411)
+		po/fr.po (1.103) (+3846 -3441)
+		po/gl.po (1.2) (+4010 -3466)
+		po/hu.po (1.35) (+3819 -3411)
+		po/it.po (1.15) (+3817 -3409)
+		po/ja.po (1.72) (+4070 -3427)
+		po/nb.po (1.36) (+3824 -3430)
+		po/nl.po (1.88) (+4072 -3417)
+		po/pl.po (1.81) (+3771 -3401)
+		po/pt.po (1.76) (+3775 -3401)
+		po/ru.po (1.9) (+3815 -3411)
+		po/sk.po (1.80) (+3775 -3401)
+		po/sl.po (1.4) (+3817 -3409)
+		po/sv.po (1.106) (+3846 -3441)
+		po/uk.po (1.5) (+4047 -3403)
+		po/zh_CN.po (1.2) (+3904 -3439)
+		po/zh_TW.po (1.36) (+3840 -3441)
+
+	Gutenprint 5.2.8-pre1 release
+
+2011-12-27	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.537) (+11 -1)
+		README (1.212) (+3 -2)
+		src/xml/printers.xml (1.207) (+8 -2)
+
+	Remove support for Canon CP-720, 780, 800, and all ES models per requirement for special spooler
+
+2011-12-24	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.536) (+3 -3)
+		README (1.211) (+13 -13)
+		configure.ac (1.231) (+4 -3)
+
+	Prep for Gutenprint 5.2.8-pre1
+
+2011-12-24	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/Makefile.am (1.56) (+3 -3)
+
+	Use rm -rf to remove foomatic-db.
+
+2011-12-24	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/Makefile.am (1.55) (+2 -12)
+
+	Back out parallelism change (causes dependency issues).
+
+2011-12-24	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_116.xml (1.4) (+2 -13)
+		src/xml/escp2/model/model_117.xml (1.2) (+2 -2)
+
+	Adjust 720x1440 and 1440x1440 DPI drop sizes per Laurent Martelli
+
+2011-12-23	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.297) (+2 -2)
+
+	Use memmove() rather than memcpy() when source and destination overlap.
+
+2011-12-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.242) (+11 -11)
+
+	corrected modes using CMYK to reference inkset with CMYK inks
+
+2011-12-22	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.436) (+2 -8)
+		src/main/print-papers.c (1.42) (+1 -9)
+		src/main/print-weave.c (1.77) (+1 -13)
+		src/main/xmlppd.c (1.6) (+0 -2)
+
+	Clean up some unused variables
+
+2011-12-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.296) (+7 -2)
+
+	corrected stp_color_init function call in print-canon.c
+
+2011-12-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.295) (+2 -6)
+
+	removed incorrectly commented out stp_color_init function call in print-canon.c
+
+2011-12-20	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.535) (+2 -1)
+		configure.ac (1.230) (+3 -3)
+		po/zh_CN.po (1.1) (added +14693 -0)
+
+	Add Chinese Mandarin translation
+
+2011-12-20	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.43) (+2 -0)
+
+	Report crash of the underlying program more prominently.
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.241) (+8 -8)
+
+	corrected inkset in modes for Canon BJC S300 and S330.
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.258) (+156 -156)
+
+	adjusted page width of Canon MP495, added INCH function for specifying inch measurements.
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.294) (+28 -12)
+
+	commented out unused code
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.240) (+2 -2)
+
+	updated Canon BJC S300 and S330 T-shirt modes to use inksets including K.
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.257) (+0 -6)
+
+	removed unused control_cmd_MULTIPASS_MP150
+
+2011-12-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.293) (+4 -4)
+
+	changed printf to use integer rather than unsigned for local loop variables, and num_channels
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.292) (+8 -8)
+
+	Change some debug messages to stp_dprintf.
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/Makefile.am (1.54) (+12 -2)
+
+	Allow building both foomatic-dbs in parallel
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	scripts/autogen.sh (1.39) (+1 -1)
+
+	Tweak libtool version regexp to handle just two version components.
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.139) (+3 -2)
+
+	Add one more debug line.
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	src/cups/rastertoprinter.c (1.138) (+375 -117)
+
+	Improve debugging output, and some code cleanup.
+
+2011-12-18	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.188) (+4 -9)
+
+	Work around a sporadic crash in pstoraster.  Per Mike Sweet this
+	should not be necessary and may be due to a bug that has since been
+	fixed in Ghostscript 9.01.
+
+2011-12-14	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.534) (+26 -2)
+		src/xml/escp2/model/Makefile.am (1.30) (+4 -2)
+		src/xml/escp2/model/model_116.xml (1.3) (+75 -107)
+		src/xml/escp2/model/model_117.xml (1.1) (added +139 -0)
+		src/xml/escp2/qualitypresets/Makefile.am (1.5) (+2 -1)
+		src/xml/escp2/qualitypresets/prox900.xml (1.1) (added +70 -0)
+		src/xml/printers.xml (1.206) (+16 -1)
+
+	Add various Epson printers.
+
+	Add preliminary (CcMmYKkk) support for Stylus Pro 7900/9900.
+
+2011-12-06	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.435) (+3 -2)
+
+	Correctly initialize the default value, from Dmitry V. Levin.
+
+2011-11-30	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.533) (+4 -0)
+
+	Added photo cartridge support information to README.
+
+2011-11-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.239) (+3 -0)
+		src/main/print-canon.c (1.291) (+5 -2)
+
+	Added support for photo cartridge in Canon BJC-3000 series (flag for the mode to select that cartridge).
+
+2011-11-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.238) (+2 -0)
+		src/main/canon-printers.h (1.256) (+1 -1)
+		src/main/print-canon.c (1.290) (+16 -2)
+
+	Added support for differentiating ESC (t codes based on media code for Canon BJC-3000 series.
+
+2011-11-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.237) (+5 -4)
+		src/main/canon-printers.h (1.255) (+1 -1)
+
+	fixed type in control command, and added CMY to modes for Canon BJC-3000 series.
+
+2011-11-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.236) (+7 -5)
+		src/main/canon-printers.h (1.254) (+1 -1)
+
+	Corrected command set and added modes for Canon BJC-3000.
+
+2011-11-27	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.235) (+1 -1)
+
+	Correction to high-quality mode for Canon BJC-4550.
+
+2011-11-27	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.532) (+1 -0)
+		src/main/canon-modes.h (1.234) (+10 -0)
+		src/main/canon-printers.h (1.253) (+13 -0)
+		src/main/print-canon.c (1.289) (+7 -1)
+		src/xml/printers.xml (1.205) (+2 -1)
+
+	Added experimental support for Canon BJC-4550.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.288) (+92 -5)
+
+	listed media size codes for CDs and Fine Art A4.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.108) (+7 -6)
+		src/main/canon-modes.h (1.233) (+11 -8)
+		src/main/canon-printers.h (1.252) (+1 -1)
+
+	Corrected Canon MP960 modes, customized media.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.232) (+2 -2)
+
+	Corrected Canon MP950 mode for T-Shirt transfers.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.531) (+2 -0)
+		src/main/canon-inks.h (1.105) (+48 -0)
+		src/main/canon-media.h (1.107) (+22 -0)
+		src/main/canon-modes.h (1.231) (+28 -3)
+		src/main/canon-printers.h (1.251) (+3 -3)
+
+	Corrected Canon MP950 printer definition, added modes, customized media and sources.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.106) (+5 -3)
+		src/main/canon-modes.h (1.230) (+35 -21)
+
+	Updated Canon iP4000 modes, leaving legacy modes (not actual driver modes) as default.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.105) (+279 -312)
+
+	Corrected incorrect media type codes, especially FineArtOther.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.530) (+33 -3)
+		src/xml/printers.xml (1.204) (+1 -17)
+
+	Removed Canon printers currently unsupportable using ESC (z commands.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.104) (+12 -12)
+		src/main/canon-media.h (1.104) (+33 -39)
+		src/main/canon-modes.h (1.229) (+150 -150)
+
+	Corrected media type names, removed some comments.
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.529) (+5 -0)
+		src/main/canon-media.h (1.103) (+22 -1)
+		src/main/canon-printers.h (1.250) (+15 -2)
+		src/main/print-canon.c (1.287) (+2 -2)
+		src/xml/printers.xml (1.203) (+6 -6)
+
+	Changed printer definition and capabilities for Canon MP750 and its clones: MP760, MP770, MP780, MP790. Media and sources adjusted. Modes remain as for iP4000 (but using iP4100 which are identical to iP4000).
+
+2011-11-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.528) (+8 -6)
+		src/main/canon-media.h (1.102) (+28 -0)
+		src/main/canon-modes.h (1.228) (+40 -6)
+		src/main/canon-printers.h (1.249) (+13 -13)
+		src/main/print-canon.c (1.286) (+7 -2)
+		src/xml/printers.xml (1.202) (+3 -3)
+
+	Completely changed printer definition and capabilities for Canon MP740. Added modes, media, new sources. MP710 identical so driver renamed to that.
+
+2011-11-25	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.527) (+2 -0)
+		src/main/canon-media.h (1.101) (+20 -0)
+		src/main/canon-modes.h (1.227) (+34 -0)
+		src/main/canon-printers.h (1.248) (+15 -0)
+		src/xml/printers.xml (1.201) (+3 -3)
+
+	Changed printer definition, modes, media, sources for Canon MP700, MP730. Japanese model adds inkjet Hagaki, Hagaki and CD support, but also has SelectParallel=ECP in initialization, therefore kept this even though US model does not use it.
+
+2011-11-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.100) (+20 -0)
+		src/main/canon-modes.h (1.226) (+30 -0)
+		src/main/canon-printers.h (1.247) (+15 -2)
+		src/xml/printers.xml (1.200) (+2 -2)
+
+	Split Canon MP610 into separate driver, and modified iP5300 sources and modes.
+
+2011-11-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.246) (+1 -1)
+
+	Changed sources for Canon iP4200.
+
+2011-11-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.99) (+1 -1)
+		src/main/canon-modes.h (1.225) (+13 -10)
+
+	Added transparency print modes to Canon MP500 and iP4200.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.224) (+3 -3)
+
+	Activated extra modes for Canon mini220.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.223) (+17 -11)
+
+	Rearranged modes for Canon MP470.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.245) (+2 -2)
+
+	Corrected printer definition for Canon MP493.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.222) (+1 -1)
+		src/main/canon-printers.h (1.244) (+2 -2)
+
+	Corrected printer definition for Canon MX420, and Env/Hagaki modes for MP480 and MX420.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.243) (+2 -2)
+
+	Corrected printer definition for Canon iX6500.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.221) (+9 -5)
+		src/main/canon-printers.h (1.242) (+1 -1)
+
+	Corrected Canon MX7600 printer definition. Added photo modes and support for Env/Hagaki.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.220) (+3 -24)
+		src/main/canon-printers.h (1.241) (+2 -2)
+
+	Corrected printer definition for Canon MX860, MX870, adjusted modes.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.219) (+15 -15)
+		src/main/canon-printers.h (1.240) (+1 -1)
+
+	Corrected printer definition for Canon MX860, and corrected and enhanced modes. Added support for Env/Hagaki.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.239) (+1 -1)
+
+	Corrected printer definition for Canon MX850.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.238) (+1 -1)
+
+	Corrected printer definition for Canon MX700.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.526) (+8 -0)
+		src/main/canon-modes.h (1.218) (+48 -32)
+		src/main/canon-printers.h (1.237) (+3 -3)
+		src/main/print-canon.c (1.285) (+2 -2)
+
+	Corrected printer definitions and modes for Canon MX330, MX340, MX350. Added missing XML capability to Canon MX340 and MX350.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.217) (+27 -19)
+		src/main/canon-printers.h (1.236) (+1 -1)
+
+	Corrected printer definition for Canon MX300. Rearranged modes, and removed unsupported ones.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.525) (+2 -0)
+		src/main/canon-inks.h (1.103) (+14 -0)
+		src/main/canon-media.h (1.98) (+12 -0)
+		src/main/canon-modes.h (1.216) (+6 -0)
+		src/main/canon-printers.h (1.235) (+13 -0)
+		src/xml/printers.xml (1.199) (+3 -1)
+
+	Added experimental support for Canon mini320 and mini360.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.524) (+1 -0)
+		src/main/canon-modes.h (1.215) (+10 -0)
+		src/main/canon-printers.h (1.234) (+18 -0)
+		src/main/print-canon.c (1.284) (+2 -1)
+		src/xml/printers.xml (1.198) (+2 -1)
+
+	Added experimental support for Canon mini220.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.214) (+17 -9)
+		src/main/canon-printers.h (1.233) (+1 -1)
+
+	Adjusted modes for Canon MP990, added some photo modes, and Env/Hagaki support.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.523) (+1 -0)
+		src/main/canon-inks.h (1.102) (+6 -1)
+		src/main/canon-media.h (1.97) (+23 -1)
+		src/main/canon-modes.h (1.213) (+23 -40)
+		src/main/canon-printers.h (1.232) (+1 -1)
+
+	Corrected printer definition for Canon MP970, created correct and customized modes, created custom media.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.522) (+1 -0)
+		src/main/canon-inks.h (1.101) (+1 -0)
+		src/main/canon-modes.h (1.212) (+23 -1)
+		src/main/canon-printers.h (1.231) (+3 -3)
+
+	Corrected printer definition for MP600, created correct and customized modes.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.211) (+3 -3)
+
+	Corrected modes for Canon MP540 (used by other models too).
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.230) (+2 -2)
+
+	Corrected printer definition for Canon MP510 and MP520.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.229) (+2 -2)
+
+	Corrected printer definition for Canon MP495.
+
+2011-11-24	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.210) (+23 -15)
+		src/main/canon-printers.h (1.228) (+1 -1)
+
+	Corrected printer definition for Canon MP480, and reorganized modes.
+
+2011-11-23	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.521) (+7 -6)
+		src/main/canon-media.h (1.96) (+26 -0)
+		src/main/canon-modes.h (1.209) (+22 -14)
+		src/main/canon-printers.h (1.227) (+4 -4)
+
+	Corrected printer definition, modes for Canon iP2000. Created custom media, and rearranged and expanded modes.
+
+2011-11-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.208) (+24 -17)
+		src/main/canon-printers.h (1.226) (+3 -3)
+
+	Corrected printer definition for Canon MP280. Rearranged modes.
+
+2011-11-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.225) (+2 -2)
+
+	Corrected printer definition for Canon MP270.
+
+2011-11-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.207) (+38 -0)
+		src/main/canon-printers.h (1.224) (+13 -0)
+		src/xml/printers.xml (1.197) (+2 -2)
+		test/pixma_parse.c (1.27) (+11 -2)
+
+	Changed printer driver for Canon MP220. Added new printer definition and modes.
+
+2011-11-23	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.196) (+3 -1)
+
+	Add Epson WorkForce 63 and Artisan 835
+
+2011-11-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.100) (+70 -0)
+		src/main/canon-modes.h (1.206) (+38 -30)
+		src/main/canon-printers.h (1.223) (+4 -4)
+		src/main/print-canon.c (1.283) (+2 -1)
+
+	Added definition of ESC (S use flag, capability, and defined all modes for Canon iP90 and iP100.
+
+2011-11-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.99) (+14 -0)
+		src/main/canon-media.h (1.95) (+17 -0)
+		src/main/canon-modes.h (1.205) (+26 -6)
+		src/main/canon-printers.h (1.222) (+13 -1)
+
+	Added definitions for Canon iP100, cleaned up iP90 definition. Both not yet usable.
+
+2011-11-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.204) (+23 -15)
+		src/main/canon-printers.h (1.221) (+1 -1)
+
+	Corrected printer definition for Canon MX360, and reorganized modes.
+
+2011-11-22	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.195) (+2 -2)
+
+	Corrected Canon PIXUS iP3100 driver (PIXMA previously corrected).
+
+2011-11-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.94) (+22 -19)
+		src/main/canon-modes.h (1.203) (+33 -18)
+		src/main/canon-printers.h (1.220) (+3 -3)
+
+	Corrected Canon iP3100 and iP3000 printer definitions. Rearranged modes to iP3100 and experimental inkjet Hagaki support to iP3000.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.219) (+2 -2)
+
+	Corrected Canon MP450 printer definition.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.202) (+5 -5)
+		src/main/canon-printers.h (1.218) (+1 -1)
+
+	Corrected Canon iP90 printer definition, commented out unsupported modes.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.217) (+1 -1)
+
+	Corrected Canon iP4000 printer definition.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.93) (+19 -0)
+		src/main/canon-modes.h (1.201) (+27 -11)
+		src/main/canon-printers.h (1.216) (+3 -3)
+
+	Corrected Canon iP3000 printer definition and commands, made custom media, and added and corrected modes.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.200) (+13 -4)
+		src/main/canon-printers.h (1.215) (+2 -5)
+
+	Corrected Canon MP150 printer definition, customized modes.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.92) (+1 -1)
+		src/main/canon-modes.h (1.199) (+35 -0)
+		src/main/canon-printers.h (1.214) (+2 -2)
+
+	Corrected Canon MP190 printer definition, customized modes.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.91) (+0 -11)
+		src/main/canon-modes.h (1.198) (+26 -12)
+		src/main/canon-printers.h (1.213) (+2 -2)
+		src/xml/printers.xml (1.194) (+2 -2)
+
+	Updated modes for Canon MP170 (commented out some unsupported modes), corrected printer definition. Also added MP180 which is a clone of MP170.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.520) (+2 -0)
+		src/main/canon-media.h (1.90) (+18 -0)
+		src/main/canon-modes.h (1.197) (+35 -0)
+		src/main/canon-printers.h (1.212) (+13 -0)
+		src/xml/printers.xml (1.193) (+2 -1)
+
+	Added experimental support for Canon MP240.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.196) (+25 -0)
+		src/main/canon-printers.h (1.211) (+13 -0)
+		src/xml/printers.xml (1.192) (+2 -2)
+
+	created separate printr definition for Canon iX4000.
+
+2011-11-21	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.519) (+3 -2)
+		src/main/canon-media.h (1.89) (+26 -0)
+		src/main/canon-modes.h (1.195) (+31 -0)
+		src/main/canon-printers.h (1.210) (+13 -0)
+		src/main/print-canon.c (1.282) (+4 -4)
+		src/xml/printers.xml (1.191) (+7 -6)
+
+	Changed driver for Canon i865, adding custom media, soruce and mode definitions. Kept old printer definition in xml/printers.xml, renamed to make the old ones have an extension 'old', so that depreciation will be simpler.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.194) (+31 -0)
+		src/main/canon-printers.h (1.209) (+13 -0)
+		src/xml/printers.xml (1.190) (+2 -1)
+
+	Added experimental support for Canon MP210.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.518) (+2 -1)
+		src/main/canon-modes.h (1.193) (+9 -2)
+		src/main/canon-printers.h (1.208) (+13 -0)
+		src/xml/printers.xml (1.189) (+3 -2)
+
+	Added experimental support for Canon MP140 and changed driver for MP160 (clone of MP140).
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.192) (+2 -1)
+		src/main/print-canon.c (1.281) (+4 -1)
+
+	Added ESC (t flag for Canon MP130 and other early devices. Corrected MP360 flag definition.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.517) (+2 -0)
+		src/main/canon-modes.h (1.191) (+26 -0)
+		src/main/canon-printers.h (1.207) (+13 -0)
+		src/main/print-canon.c (1.280) (+2 -2)
+		src/xml/printers.xml (1.188) (+3 -1)
+
+	Added experimental support for Canon S900 and S9000.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.516) (+1 -0)
+		src/main/canon-printers.h (1.206) (+13 -0)
+		src/xml/printers.xml (1.187) (+2 -1)
+
+	Added experimenal support for Canon S830D.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.515) (+1 -0)
+		src/main/canon-modes.h (1.190) (+28 -0)
+		src/main/canon-printers.h (1.205) (+13 -0)
+		src/main/print-canon.c (1.279) (+2 -2)
+		src/xml/printers.xml (1.186) (+2 -1)
+
+	Added experimenal support for Canon S820.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.514) (+1 -0)
+		src/foomatic/foomatic-generator.in (1.79) (+2 -0)
+		src/main/canon-inks.h (1.98) (+36 -0)
+		src/main/canon-media.h (1.88) (+25 -0)
+		src/main/canon-modes.h (1.189) (+32 -0)
+		src/main/canon-printers.h (1.204) (+13 -0)
+		src/xml/printers.xml (1.185) (+2 -2)
+
+	Changed printer definition of Canon S800, correcting command sets, and adding media, sources, modes.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.513) (+1 -0)
+		src/main/canon-media.h (1.87) (+18 -0)
+		src/main/canon-modes.h (1.188) (+29 -4)
+		src/main/canon-printers.h (1.203) (+15 -2)
+		src/xml/printers.xml (1.184) (+2 -1)
+
+	Added experimental support for Canon S750.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.183) (+1 -2)
+
+	Removed existing (was copy of original S600 definition) entry for Canon S630. New definition remains.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.512) (+2 -0)
+		src/main/canon-modes.h (1.187) (+29 -0)
+		src/main/canon-printers.h (1.202) (+13 -0)
+		src/xml/printers.xml (1.182) (+3 -2)
+
+	Changed printer definition for Canon S600. Added modes. Added support for clone S630.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.511) (+1 -0)
+		src/main/canon-modes.h (1.186) (+1 -0)
+		src/main/canon-printers.h (1.201) (+1 -1)
+		src/xml/printers.xml (1.181) (+2 -1)
+
+	Added experimental support for Canon S530D (same as S520). Corrected modes, command set for S520.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.510) (+1 -0)
+		src/main/canon-media.h (1.86) (+20 -2)
+		src/main/canon-modes.h (1.185) (+26 -0)
+		src/main/canon-printers.h (1.200) (+13 -0)
+		src/xml/printers.xml (1.180) (+2 -1)
+
+	Added experimental support for Canon S520.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.509) (+1 -0)
+		src/main/canon-modes.h (1.184) (+22 -5)
+		src/main/canon-printers.h (1.199) (+13 -13)
+
+	Changed printer definition for Canon S500, added custom media and source lists, and added modes.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.508) (+1 -0)
+		src/main/canon-media.h (1.85) (+18 -0)
+		src/main/canon-modes.h (1.183) (+24 -0)
+		src/main/canon-printers.h (1.198) (+13 -2)
+		src/xml/printers.xml (1.179) (+2 -1)
+
+	Added experimental support for Canon S330.
+
+2011-11-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.507) (+1 -0)
+		src/main/canon-media.h (1.84) (+19 -0)
+		src/main/canon-modes.h (1.182) (+27 -0)
+		src/main/canon-printers.h (1.197) (+4 -4)
+
+	Changed driver for Canon S300: new printer definition, modes, papers.
+
+2011-11-19	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.83) (+18 -0)
+		src/main/canon-printers.h (1.196) (+2 -2)
+
+	created custom source and media sets for Canon S200.
+
+2011-11-19	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.506) (+1 -0)
+		src/main/canon-media.h (1.82) (+1 -1)
+		src/main/canon-modes.h (1.181) (+29 -0)
+		src/main/canon-printers.h (1.195) (+13 -0)
+		src/main/print-canon.c (1.278) (+3 -3)
+		src/xml/printers.xml (1.178) (+2 -1)
+
+	Added experimental support for Canon i9900.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.505) (+1 -0)
+		src/main/canon-inks.h (1.97) (+48 -0)
+		src/main/canon-modes.h (1.180) (+31 -2)
+		src/main/canon-printers.h (1.194) (+13 -0)
+		src/main/print-canon.c (1.277) (+2 -2)
+		src/xml/printers.xml (1.177) (+2 -1)
+
+	Added experimental support for Canon i9100.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.504) (+2 -0)
+		src/main/canon-inks.h (1.96) (+12 -0)
+		src/main/canon-media.h (1.81) (+17 -0)
+		src/main/canon-modes.h (1.179) (+29 -1)
+		src/main/canon-printers.h (1.193) (+19 -0)
+		src/xml/printers.xml (1.176) (+3 -1)
+
+	Added experimental support for Canon i6100 and i6500.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.503) (+1 -0)
+		src/main/canon-inks.h (1.95) (+0 -1)
+		src/main/canon-modes.h (1.178) (+29 -6)
+		src/main/canon-printers.h (1.192) (+13 -13)
+		src/main/print-canon.c (1.276) (+2 -2)
+
+	Added missing CAP_P to some Canon i-series.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.502) (+1 -0)
+		src/main/canon-inks.h (1.94) (+1 -2)
+		src/main/canon-modes.h (1.177) (+24 -0)
+		src/main/canon-printers.h (1.191) (+13 -0)
+		src/main/print-canon.c (1.275) (+2 -2)
+		src/xml/printers.xml (1.175) (+2 -1)
+
+	Added experimental support for Canon i900D.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.501) (+1 -0)
+		src/main/canon-modes.h (1.176) (+38 -2)
+		src/main/canon-printers.h (1.190) (+13 -0)
+		src/main/print-canon.c (1.274) (+4 -4)
+		src/xml/printers.xml (1.174) (+2 -1)
+
+	Added experimental support for Canon i960.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.500) (+1 -0)
+		src/main/canon-modes.h (1.175) (+33 -0)
+		src/main/canon-printers.h (1.189) (+13 -0)
+		src/main/print-canon.c (1.273) (+2 -2)
+		src/xml/printers.xml (1.173) (+2 -1)
+
+	Added experimental support for Canon i850.
+
+2011-11-18	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.499) (+6 -1)
+		src/main/canon-media.h (1.80) (+6 -0)
+		src/main/canon-modes.h (1.174) (+27 -0)
+		src/main/canon-printers.h (1.188) (+14 -1)
+		src/main/print-canon.c (1.272) (+24 -4)
+		src/xml/printers.xml (1.172) (+3 -2)
+
+	Major changes to Canon i860 support. Created printer definition, added modes (Note: iP4000 modes are used correctly in previous definition), new source definition. Added support for ESC (M command, and new ESC ($ command used also for simplex mode with this printer.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.498) (+1 -0)
+		src/main/canon-inks.h (1.93) (+12 -0)
+		src/main/canon-media.h (1.79) (+20 -0)
+		src/main/canon-modes.h (1.173) (+29 -0)
+		src/main/canon-printers.h (1.187) (+13 -0)
+		src/xml/printers.xml (1.171) (+2 -1)
+
+	Changed Canon i850 printer definition, added media types, modes.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.497) (+2 -0)
+		src/main/canon-media.h (1.78) (+21 -3)
+		src/main/canon-modes.h (1.172) (+30 -0)
+		src/main/canon-printers.h (1.186) (+20 -0)
+		src/xml/printers.xml (1.170) (+2 -1)
+
+	Added experimental support for Canon i550.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.496) (+2 -0)
+		src/main/canon-inks.h (1.92) (+26 -1)
+		src/main/canon-media.h (1.77) (+20 -2)
+		src/main/canon-modes.h (1.171) (+51 -1)
+		src/main/canon-printers.h (1.185) (+26 -0)
+		src/xml/printers.xml (1.169) (+4 -1)
+
+	Added experimental support for Canon i450, i455 and i470D.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.495) (+1 -0)
+		src/main/canon-modes.h (1.170) (+2 -1)
+		src/xml/printers.xml (1.168) (+2 -1)
+
+	Added experimental support for Canon i350 (same as i250). Corrected i250 plain draft mode.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.494) (+2 -0)
+		src/main/canon-media.h (1.76) (+18 -0)
+		src/main/canon-modes.h (1.169) (+32 -0)
+		src/main/canon-printers.h (1.184) (+13 -0)
+		src/xml/printers.xml (1.167) (+2 -1)
+
+	Added experimental support for Canon i320. Format of data not known.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.91) (+13 -0)
+		src/main/canon-media.h (1.75) (+17 -0)
+		src/main/canon-modes.h (1.168) (+26 -0)
+		src/main/canon-printers.h (1.183) (+17 -3)
+		src/xml/printers.xml (1.166) (+2 -1)
+
+	Added experimental support for Canon i250. Format of data not known.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.493) (+1 -0)
+		src/main/canon-media.h (1.74) (+19 -2)
+		src/main/canon-modes.h (1.167) (+25 -2)
+		src/main/canon-printers.h (1.182) (+13 -0)
+		src/xml/printers.xml (1.165) (+2 -1)
+
+	Added support for Canon i50.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.492) (+1 -0)
+		src/main/canon-media.h (1.73) (+17 -0)
+		src/main/canon-modes.h (1.166) (+24 -0)
+		src/main/canon-printers.h (1.181) (+13 -0)
+		src/xml/printers.xml (1.164) (+2 -1)
+
+	Added support for Canon i70.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.491) (+1 -0)
+		src/main/canon-inks.h (1.90) (+25 -0)
+		src/main/canon-media.h (1.72) (+17 -0)
+		src/main/canon-modes.h (1.165) (+17 -3)
+		src/main/canon-printers.h (1.180) (+4 -4)
+		src/main/print-canon.c (1.271) (+2 -2)
+
+	Corrected Canon i80 printer definition, commands, paperlist, changed and extended modes, added inksets.
+
+2011-11-17	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.164) (+22 -8)
+
+	Rearranged modes for Canon Pro9000 Mk.II.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.163) (+26 -14)
+		src/main/canon-printers.h (1.179) (+2 -2)
+
+	Corrected Canon Pro9000, Pro9000 Mk.II command control sets. Rearranged modes for Pro9000.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.178) (+1 -1)
+
+	Corrected Canon iP4800 command control set.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.71) (+19 -0)
+		src/main/canon-modes.h (1.162) (+30 -12)
+		src/main/canon-printers.h (1.177) (+3 -4)
+		src/main/print-canon.c (1.270) (+2 -2)
+
+	Corrected Canon iP8500 command control set and papers. Added, corrected and rearranged modes.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.161) (+17 -11)
+
+	Reorganized modes for Canon iP6700D (iP6600D same).
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.160) (+2 -2)
+		src/main/canon-printers.h (1.176) (+8 -8)
+
+	Corrected control comands for Canon iP6000D, iP6600D, iP6700D. Added missing I, P or both capabilities to iP6000D, iP6100D, iP6210D, 6600D, 6700D. Rearranged modes for iP6000D.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.89) (+1 -0)
+		src/main/canon-modes.h (1.159) (+18 -11)
+		src/main/canon-printers.h (1.175) (+1 -2)
+
+	Corrected command set, several modes, and added Env/Hagaki and CD modes for Canon iP5300. Corrected duplicate mode names in Canon MP830.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.88) (+6 -3)
+		src/main/canon-modes.h (1.158) (+15 -8)
+		src/main/canon-printers.h (1.174) (+2 -4)
+
+	Corrected command set for Canon MP830, added high quality mode. Rearranged remaining modes.
+
+2011-11-16	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.157) (+6 -3)
+
+	Reorder modes for Canon iX5000
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.490) (+1 -0)
+		src/main/canon-inks.h (1.87) (+68 -42)
+		src/main/canon-media.h (1.70) (+19 -0)
+		src/main/canon-modes.h (1.156) (+30 -0)
+		src/main/canon-printers.h (1.173) (+13 -0)
+		src/main/print-canon.c (1.269) (+2 -2)
+		src/xml/printers.xml (1.163) (+3 -3)
+
+	Separated Canon iP4100 from iP4000, giving it a new definition with corrected control set. Modes are nominally as for iP4000.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.155) (+2 -2)
+
+	Corrected names in Canon MP530 modes (bugfix for previous commit).
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.154) (+15 -12)
+
+	Reordered Canon MP530 modes.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.153) (+14 -16)
+
+	Reordered Canon iP2700 modes.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.152) (+13 -12)
+		src/main/canon-printers.h (1.172) (+1 -1)
+
+	Added CAP_T capability to some Canon printers. Reorganized Canon iP4900 modes.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.86) (+52 -16)
+		src/main/canon-modes.h (1.151) (+114 -91)
+		src/main/canon-printers.h (1.171) (+12 -12)
+
+	Reorganized modes, added CD flag, added some photo modes to following Canon devices: MG5100, MG5200, MG5300, MG6100, MG6200, MG8100, MG8200.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.150) (+25 -25)
+		src/main/canon-printers.h (1.170) (+43 -43)
+
+	Rearranged Canon iP4700 modes, added CD flag, added Env/Hagaki support. Added missing CD flag to several other printers
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.489) (+2 -1)
+		src/main/canon-inks.h (1.85) (+17 -0)
+		src/main/canon-modes.h (1.149) (+28 -26)
+		src/main/canon-printers.h (1.169) (+14 -14)
+
+	Corrected photo modes for Canon iP4500, added Env/Hagaki modes.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.488) (+5 -1)
+		src/foomatic/foomatic-generator.in (1.78) (+14 -0)
+		src/main/canon-media.h (1.69) (+0 -1)
+		src/main/canon-modes.h (1.148) (+27 -11)
+		src/main/canon-printers.h (1.168) (+2 -2)
+
+	Corrected printer definition, some modes, and added more modes for Canon MP250.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.84) (+3 -1)
+		src/main/canon-media.h (1.68) (+19 -1)
+		src/main/canon-modes.h (1.147) (+20 -0)
+		src/main/canon-printers.h (1.167) (+13 -0)
+		src/xml/printers.xml (1.162) (+2 -2)
+
+	Created new printer definition, modes, and media for Canon iP5000 (was using iP4000 driver). Notable is the most common mode for high quality in most media uses more output inks than declared in the inkset, so is as yet unsupported.
+
+2011-11-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.83) (+1 -1)
+		src/main/canon-modes.h (1.146) (+29 -36)
+		src/main/canon-printers.h (1.166) (+2 -2)
+
+	Rearranged modes for Canon MP960. Corrected output inks for some modes.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.82) (+2 -2)
+		src/main/canon-modes.h (1.145) (+5 -5)
+
+	Cleaned up mode names and inkset comments for Canon MP550.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.487) (+1 -0)
+		src/main/canon-inks.h (1.81) (+54 -3)
+		src/main/canon-media.h (1.67) (+24 -1)
+		src/main/canon-modes.h (1.144) (+43 -18)
+		src/main/canon-printers.h (1.165) (+13 -0)
+		src/xml/printers.xml (1.161) (+2 -1)
+
+	Added experimental support for Canon iP7500. Corrected inkset also required for MP960.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.143) (+4 -4)
+
+	renamed Env/Hagaki mode for Canon MP490. Changed default print mode to highest quality plain media for Canon MP470, MP490.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.80) (+4 -4)
+		src/main/canon-modes.h (1.142) (+25 -13)
+		src/main/canon-printers.h (1.164) (+9 -9)
+		src/main/print-canon.c (1.268) (+10 -3)
+
+	Added ESC (r 0x62 0x0 support to gutenprint. Capability added to PIXMA Pro9000, Pro9000 Mk.II, Pro9500, Pro9500 Mk.II, iP7100, iP8100, iP8600, iP9910, MP900. Modes for MP900 reorganized for easier readability. Correction to standard quality inkset.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.79) (+13 -0)
+		src/main/canon-modes.h (1.141) (+3 -3)
+
+	added inkset for Canon MP360 family for high quality photo modes, using only logical cmy inks (subchannels). Unfortunately, Canon backend cannot handle such a case yet, so modes commented out for now.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.140) (+21 -14)
+
+	rearranged modes for Canon MP360, MP370, MP375R, MP390 for easier readability. Still need to check if commented-out modes (using cmy output inks only) can be supported.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.139) (+4 -4)
+
+	checked, renamed modes for MP540, iP3600 - no functional change.
+
+2011-11-14	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.138) (+19 -14)
+
+	corrected T-shirt mode, split out for easier readability for Canon MP510, MP520, MP600, iP3300, iP3500, MX700
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.137) (+36 -13)
+		src/main/canon-printers.h (1.163) (+3 -3)
+
+	Added Env/Hagaki modes to Canon MP550 and MP560 which used same modelist. Created separate MP560 modelist to cater for duplex high quality plain media mode.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.162) (+2 -2)
+
+	Added duplex capability to Canon MP630, changed ink order.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.136) (+14 -17)
+
+	Added Env/Hagaki modes to Canon MP540 and MP620. Renamed and split out modes for easier readability.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.135) (+16 -15)
+		src/main/canon-printers.h (1.161) (+2 -2)
+
+	Added duplex capability, and Env/Hagaki modes to Canon MP640. Renamed and split out modes for easier readability.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.134) (+10 -5)
+		src/main/canon-printers.h (1.160) (+2 -2)
+
+	Corrected control set for Canon iP6100D, renamed and split out modes for easier readability.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.78) (+45 -29)
+		src/main/canon-modes.h (1.133) (+15 -8)
+
+	Added Env/Hagaki modes to Canon MP980. Renamed and split out modes for easier readability. Reordered inksets.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.132) (+12 -12)
+
+	corrected FineArt mode for Canon iP8600. Corrected duplicate mode names in iP7100, iP8100, iP8600, iP9910.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.77) (+7 -8)
+		src/main/canon-modes.h (1.131) (+50 -44)
+		src/main/canon-printers.h (1.159) (+1 -1)
+
+	added Env/Hagaki modes to Canon MP810, corrected output inks for several photo modes. Cleaned up inkset definitions.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.76) (+1 -0)
+		src/main/canon-modes.h (1.130) (+11 -4)
+		src/main/canon-printers.h (1.158) (+1 -1)
+
+	added Env/Hagaki modes to Canon MP800, corrected output inks for plain and several photo modes.
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.129) (+5 -5)
+		src/main/canon-printers.h (1.157) (+2 -2)
+
+	added duplex capability to Canon iX7000, and corrected photo mode definitions
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.156) (+2 -2)
+
+	corrected control command set for Canon pro9500, pro9500 Mk.II
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.128) (+0 -3)
+		src/main/canon-printers.h (1.155) (+2 -2)
+
+	corrected control command set for Canon pro9000, pro9000 Mk.II
+
+2011-11-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.127) (+39 -39)
+
+	added missing mode flag to Canon iP7100, iP8100, iP8600 iP9910 modes
+
+2011-11-12	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.486) (+1 -0)
+		src/main/canon-media.h (1.66) (+23 -0)
+		src/main/canon-modes.h (1.126) (+35 -0)
+		src/main/canon-printers.h (1.154) (+13 -0)
+		src/main/print-canon.c (1.267) (+3 -2)
+		src/xml/printers.xml (1.160) (+2 -1)
+
+	Experimental support added for Canon iP9910
+
+2011-11-12	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.485) (+1 -0)
+		src/main/canon-modes.h (1.125) (+35 -0)
+		src/main/canon-printers.h (1.153) (+13 -0)
+		src/xml/printers.xml (1.159) (+2 -1)
+
+	Experimental support added for Canon iP8600
+
+2011-11-12	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.484) (+1 -0)
+		src/main/canon-modes.h (1.124) (+33 -1)
+		src/main/canon-printers.h (1.152) (+13 -1)
+		src/xml/printers.xml (1.158) (+2 -1)
+
+	Experimental support added for Canon iP8100
+
+2011-11-12	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.483) (+1 -0)
+		src/main/canon-inks.h (1.75) (+15 -0)
+		src/main/canon-media.h (1.65) (+23 -0)
+		src/main/canon-modes.h (1.123) (+31 -1)
+		src/main/canon-printers.h (1.151) (+14 -0)
+		src/xml/printers.xml (1.157) (+2 -1)
+
+	Experimental support added for Canon iP7100
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.482) (+3 -0)
+		src/foomatic/foomatic-generator.in (1.77) (+6 -0)
+		src/main/canon-inks.h (1.74) (+81 -14)
+		src/main/canon-media.h (1.64) (+1 -1)
+		src/main/canon-modes.h (1.122) (+30 -0)
+		src/main/canon-printers.h (1.150) (+13 -0)
+		src/main/print-canon.c (1.266) (+6 -1)
+		src/xml/printers.xml (1.156) (+4 -1)
+
+	Added support for Canon iP6210D, iP6220D, iP6310D. Uses cartridge selection, but currently only use of both is supported. Other option is color-only.
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.121) (+13 -15)
+
+	Corrected Envelope/Hagaki modes for Canon iP4900. Added CD flag.
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.120) (+15 -17)
+
+	Corrected Envelope/Hagaki modes for Canon MG8200. Added CD flag.
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.73) (+2 -2)
+		src/main/canon-modes.h (1.119) (+12 -14)
+
+	Add Env/Hagaki printing to Canon MG6200. Added CD flag.
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.118) (+8 -7)
+
+	corrected Canon MP530 high-resolution plain mode. Added Hagaki/Envelope modes.
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.117) (+11 -14)
+
+	modified Canon MG5300 mode names and small change to inkset mask for Hagaki/Env/Duplex modes
+
+2011-11-08	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.116) (+9 -8)
+
+	added Hagaki/Envelope modes to Canon MG5100
+
+2011-11-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.72) (+9 -4)
+		src/main/canon-modes.h (1.115) (+27 -5)
+		src/main/canon-printers.h (1.149) (+1 -1)
+
+	corrected and extended print modes for Canon iP4600
+
+2011-11-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.114) (+22 -1)
+		src/main/canon-printers.h (1.148) (+13 -0)
+		src/xml/printers.xml (1.155) (+2 -2)
+
+	corrected modes and printer defition for Canon iP4300, and added support for Envelope and Hagaki modes.
+
+2011-11-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.113) (+10 -0)
+		src/main/canon-printers.h (1.147) (+2 -3)
+
+	Added modes to Canon iX5000. Corrected printer definition.
+
+2011-11-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.265) (+36 -7)
+
+	Added workaround for setting FineArt papersize argument in ESC (P command (iP7100 excption partially implemented)
+
+2011-11-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.71) (+52 -7)
+		src/main/canon-media.h (1.63) (+21 -2)
+		src/main/canon-modes.h (1.112) (+18 -12)
+		src/main/canon-printers.h (1.146) (+5 -4)
+		src/main/print-canon.c (1.264) (+3 -3)
+		src/main/print-canon.h (1.6) (+5 -2)
+
+	Added support for CcMmYKk (i.e., CMYKcmk inks output). Extended Canon iP4200 modes, media, printer definition.
+
+2011-11-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.263) (+20 -6)
+		src/xml/papers.xml (1.10) (+37 -2)
+
+	Added Japanese Western-style envelopes and business cards to paper sizes. Extend paper size support in Canon backend.
+
+2011-11-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.70) (+15 -1)
+		src/main/canon-media.h (1.62) (+3 -0)
+		src/main/canon-modes.h (1.111) (+7 -2)
+		src/main/print-canon.c (1.262) (+4 -2)
+		src/main/print-canon.h (1.5) (+10 -7)
+
+	Added CMYKk capability to Canon backend. Added Hagaki, T-shirt, OHP media to iP4000 for testing.
+
+2011-11-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.110) (+0 -4)
+
+	removed unsupported modes from Canon MG5100
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.481) (+1 -0)
+		src/main/canon-media.h (1.61) (+7 -6)
+		src/main/canon-modes.h (1.109) (+25 -0)
+		src/main/canon-printers.h (1.145) (+13 -0)
+		src/xml/printers.xml (1.154) (+2 -1)
+
+	add support for Canon iP4900
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.480) (+1 -0)
+		src/xml/printers.xml (1.153) (+2 -1)
+
+	add support for Canon MG4100
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.479) (+1 -0)
+		src/main/canon-printers.h (1.144) (+13 -0)
+		src/xml/printers.xml (1.152) (+2 -1)
+
+	add support for Canon MG3100
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.478) (+1 -0)
+		src/main/canon-inks.h (1.69) (+68 -0)
+		src/main/canon-media.h (1.60) (+5 -0)
+		src/main/canon-modes.h (1.108) (+25 -1)
+		src/main/canon-printers.h (1.143) (+13 -0)
+		src/xml/printers.xml (1.151) (+2 -1)
+
+	add support for Canon MG2100
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.477) (+1 -0)
+		src/main/canon-modes.h (1.107) (+25 -1)
+		src/main/canon-printers.h (1.142) (+13 -0)
+		src/xml/printers.xml (1.150) (+2 -1)
+
+	added support for Canon MG8200
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.476) (+2 -0)
+		src/main/canon-inks.h (1.68) (+68 -0)
+		src/main/canon-media.h (1.59) (+8 -8)
+		src/main/canon-modes.h (1.106) (+25 -1)
+		src/main/canon-printers.h (1.141) (+13 -0)
+		src/xml/printers.xml (1.149) (+3 -1)
+
+	added support for Canon MG6200
+
+2011-11-03	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.67) (+17 -0)
+		src/main/canon-modes.h (1.105) (+32 -5)
+		src/main/canon-printers.h (1.140) (+18 -106)
+
+	added support for Canon MG5300
+
+2011-11-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.139) (+1 -1)
+
+	changed control set for Canon MX880
+
+2011-11-02	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.66) (+14 -0)
+		src/main/canon-modes.h (1.104) (+3 -3)
+
+	added plain media high-quality print mode to Canon iP4000
+
+2011-11-01	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.148) (+2 -2)
+
+	Fix the PX-V7 also.
+
+2011-10-31	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/Makefile.am (1.29) (+2 -3)
+		src/xml/escp2/model/model_116.xml (1.2) (removed)
+		src/xml/printers.xml (1.147) (+2 -2)
+
+	Epson R2000 is in fact wide carriage
+
+2011-10-30	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.65) (+49 -1)
+		src/main/canon-modes.h (1.103) (+9 -9)
+		src/main/canon-printers.h (1.138) (+1 -1)
+
+	corrected name for Canon MP900, added test inkets for MG5100
+
+2011-10-28	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.102) (+4 -12)
+
+	removed unsupported modes from Canon MG5100
+
+2011-10-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.475) (+1 -0)
+		src/main/canon-inks.h (1.64) (+61 -0)
+		src/main/canon-media.h (1.58) (+6 -1)
+		src/main/canon-modes.h (1.101) (+21 -0)
+		src/main/canon-printers.h (1.137) (+18 -4)
+		src/xml/printers.xml (1.146) (+2 -1)
+
+	added support for Canon MP900
+
+2011-10-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.474) (+1 -0)
+		src/main/canon-media.h (1.57) (+17 -0)
+		src/main/canon-modes.h (1.100) (+28 -0)
+		src/main/canon-printers.h (1.136) (+15 -1)
+		src/xml/printers.xml (1.145) (+2 -1)
+
+	added support for Canon MP470
+
+2011-10-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.473) (+1 -0)
+		src/main/canon-modes.h (1.99) (+32 -0)
+		src/main/canon-printers.h (1.135) (+15 -1)
+		src/main/print-canon.c (1.261) (+9 -2)
+		src/xml/printers.xml (1.144) (+2 -1)
+
+	added support for Canon MP490
+
+2011-10-25	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.134) (+4 -4)
+		src/main/print-canon.c (1.260) (+13 -3)
+
+	Corrected control set for Canon MG5100, MG5200, MG6200, MG8100. Corrected ESC (P command for so far known iP, MP, MX, iX and MG series.
+
+2011-10-22	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/Makefile.am (1.28) (+3 -2)
+		src/xml/escp2/model/model_116.xml (1.1) (added +139 -0)
+		src/xml/printers.xml (1.143) (+3 -1)
+
+	Add Epson PX-7V and R2000
+
+2011-10-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.133) (+1 -1)
+		src/main/print-canon.c (1.259) (+2 -2)
+
+	changed Canon iP4000 capabilites to include ESC (I and ESC (P commands, and set ESC (P command to use 2 bytes
+
+2011-10-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.472) (+1 -0)
+		src/main/canon-inks.h (1.63) (+51 -0)
+		src/main/canon-media.h (1.56) (+10 -0)
+		src/main/canon-modes.h (1.98) (+16 -0)
+		src/main/canon-printers.h (1.132) (+14 -0)
+		src/xml/printers.xml (1.142) (+2 -1)
+
+	added (experimental) support for Canon MP530
+
+2011-10-19	<rlk@sourceforge.net>
+
+	Files:	po/ja.po (1.71) (+3517 -4210)
+
+	Update Japanese translation
+
+2011-10-14	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.106) (+2 -2)
+
+	Fix a minor compile problem
+
+2011-09-30	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.434) (+9 -1)
+
+	Add SubchannelCutoff parameter.
+
+2011-09-30	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.141) (+2 -1)
+
+	Add support for Epson Stylus SX525.
+
+2011-09-18	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.471) (+1 -1)
+		configure.ac (1.229) (+3 -3)
+		po/gl.po (1.1) (added +15235 -0)
+
+	Add Galician translation.
+
+2011-08-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/commandtocanon.c (1.2) (+1 -0)
+		src/cups/commandtoepson.c (1.4) (+3 -2)
+
+	stdio.h is needed.
+
+2011-08-09	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.258) (+1 -1)
+
+	add Canon printer family name (currently PIXMA or SELPHY) to string for model comparison, else comparison fails (reason unknown).
+
+2011-08-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.257) (+3 -2)
+
+	added MP990 to XML-capable printers to correct ESC P command from 4 bytes to 6 bytes length
+
+2011-08-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.131) (+14 -1)
+		src/main/print-canon.c (1.256) (+3 -2)
+		src/xml/printers.xml (1.140) (+2 -1)
+
+	added support for Canon MP560
+
+2011-07-16	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.470) (+1 -0)
+		src/main/canon-inks.h (1.62) (+13 -0)
+		src/main/canon-media.h (1.55) (+16 -0)
+		src/main/canon-modes.h (1.97) (+22 -0)
+		src/main/canon-printers.h (1.130) (+13 -0)
+		src/main/print-canon.c (1.255) (+5 -2)
+		src/xml/printers.xml (1.139) (+5 -4)
+
+	redone support for Canon MP360, MP370, MP390, added MP375R (same family).
+
+2011-07-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.469) (+1 -0)
+		src/main/canon-media.h (1.54) (+26 -0)
+		src/main/canon-printers.h (1.129) (+14 -0)
+		src/xml/printers.xml (1.138) (+2 -1)
+
+	add support for Canon iP3600
+
+2011-07-15	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.468) (+2 -0)
+		src/main/canon-media.h (1.53) (+16 -0)
+		src/main/canon-printers.h (1.128) (+14 -0)
+		src/xml/printers.xml (1.137) (+4 -3)
+
+	corrected Canon PIXMA iP3100, iP3500 drivers in printers.xml. Added iP3300 support (similar to iP3500, but ifferent media selection).
+
+2011-07-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.52) (+19 -0)
+		src/main/canon-printers.h (1.127) (+14 -0)
+		src/xml/printers.xml (1.136) (+2 -1)
+
+	support for Canon MP190 added
+
+2011-07-12	<gernot2270@sourceforge.net>
+
+	Files:	test/pixma_parse.c (1.26) (+4 -3)
+
+	reduced output of unknown ink messages in parser
+
+2011-07-10	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.135) (+3 -3)
+
+	change model of SELPHY CP-760 (tested) and CP-780 (assumed)
+
+2011-07-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.61) (+1 -1)
+		src/main/canon-printers.h (1.126) (+15 -1)
+		src/xml/printers.xml (1.134) (+2 -2)
+		test/pixma_parse.c (1.25) (+9 -9)
+
+	add separate printer definition for Canon MP620
+
+2011-07-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.254) (+13 -7)
+
+	add media size argument for ESC P command
+
+2011-07-09	<rlk@sourceforge.net>
+
+	Files:	po/nl.po (1.87) (+1949 -2422)
+
+	Update Dutch translation
+
+2011-07-06	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.99) (+52 -40)
+		src/xml/printers.xml (1.133) (+6 -6)
+
+	committing Solomon Peachy's patch (v3) for SELPHY CP series, with updated model numbers
+
+2011-07-06	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.467) (+4 -1)
+		src/xml/printers.xml (1.132) (+2 -1)
+
+	Add Epson RX650
+
+2011-07-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.60) (+1 -0)
+		src/main/canon-media.h (1.51) (+16 -0)
+		src/main/canon-modes.h (1.96) (+20 -0)
+		src/main/canon-printers.h (1.125) (+14 -0)
+		src/main/print-canon.c (1.253) (+21 -4)
+		src/xml/printers.xml (1.131) (+3 -1)
+
+	Canon iP90/iP90v experimental support added
+
+2011-07-03	<rlk@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.121) (+3 -3)
+
+	Use build-time definition of ALL_LINGUAS rather than unnecessarily
+	substituting at autogen time.
+
+2011-07-03	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.228) (+3 -3)
+		po/uk.po (1.4) (+228 -47)
+
+	Re-enable Ukrainian translation
+
+2011-07-02	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.227) (+3 -3)
+
+	Remove Ukrainian translation (still has illegal strings).
+
+2011-07-02	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.226) (+3 -3)
+		po/uk.po (1.3) (+370 -347)
+
+	Add/update Ukrainian translation
+
+2011-06-16	<m0m@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.98) (+141 -16)
+		src/xml/printers.xml (1.130) (+10 -3)
+
+	fixed support for Canon SELPHY ES2, ES20
+	added support for Canon SELPHY ES3, ES30, ES40
+	added Canon SELPHY CP760, CP770, CP780, CP790 to the list of printers
+
+	Thanks to Solomon Peachy and Gernot Hassenpflug
+	(http://old.nabble.com/dye-sub-Canon-ES20%2C-ES40-help-tt31812008.html)
+
+2011-06-14	<gernot2270@sourceforge.net>
+
+	Files:	po/cs.po (1.61) (+1611 -1601)
+		po/da.po (1.104) (+1611 -1601)
+		po/de.po (1.76) (+1611 -1601)
+		po/el.po (1.76) (+1611 -1601)
+		po/en_GB.po (1.169) (+1611 -1601)
+		po/es.po (1.74) (+1611 -1601)
+		po/fi.po (1.6) (+1611 -1601)
+		po/fr.po (1.102) (+1611 -1601)
+		po/hu.po (1.34) (+1611 -1601)
+		po/it.po (1.14) (+1611 -1601)
+		po/ja.po (1.70) (+1611 -1601)
+		po/nb.po (1.35) (+1611 -1601)
+		po/nl.po (1.86) (+1611 -1601)
+		po/pl.po (1.80) (+1611 -1601)
+		po/pt.po (1.75) (+1611 -1601)
+		po/ru.po (1.8) (+1611 -1601)
+		po/sk.po (1.79) (+1611 -1601)
+		po/sl.po (1.3) (+1611 -1601)
+		po/sv.po (1.105) (+1612 -1602)
+		po/zh_TW.po (1.35) (+1611 -1601)
+		src/cups/genppd.c (1.187) (+3 -2)
+		src/main/canon-inks.h (1.59) (+29 -4)
+		src/main/canon-media.h (1.50) (+22 -0)
+		src/main/canon-modes.h (1.95) (+25 -0)
+		src/main/canon-printers.h (1.124) (+31 -0)
+		src/main/print-canon.c (1.252) (+3 -2)
+		src/xml/printers.xml (1.129) (+3 -1)
+
+	add experimental support for Canon SELPHY DS700 and DS810
+
+2011-06-13	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.49) (+1 -1)
+		src/main/canon-printers.h (1.123) (+2 -2)
+
+	updated MP540, MP550 command set
+
+2011-06-13	<rlk@sourceforge.net>
+
+	Files:	src/escputil/d4lib.c (1.14) (+45 -36)
+		src/escputil/escputil.c (1.105) (+86 -72)
+
+	Print debugging information more clearly
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	doc/README.maintaining (1.28) (+3 -2)
+
+	docbook-toys is called docbook-utils on some systems.
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.466) (+26 -1)
+		README (1.210) (+15 -11)
+
+	Bump version
+
+2011-06-12	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.94) (+680 -677)
+		src/main/canon-printers.h (1.122) (+100 -99)
+		src/main/print-canon.c (1.251) (+9 -5)
+
+	changed raster_lines_per_block from being part of printer definition to being part of each mode definition
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	include/gutenprint/vars.h (1.10) (+5 -5)
+
+	Correct documentation of stp_vars_copy_from.
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.225) (+5 -5)
+		include/gutenprint/vars.h (1.9) (+9 -1)
+		src/main/gutenprint-internal.h (1.5) (+4 -4)
+		src/main/print-vars.c (1.93) (+77 -14)
+
+	Add stp_vars_copy_from(dest, src).
+
+	Add prefix argument to stpi_vars_print_error.
+
+	Add some more debugging.
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	src/main/mxml-file.c (1.11) (+11 -10)
+
+	Make the buffer sizes be defined constants rather than arbitrary
+	inline integers.
+
+2011-06-12	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.18) (+9 -6)
+
+	Allow specifying how many pages should be tested.
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.121) (+2 -2)
+
+	changed raster blocks to 16 on MP540, MP550
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.120) (+4 -4)
+
+	added back CANON_CAP_I from iP4700, MP540, MP550, but changed raster blocks to 16 on iP4700
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.119) (+3 -3)
+
+	removed CANON_CAP_I from iP4700, MP540, MP550 experimentally
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.118) (+20 -20)
+		src/main/print-canon.c (1.250) (+2 -2)
+
+	fixed CANON_CAP_P for several models and corrected CANON_CAP_P code in print-canon.c
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.93) (+0 -2)
+		src/main/canon-printers.h (1.117) (+3 -3)
+
+	added CANON_CAP_P support to Canon MP550, iP4700
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.92) (+4 -5)
+		src/main/canon-printers.h (1.116) (+1 -1)
+
+	changed Canon iP4700 ink definitions, changed command set
+
+2011-06-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.91) (+22 -0)
+		src/main/canon-printers.h (1.115) (+2 -2)
+
+	created separate mode list for MP550, changes ink channel order
+
+2011-06-09	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.128) (+2 -1)
+
+	Add Epson CX3900
+
+2011-06-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.90) (+1 -1)
+
+	corrected Canon MP540, MP550 600dpi draft mode to not use photo black ink
+
+2011-06-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.89) (+1 -1)
+
+	corrected Canon MP540, MP550 600dpi high mode to not use photo black ink
+
+2011-06-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.88) (+3 -3)
+		src/main/canon-printers.h (1.114) (+2 -3)
+
+	corrected Canon MP990 command set, modified photo mode names
+
+2011-06-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.87) (+1 -1)
+		src/main/canon-printers.h (1.113) (+1 -1)
+
+	corrected Canon MP250 command set, changed default print mode to 300dpi
+
+2011-05-23	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_115.xml (1.2) (+0 -2)
+
+	Fix a segfault in the CUPS driver with the Epson R3000.
+
+2011-05-22	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.17) (+1 -1)
+
+	Recognize -h option.
+
+2011-05-14	<rlk@sourceforge.net>
+
+	Files:	src/main/gutenprint-internal.h (1.4) (+4 -2)
+		src/main/print-color.c (1.144) (+2 -2)
+		src/main/print-vars.c (1.92) (+83 -1)
+
+	Add some debug information to the printout if an assertion trips
+
+2011-05-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.42) (+50 -1)
+
+	Add options to list printers, list options for a printer, and list
+	values for each option.
+
+2011-05-07	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-inks.h (1.58) (+61 -3)
+		src/main/canon-media.h (1.48) (+7 -0)
+		src/main/canon-modes.h (1.86) (+7 -4)
+		src/main/canon-printers.h (1.112) (+14 -0)
+		src/xml/printers.xml (1.127) (+2 -1)
+		test/pixma_parse.c (1.24) (+78 -10)
+		test/pixma_parse.h (1.8) (+0 -1)
+
+	add support for Canon iP3500, add photo modes for MP520
+
+===============================================================================
+Name: gutenprint-5_2_7
+
+2011-05-03	<rlk@sourceforge.net>
+
+	Files:	AUTHORS (1.26) (+3 -0)
+
+	Update authors file.
+
+2011-05-03	<rlk@sourceforge.net>
+
+	Files:	AUTHORS (1.25) (+5 -1)
+
+	Add Gernot to the list.
+
 2011-05-02	<rlk@sourceforge.net>
 
 	Files:	po/cs.po (1.60) (+3276 -3090)
@@ -472,7 +5041,7 @@
 
 	Files:	NEWS (1.448) (+4 -0)
 		configure.ac (1.222) (+3 -3)
-		po/sl.po (1.1) (added +14546 -0)
+		po/sl.po (1.1) (added +15239 -0)
 
 	Add Slovenian translation
 
@@ -551,7 +5120,7 @@
 		src/xml/escp2/inks/Makefile.am (1.13) (+2 -1)
 		src/xml/escp2/inks/f360_ultrachrome_k3v_2.xml (1.1) (added +610 -0)
 		src/xml/escp2/model/Makefile.am (1.27) (+3 -2)
-		src/xml/escp2/model/model_115.xml (1.1) (added +164 -0)
+		src/xml/escp2/model/model_115.xml (1.1) (added +162 -0)
 		src/xml/printers.xml (1.101) (+3 -1)
 
 	Experimental support for Epson Stylus Photo R3000
@@ -1758,7 +6327,7 @@ Name: gutenprint-5_2_6
 2010-04-19	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.217) (+3 -3)
-		po/fi.po (1.1) (added +14461 -0)
+		po/fi.po (1.1) (added +15150 -0)
 
 	Add Finnish translation
 
@@ -2096,7 +6665,7 @@ Name: gutenprint-5_2_4
 2009-06-24	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.213) (+3 -3)
-		po/ru.po (1.1) (added +14488 -0)
+		po/ru.po (1.1) (added +15175 -0)
 
 	Add Russian translation
 
@@ -3046,7 +7615,7 @@ Name: gutenprint-5_2_2
 2008-11-11	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.207) (+3 -3)
-		po/it.po (1.1) (added +14855 -0)
+		po/it.po (1.1) (added +15548 -0)
 
 	Add Italian translation
 
@@ -5732,7 +10301,7 @@ Name: gutenprint-5_2_0-beta4
 		src/xml/escp2/model/model_87.xml (1.6) (+1 -0)
 		src/xml/escp2/model/model_9.xml (1.5) (+1 -0)
 		src/xml/escp2/qualitypresets/.cvsignore (1.1) (added +3 -0)
-		src/xml/escp2/qualitypresets/Makefile.am (1.1) (added +46 -0)
+		src/xml/escp2/qualitypresets/Makefile.am (1.1) (added +47 -0)
 		src/xml/escp2/qualitypresets/p1_5.xml (1.1) (added +70 -0)
 		src/xml/escp2/qualitypresets/picturemate.xml (1.1) (added +60 -0)
 		src/xml/escp2/qualitypresets/standard.xml (1.1) (added +70 -0)
@@ -6592,7 +11161,7 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/media/ultrachrome.xml (1.1) (added +918 -0)
 		src/xml/escp2/media/x80.xml (1.1) (added +465 -0)
 		src/xml/escp2/model/.cvsignore (1.1) (added +3 -0)
-		src/xml/escp2/model/Makefile.am (1.1) (added +157 -0)
+		src/xml/escp2/model/Makefile.am (1.1) (added +159 -0)
 		src/xml/escp2/model/model_0.xml (1.1) (added +126 -0)
 		src/xml/escp2/model/model_1.xml (1.1) (added +144 -0)
 		src/xml/escp2/model/model_10.xml (1.1) (added +146 -0)
@@ -6681,8 +11250,8 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/model/model_86.xml (1.1) (added +122 -0)
 		src/xml/escp2/model/model_87.xml (1.1) (added +193 -0)
 		src/xml/escp2/model/model_9.xml (1.1) (added +145 -0)
-		src/xml/papers.xml (1.1) (added +1368 -0)
-		src/xml/printers.xml (1.1) (added +1777 -0)
+		src/xml/papers.xml (1.1) (added +1403 -0)
+		src/xml/printers.xml (1.1) (added +1910 -0)
 		test/run-testdither (1.13) (+1 -1)
 		test/run-weavetest (1.25) (+1 -1)
 
@@ -7897,7 +12466,7 @@ Name: gutenprint-5_1_5
 
 2007-12-24	<rlk@sourceforge.net>
 
-	Files:	src/main/xmlppd.c (1.1) (added +576 -0)
+	Files:	src/main/xmlppd.c (1.1) (added +574 -0)
 		src/main/xmlppd.h (1.1) (added +46 -0)
 
 	First checkin of replacement PPD code (compiles, does not run successfully)
@@ -7972,7 +12541,7 @@ Name: gutenprint-5_1_5
 		src/cups/Makefile.am (1.94) (+4 -3)
 		src/cups/genppd.c (1.139) (+7 -2)
 		src/cups/rastertoprinter.c (1.114) (+162 -91)
-		src/cups/test-rastertogutenprint.in (1.1) (added +247 -0)
+		src/cups/test-rastertogutenprint.in (1.1) (added +250 -0)
 
 	Add test for CUPS driver
 
@@ -10224,8 +14793,8 @@ Name: gutenprint-5_1_0
 2006-09-30	<faust3@sourceforge.net>
 
 	Files:	test/Makefile.am (1.47) (+4 -2)
-		test/pixma_parse.c (1.1) (added +816 -0)
-		test/pixma_parse.h (1.1) (added +266 -0)
+		test/pixma_parse.c (1.1) (added +907 -0)
+		test/pixma_parse.h (1.1) (added +265 -0)
 
 	add pixma_parse a parser for canon bjl printjobs that can also generate ppm images from the raster data
 
@@ -10918,13 +15487,13 @@ Name: gutenprint-5_0-bp
 
 2006-08-28	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-modes.h (1.1) (added +1382 -0)
+	Files:	src/main/canon-modes.h (1.1) (added +3642 -0)
 
 	file canon-modes.h was initially added on branch canon_experimental.
 
 2006-08-07	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-inks.h (1.1) (added +2148 -0)
+	Files:	src/main/canon-inks.h (1.1) (added +3116 -0)
 
 	file canon-inks.h was initially added on branch canon_experimental.
 
@@ -10980,15 +15549,15 @@ Name: gutenprint-5_0_0
 
 2006-07-23	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-printers.h (1.1) (added +1589 -0)
+	Files:	src/main/canon-printers.h (1.1) (added +2915 -0)
 
 	file canon-printers.h was initially added on branch canon_experimental.
 
 2006-07-22	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-media.h (1.1) (added +1129 -0)
+	Files:	src/main/canon-media.h (1.1) (added +1959 -0)
 		src/main/print-canon.c (1.175) (+43 -121)
-		src/main/print-canon.h (1.1) (added +142 -0)
+		src/main/print-canon.h (1.1) (added +153 -0)
 
 	Cleanup Step 1
 	create a header for the canon driver
@@ -11056,8 +15625,8 @@ Name: gutenprint-5_0_0
 		README (1.164) (+12 -306)
 		configure.ac (1.143) (+2 -3)
 		doc/Makefile.am (1.47) (+10 -11)
-		doc/gutenprint-users-manual.odt (1.1) (added +648 -0)
-		doc/gutenprint-users-manual.pdf (1.1) (added +6019 -0)
+		doc/gutenprint-users-manual.odt (1.1) (added +603 -0)
+		doc/gutenprint-users-manual.pdf (1.1) (added +4178 -0)
 
 	1260142 User documentation needs updating for 5.0.0
 
@@ -11578,8 +16147,8 @@ Name: gutenprint-5_0_0-rc3
 
 	Files:	configure.ac (1.139) (+4 -2)
 		src/testpattern/Makefile.am (1.24) (+4 -3)
-		src/testpattern/printer_options.c (1.1) (added +262 -0)
-		src/testpattern/run-testpattern-2.in (1.1) (added +705 -0)
+		src/testpattern/printer_options.c (1.1) (added +263 -0)
+		src/testpattern/run-testpattern-2.in (1.1) (added +756 -0)
 		test/Makefile.am (1.46) (+1 -5)
 
 	Add improved test based on testpattern generator.
@@ -13211,7 +17780,7 @@ Name: gutenprint-5_0_0-rc2
 2005-08-10	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.129) (+3 -3)
-		po/zh_TW.po (1.1) (added +15565 -0)
+		po/zh_TW.po (1.1) (added +16237 -0)
 
 	Add zh_TW support
 
@@ -14299,7 +18868,7 @@ Name: gutenprint-5_0_0_beta4
 2005-04-09	<rlk@sourceforge.net>
 
 	Files:	src/escputil/Makefile.am (1.18) (+2 -0)
-		src/escputil/d4lib.c (1.1) (added +1510 -0)
+		src/escputil/d4lib.c (1.1) (added +1519 -0)
 		src/escputil/d4lib.h (1.1) (added +55 -0)
 		src/escputil/escputil.c (1.67) (+547 -259)
 
@@ -15046,7 +19615,7 @@ Name: gutenprint-5_0_0-beta3
 		include/gutenprint/.cvsignore (1.1) (added +3 -0)
 		include/gutenprint/Makefile.am (1.1) (added +63 -0)
 		include/gutenprint/array.h (1.1) (added +169 -0)
-		include/gutenprint/bit-ops.h (1.1) (added +164 -0)
+		include/gutenprint/bit-ops.h (1.1) (added +175 -0)
 		include/gutenprint/channel.h (1.1) (added +91 -0)
 		include/gutenprint/color.h (1.1) (added +143 -0)
 		include/gutenprint/curve-cache.h (1.1) (added +82 -0)
@@ -15067,7 +19636,7 @@ Name: gutenprint-5_0_0-beta3
 		include/gutenprint/sequence.h (1.1) (added +409 -0)
 		include/gutenprint/string-list.h (1.1) (added +100 -0)
 		include/gutenprint/util.h (1.1) (added +187 -0)
-		include/gutenprint/vars.h (1.1) (added +1541 -0)
+		include/gutenprint/vars.h (1.1) (added +1549 -0)
 		include/gutenprint/weave.h (1.1) (added +180 -0)
 		include/gutenprint/xml.h (1.1) (added +93 -0)
 		include/gutenprintui/.cvsignore (1.1) (added)
@@ -15190,7 +19759,7 @@ Name: gutenprint-5_0_0-beta3
 		src/gutenprintui2/plist.c (1.1) (added +1838 -0)
 		src/gutenprintui2/print-image-thumbnail.c (1.1) (added +130 -0)
 		src/gutenprintui2/printrc.h (1.1) (added +44 -0)
-		src/gutenprintui2/printrcl.l (1.1) (added +115 -0)
+		src/gutenprintui2/printrcl.l (1.1) (added +117 -0)
 		src/gutenprintui2/printrcy.y (1.1) (added +447 -0)
 		src/gutenprintui2/ui-utils.c (1.1) (added +874 -0)
 		src/libgimpprintui/.cvsignore (1.5) (removed)
@@ -15250,7 +19819,7 @@ Name: gutenprint-5_0_0-beta3
 		src/main/gimpprint.dtd (1.7) (removed)
 		src/main/gimpprint.pc.in (1.4) (removed)
 		src/main/gimpprint.xsd (1.8) (removed)
-		src/main/gutenprint-internal.h (1.1) (added +85 -0)
+		src/main/gutenprint-internal.h (1.1) (added +87 -0)
 		src/main/gutenprint.dtd (1.1) (added +224 -0)
 		src/main/gutenprint.pc.in (1.1) (added +11 -0)
 		src/main/gutenprint.xsd (1.1) (added +370 -0)
@@ -16158,7 +20727,7 @@ Name: gimp-print-5_0_0-beta1
 
 2004-06-15	<rleigh@sourceforge.net>
 
-	Files:	src/gimp2/print.c (1.1) (added +445 -0)
+	Files:	src/gimp2/print.c (1.1) (added +446 -0)
 
 	file print.c was initially added on branch gtk2-20040615-branch.
 
@@ -16824,7 +21393,7 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-05-01	<rlk@sourceforge.net>
 
-	Files:	po/hu.po (1.1) (added +14560 -0)
+	Files:	po/hu.po (1.1) (added +15252 -0)
 
 	file hu.po was initially added on branch gimp-print-4_2_branch.
 
@@ -17032,13 +21601,13 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/uk.po (1.1) (added +14031 -0)
+	Files:	po/uk.po (1.1) (added +15158 -0)
 
 	file uk.po was initially added on branch gimp-print-4_2_branch.
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/nb.po (1.1) (added +15822 -0)
+	Files:	po/nb.po (1.1) (added +16487 -0)
 
 	file nb.po was initially added on branch gimp-print-4_2_branch.
 
@@ -21161,7 +25730,7 @@ Name: gimp-print-4_3_17
 
 2003-06-19	<rlk@sourceforge.net>
 
-	Files:	src/main/mxml-file.c (1.1) (added +1481 -0)
+	Files:	src/main/mxml-file.c (1.1) (added +1467 -0)
 
 	file mxml-file.c was initially added on branch mxml-branch.
 
@@ -22070,7 +26639,7 @@ Name: gimp-print-4_3_15
 
 2003-05-21	<m0m@sourceforge.net>
 
-	Files:	src/main/print-olympus.c (1.1) (added +2881 -0)
+	Files:	src/main/print-olympus.c (1.1) (added +3018 -0)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
 
@@ -22100,7 +26669,7 @@ Name: gimp-print-4_3_15
 
 2003-05-15	<rlk@sourceforge.net>
 
-	Files:	src/main/channel.c (1.1) (added +1174 -0)
+	Files:	src/main/channel.c (1.1) (added +1176 -0)
 
 	file channel.c was initially added on branch channel-20030511-branch.
 
@@ -22415,7 +26984,7 @@ Name: gimp-print-4_3_14
 
 2003-05-04	<rlk@sourceforge.net>
 
-	Files:	po/cs.po (1.1) (added +16112 -0)
+	Files:	po/cs.po (1.1) (added +16761 -0)
 
 	file cs.po was initially added on branch gimp-print-4_2_branch.
 
@@ -24196,7 +28765,7 @@ Name: gimp-print-4_3_9
 
 	Files:	src/main/.cvsignore (1.14) (+1 -0)
 		src/main/Makefile.am (1.61) (+2 -1)
-		src/main/bit-ops.c (1.1) (added +1185 -0)
+		src/main/bit-ops.c (1.1) (added +1288 -0)
 		src/main/print-escp2.c (1.223) (+24 -10)
 		src/main/print-lexmark.c (1.103) (+24 -14)
 		src/main/print-weave.c (1.47) (+18 -914)
@@ -24554,7 +29123,7 @@ Name: gimp-print-4_3_9
 		man/cups-genppdconfig.8.in (1.3) (+6 -5)
 		man/cups-genppdupdate.8.in (1.1) (added +94 -0)
 		src/cups/Makefile.am (1.62) (+3 -3)
-		src/cups/cups-genppdupdate.in (1.1) (added +874 -0)
+		src/cups/cups-genppdupdate.in (1.1) (added +905 -0)
 
 	Add cups-genppdupdate, for upgrading PPDs between Gimp-Print revisions
 
@@ -24827,7 +29396,7 @@ Name: gimp-print-4_3_9
 		src/main/gimp-print-internal.h (1.64) (+2 -3)
 		src/main/gimpprint.xsd (1.3) (+2 -8)
 		src/main/libgimpprint.sym (1.1) (added)
-		src/main/module.c (1.1) (added +415 -0)
+		src/main/module.c (1.1) (added +416 -0)
 		src/main/module.h (1.1) (added)
 		src/main/papers.h (1.5) (+27 -2)
 		src/main/papers.xml (1.4) (+8 -1)
@@ -27162,13 +31731,13 @@ Name: gimp-print-4_3_6
 
 2002-10-21	<rlk@sourceforge.net>
 
-	Files:	src/main/print-vars.c (1.1) (added +2141 -0)
+	Files:	src/main/print-vars.c (1.1) (added +2291 -0)
 
 	file print-vars.c was initially added on branch reorg-20021020-branch.
 
 2002-10-21	<rlk@sourceforge.net>
 
-	Files:	src/main/print-papers.c (1.1) (added +440 -0)
+	Files:	src/main/print-papers.c (1.1) (added +432 -0)
 
 	file print-papers.c was initially added on branch reorg-20021020-branch.
 
@@ -27378,7 +31947,7 @@ Name: gimp-print-4_3_6
 
 2002-10-07	<rlk@sourceforge.net>
 
-	Files:	po/ja.po (1.1) (added +16149 -0)
+	Files:	po/ja.po (1.1) (added +16383 -0)
 
 	file ja.po was initially added on branch gimp-print-4_2_branch.
 
@@ -28504,7 +33073,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +15522 -0)
+	Files:	po/de.po (1.1) (added +16211 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -28593,7 +33162,7 @@ Name: gimp-print-4_3_1
 
 2002-05-11	<rlk@sourceforge.net>
 
-	Files:	po/pt.po (1.1) (added +16223 -0)
+	Files:	po/pt.po (1.1) (added +16872 -0)
 
 	file pt.po was initially added on branch gimp-print-4_2_branch.
 
@@ -28690,7 +33259,7 @@ Name: gimp-print-4_3_1
 
 2002-04-28	<rlk@sourceforge.net>
 
-	Files:	po/es.po (1.1) (added +16264 -0)
+	Files:	po/es.po (1.1) (added +16913 -0)
 
 	Spanish translation
 
@@ -29423,7 +33992,7 @@ Name: gimp-print-4_3_0
 
 	Files:	acconfig.h (1.17) (removed)
 		autogen.sh (1.4) (+1 -1)
-		configure.ac (1.1) (added +1122 -0)
+		configure.ac (1.1) (added +1131 -0)
 		configure.in.in (1.121) (removed)
 		debian/rules (1.35) (+2 -2)
 		doc/README.maintaining (1.12) (+16 -22)
@@ -29590,7 +34159,7 @@ Name: gimp-print-4_3_0
 
 2002-03-16	<rlk@sourceforge.net>
 
-	Files:	po/nl.po (1.1) (added +14756 -0)
+	Files:	po/nl.po (1.1) (added +15227 -0)
 
 	file nl.po was initially added on branch gimp-print-4_2_branch.
 
@@ -29823,7 +34392,7 @@ Name: gimp-print-4_3_0
 
 2002-02-16	<rlk@sourceforge.net>
 
-	Files:	po/el.po (1.1) (added +15846 -0)
+	Files:	po/el.po (1.1) (added +16490 -0)
 
 	file el.po was initially added on branch gimp-print-4_2_branch.
 
@@ -29923,7 +34492,7 @@ Name: gimp-print-4_3_0
 
 2002-02-14	<rlk@sourceforge.net>
 
-	Files:	po/sk.po (1.1) (added +16208 -0)
+	Files:	po/sk.po (1.1) (added +16857 -0)
 
 	file sk.po was initially added on branch gimp-print-4_2_branch.
 
@@ -30299,7 +34868,7 @@ Name: gimp-print-4_3_0
 		m4/gettext.m4 (1.1) (added +417 -0)
 		m4/gimp.m4 (1.1) (added +211 -0)
 		m4/lcmessage.m4 (1.1) (added +30 -0)
-		m4/libtool.m4 (1.1) (added +7356 -0)
+		m4/libtool.m4 (1.1) (added +7831 -0)
 		m4/progtest.m4 (1.1) (added +92 -0)
 		scripts/autogen.sh (1.17) (+12 -0)
 		scripts/gettext.m4 (1.2) (removed)
@@ -30543,7 +35112,7 @@ Name: gimp-print-4_3_0
 		doc/appendices.texi (1.5) (removed)
 		doc/copying.texi (1.2) (removed)
 		doc/developer/.cvsignore (1.1) (added +22 -0)
-		doc/developer/Makefile.am (1.1) (added +193 -0)
+		doc/developer/Makefile.am (1.1) (added +197 -0)
 		doc/developer/copying.texi (1.1) (added)
 		doc/developer/dither.texi (1.1) (added)
 		doc/developer/escp2.texi (1.1) (added)
@@ -31016,7 +35585,7 @@ Name: gimp-print-4_1_99-rc1
 2001-11-08	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.94) (+2 -2)
-		po/pl.po (1.1) (added +15471 -0)
+		po/pl.po (1.1) (added +16115 -0)
 
 	Add Polish translation
 
@@ -31566,7 +36135,7 @@ Name: gimp-print-4_1_99-b4
 2001-10-21	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.87) (+2 -2)
-		po/da.po (1.1) (added +14538 -0)
+		po/da.po (1.1) (added +15231 -0)
 		po/en_GB.po (1.65) (+2 -2)
 		po/fr.po (1.8) (+1 -1)
 		po/no.po (1.8) (+1 -1)
@@ -31865,7 +36434,7 @@ Name: gimp-print-4_1_99-b4
 
 	Files:	configure.in.in (1.84) (+3 -3)
 		po/en_GB.po (1.57) (+335 -348)
-		po/fr.po (1.1) (added +15679 -0)
+		po/fr.po (1.1) (added +16362 -0)
 		po/no.po (1.1) (added)
 		po/sv.po (1.10) (+161 -554)
 		src/cups/Makefile.am (1.37) (+2 -2)
@@ -32566,7 +37135,7 @@ Name: gimp-print-4_1_99-b3
 
 	Files:	NEWS.4.2 (1.5) (+33 -24)
 		configure.in.in (1.76) (+2 -2)
-		po/sv.po (1.1) (added +16458 -0)
+		po/sv.po (1.1) (added +17140 -0)
 		src/foomatic/foomatic-printermap (1.13) (+1 -0)
 		src/ghost/gdevstp.c (1.13) (+70 -33)
 		src/main/print-escp2.c (1.121) (+168 -6)
@@ -33658,7 +38227,7 @@ Name: gimp-print-4_1_99-a3
 		src/testpattern/testpattern.c (1.1) (added +1219 -0)
 		src/testpattern/testpattern.h (1.1) (added +113 -0)
 		src/testpattern/testpattern.sample (1.1) (added +171 -0)
-		src/testpattern/testpatternl.l (1.1) (added +130 -0)
+		src/testpattern/testpatternl.l (1.1) (added +132 -0)
 		src/testpattern/testpatterny.y (1.1) (added +666 -0)
 		test/Makefile.am (1.24) (+4 -14)
 		test/testpattern.c (1.9) (removed)
@@ -35766,7 +40335,7 @@ Name: gimp-print-4_1_7
 	Files:	Makefile.am (1.94) (+2 -2)
 		configure.in.in (1.34) (+8 -7)
 		doc/.cvsignore (1.1) (added +9 -0)
-		doc/Makefile.am (1.1) (added +92 -0)
+		doc/Makefile.am (1.1) (added +96 -0)
 		doc/gimpprint.texi (1.1) (added)
 		doc/gpl.texi (1.1) (added)
 		src/foomatic/.cvsignore (1.2) (+2 -0)
@@ -36363,7 +40932,7 @@ Name: gimp-print-4_1_6
 		src/Makefile.am (1.2) (+2 -2)
 		src/foomatic/.cvsignore (1.1) (added +13 -0)
 		src/foomatic/Makefile.am (1.1) (added +122 -0)
-		src/foomatic/foomatic-generator.in (1.1) (added +1813 -0)
+		src/foomatic/foomatic-generator.in (1.1) (added +1832 -0)
 		src/foomatic/foomatic-printermap (1.1) (added)
 		src/foomatic/foomatic-templates/Brightness.xml (1.1) (added)
 		src/foomatic/foomatic-templates/Contrast.xml (1.1) (added)
@@ -36384,7 +40953,7 @@ Name: gimp-print-4_1_6
 		src/foomatic/foomatic-templates/Saturation.xml (1.1) (added)
 		src/foomatic/foomatic-templates/Yellow.xml (1.1) (added)
 		src/foomatic/foomatic-templates/stp.xml (1.1) (added)
-		src/foomatic/printer_options.c (1.1) (added +319 -0)
+		src/foomatic/printer_options.c (1.1) (added +320 -0)
 		test/Makefile.am (1.13) (+2 -6)
 		test/printer_options.c (1.7) (removed)
 
@@ -37138,7 +41707,7 @@ Name: gimp-print-4_1_4b
 		autogen.sh (1.3) (+1 -1)
 		configure.in.in (1.19) (+28 -13)
 		debian/rules (1.3) (+8 -3)
-		doc/README.maintaining (1.1) (added +564 -0)
+		doc/README.maintaining (1.1) (added +565 -0)
 		src/cups/Makefile.am (1.18) (+2 -2)
 		src/cups/genppd.c (1.8) (+6 -2)
 		src/cups/rastertoprinter.c (1.9) (+6 -2)
@@ -37658,7 +42227,7 @@ Name: gimp-print-4_1_4
 2001-02-08	<rleigh@sourceforge.net>
 
 	Files:	configure.in.in (1.5) (+2 -2)
-		po/en_GB.po (1.1) (added +15136 -0)
+		po/en_GB.po (1.1) (added +15827 -0)
 		po/en_TEST.po (1.1) (added)
 
 	Add en_GB and en_TEST translations
@@ -38360,7 +42929,7 @@ Name: print-4_1_3
 		Ghost/debian-patch-stp (1.2) (removed)
 		Ghost/devs.mak.addon-5.10 (1.8) (removed)
 		Ghost/gdevstp.c (1.52) (removed)
-		po/POTFILES.in (1.1) (added +80 -0)
+		po/POTFILES.in (1.1) (added +81 -0)
 		src/ghost/COPYING (1.1) (added)
 		src/ghost/ChangeLog (1.1) (added)
 		src/ghost/Makefile.am (1.2) (+1 -3)
@@ -38410,11 +42979,11 @@ Name: print-4_1_3
 		src/cups/commands/PrintSelfTestPage.cmd (1.1) (added +6 -0)
 		src/cups/commands/ReportLevels.cmd (1.1) (added +6 -0)
 		src/cups/commands/SetAlignment.cmd (1.1) (added +7 -0)
-		src/cups/commandtocanon.c (1.1) (added +196 -0)
-		src/cups/commandtoepson.c (1.1) (added +233 -0)
+		src/cups/commandtocanon.c (1.1) (added +197 -0)
+		src/cups/commandtoepson.c (1.1) (added +234 -0)
 		src/cups/epson.c (1.1) (added)
-		src/cups/genppd.c (1.1) (added +2567 -0)
-		src/cups/rastertoprinter.c (1.1) (added +1449 -0)
+		src/cups/genppd.c (1.1) (added +2574 -0)
+		src/cups/rastertoprinter.c (1.1) (added +1708 -0)
 
 	Moved cups/* under src/cups
 
@@ -38508,15 +43077,15 @@ Name: print-4_1_3
 		quickmatrix257.h (1.5) (removed)
 		ran.367.179.h (1.4) (removed)
 		ran.509.131.h (1.4) (removed)
-		src/main/print-canon.c (1.1) (added +2702 -0)
+		src/main/print-canon.c (1.1) (added +5666 -0)
 		src/main/print-color.c (1.1) (added +1775 -0)
 		src/main/print-dither.c (1.1) (added)
-		src/main/print-escp2.c (1.1) (added +4569 -0)
-		src/main/print-lexmark.c (1.1) (added +3025 -0)
+		src/main/print-escp2.c (1.1) (added +4575 -0)
+		src/main/print-lexmark.c (1.1) (added +3027 -0)
 		src/main/print-pcl.c (1.1) (added +3085 -0)
 		src/main/print-ps.c (1.1) (added +1380 -0)
 		src/main/print-util.c (1.1) (added +668 -0)
-		src/main/print-weave.c (1.1) (added +2006 -0)
+		src/main/print-weave.c (1.1) (added +2007 -0)
 		src/main/printers.xml (1.1) (added)
 		src/main/quickmatrix257.h (1.1) (added)
 		src/main/ran.367.179.h (1.1) (added)
@@ -38552,7 +43121,7 @@ Name: print-4_1_3
 	Files:	escputil.1.in (1.2) (removed)
 		escputil.c (1.27) (removed)
 		man/escputil.1.in (1.1) (added +128 -0)
-		src/escputil/escputil.c (1.1) (added +2198 -0)
+		src/escputil/escputil.c (1.1) (added +2220 -0)
 
 	Moved escputil to src/escputil and man
 
@@ -38596,12 +43165,12 @@ Name: print-4_1_3
 		man/Makefile.am (1.1) (added +58 -0)
 		po/ChangeLog (1.1) (added +3 -0)
 		src/Makefile.am (1.1) (added +38 -0)
-		src/cups/Makefile.am (1.1) (added +265 -0)
+		src/cups/Makefile.am (1.1) (added +267 -0)
 		src/escputil/Makefile.am (1.1) (added +38 -0)
 		src/ghost/Makefile.am (1.1) (added +41 -0)
 		src/gimp/Makefile.am (1.1) (added)
 		src/include/Makefile.am (1.1) (added)
-		src/main/Makefile.am (1.1) (added +170 -0)
+		src/main/Makefile.am (1.1) (added +171 -0)
 		src/printdef/Makefile.am (1.1) (added)
 		test/Makefile.am (1.1) (added +70 -0)
 
@@ -46605,7 +51174,7 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	configure.in (1.1) (added +1122 -0)
+	Files:	configure.in (1.1) (added +1131 -0)
 
 	This is my first attempt at a configuration input file for autoconf.  It's
 	got some cheesy inelegant bits, but, it seems to work for me.  I'll try
@@ -46616,14 +51185,14 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	AUTHORS (1.1) (added +124 -0)
+	Files:	AUTHORS (1.1) (added +131 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +47653 -0)
+		ChangeLog (1.1) (added +52229 -0)
 		INSTALL (1.1) (added +365 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +2118 -0)
+		NEWS (1.1) (added +2462 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -47254,7 +51823,7 @@ Name: print-3_1_6
 
 1999-11-14	<rlk@sourceforge.net>
 
-	Files:	README (1.1) (added +821 -0)
+	Files:	README (1.1) (added +826 -0)
 		print-escp2.c (1.26) (+32 -12)
 		print-util.c (1.28) (+59 -41)
 		print.c (1.23) (+5 -2)
@@ -47653,7 +52222,7 @@ Name: print-3_1_6
 
 1999-09-12	<rlk@sourceforge.net>
 
-	Files:	Makefile (1.1) (added +1023 -0)
+	Files:	Makefile (1.1) (added +1027 -0)
 		print-escp2.c (1.2) (+259 -24)
 		print-pcl.c (1.2) (+3 -2)
 		print-ps.c (1.2) (+3 -2)
@@ -47666,7 +52235,7 @@ Name: print-3_1_6
 1999-09-12	<rlk@sourceforge.net>
 
 	Files:	Makefile.am (1.1) (added +214 -0)
-		Makefile.in (1.1) (added +1023 -0)
+		Makefile.in (1.1) (added +1027 -0)
 		print-escp2.c (1.1) (added)
 		print-pcl.c (1.1) (added)
 		print-ps.c (1.1) (added)

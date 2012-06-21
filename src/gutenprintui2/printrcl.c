@@ -717,7 +717,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "printrcl.l"
 /*		-*-Mode: C-*-
- * "$Id: printrcl.l,v 1.1 2004/09/17 18:38:14 rleigh Exp $"
+ * "$Id: printrcl.l,v 1.2 2012/05/11 13:16:12 rlk Exp $"
  *
  *   printrc parser
  *
@@ -756,6 +756,8 @@ char *yytext;
 
 int mylineno = 1;
 
+extern YYSTYPE yylval;
+
 #define DBG(x)						\
 do							\
   {							\
@@ -774,7 +776,7 @@ q_strdup(const char *s)
     return g_strndup(s + 1, strlen(s) - 2);
 }
 
-#line 778 "printrcl.c"
+#line 780 "printrcl.c"
 
 #define INITIAL 0
 
@@ -956,10 +958,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 73 "printrcl.l"
+#line 75 "printrcl.l"
 
 
-#line 963 "printrcl.c"
+#line 965 "printrcl.c"
 
 	if ( !(yy_init) )
 		{
@@ -1044,208 +1046,208 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 75 "printrcl.l"
+#line 77 "printrcl.l"
 DBG(CURRENT_PRINTER); return CURRENT_PRINTER;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 76 "printrcl.l"
+#line 78 "printrcl.l"
 DBG(SHOW_ALL_PAPER_SIZES); return SHOW_ALL_PAPER_SIZES;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 77 "printrcl.l"
+#line 79 "printrcl.l"
 DBG(PRINTER); return PRINTER;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 78 "printrcl.l"
+#line 80 "printrcl.l"
 DBG(DESTINATION); return DESTINATION;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 79 "printrcl.l"
+#line 81 "printrcl.l"
 DBG(SCALING); return SCALING;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 80 "printrcl.l"
+#line 82 "printrcl.l"
 DBG(ORIENTATION); return ORIENTATION;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 81 "printrcl.l"
+#line 83 "printrcl.l"
 DBG(AUTOSIZE_ROLL_PAPER); return AUTOSIZE_ROLL_PAPER;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 82 "printrcl.l"
+#line 84 "printrcl.l"
 DBG(UNIT); return UNIT;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 83 "printrcl.l"
+#line 85 "printrcl.l"
 DBG(DRIVER); return DRIVER;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 84 "printrcl.l"
+#line 86 "printrcl.l"
 DBG(LEFT); return LEFT;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 85 "printrcl.l"
+#line 87 "printrcl.l"
 DBG(TOP); return TOP;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 86 "printrcl.l"
+#line 88 "printrcl.l"
 DBG(CUSTOM_PAGE_WIDTH); return CUSTOM_PAGE_WIDTH;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 87 "printrcl.l"
+#line 89 "printrcl.l"
 DBG(CUSTOM_PAGE_HEIGHT); return CUSTOM_PAGE_HEIGHT;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 88 "printrcl.l"
+#line 90 "printrcl.l"
 DBG(OUTPUT_TYPE); return OUTPUT_TYPE;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 89 "printrcl.l"
+#line 91 "printrcl.l"
 DBG(PARAMETER); return PARAMETER;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 90 "printrcl.l"
+#line 92 "printrcl.l"
 DBG(QUEUE_NAME); return QUEUE_NAME;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 91 "printrcl.l"
+#line 93 "printrcl.l"
 DBG(OUTPUT_FILENAME); return OUTPUT_FILENAME;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 92 "printrcl.l"
+#line 94 "printrcl.l"
 DBG(EXTRA_PRINTER_OPTIONS); return EXTRA_PRINTER_OPTIONS;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 93 "printrcl.l"
+#line 95 "printrcl.l"
 DBG(CUSTOM_COMMAND); return CUSTOM_COMMAND;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 94 "printrcl.l"
+#line 96 "printrcl.l"
 DBG(COMMAND_TYPE); return COMMAND_TYPE;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 95 "printrcl.l"
+#line 97 "printrcl.l"
 DBG(GLOBAL_SETTINGS); return GLOBAL_SETTINGS;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 96 "printrcl.l"
+#line 98 "printrcl.l"
 DBG(END_GLOBAL_SETTINGS); return END_GLOBAL_SETTINGS;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 97 "printrcl.l"
+#line 99 "printrcl.l"
 DBG(GLOBAL); return GLOBAL;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 99 "printrcl.l"
+#line 101 "printrcl.l"
 DBG(pINT); return pINT;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 100 "printrcl.l"
+#line 102 "printrcl.l"
 DBG(pSTRING_LIST); return pSTRING_LIST;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 101 "printrcl.l"
+#line 103 "printrcl.l"
 DBG(pFILE); return pFILE;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 102 "printrcl.l"
+#line 104 "printrcl.l"
 DBG(pDOUBLE); return pDOUBLE;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 103 "printrcl.l"
+#line 105 "printrcl.l"
 DBG(pDIMENSION); return pDIMENSION;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 104 "printrcl.l"
+#line 106 "printrcl.l"
 DBG(pBOOLEAN); return pBOOLEAN;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 105 "printrcl.l"
+#line 107 "printrcl.l"
 DBG(pCURVE); return pCURVE;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 107 "printrcl.l"
+#line 109 "printrcl.l"
 yylval.ival = atoi(yytext); DBG(tINT); return tINT;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 108 "printrcl.l"
+#line 110 "printrcl.l"
 yylval.dval = strtod(yytext, NULL); DBG(tDOUBLE); return tDOUBLE;
 	YY_BREAK
 case 33:
 /* rule 33 can match eol */
 YY_RULE_SETUP
-#line 109 "printrcl.l"
+#line 111 "printrcl.l"
 yylval.sval = q_strdup(yytext); DBG(tSTRING); return tSTRING;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 110 "printrcl.l"
+#line 112 "printrcl.l"
 yylval.sval = g_strdup(yytext); DBG(tBOOLEAN); return tBOOLEAN;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 111 "printrcl.l"
+#line 113 "printrcl.l"
 yylval.sval = g_strdup(yytext); DBG(tWORD); return tWORD;
 	YY_BREAK
 case 36:
 /* rule 36 can match eol */
 YY_RULE_SETUP
-#line 112 "printrcl.l"
+#line 114 "printrcl.l"
 DBG(PRINTRC_HDR); return PRINTRC_HDR;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 113 "printrcl.l"
+#line 115 "printrcl.l"
 DBG(whitespace1); 	/* Skip blanks/tabs */
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 114 "printrcl.l"
+#line 116 "printrcl.l"
 DBG(comment1); 	/* Skip comments */
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */
 YY_RULE_SETUP
-#line 115 "printrcl.l"
+#line 117 "printrcl.l"
 DBG(newline); mylineno++;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 116 "printrcl.l"
+#line 118 "printrcl.l"
 ECHO;
 	YY_BREAK
-#line 1249 "printrcl.c"
+#line 1251 "printrcl.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2243,4 +2245,4 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 116 "printrcl.l"
+#line 118 "printrcl.l"

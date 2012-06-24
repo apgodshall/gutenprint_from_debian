@@ -6,6 +6,9 @@ gutenprint (5.2.8-1) UNRELEASED; urgency=low
   * Require debhelper >= 9.
   * printer-driver-gutenprint no longer installs profile.jpg. 
   * Re-enable NLS with --enable-nls.
+  * Add libgutenprint3 to replace libgutenprint2.  Due to both libraries
+    also provide the same set of loadable modules, the libraries are not
+    co-installable.
 
  -- Roger Leigh <rleigh@debian.org>  Thu, 21 Jun 2012 23:31:35 +0100
 

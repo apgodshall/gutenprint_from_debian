@@ -98,6 +98,10 @@ Depends:
  ${misc:Depends},
  libgutenprint3 (= ${binary:Version}),
  pkg-config
+Breaks:
+# Both libgutenprint2 and libgutenprint3 provide the same loadable modules
+# and hence are not co-installable.
+ libgutenprint2
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver library
  This package contains the header files for the Gutenprint library,

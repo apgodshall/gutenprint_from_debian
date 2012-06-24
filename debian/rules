@@ -51,7 +51,8 @@ debian/build/config.status: configure debian/control
 	  --enable-libgutenprintui2 --with-gimp2 \
 	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
 	  --with-foomatic --with-foomatic3 \
-	  --disable-test
+	  --disable-test \
+	  --enable-nls
 
 override_dh_auto_clean:
 	dh_auto_clean

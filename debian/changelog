@@ -1,14 +1,16 @@
-gutenprint (5.2.8-1) UNRELEASED; urgency=low
+gutenprint (5.2.8-1) unstable; urgency=low
 
   * New upstream stable release.
   * debian/README.building: Document git workflow.
-  * Upgrade Standards-Version to 3.9.3
-  * Require debhelper >= 9.
+  * debian/control:
+    - Upgrade Standards-Version to 3.9.3
+    - Require debhelper >= 9.
+    - Add libgutenprint3 to replace libgutenprint2. Due to both libraries
+      providing the same set of loadable modules, the libraries are not
+      co-installable.
+  * debian/rules:
+    - Re-enable NLS with --enable-nls.
   * printer-driver-gutenprint no longer installs profile.jpg. 
-  * Re-enable NLS with --enable-nls.
-  * Add libgutenprint3 to replace libgutenprint2.  Due to both libraries
-    also provide the same set of loadable modules, the libraries are not
-    co-installable.
 
  -- Roger Leigh <rleigh@debian.org>  Thu, 21 Jun 2012 23:31:35 +0100
 

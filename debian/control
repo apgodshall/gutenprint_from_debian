@@ -96,7 +96,7 @@ Architecture: any
 Section: libdevel
 Depends:
  ${misc:Depends},
- libgutenprint3 (= ${binary:Version}),
+ libgutenprint2 (= ${binary:Version}),
  pkg-config
 Suggests: libgutenprint-doc (= ${source:Version})
 Description: development files for the Gutenprint printer driver library
@@ -133,7 +133,7 @@ Description: documentation for the Gutenprint printer driver library
  many cases, and can be used for many of the most demanding printing
  tasks.  Gutenprint was formerly known as Gimp-Print.
 
-Package: libgutenprint3
+Package: libgutenprint2
 Architecture: any
 Section: libs
 Pre-Depends: ${misc:Pre-Depends}
@@ -198,7 +198,7 @@ Section: libs
 Depends: ${misc:Depends}
 Description: locale data files for Gutenprint
  This package contains the i18n files of Gutenprint, used by
- libgutenprint3, printer-driver-gutenprint and escputil.  It is also
+ libgutenprint2, printer-driver-gutenprint and escputil.  It is also
  used by the Print plugin for the GIMP, gimp-gutenprint.
  .
  They are needed when you want the programs in Gutenprint to print

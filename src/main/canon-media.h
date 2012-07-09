@@ -113,7 +113,7 @@ static const canon_slot_t canon_MULTIPASS_MP250_slots[] = {
 DECLARE_SLOTS(canon_MULTIPASS_MP250);
 
 static const canon_slot_t canon_PIXMA_MG2100_slots[] = {
-  { "Front",       N_ ("Front tray"), 0x8 },
+  { "Front",      N_ ("Front tray"), 0x8 },
 };
 DECLARE_SLOTS(canon_PIXMA_MG2100);
 
@@ -145,13 +145,13 @@ static const canon_slot_t canon_BJC_S800_slots[] = {
 DECLARE_SLOTS(canon_BJC_S800);
 
 static const canon_slot_t canon_MULTIPASS_MX7600_slots[] = {
-  { "Cassette",       N_ ("Cassette"), 0x8 },
+  { "Cassette",   N_ ("Cassette"), 0x8 },
 };
 DECLARE_SLOTS(canon_MULTIPASS_MX7600);
 
 static const canon_slot_t canon_PIXMA_iX7000_slots[] = {
   { "Cassette",   N_ ("Cassette"), 0x8 },
-  { "HandFeed",  N_ ("Hand Feeding"), 0x1 },
+  { "HandFeed",   N_ ("Hand Feeding"), 0x1 },
   { "Rear",       N_ ("Rear tray"), 0x4 },
 };
 DECLARE_SLOTS(canon_PIXMA_iX7000);
@@ -178,14 +178,14 @@ DECLARE_SLOTS(canon_MULTIPASS_MX850);
 static const canon_slot_t canon_MULTIPASS_MP520_slots[] = {
   { "SelectKey",  N_ ("Selected by Paper Select Key"), 0x3 },
   { "Rear",       N_ ("Rear tray"), 0x4 },
-  { "Front",   N_ ("Front tray"), 0x8 },
+  { "Front",      N_ ("Front tray"), 0x8 },
   /* There is also a "plain media only Front" option, but it seems to have same 0x8 when used, no idea whether it should take different values */
 };
 DECLARE_SLOTS(canon_MULTIPASS_MP520);
 
 static const canon_slot_t canon_PIXMA_iP3500_slots[] = {
   { "Rear",       N_ ("Rear tray"), 0x4 },
-  { "Front",   N_ ("Front tray"), 0x8 },
+  { "Front",      N_ ("Front tray"), 0x8 },
   /* There is also a "plain media only Front" option, but it seems to have same 0x8 when used, no idea whether it should take different values */
 };
 DECLARE_SLOTS(canon_PIXMA_iP3500);
@@ -211,7 +211,7 @@ DECLARE_SLOTS(canon_PIXMA_iP4600);
 /* Pro9000, Pro9500 series */
 static const canon_slot_t canon_PIXMA_Pro9000_slots[] = {
   { "Rear",       N_ ("Rear tray"), 0x4 },
-  { "Front",   N_ ("Front tray"), 0xb },
+  { "Front",      N_ ("Front tray"), 0xb },
   { "CD",         N_ ("CD tray"), 0xa },
 };
 DECLARE_SLOTS(canon_PIXMA_Pro9000);
@@ -374,7 +374,6 @@ static const canon_paper_t canon_PIXMA_iP4100_papers[] = {
   { "DiscOthers",	N_ ("Printable Disc (Other)"),		0x0c,0x12,0x00,0.78, 0.25, 0.500, 0, 0, 0 },
   { "TShirt",		N_ ("T-Shirt Transfers"),		0x03,0x03,0x00,0.78, 0.25, 0.500, 0, 0, 0 },
   { "Envelope",		N_ ("Envelope"),			0x08,0x08,0x00,0.78, 0.25, 0.500, 0, 0, 0 },
-  { "Transparency",	N_ ("Transparencies"),		        0x02,0x02,0x00,0.78, 0.25, 0.900, 0, 0, 0 },
   { "PhotopaperOther",	N_ ("Other Photo Paper"),		0x0f,0x14,0x00,0.78, 0.25, 0.500, 0, 0, 0 }, /* untested */
   { "Transparency", 	N_ ("Transparencies"),			0x02,0x02,0x00,0.78, 0.25, 0.500, 0, 0, 0 }, /* untested */
 };

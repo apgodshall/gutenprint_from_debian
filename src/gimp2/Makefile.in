@@ -68,7 +68,8 @@ am__objects_1 = print-image-gimp.$(OBJEXT) print.$(OBJEXT)
 am_gutenprint_OBJECTS = $(am__objects_1) print-gutenprint.$(OBJEXT)
 gutenprint_OBJECTS = $(am_gutenprint_OBJECTS)
 am__DEPENDENCIES_1 =
-am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1) $(GUTENPRINTUI2_LIBS)
+am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1) $(GUTENPRINT_LIBS) \
+	$(GUTENPRINTUI2_LIBS)
 am_print_OBJECTS = $(am__objects_1) print-print.$(OBJEXT)
 print_OBJECTS = $(am_print_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
@@ -178,6 +179,7 @@ LEXLIB = @LEXLIB@
 LEX_OUTPUT_ROOT = @LEX_OUTPUT_ROOT@
 LIBICONV = @LIBICONV@
 LIBINTL = @LIBINTL@
+LIBM = @LIBM@
 LIBOBJS = @LIBOBJS@
 LIBREADLINE_DEPS = @LIBREADLINE_DEPS@
 LIBS = $(INTLLIBS) @LIBS@
@@ -310,8 +312,8 @@ COMMON_PRINT_SOURCES = \
 	print_gimp.h
 
 print_SOURCES = $(COMMON_PRINT_SOURCES) print-print.c
-print_LDADD = $(GIMP2_LIBS) $(GUTENPRINTUI2_LIBS)
-print_DEPENDENCIES = $(GUTENPRINTUI2_LIBS) $(GUTENPRINT_LIBS)
+print_LDADD = $(GIMP2_LIBS) $(GUTENPRINT_LIBS) $(GUTENPRINTUI2_LIBS)
+print_DEPENDENCIES = $(GUTENPRINT_LIBS) $(GUTENPRINTUI2_LIBS)
 gutenprint_SOURCES = $(COMMON_PRINT_SOURCES) print-gutenprint.c
 gutenprint_LDADD = $(print_LDADD)
 gutenprint_DEPENDENCIES = $(print_DEPENDENCIES)

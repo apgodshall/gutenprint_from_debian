@@ -1,6 +1,8 @@
 gutenprint (5.2.9-1) UNRELEASED; urgency=low
 
   * New upstream stable release.
+  * Drop patches against 5.2.8-1 to correct library versioning and
+    linking, which have been incorporated upstream.
 
  -- Roger Leigh <rleigh@debian.org>  Mon, 09 Jul 2012 23:16:31 +0100
 

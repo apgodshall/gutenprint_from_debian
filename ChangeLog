@@ -1,3 +1,94 @@
+2012-07-07	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.580) (+2 -0)
+		src/main/canon-media-mode.h (1.161) (+1 -2)
+		src/main/canon-media.h (1.132) (+6 -6)
+
+	Corrected mis-typed mode for Canon pro9000 in canon-media-modes, and removed another erroneous mode.
+
+2012-07-02	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.236) (+11 -2)
+
+	Update comments.
+
+2012-06-25	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.579) (+20 -3)
+		README (1.214) (+14 -14)
+		configure.ac (1.235) (+3 -3)
+
+	Prep for 5.2.9
+
+2012-06-25	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.234) (+13 -13)
+		src/gimp2/Makefile.am (1.8) (+3 -3)
+		src/testpattern/Makefile.am (1.28) (+2 -2)
+
+	Fix the .soname, from Roger Leigh
+
+2012-06-23	<rlk@sourceforge.net>
+
+	Files:	po/de.po (1.79) (+4636 -5868)
+
+	Update German translation
+
+2012-06-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.20) (+1 -1)
+
+	Undo previous change.
+
+2012-06-16	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-rastertogutenprint.in (1.19) (+1 -1)
+
+	"whence" doesn't work on some platforms.
+
+2012-06-16	<rlk@sourceforge.net>
+
+	Files:	src/main/print-escp2.c (1.439) (+3 -3)
+
+	Allow a larger range of correction for fine adjustment of CD position.
+
+2012-06-15	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.131) (+0 -1)
+
+	Removed duplicate transparency media from Canon iP4100 media types.
+
+===============================================================================
+Name: gutenprint-5_2_8
+
+2012-06-12	<rlk@sourceforge.net>
+
+	Files:	po/cs.po (1.63) (+2244 -1979)
+		po/da.po (1.106) (+2229 -1954)
+		po/de.po (1.78) (+2231 -1960)
+		po/el.po (1.78) (+2244 -1980)
+		po/en_GB.po (1.171) (+2227 -1954)
+		po/es.po (1.76) (+2244 -1979)
+		po/fi.po (1.8) (+2229 -1954)
+		po/fr.po (1.104) (+2225 -1957)
+		po/gl.po (1.3) (+2231 -1955)
+		po/hu.po (1.36) (+2228 -1954)
+		po/it.po (1.16) (+2229 -1954)
+		po/ja.po (1.73) (+2240 -1966)
+		po/nb.po (1.37) (+2225 -1964)
+		po/nl.po (1.89) (+2231 -1952)
+		po/pl.po (1.82) (+2243 -1979)
+		po/pt.po (1.77) (+2244 -1979)
+		po/ru.po (1.10) (+2227 -1954)
+		po/sk.po (1.81) (+2244 -1979)
+		po/sl.po (1.5) (+2229 -1954)
+		po/sv.po (1.107) (+2227 -1960)
+		po/uk.po (1.6) (+2231 -1952)
+		po/zh_CN.po (1.3) (+2157 -1945)
+		po/zh_TW.po (1.37) (+2219 -1956)
+
+	Gutenprint 5.2.8 release
+
 2012-06-07	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.578) (+7 -7)
@@ -1952,7 +2043,7 @@
 2012-03-18	<gernot2270@sourceforge.net>
 
 	Files:	src/main/Makefile.am (1.105) (+3 -2)
-		src/main/canon-media-mode.h (1.1) (added +10663 -0)
+		src/main/canon-media-mode.h (1.1) (added +10662 -0)
 		src/main/canon-modes.h (1.274) (+1 -1)
 		src/main/print-canon.c (1.323) (+31 -3)
 
@@ -15555,7 +15646,7 @@ Name: gutenprint-5_0_0
 
 2006-07-22	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-media.h (1.1) (added +1959 -0)
+	Files:	src/main/canon-media.h (1.1) (added +1958 -0)
 		src/main/print-canon.c (1.175) (+43 -121)
 		src/main/print-canon.h (1.1) (added +153 -0)
 
@@ -33073,7 +33164,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +16211 -0)
+	Files:	po/de.po (1.1) (added +15838 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -33992,7 +34083,7 @@ Name: gimp-print-4_3_0
 
 	Files:	acconfig.h (1.17) (removed)
 		autogen.sh (1.4) (+1 -1)
-		configure.ac (1.1) (added +1131 -0)
+		configure.ac (1.1) (added +1140 -0)
 		configure.in.in (1.121) (removed)
 		debian/rules (1.35) (+2 -2)
 		doc/README.maintaining (1.12) (+16 -22)
@@ -51174,7 +51265,7 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	configure.in (1.1) (added +1131 -0)
+	Files:	configure.in (1.1) (added +1140 -0)
 
 	This is my first attempt at a configuration input file for autoconf.  It's
 	got some cheesy inelegant bits, but, it seems to work for me.  I'll try
@@ -51187,12 +51278,12 @@ Name: print-3_1_6
 
 	Files:	AUTHORS (1.1) (added +131 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +52229 -0)
+		ChangeLog (1.1) (added +52330 -0)
 		INSTALL (1.1) (added +365 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +2462 -0)
+		NEWS (1.1) (added +2481 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -52222,7 +52313,7 @@ Name: print-3_1_6
 
 1999-09-12	<rlk@sourceforge.net>
 
-	Files:	Makefile (1.1) (added +1027 -0)
+	Files:	Makefile (1.1) (added +1028 -0)
 		print-escp2.c (1.2) (+259 -24)
 		print-pcl.c (1.2) (+3 -2)
 		print-ps.c (1.2) (+3 -2)
@@ -52235,7 +52326,7 @@ Name: print-3_1_6
 1999-09-12	<rlk@sourceforge.net>
 
 	Files:	Makefile.am (1.1) (added +214 -0)
-		Makefile.in (1.1) (added +1027 -0)
+		Makefile.in (1.1) (added +1028 -0)
 		print-escp2.c (1.1) (added)
 		print-pcl.c (1.1) (added)
 		print-ps.c (1.1) (added)

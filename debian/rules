@@ -21,6 +21,7 @@ override_dh_auto_configure:
 	  --with-modules=dlopen \
 	  --enable-libgutenprintui2 --with-gimp2 \
 	  --with-cups --enable-cups-level3-ppds --enable-globalized-cups-ppds \
+	  --enable-cups-1_2-enhancements --disable-cups-ppds \
 	  --with-foomatic --with-foomatic3 \
 	  --disable-test \
 	  --enable-nls

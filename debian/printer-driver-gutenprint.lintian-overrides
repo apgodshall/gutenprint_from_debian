@@ -1,0 +1,1 @@
+cups: non-standard-executable-perm usr/lib/cups/backend/gutenprint52+usb 0700 != 0755

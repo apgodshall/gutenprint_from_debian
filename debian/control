@@ -17,8 +17,8 @@ Build-Depends:
  gettext,
  foomatic-db-engine,
  chrpath,
-Vcs-Browser: http://git.debian.org/?p=collab-maint/gutenprint.git
-Vcs-Git: git://git.debian.org/git/collab-maint/gutenprint
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=printing/gutenprint.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/printing/gutenprint.git
 
 Package: gimp-gutenprint
 Architecture: any

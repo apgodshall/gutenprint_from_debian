@@ -78,6 +78,7 @@ install-indep: build-indep $(DH_INSTALL_FILES)
 
 	rm -r debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint/
 	ln -s printer-driver-gutenprint debian/cups-driver-gutenprint/usr/share/doc/cups-driver-gutenprint
+	rm -f debian/gutenprint-locales/usr/share/locale/*/*.po
 
 override_dh_install-arch:
 	dh_install

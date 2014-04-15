@@ -116,7 +116,7 @@ Description: development files for the Gutenprint printer driver library
 Package: libgutenprint-doc
 Architecture: all
 Section: doc
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, libjs-jquery (>= 1.7.1)
 Suggests: libgutenprint-dev (= ${source:Version})
 Description: documentation for the Gutenprint printer driver library
  This package contains lots of info-files, DVI docs and other
@@ -290,7 +290,8 @@ Suggests:
  printer-driver-gutenprint (>= ${source:Version}),
  foomatic-db-gutenprint (>= ${source:Version}),
  gimp-gutenprint (>= ${source:Version}),
- ijsgutenprint (>= ${source:Version})
+ ijsgutenprint (>= ${source:Version}),
+ libjs-jquery (>= 1.7.1)
 Description: users' guide for Gutenprint and CUPS
  This package contains a user guide for programs using the
  Gutenprint library for photographic quality printing.  Currently

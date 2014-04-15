@@ -1,4 +1,5 @@
 Source: gutenprint
+Homepage: http://gimp-print.sourceforge.net/
 Section: graphics
 Priority: optional
 Maintainer: Debian Printing Group <debian-printing@lists.debian.org>
@@ -272,8 +273,6 @@ Description: OpenPrinting printer support - database for Gutenprint printer driv
  .
  This package includes support for printers using the Gutenprint
  printer driver suite.
- .
- Home Page: http://www.openprinting.org/
  .
  Gutenprint is the print facility for the GIMP, and in addition a
  suite of drivers that may be used with common UNIX spooling systems

@@ -1,3 +1,22 @@
+gutenprint (5.2.9-2) unstable; urgency=low
+
+  * Team upload
+
+  [ Didier Raboud ]
+  * Move the repository from collab-maint to printing; update the VCS-* fields
+    accordingly
+  * Bump Standards-Version to 3.9.5 without changes needed
+  * Add the non-minified jquery 1.7.1 source to debian/missing-sources
+  * Let {lib,}gutenprint-doc depend on libjs-jquery and symlink the jquery.js
+    to the packaged version
+  * Add homepage URL
+  * Stop installing .po files in gutenprint-locales (Closes: #650758)
+
+  [ Bart Martens ]
+  * Add debian/watch
+
+ -- Didier Raboud <odyx@debian.org>  Tue, 15 Apr 2014 14:16:04 +0200
+
 gutenprint (5.2.9-1) unstable; urgency=low
 
   * New upstream stable release.

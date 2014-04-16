@@ -37,6 +37,41 @@
 
 #include "backend_common.h"
 
+/* Exported */
+#define USB_VID_CANON       0x04a9
+#define USB_PID_CANON_CP10  0x304A
+#define USB_PID_CANON_CP100 0x3063
+#define USB_PID_CANON_CP200 0x307C
+#define USB_PID_CANON_CP220 0x30BD
+#define USB_PID_CANON_CP300 0x307D
+#define USB_PID_CANON_CP330 0x30BE
+#define USB_PID_CANON_CP400 0x30F6
+#define USB_PID_CANON_CP500 0x30F5
+#define USB_PID_CANON_CP510 0x3128
+#define USB_PID_CANON_CP520 520 // XXX 316f? 3172? (related to cp740/cp750)
+#define USB_PID_CANON_CP530 0x31b1
+#define USB_PID_CANON_CP600 0x310B
+#define USB_PID_CANON_CP710 0x3127
+#define USB_PID_CANON_CP720 0x3143
+#define USB_PID_CANON_CP730 0x3142
+#define USB_PID_CANON_CP740 0x3171
+#define USB_PID_CANON_CP750 0x3170
+#define USB_PID_CANON_CP760 0x31AB
+#define USB_PID_CANON_CP770 0x31AA
+#define USB_PID_CANON_CP780 0x31DD
+#define USB_PID_CANON_CP790 0x31E7
+#define USB_PID_CANON_CP800 0x3214
+#define USB_PID_CANON_CP810 0x3256
+#define USB_PID_CANON_CP820 820 // XXX
+#define USB_PID_CANON_CP900 0x3255
+#define USB_PID_CANON_CP910 910 // XXX
+#define USB_PID_CANON_ES1   0x3141
+#define USB_PID_CANON_ES2   0x3185
+#define USB_PID_CANON_ES20  0x3186
+#define USB_PID_CANON_ES3   0x31AF
+#define USB_PID_CANON_ES30  0x31B0
+#define USB_PID_CANON_ES40  0x31EE
+
 #define READBACK_LEN 12
 
 struct printer_data {
@@ -222,8 +257,8 @@ static struct printer_data selphy_printers[] = {
 	  .ready_m_readback = { 0x04, 0x00, 0x03, 0x00, 0x02, 0x01, -1, 0x01, 0x00, 0x00, 0x00, 0x00 },
 	  .ready_c_readback = { 0x04, 0x00, 0x07, 0x00, 0x02, 0x01, -1, 0x01, 0x00, 0x00, 0x00, 0x00 },
 	  .done_c_readback = { 0x04, 0x00, 0x00, 0x00, 0x02, 0x01, -1, 0x01, 0x00, 0x00, 0x00, 0x00 },
-	  // .clear_error + clear_error_len
-	  // .paper_codes
+	  .clear_error = { 0x40, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+	  .clear_error_len = 12,
 	  .pgcode_offset = 3,
 	  .paper_code_offset = 6,
 	  .error_detect = es1_error_detect,
@@ -237,8 +272,8 @@ static struct printer_data selphy_printers[] = {
 	  .ready_m_readback = { 0x06, 0x00, 0x03, 0x00, -1, 0x00, -1, -1, 0x00, 0x00, 0x00, 0x00 },
 	  .ready_c_readback = { 0x09, 0x00, 0x07, 0x00, -1, 0x00, -1, -1, 0x00, 0x00, 0x00, 0x00 },
 	  .done_c_readback = { 0x09, 0x00, 0x00, 0x00, -1, 0x00, -1, -1, 0x00, 0x00, 0x00, 0x00 },
-	  // .clear_error + clear_error_len
-	  // .paper_codes
+	  .clear_error = { 0x40, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+	  .clear_error_len = 12,
 	  .pgcode_offset = 2,
 	  .paper_code_offset = 4,
 	  .error_detect = es2_error_detect,
@@ -252,8 +287,8 @@ static struct printer_data selphy_printers[] = {
 	  .ready_m_readback = { 0x03, 0xff, 0x02, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00 },
 	  .ready_c_readback = { 0x05, 0xff, 0x03, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00 },
 	  .done_c_readback = { 0x00, 0xff, 0x10, 0x00, 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00 },
-	  // .clear_error + clear_error_len
-	  // .paper_codes
+	  .clear_error = { 0x40, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+	  .clear_error_len = 12,
 	  .pgcode_offset = 2,
 	  .paper_code_offset = -1,
 	  .error_detect = es3_error_detect,
@@ -274,8 +309,8 @@ static struct printer_data selphy_printers[] = {
 	  .ready_m_readback = { 0x00, 0x03, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, -1 },
 	  .ready_c_readback = { 0x00, 0x05, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, -1 },
 	  .done_c_readback = { 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, -1 },
-	  // .clear_error + clear_error_len
-	  // .paper_codes
+	  .clear_error = { 0x40, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+	  .clear_error_len = 12,
 	  .pgcode_offset = 2,
 	  .paper_code_offset = 11,
 	  .error_detect = es40_error_detect,
@@ -523,9 +558,6 @@ static void canonselphy_attach(void *vctx, struct libusb_device_handle *dev,
 
 		device = libusb_get_device(dev);
 		libusb_get_device_descriptor(device, &desc);
-
-#define USB_PID_CANON_CP790 0x31E7
-#define USB_PID_CANON_ES40  0x31EE
 		
 		if (desc.idProduct == USB_PID_CANON_CP790)
 			printer_type = P_CP790;
@@ -892,44 +924,9 @@ top:
 	return 0;
 }
 
-/* Exported */
-#define USB_VID_CANON       0x04a9
-#define USB_PID_CANON_CP10  0x304A
-#define USB_PID_CANON_CP100 0x3063
-#define USB_PID_CANON_CP200 0x307C
-#define USB_PID_CANON_CP220 0x30BD
-#define USB_PID_CANON_CP300 0x307D
-#define USB_PID_CANON_CP330 0x30BE
-#define USB_PID_CANON_CP400 0x30F6
-#define USB_PID_CANON_CP500 0x30F5
-#define USB_PID_CANON_CP510 0x3128
-#define USB_PID_CANON_CP520 520 // XXX 316f? 3172? (related to cp740/cp750)
-#define USB_PID_CANON_CP530 0x31b1
-#define USB_PID_CANON_CP600 0x310B
-#define USB_PID_CANON_CP710 0x3127
-#define USB_PID_CANON_CP720 0x3143
-#define USB_PID_CANON_CP730 0x3142
-#define USB_PID_CANON_CP740 0x3171
-#define USB_PID_CANON_CP750 0x3170
-#define USB_PID_CANON_CP760 0x31AB
-#define USB_PID_CANON_CP770 0x31AA
-#define USB_PID_CANON_CP780 0x31DD
-#define USB_PID_CANON_CP790 0x31E7
-#define USB_PID_CANON_CP800 0x3214
-#define USB_PID_CANON_CP810 0x3256
-#define USB_PID_CANON_CP820 820 // XXX
-#define USB_PID_CANON_CP900 0x3255
-#define USB_PID_CANON_CP910 910 // XXX
-#define USB_PID_CANON_ES1   0x3141
-#define USB_PID_CANON_ES2   0x3185
-#define USB_PID_CANON_ES20  0x3186
-#define USB_PID_CANON_ES3   0x31AF
-#define USB_PID_CANON_ES30  0x31B0
-#define USB_PID_CANON_ES40  0x31EE
-
 struct dyesub_backend canonselphy_backend = {
 	.name = "Canon SELPHY CP/ES",
-	.version = "0.80",
+	.version = "0.81",
 	.uri_prefix = "canonselphy",
 	.init = canonselphy_init,
 	.attach = canonselphy_attach,
@@ -1283,6 +1280,6 @@ struct dyesub_backend canonselphy_backend = {
       necessarily identical.  So it's possible to have a code of, say,
       0x41 if the 'Wide' paper tray is loaded with a 'P' ribbon. A '0' is used
       to signify nothing being loaded.
- 
+
 
 */

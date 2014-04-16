@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.523 2012/05/25 17:52:30 gernot2270 Exp $"
+ * "$Id: print-canon.c,v 1.552 2014/01/24 17:21:46 gernot2270 Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -67,9 +67,7 @@
 #  define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif /* !MAX */
 
-/* set this to 1 to see errors in make, set to 0 (normal) to avoid noise */
-#define ERRPRINT 0
-
+/* 5 3-level pixels into 1 byte */
 static int
 pack_pixels(unsigned char* buf,int len)
 {
@@ -78,7 +76,7 @@ pack_pixels(unsigned char* buf,int len)
   int shift = 6;
   while(read_pos < len)
   {
-    /* read 5pixels a 2 bit */
+    /* read 5pixels at 2 bit */
     unsigned short value = buf[read_pos] << 8;
     if(read_pos+1 < len)
       value += buf[read_pos + 1];
@@ -95,6 +93,70 @@ pack_pixels(unsigned char* buf,int len)
     else
     {
       shift -= 2;
+      ++read_pos;
+    }
+  }
+  return write_pos;
+}
+
+/* 3 4-bit-per-pixel  5-level pixels into 1 byte */
+static int
+pack_pixels3_5(unsigned char* buf,int len)
+{
+  int read_pos = 0;
+  int write_pos = 0;
+  int shift = 7;
+  while(read_pos < len)
+  {
+    /* read 3pixels at 3 bit */
+    unsigned short value = buf[read_pos] << 8;
+    if(read_pos+1 < len)
+      value += buf[read_pos + 1];
+    if(shift)
+      value >>= shift;
+    /* write 8bit value representing the 12 bit pixel combination */
+    buf[write_pos] = twelve2eight[value & 1023];
+    ++write_pos;
+    if(shift == 0)
+    {
+      shift = 7;
+      read_pos += 2;
+    }
+    else
+    {
+      shift -= 1;
+      ++read_pos;
+    }
+  }
+  return write_pos;
+}
+
+/* 3 4-bit-per-pixel 6-level pixels into 1 byte */
+static int
+pack_pixels3_6(unsigned char* buf,int len)
+{
+  int read_pos = 0;
+  int write_pos = 0;
+  int shift = 7;
+  while(read_pos < len)
+  {
+    /* read 3pixels at 3 bit */
+    unsigned short value = buf[read_pos] << 8;
+    if(read_pos+1 < len)
+      value += buf[read_pos + 1];
+    if(shift)
+      value >>= shift;
+    /* write 8bit value representing the 12 bit pixel combination */
+    buf[write_pos] = twelve2eight2[value & 1023];
+    ++write_pos;
+    if(shift == 0)
+    {
+      shift = 7;
+      read_pos += 2;
+    }
+    else
+    {
+      shift -= 1;
       ++read_pos;
     }
   }
@@ -127,6 +189,7 @@ pack_pixels(unsigned char* buf,int len)
 #define CANON_CAP_cart       0x800000ul /* BJC printers with Color, Black, Photo options */
 #define CANON_CAP_BORDERLESS 0x1000000ul /* borderless printing */
 #define CANON_CAP_NOBLACK    0x2000000ul /* no Black cartridge selection */
+#define CANON_CAP_v          0x4000000ul /* not sure of this yet */
 
 #define CANON_CAP_STD0 (CANON_CAP_b|CANON_CAP_c|CANON_CAP_d|\
                         CANON_CAP_l|CANON_CAP_q|CANON_CAP_t)
@@ -469,8 +532,7 @@ static char* canon_get_printername(const stp_vars_t* v)
   len = strlen(canon_families[family]) + 7; /* max model nr. + terminating 0 */
   name = stp_zalloc(len);
   snprintf(name,len,"%s%u",canon_families[family],nr);
-  if (ERRPRINT)
-    stp_eprintf(v,"canon_get_printername: current printer name: %s\n", name);
+  stp_dprintf(STP_DBG_CANON, v,"canon_get_printername: current printer name: %s\n", name);
   return name;
 }
 
@@ -517,9 +579,7 @@ static const canon_mode_t* canon_get_current_mode(const stp_vars_t *v){
     const char *ink_set = stp_get_string_parameter(v, "InkSet");/*debug*/
     int i;
 
-  stp_dprintf(STP_DBG_CANON, v,"Entered canon_get_current_mode\n");
-  if (ERRPRINT)
-    stp_eprintf(v,"entered canon_get_current_mode\n");
+    stp_dprintf(STP_DBG_CANON, v,"Entered canon_get_current_mode\n");
 
     if (ink_set)
       stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: InkSet value (high priority): '%s'\n",ink_set);
@@ -566,8 +626,6 @@ static const canon_mode_t* canon_get_current_mode(const stp_vars_t *v){
 #endif
 
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: current mode is '%s'\n",resolution);
-    if (ERRPRINT)
-      stp_eprintf(v,"current mode is '%s'\n",resolution);
     
     return mode;
 }
@@ -579,8 +637,6 @@ const canon_modeuse_t* select_media_modes(stp_vars_t *v, const canon_paper_t* me
     if(!strcmp(media_type->name,mlist->modeuses[i].name)){
       muse = &mlist->modeuses[i];
       stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: mode searching: assigned media '%s'\n",mlist->name);
-      if (ERRPRINT)
-	stp_eprintf(v,"mode searching: assigned media '%s'\n",mlist->name);
       break;
     }
   }
@@ -591,8 +647,6 @@ int compare_mode_valid(stp_vars_t *v,const canon_mode_t* mode,const canon_modeus
   int i=0;
   int modecheck=1;
   stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: mode searching: assigned mode-media '%s'\n",mlist->name);
-  if (ERRPRINT)
-    stp_eprintf(v,"mode searching: assigned mode-media '%s'\n",mlist->name);
   while (muse->mode_name_list[i]!=NULL){
     if(!strcmp(mode->name,muse->mode_name_list[i])){
       modecheck=0;
@@ -618,7 +672,7 @@ const canon_mode_t* suitable_mode_monochrome(stp_vars_t *v,const canon_modeuse_t
 	  /* only look at modes with MODE_FLAG_BLACK if INKSET_BLACK_MODEREPL is in force */
 	  if ( (caps->modelist->modes[j].quality >= quality) && (caps->modelist->modes[j].flags & MODE_FLAG_BLACK) ){ 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check -- rare for monochrome, cannot remember any such case */
 	      mode = &caps->modelist->modes[j];
 	      modefound=1;
@@ -629,7 +683,7 @@ const canon_mode_t* suitable_mode_monochrome(stp_vars_t *v,const canon_modeuse_t
 	else { /* no special replacement modes for black inkset */
 	  if ( (caps->modelist->modes[j].quality >= quality) ){ 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check -- rare for monochrome, cannot remember any such case */
 	      mode = &caps->modelist->modes[j];
 	      modefound=1;
@@ -651,16 +705,19 @@ const canon_mode_t* find_first_matching_mode_monochrome(stp_vars_t *v,const cano
   int modefound=0;
   int j;
 
+  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered find_first_matching_mode_monochrome\n");
+
   while ( (muse->mode_name_list[i]!=NULL)  && (modefound != 1) ) {
     /* pick first mode with MODE_FLAG_BLACK */
     for(j=0;j<caps->modelist->count;j++){
       if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 	/* only look at modes with MODE_FLAG_BLACK if INKSET_BLACK_MODEREPL is in force */
 	if ( (caps->modelist->modes[j].flags & MODE_FLAG_BLACK) ) { 
-	  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	    /* duplex check -- rare for monochrome, cannot remember any such case */
 	    mode = &caps->modelist->modes[j];
 	    modefound=1;
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (find_first_matching_mode_monochrome): picked monochrome mode (%s)\n",mode->name);
 	  }
 	}
 	break; /* go to next mode in muse list */
@@ -677,11 +734,13 @@ const canon_mode_t* find_first_matching_mode(stp_vars_t *v,const canon_modeuse_t
   int modefound=0;
   int j;
 
+  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered find_first_matching_mode\n");
+
   while ( (muse->mode_name_list[i]!=NULL)  && (modefound != 1) ) {
     for(j=0;j<caps->modelist->count;j++){
       if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
-	if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
-	  /* duplex check -- rare for monochrome, cannot remember any such case */
+	if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	  /* duplex check */
 	  mode = &caps->modelist->modes[j];
 	  modefound=1;
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (find_first_matching_mode): picked mode without inkset limitation (%s)\n",mode->name);
@@ -709,7 +768,7 @@ const canon_mode_t* suitable_mode_color(stp_vars_t *v,const canon_modeuse_t* mus
 	  /* only look at modes with MODE_FLAG_COLOR if INKSET_COLOR_MODEREPL is in force */
 	  if ( (caps->modelist->modes[j].quality >= quality)  && (caps->modelist->modes[j].flags & MODE_FLAG_COLOR) ) { 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check */
 	      mode = &caps->modelist->modes[j];
 	      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (suitable_mode_color): picked mode with special replacement inkset (%s)\n",mode->name);
@@ -721,7 +780,7 @@ const canon_mode_t* suitable_mode_color(stp_vars_t *v,const canon_modeuse_t* mus
 	else { /* no special replacement modes for color inkset */
 	  if ( (caps->modelist->modes[j].quality >= quality) ){ 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check */
 	      mode = &caps->modelist->modes[j];
 	      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (suitable_mode_color): picked mode without any special replacement inkset (%s)\n",mode->name);
@@ -744,13 +803,15 @@ const canon_mode_t* find_first_matching_mode_color(stp_vars_t *v,const canon_mod
   int modefound=0;
   int j;
 
+  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered find_first_matching_mode_color\n");
+
   while ( (muse->mode_name_list[i]!=NULL)  && (modefound != 1) ) {
     /* pick first mode with MODE_FLAG_COLOR */
     for(j=0;j<caps->modelist->count;j++){
       if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 	/* only look at modes with MODE_FLAG_COLOR if INKSET_COLOR_MODEREPL is in force */
 	if ( (caps->modelist->modes[j].flags & MODE_FLAG_COLOR) ) { 
-	  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	    /* duplex check */
 	    mode = &caps->modelist->modes[j];
 	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (find_first_matching_mode_color): picked first mode with special replacement inkset (%s)\n",mode->name);
@@ -780,9 +841,10 @@ const canon_mode_t* suitable_mode_photo(stp_vars_t *v,const canon_modeuse_t* mus
 	  /* only look at modes with MODE_FLAG_PHOTO if INKSET_PHOTO_MODEREPL is in force */
 	  if ( (caps->modelist->modes[j].quality >= quality)  && (caps->modelist->modes[j].flags & MODE_FLAG_PHOTO) ) { 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check */
 	      mode = &caps->modelist->modes[j];
+	      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (suitable_mode_photo): picked first mode with special replacement inkset (%s)\n",mode->name);
 	      modefound=1;
 	    }
 	  }
@@ -791,9 +853,10 @@ const canon_mode_t* suitable_mode_photo(stp_vars_t *v,const canon_modeuse_t* mus
 	else { /* if no special replacement modes for photo inkset */
 	  if ( (caps->modelist->modes[j].quality >= quality) ){ 
 	    /* keep setting the mode until lowest matching quality is found */
-	    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	      /* duplex check */
 	      mode = &caps->modelist->modes[j];
+	      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (suitable_mode_photo): picked first mode with photo inkset (%s)\n",mode->name);
 	      modefound=1;
 	    }
 	  }
@@ -812,6 +875,8 @@ const canon_mode_t* find_first_matching_mode_photo(stp_vars_t *v,const canon_mod
   int i=0;
   int modefound=0;
   int j;
+
+  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered find_first_matching_mode_photo\n");
   
   while ( (muse->mode_name_list[i]!=NULL)  && (modefound != 1) ) {
     /* pick first mode with MODE_FLAG_PHOTO */
@@ -819,9 +884,10 @@ const canon_mode_t* find_first_matching_mode_photo(stp_vars_t *v,const canon_mod
       if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 	/* only look at modes with MODE_FLAG_PHOTO if INKSET_PHOTO_MODEREPL is in force */
 	if ( (caps->modelist->modes[j].flags & MODE_FLAG_PHOTO) ) { 
-	  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	    /* duplex check */
 	    mode = &caps->modelist->modes[j];
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (find_first_matching_mode_photo): picked first mode with photo inkset (%s)\n",mode->name);
 	    modefound=1;
 	  }
 	}
@@ -840,15 +906,17 @@ const canon_mode_t* suitable_mode_general(stp_vars_t *v,const canon_modeuse_t* m
   int modefound=0;
 
   stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered suitable_mode_general\n");
+
   
   while ((muse->mode_name_list[i]!=NULL) && (modefound != 1)){
     for(j=0;j<caps->modelist->count;j++){
       if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 	if ( (caps->modelist->modes[j].quality >= quality) ) { 
 	  /* keep setting the mode until lowest matching quality is found */
-	  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+	  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 	    /* duplex check */
 	    mode = &caps->modelist->modes[j];
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (suitable_mode_general): picked first mode with lowest matching quality (%s)\n",mode->name);
 	    modefound=1;
 	  }
 	}
@@ -863,6 +931,8 @@ const canon_mode_t* suitable_mode_general(stp_vars_t *v,const canon_modeuse_t* m
 const char* find_ink_type(stp_vars_t *v,const canon_mode_t* mode,const char *printing_mode) {
   int i,inkfound;
   const char *ink_type = stp_get_string_parameter(v, "InkType");
+
+  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Entered find_ink_type\n");
 
   /* if InkType does not match that of mode, change InkType to match it */
   /* choose highest color as default, as there is only one option for Black */
@@ -928,8 +998,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 #endif
 
   stp_dprintf(STP_DBG_CANON, v,"Entered canon_check_current_mode: got PrintingMode %s\n",printing_mode);
-  if (ERRPRINT)
-    stp_eprintf(v,"entered canon_check_current_mode: got PrintingMode %s\n",printing_mode);
 
   /* Logic: priority of options
      1. Media --- always present for final selection.
@@ -958,8 +1026,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 
   if(resolution){
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint:  check_current_mode --- (Initial) Resolution already known: '%s'\n",resolution);
-    if (ERRPRINT)
-      stp_eprintf(v,"check_current_mode --- (Initial) Resolution already known: '%s'\n",resolution);
     for(i=0;i<caps->modelist->count;i++){
       if(!strcmp(resolution,caps->modelist->modes[i].name)){
 	mode = &caps->modelist->modes[i];
@@ -969,8 +1035,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
   }
   else {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint:  check_current_mode --- (Initial) Resolution not yet known \n");
-    if (ERRPRINT)
-      stp_eprintf(v,"check_current_mode --- (Initial) Resolution not yet known \n");
   }
     
   if (ink_set)
@@ -986,14 +1050,8 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
   /* beginning of mode replacement code */
   if (media_type && resolution && mode) {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint:  check_current_mode --- Resolution, Media, Mode all known \n");
-    if (ERRPRINT)
-      stp_eprintf(v,"check_current_mode --- Resolution, Media, Mode all known \n");
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: media type selected: '%s'\n",media_type->name);
-    if (ERRPRINT)
-      stp_eprintf(v,"media type selected: '%s'\n",media_type->name);
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: (Inital) Gutenprint: mode initally active: '%s'\n",mode->name);
-    if (ERRPRINT)
-      stp_eprintf(v,"(Inital) mode initially active: '%s'\n",mode->name);
       
     /* scroll through modeuse list to find media */
     muse = select_media_modes(v,media_type,mlist);
@@ -1001,20 +1059,20 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
     /* now scroll through to find if the mode is in the modeuses list */
     modecheck=compare_mode_valid(v,mode,muse,mlist);
 
-    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: modecheck value: '%i'\n",modecheck);
-    if (ERRPRINT)
-      stp_eprintf(v,"modecheck value: '%i'\n",modecheck);
+    stp_dprintf(STP_DBG_CANON, v,"DEBUG: (mode replacement) Gutenprint: modecheck value: '%i'\n",modecheck);
             
     /* if we did not find a valid mode, need to replace it */
     if (modecheck!=0) {
 
       stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode): no suitable mode exists, need to find a mode\n");
+
       quality = mode->quality;
       /* Black InkSet */
       if (ink_set && !strcmp(ink_set,"Black"))  {
 	stp_set_string_parameter(v, "PrintingMode","BW");
 	printing_mode = stp_get_string_parameter(v, "PrintingMode");
 	if (!(mode->ink_types & CANON_INK_K)) {
+      
 	  /* need a new mode: 
 	     loop through modes in muse list searching for a matching inktype, comparing quality
 	  */
@@ -1030,6 +1088,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    }
 	    else {  /* no special replacement modes for black inkset */
 	      mode=find_first_matching_mode(v,muse,caps,duplex_mode);
+	      stp_dprintf(STP_DBG_CANON, v,"Gutenprint (check_current_mode): Ink set is set to CANON_INK_K but did no special conditions, so first match taken: '%s'\n",mode->name);
 	    }
 	  }
 	  if (!mode)
@@ -1053,6 +1112,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	  /* mode is fine */
 	  /* matched expected K inkset, but need to check if Duplex matches, and if not, get a new mode with right inkset */
 	  mode=suitable_mode_monochrome(v,muse,caps,quality,duplex_mode);
+	  stp_dprintf(STP_DBG_CANON, v,"Gutenprint (check_current_mode): Ink set is set to CANON_INK_K and mode already fits (but need to check for duplex condition): '%s'\n",mode->name);
 	  if (!mode)
 	    modefound=0;
 	  else
@@ -1061,9 +1121,11 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	  if (modefound == 0) { /* still did not find a mode: pick first one for that media matching the InkSet limitation */
 	    if ( (muse->use_flags & INKSET_BLACK_MODEREPL) ) {
 	    mode=find_first_matching_mode_monochrome(v,muse,caps,duplex_mode);
+	    stp_dprintf(STP_DBG_CANON, v,"Gutenprint (check_current_mode): Ink set is set to CANON_INK_K, pick first one matching condition for black mode replacement: '%s'\n",mode->name);
 	    }
 	    else {  /* no special replacement modes for black inkset */
 	      mode=find_first_matching_mode(v,muse,caps,duplex_mode);
+	      stp_dprintf(STP_DBG_CANON, v,"Gutenprint (check_current_mode): Ink set is set to CANON_INK_K, pick first one matching condition without mode replacement needed: '%s'\n",mode->name);
 	    }
 	  }
 
@@ -1074,17 +1136,17 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	  /* if InkType does not match that of mode, change InkType to match it */
 	  /* choose highest color as default, as there is only one option for Black */
 	  if (printing_mode && !strcmp(printing_mode,"BW")) {
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Black): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
 	    stp_set_string_parameter(v, "InkType", "Gray");
 	    ink_type = stp_get_string_parameter(v, "InkType");
 	  } else {
 	    inkfound=0;
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Black): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
 	    for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	      if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		if ( !(strcmp(ink_type,canon_inktypes[i].name))) {
 		  inkfound=1;
-		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Black): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		  stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		  ink_type = stp_get_string_parameter(v, "InkType");
 		  break;
@@ -1096,7 +1158,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 		if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		  if ((!ink_type) || (strcmp(ink_type,canon_inktypes[i].name))) { /* if InkType does not match selected mode ink type*/
-		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Black): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		    stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		    ink_type = stp_get_string_parameter(v, "InkType");
 		    inkfound=1; /* set */
@@ -1163,17 +1225,17 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	  /* if InkType does not match that of mode, change InkType to match it */
 	  /* choose highest color as default, as there is only one option for Black */
 	  if (printing_mode && !strcmp(printing_mode,"BW")) {
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
 	    stp_set_string_parameter(v, "InkType", "Gray");
 	    ink_type = stp_get_string_parameter(v, "InkType");
 	  } else {
 	    inkfound=0;
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
 	    for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	      if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		if ( !(strcmp(ink_type,canon_inktypes[i].name))) {
 		  inkfound=1;
-		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		  stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		  ink_type = stp_get_string_parameter(v, "InkType");
 		  break;
@@ -1243,17 +1305,17 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	  /* if InkType does not match that of mode, change InkType to match it */
 	  /* choose highest color as default, as there is only one option for Black */
 	  if (printing_mode && !strcmp(printing_mode,"BW")) {
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType changed to %u (%s)\n",CANON_INK_K, "Gray");
 	    stp_set_string_parameter(v, "InkType", "Gray");
 	    ink_type = stp_get_string_parameter(v, "InkType");
 	  } else {
 	    inkfound=0;
-	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
+	    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType of mode %s is currently set as %s\n",mode->name,ink_type);
 	    for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	      if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		if ( !(strcmp(ink_type,canon_inktypes[i].name))) {
 		  inkfound=1;
-		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): InkType match found %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		  stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		  ink_type = stp_get_string_parameter(v, "InkType");
 		  break;
@@ -1265,7 +1327,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 		if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		  if ((!ink_type) || (strcmp(ink_type,canon_inktypes[i].name))) { /* if InkType does not match selected mode ink type*/
-		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Color): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		    stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		    ink_type = stp_get_string_parameter(v, "InkType");
 		    inkfound=1; /* set */
@@ -1462,7 +1524,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	if (printing_mode && !strcmp(printing_mode,"Color")) {
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode Color\n");
 	  /* must skip K-only inksets if they exist: they only exist if the option "BW" is also declared but we cannot check if an option exists or not */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	  i=0;
 	  quality = mode->quality;
 	  modefound=0;
@@ -1470,10 +1531,11 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(j=0;j<caps->modelist->count;j++){
 	      if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		if ( (caps->modelist->modes[j].quality >= quality) ) {
-		  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		    /* duplex check */
 		    if (caps->modelist->modes[j].ink_types > CANON_INK_K) {
 		      mode = &caps->modelist->modes[j];
+		      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode, Both/Color, printmode color): picked first mode with color inkset (%s)\n",mode->name);
 		      modefound=1;
 		    }
 		  }
@@ -1483,12 +1545,10 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    }
 	    i++;
 	  }
-	  /*}*/
 	}
 	else if (printing_mode && !strcmp(printing_mode,"BW")) {
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode BW\n");
 	  /* need to find K-only inksets: they must exist since we declared the printer to have this capability! */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	  i=0;
 	  quality = mode->quality;
 	  modefound=0;
@@ -1496,10 +1556,11 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(j=0;j<caps->modelist->count;j++){
 	      if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		if ( (caps->modelist->modes[j].quality >= quality) ) {
-		  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		    /* duplex check */
 		    if (caps->modelist->modes[j].ink_types & CANON_INK_K) { /* AND means support for CANON_IN_K is included */
 		      mode = &caps->modelist->modes[j];
+		      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode, Both/Color, printmode BW): picked first mode with mono inkset (%s)\n",mode->name);
 		      modefound=1;
 		    }
 		  }
@@ -1509,12 +1570,10 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    }
 	    i++;
 	  }
-	  /*}*/
 	}
 	else { /* no restriction from PrintingMode if not set yet */
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode not set yet\n");
 	  /* if mode is not a matching duplex mode, need to find a new one */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	  i=0;
 	  quality = mode->quality;
 	  modefound=0;
@@ -1525,6 +1584,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 		  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		    /* duplex check */
 		    mode = &caps->modelist->modes[j];
+		      stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode, Both/Color, printmode unset): picked first mode with quality match (%s)\n",mode->name);
 		    modefound=1;
 		  }
 		}
@@ -1533,10 +1593,8 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    }
 	    i++;
 	  }
-	  /*}*/
 	}
 	/* if no mode was found yet, repeat with no restrictions --- since some media may not allow PrintingMode to be what was selected */
-	/*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	if (modefound==0) {
 	  i=0;
 	  quality = mode->quality;
@@ -1544,9 +1602,10 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(j=0;j<caps->modelist->count;j++){
 	      if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		if ( (caps->modelist->modes[j].quality >= quality) ) {
-		  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		    /* duplex check */
 		    mode = &caps->modelist->modes[j];
+		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode, Both/Color, no printmode): picked first mode with quality match (%s)\n",mode->name);
 		    modefound=1;
 		    /* set PrintingMode to whatever the mode is capable of */
 		    if (caps->modelist->modes[j].ink_types > CANON_INK_K) {
@@ -1596,7 +1655,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	      if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		if ((!ink_type) || (strcmp(ink_type,canon_inktypes[i].name))) { /* if InkType does not match selected mode ink type*/
-		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---choosing first available. InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		  stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		  ink_type = stp_get_string_parameter(v, "InkType");
 		  inkfound=1; /* set */
@@ -1611,8 +1670,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	/* end of cartridge option block */
 	
 	stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: mode searching: replaced mode with: '%s'\n",mode->name);
-	if (ERRPRINT)
-	  stp_eprintf(v,"mode searching: replaced mode with: '%s'\n",mode->name);
 	
 #if 0
 	/* set InkType for the mode decided upon */
@@ -1629,7 +1686,8 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 #endif
 	
       }
-    }/* added one here */
+    }
+    /* -------------------------------------- modecheck returned 0 for compare_mode_valid ------------------------------------------*/
     else { /* we did find the mode in the list for media, so it should take precedence over other settings, as it is more specific. */
 
       stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (check_current_mode):  mode exists, need to check for consistency (%s)\n",mode->name);
@@ -2132,7 +2190,6 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	if (printing_mode && !strcmp(printing_mode,"Color")) {
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode Color\n");
 	  /* must skip K-only inksets if they exist: they only exist if the option "BW" is also declared but we cannot check if an option exists or not */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	    i=0;
 	    quality = mode->quality;
 	    modefound=0;
@@ -2140,7 +2197,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      for(j=0;j<caps->modelist->count;j++){
 		if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		  if ( (caps->modelist->modes[j].quality >= quality) ) {
-		    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		      /* duplex check */
 		      if (caps->modelist->modes[j].ink_types > CANON_INK_K) {
 			if (!strcmp(mode->name,caps->modelist->modes[j].name)) {
@@ -2156,12 +2213,10 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      }
 	      i++;
 	    }
-	    /*}*/
 	}
 	else if (printing_mode && !strcmp(printing_mode,"BW")) {
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode BW\n");
 	  /* need to find K-only inksets: they must exist since we declared the printer to have this capability! */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	    i=0;
 	    quality = mode->quality;
 	    modefound=0;
@@ -2169,7 +2224,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      for(j=0;j<caps->modelist->count;j++){
 		if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		  if ( (caps->modelist->modes[j].quality >= quality) ) {
-		    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		      /* duplex check */
 		      if (caps->modelist->modes[j].ink_types & CANON_INK_K) { /* AND means CANON_INK_K is included in the support */
 			if (!strcmp(mode->name,caps->modelist->modes[j].name)) {
@@ -2185,12 +2240,9 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      }
 	      i++;
 	    }
-	    /*}*/
 	}
 	else { /* no restriction from PrintingMode if not set yet */
 	  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) PrintingMode not set yet\n");
-	  /* if mode is not a matching duplex mode, need to find a new one */
-	  /*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	    i=0;
 	    quality = mode->quality;
 	    modefound=0;
@@ -2198,7 +2250,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      for(j=0;j<caps->modelist->count;j++){
 		if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		  if ( (caps->modelist->modes[j].quality >= quality) ) {
-		    if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		    if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		      /* duplex check */
 		      if (!strcmp(mode->name,caps->modelist->modes[j].name)) {
 			mode = &caps->modelist->modes[j];
@@ -2212,10 +2264,8 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	      }
 	      i++;
 	    }
-	    /*}*/
 	}
 	/* if no mode was found yet, repeat with no restrictions --- since some media may not allow PrintingMode to be what was selected */
-	/*if ( (duplex_mode) || (mode->flags & MODE_FLAG_NODUPLEX) ) {*/
 	if (modefound==0) {
 	  i=0;
 	  quality = mode->quality;
@@ -2223,7 +2273,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(j=0;j<caps->modelist->count;j++){
 	      if(!strcmp(muse->mode_name_list[i],caps->modelist->modes[j].name)){/* find right place in canon-modes list */
 		if ( (caps->modelist->modes[j].quality >= quality) ) {
-		  if ( !(duplex_mode) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
+		  if ( (duplex_mode && strncmp(duplex_mode,"Duplex",6)) || !(muse->use_flags & DUPLEX_SUPPORT) || !(caps->modelist->modes[j].flags & MODE_FLAG_NODUPLEX) ) {
 		    /* duplex check */
 		    mode = &caps->modelist->modes[j];
 		    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both) No mode previously found---catch-all: Decided on first matching mode (%s)\n",mode->name);
@@ -2276,7 +2326,7 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 	    for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	      if (mode->ink_types & canon_inktypes[i].ink_type) { /* a mode can have several ink_types: must compare with ink_type if set */
 		if ((!ink_type) || (strcmp(ink_type,canon_inktypes[i].name))) { /* if InkType does not match selected mode ink type*/
-		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
+		  stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint (InkSet:Both): No match found---choosing first available. InkType changed to %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 		  stp_set_string_parameter(v, "InkType", canon_inktypes[i].name);
 		  ink_type = stp_get_string_parameter(v, "InkType");
 		  inkfound=1; /* set */
@@ -2322,13 +2372,9 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
 
   if (mode) {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint:  check_current_mode --- Final returned mode: '%s'\n",mode->name);
-    if (ERRPRINT)
-      stp_eprintf(v,"check_current_mode --- Final returned mode: '%s'\n",mode->name);
   }
   else {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint:  check_current_mode --- Final returned mode is NULL \n");
-    if (ERRPRINT)
-      stp_eprintf(v,"check_current_mode --- Final returned mode is NULL \n");
   }
 
   /* set PrintingMode in case of Inkset precedence */
@@ -2345,20 +2391,22 @@ const canon_mode_t* canon_check_current_mode(stp_vars_t *v){
       stp_set_string_parameter(v, "PrintingMode", "Color");
   }
 
-  if (printing_mode)
+  if (printing_mode) {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final PrintingMode %s\n",printing_mode);
-  else /* should not happen */
+  } else { /* should not happen */
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final PrintingMode is NULL\n");
-
-  if (ink_set)
+  }
+  if (ink_set) {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final InkSet value (high priority): '%s'\n",ink_set);
-  else
+  } else {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final InkSet value is NULL\n");
+  }
   
-  if (ink_type)
+  if (ink_type) {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final InkType value (low priority): '%s'\n",ink_type);
-  else
+  } else {
     stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Final InkType value is NULL\n");
+  }
 
   return mode;
 }
@@ -2375,12 +2423,9 @@ canon_printhead_colors(const stp_vars_t*v)
   const char *ink_set = stp_get_string_parameter(v, "InkSet");
 
   stp_dprintf(STP_DBG_CANON, v,"Entered canon_printhead_colors: got PrintingMode %s\n",print_mode);
-  if (ERRPRINT)
-    stp_eprintf(v,"entered canon_printhead_colors: got PrintingMode %s\n",print_mode);
 
   /* if a mode is available, use it. Else mode is NULL */
-  if (ERRPRINT)
-    stp_eprintf(v,"Calling get_current_parameter from canon_printhead_colors");
+  stp_dprintf(STP_DBG_CANON, v,"Calling get_current_parameter from canon_printhead_colors\n");
   mode = canon_get_current_mode(v);
   
   /* get the printing mode again */
@@ -2390,17 +2435,11 @@ canon_printhead_colors(const stp_vars_t*v)
   if(print_mode && !strcmp(print_mode, "BW") && !(caps->features & CANON_CAP_NOBLACK) ){ /* workaround in case BW is a default */
     stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[BW]) Found InkType %u (CANON_INK_K)\n",CANON_INK_K);
     stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[BW]) NOBLACK? %lu\n",(caps->features & CANON_CAP_NOBLACK));
-    if (ERRPRINT) {
-      stp_eprintf(v,"(canon_printhead_colors[BW]) Found InkType %u (CANON_INK_K)\n",CANON_INK_K);
-      stp_eprintf(v,"(canon_printhead_colors[BW]) NOBLACK? %lu\n",(caps->features & CANON_CAP_NOBLACK));
-    }
     return CANON_INK_K;
   }
   /* alternatively, if the cartridge selection is in force, and black cartride is selected, accept it */
   if(ink_set && !strcmp(ink_set, "Black")){
     stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[BW]) Found InkSet black selection\n");
-    if (ERRPRINT)
-      stp_eprintf(v,"(canon_printhead_colors[BW]) Found InkSet black selection\n");
     return CANON_INK_K;
   }
   
@@ -2416,8 +2455,6 @@ canon_printhead_colors(const stp_vars_t*v)
       for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	if (mode->ink_types & canon_inktypes[i].ink_type) {
 	  stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[inktype]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
-	  if (ERRPRINT)
-	    stp_eprintf(v,"(canon_printhead_colors[inktype]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 	  return canon_inktypes[i].ink_type;
 	}
       }
@@ -2428,8 +2465,6 @@ canon_printhead_colors(const stp_vars_t*v)
       for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	if(mode->ink_types & canon_inktypes[i].ink_type) {
 	  stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[mode]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
-	  if (ERRPRINT)
-	    stp_eprintf(v,"(canon_printhead_colors[mode]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 	  return canon_inktypes[i].ink_type;
 	}
       }
@@ -2441,22 +2476,17 @@ canon_printhead_colors(const stp_vars_t*v)
       for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	if(ink_type && !strcmp(canon_inktypes[i].name,ink_type)) {
 	  stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[inktype]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
-	  if (ERRPRINT)
-	    stp_eprintf(v,"(canon_printhead_colors[inktype]) Found InkType %i(%s)\n",canon_inktypes[i].ink_type,canon_inktypes[i].name);
 	  return canon_inktypes[i].ink_type;
 	}
       }
     }
     else { /* no ink type selected yet */
-      if (ERRPRINT)
-	stp_eprintf(v,"canon_printhead_colors: no mode and no inktype: we have to choose the highest one to return\n");
+      stp_dprintf(STP_DBG_CANON, v,"canon_printhead_colors: no mode and no inktype: we have to choose the highest one to return\n");
       /* loop through all modes, and return the highest inktype found */
       for(i=0;i<sizeof(canon_inktypes)/sizeof(canon_inktypes[0]);i++){
 	for(j=0;j<caps->modelist->count;j++){
 	  if(caps->modelist->modes[j].ink_types & canon_inktypes[i].ink_type){
 	    stp_dprintf(STP_DBG_CANON, v," highest inktype found ---  %s(%s)\n",canon_inktypes[i].name,canon_inktypes[i].text);
-	    if (ERRPRINT)
-	      stp_eprintf(v,"highest inktype found --- %s(%s)\n",canon_inktypes[i].name,canon_inktypes[i].text);
 	    return canon_inktypes[i].ink_type;
 	  }
 	}
@@ -2469,8 +2499,6 @@ canon_printhead_colors(const stp_vars_t*v)
   /* However, some Canon printers do not have monochrome mode at all, only color meta ink modes, like iP6000 series */
 #if 0
   stp_dprintf(STP_DBG_CANON, v,"(canon_printhead_colors[fall-through]) Returning InkType %i(CANON_INK_K)\n",CANON_INK_K);
-  if (ERRPRINT)
-    stp_eprintf(v,"(canon_printhead_colors[fall-through]) Found InkType %i(CANON_INK_K)\n",CANON_INK_K);
   return CANON_INK_K;
 #endif
   /* new fallback: loop through ink type in reverse order, picking first one found, which if CANON_INK_K is supported will be that, else the lowest amount of color */
@@ -2478,8 +2506,6 @@ canon_printhead_colors(const stp_vars_t*v)
     for(j=0;j<caps->modelist->count;j++){
       if(caps->modelist->modes[j].ink_types & canon_inktypes[i].ink_type){
 	stp_dprintf(STP_DBG_CANON, v," lowest inktype found ---  %s(%s)\n",canon_inktypes[i].name,canon_inktypes[i].text);
-	if (ERRPRINT)
-	  stp_eprintf(v,"lowest inktype found --- %s(%s)\n",canon_inktypes[i].name,canon_inktypes[i].text);
 	return canon_inktypes[i].ink_type;
       }
     }
@@ -2522,28 +2548,63 @@ canon_size_type(const stp_vars_t *v, const canon_cap_t * caps)
       if (!strcmp(name,"w252h360J"))   return 0x32; /* L --- similar to US 3.5x5 size */
       if (!strcmp(name,"w360h504J"))   return 0x33; /* 2L --- similar to US5x7 */
       if (!strcmp(name,"w288h432J"))   return 0x34; /* KG --- same size as US 4x6 */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x35; */ /* CD Custom Tray */
       if (!strcmp(name,"w155h257"))    return 0x36; /* Japanese Business Card 55mm x 91mm */
       if (!strcmp(name,"w360h504"))    return 0x37; /* US5x7 */
       if (!strcmp(name,"w420h567"))    return 0x39; /* Ofuku Hagaki */
       if (!strcmp(name,"w340h666"))    return 0x3a; /* Japanese Long Env #3 (chou3) */
       if (!strcmp(name,"w255h581"))    return 0x3b; /* Japanese Long Env #4 (chou4) */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x3f; */ /* CD Tray A */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x40; */ /* CD Tray B */
       if (!strcmp(name,"w155h244"))    return 0x41; /* Business/Credit Card 54mm x 86mm */
+
+      /* Fine Art paper codes */
+      /* iP6700D, iP7100, iP7500, iP8100, iP8600, iP9910 */
+      /* iX7000 */
+      /* MG6100, M6200, MG8100, MG8200 */
+      /* MX7600 */
+      /* MP950, MP960, MP970, MP980, MP990 */
       /* if (!strcmp(name,"A4"))       return 0x42; */ /* FineArt A4 35mm border --- iP7100: gap is 18 */
-      /* if (!strcmp(name,"A3"))       return 0x43; */ /* FineArt A3 35mm border --- iP7100: gap is 18 */
-      /* if (!strcmp(name,"Letter"))   return 0x44; */ /* FineArt Letter 35mm border --- iP7100: gap is 18 */
+      /* if (!strcmp(name,"A3"))       return 0x43; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x44; */ /* FineArt A3plus 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x45; */ /* FineArt Letter 35mm border */
+
       if (!strcmp(name,"w288h576"))    return 0x46; /* US4x8 */
       if (!strcmp(name,"w1008h1224J")) return 0x47; /* HanKire --- 14in x 17in */
       if (!strcmp(name,"720h864J"))    return 0x48; /* YonKire --- 10in x 12 in*/
       if (!strcmp(name,"c8x10J"))      return 0x49; /* RokuKire --- same size as 8x10 */
-      /* if (!strcmp(name,"A4"))       return 0x4d; */ /* ArtA4 35mm border */
-      /* if (!strcmp(name,"A3"))       return 0x4e; */ /* ArtA3 35mm border */
-      /* if (!strcmp(name,"Letter"))   return 0x4f; */ /* ArtLetter 35mm border */
+
+      /* if (!strcmp(name,"CD5Inch"))  return 0x4a; */ /* CD Tray C */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x4b; */ /* CD Tray D */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x4c; */ /* CD Tray E */
+
+      /* Fine Art paper codes */
+      /* Pro series (9000, 9000 Mk.2, 9500, 9500 Mk.2, PRO-1) */
+      /* if (!strcmp(name,"A4"))       return 0x4d; */ /* FineArt A4 35mm border */
+      /* if (!strcmp(name,"A3"))       return 0x4e; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x4f; */ /* FineArt Letter 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x50; */ /* FineArt A3plus 35mm border */
+
+      /* if (!strcmp(name,"CD5Inch"))  return 0x51; */ /* CD Tray F */
       if (!strcmp(name,"w288h512"))    return 0x52; /* Wide101.6x180.6 */
       /* w283h566 Wide postcard 148mm x 200mm */
 
       /* media size codes for CD (and other media depending on printer model */
-      if (!strcmp(name,"CD5Inch"))    return 0x53; /* CD --- arbitrary choice here, modify in ESC (P command */
-      /* similar needed for FineArt media which have common sizes but different codes */
+
+      if (!strcmp(name,"CD5Inch"))     return 0x53; /* CD Tray G --- arbitrary choice here, modify in ESC (P command */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x56; */ /* CD Tray G-late */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x57; */ /* CD Tray H */
+
+      /* Fine Art paper codes */
+      /* MG6300, MG6500, MG7100 (only A4)  */
+      /* iP8700, iX6800 (A3  */
+      /* if (!strcmp(name,"A4"))       return 0x58; */ /* FineArt A4 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x5a; */ /* FineArt Letter 35mm border */
+      /* if (!strcmp(name,"A3"))       return 0x59; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x5d; */ /* FineArt A3plus 35mm border */
+
+      /* if (!strcmp(name,"CD5Inch"))  return 0x5b; */ /* CD Tray J */
+      /* if (!strcmp(name,"CD5Inch"))  return 0x62; */ /* CD Tray L */
 
       /* custom */
 
@@ -2562,8 +2623,7 @@ canon_describe_resolution(const stp_vars_t *v, int *x, int *y)
   const canon_cap_t * caps = canon_get_model_capabilities(v);
  
   /* if mode is not yet set, it remains NULL */
-  if (ERRPRINT)
-    stp_eprintf(v,"Calling get_current_parameter from canon_describe_resolution");
+  stp_dprintf(STP_DBG_CANON, v,"Calling get_current_parameter from canon_describe_resolution\n");
   mode = canon_get_current_mode(v);
 
   if(!mode)
@@ -2646,7 +2706,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
   if (strcmp(name, "PageSize") == 0)
     {
       const char* input_slot = stp_get_string_parameter(v, "InputSlot");
-      int height_limit, width_limit;
+      unsigned int height_limit, width_limit;
       int papersizes = stp_known_papersizes();
       description->bounds.str = stp_string_list_create();
 
@@ -2669,6 +2729,21 @@ canon_parameters(const stp_vars_t *v, const char *name,
 				     pt->name, gettext(pt->text));
            }
         }
+	/*
+	{
+	  for (i = 0; i < papersizes; i++)
+	    {
+	      const stp_papersize_t *pt = stp_get_papersize_by_index(i);
+	      if (verify_papersize(v, pt))
+		stp_string_list_add_string(description->bounds.str,
+					   pt->name, gettext(pt->text));
+	    }
+	}
+
+
+	 */
+
+
       }
       description->deflt.str =
         stp_string_list_param(description->bounds.str, 0)->name;
@@ -2752,8 +2827,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
   {
     const canon_mode_t* mode = NULL;
 
-    if (ERRPRINT)
-      stp_eprintf(v,"Calling get_current_parameter from InkType block in canon_parameters");
+    stp_dprintf(STP_DBG_CANON, v,"Calling get_current_parameter from InkType block in canon_parameters\n");
     mode=canon_get_current_mode(v);
 
     description->bounds.str= stp_string_list_create();
@@ -2762,8 +2836,6 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	if(mode->ink_types & canon_inktypes[i].ink_type){
           stp_string_list_add_string(description->bounds.str,canon_inktypes[i].name,_(canon_inktypes[i].text));
 	  stp_dprintf(STP_DBG_CANON, v," mode known --- Added InkType %s(%s) for mode %s (inktype %u)\n",canon_inktypes[i].name,canon_inktypes[i].text,mode->name,mode->ink_types);
-	  if (ERRPRINT)
-	    stp_eprintf(v,"mode known --- Added InkType %s(%s) for mode %s (inktype %u)\n",canon_inktypes[i].name,canon_inktypes[i].text,mode->name,mode->ink_types);
 	}
       }
       description->deflt.str = stp_string_list_param(description->bounds.str, 0)->name;
@@ -2775,8 +2847,6 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	  if(caps->modelist->modes[j].ink_types & canon_inktypes[i].ink_type){
 	    stp_string_list_add_string(description->bounds.str,canon_inktypes[i].name,_(canon_inktypes[i].text));
 	    stp_dprintf(STP_DBG_CANON, v," no mode --- Added InkType %s(%s) for mode (%s) inktypes %u\n",canon_inktypes[i].name,canon_inktypes[i].text,caps->modelist->modes[j].name,caps->modelist->modes[j].ink_types);
-	    if (ERRPRINT)
-	      stp_eprintf(v,"no mode --- Added InkType %s(%s) for mode (%s) inktypes %u\n",canon_inktypes[i].name,canon_inktypes[i].text,caps->modelist->modes[j].name,caps->modelist->modes[j].ink_types);
 	    break;
 	  }      
 	}
@@ -2800,8 +2870,6 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	if(ink_type == canon_inktypes[i].ink_type){
               description->deflt.integer = canon_inktypes[i].num_channels;
 	      stp_dprintf(STP_DBG_CANON, v,"Added %d InkChannels\n",canon_inktypes[i].num_channels);
-	      if (ERRPRINT)
-		stp_eprintf(v,"Added %d InkChannels\n",canon_inktypes[i].num_channels);
 	}
       }
       description->bounds.integer.lower = -1;
@@ -2840,37 +2908,31 @@ canon_parameters(const stp_vars_t *v, const char *name,
     const canon_mode_t* mode = NULL;
     /* mode remains NULL if not yet set */
     
-    if (ERRPRINT)
-      stp_eprintf(v,"Calling get_current_mode from PrintingMode block in canon_parameter");
+    stp_dprintf(STP_DBG_CANON, v,"Calling get_current_mode from PrintingMode block in canon_parameter\n");
     mode = canon_get_current_mode(v);
     
     /* If mode is not set need to search ink types for all modes and
        see whether we have any color there
      */
 
-    if (ERRPRINT)
-      stp_eprintf(v,"PrintingMode---entered enumeration block in canon_printers\n");
+    stp_dprintf(STP_DBG_CANON, v,"PrintingMode---entered enumeration block in canon_printers\n");
 
     description->bounds.str = stp_string_list_create();
 
-    if (ERRPRINT)
-      stp_eprintf(v,"PrintingMode---created list\n");
+    stp_dprintf(STP_DBG_CANON, v,"PrintingMode---created list\n");
 
     if (mode) {
-      if (ERRPRINT)
-	stp_eprintf(v,"PrintingMode: (mode known) what is the current mode inktype value: %i\n",mode->ink_types);
+      stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode known) what is the current mode inktype value: %i\n",mode->ink_types);
       /* e.g., ink_types is 21 = 16 + 4 + 1 */
       if (mode->ink_types > 1) {
 	stp_string_list_add_string
 	  (description->bounds.str, "Color", _("Color"));
-	if (ERRPRINT)
-	  stp_eprintf(v,"PrintingMode: (mode known) added Color\n");
+	stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode known) added Color\n");
       }
       if (mode->ink_types & CANON_INK_K) {
 	stp_string_list_add_string
 	  (description->bounds.str, "BW", _("Black and White"));
-	if (ERRPRINT)
-	  stp_eprintf(v,"PrintingMode: (mode known) added BW\n");
+	stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode known) added BW\n");
       }
     }
 #if 0
@@ -2879,14 +2941,12 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	if (mode->ink_types != CANON_INK_K) {
 	  stp_string_list_add_string
 	    (description->bounds.str, "Color", _("Color"));
-	  if (ERRPRINT)
-	    stp_eprintf(v,"PrintingMode: (mode known) added Color\n");
+	  stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode known) added Color\n");
 	}
 #endif
 
     else { /* mode not known yet --- needed for PPD generation */
-      if (ERRPRINT)
-	stp_eprintf(v,"PrintingMode: entered mode not known conditional block\n");
+      stp_dprintf(STP_DBG_CANON, v,"PrintingMode: entered mode not known conditional block\n");
       /* add code to find color inks */
       /* default type must be deduced from the default mode */
       /* use color if available, so break after first (color) is found, since ink types ordered with gray last */
@@ -2897,8 +2957,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	    stp_string_list_add_string
 	      (description->bounds.str, "Color", _("Color"));
 	    found_color=1;
-	    if (ERRPRINT)
-	      stp_eprintf(v,"PrintingMode: (mode not known) added Color\n");
+	    stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode not known) added Color\n");
 	    break;
 	  }
 	}
@@ -2912,8 +2971,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
 	    stp_string_list_add_string
 	      (description->bounds.str, "BW", _("Black and White"));
 	    found_mono=1;
-	    if (ERRPRINT)
-	      stp_eprintf(v,"PrintingMode: (mode not known) added BW\n");
+	    stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode not known) added BW\n");
 	    break;
 	  }
 	}
@@ -2926,22 +2984,19 @@ canon_parameters(const stp_vars_t *v, const char *name,
       if(caps->modelist->modes[caps->modelist->default_mode].ink_types > 1){
 	stp_string_list_add_string
 	  (description->bounds.str, "Color", _("Color"));
-	if (ERRPRINT)
-	  stp_eprintf(v,"PrintingMode: (mode not known) added Color\n");
+	stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode not known) added Color\n");
       }
       if(caps->modelist->modes[caps->modelist->default_mode].ink_types & CANON_INK_K){
 	stp_string_list_add_string
 	(description->bounds.str, "BW", _("Black and White"));
-	if (ERRPRINT)
-	  stp_eprintf(v,"PrintingMode: (mode not known) added BW\n");	
+	stp_dprintf(STP_DBG_CANON, v,"PrintingMode: (mode not known) added BW\n");	
       }
 #endif
 #if 0
       /* original code */
       stp_string_list_add_string
 	(description->bounds.str, "BW", _("Black and White"));
-      if (ERRPRINT)
-	stp_eprintf(v,"PrintingMode: added BW\n");
+      stp_dprintf(STP_DBG_CANON, v,"PrintingMode: added BW\n");
 #endif
     }
     
@@ -3116,29 +3171,24 @@ internal_imageable_area(const stp_vars_t *v,   /* I */
   }
 
   /* temporarily limit to non-CD media until page size code moved here from do_print */
-  /* Note: written beloe code to handle CD case as well */
+  /* Note: written below code to handle CD case as well */
   if(!cd){
-    if (ERRPRINT) {
-      stp_eprintf(v,"internal_imageable_area: about to enter the borderless condition block\n");
-      stp_eprintf(v,"internal_imageable_area: is borderless available? %016lx\n",caps->features & CANON_CAP_BORDERLESS);
-      stp_eprintf(v,"internal_imageable_area: is borderless selected? %d\n",stp_get_boolean_parameter(v, "FullBleed"));
-    }
+    stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: about to enter the borderless condition block\n");
+    stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: is borderless available? %016lx\n",caps->features & CANON_CAP_BORDERLESS);
+    stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: is borderless selected? %d\n",stp_get_boolean_parameter(v, "FullBleed"));
     
     if ( (caps->features & CANON_CAP_BORDERLESS) &&
 	 (use_maximum_area || (!cd && stp_get_boolean_parameter(v, "FullBleed")))) {
       
-      if (ERRPRINT)
-	stp_eprintf(v,"internal_imageable_area: entered borderless condition\n");
+      stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: entered borderless condition\n");
       
       if (pt) {
 	
-	if (ERRPRINT)
-	  stp_eprintf(v,"internal_imageable_area: entered pt condition\n");
+	stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: entered pt condition\n");
 	
 	if (pt->left <= 0 && pt->right <= 0 && pt->top <= 0 && pt->bottom <= 0) {
 	  
-	  if (ERRPRINT)
-	    stp_eprintf(v,"internal_imageable_area: enetered margin<=0 condition\n");
+	  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: entered margin<=0 condition\n");
 	  
 	  if (use_paper_margins) {
 	    unsigned width_limit = caps->max_width;
@@ -3149,8 +3199,7 @@ internal_imageable_area(const stp_vars_t *v,   /* I */
 	    top_margin = -6;
 	    bottom_margin = -15;
 	    
-	    if (ERRPRINT)
-	      stp_eprintf(v,"internal_imageable_area: use_paper_margins so set margins all to -7\n");
+	    stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: use_paper_margins so set margins all to -7\n");
 
 	  }
 	  else {
@@ -3159,8 +3208,7 @@ internal_imageable_area(const stp_vars_t *v,   /* I */
 	    top_margin = 0;
 	    bottom_margin = 0;
 	    
-	    if (ERRPRINT)
-	      stp_eprintf(v,"internal_imageable_area: does not use paper margins so set margins all to 0\n");
+	    stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: does not use paper margins so set margins all to 0\n");
 
 	  }
 	}
@@ -3168,26 +3216,20 @@ internal_imageable_area(const stp_vars_t *v,   /* I */
     }
   }
 
-  if (ERRPRINT) 
-    {
-      stp_eprintf(v,"internal_imageable_area: left_margin %d\n",left_margin);
-      stp_eprintf(v,"internal_imageable_area: right_margin %d\n",right_margin);
-      stp_eprintf(v,"internal_imageable_area: top_margin %d\n",top_margin);
-      stp_eprintf(v,"internal_imageable_area: bottom_margin %d\n",bottom_margin);
-    }
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: left_margin %d\n",left_margin);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: right_margin %d\n",right_margin);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: top_margin %d\n",top_margin);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: bottom_margin %d\n",bottom_margin);
 
   *left =	left_margin;
   *right =	width - right_margin;
   *top =	top_margin;
   *bottom =	length - bottom_margin;
 
-  if (ERRPRINT) 
-    {
-      stp_eprintf(v,"internal_imageable_area: page_left %d\n",*left);
-      stp_eprintf(v,"internal_imageable_area: page_right %d\n",*right);
-      stp_eprintf(v,"internal_imageable_area: page_top %d\n",*top);
-      stp_eprintf(v,"internal_imageable_area: page_bottom %d\n",*bottom);
-    }
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: page_left %d\n",*left);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: page_right %d\n",*right);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: page_top %d\n",*top);
+  stp_dprintf(STP_DBG_CANON, v,"internal_imageable_area: page_bottom %d\n",*bottom);
 
 }
 
@@ -3545,7 +3587,7 @@ canon_init_setESC_M(const stp_vars_t *v, const canon_privdata_t *init)
 /* ESC (p -- 0x70 -- cmdSetPageMargins2 --:
  */
 static void
-canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
+canon_init_setPageMargins2(const stp_vars_t *v, canon_privdata_t *init)
 {
   unsigned char arg_70_1,arg_70_2,arg_70_3,arg_70_4;
 
@@ -3554,6 +3596,28 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
   int border_right2;
   int border_bottom2;
   int area_right,area_top;
+  int test_cd; /* variable for activating experimental adjustments */
+  /* CD tray size adjustments for paper dimensions */
+  int adjust_tray_custom_length, adjust_tray_custom_width;
+  int adjust_tray_A_length, adjust_tray_A_width;
+  int adjust_tray_BCD_length, adjust_tray_BCD_width;
+  int adjust_tray_E_length, adjust_tray_E_width;
+  int adjust_tray_F_length, adjust_tray_F_width;
+  int adjust_tray_G_length, adjust_tray_G_width;
+  int adjust_tray_H_length, adjust_tray_H_width;
+  int adjust_tray_J_length, adjust_tray_J_width;
+  int adjust_tray_L_length, adjust_tray_L_width;
+  /* CD tray border adjustments */
+  int adjust_tray_custom_left, adjust_tray_custom_right, adjust_tray_custom_top, adjust_tray_custom_bottom;
+  int adjust_tray_A_left, adjust_tray_A_right, adjust_tray_A_top, adjust_tray_A_bottom;
+  int adjust_tray_BCD_left, adjust_tray_BCD_right, adjust_tray_BCD_top, adjust_tray_BCD_bottom;
+  int adjust_tray_E_left, adjust_tray_E_right, adjust_tray_E_top, adjust_tray_E_bottom;
+  int adjust_tray_F_left, adjust_tray_F_right, adjust_tray_F_top, adjust_tray_F_bottom;
+  int adjust_tray_G_left, adjust_tray_G_right, adjust_tray_G_top, adjust_tray_G_bottom;
+  int adjust_tray_H_left, adjust_tray_H_right, adjust_tray_H_top, adjust_tray_H_bottom;
+  int adjust_tray_J_left, adjust_tray_J_right, adjust_tray_J_top, adjust_tray_J_bottom;
+  int adjust_tray_L_left, adjust_tray_L_right, adjust_tray_L_top, adjust_tray_L_bottom;
+
 
   /* TOFIX: what exactly is to be sent?
    * Is it the printable length or the bottom border?
@@ -3567,32 +3631,401 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
   const char* input_slot = stp_get_string_parameter(v, "InputSlot");  
   int print_cd= (input_slot && (!strcmp(input_slot, "CD")));
 
-  if (ERRPRINT) {
-    stp_eprintf(v,"canon_init_setPageMargins2: borderless capability? %016lx\n", init->caps->features & CANON_CAP_BORDERLESS);
-    stp_eprintf(v,"canon_init_setPageMargins2: borderless active? %d\n", stp_get_boolean_parameter(v, "FullBleed"));
+  stp_dprintf(STP_DBG_CANON, v,"setPageMargins2: print_cd = %d\n",print_cd);
+
+  test_cd = 1;
+  /*
+    Adjustments for different CD trays:
+    All based on the following settings:
+    CANON_CD_X = 176
+    CANON_CD_Y = 405
+
+    Custom:
+    printable_width = init->page_width + 24;
+    printable_length = init->page_height + 132;
+
+    A:
+    printable_width = init->page_width + 44;
+    printable_length = init->page_height + 151;
+
+    B/C/D:
+    printable_width = init->page_width + 10;
+    printable_length = init->page_height + 84;
+
+    E:
+    printable_width = init->page_width + 127;
+    printable_length = init->page_height + 186;
+
+    F:
+    printable_width = init->page_width + 10;
+    printable_length = init->page_height + 95;
+
+    G:
+    printable_width = init->page_width + 10;
+    printable_length = init->page_height + 127;
+
+    H:
+    printable_width = init->page_width + 68;
+    printable_length = init->page_height + 481;
+
+    J:
+    printable_width = init->page_width + 8;
+    printable_length = init->page_height + 44;
+
+    L:
+    printable_width = init->page_width + 10;
+    printable_length = init->page_height + 263;
+  */
+
+  /* adjust paper dimensions for CD in points */
+  adjust_tray_custom_length = 132;
+  adjust_tray_custom_width = 24;
+  adjust_tray_A_length = 151;
+  adjust_tray_A_width = 44;
+  adjust_tray_BCD_length = 84;
+  adjust_tray_BCD_width = 10;
+  adjust_tray_E_length = 186;
+  adjust_tray_E_width = 127;
+  adjust_tray_F_length = 95;
+  adjust_tray_F_width = 10; /* 10 calculated, but empirically 11 */
+  adjust_tray_G_length = 127;
+  adjust_tray_G_width = 10; /* 10 calculated, but empirically 11 */
+  adjust_tray_H_length = 481;
+  adjust_tray_H_width = 68;
+  adjust_tray_J_length = 44;
+  adjust_tray_J_width = 8;
+  adjust_tray_L_length = 263;
+  adjust_tray_L_width = 10;
+
+  /* ensure less than or equal to Windows measurements  by border adjustments in points  */
+  adjust_tray_custom_left = 0;
+  adjust_tray_custom_right = 0;
+  adjust_tray_custom_top = 0;
+  adjust_tray_custom_bottom = 0;
+  adjust_tray_A_left = 0;
+  adjust_tray_A_right = 0;
+  adjust_tray_A_top = 0;
+  adjust_tray_A_bottom = 0;
+  adjust_tray_BCD_left = 0;
+  adjust_tray_BCD_right = 0;
+  adjust_tray_BCD_top = 0;
+  adjust_tray_BCD_bottom = 0;
+  adjust_tray_E_left = 0;
+  adjust_tray_E_right = 0;
+  adjust_tray_E_top = 0;
+  adjust_tray_E_bottom = 0;
+  adjust_tray_F_left = 0; 
+  adjust_tray_F_right = 0;
+  adjust_tray_F_top = 0; 
+  adjust_tray_F_bottom = 0;
+  adjust_tray_G_left = 0;
+  adjust_tray_G_right = 0;
+  adjust_tray_G_top = 0;
+  adjust_tray_G_bottom = 0;
+  adjust_tray_H_left = 0;
+  adjust_tray_H_right = 0;
+  adjust_tray_H_top = 0;
+  adjust_tray_H_bottom = 0;
+  adjust_tray_J_left = 0;
+  adjust_tray_J_right = 0;
+  adjust_tray_J_top = 0;
+  adjust_tray_J_bottom = 0;
+  adjust_tray_L_left = 0;
+  adjust_tray_L_right = 0;
+  adjust_tray_L_top = 0;
+  adjust_tray_L_bottom = 0;
+
+  if ((print_cd) && test_cd) {
+    /* test all of the parameters for CD */
+    stp_dprintf(STP_DBG_CANON, v,"==========Start Test Printout=========='\n");
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_custom_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_custom_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom printable width (pts): '%d'\n",(init->page_width + adjust_tray_custom_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom printable length (pts): '%d'\n",(init->page_height + adjust_tray_custom_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom page_width (1/600): '%d'\n",(init->page_width + adjust_tray_custom_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom page_height (1/600): '%d'\n",(init->page_height + adjust_tray_custom_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_custom_width + 20 + adjust_tray_custom_left + adjust_tray_custom_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_custom_length + 24 + adjust_tray_custom_top + adjust_tray_custom_bottom) * unit / 72);
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray A original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_A_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_A_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A printable width (pts): '%d'\n",(init->page_width + adjust_tray_A_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A printable length (pts): '%d'\n",(init->page_height + adjust_tray_A_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A page_width (1/600): '%d'\n",(init->page_width + adjust_tray_A_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A page_height (1/600): '%d'\n",(init->page_height + adjust_tray_A_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_A_width + 20 + adjust_tray_A_left + adjust_tray_A_right ) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_A_length + 24 + adjust_tray_A_top + adjust_tray_A_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_BCD_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_BCD_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D printable width (pts): '%d'\n",(init->page_width + adjust_tray_BCD_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D printable length (pts): '%d'\n",(init->page_height + adjust_tray_BCD_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D page_width (1/600): '%d'\n",(init->page_width + adjust_tray_BCD_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D page_height (1/600): '%d'\n",(init->page_height + adjust_tray_BCD_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_BCD_width + 20 + adjust_tray_BCD_left + adjust_tray_BCD_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_BCD_length + 24 + adjust_tray_BCD_top + adjust_tray_BCD_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray E original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_E_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_E_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E printable width (pts): '%d'\n",(init->page_width + adjust_tray_E_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E printable length (pts): '%d'\n",(init->page_height + adjust_tray_E_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E page_width (1/600): '%d'\n",(init->page_width + adjust_tray_E_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E page_height (1/600): '%d'\n",(init->page_height + adjust_tray_E_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_E_width + 20 + adjust_tray_E_left + adjust_tray_E_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_E_length + 24 + adjust_tray_E_top + adjust_tray_E_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray F original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_F_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_F_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F printable width (pts): '%d'\n",(init->page_width + adjust_tray_F_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F printable length (pts): '%d'\n",(init->page_height + adjust_tray_F_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F page_width (1/600): '%d'\n",(init->page_width + adjust_tray_F_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F page_height (1/600): '%d'\n",(init->page_height + adjust_tray_F_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_F_width + 20 + adjust_tray_F_left + adjust_tray_F_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_F_length + 24 + adjust_tray_F_top + adjust_tray_F_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray G original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_G_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_G_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G printable width (pts): '%d'\n",(init->page_width + adjust_tray_G_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G printable length (pts): '%d'\n",(init->page_height + adjust_tray_G_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G page_width (1/600): '%d'\n",(init->page_width + adjust_tray_G_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G page_height (1/600): '%d'\n",(init->page_height + adjust_tray_G_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_G_width + 20 + adjust_tray_G_left + adjust_tray_G_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_G_length + 24 + adjust_tray_G_top + adjust_tray_G_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray H original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_H_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_H_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H printable width (pts): '%d'\n",(init->page_width + adjust_tray_H_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H printable length (pts): '%d'\n",(init->page_height + adjust_tray_H_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H page_width (1/600): '%d'\n",(init->page_width + adjust_tray_H_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H page_height (1/600): '%d'\n",(init->page_height + adjust_tray_H_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_H_width + 20 + adjust_tray_H_left + adjust_tray_H_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_H_length + 24 + adjust_tray_H_top + adjust_tray_H_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v, "Tray J original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_J_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_J_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J printable width (pts): '%d'\n",(init->page_width + adjust_tray_J_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J printable length (pts): '%d'\n",(init->page_height + adjust_tray_J_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J page_width (1/600): '%d'\n",(init->page_width + adjust_tray_J_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J page_height (1/600): '%d'\n",(init->page_height + adjust_tray_J_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_J_width + 20 + adjust_tray_J_left + adjust_tray_J_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_J_length + 24 + adjust_tray_J_top + adjust_tray_J_bottom) * unit / 72);
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray L original init->page_width (pts): '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L original init->page_height (pts): '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified init->page_width (pts): '%d'\n",init->page_width + adjust_tray_L_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified init->page_height (pts): '%d'\n",init->page_height + adjust_tray_L_length);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L printable width (pts): '%d'\n",(init->page_width + adjust_tray_L_width + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L printable length (pts): '%d'\n",(init->page_height + adjust_tray_L_length + 1) * 5 / 6);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L page_width (1/600): '%d'\n",(init->page_width + adjust_tray_L_width) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L page_height (1/600): '%d'\n",(init->page_height + adjust_tray_L_length) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L paper_width (1/600): '%d'\n",(init->page_width + adjust_tray_L_width + 20 + adjust_tray_L_left + adjust_tray_L_right) * unit / 72);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L paper_height (1/600): '%d'\n",(init->page_height + adjust_tray_L_length + 24 + adjust_tray_L_top + adjust_tray_L_bottom) * unit / 72);
+    
+    stp_dprintf(STP_DBG_CANON, v,"==========End Test Printout=========='\n");
+  }
+
+  /* Tray Custom */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA MP710")) && (test_cd==1) ) {
+
+    init->page_width +=24;
+    init->page_height +=132;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray Custom modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray A */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP9910")) && (test_cd==1) ) {
+
+    init->page_width +=44;
+    init->page_height +=151;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray A modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray B,C,D */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP3000")) && (test_cd==1) ) {
+
+    init->page_width +=10;
+    init->page_height +=84;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/B modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray B/C/D modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray E */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA Pro9000")) && (test_cd==1) ) {
+
+    init->page_width +=127;
+    init->page_height +=186;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray E modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray F */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP4500")) && (test_cd==1) ) {
+    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Tray F init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Tray F init->page_height: '%d'\n",init->page_height);
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray F init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F init->page_height: '%d'\n",init->page_height);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F initial printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F initial printable_length: '%d'\n",printable_length);
+
+    init->page_width +=10;
+    init->page_height +=95;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray F modified printable_length: '%d'\n",printable_length);
+
+    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Tray F modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v,"DEBUG: Gutenprint: Tray F modified printable_length: '%d'\n",printable_length);
+  }
+
+  /* Tray G */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP4700")) && (test_cd==1) ) {
+
+    init->page_width +=10;
+    init->page_height +=127;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray G modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray H */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA PRO-1")) && (test_cd==1) ) {
+
+    init->page_width +=68;
+    init->page_height +=481;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray H modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray J */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP7200")) && (test_cd==1) ) {
+
+    init->page_width +=8;
+    init->page_height +=44;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray J modified printable_length: '%d'\n",printable_length);
+
+  }
+
+  /* Tray L */
+  if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP8700")) && (test_cd==1) ) {
+
+    init->page_width +=10;
+    init->page_height +=263;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified init->page_width: '%d'\n",init->page_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified init->page_height: '%d'\n",init->page_height);
+
+    printable_width=  (init->page_width+ 1)*5/6;
+    printable_length= (init->page_height + 1)*5/6;
+
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified printable_width: '%d'\n",printable_width);
+    stp_dprintf(STP_DBG_CANON, v, "Tray L modified printable_length: '%d'\n",printable_length);
+
   }
 
   if ( (init->caps->features & CANON_CAP_BORDERLESS) && 
        !(print_cd) && stp_get_boolean_parameter(v, "FullBleed") ) 
     {
-      if (ERRPRINT)
-	stp_eprintf(v,"canon_init_setPageMargins2: for borderless set printable length and width to 0\n");
+      stp_dprintf(STP_DBG_CANON, v,"canon_init_setPageMargins2: for borderless set printable length and width to 0\n");
       /* set to 0 for borderless */
       printable_width = 0;
       printable_length = 0;
     }
 
+  /* arguments for short form of Esc (p command  */
   arg_70_1= (printable_length >> 8) & 0xff;
   arg_70_2= (printable_length) & 0xff;
   arg_70_3= (printable_width >> 8) & 0xff;
   arg_70_4= (printable_width) & 0xff;
+
 
   if (!(init->caps->features & CANON_CAP_px) && !(init->caps->features & CANON_CAP_p))
 	return;
 
   if ((init->caps->features & CANON_CAP_px) ) {
     /* workaround for CD writing that uses CANON_CAP_px --- fix with capabilities */
-    if ( !(input_slot && !strcmp(input_slot,"CD")) || !(strcmp(init->caps->name,"PIXMA iP4600")) || !(strcmp(init->caps->name,"PIXMA iP4700")) || !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) )
+    if ( !( input_slot && !(strcmp(input_slot,"CD")) ) || !(strcmp(init->caps->name,"PIXMA iP4500")) || !(strcmp(init->caps->name,"PIXMA iP4600")) || !(strcmp(init->caps->name,"PIXMA iP4700")) || !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA MP710")) || !(strcmp(init->caps->name,"PIXMA iP3000")) || !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) )
+      /* need to check if iP9910, MP710, iP3000, Pro9000 use Esc (p */
       {
 
 	/* original borders */
@@ -3603,7 +4036,7 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
 
 	if (print_cd) {
 	  border_top=9;
-	  border_bottom=9;
+	  border_bottom=15; /* was 9 originally */
 	}
 
 	/* modified borders */
@@ -3612,8 +4045,72 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
 	border_right2=border_right;
 	border_bottom2=border_bottom;
 
-	area_right = border_left2 * unit / 72;
-	area_top = border_top2 * unit / 72;
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA MP710")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_custom_left;
+	  border_right2  = border_right + adjust_tray_custom_right;
+	  border_top2    = border_top + adjust_tray_custom_top;
+	  border_bottom2 = border_bottom + adjust_tray_custom_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP9910")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_A_left;
+	  border_right2  = border_right + adjust_tray_A_right;
+	  border_top2    = border_top + adjust_tray_A_top;
+	  border_bottom2 = border_bottom + adjust_tray_A_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP3000")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_BCD_left;
+	  border_right2  = border_right + adjust_tray_BCD_right;
+	  border_top2    = border_top + adjust_tray_BCD_top;
+	  border_bottom2 = border_bottom + adjust_tray_BCD_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA Pro9000")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_E_left;
+	  border_right2  = border_right + adjust_tray_E_right;
+	  border_top2    = border_top + adjust_tray_E_top;
+	  border_bottom2 = border_bottom + adjust_tray_E_bottom;
+	}
+	
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP4500")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_F_left;
+	  border_right2  = border_right + adjust_tray_F_right;
+	  border_top2    = border_top + adjust_tray_F_top;
+	  border_bottom2 = border_bottom + adjust_tray_F_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP4700")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_G_left;
+	  border_right2  = border_right + adjust_tray_G_right;
+	  border_top2    = border_top + adjust_tray_G_top;
+	  border_bottom2 = border_bottom + adjust_tray_G_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA PRO-1")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_H_left;
+	  border_right2  = border_right + adjust_tray_H_right;
+	  border_top2    = border_top + adjust_tray_H_top;
+	  border_bottom2 = border_bottom + adjust_tray_H_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP7200")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_J_left;
+	  border_right2  = border_right + adjust_tray_J_right;
+	  border_top2    = border_top + adjust_tray_J_top;
+	  border_bottom2 = border_bottom + adjust_tray_J_bottom;
+	}
+
+	if ( (print_cd) && !(strcmp(init->caps->name,"PIXMA iP8700")) && (test_cd==1) ) {
+	  border_left2   = border_left + adjust_tray_L_left;
+	  border_right2  = border_right + adjust_tray_L_right;
+	  border_top2    = border_top + adjust_tray_L_top;
+	  border_bottom2 = border_bottom + adjust_tray_L_bottom;
+	}
+
+	/* this does not seem to need adjustment, so use original borders */
+	area_right = border_left * unit / 72;
+	area_top = border_top * unit / 72;
 
 	if ( (init->caps->features & CANON_CAP_BORDERLESS) && 
 	     !(print_cd) && stp_get_boolean_parameter(v, "FullBleed") ) {
@@ -3625,21 +4122,24 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
 	  area_top = border_top2 * unit / 72;
 	}
 
-	if (ERRPRINT) {
-	  stp_eprintf(v,"setPageMargins2: init->page_height = %d\n",init->page_height);
-	  stp_eprintf(v,"setPageMargins2: printable_length = %d\n",printable_length);
-	  stp_eprintf(v,"setPageMargins2: paper_height = %d\n",(init->page_height + border_top + border_bottom) * unit / 72);
-	}
+	stp_dprintf(STP_DBG_CANON, v,"setPageMargins2: init->page_height = %d\n",init->page_height);
+	stp_dprintf(STP_DBG_CANON, v,"setPageMargins2: printable_length = %d\n",printable_length);
+	stp_dprintf(STP_DBG_CANON, v,"setPageMargins2: paper_height = %d\n",(init->page_height + border_top + border_bottom) * unit / 72);
 
+
+	stp_dprintf(STP_DBG_CANON, v, "final init->page_width: '%d'\n",init->page_width);
+	stp_dprintf(STP_DBG_CANON, v, "final init->page_height: '%d'\n",init->page_height);
+	stp_dprintf(STP_DBG_CANON, v, "final printable_width: '%d'\n",printable_width);
+	stp_dprintf(STP_DBG_CANON, v, "final printable_length: '%d'\n",printable_length);
 
 	stp_zfwrite(ESC28,2,1,v); /* ESC( */
 	stp_putc(0x70,v);         /* p    */
 	stp_put16_le(46, v);      /* len  */
 	/* 0 for borderless, calculated otherwise */
-	stp_put16_be(printable_length,v); /* Windows 698, gutenprint 570 */
+	stp_put16_be(printable_length,v); /* printable_length */
 	stp_put16_be(0,v);
 	/* 0 for borderless, calculated otherwise */
-	stp_put16_be(printable_width,v); /* Windows 352, gutenprint 342 */
+	stp_put16_be(printable_width,v); /* printable_width */
 	stp_put16_be(0,v);
 	stp_put32_be(0,v);
 	stp_put16_be(unit,v);
@@ -3647,15 +4147,47 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
 	/* depends on borderless or not: uses modified borders */
 	stp_put32_be(area_right,v); /* area_right : Windows seems to use 9.6, gutenprint uses 10 */
 	stp_put32_be(area_top,v);  /* area_top : Windows seems to use 8.4, gutenprint uses 15 */
+
 	/* calculated depending on borderless or not: uses modified borders */
-	stp_put32_be((init->page_width + (border_left - border_left2) + (border_right - border_right2) ) * unit / 72,v); /* area_width : Windows seems to use 352 for Tray G, gutenprint uses 340.92 */
-	stp_put32_be((init->page_height + (border_top - border_top2) + (border_bottom - border_bottom2) ) * unit / 72,v); /* area_length : Windows seems to use 698.28 for Tray G, gutenprint uses 570 */
+	if ( (init->caps->features & CANON_CAP_BORDERLESS) && 
+	     !(print_cd) && stp_get_boolean_parameter(v, "FullBleed") ) {
+	  stp_put32_be((init->page_width - border_left2 - border_right2 ) * unit / 72,v); /* area_width */
+	  stp_put32_be((init->page_height - border_top2 - border_bottom2 ) * unit / 72,v); /* area_length */
+	}
+	else {
+	  /* for CD */
+	  if ( (print_cd) && (test_cd==1) ) {
+	    stp_put32_be(init->page_width * unit / 72,v); /* area_width */
+	    stp_put32_be(init->page_height * unit / 72,v); /* area_length */
+	  }
+	  else { /* no CD */
+	    stp_put32_be((init->page_width) * unit / 72,v); /* area_width */
+	    stp_put32_be((init->page_height) * unit / 72,v); /* area_length */
+	  }
+	}
+ 
 	/* 0 under all currently known circumstances */
 	stp_put32_be(0,v); /* paper_right : Windows also 0 here for all Trays */
 	stp_put32_be(0,v); /* paper_top : Windows also 0 here for all Trays */
+
 	/* standard paper sizes, unchanged for borderless so use original borders */
-	stp_put32_be((init->page_width + border_left + border_right) * unit / 72,v); /* paper_width : Windows 371.4, gutenprint 360.96 */
-	stp_put32_be((init->page_height + border_top + border_bottom) * unit / 72,v); /* paper_height : Windows 720.96, gutenprint 600 */
+	if ( (init->caps->features & CANON_CAP_BORDERLESS) && 
+	     !(print_cd) && stp_get_boolean_parameter(v, "FullBleed") ) {
+	  stp_put32_be((init->page_width) * unit / 72,v); /* paper_width */
+	  stp_put32_be((init->page_height) * unit / 72,v); /* paper_length */
+	}
+	else {
+	  /* for CD */
+	  if ( (print_cd) && (test_cd==1) ) {
+	    stp_put32_be((init->page_width + border_left2 + border_right2) * unit / 72,v); /* paper_width */
+	    stp_put32_be((init->page_height + border_top2 + border_bottom2) * unit / 72,v); /* paper_length */
+	  }
+	  else { /* not CD */
+	    stp_put32_be((init->page_width + border_left + border_right) * unit / 72,v); /* paper_width */
+	    stp_put32_be((init->page_height + border_top + border_bottom) * unit / 72,v); /* paper_length */
+	  }
+	}
+	
 	return;
       }
   }
@@ -3670,12 +4202,23 @@ canon_init_setPageMargins2(const stp_vars_t *v, const canon_privdata_t *init)
 static void
 canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
 {
-  unsigned char arg_ESCP_1, arg_ESCP_2;
+  unsigned char arg_ESCP_1, arg_ESCP_2, arg_ESCP_9;
   if(!(init->caps->features & CANON_CAP_P))
     return;
 
   arg_ESCP_1 = (init->pt) ? canon_size_type(v,init->caps): 0x03;
   arg_ESCP_2 = (init->pt) ? init->pt->media_code_P: 0x00;
+  if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) ) {
+    arg_ESCP_9 = 0x02;
+  }
+  else if ( !(strcmp(init->caps->name,"PIXMA MG3500")) || !(strcmp(init->caps->name,"PIXMA MG5500")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) ) {
+    arg_ESCP_9 = 0xff;
+  }
+
+  else {
+    arg_ESCP_9 = 0x00;
+  }
+
 
   /* workaround for CD media */
 
@@ -3711,9 +4254,18 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
       if ( !(strcmp(init->caps->name,"PIXMA MP600")) || !(strcmp(init->caps->name,"PIXMA MP610")) || !(strcmp(init->caps->name,"PIXMA MP810")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MX850")) || !(strcmp(init->caps->name,"PIXMA iP4300")) || !(strcmp(init->caps->name,"PIXMA iP4500")) || !(strcmp(init->caps->name,"PIXMA iP5300")) ) {
 	arg_ESCP_1 = 0x51;
       }
-      /* Tray G from iP4800 onwards */
-      if ( !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
+      /* Tray G from iP4600 onwards */
+      if ( !(strcmp(init->caps->name,"PIXMA iP4600")) || !(strcmp(init->caps->name,"PIXMA iP4700")) || !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
 	arg_ESCP_1 = 0x56;
+      }
+      /* Tray J from iP7200 onwards */
+      if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300"))  || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MX920")) ) {
+	arg_ESCP_1 = 0x5b;
+	arg_ESCP_9 = 0x00;
+      }
+      /* Tray J from iP8700 onwards */
+      if ( !(strcmp(init->caps->name,"PIXMA iP8700"))  ) {
+	arg_ESCP_1 = 0x62;
       }
     }
   }
@@ -3744,6 +4296,7 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
       /* MP980:  CD Tray G     : 0x53               */
       /* MP990:  CD Tray G     : 0x53               */
       /* MX850:  CD Tray F     : 0x51               */
+      /* MX920:  CD Tray J     : 0x5b               */
       /* iP3000: CD Tray B     : 0x40               */
       /* iP3100: CD Tray B     : 0x40               */
       /* iP4000: CD Tray B     : 0x40               */
@@ -3762,15 +4315,20 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
       /* iP6100D:CD Tray B     : 0x40               */
       /* iP6700D:CD Tray C     : 0x4a               */
       /* iP7100: CD Tray B     : 0x40               */
+      /* iP7200: CD Tray J     : 0x5b               */
       /* iP7500: CD Tray C     : 0x4a               */
       /* iP8100: CD Tray B     : 0x40               */
       /* iP8500 :CD Tray B     : 0x40               */
       /* iP8600: CD Tray B     : 0x40               */
+      /* iP8700: CD Tray L     : 0x62               */
       /* iP9910: CD Tray A     : 0x3f               */
       /* MG5200: CD Tray G     : 0x56               */
       /* MG5300: CD Tray G     : 0x56               */
+      /* MG5400: CD Tray J     : 0x5b               */
       /* MG6100: CD Tray G     : 0x56               */
       /* MG6200: CD Tray G     : 0x56               */
+      /* MG6300: CD Tray J     : 0x5b               */
+      /* MG6500: CD Tray J     : 0x5b               */
       /* MG8100: CD Tray G     : 0x56               */
       /* MG8200: CD Tray G     : 0x56               */
       /* pro9000:CD Tray E     : 0x4c               */
@@ -3779,60 +4337,140 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
       /* pro9500mk2:CD Tray E  : 0x4c               */
       /* PRO-1:  CD Tray H     : 0x57               */
 
-
-
   /* workaround for FineArt media having same size as non-FineArt media */
 
-      /* MP950:  FineArtA4     : 0x42               */
-      /* MP960:  FineArtA4     : 0x42               */
-      /* MP970:  FineArtA4     : 0x42               */
-      /* MP980:  FineArtA4     : 0x42               */
-      /* MP990:  FineArtA4     : 0x42               */
-      /* MX7600: FineArtA4     : 0x42               */
-      /* iP6700D:FineArtA4     : 0x42               */
-      /* iP7100: FineArtA4     : 0x42               */
-      /* iP7500: FineArtA4     : 0x42               */
-      /* iP8100: FineArtA4     : 0x42               */
-      /* iP8600: FineArtA4     : 0x42               */
-      /* iP9910: FineArtA4     : 0x42               */
-      /* iX7000: FineArtA4     : 0x42               */
-      /* MG6100: FineArtA4     : 0x42               */
-      /* MG6200: FineArtA4     : 0x42               */
-      /* MG8100: FineArtA4     : 0x42               */
-      /* MG8200: FineArtA4     : 0x42               */
-      /* pro9000:FineArtA4     : 0x4d               */
-      /* pro9000mk2:FineArtA4  : 0x4d               */
-      /* pro9500:FineArtA4     : 0x4d               */
-      /* pro9500mk2:FineArtA4  : 0x4d               */
-      /* PRO-1:  FineArtA4     : 0x4d               */
+      /* Fine Art paper codes */
+      /* iP6700D, iP7100, iP7500, iP8100, iP8600, iP9910 */
+      /* iX7000 */
+      /* MG6100, M6200, MG8100, MG8200 */
+      /* MX7600 */
+      /* MP950, MP960, MP970, MP980, MP990 */
+      /* if (!strcmp(name,"A4"))       return 0x42; */ /* FineArt A4 35mm border --- iP7100: gap is 18 */
+      /* if (!strcmp(name,"A3"))       return 0x43; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x44; */ /* FineArt A3plus 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x45; */ /* FineArt Letter 35mm border */
+
+      /* Fine Art paper codes */
+      /* Pro series (9000, 9000 Mk.2, 9500, 9500 Mk.2, PRO-1) */
+      /* if (!strcmp(name,"A4"))       return 0x4d; */ /* FineArt A4 35mm border */
+      /* if (!strcmp(name,"A3"))       return 0x4e; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x50; */ /* FineArt A3plus 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x4f; */ /* FineArt Letter 35mm border */
+
+      /* Fine Art paper codes */
+      /* MG6300, MG6500, MG7100 */
+      /* if (!strcmp(name,"A4"))       return 0x58; */ /* FineArt A4 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x5a; */ /* FineArt Letter 35mm border */
+
+      /* Fine Art paper codes */
+      /* iP8700, iX6800 */
+      /* if (!strcmp(name,"A4"))       return 0x58; */ /* FineArt A4 35mm border */
+      /* if (!strcmp(name,"A3"))       return 0x59; */ /* FineArt A3 35mm border */
+      /* if (!strcmp(name,"A3plus"))   return 0x5d; */ /* FineArt A3plus 35mm border */
+      /* if (!strcmp(name,"Letter"))   return 0x5a; */ /* FineArt Letter 35mm border */
+
 
   /* iP7100 is an exception needing yet another papersize code */
   if ( (arg_ESCP_2 == 0x28) || ( arg_ESCP_2 == 0x29) || (arg_ESCP_2 ==  0x2c) || (arg_ESCP_2 == 0x31) ) {
-    /* A4 */
+    /* A4 FineArt */
     if ( arg_ESCP_1 == 0x03 ) {
-      /* default */
-      arg_ESCP_1 = 0x4d;
-      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
+      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
 	arg_ESCP_1 = 0x42;
       }
-    }
-    /* A3 */
-    if ( arg_ESCP_1 == 0x05 ) {
-      arg_ESCP_1 = 0x4e;
-      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
-	arg_ESCP_1 = 0x43;
+      else if ( !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA Pro9002")) || !(strcmp(init->caps->name,"PIXMA Pro9500")) || !(strcmp(init->caps->name,"PIXMA Pro9502")) ) {
+	arg_ESCP_1 = 0x4d;
+      }
+      else if ( !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) ) {
+	arg_ESCP_1 = 0x58;
+      }
+      else {
+	/* default back to non-FineArt */
+	arg_ESCP_1 = 0x03;
       }
     }
-    /* Letter */
+    /* A3 FineArt */
+    if ( arg_ESCP_1 == 0x05 ) {
+      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
+	arg_ESCP_1 = 0x43;
+      }
+      else if ( !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA Pro9002")) || !(strcmp(init->caps->name,"PIXMA Pro9500")) || !(strcmp(init->caps->name,"PIXMA Pro9502")) ) {
+	arg_ESCP_1 = 0x4e;
+      } 
+#if 0
+      /* no known papersize code yet, since these printers do not handle A3 */
+      else if ( !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) ) {
+        arg_ESCP_1 = 0x59;
+	}
+#endif
+      else {
+	/* default back to non-FineArt */
+	arg_ESCP_1 = 0x05;
+      }
+    }
+    /* Letter FineArt */
     if ( arg_ESCP_1 == 0x0d ) {
-      arg_ESCP_1 = 0x4f;
-      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
+      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
+	arg_ESCP_1 = 0x45;
+      }
+      else if ( !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA Pro9002")) || !(strcmp(init->caps->name,"PIXMA Pro9500")) || !(strcmp(init->caps->name,"PIXMA Pro9502")) ) {
+	arg_ESCP_1 = 0x4f;
+      }
+      else if ( !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) ) {
+	arg_ESCP_1 = 0x5a;
+      }
+      else {
+	/* default back to non-FineArt */
+	arg_ESCP_1 = 0x0d;
+      }
+    }
+    /* A3plus FineArt */
+    if ( arg_ESCP_1 == 0x2c ) {
+      if ( !(strcmp(init->caps->name,"PIXMA MP950")) || !(strcmp(init->caps->name,"PIXMA MP960")) || !(strcmp(init->caps->name,"PIXMA MP970")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MX7600")) || !(strcmp(init->caps->name,"PIXMA iP6700")) || !(strcmp(init->caps->name,"PIXMA iP7100")) || !(strcmp(init->caps->name,"PIXMA iP7500")) || !(strcmp(init->caps->name,"PIXMA iP8100")) || !(strcmp(init->caps->name,"PIXMA iP8600")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA iX7000")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) ) {
 	arg_ESCP_1 = 0x44;
+      }
+      else if ( !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA Pro9002")) || !(strcmp(init->caps->name,"PIXMA Pro9500")) || !(strcmp(init->caps->name,"PIXMA Pro9502")) ) {
+	arg_ESCP_1 = 0x50;
+      }
+#if 0
+      else if ( !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) ) {
+        arg_ESCP_1 = 0x5d;
+	}
+#endif
+      else {
+	/* default back to non-FineArt */
+	arg_ESCP_1 = 0x2c;
       }
     }
   }
 
-  if ( init->caps->ESC_P_len == 8 ) /* support for new devices from 2012. TODO: check if XML contents are identical to 6-byte devices */
+  /* workaround for media type based differences in 9-parameter ESC (P commands */
+  /* MX720, MX920, MG6500 uses 2 usually, 1 with various Hagaki media, and 0 with CD media */
+  if (  !(strcmp(init->caps->name,"PIXMA MX720")) || !(strcmp(init->caps->name,"PIXMA MX920")) || !(strcmp(init->caps->name,"PIXMA MG6500")) ) {
+    switch(arg_ESCP_2)
+      {
+	/* Hagaki media */
+      case 0x07: arg_ESCP_9=0x01; break;;
+      case 0x14: arg_ESCP_9=0x01; break;;
+      case 0x1b: arg_ESCP_9=0x01; break;;
+      case 0x36: arg_ESCP_9=0x01; break;;
+      case 0x38: arg_ESCP_9=0x01; break;;
+	/* CD media */
+      case 0x1f: arg_ESCP_9=0x00; break;;
+      case 0x20: arg_ESCP_9=0x00; break;;
+	/* other media */
+      default:   arg_ESCP_9=0x02; break;;
+      }
+  }
+  
+  if ( init->caps->ESC_P_len == 9 ) /* support for new devices from October 2012. */
+    {/* the 4th of the 6 bytes is the media type. 2nd byte is media size. Both read from canon-media array. */
+  
+      /* arg_ESCP_1 = 0x03; */ /* A4 size */
+      /* arg_ESCP_2 = 0x00; */ /* plain media */
+      /*                             size                media                      tray */
+      canon_cmd( v,ESC28,0x50,9,0x00,arg_ESCP_1,0x00,arg_ESCP_2,0x01,0x00,0x01,0x00,arg_ESCP_9);
+    }
+  else if ( init->caps->ESC_P_len == 8 ) /* support for new devices from 2012. */
     {/* the 4th of the 6 bytes is the media type. 2nd byte is media size. Both read from canon-media array. */
 
       /* arg_ESCP_1 = 0x03; */ /* A4 size */
@@ -4092,6 +4730,10 @@ canon_init_setImage(const stp_vars_t *v, const canon_privdata_t *init)
                buf[3+i*3+1]=0x01;
                buf[3+i*3+0]=init->mode->inks[i].ink->bits;
              }*/
+	  else if(init->mode->inks[i].ink->flags & INK_FLAG_3pixel5level_in_1byte)
+            buf[3+i*3+0]=(1<<5)|init->mode->inks[i].ink->bits; /*info*/
+	  else if(init->mode->inks[i].ink->flags & INK_FLAG_3pixel6level_in_1byte)
+            buf[3+i*3+0]=(1<<5)|init->mode->inks[i].ink->bits; /*info*/
           else
             buf[3+i*3+0]=init->mode->inks[i].ink->bits;
 
@@ -4193,7 +4835,7 @@ canon_init_setMultiRaster(const stp_vars_t *v, const canon_privdata_t *init){
   stp_put16_le(init->num_channels, v);
   /* add an exception here to add 0x60 of cmy channels for those printers/modes that require it */
   raster_channel_order=init->channel_order;
-  if ( !(strcmp(init->caps->name,"PIXMA MP140")) || !(strcmp(init->caps->name,"PIXMA MP150")) || !(strcmp(init->caps->name,"PIXMA MP160")) || !(strcmp(init->caps->name,"PIXMA MP170")) || !(strcmp(init->caps->name,"PIXMA MP180")) || !(strcmp(init->caps->name,"PIXMA MP190")) || !(strcmp(init->caps->name,"PIXMA MP210")) || !(strcmp(init->caps->name,"PIXMA MP220")) || !(strcmp(init->caps->name,"PIXMA MP240")) || !(strcmp(init->caps->name,"PIXMA MP250")) || !(strcmp(init->caps->name,"PIXMA MP270")) || !(strcmp(init->caps->name,"PIXMA MP280")) || !(strcmp(init->caps->name,"PIXMA MP450")) || !(strcmp(init->caps->name,"PIXMA MP460")) || !(strcmp(init->caps->name,"PIXMA MP470")) || !(strcmp(init->caps->name,"PIXMA MP480")) || !(strcmp(init->caps->name,"PIXMA MP490")) || !(strcmp(init->caps->name,"PIXMA MP495")) || !(strcmp(init->caps->name,"PIXMA MX300")) || !(strcmp(init->caps->name,"PIXMA MX310")) || !(strcmp(init->caps->name,"PIXMA MX330")) || !(strcmp(init->caps->name,"PIXMA MX340")) || !(strcmp(init->caps->name,"PIXMA MX350")) || !(strcmp(init->caps->name,"PIXMA MX360"))  || !(strcmp(init->caps->name,"PIXMA MX370")) || !(strcmp(init->caps->name,"PIXMA MX410")) || !(strcmp(init->caps->name,"PIXMA MX510")) || !(strcmp(init->caps->name,"PIXMA iP2700")) || !(strcmp(init->caps->name,"PIXMA MG2100")) )
+  if ( !(strcmp(init->caps->name,"PIXMA MP140")) || !(strcmp(init->caps->name,"PIXMA MP150")) || !(strcmp(init->caps->name,"PIXMA MP160")) || !(strcmp(init->caps->name,"PIXMA MP170")) || !(strcmp(init->caps->name,"PIXMA MP180")) || !(strcmp(init->caps->name,"PIXMA MP190")) || !(strcmp(init->caps->name,"PIXMA MP210")) || !(strcmp(init->caps->name,"PIXMA MP220")) || !(strcmp(init->caps->name,"PIXMA MP240")) || !(strcmp(init->caps->name,"PIXMA MP250")) || !(strcmp(init->caps->name,"PIXMA MP270")) || !(strcmp(init->caps->name,"PIXMA MP280")) || !(strcmp(init->caps->name,"PIXMA MP450")) || !(strcmp(init->caps->name,"PIXMA MP460")) || !(strcmp(init->caps->name,"PIXMA MP470")) || !(strcmp(init->caps->name,"PIXMA MP480")) || !(strcmp(init->caps->name,"PIXMA MP490")) || !(strcmp(init->caps->name,"PIXMA MP495")) || !(strcmp(init->caps->name,"PIXMA MX300")) || !(strcmp(init->caps->name,"PIXMA MX310")) || !(strcmp(init->caps->name,"PIXMA MX330")) || !(strcmp(init->caps->name,"PIXMA MX340")) || !(strcmp(init->caps->name,"PIXMA MX350")) || !(strcmp(init->caps->name,"PIXMA MX360"))  || !(strcmp(init->caps->name,"PIXMA MX370")) || !(strcmp(init->caps->name,"PIXMA MX410")) || !(strcmp(init->caps->name,"PIXMA MX510")) || !(strcmp(init->caps->name,"PIXMA MX520")) || !(strcmp(init->caps->name,"PIXMA iP2700")) || !(strcmp(init->caps->name,"PIXMA MG2100")) || !(strcmp(init->caps->name,"PIXMA MG2400")) || !(strcmp(init->caps->name,"PIXMA MG3500")) )
     {
       /* if cmy there, add 0x60 to each --- all modes using cmy require it */
       for(i=0;i<init->num_channels;i++){
@@ -4260,9 +4902,20 @@ canon_init_setMultiRaster(const stp_vars_t *v, const canon_privdata_t *init){
 
 
 
+/* ESC (v -- 0x76 -- */
+static void
+canon_init_setESC_v(const stp_vars_t *v, const canon_privdata_t *init)
+{
+  if (!(init->caps->features & CANON_CAP_v))
+    return;
+
+  canon_cmd(v,ESC28,0x76, 1, 0x00);
+}
+
+
 
 static void
-canon_init_printer(const stp_vars_t *v, const canon_privdata_t *init)
+canon_init_printer(const stp_vars_t *v, canon_privdata_t *init)
 {
   unsigned int mytop;
   /* init printer */
@@ -4285,6 +4938,7 @@ canon_init_printer(const stp_vars_t *v, const canon_privdata_t *init)
   canon_init_setESC_S(v,init);           /* ESC (S */
   canon_init_setTray(v,init);            /* ESC (l */
   canon_init_setX72(v,init);             /* ESC (r */
+  canon_init_setESC_v(v,init);           /* ESC (v */
   canon_init_setMultiRaster(v,init);     /* ESC (I (J (L */
 
   /* some linefeeds */
@@ -4446,6 +5100,7 @@ static int canon_setup_channel(stp_vars_t *v,canon_privdata_t* privdata,int chan
         canon_channel_t* current;
 	stp_dprintf(STP_DBG_CANON, v, "canon_setup_channel: (start) privdata->num_channels %d\n", privdata->num_channels);
 	stp_dprintf(STP_DBG_CANON, v, "canon_setup_channel: (start) privdata->channel_order %s\n", privdata->channel_order);
+
         /* create a new channel */
         privdata->channels = stp_realloc(privdata->channels,sizeof(canon_channel_t) * (privdata->num_channels + 1));
         privdata->channel_order = stp_realloc(privdata->channel_order,privdata->num_channels + 2);
@@ -4578,7 +5233,7 @@ static void canon_setup_channels(stp_vars_t *v,canon_privdata_t* privdata){
 
 
 
-/* FIXME move this to printercaps */
+/* FIXME move this to printercaps, and/or Esc (p command  */
 #define CANON_CD_X 176
 #define CANON_CD_Y 405
 
@@ -4638,31 +5293,18 @@ static void setup_page(stp_vars_t* v,canon_privdata_t* privdata){
     privdata->top -= page_top; /* checked in Epson: matches */
     privdata->page_width = page_right - page_left; /* checked in Epson: matches */
     privdata->page_height = page_bottom - page_top; /* checked in Epson: matches */
-
-    if (ERRPRINT) {
-      stp_eprintf(v,"============================set_imageable_area========================\n");
-      stp_eprintf(v,"setup_page page_top = %i\n",page_top);
-      stp_eprintf(v,"setup_page page_bottom = %i\n",page_bottom);
-      stp_eprintf(v,"setup_page page_left = %i\n",page_left);
-      stp_eprintf(v,"setup_page page_right = %i\n",page_right);
-      stp_eprintf(v,"setup_page top = %i\n",privdata->top);
-      stp_eprintf(v,"setup_page left = %i\n",privdata->left);
-      stp_eprintf(v,"setup_page out_height = %i\n",privdata->out_height);
-      stp_eprintf(v,"setup_page page_height = %i\n",privdata->page_height);
-      stp_eprintf(v,"setup_page page_width = %i\n",privdata->page_width);
-    }
-
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_top = %i\n",page_top);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_bottom = %i\n",page_bottom);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_left = %i\n",page_left);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_right = %i\n",page_right);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page top = %i\n",privdata->top);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page left = %i\n",privdata->left);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page out_height = %i\n",privdata->out_height);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_height = %i\n",privdata->page_height);
-    stp_dprintf(STP_DBG_CANON, v, "setup_page page_width = %i\n",privdata->page_width);
-
   }
+  
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_top = %i\n",page_top);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_bottom = %i\n",page_bottom);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_left = %i\n",page_left);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_right = %i\n",page_right);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page top = %i\n",privdata->top);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page left = %i\n",privdata->left);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page out_height = %i\n",privdata->out_height);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_height = %i\n",privdata->page_height);
+  stp_dprintf(STP_DBG_CANON, v, "setup_page page_width = %i\n",privdata->page_width);
+
 }
 
 
@@ -4836,7 +5478,7 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 
   /* --- no current restrictions for Duplex setting --- */
 
-  /* in particular, we do not constraint duplex printing to certain media */
+  /* in particular, we do not constrain duplex printing to certain media */
   privdata.duplex_str = duplex_mode;
 
   /* ---  make adjustment to InkType to comply with InkSet --- */
@@ -4860,8 +5502,6 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   /* --- make adjustments to mode --- */
 
   /* find the wanted print mode: NULL if not yet set */
-  if (ERRPRINT)
-    stp_eprintf(v,"Calling get_current_parameter from canon_do_print routine (before default set)");
   stp_dprintf(STP_DBG_CANON, v, "canon_do_print: calling canon_get_current_mode\n");
   privdata.mode = canon_get_current_mode(v);
 
@@ -4870,8 +5510,6 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
   }
   
   /* then call get_current_mode again to sort out the correct matching of parameters and mode selection */
-  if (ERRPRINT)
-    stp_eprintf(v,"Calling cannon_check_current_parameter from canon_do_print routine (after default set)");
   
   stp_dprintf(STP_DBG_CANON, v, "canon_do_print: calling canon_check_current_mode\n");
 
@@ -5097,13 +5735,13 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
                                 stp_compute_uncompressed_linewidth);
        privdata.last_pass_offset = 0;
 
-       if (ERRPRINT) {
+       if (stp_get_debug_level() & STP_DBG_CANON) {
 	 for(x=0;x<4;x++){
-	   stp_eprintf(v, "DEBUG print-canon weave: weave_color_order[%d]: %u\n",
+	   stp_dprintf(STP_DBG_CANON, v, "DEBUG print-canon weave: weave_color_order[%d]: %u\n",
 		       x, (unsigned int)weave_color_order[x]);
 	 }
 	 for(x=0;x<privdata.num_channels;x++){
-	   stp_eprintf(v, "DEBUG print-canon weave: channel_order[%d]: %u\n",
+	   stp_dprintf(STP_DBG_CANON, v, "DEBUG print-canon weave: channel_order[%d]: %u\n",
 		       x, (unsigned int)privdata.channel_order[x]);
 	 }
        }
@@ -5117,8 +5755,7 @@ canon_do_print(stp_vars_t *v, stp_image_t *image)
 	     if(weave_color_order[i] == privdata.channel_order[x]){
 	       weave_cols[i] = privdata.channels[x].buf;
 	       privdata.weave_bits[i] = privdata.channels[x].props->bits;
-	       if (ERRPRINT)
-		 stp_eprintf(v, "DEBUG print-canon weave: set weave_cols[%d] to privdata.channels[%d].buf\n",
+	       stp_dprintf(STP_DBG_CANON, v, "DEBUG print-canon weave: set weave_cols[%d] to privdata.channels[%d].buf\n",
 			     i, x);
 	     }
            }
@@ -5303,7 +5940,7 @@ canon_shift_buffer(unsigned char *line,int length,int bits)
 }
 
 
-/* fold, apply 5 pixel in 1 byte compression, pack tiff and return the compressed length */
+/* fold, apply the necessary compression, pack tiff and return the compressed length */
 static int canon_compress(stp_vars_t *v, canon_privdata_t *pd, unsigned char* line,int length,int offset,unsigned char* comp_buf,int bits, int ink_flags)
 {
   unsigned char
@@ -5329,17 +5966,17 @@ static int canon_compress(stp_vars_t *v, canon_privdata_t *pd, unsigned char* li
       pixels_per_byte = 5;
     
     stp_fold(line,length,pd->fold_buf);
-    in_ptr= pd->fold_buf;
-    length= (length*8/4); /* 4 pixels in 8bit */
+    in_ptr    = pd->fold_buf;
+    length    = (length*8/4); /* 4 pixels in 8bit */
     /* calculate the number of compressed bytes that can be sent directly */
-    offset2 = offset / pixels_per_byte;
+    offset2   = offset / pixels_per_byte;
     /* calculate the number of (uncompressed) bits that have to be added to the raster data */
     bitoffset = (offset % pixels_per_byte) * 2;
   }
   else if (bits==3) {
     stp_fold_3bit_323(line,length,pd->fold_buf);
-    in_ptr= pd->fold_buf;
-    length= (length*8)/3;
+    in_ptr  = pd->fold_buf;
+    length  = (length*8)/3;
     offset2 = offset/3;
 #if 0
     switch(offset%3){
@@ -5351,11 +5988,19 @@ static int canon_compress(stp_vars_t *v, canon_privdata_t *pd, unsigned char* li
     bitoffset= 0;
   }
   else if (bits==4) {
+    int pixels_per_byte = 2;
+    if(ink_flags & INK_FLAG_3pixel5level_in_1byte)
+      pixels_per_byte = 3;
+    else if(ink_flags & INK_FLAG_3pixel6level_in_1byte)
+      pixels_per_byte = 3;
+
     stp_fold_4bit(line,length,pd->fold_buf);
-    in_ptr= pd->fold_buf;
-    length= (length*8)/2;
-    offset2 = offset / 2; 
-    bitoffset= offset % 2;
+    in_ptr    = pd->fold_buf;
+    length    = (length*8)/2; /* 2 pixels in 8 bits */
+    /* calculate the number of compressed bytes that can be sent directly */
+    offset2   = offset / pixels_per_byte; 
+    /* calculate the number of (uncompressed) bits that have to be added to the raster data */
+    bitoffset = (offset % pixels_per_byte) * 2; /* not sure what this value means */
   }
   else if (bits==8) {
     stp_fold_8bit(line,length,pd->fold_buf);
@@ -5394,6 +6039,11 @@ static int canon_compress(stp_vars_t *v, canon_privdata_t *pd, unsigned char* li
   
   if(ink_flags & INK_FLAG_5pixel_in_1byte)
     length = pack_pixels(in_ptr,length);
+  else if(ink_flags & INK_FLAG_3pixel5level_in_1byte)
+    length = pack_pixels3_5(in_ptr,length);
+  else if(ink_flags & INK_FLAG_3pixel6level_in_1byte)
+    length = pack_pixels3_6(in_ptr,length);
+
   
   stp_pack_tiff(v, in_ptr, length, comp_data, &comp_ptr, NULL, NULL);
   

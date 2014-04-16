@@ -1,4 +1,4 @@
-Welcome to Gutenprint 5.2.9!  Please read these notes carefully.
+Welcome to Gutenprint 5.2.10-pre1!  Please read these notes carefully.
 
 *** NOTE TO PACKAGERS: Please read the file README.package for issues
     that are of interest to distributors and packagers of Gutenprint.
@@ -8,8 +8,8 @@ Welcome to Gutenprint 5.2.9!  Please read these notes carefully.
 
 I) INTRODUCTION
 
-    This is Gutenprint version 5.2.9, a stable release of Gutenprint
-    5.2.  Gutenprint, formerly named Gimp-Print, is a suite of printer
+    This is Gutenprint version 5.2.10-pre1, a prerelease of Gutenprint
+    5.2.10.  Gutenprint, formerly named Gimp-Print, is a suite of printer
     drivers that may be used with most common UNIX print spooling
     systems, including CUPS, lpr, LPRng, or others.  These drivers
     provide high quality printing for UNIX (including Macintosh OS X
@@ -32,10 +32,8 @@ I) INTRODUCTION
     Please read the user's manual (in ODF format as
     doc/gutenprint-users-manual.odt or PDF format as
     doc/gutenprint-users-manual.pdf) carefully, as it covers much more
-    information than this README file.  The user's manual contains a
-    complete list of supported printers.  In addition, please read the
+    information than this README file.  In addition, please read the
     release notes (NEWS), as it has information on the latest changes.
-    This package has changed significantly since Gutenprint 5.0.
 
     Gutenprint supports only the printer part of multi-function
     devices (devices that typically include scanning, copying, and fax
@@ -87,12 +85,13 @@ A) OVERVIEW
 
       - The core driver library (required for everything else)
       - A CUPS (Common UNIX Printing System) driver
+      - A CUPS backend, required for selected dye-sublimation printers
+      - A command-line utility to administer and maintain Epson
+        printers
       - An enhanced Print plug-in for GIMP
       - GTK-based UI libraries (used by the enhanced GIMP plug-in)
       - Support for the Foomatic spooler configuration system
       - A Ghostscript driver using the IJS plugin facility
-      - A command-line utility to administer and maintain Epson
-        printers
 
     This package requires the use of GNU Make to compile.  On systems
     with both GNU make and another make installed, GNU make may be
@@ -124,7 +123,7 @@ A) OVERVIEW
 	gimp-print-devel@lists.sourceforge.net
 
 	================================================================
-	  Release: gutenprint 5.2.9 generated on 04 Jun 2012
+	  Release: gutenprint 5.2.10 generated on 08 Feb 2014
 
 	  Features:
 	    Build CUPS:                                 yes, installing in /usr
@@ -132,7 +131,8 @@ A) OVERVIEW
 		Build CUPS PPD files:                   no
 		Generate PS level 3 CUPS PPD files:     yes
 		Build genppd statically:                yes
-	    Build Ghostscript IJS driver:               yes
+		Build CUPS dyesub USB backend:          yes
+	    Build Ghostscript IJS driver:               no
 	    Build Foomatic data:                        yes
 		Build Foomatic 3.x data:                yes
 	    Build enhanced Print plugin for GIMP:       yes
@@ -144,11 +144,11 @@ A) OVERVIEW
 
 	  Installation summary:
 	    Installation prefix:                        /usr/local
-	    Exec prefix:                                ${prefix}
+	    Exec prefix:                                ${prefix} (/usr/local)
 	    Data directory:                             /usr/local/share/gutenprint
-	    Library directory:                          ${exec_prefix}/lib64/gutenprint
+	    Library directory:                          ${exec_prefix}/lib64/gutenprint (/usr/local/lib64/gutenprint)
 	    XML data directory:                         /usr/local/share/gutenprint/5.2/xml
-	    Module directory:                           ${exec_prefix}/lib64/gutenprint/5.2/modules
+	    Module directory:                           ${exec_prefix}/lib64/gutenprint/5.2/modules (/usr/local/lib64/gutenprint/5.2/modules)
 	    Install sample images:                      yes
 
 	  General configuration:
@@ -161,7 +161,7 @@ A) OVERVIEW
 	    Generate debugging symbols:                 no
 	    Use modules:                                static
 	    Use readline libraries:                     yes, extra arguments: -lncurses
-	    uname -a output:                            Linux dsl092-065-009 3.1.10-1.9-default #1 SMP Thu Apr 5 18:48:38 UTC 2012 (4a97ec8) x86_64 x86_64 x86_64 GNU/Linux
+	    uname -a output:                            Linux dsl092-065-009 3.11.6-4-default #1 SMP Wed Oct 30 18:04:56 UTC 2013 (e6d4a27) x86_64 x86_64 x86_64 GNU/Linux
 	================================================================
 
     The CUPS, GIMP, Foomatic, and Ghostscript components require that
@@ -177,10 +177,11 @@ A) OVERVIEW
 
     PLEASE INSPECT THE OUTPUT CAREFULLY BEFORE PROCEEDING.  If you
     expect to build a particular component (particularly the CUPS
-    driver or enhanced Print plugin for GIMP), and the configure
-    output states that that component will not be built, please make
-    certain that you have the required development packages installed,
-    as described below in the sections for the particular components.
+    driver, CUPS backends, or enhanced Print plugin for GIMP), and 
+    the configure output states that that component will not be built,
+    please make certain that you have the required development packages
+    installed, as described below in the sections for the particular
+    components.
 
 
 ----------------
@@ -234,7 +235,7 @@ C) CUPS
     directory" (other ".h" files may also be missing, depending upon
     the missing packages):
 
-	make[3]: Entering directory `/opt/gutenprint/gutenprint-5.2.9/src/cups'
+	make[3]: Entering directory `/opt/gutenprint/gutenprint-5.2.10/src/cups'
 	gcc -DHAVE_CONFIG_H -I. -I../..  -I../../include -I../../include
 	   -Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes
 	   -Wmissing-declarations -Wnested-externs -Wwrite-strings
@@ -247,11 +248,11 @@ C) CUPS
 	genppd.c:79:23: error: cups/cups.h: No such file or directory
 	genppd.c:80:25: error: cups/raster.h: No such file or directory
 	make[3]: *** [gutenprint_5_2-genppd.o] Error 1
-	make[3]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9/src/cups'
+	make[3]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10/src/cups'
 	make[2]: *** [all-recursive] Error 1
-	make[2]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9/src'
+	make[2]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10/src'
 	make[1]: *** [all-recursive] Error 1
-	make[1]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9'
+	make[1]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10'
 	make: *** [all] Error 2
 
     Installing the CUPS driver for Gutenprint 5.2 will not interfere
@@ -276,16 +277,21 @@ C) CUPS
       are installed as commandtocanon and commandtoepson; they are
       installed in /usr/lib/cups/filter.
 
+    * A custom backend, gutenprint52usb, to send data to certain dye
+      sublimation printers.  Some dye sublimation printers use custom
+      USB protocols to send data to the printer and will not work with
+      the standard USB back end.
+
     * One or more sets of PPD files describing all of the printers
       supported by Gutenprint.  These are normally installed in
       /usr/share/cups/model/gutenprint.  These PPD files can only be
       used by the precise version of Gutenprint that they were built
       with; for example, it is not possible to use PPD files from
-      Gutenprint 5.0.0 with Gutenprint 5.2.0.
+      Gutenprint 5.2.9 with Gutenprint 5.2.10.
 
-      If you are using CUPS 1.2 or above, these PPD files are not
-      actually installed by default.  Instead, a CUPS driver generates
-      these PPD files on demand.
+      If you are using CUPS 1.2 or above, these PPD files may not be
+      actually installed by default, depending upon your system.
+      Instead, a CUPS driver generates these PPD files on demand.
 
     * A utility to update PPD files from an earlier release of
       Gutenprint, cups-genppdupdate.  This utility may be used to
@@ -498,7 +504,166 @@ C) CUPS
 
 ----------------
 
-D) FOOMATIC
+D) CUPS dye-sublimation backend
+
+    A new CUPS backend was added to support USB specific dye-sublimation 
+    printers that require a special communications protocol. This backend is 
+    called 'gutenprint52usb' and currently supports the models listed below.
+    If you do not have a printer on this list, you may skip the remainder
+    of this section.
+
+        Canon SELPHY ES series  (All models)
+        Canon SELPHY CP series  (All models except CP520, CP820 and CP910)
+        Kodak Professional 1400
+        Kodak 805 Photo Printer
+        Kodak 6800 Photo Printer
+        Kodak 6850 Photo Printer
+        Kodak 605 Photo Printer
+        Shinko/Sinfonia CHC-S2145 
+        Sony UP-DR150
+        Sony UP-DR200
+        DNP DS40
+        DNP DS80
+        DNP DS-RX1
+        Citizen CX
+        Citizen CX-W
+        Citizen CY
+	Mitsubishi CP-D70DW  (EXPERIMENTAL)
+	Mitsubishi CP-D707DW (EXPERIMENTAL)
+
+    Although these printers advertise themselves as standard USB Printer
+    Class devices, they do not actually obey those specifications, and 
+    require two-way handshaking in order to successfully print.
+
+    Over time, it is expected that additional printer models will be
+    supported by this backend.
+
+  Build Requirements
+
+    This backend requires libusb (or libusbx) 1.0 or newer.
+
+  CUPS Integration
+
+    If you are using up-to-date versions of CUPS (1.6.4 or newer) on
+    Linux, then your system will automatically select this backend if
+    the you plug in one of its supported printers.  No further intervention
+    on the your part should be necessary.
+
+    Unfortunately, if you are using an older version of CUPS or a non-Linux
+    system (particularly OSX) then you will probably need to manually
+    configure the use of this backend because the system may attempt to 
+    use the default usb backend, which will not work properly with these
+    printers.
+
+    To check which backend your printers are using, run the 'lpstat
+    -s' command.  Below is an example of its output:
+
+      device for Canon_SELPHY_ES1: gutenprint52+usb://Canon/SELPHY%20ES1?serial=221CD10131&backend=canonselphy
+      device for Canon_SELPHY_ES3: usb://Canon/Canon%20SELPHY%20ES3
+
+    In this example, the SELPHY ES1 is using the correct gutenprint
+    backend, but the ES3 is using the incorrect 'usb' backend. In
+    order for the ES3 to function properly, you need to configure it
+    to use the correct backend.
+
+    The most expedient way to accomplish this is to remove the printer
+    via your system's printer configuration interface, then manually
+    add a new one, taking care to select the correct backend
+    ("gutenprint52+usb"). This backend name is present in the device
+    URI for the printer, as demonstrated in the above example.  An
+    alternative to the system printer configuration interface is to
+    use your local system's CUPS web interface, if it is enabled.
+    Step-by-step instructions for using any of these interfaces is 
+    beyond the scope of this document.
+
+    Once the printer is properly configured, this backend will be
+    automatically invoked as needed; you will never invoke the backend
+    directly.
+
+  Note on Use of Multiple Printers of the Same Model
+
+    If you do not use (and do not intend to use) more than one printer of 
+    the same model connected via USB to one computer, you may skip this 
+    section.
+
+    If you have more than one printer connected to a computer (via
+    separate queues), CUPS inspects each printer to determine which
+    printer is attached to which queue.  Most printers provide a
+    serial number, which is different for each individual printer, to
+    determine which unique printer is which.  Unfortunately, certain
+    printers do not provide this serial number, so CUPS cannot
+    uniquely identify each printer.
+
+    To determine if your printer model is affected, you should inspect the
+    CUPS queue URI, specifically the "serial=" portion.  If the serial is 
+    NONE_UNKNOWN, it indicates that the printer does not report a serial
+    number and so CUPS cannot uniquely that printer, if more than one of
+    that type is plugged in.
+
+    For example, a device URI of
+
+      gutenprint52+usb://Canon/SELPHY+ES1?serial=221CD10131&backend=canonselphy
+    has a proper serial number (221CD10131), and CUPS can uniquely
+    identify the printer.
+
+    A device URI of
+
+      gutenprint52+usb://Canon/CP-10?serial=NONE_UNKNOWN&backend=canonselphy
+
+    indicates that the printer does not report a valid serial number,
+    so that CUPS cannot uniquely identify the printer if there are
+    two or more Canon CP-10 printers attached.
+
+    If you attach more than one of any one of these printer models to
+    the same computer (such as two Canon CP-10 printers), you may
+    experience incorrect behavior, including:
+
+      * Printing (or attempting to print) to a printer other than
+        the desired one
+      * Failing to print a particular job at all
+      * Inability to create a queue for each printer
+      * Attempt to create a queue that already exists
+
+  Note on the Shinko CHC-S2145
+
+    The Shinko CHC-S2145 does not report a serial number in the traditional
+    sense; instead it reports a user identification string, which the backend
+    will use if one is configured.
+
+    The backend supports configuring this user identification string.
+    To do so, first disconnect all other Shinko CHC-S2145 printers from the
+    system, and then connect each printer individually, and run the 
+    following command.  Please ensure that the text you choose for each
+    printer is different.
+
+       /usr/lib/cups/backend/gutenprint52+usb -B shinkos2145 -U "sometext"
+    
+    After changing the user string, you will need to remove and re-create
+    the CUPS queue.
+
+
+----------------
+
+E) ESCPUTIL
+
+    "escputil" is a command line utility for administering Epson
+    inkjet printers.  It performs head alignment, retrieval of ink
+    levels and status information, printing of test patterns, etc.  It
+    is built and installed by default; if you don't want it, you may
+    use --without-escputil when configuring.
+
+    escputil uses the readline package for interactive commands
+    (currently only head alignment falls into this category).  Linking
+    against libreadline sometimes requires linking against other
+    packages.  Gutenprint attempts to determine the correct packages
+    to link against; the exact sequence is described in the release
+    notes.  If you do not wish to use readline, you may use
+    --without-readline.
+
+
+----------------
+
+F) FOOMATIC
 
     Foomatic is a printer meta-driver that can be used with any
     spooler (CUPS, lpd, LPRng, etc.) or even no spooler at all.  It
@@ -577,7 +742,7 @@ D) FOOMATIC
 
 ----------------
 
-E) GIMP
+G) GIMP
 
     Gutenprint may be used as an enhanced Print plug-in for GIMP (2.0
     and above), providing the ability to print images.  Please read
@@ -601,7 +766,7 @@ E) GIMP
     The errors will typically look like this; the important errors are
     the ones "No such file or directory".
 
-	make[3]: Entering directory `/opt/gutenprint/gutenprint-5.2.9/src/gimp2'
+	make[3]: Entering directory `/opt/gutenprint/gutenprint-5.2.10/src/gimp2'
 	gcc -DHAVE_CONFIG_H -I. -I../..  -I../../include -I../../include
 	   -Wall -Wcast-align -Wstrict-prototypes -Wmissing-prototypes
 	   -Wmissing-declarations -Wnested-externs -Wwrite-strings
@@ -614,11 +779,11 @@ E) GIMP
 	print_gimp.h:37:26: error: libgimp/gimp.h: No such file or directory
 	print_gimp.h:38:28: error: libgimp/gimpui.h: No such file or directory
 	make[3]: *** [print-image-gimp.o] Error 1
-	make[3]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9/src/gimp2'
+	make[3]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10/src/gimp2'
 	make[2]: *** [all-recursive] Error 1
-	make[2]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9/src'
+	make[2]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10/src'
 	make[1]: *** [all-recursive] Error 1
-	make[1]: Leaving directory `/opt/gutenprint/gutenprint-5.2.9'
+	make[1]: Leaving directory `/opt/gutenprint/gutenprint-5.2.10'
 	make: *** [all] Error 2
 
     Normally, the Gutenprint configure script detects which version,
@@ -639,25 +804,6 @@ E) GIMP
     settings from previous versions of Gutenprint and Gimp-Print, but
     the configuration file format in Gutenprint 5.2 cannot be read by
     older versions of Gimp-Print or Gutenprint.
-
-
-----------------
-
-F) ESCPUTIL
-
-    "escputil" is a command line utility for administering Epson
-    inkjet printers.  It performs head alignment, retrieval of ink
-    levels and status information, printing of test patterns, etc.  It
-    is built and installed by default; if you don't want it, you may
-    use --without-escputil when configuring.
-
-    escputil uses the readline package for interactive commands
-    (currently only head alignment falls into this category).  Linking
-    against libreadline sometimes requires linking against other
-    packages.  Gutenprint attempts to determine the correct packages
-    to link against; the exact sequence is described in the release
-    notes.  If you do not wish to use readline, you may use
-    --without-readline.
 
 
 ================================================================
@@ -688,8 +834,8 @@ A) PRINTER INSTALLATION
     driver, so you may find more than one PPD file for your printer.
     Gutenprint PPD files are described as
 
-    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.9
-    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.9 Simplified
+    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.10
+    Epson Stylus Photo R300 - CUPS+Gutenprint v5.2.10 Simplified
     Epson Stylus Photo R300 Foomatic/gutenprint-ijs.5.2
     Epson Stylus Photo R300 Foomatic/gutenprint-ijs-simplified.5.2
 
@@ -729,7 +875,7 @@ A) PRINTER INSTALLATION
     identify printers using Gutenprint PPD files by the name of the
     PPD file, which will be something like:
 
-		    EPSON Stylus Photo EX - CUPS+Gutenprint v5.2.9(en)
+		    EPSON Stylus Photo EX - CUPS+Gutenprint v5.2.10(en)
 
     Linux users please note: If you are using CUPS 1.1.11 or higher,
     and you have a USB-connected printer, you must have a printer

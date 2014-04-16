@@ -145,28 +145,28 @@ typedef struct errorMessage_s
 
 static errorMessage_t errorMessage[] =
 {
-   { 0x01, "Unable to begin conversation, try later."              ,0 },
-   { 0x02, "Protocol revision not supported."                      ,1 },
-   { 0x03, "Transaction channel canÅ¥t be closed."                  ,0 },
-   { 0x04, "No sufficient resources available now."                ,0 },
-   { 0x05, "Connection denied."                                    ,1 },
-   { 0x06, "Channel allready open."                                ,0 },
-   { 0x07, "Credit overflow, previous credit remain valid."        ,0 },
-   { 0x08, "Channel is not open."                                  ,1 },
-   { 0x09, "Service not available on specified socket."            ,1 },
-   { 0x0a, "Service name to socket ID failed."                     ,1 },
-   { 0x0b, "Init transaction failed."                              ,1 },
-   { 0x0c, "Invalid packet size."                                  ,1 },
-   { 0x0d, "Requested packed size is 0, no data can be transfered.",0 },
-   { 0x80, "Malformed packet, ignored."                            ,1 },
-   { 0x81, "No credit for received packet, ignored"                ,0 },
-   { 0x82, "Reply donÅ¥t match with outstanding command, ignored."  ,1 },
-   { 0x83, "Packet size greater as negotiated size."               ,1 },
-   { 0x84, "Data received for a non opened channel."               ,1 },
-   { 0x85, "Reply with unknown result value received."             ,1 },
-   { 0x86, "Piggybacked credit in data packet cause overflow."     ,1 },
-   { 0x87, "Unknown 1284.4 Reply."                                 ,0 },
-   { 0x00, NULL                                                    ,0 }
+   { 0x01, "Unable to begin conversation, try later."                ,0 },
+   { 0x02, "Protocol revision not supported."                        ,1 },
+   { 0x03, "Transaction channel can't be closed."                    ,0 },
+   { 0x04, "No sufficient resources available now."                  ,0 },
+   { 0x05, "Connection denied."                                      ,1 },
+   { 0x06, "Channel allready open."                                  ,0 },
+   { 0x07, "Credit overflow, previous credit remain valid."          ,0 },
+   { 0x08, "Channel is not open."                                    ,1 },
+   { 0x09, "Service not available on specified socket."              ,1 },
+   { 0x0a, "Service name to socket ID failed."                       ,1 },
+   { 0x0b, "Init transaction failed."                                ,1 },
+   { 0x0c, "Invalid packet size."                                    ,1 },
+   { 0x0d, "Requested packed size is 0, no data can be transfered."  ,0 },
+   { 0x80, "Malformed packet, ignored."                              ,1 },
+   { 0x81, "No credit for received packet, ignored"                  ,0 },
+   { 0x82, "Reply doesn't match with outstanding command, ignored."  ,1 },
+   { 0x83, "Packet size greater as negotiated size."                 ,1 },
+   { 0x84, "Data received for a non opened channel."                 ,1 },
+   { 0x85, "Reply with unknown result value received."               ,1 },
+   { 0x86, "Piggybacked credit in data packet cause overflow."       ,1 },
+   { 0x87, "Unknown 1284.4 Reply."                                   ,0 },
+   { 0x00, NULL                                                      ,0 }
 };
 
 #define RESET_TIMER(ti,oti) { signal(SIGALRM, sig); \
@@ -1383,7 +1383,9 @@ void flushData(int fd, unsigned char socketID)
 /*                                                                 */
 /*******************************************************************/
 
-static void clearSndBuf(int fd)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-function"
+static inline void clearSndBuf(int fd)
 {
    char             buf[256];
    struct itimerval ti, oti;
@@ -1393,6 +1395,7 @@ static void clearSndBuf(int fd)
       SET_TIMER(ti,oti, d4RdTimeout);
    RESET_TIMER(ti,oti);
 }
+#pragma GCC diagnostic pop
 
 void setDebug(int debug)
 {

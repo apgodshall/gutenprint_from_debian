@@ -239,6 +239,12 @@ static const char* control_cmd_PIXMA_MG5300[] = {
   NULL
 };
 
+static const char* control_cmd_PIXMA_MG3500[] = {
+/*"SetTime=20060722092503", */         /*what is this for?*/
+  "ForcePWDetection=OFF",
+  NULL
+};
+
 static const char iP4500_channel_order[STP_NCOLORS] = {1,2,3,0}; /* CMYK */
 
 static const canon_cap_t canon_model_capabilities[] =
@@ -649,12 +655,12 @@ static const canon_cap_t canon_model_capabilities[] =
 
   { /* Canon BJC 6000 *//* heads: BC-30/BC-31 BC-32/BC-31 */
     "6000", 3,
-    618, 936,      /* 8.58" x 13 " */
-    11, 9, 10, 18, /* unconfirmed */
+    618, 4745,      /* 8.58" x 65.9" (banner paper) */
+    10, 10, 9, 20, /* l 3.4mm r 3.4mm t 3mm b 7mm */
     &canon_default_slotlist,
-    CANON_CAP_STD1,0,
+    CANON_CAP_STD1 | CANON_CAP_cart,0,
     2,0,
-    control_cmd_ackshort,
+    control_cmd_BJC_i6100,
     &canon_BJC_6000_modelist,
     &canon_default_paperlist,
     &canon_BJC_6000_modeuselist,
@@ -683,12 +689,12 @@ static const canon_cap_t canon_model_capabilities[] =
 
   { /* Canon BJC 6500 *//* heads: BC-30/BC-31 BC-32/BC-31 */
     "6500", 3,
-    842, INCH(17),
-    11, 9, 10, 18, /* unconfirmed */
+    821, INCH(17), /* printing width: 289,6mm = 11.4" = 821 points */
+    10, 10, 9, 15, /* l 3.4mm r 3.4mm t 3mm b 5mm */
     &canon_default_slotlist,
-    CANON_CAP_STD1,0,
+    CANON_CAP_STD1 | CANON_CAP_cart,0,
     2,0,
-    NULL,
+    control_cmd_BJC_i6100,
     &canon_BJC_6000_modelist,
     &canon_default_paperlist,
     &canon_BJC_6000_modeuselist,
@@ -1305,7 +1311,7 @@ static const canon_cap_t canon_model_capabilities[] =
   },
   { /* Canon PIXMA iP100 */
     "PIXMA iP100", 3,          /*model, model_id*/
-    INCH(17/2), INCH(23),       /* max paper width and height */       /* from MacOSX driver */
+    INCH(17/2), INCH(23),       /* max paper width and height */ /* from MacOSX driver, and linux driver v3.70 */
     10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_NOBLACK|CANON_CAP_S|CANON_CAP_BORDERLESS,0,
@@ -1818,6 +1824,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon PIXMA iP7200 CD-R tray J */
+    "PIXMA iP7200", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* iP7200 uses ESC (r 0x68 command for CD tray only */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features Uses ESC (r only for CD media */
+    &canon_PIXMA_iP7200_modelist,
+    &canon_PIXMA_MG5400_paperlist,
+    &canon_PIXMA_iP7200_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon PIXMA iX4000 --- like iX5000 but includes Transparency and ud1 mode is different */
     "PIXMA iX4000", 3,          /*model, model_id*/
     933, INCH(23),       /* max paper width and height */       /* from MacOSX driver */
@@ -2170,7 +2192,7 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     NULL,
     NULL,
-    NULL
+    iP4500_channel_order
   },
   { /* Canon PIXMA Pro9500 Mk.II */
     "PIXMA Pro9502", 3,          /*model, model_id*/
@@ -2186,7 +2208,7 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     NULL,
     NULL,
-    NULL
+    iP4500_channel_order
   },
   { /* Canon PIXMA iP7100 */
     "PIXMA iP7100", 3,          /*model, model_id*/
@@ -2444,6 +2466,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS MP230 --- with XML no borderless but leave it in as untested */
+    "PIXMA MP230", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0, /* borderless not in Windows driver---untested */
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /*features */
+    &canon_MULTIPASS_MP230_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_MULTIPASS_MP230_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon MULTIPASS MP240 */
     "PIXMA MP240", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from MacOSX driver */
@@ -2524,6 +2562,38 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon PIXMA MG2200 */
+    "PIXMA MG2200", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
+    &canon_PIXMA_MG2100_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_PIXMA_MG2200_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG2400 */
+    "PIXMA MG2400", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
+    &canon_PIXMA_MG2400_modelist,
+    &canon_PIXMA_MG2400_paperlist,
+    &canon_PIXMA_MG2400_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon PIXMA MG3100 */
     "PIXMA MG3100", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.60 */
@@ -2535,6 +2605,38 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG3100_modelist,
     &canon_PIXMA_MG5100_paperlist,
     &canon_PIXMA_MG3100_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG3200 */
+    "PIXMA MG3200", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features: also uses CAP_T */
+    &canon_PIXMA_MG3100_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_PIXMA_MG3200_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG3500 */
+    "PIXMA MG3500", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* unconfirmed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG3500,  /* features: also uses CAP_T */
+    &canon_PIXMA_MG3500_modelist, /* same as MG3100 but try to use inktypes to control use of inks in inksets */
+    &canon_PIXMA_MG3200_paperlist, /* Canon Photo Hagaki changed to merely Photo Hagaki in Windows driver */
+    &canon_PIXMA_MG3500_modeuselist,/* same as MG3200 but try to use inktypes to control use of inks in inksets */
     NULL,
     NULL,
     NULL,
@@ -2588,6 +2690,38 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon PIXMA MG5400 */
+    "PIXMA MG5400", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* from linux drver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features */
+    &canon_PIXMA_MG5300_modelist,
+    &canon_PIXMA_MG5400_paperlist,
+    &canon_PIXMA_MG5400_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG5500 */
+    "PIXMA MG5500", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG3500,
+    &canon_PIXMA_MG5500_modelist,
+    &canon_PIXMA_MG3200_paperlist, /* Canon Photo Hagaki changed to merely Photo Hagaki in Windows driver */
+    &canon_PIXMA_MG5500_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon PIXMA MG6100 */
     "PIXMA MG6100", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.40 */
@@ -2615,6 +2749,38 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG6200_modelist,
     &canon_PIXMA_MG6100_paperlist,
     &canon_PIXMA_MG6200_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG6300 */
+    "PIXMA MG6300", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features */
+    &canon_PIXMA_MG6200_modelist,
+    &canon_PIXMA_MG6300_paperlist,
+    &canon_PIXMA_MG6300_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG6500 */
+    "PIXMA MG6500", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG3500,
+    &canon_PIXMA_MG6500_modelist,
+    &canon_PIXMA_MG6300_paperlist,
+    &canon_PIXMA_MG6500_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2733,6 +2899,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS MX390 --- with XML */
+    "PIXMA MX390", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.90 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,
+    &canon_MULTIPASS_MX370_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_MULTIPASS_MX390_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon MULTIPASS MX420 --- with XML */
     "PIXMA MX420", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.50 */
@@ -2765,6 +2947,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS MX520 --- with XML */
+    "PIXMA MX520", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.90 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,
+    &canon_MULTIPASS_MX510_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_MULTIPASS_MX520_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon MULTIPASS MX700 */
     "PIXMA MX700", 3,          /*model, model_id*/
     INCH(17/2), INCH(23),       /* max paper width and height */ /* from MacOSX driver */
@@ -2783,7 +2981,7 @@ static const canon_cap_t canon_model_capabilities[] =
   },
   { /* Canon MULTIPASS MX710 --- with XML */
     "PIXMA MX710", 3,          /*model, model_id*/
-    INCH(17/2), INCH(23),       /* max paper width and height */ /* from linux driver v3.70 */
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.70 */
     10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
@@ -2792,6 +2990,22 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MX710_modelist,
     &canon_MULTIPASS_MX420_paperlist,
     &canon_MULTIPASS_MX710_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS MX720 --- with XML */
+    "PIXMA MX720", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* from linux driver v3.90 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MX720_slotlist,
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,
+    &canon_PIXMA_MX720_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_PIXMA_MX720_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2861,6 +3075,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS MX920 --- with XML CD-R tray J */
+    "PIXMA MX920", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* from linux driver v3.90 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* iP7200 uses ESC (r 0x68 command for CD tray only */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300,  /* features Uses ESC (r only for CD media */
+    &canon_PIXMA_MX920_modelist,
+    &canon_PIXMA_MG5400_paperlist,
+    &canon_PIXMA_MX920_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon MULTIPASS MX7600 */
     "PIXMA MX7600", 3,          /*model, model_id*/
     INCH(17/2), INCH(23),       /* max paper width and height */ /* from MacOSX driver */
@@ -2893,6 +3123,22 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS E510 --- with XML */
+    "PIXMA E510", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MULTIPASS_E500_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_MULTIPASS_E510_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
   { /* Canon MULTIPASS E600 --- with XML */
     "PIXMA E600", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.70 */
@@ -2904,6 +3150,22 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_E500_modelist,
     &canon_MULTIPASS_MX880_paperlist,
     &canon_MULTIPASS_E500_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS E610 --- with XML */
+    "PIXMA E610", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.80 */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MULTIPASS_E500_modelist,
+    &canon_PIXMA_MG3200_paperlist,
+    &canon_MULTIPASS_E510_modeuselist,
     NULL,
     NULL,
     NULL,

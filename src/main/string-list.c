@@ -1,5 +1,5 @@
 /*
- * "$Id: string-list.c,v 1.19 2005/06/15 01:13:41 rlk Exp $"
+ * "$Id: string-list.c,v 1.21 2014/01/04 00:31:38 rlk Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -33,8 +33,8 @@ static void
 free_list_element(void *item)
 {
   stp_param_string_t *string = (stp_param_string_t *) (item);
-  stp_free((char *) string->name);
-  stp_free((char *) string->text);
+  stp_free(stpi_cast_safe(string->name));
+  stp_free(stpi_cast_safe(string->text));
   stp_free(string);
 }
 
@@ -128,6 +128,31 @@ void
 stp_string_list_add_string(stp_string_list_t *list,
 			   const char *name,
 			   const char *text)
+{
+  stp_param_string_t *new_string = stp_malloc(sizeof(stp_param_string_t));
+  do
+    {
+      const char *xname = name;
+      while (*xname)
+	{
+	  if (!isalnum(*xname) &&
+	      *xname != '_' && *xname != '-' && *xname != '+')
+	    {
+	      stp_erprintf("Gutenprint: bad string %s (%s)\n", name, text);
+	      break;
+	    }
+	  xname++;
+	}
+    } while(0);
+  new_string->name = stp_strdup(name);
+  new_string->text = stp_strdup(text);
+  stp_list_item_create((stp_list_t *) list, NULL, new_string);
+}
+
+void
+stp_string_list_add_string_unsafe(stp_string_list_t *list,
+				  const char *name,
+				  const char *text)
 {
   stp_param_string_t *new_string = stp_malloc(sizeof(stp_param_string_t));
   new_string->name = stp_strdup(name);

@@ -1,5 +1,5 @@
 /*
- * "$Id: printers.c,v 1.89 2010/08/07 02:30:38 rlk Exp $"
+ * "$Id: printers.c,v 1.91 2014/01/12 01:30:44 rlk Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -449,7 +449,7 @@ stp_printer_get_defaults(const stp_printer_t *printer)
 {
   if (! printer->vars_initialized)
     {
-      stp_printer_t *nc_printer = (stp_printer_t *) printer;
+      stp_printer_t *nc_printer = (stp_printer_t *) stpi_cast_safe(printer);
       stp_deprintf(STP_DBG_PRINTERS, "  ==>init %s\n", printer->driver);
       set_printer_defaults (nc_printer->printvars, 1, 0);
       nc_printer->vars_initialized = 1;
@@ -982,6 +982,9 @@ stp_family_register(stp_list_t *family)
 	  printer = (const stp_printer_t *) stp_list_item_get_data(printer_item);
 	  if (!stp_list_get_item_by_name(printer_list, printer->driver))
 	    stp_list_item_create(printer_list, NULL, printer);
+	  else
+	    stp_erprintf("Duplicate printer entry `%s' (%s)\n",
+			 printer->driver, printer->long_name);
 	  printer_item = stp_list_item_next(printer_item);
 	}
     }

@@ -1,10 +1,9 @@
-Welcome to Gutenprint 5.2.9, a stable release of Gutenprint 5.2.  This
-release has a few, mostly emergency bug fixes to 5.2.8.  Please read
-these release notes carefully.
+Welcome to Gutenprint 5.2.10-pre1, a pre-release of Gutenprint
+5.2.10. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
-others.  Gutenprint currently supports over 1600 printer models.
+others.  Gutenprint currently supports over 2000 printer models.
 These drivers provide high quality printing for UNIX, Linux, and
 Macintosh OS X (10.3 and above) systems.  Gutenprint includes CUPS and
 Foomatic drivers, and an enhanced Print plug-in for GIMP that replaces
@@ -21,6 +20,7 @@ These release notes contain the following sections:
 I)    General Requirements
 II)   Critical Upgrade Note
 III)  Changes from Previous Releases
+        * Changes from 5.2.9
         * Changes from 5.2.8
         * Changes from 5.2.7
         * Changes from 5.2.6
@@ -252,6 +252,1064 @@ device.  We have determined that the data is in fact written by the
 ================================================================
 
 III) MAJOR CHANGES FROM PREVIOUS RELEASES
+
+* Changes from 5.2.9
+
+  1) Added a unified CUPS backend to support selected dye sublimation
+     printers.
+
+     A new CUPS backend was added to support USB printers that require a
+     special communications protocol. The backend is called 
+     'gutenprint52usb' and requires libusb 1.0 (or newer) in order to build.
+
+     The following dye-sublimation printers require this backend in order
+     to function properly:
+
+        Canon SELPHY ES series  (All models)
+	Canon SELPHY CP series  (All models except CP520, CP820, and CP910)
+	Kodak Professional 1400
+	Kodak 805 Photo Printer
+   	Kodak 6800 Photo Printer
+   	Kodak 6850 Photo Printer
+	Kodak 605 Photo Printer
+   	Shinko/Sinfonia CHC-S2145 
+   	Sony UP-DR150
+        Sony UP-DR200
+	DNP DS40
+	DNP DS80
+	DNP DS-RX1
+	Citizen CX
+	Citizen CX-W
+	Citizen CY
+        Mitsubishi CP-D70DW  (EXPERIMENTAL)
+        Mitsubishi DP-D707DW (EXPERIMENTAL)
+
+     For further information about configuration and use of this CUPS 
+     backend, please see the README document, section II D.
+
+  2) New printers supported in this release:
+
+     - Epson inkjets:
+
+       EPSON Stylus TX125
+       EPSON Stylus C92
+       EPSON Stylus CX7300
+       EPSON Stylus D78
+       EPSON Stylus SX445W
+       EPSON WorkForce WF-7010 (EXPERIMENTAL)
+       EPSON WorkForce WF-7011 (EXPERIMENTAL)
+       EPSON WorkForce WF-7015 (EXPERIMENTAL)
+       EPSON WorkForce WF-7018 (EXPERIMENTAL)
+       EPSON WorkForce WF-7510 (EXPERIMENTAL)
+       EPSON WorkForce WF-7511 (EXPERIMENTAL)
+       EPSON WorkForce WF-7515 (EXPERIMENTAL)
+       EPSON WorkForce WF-7520 (EXPERIMENTAL)
+       EPSON WorkForce WF-7521 (EXPERIMENTAL)
+       EPSON WorkForce WF-7525 (EXPERIMENTAL)
+       EPSON PX-1200 (EXPERIMENTAL)
+       EPSON PX-1600F (EXPERIMENTAL)
+       EPSON PX-1700F (EXPERIMENTAL)
+
+     - Monochrome laser printers:
+
+       OKI B401d
+
+     - Canon inkjets:
+
+       Canon MP140 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP145   (EXPERIMENTAL)(*2)
+
+       Canon MP150 series  (EXPERIMENTAL)(*1)
+
+       Canon MP160 series  (EXPERIMENTAL)(*1)
+
+       Canon MP170 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP170   (EXPERIMENTAL)(*2)
+
+       Canon MP180 series  (EXPERIMENTAL)(*1)
+
+       Canon MP190 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP198   (EXPERIMENTAL)(*2)
+
+       Canon MP210 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP218   (EXPERIMENTAL)(*2)
+
+       Canon MP220 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP228   (EXPERIMENTAL)(*2)
+
+       Canon MP230 series  (EXPERIMENTAL)
+       Canon PIXMA MP230   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP236   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP237   (EXPERIMENTAL)(*2)
+
+       Canon MP240 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP245   (EXPERIMENTAL)(*2)
+
+       Canon MP250 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP252   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP258   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP259   (EXPERIMENTAL)(*2)
+
+       Canon MP260 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MP268   (EXPERIMENTAL)(*2)
+
+       Canon MP270 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP270   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP272   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP276   (EXPERIMENTAL)(*2)
+
+       Canon MP280 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP280   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP282   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP287   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP288   (EXPERIMENTAL)(*2)
+
+       Canon MP360 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP360   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP360  (EXPERIMENTAL)(*2)
+       Canon SmartBase MP360S (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP360  (EXPERIMENTAL)(*2)
+
+       Canon MP370 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP370   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP370  (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP370  (EXPERIMENTAL)(*2)
+       Canon PIXUS MP375R  (EXPERIMENTAL)(*2)
+
+       Canon MP390 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP390   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP390  (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP390  (EXPERIMENTAL)(*2)
+
+       Canon MP450 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP450   (EXPERIMENTAL)(*2)
+
+       Canon MP460 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP460   (EXPERIMENTAL)(*2)
+
+       Canon MP470 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP470   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP476   (EXPERIMENTAL)(*2)
+
+       Canon MP480 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP480   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP486   (EXPERIMENTAL)(*2)
+
+       Canon MP490 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP490   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP492   (EXPERIMENTAL)(*2)
+       Canon PIXUS MP493   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP495   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP496   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP497   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP498   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP499   (EXPERIMENTAL)(*2)
+
+       Canon MP500 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP500   (EXPERIMENTAL)(*2)
+
+       Canon MP510 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP510   (EXPERIMENTAL)(*2)
+
+       Canon MP520 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP520   (EXPERIMENTAL)(*2)
+
+       Canon MP530 series  (EXPERIMENTAL)(*1)
+
+       Canon MP540 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP540   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP545   (EXPERIMENTAL)(*2)
+
+       Canon MP550 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP550   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP558   (EXPERIMENTAL)(*2)
+
+       Canon MP560 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP560   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP568   (EXPERIMENTAL)(*2)
+
+       Canon MP600 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP600   (EXPERIMENTAL)(*2)
+
+       Canon MP610 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP610   (EXPERIMENTAL)(*2)
+
+       Canon MP620 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP620   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP628   (EXPERIMENTAL)(*2)
+
+       Canon MP630 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP630   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP638   (EXPERIMENTAL)(*2)
+
+       Canon MP640 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP640   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP648   (EXPERIMENTAL)(*2)
+
+       Canon MP700 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP700   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP700 (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP700 (EXPERIMENTAL)(*2)
+
+       Canon MP710 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP710   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP710 (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP710 (EXPERIMENTAL)(*2)
+
+       Canon MP730 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP730   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP730 (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP730 (EXPERIMENTAL)(*2)
+
+       Canon MP740 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP740   (EXPERIMENTAL)(*2)
+       Canon SmartBase MP740 (EXPERIMENTAL)(*2)
+       Canon MultiPASS MP740 (EXPERIMENTAL)(*2)
+
+       Canon MP750 series  (EXPERIMENTAL)(*1)
+
+       Canon MP760 series  (EXPERIMENTAL)(*1)
+
+       Canon MP770 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP700   (EXPERIMENTAL)(*2)
+
+       Canon MP780 series  (EXPERIMENTAL)(*1)
+
+       Canon MP790 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP790   (EXPERIMENTAL)(*2)
+
+       Canon MP800 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP800   (EXPERIMENTAL)(*2)
+
+       Canon MP810 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP810   (EXPERIMENTAL)(*2)
+
+       Canon MP830 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP830   (EXPERIMENTAL)(*2)
+
+       Canon MP900 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP900   (EXPERIMENTAL)(*2)
+
+       Canon MP950 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP950   (EXPERIMENTAL)(*2)
+
+       Canon MP960 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP960   (EXPERIMENTAL)(*2)
+
+       Canon MP970 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP970   (EXPERIMENTAL)(*2)
+
+       Canon MP980 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP980   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP988   (EXPERIMENTAL)(*2)
+
+       Canon MP990 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MP990   (EXPERIMENTAL)(*2)
+       Canon PIXMA MP996   (EXPERIMENTAL)(*2)
+
+       Canon MG2100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG2110  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2120  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG2130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2160  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2180  (EXPERIMENTAL)(*2)
+
+       Canon MG2200 series (EXPERIMENTAL)
+       Canon PIXMA MG2210  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2220  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2260  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2270  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG2280  (EXPERIMENTAL)(*2)
+
+       Canon MG2400 series (EXPERIMENTAL)(*3)
+       Canon PIXMA MG2400  (EXPERIMENTAL)
+       Canon PIXMA MG2410  (EXPERIMENTAL)
+       Canon PIXMA MG2420  (EXPERIMENTAL)
+       Canon PIXMA MG2440  (EXPERIMENTAL)
+       Canon PIXMA MG2450  (EXPERIMENTAL)
+       Canon PIXMA MG2470  (EXPERIMENTAL)
+
+       Canon MG2500 series (EXPERIMENTAL)(*3)
+       Canon PIXMA MG2510  (EXPERIMENTAL)
+       Canon PIXMA MG2520  (EXPERIMENTAL)
+       Canon PIXMA MG2540  (EXPERIMENTAL)
+       Canon PIXMA MG2550  (EXPERIMENTAL)
+       Canon PIXMA MG2560  (EXPERIMENTAL)
+       Canon PIXMA MG2570  (EXPERIMENTAL)
+       Canon PIXMA MG2580  (EXPERIMENTAL)
+
+       Canon MG3100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG3110  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3120  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3122  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG3130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3160  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3180  (EXPERIMENTAL)(*2)
+
+       Canon MG3200 series (EXPERIMENTAL)
+       Canon PIXMA MG3210  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3220  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3222  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG3230  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3260  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG3270  (EXPERIMENTAL)(*2)
+
+       Canon MG3500 series (EXPERIMENTAL)
+       Canon PIXMA MG3510  (EXPERIMENTAL)
+       Canon PIXMA MG3520  (EXPERIMENTAL)
+       Canon PIXMA MG3530  (EXPERIMENTAL)
+       Canon PIXMA MG3540  (EXPERIMENTAL)
+       Canon PIXMA MG3550  (EXPERIMENTAL)
+       Canon PIXMA MG3560  (EXPERIMENTAL)
+       Canon PIXMA MG3570  (EXPERIMENTAL)
+       Canon PIXMA MG3580  (EXPERIMENTAL)
+
+       Canon MG4100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG4110  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4120  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG4130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4160  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4180  (EXPERIMENTAL)(*2)
+
+       Canon MG4200 series (EXPERIMENTAL)
+       Canon PIXMA MG4210  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4220  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG4230  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4260  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4270  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG4280  (EXPERIMENTAL)(*2)
+
+       Canon MG5100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG5120  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG5130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5180  (EXPERIMENTAL)(*2)
+
+       Canon MG5200 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG5210  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5220  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG5230  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5270  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5280  (EXPERIMENTAL)(*2)
+
+       Canon MG5300 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG5310  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5320  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG5330  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5340  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5350  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5370  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5380  (EXPERIMENTAL)(*2)
+
+       Canon MG5400 series (EXPERIMENTAL)
+       Canon PIXMA MG5410  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5420  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5422  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG5430  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5440  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5450  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5460  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5470  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG5480  (EXPERIMENTAL)(*2)
+
+       Canon MG5500 series (EXPERIMENTAL)
+       Canon PIXMA MG5510  (EXPERIMENTAL)
+       Canon PIXMA MG5520  (EXPERIMENTAL)
+       Canon PIXMA MG5522  (EXPERIMENTAL)
+       Canon PIXUS MG5530  (EXPERIMENTAL)
+       Canon PIXMA MG5540  (EXPERIMENTAL)
+       Canon PIXMA MG5550  (EXPERIMENTAL)
+       Canon PIXMA MG5560  (EXPERIMENTAL)
+       Canon PIXMA MG5570  (EXPERIMENTAL)
+       Canon PIXMA MG5580  (EXPERIMENTAL)
+
+       Canon MG6100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG6110  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6120  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG6130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6180  (EXPERIMENTAL)(*2)
+
+       Canon MG6200 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG6210  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6220  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG6230  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6270  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6280  (EXPERIMENTAL)(*2)
+
+       Canon MG6300 series (EXPERIMENTAL)
+       Canon PIXMA MG6310  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6320  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG6330  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6340  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6350  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6360  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6370  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG6380  (EXPERIMENTAL)(*2)
+
+       Canon MG6400 series (EXPERIMENTAL)
+       Canon PIXMA MG6400  (EXPERIMENTAL)
+       Canon PIXMA MG6410  (EXPERIMENTAL)
+       Canon PIXMA MG6420  (EXPERIMENTAL)
+       Canon PIXMA MG6440  (EXPERIMENTAL)
+       Canon PIXMA MG6450  (EXPERIMENTAL)
+       Canon PIXMA MG6470  (EXPERIMENTAL)
+
+       Canon MG6500 series (EXPERIMENTAL)
+       Canon PIXUS MG6530  (EXPERIMENTAL)
+
+       Canon MG7100 series (EXPERIMENTAL)
+       Canon PIXMA MG7110  (EXPERIMENTAL)
+       Canon PIXMA MG7120  (EXPERIMENTAL)
+       Canon PIXUS MG7130  (EXPERIMENTAL)
+       Canon PIXMA MG7140  (EXPERIMENTAL)
+       Canon PIXMA MG7150  (EXPERIMENTAL)
+       Canon PIXMA MG7170  (EXPERIMENTAL)
+       Canon PIXMA MG7180  (EXPERIMENTAL)
+
+       Canon MG8100 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG8120  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG8130  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8140  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8150  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8170  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8180  (EXPERIMENTAL)(*2)
+
+       Canon MG8200 series (EXPERIMENTAL)(*1)
+       Canon PIXMA MG8220  (EXPERIMENTAL)(*2)
+       Canon PIXUS MG8230  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8240  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8250  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8270  (EXPERIMENTAL)(*2)
+       Canon PIXMA MG8280  (EXPERIMENTAL)(*2)
+
+       Canon iP2700 series (EXPERIMENTAL)(*1)
+       Canon PIXMA iP2701  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2702  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2740  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2760  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2770  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2772  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2780  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP2788  (EXPERIMENTAL)(*2)
+
+       Canon iP3100 series (EXPERIMENTAL)(*1)
+
+       Canon iP3300 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP3300  (EXPERIMENTAL)(*2)
+
+       Canon iP3500 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP3500  (EXPERIMENTAL)(*2)
+
+       Canon iP3600 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP3600  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP3680  (EXPERIMENTAL)(*2)
+
+       Canon iP4100 series (EXPERIMENTAL)(*1)
+
+       Canon iP4100R series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4100R (EXPERIMENTAL)(*2)
+
+       Canon iP4200 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4200 (EXPERIMENTAL)(*2)
+
+       Canon iP4300 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4300 (EXPERIMENTAL)(*2)
+
+       Canon iP4500 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4500  (EXPERIMENTAL)(*2)
+
+       Canon iP4600 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4600  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4680  (EXPERIMENTAL)(*2)
+
+       Canon iP4700 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP4700  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4760  (EXPERIMENTAL)(*2)
+
+       Canon iP4800 series (EXPERIMENTAL)(*1)
+       Canon PIXMA iP4810  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4820  (EXPERIMENTAL)(*2)
+       Canon PIXUS iP4830  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4840  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4850  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4870  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4880  (EXPERIMENTAL)(*2)
+
+       Canon iP4900 series (EXPERIMENTAL)(*1)
+       Canon PIXMA iP4910  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4920  (EXPERIMENTAL)(*2)
+       Canon PIXUS iP4930  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4940  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4950  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4970  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP4980  (EXPERIMENTAL)(*2)
+
+       Canon iP5000 series (EXPERIMENTAL)(*1)
+
+       Canon iP5200 series (EXPERIMENTAL)(*1)
+
+       Canon iP5200R series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP5200R  (EXPERIMENTAL)(*2)
+
+       Canon iP5300 series (EXPERIMENTAL)(*1)
+
+       Canon iP6000D series (EXPERIMENTAL)(*1)
+
+       Canon iP6100D series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP6100D  (EXPERIMENTAL)(*2)
+
+       Canon iP6210D series (EXPERIMENTAL)(*1)
+
+       Canon iP6220D series (EXPERIMENTAL)(*1)
+
+       Canon iP6310D series (EXPERIMENTAL)(*1)
+
+       Canon iP6320D series (EXPERIMENTAL)(*1)
+
+       Canon iP6600D series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP6600D  (EXPERIMENTAL)(*2)
+
+       Canon iP6700D series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP6700D  (EXPERIMENTAL)(*2)
+
+       Canon iP7100 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP7100  (EXPERIMENTAL)(*2)
+
+       Canon iP7500 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP7500  (EXPERIMENTAL)(*2)
+
+       Canon iP8100 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP8100  (EXPERIMENTAL)(*2)
+
+       Canon iP8500 series (EXPERIMENTAL)(*1)
+
+       Canon iP8600 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP8600  (EXPERIMENTAL)(*2)
+
+       Canon iP9910 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iP9910  (EXPERIMENTAL)(*2)
+
+       Canon iP7200 series (EXPERIMENTAL)
+       Canon PIXMA iP7210  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7220  (EXPERIMENTAL)(*2)
+       Canon PIXUS iP7230  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7240  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7250  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7260  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7270  (EXPERIMENTAL)(*2)
+       Canon PIXMA iP7280  (EXPERIMENTAL)(*2)
+
+       Canon iX4000 series (EXPERIMENTAL)(*1)
+
+       Canon iX5000 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iX5000  (EXPERIMENTAL)(*2)
+
+       Canon iX6500 series (EXPERIMENTAL)(*1)
+       Canon PIXMA iX6510  (EXPERIMENTAL)(*2)
+       Canon PIXMA iX6520  (EXPERIMENTAL)(*2)
+       Canon PIXUS iX6530  (EXPERIMENTAL)(*2)
+       Canon PIXMA iX6540  (EXPERIMENTAL)(*2)
+       Canon PIXMA iX6550  (EXPERIMENTAL)(*2)
+       Canon PIXMA iX6560  (EXPERIMENTAL)(*2)
+       Canon PIXMA iX6580  (EXPERIMENTAL)(*2)
+
+       Canon iX7000 series (EXPERIMENTAL)(*1)
+       Canon PIXUS iX7000  (EXPERIMENTAL)(*2)
+			   
+       Canon MX300 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX308   (EXPERIMENTAL)(*2)
+
+       Canon MX310 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX318   (EXPERIMENTAL)(*2)
+
+       Canon MX320 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX328   (EXPERIMENTAL)(*2)
+
+       Canon MX330 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX338   (EXPERIMENTAL)(*2)
+
+       Canon MX340 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX347   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX348   (EXPERIMENTAL)(*2)
+
+       Canon MX350 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MX350   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX357   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX358   (EXPERIMENTAL)(*2)
+
+       Canon MX360 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX366   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX368   (EXPERIMENTAL)(*2)
+
+       Canon MX370 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX371   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX372   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX374   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX375   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX376   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX377   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX378   (EXPERIMENTAL)(*2)
+
+       Canon MX390 series  (EXPERIMENTAL)
+       Canon PIXMA MX391   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX392   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX394   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX395   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX396   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX397   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX398   (EXPERIMENTAL)(*2)
+
+       Canon MX410 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX416   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX418   (EXPERIMENTAL)(*2)
+
+       Canon MX420 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MX420   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX426   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX428   (EXPERIMENTAL)(*2)
+
+       Canon MX430 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX431   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX432   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX434   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX435   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX436   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX437   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX438   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX439   (EXPERIMENTAL)(*2)
+			   
+       Canon MX450 series  (EXPERIMENTAL)
+       Canon PIXMA MX451   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX452   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX454   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX455   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX456   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX457   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX458   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX459   (EXPERIMENTAL)(*2)
+
+       Canon MX510 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX511   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX512   (EXPERIMENTAL)(*2)
+       Canon PIXUS MX513   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX514   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX515   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX516   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX517   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX518   (EXPERIMENTAL)(*2)
+
+       Canon MX520 series  (EXPERIMENTAL)
+       Canon PIXMA MX521   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX522   (EXPERIMENTAL)(*2)
+       Canon PIXUS MX523   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX524   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX525   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX526   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX527   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX528   (EXPERIMENTAL)(*2)
+
+       Canon MX700 series  (EXPERIMENTAL)(*1)
+
+       Canon MX710 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX711   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX712   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX714   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX715   (EXPERIMENTAL)(*2)
+			   
+       Canon MX720 series  (EXPERIMENTAL)
+       Canon PIXMA MX721   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX722   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX725   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX726   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX727   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX728   (EXPERIMENTAL)(*2)
+
+       Canon MX860 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MX860   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX868   (EXPERIMENTAL)(*2)			   
+
+       Canon MX870 series  (EXPERIMENTAL)(*1)
+       Canon PIXUS MX870   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX876   (EXPERIMENTAL)(*2)			   
+
+       Canon MX880 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX882   (EXPERIMENTAL)(*2)
+       Canon PIXUS MX883   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX884   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX885   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX886   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX888   (EXPERIMENTAL)(*2)
+
+       Canon MX890 series  (EXPERIMENTAL)(*1)
+       Canon PIXMA MX892   (EXPERIMENTAL)(*2)
+       Canon PIXUS MX893   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX894   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX895   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX897   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX898   (EXPERIMENTAL)(*2)
+
+       Canon MX920 series  (EXPERIMENTAL)
+       Canon PIXMA MX922   (EXPERIMENTAL)(*2)
+       Canon PIXUS MX923   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX924   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX925   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX926   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX927   (EXPERIMENTAL)(*2)
+       Canon PIXMA MX928   (EXPERIMENTAL)(*2)
+
+       Canon MX7600 series (EXPERIMENTAL)(*1)
+       Canon PIXUS MX7600  (EXPERIMENTAL)(*2)
+
+       Canon E500 series   (EXPERIMENTAL)(*1)
+			   
+       Canon E510 series   (EXPERIMENTAL)
+       Canon PIXMA E510    (EXPERIMENTAL)(*2)
+       Canon PIXMA E518    (EXPERIMENTAL)(*2)
+			   
+       Canon E600 series   (EXPERIMENTAL)(*1)
+       Canon PIXMA E608    (EXPERIMENTAL)(*2)
+			   
+       Canon E610 series   (EXPERIMENTAL)
+       Canon PIXMA E610    (EXPERIMENTAL)(*2)
+       Canon PIXMA E618    (EXPERIMENTAL)(*2)
+
+       Canon Pro9000 series (EXPERIMENTAL)(*1)
+       Canon PIXUS Pro9000  (EXPERIMENTAL)(*2)
+
+       Canon Pro9000 II series (EXPERIMENTAL)(*1)
+       Canon PIXUS Pro9000 II  (EXPERIMENTAL)(*2)
+
+       Canon Pro9500 series (EXPERIMENTAL)(*1)
+       Canon PIXUS Pro9500  (EXPERIMENTAL)(*2)
+
+       Canon Pro9500 II series (EXPERIMENTAL)(*1)
+       Canon PIXUS Pro9500 II  (EXPERIMENTAL)(*2)
+
+       Note 1: Added the printer family
+               identification string by
+               which all family instances
+               identify themselves to the OS.
+
+       Note 2: Added individual family
+               instances, even though the
+               printer identifies itself
+               by a generic family
+               identification string.
+
+       Note 3: MG2400 and MG2500 lines only support 4 media types:
+               plain, photo paper gloss Gold, photo paper gloss, and envelope.
+               We have retained support for other media types common
+               to recent Canon printers, but it is unconfirmed whether
+               the printer firmware will accept these.
+               The lines also lack support for borderless printing 
+               in the Windows driver, and we have not tried to add
+               experimental support.
+
+       Area codes as follows:
+             1: Latin America
+             2: USA
+             3: Japan
+             4: Europe/Africa
+             5: UK
+             6: Australia/New Zealand
+             7: India/South Asia
+             8: China
+             (for MG series includes a trailing 0)
+
+     - Canon dye-sublimation printers:
+
+       Support for all Canon SELPHY CP- and ES- printers has been improved
+       considerably through the addition of an intelligent CUPS backend.  As
+       well as enabling support for more recent printers, it improves support
+       for older models as well.
+
+       Newly added in this release:
+
+       Canon SELPHY CP810
+       Canon SELPHY CP900
+
+       Added back after removal in 5.2.9 release:
+
+       Canon SELPHY CP600 *1
+       Canon SELPHY CP720 
+       Canon SELPHY CP780
+       Canon SELPHY CP800
+       Canon SELPHY ES1
+       Canon SELPHY ES2
+       Canon SELPHY ES3
+       Canon SELPHY ES20 *1
+       Canon SELPHY ES30
+       Canon SELPHY ES40
+
+       Improved support for existing models:
+
+       Canon CP-100
+       Canon CP-200
+       Canon CP-220       *1
+       Canon CP-300
+       Canon CP-330
+       Canon SELPHY CP400
+       Canon SELPHY CP500
+       Canon SELPHY CP510
+       Canon SELPHY CP520
+       Canon SELPHY CP530 *1
+       Canon SELPHY CP710
+       Canon SELPHY CP730
+       Canon SELPHY CP740
+       Canon SELPHY CP750
+       Canon SELPHY CP760
+       Canon SELPHY CP770
+       Canon SELPHY CP790
+
+       Known Problematic models:
+
+       The USB PIDs for the following three SELPHY CP series models are 
+       still unknown, and are therefore unsupported by the backend:
+
+       Canon SELPHY CP520
+       Canon SELPHY CP820
+       Canon SELPHY CP910
+
+	*1: We have not confirmed these printers function with the new
+	    backend, but they are presumed to work.
+
+     - Mitsubishi Dye-Sublimation printers:
+
+       Mitsubishi CP9810D/DW
+
+	This model has been verified to work
+
+       Mitsubishi CP3020D/DU/DE (EXPERIMENTAL)
+       Mitsubishi CP3020DA/DAE  (EXPERIMENTAL)
+       Mitsubishi CP9550D/DW    (EXPERIMENTAL)
+       Mitsubishi CPD70D/DW     (EXPERIMENTAL)
+       Mitsubishi CPD707D/DW    (EXPERIMENTAL)
+       Mitsubishi CPK60DW       (EXPERIMENTAL)
+       Mitsubishi CP3800DW      (EXPERIMENTAL)
+
+	None of these models have been tested and confirmed to work 
+	(or not), so feedback is welcome.
+
+	NOTE: With the exception of the CP-K60DW-S, all Mitsubishi
+	printers with red faceplates and/or model designations ending with 
+	an '-S' suffix are not supported.
+
+	The CP-D70DW and CP-D707DW (and likely the CP-K60DW) require use of 
+	an intelligent backend,	which is bundled with Gutenprint.
+
+     - Kodak Dye-Sublimation printers:
+
+       Kodak 1400
+       Kodak 805
+       Kodak 6800
+       Kodak 6850
+       Kodak 605
+
+	These Kodak models require an intelligent CUPS backend, 
+	which is bundled with Gutenprint.
+
+       Kodak 8500 (EXPERIMENTAL)	
+       Kodak 9810 (EXPERIMENTAL)
+
+	Neither of these models have been tested and confirmed to work 
+	(or not), so feedback is welcome.
+
+     - Shinko/Sinfonia Dye-Sublimation printers:
+
+       Shinko/Sinfonia CHC-S2145 (aka S2)
+
+	The CHC-S2145 requires an intelligent CUPS backend, which is
+	bundled with Gutenprint.
+
+     - Sony Dye-Sublimation printers:
+
+       Sony UP-DR150
+
+	Support for the Sony UP-DR150 was greatly improved through the
+	addition of an intelligent CUPS backend.
+
+       Sony UP-DR200
+
+	The Sony UP-DR200 requires the use of an intelligent CUPS backend.
+
+     - Dai Nippon Printing (DNP) printers:
+
+       DNP DS40
+       DNP DS80
+
+	Support for these printers has been considerably improved:
+ 
+	 * Addition of an intelligent CUPS backend
+	 * 5x7 and 3.5x5" print support on the DS40
+	 * Matte lamination with printer firmware 1.30 or newer
+	 * Improved margins making printable area more explicit
+	 * Support 300x600dpi print mode
+
+       DNP DSRX1
+
+         This printer is functionally identical to the DS40, except
+         it does not support 6x9 prints,
+
+     - Citizen Dye-Sublimation printers: 
+
+       Citizen CX
+       Citizen CX-W
+       Citizen CY
+
+         These models are identical to the DNP DS40, DS80, and DSRX1,
+	 respectively, and for best results should be used with the
+	 intelligent backend.
+       
+       Citizen CW-01
+       Citizen CW-02
+       Citizen OP900
+       Citizen OP900II
+
+         Support for these models is considered experimental; they have
+	 not yet been tested.  They are functionally identical to the
+	 Citizen CX.
+
+  3) The following Canon printer models were not added, as they cannot
+     currently be supported, even experimentally, owing to an as-yet
+     unknown command format or other issues:
+
+       Canon PIXMA mini260 *1
+       Canon PIXMA i255
+       Canon PIXMA i355
+       Canon PIXMA iP1180
+       Canon PIXMA iP1188
+       Canon PIXMA iP1880
+       Canon PIXMA iP1980
+       Canon PIXMA iP2580
+       Canon PIXMA iP2680
+       Canon PIXMA PRO-10  *1
+       Canon PIXMA PRO-100 *1
+
+       *1: protocol is supported but inks used are not yet supported
+
+  4) Corrected page dimensions for borderless printing with Canon
+     printers.
+
+  5) Added duplex support for the EPSON WorkForce 645.
+
+  6) Expanded printable area at the bottom of the page for the Epson
+     Stylus Pro 3800 and 3880.
+
+  7) Added IEEE1284 device IDs for the following printers.
+
+     - Device IDs added for the following Canon printers:
+       Canon SELPHY ES1
+       Canon SELPHY ES2
+       Canon SELPHY ES3
+       Canon SELPHY ES30
+       Canon SELPHY ES40
+       Canon SELPHY CP-10
+       Canon SELPHY CP-100
+       Canon SELPHY CP-200
+       Canon SELPHY CP-220
+       Canon SELPHY CP-300
+       Canon SELPHY CP-330
+       Canon SELPHY CP400
+       Canon SELPHY CP500
+       Canon SELPHY CP510
+       Canon SELPHY CP530
+       Canon SELPHY CP600
+       Canon SELPHY CP710
+       Canon SELPHY CP720
+       Canon SELPHY CP730
+       Canon SELPHY CP750
+       Canon SELPHY CP760
+       Canon SELPHY CP780
+       Canon SELPHY CP790
+       Canon SELPHY CP800
+       Canon SELPHY CP810
+       Canon iP2700 series
+       Canon PIXMA iP3000
+       Canon PIXMA iP4000 (possibly incomplete)
+       Canon PIXMA iP4200 (possibly incomplete)
+       Canon Pro9000 II series (possibly incomplete)
+       Canon MP160
+       Canon MP250 series
+       Canon MP280 series (possibly incomplete)
+       Canon MP450 series
+
+     - Device IDs added for the following Epson printers:
+       Epson Stylus Photo 1270
+       Epson Stylus Photo R2400
+       Epson Stylus C92
+       Epson Stylus D78
+       Epson Stylus Color 680
+
+     - Device IDs added for the following Bother printers:
+       Brother HL-2030 series
+
+     - Device IDs added for the following Hewlett-Packard printers:
+       HP Color LaserJet 2500
+       HP Color LaserJet 4550 (added space in DES)
+       HP LaserJet 4050 (added space in DES)
+       HP LaserJet 4100 (added space in DES)
+       HP LaserJet 4350 (improved)
+       HP LaserJet 5100
+       HP LaserJet 8000
+       HP LaserJet M3027 MFP (corrected)
+       HP LaserJet M3035 MFP (corrected)
+       HP LaserJet P3005 (corrected)
+
+     - Device IDs added for the following Samsung printers:
+       Samsung ML-1450 (possibly incomplete)
+
+     - Device IDs added for the following Kodak printers:
+       Kodak 1400
+       Kodak 605
+       Kodak 805
+       Kodak 6800
+       Kodak 6850
+
+     - Device IDs added for the following Kyocera printers:
+       Kyocera FS-1118MFP
+
+     - Device IDs added for the following Sony printers:
+       Sony UP-DR150
+
+     - Device IDs added for the following Shinko/Sinfonia printers:
+       Shinko/Sinfonia CHC-S2145
+
+     - Device IDs added for the following Mitsubishi printers:
+       Mitsubishi CP-D70DW
+       Mitsubishi CP-D707DW
+
+     - Device IDs added for the following DNP printers:
+       DNP DS40
+       DNP DS80
+
+     - Device IDs added for the following Citizen printers:
+       Citizen CX
+
+  8) Added Catalan, Turkish, and Vietnamese translations.
 
 * Changes from 5.2.8
 

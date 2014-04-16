@@ -1,5 +1,5 @@
 /*
- * "$Id: rastertoprinter.c,v 1.139 2011/12/18 16:20:31 rlk Exp $"
+ * "$Id: rastertoprinter.c,v 1.143 2014/01/04 00:31:37 rlk Exp $"
  *
  *   Gutenprint based raster filter for the Common UNIX Printing System.
  *
@@ -135,6 +135,16 @@ static const char *load_file_name = NULL;
 #endif /* ENABLE_CUPS_LOAD_SAVE_OPTIONS */
 
 extern void stpi_vars_print_error(const stp_vars_t *v, const char *prefix);
+
+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+static inline void *
+cast_safe(const void *ptr)
+{
+  return (void *)ptr;
+}
+#pragma GCC diagnostic pop
 
 static void
 set_string_parameter(stp_vars_t *v, const char *name, const char *val)
@@ -330,7 +340,7 @@ static stp_vars_t *
 initialize_page(cups_image_t *cups, const stp_vars_t *default_settings,
 		const char *page_size_name)
 {
-  int tmp_left, tmp_right, tmp_top, tmp_bottom, tmp_width, tmp_height;
+  int tmp_left, tmp_right, tmp_top, tmp_bottom;
   stp_vars_t *v = stp_vars_create_copy(default_settings);
 
   if (! suppress_messages)
@@ -480,8 +490,6 @@ initialize_page(cups_image_t *cups, const stp_vars_t *default_settings,
     tmp_right = cups->width;
   if (tmp_bottom > tmp_top + cups->height)
     tmp_bottom = cups->height;
-  tmp_width = cups->right - cups->left;
-  tmp_height = cups->bottom - cups->top;
   if (tmp_left < cups->left)
     {
       if (cups->shrink_to_fit != 1)
@@ -802,7 +810,7 @@ set_all_options(stp_vars_t *v, cups_option_t *options, int num_options,
 		  if (raw)
 		    {
 		      stp_set_raw_parameter(v, desc.name, raw->data, raw->bytes);
-		      stp_free((void *)raw->data);
+		      stp_free(cast_safe(raw->data));
 		      stp_free(raw);
 		    }
 		  break;
@@ -1085,7 +1093,6 @@ main(int  argc,				/* I - Number of command-line arguments */
   const char            *version_id;
   const char            *release_version_id;
   struct tms		tms;
-  clock_t		clk;
   long			clocks_per_sec;
   struct timeval	t1, t2;
   struct timezone	tz;
@@ -1398,12 +1405,11 @@ main(int  argc,				/* I - Number of command-line arguments */
       stp_vars_destroy(v);
     }
   cupsRasterClose(cups.ras);
-  clk = times(&tms);
+  (void) times(&tms);
   (void) gettimeofday(&t2, &tz);
   clocks_per_sec = sysconf(_SC_CLK_TCK);
-  fprintf(stderr, "DEBUG: Gutenprint: Printed total %.0f bytes\n",
-	  total_bytes_printed);
-  fprintf(stderr, "DEBUG: Gutenprint: Time %.3f user, %.3f sys, %.3f elapsed\n",
+  fprintf(stderr, "DEBUG: Gutenprint: stats %.0fB, %.3fu, %.3fs, %.3fel\n",
+	  total_bytes_printed,
 	  (double) tms.tms_utime / clocks_per_sec,
 	  (double) tms.tms_stime / clocks_per_sec,
 	  (double) (t2.tv_sec - t1.tv_sec) +
@@ -1704,5 +1710,5 @@ Image_width(stp_image_t *image)	/* I - Image */
 
 
 /*
- * End of "$Id: rastertoprinter.c,v 1.139 2011/12/18 16:20:31 rlk Exp $".
+ * End of "$Id: rastertoprinter.c,v 1.143 2014/01/04 00:31:37 rlk Exp $".
  */

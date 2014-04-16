@@ -1,2 +1,0 @@
-debian/install/usr/lib/gimp/2.0/plug-ins/gutenprint  usr/lib/gimp/2.0/plug-ins
-samples/*.png                                        usr/share/doc/gutenprint/samples

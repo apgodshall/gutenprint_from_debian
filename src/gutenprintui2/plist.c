@@ -1,5 +1,5 @@
 /*
- * "$Id: plist.c,v 1.18 2008/07/04 14:29:28 rlk Exp $"
+ * "$Id: plist.c,v 1.20 2014/01/04 00:31:37 rlk Exp $"
  *
  *   Print plug-in for the GIMP.
  *
@@ -348,12 +348,6 @@ writefunc(void *file, const char *buf, size_t bytes)
 {
   FILE *prn = (FILE *)file;
   fwrite(buf, 1, bytes, prn);
-}
-
-static void
-stpui_errfunc(void *file, const char *buf, size_t bytes)
-{
-  g_message("%s",buf);
 }
 
 void
@@ -966,7 +960,6 @@ extern int yyparse(void);
 static void
 stpui_printrc_load_v2(FILE *fp)
 {
-  int retval;
   char *locale;
   yyin = fp;
 
@@ -975,7 +968,7 @@ stpui_printrc_load_v2(FILE *fp)
   locale = g_strdup(setlocale(LC_NUMERIC, NULL));
   setlocale(LC_NUMERIC, "C");
 #endif
-  retval = yyparse();
+  (void) yyparse();
 #ifdef HAVE_LOCALE_H
   setlocale(LC_NUMERIC, locale);
   SAFE_FREE(locale);
@@ -1249,8 +1242,8 @@ stpui_get_system_printers(void)
   char  line[1025];		/* Line from status command */
 
   stpui_system_print_queues = stp_string_list_create();
-  stp_string_list_add_string(stpui_system_print_queues, "",
-			     _("(Default Printer)"));
+  stp_string_list_add_string_unsafe(stpui_system_print_queues, "",
+				    _("(Default Printer)"));
 
  /*
   * Run the command, if any, to get the available printers...
@@ -1281,8 +1274,8 @@ stpui_get_system_printers(void)
 	  if (strlen(line) > 0)
 	    {
 	      if (!stp_string_list_is_present(stpui_system_print_queues, line))
-		stp_string_list_add_string(stpui_system_print_queues,
-					   line, line);
+		stp_string_list_add_string_unsafe(stpui_system_print_queues,
+						  line, line);
 	    }
 	}
       pclose(pfile);
@@ -1637,7 +1630,6 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 		      else	/* Child 2 (printer command) */
 			{
 			  char *command;
-			  char *locale;
 			  if (stpui_plist_get_command_type(printer) ==
 			      COMMAND_TYPE_DEFAULT)
 			    {
@@ -1648,7 +1640,7 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 			    }
 			  else
 			    command =
-			      (char *) stpui_plist_get_custom_command(printer);
+			      cast_safe(stpui_plist_get_custom_command(printer));
 			  (void) close(2);
 			  (void) close(1);
 			  dup2 (errfd[1], 2);
@@ -1658,7 +1650,7 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 			  close (pipefd[1]);
 			  close(syncfd[1]);
 #ifdef HAVE_LOCALE_H
-			  locale = g_strdup(setlocale(LC_NUMERIC, NULL));
+			  setlocale(LC_NUMERIC, NULL);
 			  setlocale(LC_NUMERIC, "C");
 #endif
 			  execl("/bin/sh", "/bin/sh", "-c", command, NULL);
@@ -1828,11 +1820,12 @@ stpui_print(const stpui_plist_t *printer, stpui_image_t *image)
 	}
       stpui_plist_destroy(np);
       g_free(np);
-      return 1;
+      return print_status;
     }
+
   return 0;
 }
 
 /*
- * End of "$Id: plist.c,v 1.18 2008/07/04 14:29:28 rlk Exp $".
+ * End of "$Id: plist.c,v 1.20 2014/01/04 00:31:37 rlk Exp $".
  */

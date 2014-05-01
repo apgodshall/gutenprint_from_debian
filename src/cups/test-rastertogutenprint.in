@@ -66,7 +66,7 @@ fi
 
 version="@GUTENPRINT_MAJOR_VERSION@.@GUTENPRINT_MINOR_VERSION@";
 cupsdir="@cups_conf_serverbin@/filter"
-if [ -x "$cupsdir/pstoraster" -o -x "$cupsdir/cgpdftoraster" ] ; then
+if [ -x "$cupsdir/pstoraster" -o -x "$cupsdir/gstoraster" -o -x "$cupsdir/cgpdftoraster" ] ; then
     pages="page-ranges=24-`expr 24 + $npages - 1` "
 else
     pages=''
@@ -221,15 +221,19 @@ if [ -d ppd/C ] ; then
 	    is_duplicate $f
 	fi
 	if [ -z "$skip" ] ; then
-	    echo "$f "
+	    echo -n "`basename $f |sed -e 's/stp-//' -e 's/@GUTENPRINT_RELEASE_VERSION@.ppd.*$//'`... "
 	    PPD=$f
 	    export PPD
 	    if [ -x "$cupsdir/cgpdftoraster" ] ; then
 		output="`($cupsdir/cgpdftoraster 1 1 1 1 $pages < $sdir/../../doc/gutenprint-users-manual.pdf 2>/dev/null | run_rastertogp | do_output) 2>&1`"
+	    elif [ -f "$tfile" -a -x "$cupsdir/gstoraster" ] ; then
+		output="`($cupsdir/gstoraster 1 1 1 1 \"$cupsargs\" < $tfile 2>/dev/null | run_rastertogp | do_output) 2>&1`"
 	    elif [ -f "$tfile" ] ; then
 		output="`($cupsdir/pstops 1 1 1 1 \"$cupsargs\" < $tfile 2>/dev/null | $cupsdir/pstoraster 2>/dev/null | run_rastertogp | do_output) 2>&1`"
 	    elif [ -x "$cupsdir/pstoraster" ] ; then
 		output="`($cupsdir/pdftops 1 1 1 1 \"$pages$cupsargs\" < $sdir/../../doc/gutenprint-users-manual.pdf 2>/dev/null | $cupsdir/pstops 1 1 1 1 \"$pages$cupsargs\" 2>/dev/null | $cupsdir/pstoraster 2>/dev/null | run_rastertogp | do_output) 2>&1`"
+	    elif [ -x "$cupsdir/gstoraster" ] ; then
+		output="`($cupsdir/pdftops 1 1 1 1 \"$pages$cupsargs\" < $sdir/../../doc/gutenprint-users-manual.pdf 2>/dev/null | $cupsdir/gstoraster 1 1 1 1 \"$pages$cupsargs\" 2>/dev/null | run_rastertogp | do_output) 2>&1`"
 	    else
 		output="`($cupsdir/imagetoraster 1 1 1 1 \"$pages$cupsargs\" < calibrate.ppm 2>/dev/null | run_rastertogp | do_output) 2>&1`"
 	    fi

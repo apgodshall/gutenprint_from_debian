@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.439 2012/06/16 03:10:56 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.442 2014/01/23 13:22:41 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -89,6 +89,14 @@ static const channel_count_t escp2_channel_counts[] =
   { 30, "30" },
   { 31, "31" },
   { 32, "32" },
+  { 33, "33" },
+  { 34, "34" },
+  { 35, "35" },
+  { 36, "36" },
+  { 37, "37" },
+  { 38, "38" },
+  { 39, "39" },
+  { 40, "40" },
 };
 
 static stp_curve_t *hue_curve_bounds = NULL;
@@ -385,6 +393,12 @@ static const stp_parameter_t the_parameters[] =
     STP_PARAMETER_TYPE_CURVE, STP_PARAMETER_CLASS_OUTPUT,
     STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, 5, 1, 0
   },
+  {
+    "GreenHueCurve", N_("Green Map"), "Color=Yes,Category=Advanced Output Control",
+    N_("Adjust the green map"),
+    STP_PARAMETER_TYPE_CURVE, STP_PARAMETER_CLASS_OUTPUT,
+    STP_PARAMETER_LEVEL_ADVANCED4, 0, 1, 5, 1, 0
+  },
   PARAMETER_INT(max_hres),
   PARAMETER_INT(max_vres),
   PARAMETER_INT(min_hres),
@@ -483,24 +497,32 @@ static const float_param_t float_parameters[] =
   },
   {
     {
-      "RedDensity", N_("Red Density"), "Color=Yes,Category=Output Level Adjustment",
-      N_("Adjust the red density"),
+      "BlueDensity", N_("Blue Density"), "Color=Yes,Category=Output Level Adjustment",
+      N_("Adjust the blue density"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
       STP_PARAMETER_LEVEL_ADVANCED, 0, 1, 4, 1, 0
     }, 0.0, 2.0, 1.0, 1
   },
   {
     {
-      "BlueDensity", N_("Blue Density"), "Color=Yes,Category=Output Level Adjustment",
-      N_("Adjust the blue density"),
+      "OrangeDensity", N_("Orange Density"), "Color=Yes,Category=Output Level Adjustment",
+      N_("Adjust the orange density"),
+      STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
+      STP_PARAMETER_LEVEL_ADVANCED, 0, 1, 4, 1, 0
+    }, 0.0, 2.0, 1.0, 1
+  },
+  {
+    {
+      "RedDensity", N_("Red Density"), "Color=Yes,Category=Output Level Adjustment",
+      N_("Adjust the red density"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
       STP_PARAMETER_LEVEL_ADVANCED, 0, 1, 5, 1, 0
     }, 0.0, 2.0, 1.0, 1
   },
   {
     {
-      "OrangeDensity", N_("Orange Density"), "Color=Yes,Category=Output Level Adjustment",
-      N_("Adjust the orange density"),
+      "GreenDensity", N_("Green Density"), "Color=Yes,Category=Output Level Adjustment",
+      N_("Adjust the green density"),
       STP_PARAMETER_TYPE_DOUBLE, STP_PARAMETER_CLASS_OUTPUT,
       STP_PARAMETER_LEVEL_ADVANCED, 0, 1, 5, 1, 0
     }, 0.0, 2.0, 1.0, 1
@@ -1007,7 +1029,7 @@ get_privdata(stp_vars_t *v)
 }
 
 #define DEF_SIMPLE_ACCESSOR(f, t)					\
-static inline t								\
+static t								\
 escp2_##f(const stp_vars_t *v)						\
 {									\
   if (stp_check_int_parameter(v, "escp2_" #f, STP_PARAMETER_ACTIVE))	\
@@ -1020,7 +1042,7 @@ escp2_##f(const stp_vars_t *v)						\
 }
 
 #define DEF_RAW_ACCESSOR(f, t)						\
-static inline t								\
+static t								\
 escp2_##f(const stp_vars_t *v)						\
 {									\
   if (stp_check_raw_parameter(v, "escp2_" #f, STP_PARAMETER_ACTIVE))	\
@@ -1033,7 +1055,7 @@ escp2_##f(const stp_vars_t *v)						\
 }
 
 #define DEF_ROLL_ACCESSOR(f, t)						\
-static inline t								\
+static t								\
 escp2_##f(const stp_vars_t *v, int rollfeed)				\
 {									\
   if (stp_check_int_parameter(v, "escp2_" #f, STP_PARAMETER_ACTIVE))	\
@@ -1244,25 +1266,25 @@ escp2_density(const stp_vars_t *v)
   return 0;
 }
 
-static int
+static inline int
 escp2_bits(const stp_vars_t *v)
 {
   return escp2_res_param(v, "escp2_bits", NULL);
 }
 
-static int
+static inline int
 escp2_base_res(const stp_vars_t *v)
 {
   return escp2_res_param(v, "escp2_base_res", NULL);
 }
 
-static int
+static inline int
 escp2_ink_type_by_res(const stp_vars_t *v, const res_t *res)
 {
   return escp2_res_param(v, "escp2_ink_type", res);
 }
 
-static double
+static inline double
 escp2_density_by_res(const stp_vars_t *v, const res_t *res)
 {
   if (res)
@@ -1274,13 +1296,13 @@ escp2_density_by_res(const stp_vars_t *v, const res_t *res)
   return 0.0;
 }
 
-static int
+static inline int
 escp2_bits_by_res(const stp_vars_t *v, const res_t *res)
 {
   return escp2_res_param(v, "escp2_bits", res);
 }
 
-static int
+static inline int
 escp2_base_res_by_res(const stp_vars_t *v, const res_t *res)
 {
   return escp2_res_param(v, "escp2_base_res", res);
@@ -2526,6 +2548,7 @@ escp2_parameters(const stp_vars_t *v, const char *name,
 	   strcmp(name, "BlackDensity") == 0 ||
 	   strcmp(name, "RedDensity") == 0 ||
 	   strcmp(name, "BlueDensity") == 0 ||
+	   strcmp(name, "GreenDensity") == 0 ||
 	   strcmp(name, "OrangeDensity") == 0)
     set_density_parameter(v, description, name);
   else if (strcmp(name, "CyanHueCurve") == 0 ||
@@ -2533,6 +2556,7 @@ escp2_parameters(const stp_vars_t *v, const char *name,
 	   strcmp(name, "YellowHueCurve") == 0 ||
 	   strcmp(name, "RedHueCurve") == 0 ||
 	   strcmp(name, "BlueHueCurve") == 0 ||
+	   strcmp(name, "GreenHueCurve") == 0 ||
 	   strcmp(name, "OrangeHueCurve") == 0)
     set_hue_map_parameter(v, description, name);
   else if (strcmp(name, "UseGloss") == 0)
@@ -4087,7 +4111,10 @@ setup_page(stp_vars_t *v)
 	  pd->page_management_units / escp2_base_separation(v);
       else
 	pd->page_extra_height = 0;
-      pd->paper_extra_bottom = escp2_paper_extra_bottom(v);
+      if (pd->duplex)
+	pd->paper_extra_bottom = 0;
+      else
+	pd->paper_extra_bottom = escp2_paper_extra_bottom(v);
     }
   internal_imageable_area(v, 0, 0, &pd->page_left, &pd->page_right,
 			  &pd->page_bottom, &pd->page_top);

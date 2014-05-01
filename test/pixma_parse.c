@@ -55,7 +55,6 @@ static int nextcmd( FILE *infile,unsigned char* cmd,unsigned char *buf, unsigned
 {
 	unsigned char c1,c2;
 	unsigned int startxml, endxml;
-	unsigned int xmldata;
 	if (feof(infile))
 		return -1;
 	while (!feof(infile)){
@@ -65,15 +64,15 @@ static int nextcmd( FILE *infile,unsigned char* cmd,unsigned char *buf, unsigned
 		/* add skip for XML header and footer */
 		if (c1 == 60 ){  /* "<" for XML start */
 		  if (*xml_read==0){
-		    /* start: */
-		    startxml=680;
-		    xmldata=fread(buf,1,679,infile); /* 1 less than 680 */
+		    /* start */
+		    startxml=680-1;
+		    fread(buf,1,startxml,infile); /* 1 less than 680 */
 		    fprintf(stderr,"nextcmd: read starting XML %d %d\n", *xml_read, startxml);
 		    *xml_read=1;
 		  }else if (*xml_read==1) {
 		    /* end */
-		    endxml=263;
-		    xmldata=fread(buf,1,262,infile); /* 1 less than 263*/
+		    endxml=263-1;
+		    fread(buf,1,endxml,infile); /* 1 less than 263*/
 		    fprintf(stderr,"nextcmd: read ending XML %d %d\n", *xml_read, endxml);
 		    *xml_read=2;
 		  }
@@ -121,6 +120,7 @@ static color_t* get_color(image_t* img,char name){
 	return NULL;
 }
 
+#if 0
 /* return pointer to color info structure matching name less 0x80 */
 static color_t* get_color2(image_t* img,char name){
 	int i;
@@ -133,6 +133,7 @@ static color_t* get_color2(image_t* img,char name){
 	}
 	return NULL;
 }
+#endif
 
 static int valid_color(unsigned char color){
 	int i;
@@ -159,6 +160,77 @@ static int eight2ten(unsigned char* inbuffer,unsigned char* outbuffer,int num_by
 	return s.buf_ptr-s.buf;
 }
 
+/* decompression routine for 3 4-bit pixels of 5 levels each */
+static int eight2twelve(unsigned char* inbuffer,unsigned char* outbuffer,int num_bytes,int outbuffer_size){
+	PutBitContext s;
+	int read_pos=0;
+	init_put_bits(&s, outbuffer,outbuffer_size);
+	while(read_pos < num_bytes){
+		unsigned short value=Table5Level[inbuffer[read_pos]];
+		++read_pos;
+		put_bits(&s,12,value);
+	}
+	return s.buf_ptr-s.buf;
+}
+
+#if 0
+static int analysiseight2twelve(unsigned char* inbuffer,unsigned char* outbuffer,int num_bytes,int outbuffer_size){
+	PutBitContext s;
+	int maxlevels;
+	int maxnum;
+	int read_pos=0;
+	init_put_bits(&s, outbuffer,outbuffer_size);
+	while(read_pos < num_bytes){
+		unsigned short value=Table5Level[inbuffer[read_pos]];
+		++read_pos;
+		/*put_bits(&s,12,value);*/
+		if (value>125) {
+		  maxlevels+=1;
+		  if (value>maxnum) {
+		    maxnum=value;
+		  }
+		}
+	}
+	/*return s.buf_ptr-s.buf;*/
+	return maxnum;
+}
+#endif
+
+/* decompression routine for 3 4-bit pixels of 6 levels each */
+static int eight2twelve2(unsigned char* inbuffer,unsigned char* outbuffer,int num_bytes,int outbuffer_size){
+	PutBitContext s;
+	int read_pos=0;
+	init_put_bits(&s, outbuffer,outbuffer_size);
+	while(read_pos < num_bytes){
+	  unsigned short value=Table6Level[inbuffer[read_pos]];
+		++read_pos;
+		put_bits(&s,12,value);
+	}
+	return s.buf_ptr-s.buf;
+}
+
+#if 0
+static int analysiseight2twelve2(unsigned char* inbuffer,unsigned char* outbuffer,int num_bytes,int outbuffer_size){
+	PutBitContext s;
+	int maxlevels;
+	int maxnum;
+	int read_pos=0;
+	init_put_bits(&s, outbuffer,outbuffer_size);
+	while(read_pos < num_bytes){
+		unsigned short value=Table6Level[inbuffer[read_pos]];
+		++read_pos;
+		/*put_bits(&s,12,value);*/
+		if (value>216) {
+		  maxlevels+=1;
+		  if (value>maxnum) {
+		    maxnum=value;
+		  }
+		}
+	}
+	/*return s.buf_ptr-s.buf;*/
+	return maxnum;
+}
+#endif
 
 /* reads a run length encoded block of raster data, decodes and uncompresses it */
 static int Raster(image_t* img,unsigned char* buffer,unsigned int len,unsigned char color_name,unsigned int maxw){
@@ -168,6 +240,13 @@ static int Raster(image_t* img,unsigned char* buffer,unsigned int len,unsigned c
 	int cur_line=0; /* line relative to block begin */
 	unsigned char* dst=malloc(len*256); /* the destination buffer */
 	unsigned char* dstr=dst;
+
+#if 0
+	/*int numbigvals;*/ /* number of values greater than number of decompression table max index value */
+	int maxtablevalue; /* try to catch the range of table values needed for decompression table */
+	maxtablevalue=0;
+#endif
+
 	/* if(!color){
 	   printf("no matching color for %c (0x%x, %i) in the database => ignoring %i bytes\n",color_name,color_name,color_name, len); 
 	   } */
@@ -200,11 +279,37 @@ static int Raster(image_t* img,unsigned char* buffer,unsigned int len,unsigned c
 					color->head->buf=calloc(1,size+8); /* allocate slightly bigger buffer for get_bits */
 					memcpy(color->head->buf,dstr,size);
 					color->head->len=size;
-					/*printf("DEBUG color not compressed\n");*/
-				}else{ /* handle 5pixel in 8 bits compression */
-					color->head->buf=calloc(1,size*2+8);
-					size=color->head->len=eight2ten(dstr,color->head->buf,size,size*2);
-					/*printf("DEBUG color compressed 5pixel in 8 bits \n");*/
+					if (DEBUG) {
+					  printf("DEBUG color not compressed\n");
+					}
+				}else{
+				  if (img->color->bpp==2) {/* handle 5pixel in 8 bits compression --- this is pixel-packing rather than compression, just not wasting space */
+				    color->head->buf=calloc(1,size*2+8);
+				    size=color->head->len=eight2ten(dstr,color->head->buf,size,size*2);
+				    /*printf("DEBUG 3-level color compressed\n");*/
+				  } else if(img->color->bpp==4){ /* handle 4-bit ink compression */
+				    if (img->color->level==5) {/* 5-level compression --- this is pixel-packing rather than compression, just not wasting space */
+				      color->head->buf=calloc(1,size*2+8);
+				      size=color->head->len=eight2twelve(dstr,color->head->buf,size,size*2);
+				      if (DEBUG) {
+					printf("DEBUG 5-level color compressed\n");
+				      }
+				      /*maxtablevalue=analysiseight2twelve(dstr,color->head->buf,size,size*2);
+				      if (maxtablevalue!=0) {
+					printf("maxtablevalue: %x",maxtablevalue);
+					}*/
+				    } else if (img->color->level==6) { /* 6-level compression --- this is pixel-packing rather than compression, just not wasting space */
+				      color->head->buf=calloc(1,size*2+8);
+				      size=color->head->len=eight2twelve2(dstr,color->head->buf,size,size*2);
+				      if (DEBUG) {
+					printf("DEBUG 6-level color compressed\n");
+				      }
+				      /*maxtablevalue=analysiseight2twelve2(dstr,color->head->buf,size,size*2);
+				      if (maxtablevalue!=0) {
+					printf("maxtablevalue: %x",maxtablevalue);
+					}*/
+				    }
+				  }
 				}
 			}
 			/* adjust the maximum image width */
@@ -291,15 +396,15 @@ static void write_line(image_t*img,FILE* fp,int pos_y){
 	color_t* m=get_color(img,'m');
 	color_t* y=get_color(img,'y');
 	color_t* k=get_color(img,'k');
-	/*color_t* H=get_color(img,'H');*/
+	/* color_t* H=get_color(img,'H'); */
 	/*color_t* R=get_color(img,'R');*/
 	/*color_t* G=get_color(img,'G');*/
 	/* experimenting with strange colors */
-	color_t* P=get_color2(img,'P');
+	/* color_t* P=get_color2(img,'P');
 	color_t* Q=get_color2(img,'Q');
 	color_t* R=get_color2(img,'R');
 	color_t* S=get_color2(img,'S');
-	color_t* T=get_color2(img,'T');
+	color_t* T=get_color2(img,'T'); */
 
 	/* color_t* A=get_color(img,'A'); */
 	/* color_t* B=get_color(img,'B'); */
@@ -423,11 +528,11 @@ static void write_ppm(image_t* img,FILE* fp){
 	/* allocate buffers for dot statistics */
         for(i=0;i<MAX_COLORS;i++){
 	  /*img->color[i].dots=calloc(1,sizeof(int)*(img->color[i].level+1));*/
-	  img->color[i].dots=calloc(1,sizeof(int)*(1<<(img->color[i].bpp)+1));
+	  img->color[i].dots=calloc(1,sizeof(int)*(1<<((img->color[i].bpp)+1)));
 	}	
 	/* allocate buffers for levels used*/
         for(i=0;i<MAX_COLORS;i++){
-	  img->color[i].usedlevels=calloc(1,sizeof(int)*(1<<(img->color[i].bpp)+1));
+	  img->color[i].usedlevels=calloc(1,sizeof(int)*(1<<((img->color[i].bpp)+1)));
 	}	
 
 	/* write header */
@@ -490,6 +595,7 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 	unsigned char* buf=malloc(0xFFFF);
 	int returnv=0;
 	int i;
+	int num_colors;
 	unsigned int xml_read;
 	xml_read=0;
 
@@ -550,9 +656,10 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 			  fprintf(stderr,"ESC (t set image cnt %i\n",cnt);
 				if(buf[0]>>7){
 				        /* usual order */
+				        char order[]="CMYKcmyk";
 				        /*char order[]="CMYKcmykHRGABDEFIJLMNOPQSTUVWXZabdef";*/
 				        /* iP3500 test */
-				        char order[]="CMYKcmykHRGBCMYcmykabd";
+				        /*char order[]="CMYKcmykHRGBCMYcmykabd";*/
 				        /*char order[]="CMYKcmykHpnoPQRSTykabd";*/
 				        /*char order[]="KCMYkcmyHpnoPQRSTykabd";*/
 				        /* MP960 photo modes: k instead of K */
@@ -563,8 +670,8 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 				        /*char order[]="KCcMmYykRHGABDEFIJLMNOPQSTUVWXZabdef";*/
 					/* MP990 etc. photo modes */
 				        /* char order[]="KCcMmYykRHGABDEFIJLMNOPQSTUVWXZabdef"; */
-					int black_found = 0;
-					int num_colors = (cnt - 3)/3;
+					/* int black_found = 0; */
+					num_colors = (cnt - 3)/3;
 					fprintf(stderr," bit_info: using detailed color settings for max %i colors\n",num_colors);
 					if(buf[1]==0x80)
 					  fprintf(stderr," format: BJ indexed color image format\n");
@@ -613,8 +720,10 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 					    }					    
 					    else
 					      img->color[i].density = 128; /*128+96;*/ /* try to add 0x80 to sub-channels for MP450 hi-quality mode */
+                                            /*
 					    if((order[i] == 'K' || order[i] == 'k') && img->color[i].bpp)
 					      black_found = 1;
+					    */
 					    /*
 					    if(order[i] == 'y' && !black_found && img->color[i].level){
 					      printf("iP6700 hack: treating color definition at the y position as k\n");
@@ -629,8 +738,7 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 					    fprintf(stderr," Color %c Compression: %i bpp %i level %i\n",img->color[i].name,
 						   img->color[i].compression,img->color[i].bpp,img->color[i].level);
 					  }else{
-					    fprintf(stderr," Color %c Compression: %i bpp %i level %i\n",img->color[i].name,
-						   img->color[i].compression,img->color[i].bpp,img->color[i].level);
+					    fprintf(stderr," Color %i out of bounds!\n", i);
 					    /*printf(" Color ignoring setting %x %x %x\n",buf[3+i*3],buf[3+i*3+1],buf[3+i*3+2]);*/
 					  }
 					  
@@ -638,16 +746,17 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 					
 					
 				}else if(buf[0]==0x1 && buf[1]==0x0 && buf[2]==0x1){
-					fprintf(stderr," 1bit-per pixel\n");
-					int num_colors = cnt*3; /*no idea yet! 3 for iP4000 */
+					fprintf(stderr," 1bit-per pixel\n");					
+					num_colors = cnt*3; /*no idea yet! 3 for iP4000 */
 					/*num_colors=9;*/
 					/*for(i=0;i<MAX_COLORS;i++){*/
 					for(i=0;i<num_colors;i++){
 					  if(i<MAX_COLORS){	
 					        /* usual */
+  					        char order[]="CMYKcmyk";
 					        /* const char order[]="CMYKcmykHRGABDEFIJLMNOPQSTUVWXZabdef";*/
 				                /* iP3500 test */
-				                char order[]="CMYKcmykHRGBCMYcmykabd";
+				                /* char order[]="CMYKcmykHRGBCMYcmykabd"; */
 						/* MP990, MG6100, MG8100 plain modes */
 						/*const char order[]="KCcMmYykRHGABDEFIJLMNOPQSTUVWXZabdef";*/
 						img->color[i].name=order[i];
@@ -659,8 +768,7 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 						fprintf(stderr," Color %c Compression: %i bpp %i level %i\n",img->color[i].name,
 						       img->color[i].compression,img->color[i].bpp,img->color[i].level);
 					  }else{
-					    fprintf(stderr," Color %c Compression: %i bpp %i level %i\n",img->color[i].name,
-						       img->color[i].compression,img->color[i].bpp,img->color[i].level);
+					    fprintf(stderr," Color %i out of bounds!", i);
 						/*printf(" Color ignoring setting %x %x %x\n",buf[3+i*3],buf[3+i*3+1],buf[3+i*3+2]);*/
 					  }
 					}
@@ -695,8 +803,8 @@ static int process(FILE* in, FILE* out,int verbose,unsigned int maxw,unsigned in
 				break;
 			case 'p':
 				fprintf(stderr,"ESC (p set extended margin (len=%i):\n",cnt);
-                                fprintf(stderr," printed length %i left %i\n",((buf[0]<<8 )+buf[1]) *6 / 5,(buf[2]<<8) + buf[3]);
-                                fprintf(stderr," printed width %i top %i\n",((buf[4]<<8 )+buf[5]) * 6 / 5,(buf[6]<<8) + buf[7]);
+                                fprintf(stderr," printed length %i left %i\n",((buf[0]<<8 )+buf[1]) *6 / 5 - 1,(buf[2]<<8) + buf[3]);
+                                fprintf(stderr," printed width %i top %i\n",((buf[4]<<8 )+buf[5]) * 6 / 5 - 1,(buf[6]<<8) + buf[7]);
 
                                 if(cnt > 8){
 					int unit = (buf[12] << 8)| buf[13];

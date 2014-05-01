@@ -17,6 +17,9 @@
 #undef ENABLE_NLS
 
 /* */
+#undef GUTENPRINT_BASE_VERSION
+
+/* */
 #undef GUTENPRINT_RELEASE_VERSION
 
 /* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the

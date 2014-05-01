@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.23 2012/05/26 19:09:01 rlk Exp $
+## $Id: Makefile.am,v 1.25 2014/02/03 16:04:21 jlabovitz Exp $
 ## Copyright (C) 2001 Andy Stewart and Roger Leigh
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,9 @@ MANUAL_SRC_FILES = \
 
 HTMLDIR = reference-html
 
+if BUILD_DOC
 STANDARD_TARGETS = html
+endif
 
 DISTHOOKDIRS = $(HTMLDIR)
 
@@ -103,7 +105,7 @@ gutenprint.pdf:  $(MANUAL_SRC_FILES)
 	    $(LN_S) -f $(srcdir)/$$file $$file ; \
 	  done ; \
 	fi ; \
-	$(DB2PDF) gutenprint.xml
+	$(DB2PDF) gutenprint.xml 2>&1 | $(PERL) ./cleanwarnings.pl
 
 html: html-stamp
 

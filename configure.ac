@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.236 2012/07/02 11:47:36 rlk Exp $
+dnl $Id: configure.ac,v 1.257 2014/02/15 16:15:36 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -23,39 +23,70 @@ dnl
 dnl Since the last release:
 dnl 1. if only source code (not the interface) has changed, set
 dnl      GUTENPRINT_MICRO_VERSION += 1;
-dnl 2. if any functions have been added, removed, or changed, set
-dnl      GUTENPRINT_CURRENT_INTERFACE += 1;
-dnl 3. if interfaces have been added, set
-dnl      GUTENPRINT_BINARY_AGE += 1;
-dnl    or, if interfaces have been removed, set
-dnl      GUTENPRINT_CURRENT_INTERFACE -= GUTENPRINT_BINARY_AGE
-dnl      GUTENPRINT_BINARY_AGE = 0;
+dnl 2. if any interfaces have been added or changed *compatibly*
+dnl      GUTENPRINT_CURRENT_INTERFACE (GCI) += 1;
+dnl      GUTENPRINT_BINARY_AGE (GBA) += 1;
+dnl 3. if interfaces have been deleted or changed *incompatibly*, set
+dnl    	 GCI = GBA + 1;
+dnl      GBA = 0;
 dnl
-dnl The .soname version is
-dnl (GUTENPRINT_CURRENT_INTERFACE - GUTENPRINT_BINARY_AGE).GUTENPRINT_BINARY_AGE
-dnl Example: if GUTENPRINT_CURRENT_INTERFACE is 3 and GUTENPRINT_BINARY_AGE is
-dnl 1, the version is 2.1.  To get 2.2, GUTENPRINT_CURRENT_INTERFACE would be
-dnl incremented to 4 and GUTENPRINT_BINARY_AGE to 2.
+dnl (Note that "added", "changed", and "deleted" refer to *external*
+dnl interfaces, that is, interfaces that start with stp_ and are in any
+dnl of the header files in include/gutenprint.  Internal interfaces
+dnl that are prefixed with stpi_ and are only listed in internal headers
+dnl in src/main do not need to be considered, since no external program
+dnl should rely on them.  "Change" refers to more than just function
+dnl signature; things like changes to enumerated types or changes in
+dnl behavior with the same function arguments are also considered changes)
 dnl
+dnl The .soname version is (GCI - GBA).GBA
+dnl Example: if GCI is 3 and GBA is 1, the version is 2.1.  To get 2.2,
+dnl GCI would be incremented to 4 and GBA to 2.
+dnl 
 dnl *NOTE*: due to an error preparing 5.2.8, we must skip over major version of
-dnl 3 and go directly from 2 to 4.
+dnl 3 (that is, GCI - GBA) and go directly from 2 to 4.
+dnl
+dnl For example:
+dnl 	 GCI=3, GBA=1 => .soname = libgutenprint.so.2.1
+dnl 	 GCI=4, GBA=2 => .soname = libgutenprint.so.2.2
+dnl          (and so on for 5.2 releases, which must remain compatible)
+dnl 	 GCI=4, GBA=0 => .soname = libgutenprint.so.4.0
+dnl 	 GCI=5, GBA=1 => .soname = libgutenprint.so.4.1
+dnl 	 GCI=6, GBA=2 => .soname = libgutenprint.so.4.2
+dnl          (for Gutenprint 5.3 or 5.4 or 6.0 or whatever)
+dnl 	 GCI=5, GBA=0 => .soname = libgutenprint.so.4.0
+dnl 	 GCI=6, GBA=1 => .soname = libgutenprint.so.4.1
+dnl 	 GCI=7, GBA=2 => .soname = libgutenprint.so.4.2
+dnl          (for the next major/minor release beyond that)
+dnl
+dnl Typically, programs will require a certain major number to be matched
+dnl and a minimum minor number.  Causing the major number to be incremented
+dnl will result in programs linked against libgutenprint.so.2 to be treated
+dnl as incompatible with libgutenprint.so.3.
+dnl
+dnl .soname versions can have a third component, which is set from
+dnl GUTENPRINT_INTERFACE_AGE.  This resulted in problems on OS X and
+dnl we have elected to use only two components in the .soname.
+dnl
+dnl Similar principles apply to libgutenprintui2, but that interface is
+dnl still at 1.0.
 dnl
 dnl For more detailed information, see the libtool info documentation.
 dnl
 pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [2])
-pushdef([GUTENPRINT_MICRO_VERSION],     [9])
-pushdef([GUTENPRINT_EXTRA_VERSION],     [])
-pushdef([GUTENPRINT_CURRENT_INTERFACE], [3])
-pushdef([GUTENPRINT_BINARY_AGE],        [1])
+pushdef([GUTENPRINT_MICRO_VERSION],     [10])
+pushdef([GUTENPRINT_EXTRA_VERSION],     [-pre1])
+pushdef([GUTENPRINT_CURRENT_INTERFACE], [4])
+pushdef([GUTENPRINT_BINARY_AGE],        [2])
 pushdef([GUTENPRINTUI2_CURRENT_INTERFACE], [1])
 pushdef([GUTENPRINTUI2_BINARY_AGE],        [0])
 pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.GUTENPRINT_MICRO_VERSION[]GUTENPRINT_EXTRA_VERSION)
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.236 $)
+AC_REVISION($Revision: 1.257 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_AUX_DIR(scripts)
 STP_INIT
@@ -143,7 +174,7 @@ dnl Specify a configuration file.
 AM_CONFIG_HEADER([config.h])
 
 dnl Available languages (translations)
-ALL_LINGUAS="cs da de el en_GB es fi fr gl hu it ja nb nl pl pt ru sk sl sv uk zh_CN zh_TW"
+ALL_LINGUAS="ca cs da de el en_GB es fi fr gl hu it ja nb nl pl pt ru sk sl sv tr uk vi zh_CN zh_TW"
 AC_SUBST(ALL_LINGUAS)
 
 dnl Set up libtool scripts.
@@ -229,8 +260,9 @@ BUILD_CUPS_1_2="no"
 if test -n "${CUPS_CONFIG}" -a "${BUILD_CUPS}" = "yes" ; then
   cups_version=`${CUPS_CONFIG} --version | sed -e '1,$s/svn$/.0/'`
 dnl Quote to protect sed regexes
-  [cups_major=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\1/'`]
-  [cups_minor=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
+dnl Some relases may be 1.xrc1 or 1.xsvn. Grab only what is needed.
+  [cups_major=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).*/\1/'`]
+  [cups_minor=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).*/\2/'`]
   [cups_point=`echo $cups_version | sed -e 's/\([0-9][0-9]*\).\([0-9][0-9]*\).\([0-9][0-9]*\).*/\3/'`]
 dnl There was no CUPS 1.0.15 or the like
   if test "$cups_major" -gt 1 -o "$cups_minor" -gt 1 -o "$cups_point" -gt 14 ; then
@@ -394,6 +426,13 @@ STP_ARG_WITH_DETAILED([readline], ,
 dnl if test -z "${[EXTRA_LIBREADLINE_DEPS]}" ; then
 dnl   [EXTRA_LIBREADLINE_DEPS]=""
 dnl fi
+
+# libusb-1.0 (For CUPS backends)
+PKG_CHECK_MODULES([LIBUSB], [libusb-1.0],
+                  [HAVE_LIBUSB=yes
+                   BUILD_LIBUSB_BACKENDS=yes],
+                  [HAVE_LIBUSB=no
+	           BUILD_LIBUSB_BACKENDS=no])
 
 AC_PATH_PROGS([GIMPTOOL2_CHECK], [gimptool-2.0 gimptool])
 if test -z "${GIMPTOOL2_CHECK}" ; then
@@ -576,6 +615,9 @@ fi
 GUTENPRINT_RELEASE_VERSION=${GUTENPRINT_MAJOR_VERSION}.${GUTENPRINT_MINOR_VERSION}
 AH_TEMPLATE(GUTENPRINT_RELEASE_VERSION,, [Gutenprint release version])
 AC_DEFINE_UNQUOTED(GUTENPRINT_RELEASE_VERSION, "${GUTENPRINT_RELEASE_VERSION}")
+GUTENPRINT_BASE_VERSION=${GUTENPRINT_MAJOR_VERSION}.${GUTENPRINT_MINOR_VERSION}.${GUTENPRINT_MICRO_VERSION}
+AH_TEMPLATE(GUTENPRINT_BASE_VERSION,, [Gutenprint base version])
+AC_DEFINE_UNQUOTED(GUTENPRINT_BASE_VERSION, "${GUTENPRINT_BASE_VERSION}")
 
 dnl Set PACKAGE_LOCALE_DIR in config.h
 AH_TEMPLATE(PACKAGE_LOCALE_DIR,, [Package locale directory])
@@ -625,7 +667,7 @@ else
   PACKAGE_LIB_DIR="${libdir}/${PACKAGE}"
 fi
 
-AC_DEFINE_UNQUOTED(PACKAGE_LIB_DIR, "${PACKAGE_LIB_DIR}")
+AC_DEFINE_UNQUOTED(PACKAGE_LIB_DIR, ["${PACKAGE_LIB_DIR}"])
 
 AH_TEMPLATE(PKGXMLDATADIR,, [Package XML data directory])
 PKGXMLDATADIR="${PACKAGE_DATA_DIR}/${GUTENPRINT_RELEASE_VERSION}/xml"
@@ -743,8 +785,8 @@ AC_CHECK_LIB(dl, dlopen, [DLOPEN_LIBS="-ldl"])
 AC_CHECK_LIB(m,pow,
              GUTENPRINT_LIBDEPS="${GUTENPRINT_LIBDEPS} -lm"
              gutenprint_libdeps="${gutenprint_libdeps} -lm"
-             GUTENPRINTUI2_LIBDEPS="${GUTENPRINT_LIBDEPS} -lm"
-             gutenprintui2_libdeps="${gutenprint_libdeps} -lm"
+             GUTENPRINTUI2_LIBDEPS="${GUTENPRINTUI2_LIBDEPS} -lm"
+             gutenprintui2_libdeps="${gutenprintui2_libdeps} -lm"
 	     LIBM=-lm
 )
 
@@ -836,6 +878,8 @@ AM_CONDITIONAL(INSTALL_SAMPLES, test x${INSTALL_SAMPLES} = xyes)
 
 AM_CONDITIONAL(INSTALL_USER_GUIDE, test x${INSTALL_USER_GUIDE} = xyes)
 
+AM_CONDITIONAL(BUILD_LIBUSB_BACKENDS, test x${BUILD_LIBUSB_BACKENDS} = xyes)
+
 STP_CUPS_PATH
 
 # loadable modules
@@ -924,6 +968,8 @@ dnl Some versions of make get very grouchy about $(RM)
 RM='rm'
 
 dnl Substitutions
+AC_SUBST(prefix)
+AC_SUBST(exec_prefix)
 AC_SUBST(cups_prefix)
 AC_SUBST(cups_exec_prefix)
 AC_SUBST(cups_bindir)
@@ -964,6 +1010,8 @@ AC_SUBST(MAINTAINER_CFLAGS)
 AC_SUBST(PLUG_IN_PATH)
 AC_SUBST(WHICH_PPDS)
 AC_SUBST(BUILD_CUPS_PPDS)
+AC_SUBST(GUTENPRINT_BASE_VERSION)
+AC_SUBST(GUTENPRINT_RELEASE_VERSION)
 
 dnl Optional architecture options to be applied after all autoconf tests
 dnl are done...
@@ -1027,6 +1075,7 @@ AC_CONFIG_COMMANDS([default], [
 echo
 ],
 [GUTENPRINT_RELEASE_VERSION=${GUTENPRINT_RELEASE_VERSION}]
+[GUTENPRINT_BASE_VERSION=${GUTENPRINT_BASE_VERSION}]
 )
 
 AC_OUTPUT
@@ -1066,14 +1115,11 @@ if test "$BUILD_CUPS" != "no" ; then
 	echo "                        Please review the README and release notes carefully!"
 	warnings_emitted=1
     fi
+    echo "        Build CUPS dyesub USB backend:          $BUILD_LIBUSB_BACKENDS"
 else
     echo "    Build CUPS:                                 $BUILD_CUPS"
 fi
-echo "    Build Ghostscript IJS driver:               $BUILD_GHOSTSCRIPT"
-echo "    Build Foomatic data:                        $BUILD_FOOMATIC"
-if test "$BUILD_FOOMATIC" != "no" ; then
-    echo "        Build Foomatic 3.x data:                $BUILD_FOOMATIC_3"
-fi
+echo "    Build EPSON inkjet utility:                 $BUILD_ESCPUTIL"
 if test "$BUILD_GIMP2" != "no" ; then
     echo "    Build enhanced Print plugin for GIMP:       yes"
     if test "$BUILD_GIMP2_AS_GUTENPRINT" != "no" ; then
@@ -1085,17 +1131,23 @@ if test "$BUILD_GIMP2" != "no" ; then
 else
     echo "    Build enhanced Print plugin for GIMP:       no"
 fi
-echo "    Build EPSON Stylus utility:                 $BUILD_ESCPUTIL"
+echo "    Build Ghostscript IJS driver:               $BUILD_GHOSTSCRIPT"
+echo "    Build Foomatic data:                        $BUILD_FOOMATIC"
+if test "$BUILD_FOOMATIC" != "no" ; then
+    echo "        Build Foomatic 3.x data:                $BUILD_FOOMATIC_3"
+fi
 echo "    Build test programs:                        $BUILD_TEST"
 echo "    Build testpattern generator:                $BUILD_TESTPATTERN"
 echo
 echo "  Installation summary:"
 echo "    Installation prefix:                        $prefix"
-echo "    Exec prefix:                                $exec_prefix"
+# Configure intentionally does not expand exec_prefix to allow make
+# to do so.
+echo "    Exec prefix:                                `eval eval echo $exec_prefix` ($exec_prefix)";
 echo "    Data directory:                             $PACKAGE_DATA_DIR"
-echo "    Library directory:                          $PACKAGE_LIB_DIR"
+echo "    Library directory:                          `eval eval echo $PACKAGE_LIB_DIR` ($PACKAGE_LIB_DIR)"
 echo "    XML data directory:                         $PKGXMLDATADIR"
-echo "    Module directory:                           $PKGMODULEDIR"
+echo "    Module directory:                           `eval eval echo $PKGMODULEDIR` ($PKGMODULEDIR)"
 echo "    Install sample images:                      $INSTALL_SAMPLES"
 echo
 echo "  General configuration:"
@@ -1120,7 +1172,7 @@ echo "    uname -a output:                            `uname -a`"
 echo "================================================================"
 if test $warnings_emitted -ne 0 ; then
     echo
-    echo '*** NOTE: Please review the warnings shown above carefully!'
+    echo '*** WARNING: Please review the warnings shown above carefully!'
 fi
 echo
 if test "$BUILD_GIMP2" = "no" -o "$BUILD_CUPS" = "no" ; then

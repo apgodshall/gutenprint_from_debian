@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2-data.c,v 1.273 2010/08/04 00:33:56 rlk Exp $"
+ * "$Id: print-escp2-data.c,v 1.275 2013/12/14 19:36:29 rlk Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -353,7 +353,8 @@ load_model_from_file(const stp_vars_t *v, stp_mxml_node_t *xmod, int model)
 			  !strcmp(child->value.element.name, "ChannelName"))
 			{
 			  const char *cname = stp_mxmlElementGetAttr(child, "name");
-			  stp_string_list_add_string(p->channel_names, cname, cname);
+			  const char *ctext = stp_mxmlElementGetAttr(child, "text");
+			  stp_string_list_add_string(p->channel_names, cname, ctext);
 			}
 		      child = child->next;
 		    }
@@ -405,7 +406,7 @@ stp_escp2_load_model(const stp_vars_t *v, int model)
       if (doc)
 	{
 	  stp_mxml_node_t *node =
-	    stp_mxmlFindElement(doc, doc, "escp2:model", NULL, NULL,
+	    stp_mxmlFindElement(doc, doc, "escp2Model", NULL, NULL,
 				STP_MXML_DESCEND);
 	  if (node)
 	    {

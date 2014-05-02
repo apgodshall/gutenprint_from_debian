@@ -1811,7 +1811,7 @@ $(top_builddir)/src/gutenprintui2/libgutenprintui2.la:
 @BUILD_CUPS_TRUE@@BUILD_LIBUSB_BACKENDS_TRUE@	chmod 700 "$(DESTDIR)$(pkglibdir)/backend/gutenprint$(GUTENPRINT_MAJOR_VERSION)$(GUTENPRINT_MINOR_VERSION)+usb"
 @BUILD_LIBUSB_BACKENDS_TRUE@install-blacklist:
 @BUILD_LIBUSB_BACKENDS_TRUE@	$(mkdir_p) $(DESTDIR)$(cupsdata_blacklistdir)
-@BUILD_LIBUSB_BACKENDS_TRUE@	$(INSTALL_DATA) blacklist $(DESTDIR)$(cupsdata_blacklistdir)/net.sf.gimp-print.usb-quirks
+@BUILD_LIBUSB_BACKENDS_TRUE@	$(INSTALL_DATA) $(srcdir)/blacklist $(DESTDIR)$(cupsdata_blacklistdir)/net.sf.gimp-print.usb-quirks
 
 install-data-local: $(INSTALL_DATA_LOCAL_DEPS) $(INSTALL_BLACKLIST)
 	if test -n "$(CUPS_PKG)" -a -n "$(INSTALL_DATA_LOCAL_DEPS)" ; then \

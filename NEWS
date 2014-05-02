@@ -1,15 +1,15 @@
-Welcome to Gutenprint 5.2.10-pre1, a pre-release of Gutenprint
+Welcome to Gutenprint 5.2.10-pre2, a pre-release of Gutenprint
 5.2.10. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
 others.  Gutenprint currently supports over 2000 printer models.
 These drivers provide high quality printing for UNIX, Linux, and
-Macintosh OS X (10.3 and above) systems.  Gutenprint includes CUPS and
+Macintosh OS X (10.5 and above) systems.  Gutenprint includes CUPS and
 Foomatic drivers, and an enhanced Print plug-in for GIMP that replaces
 the print plug-in packaged with the GIMP distribution.
 
-Gutenprint 5.2 no longer supports Macintosh OS X 10.2.
+Gutenprint 5.2 no longer supports Macintosh OS X 10.2, 10.3, or 10.4.
 
 *** NOTE TO PACKAGERS: Please read the file README.package for issues
     that are of interest to distributors and packagers of Gutenprint.
@@ -49,7 +49,7 @@ V)    Overall changes from 5.0.2 to 5.2
 I) GENERAL REQUIREMENTS
 
 Gutenprint will run on any reasonably modern computer running Linux,
-Macintosh OS X (10.3 or above), Solaris, or any other UNIX-like
+Macintosh OS X (10.5 or above), Solaris, or any other UNIX-like
 operating system.  If you plan to compile this package from source,
 you will also need an ANSI C compiler, such as gcc (recommended).  A
 compiler is not required if you are installing a pre-compiled package.
@@ -92,12 +92,11 @@ create a driver that may be built much more easily than traditional
 Ghostscript drivers.  This driver should be used in conjunction with
 Foomatic to configure printers.
 
-Users of Macintosh 10.3 (Panther), 10.4 (Tiger) 10.5 (Leopard), and
-10.6 (Snow Leopard) can use this package, as the printing system is
-based on CUPS.  For ease of installation, a pre-built package with
-installer is normally supplied a few days after the release of the
-source package.  We strongly recommend that OS X users use the
-pre-built package rather than attempt to build it themselves.
+Users of Macintosh 10.5 (Leopard) and above can use this package.
+For ease of installation, a pre-built package with installer is
+normally supplied a few days after the release of the source package.
+We strongly recommend that OS X users use the pre-built package rather
+than attempt to build it themselves.
 
 The README file included with this package provides full instructions
 for building and installing Gutenprint.
@@ -265,24 +264,29 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
      The following dye-sublimation printers require this backend in order
      to function properly:
 
-        Canon SELPHY ES series  (All models)
-	Canon SELPHY CP series  (All models except CP520, CP820, and CP910)
+        Canon SELPHY ES series  (All models)  (*1)
+	Canon SELPHY CP series  (All models)  (*1)
 	Kodak Professional 1400
 	Kodak 805 Photo Printer
    	Kodak 6800 Photo Printer
    	Kodak 6850 Photo Printer
 	Kodak 605 Photo Printer
    	Shinko/Sinfonia CHC-S2145 
-   	Sony UP-DR150
+   	Sony UP-DR150  (*1)
         Sony UP-DR200
-	DNP DS40
-	DNP DS80
+	DNP DS40  (*1)
+	DNP DS80  (*1)
 	DNP DS-RX1
 	Citizen CX
 	Citizen CX-W
 	Citizen CY
         Mitsubishi CP-D70DW  (EXPERIMENTAL)
         Mitsubishi DP-D707DW (EXPERIMENTAL)
+
+     *1) Please note that if you were using a Sony UP-DR150, DNP DS40/DS80,
+	 or a Canon SELPHY printer with a previous Gutenprint release, 
+         you will need to remove and re-create your printer queue after 
+         the upgrade to 5.2.10 is complete.
 
      For further information about configuration and use of this CUPS 
      backend, please see the README document, section II D.
@@ -291,7 +295,16 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 
      - Epson inkjets:
 
+       EPSON Stylus NX630
+       EPSON Stylus NX635
+       EPSON Stylus NX645
+       EPSON Stylus SX630
+       EPSON Stylus SX635
+       EPSON Stylus SX645
        EPSON Stylus TX125
+       EPSON Stylus TX630
+       EPSON Stylus TX635
+       EPSON Stylus TX645
        EPSON Stylus C92
        EPSON Stylus CX7300
        EPSON Stylus D78
@@ -1047,8 +1060,13 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        well as enabling support for more recent printers, it improves support
        for older models as well.
 
+       Please note that if you are using one of these models with a 
+       prior Gutenprint release, you will have to remove and re-create your 
+       printer queue after upgrading.
+
        Newly added in this release:
 
+       Canon SELPHY CP790
        Canon SELPHY CP810
        Canon SELPHY CP900
 
@@ -1083,19 +1101,22 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        Canon SELPHY CP750
        Canon SELPHY CP760
        Canon SELPHY CP770
-       Canon SELPHY CP790
-
-       Known Problematic models:
-
-       The USB PIDs for the following three SELPHY CP series models are 
-       still unknown, and are therefore unsupported by the backend:
-
-       Canon SELPHY CP520
-       Canon SELPHY CP820
-       Canon SELPHY CP910
 
 	*1: We have not confirmed these printers function with the new
 	    backend, but they are presumed to work.
+
+       Known Problematic models:
+
+        The USB PIDs for the SELPHY CP520 is still unknown, and
+        therefore unsupported by this backend.
+
+       The following models are completely unsupported:
+
+       Canon SELPHY CP820
+       Canon SELPHY CP910
+
+        These utilize a new communications protocol that has not yet
+        been decoded.
 
      - Mitsubishi Dye-Sublimation printers:
 
@@ -1150,7 +1171,8 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        Sony UP-DR150
 
 	Support for the Sony UP-DR150 was greatly improved through the
-	addition of an intelligent CUPS backend.
+	addition of an intelligent CUPS backend.  You will need to
+	remove and re-create your printer queue after upgrading.
 
        Sony UP-DR200
 
@@ -1168,6 +1190,9 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	 * Matte lamination with printer firmware 1.30 or newer
 	 * Improved margins making printable area more explicit
 	 * Support 300x600dpi print mode
+
+	If you have one of these printers we highly recommend you remove
+	and re-create your printer queue after upgrading.
 
        DNP DSRX1
 
@@ -1214,7 +1239,8 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
   4) Corrected page dimensions for borderless printing with Canon
      printers.
 
-  5) Added duplex support for the EPSON WorkForce 645.
+  5) Added duplex support for the EPSON WorkForce 630, 635, and 645,
+     and NX635
 
   6) Expanded printable area at the bottom of the page for the Epson
      Stylus Pro 3800 and 3880.

@@ -1,3 +1,406 @@
+2014-03-07	<speachy@sourceforge.net>
+
+	Files:	README (1.238) (+1 -1)
+
+	It's 5.2.10-pre2 now.  :)
+
+2014-03-07	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.8) (+1310 -1270)
+		po/cs.po (1.67) (+1310 -1270)
+		po/da.po (1.112) (+1310 -1270)
+		po/de.po (1.84) (+1310 -1270)
+		po/el.po (1.82) (+1310 -1270)
+		po/en_GB.po (1.175) (+1310 -1270)
+		po/es.po (1.80) (+1310 -1270)
+		po/fi.po (1.12) (+1310 -1270)
+		po/fr.po (1.108) (+1310 -1270)
+		po/gl.po (1.7) (+1310 -1270)
+		po/hu.po (1.40) (+1310 -1270)
+		po/it.po (1.22) (+1310 -1270)
+		po/ja.po (1.77) (+1310 -1270)
+		po/nb.po (1.41) (+1310 -1270)
+		po/nl.po (1.95) (+1310 -1270)
+		po/pl.po (1.86) (+1310 -1270)
+		po/pt.po (1.81) (+1310 -1270)
+		po/ru.po (1.14) (+1310 -1270)
+		po/sk.po (1.85) (+1310 -1270)
+		po/sl.po (1.9) (+1310 -1270)
+		po/sv.po (1.111) (+1311 -1271)
+		po/tr.po (1.4) (+1310 -1270)
+		po/uk.po (1.12) (+1310 -1270)
+		po/vi.po (1.3) (+1310 -1270)
+		po/zh_CN.po (1.7) (+1302 -1270)
+		po/zh_TW.po (1.41) (+1310 -1270)
+
+	Prep for Gutenprint 5.2.10-pre2
+
+2014-03-07	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.700) (+2 -10)
+		src/main/print-olympus.c (1.157) (+25 -25)
+
+	Revert the SELPHY CP/ES paper size changes.
+
+2014-03-07	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.260) (+6 -5)
+
+	Bump .soname for 5.2.10.
+
+2014-03-07	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.259) (+5 -5)
+
+	Correct the comments.
+
+2014-03-07	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.699) (+1 -1)
+		README (1.237) (+1 -1)
+		configure.ac (1.258) (+3 -3)
+
+	Prep for 5.2.10-pre2
+
+2014-03-07	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.698) (+11 -2)
+
+	Update release notes to document the paper size changes for the SELPHY
+	CP/ES series.
+
+2014-03-06	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/make-build (1.3) (+12 -14)
+		macosx/setup-env.sample (1.2) (+2 -2)
+		macosx/src/gutenprint.pkg.src/Resources/postinstall (1.2) (+2 -64)
+		macosx/src/gutenprint.pkg.src/Resources/postupgrade (1.2) (+2 -64)
+		macosx/src/gutenprint.pkg.src/make-contents (1.3) (+4 -13)
+
+	Remove 10.4 build/install process.
+	Pull libusb & gutenprint release from tarballs, rather than extracted directories.
+
+2014-03-06	<jlabovitz@sourceforge.net>
+
+	Files:	NEWS (1.697) (+4 -4)
+		README (1.236) (+2 -2)
+		macosx/README (1.4) (+19 -31)
+		macosx/src/gutenprint.pkg.src/Resources/ReadMe.html (1.3) (+3 -3)
+		macosx/src/gutenprint.pkg.src/Resources/Welcome.rtfd/TXT.rtf (1.2) (+1 -1)
+
+	Update documentation to reflect dropping of OS X 10.4/Tiger.
+	Update OS X developer guide accordingly.
+
+2014-03-06	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.696) (+9 -5)
+
+	The SELPHY CP820 and CP910 utilize a completey different spoolfile (and
+	presumably, comms protocol) so they will not be supported by the
+	existing SELPHY CP/ES code.
+
+2014-03-05	<speachy@sourceforge.net>
+
+	Files:	src/cups/selphy_print.c (1.34) (+36 -39)
+
+	Synchronize with upstream.  No functional change, just style.
+
+2014-03-05	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.695) (+1 -1)
+		README (1.235) (+1 -1)
+
+	Minor documentation correction regarding the new backend.
+
+2014-03-05	<speachy@sourceforge.net>
+
+	Files:	src/cups/selphy_print.c (1.33) (+9 -9)
+
+	Implement error recovery for all SELPHY models.
+
+2014-03-04	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.156) (+25 -25)
+
+	Migrate Canon SELPHY CP/ES printers to using "standard" paper sizes.
+
+	Postcard -> w288h432  (standard 4x6)
+	w253h337 -> B7        (standard 3.5x5)
+	w283h566 -> w288h576  (standard 4x8)
+
+	Remaining is the "Credit Card" size, which doesn't seem to have any
+	other users -- but the description doesn't match the dimensions.
+
+2014-03-04	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.155) (+8 -8)
+
+	Remove some superflous whitespace.
+
+2014-03-04	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.154) (+13 -2)
+
+	When using a dyesub printer with FEATURE_WHITE_BORDER, we need to
+	incorporate its margins when reporting the max printable area.
+
+	This affects the DNP/Citizen models, and the Kodak 1400/805, but only
+	when printing via CUPS.
+
+2014-03-04	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.694) (+8 -1)
+		README (1.234) (+10 -0)
+
+	Document that you will need to remove/recreate your printer queue if you
+	are using one of the previously-supported printers now handled by the
+	dyesub backend.  (affected models are explicitly listed)
+
+2014-03-04	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.153) (+25 -25)
+
+	DS40/DS80: Ensure orientation of print size matches defined paper orientation.
+
+	For example, the '4x6' is defined to be taller-than-wide, but the
+	printer prints it as wider-than-tall.  This swaps the axes so gutenprint
+	knows to swap it.
+
+	Interestingly, for the most part it worked, but 'cuptestppd'
+	barfed, and photoprint also was mightily confused.
+
+2014-02-26	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.9) (+1 -3)
+
+	Get rid of an unnecessary byteswap in the DNP/Citizen code.
+
+2014-02-25	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.h (1.12) (+1 -1)
+
+	backend: use <libusb.h> instead of <libusb-1.0/libusb.h>
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/README (1.3) (+135 -51)
+
+	Describe need for Tiger build machine, in addition to Leopard and Mavericks.
+	Clarify initial configuration.
+	Add Homebrew installation procudures (for pkg-config).
+	Clarify CVS build.
+	Revise for new method of extracting Gutenprint & libusb release downloads.
+	Change names of environment variables for build configuration.
+	Describe use of 'subversion' file.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/make-build (1.2) (+46 -20)
+
+	Build & install libusb so that dyesub backend is built.
+	Add --without-libiconv-prefix to make Tiger build work.
+	Remove i386 build for Tiger (this is a mistake -- will fix & test).
+	Use new environment variables, and ensure they are set.
+	Refactor script to handle expanded builds of both libusb and Gutenprint.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/make-installer (1.3) (+9 -2)
+
+	Use sudo to remove old build directory.
+	Use new environment variables, and ensure they are set.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/make-pkg (1.3) (+3 -2)
+
+	Run PackageMaker under 'sudo' so it's able to get to all required files.
+	Make PackageMaker output more verbose for help in debugging.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/make-supported-printers (1.2) (+2 -2)
+		macosx/src/gutenprint.dmg.src/name (1.2) (+1 -1)
+		macosx/src/install-gutenprint.mpkg.src/make-contents (1.3) (+3 -3)
+		macosx/src/install-gutenprint.mpkg.src/name (1.2) (+1 -1)
+
+	Change names of build-specific environment variables to all begin with 'GP_'.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/gutenprint-version (1.2) (+12 -7)
+
+	Change name of environment variable to start with 'GP_', to fit with
+	other build variables.
+	Clarify names of other internal variables.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/subversion (1.1) (added +1 -0)
+
+	Added 'subversion' file to specify (optional) build version that is
+	appended to Gutenprint version string.
+
+2014-02-23	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/setup-env.sample (1.1) (added +4 -0)
+
+	Add file to set needed environment variables.
+
+2014-02-21	<rlk@sourceforge.net>
+
+	Files:	src/escputil/escputil.c (1.110) (+9 -9)
+
+	Don't sanity check names of ink colors.
+
+2014-02-19	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.h (1.11) (+1 -1)
+
+	Fix compile on Big Endian systems.  Patch from Dimitri John Ledkov.
+
+2014-02-19	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.693) (+10 -5)
+		README (1.233) (+1 -1)
+
+	Documentation update, referencing the fact that you will need to
+	re-create your printer queue if you are using a previously-supported
+	printer with the new dyesub backend.
+
+2014-02-19	<speachy@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.146) (+2 -2)
+
+	Add $(srcdir) to the blacklist install target.
+
+2014-02-17	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/README (1.2) (+1 -1)
+		macosx/make-dmg (1.2) (+6 -3)
+		macosx/make-doc (1.2) (+1 -1)
+		macosx/make-installer (1.2) (+2 -2)
+		macosx/make-mpkg (1.2) (+1 -1)
+		macosx/make-pkg (1.2) (+5 -1)
+		macosx/src/gutenprint.pkg.src/Resources/ReadMe.html (1.2) (+7 -8)
+		macosx/src/gutenprint.pkg.src/make-contents (1.2) (+1 -2)
+		macosx/src/install-gutenprint.mpkg.src/make-contents (1.2) (+1 -2)
+
+	Clean up CVS directories and .DS_Store files before packages & DMG are built.
+	Correctly determine release version number.
+	Update ReadMe.html with current information.
+	Make debugging control line consistent across scripts.
+	Tweak whitespace in documentation.
+
+2014-02-17	<speachy@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.83) (+2 -5)
+
+	Replace the hackish patch that enabled mismatched x/y resolutions in the
+	dyesub driver with a proper workaround from rlk.
+
+2014-02-17	<jlabovitz@sourceforge.net>
+
+	Files:	README (1.232) (+16 -16)
+
+	Remove references to 10.3 Panther.
+
+2014-02-17	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/README (1.1) (added +284 -0)
+		macosx/README.vm-environment (1.1) (added +67 -0)
+		macosx/compare-gutenprint-5 (1.1) (added +173 -0)
+		macosx/gutenprint-version (1.1) (added +30 -0)
+		macosx/make-build (1.1) (added +100 -0)
+		macosx/make-dmg (1.1) (added +44 -0)
+		macosx/make-doc (1.1) (added +20 -0)
+		macosx/make-installer (1.1) (added +61 -0)
+		macosx/make-mpkg (1.1) (added +36 -0)
+		macosx/make-pkg (1.1) (added +44 -0)
+		macosx/make-supported-printers (1.1) (added +69 -0)
+		macosx/src/gutenprint.dmg.src/Contents/Documentation/GPL License.rtf (1.1) (added)
+		macosx/src/gutenprint.dmg.src/Contents/Documentation/SourceCode.webloc (1.1) (added +8 -0)
+		macosx/src/gutenprint.dmg.src/Contents/Documentation/Supported Printers.webloc (1.1) (added)
+		macosx/src/gutenprint.dmg.src/Contents/Gutenprint Utility for EPSON Inkjet Printers/Gutenprint Utility for EPSON Inkjet Printers.command (1.1) (added)
+		macosx/src/gutenprint.dmg.src/Contents/Gutenprint Utility for EPSON Inkjet Printers/Utility Read Me.rtf (1.1) (added)
+		macosx/src/gutenprint.dmg.src/Contents/Uninstaller Read Me.rtfd/Pasted Graphic 1.tiff (1.1) (added)
+		macosx/src/gutenprint.dmg.src/Contents/Uninstaller Read Me.rtfd/TXT.rtf (1.1) (added)
+		macosx/src/gutenprint.dmg.src/name (1.1) (added +0 -0)
+		macosx/src/gutenprint.pkg.src/Info.plist (1.1) (added +46 -0)
+		macosx/src/gutenprint.pkg.src/Resources/English.lproj/Description.plist (1.1) (added +10 -0)
+		macosx/src/gutenprint.pkg.src/Resources/English.lproj/Gutenprint 5.info (1.1) (added)
+		macosx/src/gutenprint.pkg.src/Resources/License.txt (1.1) (added +12 -0)
+		macosx/src/gutenprint.pkg.src/Resources/ReadMe.html (1.1) (added +58 -0)
+		macosx/src/gutenprint.pkg.src/Resources/Welcome.rtfd/TXT.rtf (1.1) (added +23 -0)
+		macosx/src/gutenprint.pkg.src/Resources/postinstall (1.1) (added +132 -0)
+		macosx/src/gutenprint.pkg.src/Resources/postupgrade (1.1) (added +132 -0)
+		macosx/src/gutenprint.pkg.src/Resources/preflight (1.1) (added +55 -0)
+		macosx/src/gutenprint.pkg.src/Resources/preinstall (1.1) (added +69 -0)
+		macosx/src/gutenprint.pkg.src/Resources/preupgrade (1.1) (added +69 -0)
+		macosx/src/gutenprint.pkg.src/make-contents (1.1) (added +28 -0)
+		macosx/src/gutenprint.pkg.src/name (1.1) (added +0 -0)
+		macosx/src/install-gutenprint.mpkg.src/Info.plist (1.1) (added +53 -0)
+		macosx/src/install-gutenprint.mpkg.src/make-contents (1.1) (added +29 -0)
+		macosx/src/install-gutenprint.mpkg.src/name (1.1) (added +0 -0)
+
+	Adding OS X build scripts, documentation, and supporting information.
+
+2014-02-17	<jlabovitz@sourceforge.net>
+
+	Files:	NEWS (1.692) (+8 -9)
+
+	Update list of OS X versions supported.
+
+2014-02-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.691) (+2 -1)
+
+	Updates for Epson driver.
+
+2014-02-16	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.690) (+9 -0)
+		src/xml/escp2/model/model_118.xml (1.5) (+1 -1)
+		src/xml/printers.xml (1.355) (+12 -4)
+
+	Add support for xX630, 635, and 645 parallel to WorkForce printers.
+
+	Improve duplex for WorkForce 630/635/645.
+
+===============================================================================
+Name: gutenprint-5_2_10-pre1
+
+2014-02-15	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.7) (+4462 -4240)
+		po/cs.po (1.66) (+4312 -4185)
+		po/da.po (1.111) (+4461 -4247)
+		po/de.po (1.83) (+4320 -4186)
+		po/el.po (1.81) (+4313 -4186)
+		po/en_GB.po (1.174) (+4319 -4186)
+		po/es.po (1.79) (+4312 -4185)
+		po/fi.po (1.11) (+4320 -4186)
+		po/fr.po (1.107) (+4319 -4186)
+		po/gl.po (1.6) (+4320 -4186)
+		po/hu.po (1.39) (+4320 -4186)
+		po/it.po (1.21) (+4487 -4257)
+		po/ja.po (1.76) (+4319 -4186)
+		po/nb.po (1.40) (+4308 -4183)
+		po/nl.po (1.94) (+4500 -4261)
+		po/pl.po (1.85) (+4308 -4183)
+		po/pt.po (1.80) (+4312 -4185)
+		po/ru.po (1.13) (+4315 -4185)
+		po/sk.po (1.84) (+4312 -4185)
+		po/sl.po (1.8) (+4320 -4186)
+		po/sv.po (1.110) (+4321 -4187)
+		po/tr.po (1.3) (+4320 -4186)
+		po/uk.po (1.11) (+4472 -4248)
+		po/vi.po (1.2) (+4369 -4207)
+		po/zh_CN.po (1.6) (+4298 -4183)
+		po/zh_TW.po (1.40) (+4311 -4185)
+
+	Gutenprint 5.2.10-pre1 release
+
 2014-02-15	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.689) (+2 -2)
@@ -500,7 +903,7 @@
 
 	Files:	NEWS (1.672) (+1 -1)
 		configure.ac (1.248) (+3 -3)
-		po/vi.po (1.1) (added +15415 -0)
+		po/vi.po (1.1) (added +15617 -0)
 
 	Add Vietnamese translation
 
@@ -1094,7 +1497,7 @@
 		src/cups/Makefile.am (1.138) (+2 -2)
 		src/cups/backend_common.c (1.14) (+1 -0)
 		src/cups/backend_common.h (1.5) (+3 -0)
-		src/cups/dnpds40_print.c (1.1) (added +1017 -0)
+		src/cups/dnpds40_print.c (1.1) (added +1015 -0)
 
 	backends:  Add a backend for the DNP DS40/DS80 printers.
 
@@ -1499,7 +1902,7 @@
 		po/sk.po (1.82) (+6874 -5619)
 		po/sl.po (1.6) (+6851 -5581)
 		po/sv.po (1.108) (+6935 -5673)
-		po/tr.po (1.1) (added +16451 -0)
+		po/tr.po (1.1) (added +16625 -0)
 		po/uk.po (1.8) (+7004 -5622)
 		po/zh_CN.po (1.4) (+6348 -5558)
 		po/zh_TW.po (1.38) (+6928 -5655)
@@ -2802,7 +3205,7 @@
 2013-02-17	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.240) (+3 -3)
-		po/ca.po (1.1) (added +15678 -0)
+		po/ca.po (1.1) (added +15940 -0)
 
 	Add Catalan translation
 
@@ -3123,7 +3526,7 @@
 
 2012-11-18	<speachy@sourceforge.net>
 
-	Files:	src/cups/selphy_print.c (1.1) (added +1288 -0)
+	Files:	src/cups/selphy_print.c (1.1) (added +1285 -0)
 		src/cups/selphy_print_common.h (1.1) (added)
 
 	[selphy]  Initial commit of the Canon Dyesub (Selphy CP/ES) CUPS backend.
@@ -6017,7 +6420,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.535) (+2 -1)
 		configure.ac (1.230) (+3 -3)
-		po/zh_CN.po (1.1) (added +15434 -0)
+		po/zh_CN.po (1.1) (added +15581 -0)
 
 	Add Chinese Mandarin translation
 
@@ -7557,7 +7960,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.471) (+1 -1)
 		configure.ac (1.229) (+3 -3)
-		po/gl.po (1.1) (added +16690 -0)
+		po/gl.po (1.1) (added +16864 -0)
 
 	Add Galician translation.
 
@@ -8428,7 +8831,7 @@ Name: gutenprint-5_2_7
 
 	Files:	NEWS (1.448) (+4 -0)
 		configure.ac (1.222) (+3 -3)
-		po/sl.po (1.1) (added +16693 -0)
+		po/sl.po (1.1) (added +16867 -0)
 
 	Add Slovenian translation
 
@@ -9714,7 +10117,7 @@ Name: gutenprint-5_2_6
 2010-04-19	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.217) (+3 -3)
-		po/fi.po (1.1) (added +16601 -0)
+		po/fi.po (1.1) (added +16775 -0)
 
 	Add Finnish translation
 
@@ -10052,7 +10455,7 @@ Name: gutenprint-5_2_4
 2009-06-24	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.213) (+3 -3)
-		po/ru.po (1.1) (added +16624 -0)
+		po/ru.po (1.1) (added +16794 -0)
 
 	Add Russian translation
 
@@ -11002,7 +11405,7 @@ Name: gutenprint-5_2_2
 2008-11-11	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.207) (+3 -3)
-		po/it.po (1.1) (added +15692 -0)
+		po/it.po (1.1) (added +15962 -0)
 
 	Add Italian translation
 
@@ -14638,7 +15041,7 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/model/model_87.xml (1.1) (added +193 -0)
 		src/xml/escp2/model/model_9.xml (1.1) (added +145 -0)
 		src/xml/papers.xml (1.1) (added +1440 -0)
-		src/xml/printers.xml (1.1) (added +2633 -0)
+		src/xml/printers.xml (1.1) (added +2641 -0)
 		test/run-testdither (1.13) (+1 -1)
 		test/run-weavetest (1.25) (+1 -1)
 
@@ -21167,7 +21570,7 @@ Name: gutenprint-5_0_0-rc2
 2005-08-10	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.129) (+3 -3)
-		po/zh_TW.po (1.1) (added +17692 -0)
+		po/zh_TW.po (1.1) (added +17858 -0)
 
 	Add zh_TW support
 
@@ -24780,7 +25183,7 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-05-01	<rlk@sourceforge.net>
 
-	Files:	po/hu.po (1.1) (added +16703 -0)
+	Files:	po/hu.po (1.1) (added +16877 -0)
 
 	file hu.po was initially added on branch gimp-print-4_2_branch.
 
@@ -24988,13 +25391,13 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/uk.po (1.1) (added +15631 -0)
+	Files:	po/uk.po (1.1) (added +15895 -0)
 
 	file uk.po was initially added on branch gimp-print-4_2_branch.
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/nb.po (1.1) (added +17921 -0)
+	Files:	po/nb.po (1.1) (added +18086 -0)
 
 	file nb.po was initially added on branch gimp-print-4_2_branch.
 
@@ -30026,7 +30429,7 @@ Name: gimp-print-4_3_15
 
 2003-05-21	<m0m@sourceforge.net>
 
-	Files:	src/main/print-olympus.c (1.1) (added +4924 -0)
+	Files:	src/main/print-olympus.c (1.1) (added +4935 -0)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
 
@@ -30371,7 +30774,7 @@ Name: gimp-print-4_3_14
 
 2003-05-04	<rlk@sourceforge.net>
 
-	Files:	po/cs.po (1.1) (added +18174 -0)
+	Files:	po/cs.po (1.1) (added +18341 -0)
 
 	file cs.po was initially added on branch gimp-print-4_2_branch.
 
@@ -35334,7 +35737,7 @@ Name: gimp-print-4_3_6
 
 2002-10-07	<rlk@sourceforge.net>
 
-	Files:	po/ja.po (1.1) (added +17838 -0)
+	Files:	po/ja.po (1.1) (added +18011 -0)
 
 	file ja.po was initially added on branch gimp-print-4_2_branch.
 
@@ -36460,7 +36863,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +17293 -0)
+	Files:	po/de.po (1.1) (added +17467 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -36549,7 +36952,7 @@ Name: gimp-print-4_3_1
 
 2002-05-11	<rlk@sourceforge.net>
 
-	Files:	po/pt.po (1.1) (added +18285 -0)
+	Files:	po/pt.po (1.1) (added +18452 -0)
 
 	file pt.po was initially added on branch gimp-print-4_2_branch.
 
@@ -36646,7 +37049,7 @@ Name: gimp-print-4_3_1
 
 2002-04-28	<rlk@sourceforge.net>
 
-	Files:	po/es.po (1.1) (added +18327 -0)
+	Files:	po/es.po (1.1) (added +18494 -0)
 
 	Spanish translation
 
@@ -37379,7 +37782,7 @@ Name: gimp-print-4_3_0
 
 	Files:	acconfig.h (1.17) (removed)
 		autogen.sh (1.4) (+1 -1)
-		configure.ac (1.1) (added +1192 -0)
+		configure.ac (1.1) (added +1193 -0)
 		configure.in.in (1.121) (removed)
 		debian/rules (1.35) (+2 -2)
 		doc/README.maintaining (1.12) (+16 -22)
@@ -37546,7 +37949,7 @@ Name: gimp-print-4_3_0
 
 2002-03-16	<rlk@sourceforge.net>
 
-	Files:	po/nl.po (1.1) (added +15681 -0)
+	Files:	po/nl.po (1.1) (added +15960 -0)
 
 	file nl.po was initially added on branch gimp-print-4_2_branch.
 
@@ -37779,7 +38182,7 @@ Name: gimp-print-4_3_0
 
 2002-02-16	<rlk@sourceforge.net>
 
-	Files:	po/el.po (1.1) (added +17899 -0)
+	Files:	po/el.po (1.1) (added +18066 -0)
 
 	file el.po was initially added on branch gimp-print-4_2_branch.
 
@@ -37879,7 +38282,7 @@ Name: gimp-print-4_3_0
 
 2002-02-14	<rlk@sourceforge.net>
 
-	Files:	po/sk.po (1.1) (added +18270 -0)
+	Files:	po/sk.po (1.1) (added +18437 -0)
 
 	file sk.po was initially added on branch gimp-print-4_2_branch.
 
@@ -38972,7 +39375,7 @@ Name: gimp-print-4_1_99-rc1
 2001-11-08	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.94) (+2 -2)
-		po/pl.po (1.1) (added +17521 -0)
+		po/pl.po (1.1) (added +17686 -0)
 
 	Add Polish translation
 
@@ -39522,7 +39925,7 @@ Name: gimp-print-4_1_99-b4
 2001-10-21	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.87) (+2 -2)
-		po/da.po (1.1) (added +15690 -0)
+		po/da.po (1.1) (added +15944 -0)
 		po/en_GB.po (1.65) (+2 -2)
 		po/fr.po (1.8) (+1 -1)
 		po/no.po (1.8) (+1 -1)
@@ -39821,7 +40224,7 @@ Name: gimp-print-4_1_99-b4
 
 	Files:	configure.in.in (1.84) (+3 -3)
 		po/en_GB.po (1.57) (+335 -348)
-		po/fr.po (1.1) (added +17808 -0)
+		po/fr.po (1.1) (added +17981 -0)
 		po/no.po (1.1) (added)
 		po/sv.po (1.10) (+161 -554)
 		src/cups/Makefile.am (1.37) (+2 -2)
@@ -40522,7 +40925,7 @@ Name: gimp-print-4_1_99-b3
 
 	Files:	NEWS.4.2 (1.5) (+33 -24)
 		configure.in.in (1.76) (+2 -2)
-		po/sv.po (1.1) (added +18585 -0)
+		po/sv.po (1.1) (added +18759 -0)
 		src/foomatic/foomatic-printermap (1.13) (+1 -0)
 		src/ghost/gdevstp.c (1.13) (+70 -33)
 		src/main/print-escp2.c (1.121) (+168 -6)
@@ -44319,7 +44722,7 @@ Name: gimp-print-4_1_6
 		src/Makefile.am (1.2) (+2 -2)
 		src/foomatic/.cvsignore (1.1) (added +13 -0)
 		src/foomatic/Makefile.am (1.1) (added +122 -0)
-		src/foomatic/foomatic-generator.in (1.1) (added +1835 -0)
+		src/foomatic/foomatic-generator.in (1.1) (added +1832 -0)
 		src/foomatic/foomatic-printermap (1.1) (added)
 		src/foomatic/foomatic-templates/Brightness.xml (1.1) (added)
 		src/foomatic/foomatic-templates/Contrast.xml (1.1) (added)
@@ -45614,7 +46017,7 @@ Name: gimp-print-4_1_4
 2001-02-08	<rleigh@sourceforge.net>
 
 	Files:	configure.in.in (1.5) (+2 -2)
-		po/en_GB.po (1.1) (added +17280 -0)
+		po/en_GB.po (1.1) (added +17453 -0)
 		po/en_TEST.po (1.1) (added)
 
 	Add en_GB and en_TEST translations
@@ -54561,7 +54964,7 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	configure.in (1.1) (added +1192 -0)
+	Files:	configure.in (1.1) (added +1193 -0)
 
 	This is my first attempt at a configuration input file for autoconf.  It's
 	got some cheesy inelegant bits, but, it seems to work for me.  I'll try
@@ -54574,12 +54977,12 @@ Name: print-3_1_6
 
 	Files:	AUTHORS (1.1) (added +131 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +55619 -0)
+		ChangeLog (1.1) (added +56037 -0)
 		INSTALL (1.1) (added +370 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +3539 -0)
+		NEWS (1.1) (added +3565 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -55210,7 +55613,7 @@ Name: print-3_1_6
 
 1999-11-14	<rlk@sourceforge.net>
 
-	Files:	README (1.1) (added +972 -0)
+	Files:	README (1.1) (added +982 -0)
 		print-escp2.c (1.26) (+32 -12)
 		print-util.c (1.28) (+59 -41)
 		print.c (1.23) (+5 -2)

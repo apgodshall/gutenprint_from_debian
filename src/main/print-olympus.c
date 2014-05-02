@@ -1,5 +1,5 @@
 /*
- * "$Id: print-olympus.c,v 1.152 2014/02/01 01:04:21 speachy Exp $"
+ * "$Id: print-olympus.c,v 1.157 2014/03/07 14:03:36 speachy Exp $"
  *
  *   Print plug-in DyeSub driver (formerly Olympus driver) for the GIMP.
  *
@@ -1395,7 +1395,7 @@ LIST(dyesub_printsize_list_t, cx400_printsize_list, dyesub_printsize_t, cx400_pr
 static void cx400_printer_init_func(stp_vars_t *v)
 {
   char pg = '\0';
-  const char *pname = "XXXXXX";		  				
+  const char *pname = "XXXXXX";
 
   stp_deprintf(STP_DBG_DYESUB,
 	"dyesub: fuji driver %s\n", stp_get_driver(v));
@@ -2834,10 +2834,10 @@ LIST(dyesub_resolution_list_t, res_dnpds40_dpi_list, dyesub_resolution_t, res_dn
    printer with the full imaging width. */
 static const dyesub_pagesize_t dnpds40_dock_page[] =
 {
-  { "B7",	"3.5x5", PT(1920,300)+1, PT(1088,300)+1, PT(112,300), PT(112,300), 0, 0, DYESUB_PORTRAIT},
-  { "w288h432", "4x6", PT(1920,300)+1, PT(1240,300)+1, PT(38,300), PT(38,300), 0, 0, DYESUB_PORTRAIT},
+  { "B7", "3.5x5", PT(1088,300)+1, PT(1920,300)+1, 0, 0, PT(112,300), PT(112,300), DYESUB_LANDSCAPE},
+  { "w288h432", "4x6", PT(1240,300)+1, PT(1920,300)+1, 0, 0, PT(38,300), PT(38,300), DYESUB_LANDSCAPE},
 #ifdef DNPX2
-  { "2x6_x2", "2x6*2", PT(1920,300)+1, PT(1240,300)+1, PT(38,300), PT(38,300), 0, 0, DYESUB_PORTRAIT},
+  { "2x6_x2", "2x6*2", PT(1240,300)+1, PT(1920,300)+1, 0, 0, PT(38,300), PT(38,300), DYESUB_LANDSCAPE},
 #endif
   { "w360h504",	"5x7", PT(1920,300)+1, PT(2138,300)+1, PT(112,300), PT(112,300), 0, 0, DYESUB_PORTRAIT},
   { "A5", "6x8", PT(1920,300)+1, PT(2436,300)+1, PT(38,300), PT(38,300), 0, 0, DYESUB_PORTRAIT},
@@ -2851,13 +2851,13 @@ LIST(dyesub_pagesize_list_t, dnpds40_dock_page_list, dyesub_pagesize_t, dnpds40_
 
 static const dyesub_printsize_t dnpds40_dock_printsize[] =
 {
-  { "300x300", "B7", 1920, 1088},
-  { "300x600", "B7", 1920, 2176},
-  { "300x300", "w288h432", 1920, 1240},
-  { "300x600", "w288h432", 1920, 2480},
+  { "300x300", "B7", 1088, 1920},
+  { "300x600", "B7", 2176, 1920},
+  { "300x300", "w288h432", 1240, 1920},
+  { "300x600", "w288h432", 2480, 1920},
 #ifdef DNPX2
-  { "300x300", "2x6_x2", 1920, 1240},
-  { "300x600", "2x6_x2", 1920, 2480},
+  { "300x300", "2x6_x2", 1240, 1920},
+  { "300x600", "2x6_x2", 2480, 1920},
 #endif
   { "300x300", "w360h504", 1920, 2138},
   { "300x600", "w360h504", 1920, 4276},
@@ -2981,12 +2981,12 @@ static void dnpds40_plane_init(stp_vars_t *v)
    printer with the full imaging width. */
 static const dyesub_pagesize_t dnpds80_dock_page[] =
 {
-  { "w288h576", "8x4", PT(2560,300)+1, PT(1236,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
-  { "w360h576", "8x5", PT(2560,300)+1, PT(1536,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
-  { "w432h576", "8x6", PT(2560,300)+1, PT(1836,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
-  { "w576h576", "8x8", PT(2560,300)+1, PT(2436,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
+  { "w288h576", "8x4", PT(1236,300)+1, PT(2560,300)+1, 0, 0, PT(56,300), PT(56,300), DYESUB_LANDSCAPE},
+  { "w360h576", "8x5", PT(1536,300)+1, PT(2560,300)+1, 0, 0, PT(56,300), PT(56,300), DYESUB_LANDSCAPE},
+  { "w432h576", "8x6", PT(1836,300)+1, PT(2560,300)+1, 0, 0, PT(56,300), PT(56,300), DYESUB_LANDSCAPE},
+  { "w576h576", "8x8", PT(2436,300)+1, PT(2560,300)+1, 0, 0, PT(56,300), PT(56,300), DYESUB_LANDSCAPE},
 #ifdef DNPX2
-  { "8x4_x2", "8x4*2", PT(2560,300)+1, PT(2502,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
+  { "8x4_x2", "8x4*2", PT(2502,300)+1, PT(2560,300)+1, 0, 0, PT(56,300), PT(56,300), DYESUB_LANDSCAPE},
   { "8x5_8x4", "8x5+8x4", PT(2560,300)+1, PT(2802,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
 #endif
   { "c8x10", "8x10", PT(2560,300)+1, PT(3036,300)+1, PT(56,300), PT(56,300), 0, 0, DYESUB_PORTRAIT},
@@ -3008,17 +3008,17 @@ LIST(dyesub_pagesize_list_t, dnpds80_dock_page_list, dyesub_pagesize_t, dnpds80_
 
 static const dyesub_printsize_t dnpds80_dock_printsize[] =
 {
-  { "300x300", "w288h576", 2560, 1236},
-  { "300x600", "w288h576", 2560, 2472},
-  { "300x300", "w360h576", 2560, 1536},
-  { "300x600", "w360h576", 2560, 3072},
-  { "300x300", "w432h576", 2560, 1836},
-  { "300x600", "w432h576", 2560, 3672},
-  { "300x300", "w576h576", 2560, 2436},
-  { "300x600", "w576h576", 2560, 4872},
+  { "300x300", "w288h576", 1236, 2560},
+  { "300x600", "w288h576", 2472, 2560},
+  { "300x300", "w360h576", 1536, 2560},
+  { "300x600", "w360h576", 3072, 2560},
+  { "300x300", "w432h576", 1836, 2560},
+  { "300x600", "w432h576", 3672, 2560},
+  { "300x300", "w576h576", 2436, 2560},
+  { "300x600", "w576h576", 4872, 2560},
 #ifdef DNPX2
-  { "300x300", "8x4_x2", 2560, 2502},
-  { "300x600", "8x4_x2", 2560, 5004},
+  { "300x300", "8x4_x2", 2502, 2560},
+  { "300x600", "8x4_x2", 5004, 2560},
   { "300x300", "8x5_8x4", 2560, 2802},
   { "300x600", "8x5_8x4", 2560, 5604},
 #endif
@@ -3537,7 +3537,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     NULL, NULL,
   },
   { /* Kodak Easyshare Dock family */
-    4000, 		
+    4000,
     &ymc_ink_list,
     &res_300dpi_list,
     &kodak_dock_page_list,
@@ -3552,7 +3552,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     NULL, NULL,
   },
   { /* Kodak Photo Printer 6800 */
-    4001, 		
+    4001,
     &rgb_ink_list,
     &res_300dpi_list,
     &kodak_6800_page_list,
@@ -3566,7 +3566,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     &kodak_6800_laminate_list, NULL,
   },
   { /* Kodak Photo Printer 6850 */
-    4002, 		
+    4002,
     &rgb_ink_list,
     &res_300dpi_list,
     &kodak_6850_page_list,
@@ -3580,7 +3580,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     &kodak_6800_laminate_list, NULL,
   },
   { /* Kodak Photo Printer 605 */
-    4003, 		
+    4003,
     &rgb_ink_list,
     &res_300dpi_list,
     &kodak_6800_page_list,
@@ -3594,7 +3594,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     &kodak_605_laminate_list, NULL,
   },
   { /* Kodak Professional 1400 */
-    4004,	
+    4004,
     &bgr_ink_list,
     &res_301dpi_list,
     &kodak_1400_page_list,
@@ -3611,7 +3611,7 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     &kodak_1400_media_list,
   },
   { /* Kodak Photo Printer 805 */
-    4005, 		
+    4005,
     &bgr_ink_list,
     &res_301dpi_list,
     &kodak_805_page_list,
@@ -4259,7 +4259,18 @@ dyesub_maximum_imageable_area(const stp_vars_t *v,
 			       int  *top)
 {
   int not_used;
-  dyesub_imageable_area_internal(v, 1, left, right, bottom, top, &not_used);
+  const int model = stp_get_model_id(v);
+  const dyesub_cap_t *caps = dyesub_get_model_capabilities(model);
+
+  /* For printers that report FEATURE_WHITE_BORDER, we need to
+     respect the margins they define as that's the printable area.
+     The SELPHY models support FEATURE_BORDERLESS as well, so handle
+     that special case. */
+
+  dyesub_imageable_area_internal(v,
+    (!(dyesub_feature(caps, DYESUB_FEATURE_WHITE_BORDER) &&
+       !dyesub_feature(caps, DYESUB_FEATURE_BORDERLESS))),
+    left, right, bottom, top, &not_used);
 }
 
 static void

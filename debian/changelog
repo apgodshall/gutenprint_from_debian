@@ -1,3 +1,59 @@
+gutenprint (5.2.10~pre2-1~exp1) experimental; urgency=medium
+
+  * Team upload, 2nd build-attempt on experimental.
+
+  * New upstream release
+     o Added a unified CUPS backend to support selected dye sublimation
+       printers.
+     o Added support for many new Epson and Canon inkjets and for many dye
+       sublimation printers. Support for new Canon inkjets mostly experimental.
+     o Improved support for many already supported dye sublimation printers.
+     o Corrected page dimensions for borderless printing with Canon
+       printers.
+     o Added duplex support for the EPSON WorkForce 645.
+     o Expanded printable area at the bottom of the page for the Epson
+       Stylus Pro 3800 and 3880.
+     o Added IEEE1284 device IDs for many Epson and Canon inkjets
+       (LP: #1248303), monochrome laser printers of all manufacturers, and dye
+       sublimation printers of all manufacturers.
+     o Added Catalan, Turkish, and Vietnamese translations.
+
+  [ Didier Raboud ]
+  * Simplify buildsystem to make use of recent debhelper features
+  * Let printer-driver-gutenprint only depend on perl-base through dh_perl -p
+  * Only build-depend on libusb-1.0-dev on !hurd-any as it's not available there
+  * Add patch to avoid running the insanely long test-rastertogutenprint
+    build-test that makes sbuild timeout
+  * Build-depend and use dh_autoreconf to make the latest patches useful
+  * Import a bunch of Ubuntu changes, thanks to Till Kamppeter.
+
+  [ Till Kamppeter ]
+  * Replace the printer-driver-gutenprint postinst with a ppd-updater trigger.
+    Update the PPD files of all already existing print queues using this driver
+    when updating this package. In contrary to Gutenprint's own
+    cups-genppdupdate, the script of the cups package can also migrate PPD
+    files. In our case we migrate Foomatic/IJS PPD files to the equivalent PPDs
+    using the CUPS Raster driver of Gutenprint and we replace simplified PPD
+    files by the corresponding standard PPDs, as we discontinue the simplified
+    PPDs in Ubuntu to reduce the delta to Debian and to make printer
+    model/driver listings in printer setup tools less cluttered.
+  * Replaced dependency of printer-driver-gutenprint on ghostscript-cups by
+    "cups-filters (>= 1.0.36) | ghostscript-cups (<< 9.08)" as Ghostscript's
+    CUPS filters moved to cups-filters from cups-filters 1.0.36/Ghostscript
+    9.08 on.
+  * Add two configure flags to avoid depending on the CUPS version detection
+    code to enable CUPS 1.2 enhancements and disable the CUPS PPD files.
+  * Build-depend on libusb-1.0-0-dev for the new CUPS backend for dye
+    sublimation printers on USB
+  * Install new USB printer blacklist file for the CUPS USB backend (for dye
+    sublimation printers using Gutenprint's own backend)
+  * Add upstream patch to fix the gutenprint52+usb CUPS backend crashing on
+    failure of USB access via libusb (LP: #1297326)
+  * Set gutenprint52+usb CUPS backend to 700 permissions so that CUPS runs it
+    as root (LP: #1297326)
+
+ -- Didier Raboud <odyx@debian.org>  Sun, 04 May 2014 12:37:46 +0200
+
 gutenprint (5.2.9-2) unstable; urgency=low
 
   * Team upload

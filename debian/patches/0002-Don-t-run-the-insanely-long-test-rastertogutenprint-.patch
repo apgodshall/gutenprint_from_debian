@@ -1,0 +1,23 @@
+From f82b71f8d70edd5423e824df4bf2023e7ccf76bb Mon Sep 17 00:00:00 2001
+From: Didier Raboud <odyx@debian.org>
+Date: Sun, 4 May 2014 12:34:59 +0200
+Subject: [PATCH 2/2] Don't run the insanely long test-rastertogutenprint
+ build-test that lets sbuild timeout on all architectures
+
+---
+ src/cups/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/cups/Makefile.am b/src/cups/Makefile.am
+index 939f1a8..8d18644 100644
+--- a/src/cups/Makefile.am
++++ b/src/cups/Makefile.am
+@@ -97,7 +97,7 @@ install-exec-hook:
+ 	chmod 700 "$(DESTDIR)$(pkglibdir)/backend/gutenprint$(GUTENPRINT_MAJOR_VERSION)$(GUTENPRINT_MINOR_VERSION)+usb"
+ endif
+ 
+-TESTS= test-ppds test-rastertogutenprint
++TESTS= test-ppds
+ noinst_SCRIPTS=test-rastertogutenprint
+ endif
+ 

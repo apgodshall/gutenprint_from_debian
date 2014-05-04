@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 %:
-	dh $@ --with autotools_dev --parallel
+	dh $@ --with autotools_dev,autoreconf --parallel
 
 update-patch-series:
 	mkdir -p $(CURDIR)/debian/patches
@@ -13,6 +13,10 @@ update-patch-series:
 	  head -n $$(($$lines - 3)) $$patch > $${patch}.chomped; \
 	  mv $${patch}.chomped $$patch; \
 	done
+
+override_dh_autoreconf:
+	[ -d m4local ] || mkdir -p m4local
+	dh_autoreconf
 
 override_dh_auto_configure:
 	dh_auto_configure -- \

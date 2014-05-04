@@ -13,7 +13,7 @@ Build-Depends:
  libgimp2.0-dev,
  libreadline-dev,
  libijs-dev,
- libusb-1.0-0-dev,
+ libusb-1.0-0-dev [!hurd-any],
  zlib1g-dev,
  flex,
  gettext,

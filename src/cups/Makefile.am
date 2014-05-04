@@ -97,7 +97,7 @@ install-exec-hook:
 	mv $(DESTDIR)$(pkglibdir)/backend/backend_gutenprint "$(DESTDIR)$(pkglibdir)/backend/gutenprint$(GUTENPRINT_MAJOR_VERSION)$(GUTENPRINT_MINOR_VERSION)+usb"
 endif
 
-TESTS= test-ppds test-rastertogutenprint
+TESTS= test-ppds
 noinst_SCRIPTS=test-rastertogutenprint
 endif
 

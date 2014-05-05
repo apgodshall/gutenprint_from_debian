@@ -63,8 +63,7 @@ override_dh_perl:
 	dh_perl -d
 
 override_dh_fixperms:
-	dh_fixperms -Xusr/lib/cups/backend
-
+	dh_fixperms
 # Make the gutenprint52+usb backend run as root, since /dev/bus/usb/*
 # are root:root in udev < 147, and the usblp kernel module is not used
 # here; udev 147 makes most of those printers accessible to lp, but

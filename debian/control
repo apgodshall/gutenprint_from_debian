@@ -62,7 +62,6 @@ Description: transitional dummy package for gutenprint printer driver
 
 Package: printer-driver-gutenprint
 Architecture: any
-Section: graphics
 Depends:
  ${misc:Depends},
  ${perl:Depends},

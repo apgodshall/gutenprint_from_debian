@@ -2,7 +2,6 @@ etc/cups/command.types                  usr/share/cups/mime
 usr/bin/cups-calibrate
 usr/sbin/cups-genppdupdate
 usr/lib/cups
-usr/share/cups/usb
 usr/share/cups/calibrate.ppm
 usr/share/man/man8/cups-calibrate.8
 usr/share/man/man8/cups-genppdupdate.8

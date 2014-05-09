@@ -68,4 +68,5 @@ override_dh_fixperms:
 # are root:root in udev < 147, and the usblp kernel module is not used
 # here; udev 147 makes most of those printers accessible to lp, but
 # apparently not all of them
-	chmod go-x debian/printer-driver-gutenprint/usr/lib/cups/backend/gutenprint52+usb
+	[ ! -f debian/printer-driver-gutenprint/usr/lib/cups/backend/gutenprint52+usb ] || \
+		chmod go-x debian/printer-driver-gutenprint/usr/lib/cups/backend/gutenprint52+usb

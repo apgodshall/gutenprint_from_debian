@@ -39,6 +39,10 @@ override_dh_installdocs:
 	dh_installdocs --remaining-packages
 
 override_dh_install-arch:
+ifeq ($(DEB_BUILD_ARCH_OS),linux)
+	# Install common files
+	dh_install -pprinter-driver-gutenprint --ignore=debian/printer-driver-gutenprint.install.linux
+endif
 	dh_install -a
 # Remove rpath
 	find debian/printer-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete

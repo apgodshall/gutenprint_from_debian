@@ -48,7 +48,7 @@ Section: oldlibs
 Priority: extra
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
- printer-driver-gutenprint
+ printer-driver-gutenprint (>= ${binary:Version}~)
 Description: transitional dummy package for gutenprint printer driver
  This is a transitional package to install the CUPS driver based on
  Gutenprint, which has been renamed to printer-driver-gutenprint.
@@ -215,7 +215,9 @@ Description: locale data files for Gutenprint
 Package: escputil
 Architecture: any
 Section: utils
-Depends: ${misc:Depends}, ${shlibs:Depends}
+Depends: ${misc:Depends},
+ ${shlibs:Depends},
+ libgutenprint2 (= ${binary:Version}),
 Suggests: gutenprint-locales (>= ${source:Version})
 Description: maintenance utility for Epson Stylus printers
  escputil is a utility to clean and align the heads of Epson Stylus
@@ -233,6 +235,7 @@ Architecture: any
 Section: text
 Depends:
  ${misc:Depends}, ${shlibs:Depends},
+ libgutenprint2 (= ${binary:Version}),
  ghostscript (>= 8.61)
 Recommends: foomatic-db-gutenprint
 Description: inkjet server - Ghostscript driver for Gutenprint

@@ -36,8 +36,17 @@ override_dh_install-indep:
 	rm -f debian/gutenprint-locales/usr/share/locale/*/*.po
 
 override_dh_installdocs:
+	# Let it be installed by dh_installdocs
+	cp src/cups/README debian/README.cups
+	dh_installdocs -pescputil --link-doc=libgutenprint2
+	dh_installdocs -pijsgutenprint --link-doc=libgutenprint2
+	dh_installdocs -plibgutenprintui2-dev --link-doc=libgutenprintui2-1
 	dh_installdocs -pcups-driver-gutenprint --link-doc=printer-driver-gutenprint
 	dh_installdocs --remaining-packages
+
+override_dh_clean:
+	- rm -f debian/README.cups
+	dh_clean
 
 override_dh_install-arch:
 ifeq ($(DEB_BUILD_ARCH_OS),linux)
@@ -48,7 +57,6 @@ endif
 # Remove rpath
 	find debian/printer-driver-gutenprint/usr/lib -type f -perm +0111 -print0 | xargs -0 chrpath --delete
 # Documentation fixup
-	cp src/cups/README debian/printer-driver-gutenprint/usr/share/doc/printer-driver-gutenprint/README.cups
 	mv debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1 debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.5.2.1
 	ln -s ijsgutenprint.5.2.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
 	ln -s ijsgutenprint.5.2 debian/ijsgutenprint/usr/bin/ijsgutenprint

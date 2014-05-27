@@ -53,7 +53,7 @@ endif
 	ln -s ijsgutenprint.5.2.1.gz debian/ijsgutenprint/usr/share/man/man1/ijsgutenprint.1.gz
 	ln -s ijsgutenprint.5.2 debian/ijsgutenprint/usr/bin/ijsgutenprint
 # Install ppd-updater file
-	install -D --mode=644 debian/printer-driver-gutenprint.ppd-updater $(CURDIR)/debian/printer-driver-splix/usr/share/cups/ppd-updaters/printer-driver-gutenprint.ppd-updater
+	install -D --mode=644 debian/printer-driver-gutenprint.ppd-updater $(CURDIR)/debian/printer-driver-gutenprint/usr/share/cups/ppd-updaters/printer-driver-gutenprint.ppd-updater
 
 override_dh_installchangelogs:
 	dh_installchangelogs NEWS

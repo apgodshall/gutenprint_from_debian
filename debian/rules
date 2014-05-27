@@ -20,6 +20,7 @@ override_dh_autoreconf:
 
 override_dh_auto_configure:
 	dh_auto_configure -- \
+	  --libdir=/usr/lib/$(DEB_HOST_MULTIARCH) \
 	  --disable-static --enable-shared --disable-rpath \
 	  --disable-static-genppd \
 	  --with-modules=dlopen \
@@ -65,6 +66,12 @@ override_dh_auto_test:
 
 override_dh_perl:
 	dh_perl -d
+
+override_dh_makeshlibs:
+	dh_makeshlibs -a -V -X usr/lib/$(DEB_HOST_MULTIARCH)/gutenprint
+
+override_dh_shlibdeps:
+	dh_shlibdeps -a -X usr/lib/$(DEB_HOST_MULTIARCH)/gutenprint -ldebian/libgutenprint2/usr/lib/$(DEB_HOST_MULTIARCH):debian/libgutenprintui2-1/usr/lib/$(DEB_HOST_MULTIARCH)
 
 override_dh_fixperms:
 	dh_fixperms

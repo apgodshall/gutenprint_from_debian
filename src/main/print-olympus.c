@@ -1,5 +1,5 @@
 /*
- * "$Id: print-olympus.c,v 1.157 2014/03/07 14:03:36 speachy Exp $"
+ * "$Id: print-olympus.c,v 1.165 2014/05/07 11:16:56 speachy Exp $"
  *
  *   Print plug-in DyeSub driver (formerly Olympus driver) for the GIMP.
  *
@@ -1015,6 +1015,68 @@ static void cp900_printer_end_func(stp_vars_t *v)
   dyesub_nputc(v, 0x0, 4);
 }
 
+/* Canon CP820/CP910 */
+static const dyesub_pagesize_t cp910_page[] =
+{
+  { "Postcard", "Postcard 100x148mm", PT(1248,300)+1, PT(1872,300)+1, 13, 13, 16, 19, DYESUB_PORTRAIT},
+  { "w253h337", "CP_L 89x119mm", PT(1104,300)+1, PT(1536,300)+1, 13, 13, 15, 15, DYESUB_PORTRAIT},
+  { "w155h244", "Card 54x86mm", PT(1088,300)+1, PT(668,300)+1, 13, 13, 15, 15, DYESUB_LANDSCAPE},
+  { "Custom", NULL, PT(1248,300)+1, PT(1872,300)+1, 13, 13, 16, 19, DYESUB_PORTRAIT},
+};
+
+LIST(dyesub_pagesize_list_t, cp910_page_list, dyesub_pagesize_t, cp910_page);
+
+static const dyesub_printsize_t cp910_printsize[] =
+{
+  { "300x300", "Postcard", 1248, 1872},
+  { "300x300", "w253h337", 1104, 1536},
+  { "300x300", "w155h244", 668, 1088},
+  { "300x300", "Custom", 1248, 1872},
+};
+
+LIST(dyesub_printsize_list_t, cp910_printsize_list, dyesub_printsize_t, cp910_printsize);
+
+static void cp910_printer_init_func(stp_vars_t *v)
+{
+  char pg;
+
+  stp_zfwrite("\x0f\x00\x00\x40\x00\x00\x00\x00", 1, 8, v);
+  stp_zfwrite("\x00\x00\x00\x00\x00\x00\x01\x00", 1, 8, v);
+  stp_putc(0x01, v);
+  stp_putc(0x00, v);
+
+  pg = (strcmp(privdata.pagesize, "Postcard") == 0 ? 0x50 :
+                (strcmp(privdata.pagesize, "w253h337") == 0 ? 0x4c :
+                (strcmp(privdata.pagesize, "w155h244") == 0 ? 0x43 :
+                 0x50 )));
+  stp_putc(pg, v);
+
+  dyesub_nputc(v, '\0', 5);
+
+  pg = (strcmp(privdata.pagesize, "Postcard") == 0 ? 0xe0 :
+                (strcmp(privdata.pagesize, "w253h337") == 0 ? 0x80 :
+                (strcmp(privdata.pagesize, "w155h244") == 0 ? 0x40 :
+                 0xe0 )));
+  stp_putc(pg, v);
+
+  stp_putc(0x04, v);
+  dyesub_nputc(v, '\0', 2);
+
+  pg = (strcmp(privdata.pagesize, "Postcard") == 0 ? 0x50 :
+                (strcmp(privdata.pagesize, "w253h337") == 0 ? 0xc0 :
+                (strcmp(privdata.pagesize, "w155h244") == 0 ? 0x9c :
+                 0x50 )));
+  stp_putc(pg, v);
+
+  pg = (strcmp(privdata.pagesize, "Postcard") == 0 ? 0x07 :
+                (strcmp(privdata.pagesize, "w253h337") == 0 ? 0x05 :
+                (strcmp(privdata.pagesize, "w155h244") == 0 ? 0x02 :
+                 0x07 )));
+  stp_putc(pg, v);
+
+  dyesub_nputc(v, '\0', 2);
+}
+
 /* Sony DPP-EX5, DPP-EX7 */
 static const dyesub_resolution_t res_403dpi[] =
 {
@@ -1578,6 +1640,30 @@ static void kodak_6850_printer_init(stp_vars_t *v)
 }
 
 /* Kodak 605 */
+static const dyesub_pagesize_t kodak_605_page[] =
+{
+  { "w288h432", "4x6", PT(1240,300)+1, PT(1844,300)+1, 0, 0, 0, 0,
+  						DYESUB_LANDSCAPE}, /* 4x6 */
+  { "w360h504", "5x7", PT(1500,300)+1, PT(2100,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT}, /* 5x7 */
+  { "w432h576", "6x8", PT(1844,300)+1, PT(2434,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT}, /* 6x8 */
+  { "Custom", NULL, PT(1240,300)+1, PT(1844,300)+1, 0, 0, 0, 0,
+  						DYESUB_LANDSCAPE}, /* 4x6 */
+};
+
+LIST(dyesub_pagesize_list_t, kodak_605_page_list, dyesub_pagesize_t, kodak_605_page);
+
+static const dyesub_printsize_t kodak_605_printsize[] =
+{
+  { "300x300", "w288h432", 1240, 1844},
+  { "300x300", "w360h504", 1500, 2100},
+  { "300x300", "w432h576", 1844, 2434},
+  { "300x300", "Custom", 1240, 1844},
+};
+
+LIST(dyesub_printsize_list_t, kodak_605_printsize_list, dyesub_printsize_t, kodak_605_printsize);
+
 static void kodak_605_printer_init(stp_vars_t *v)
 {
   stp_zfwrite("\x01\x40\x0a\x00\x01", 1, 5, v);
@@ -1585,7 +1671,17 @@ static void kodak_605_printer_init(stp_vars_t *v)
   stp_putc(0x00, v);
   stp_put16_le(privdata.w_size, v);
   stp_put16_le(privdata.h_size, v);
-  stp_putc(privdata.h_size == 1240 ? 0x01 : 0x03, v);
+  if (privdata.h_size == 1240)
+	  stp_putc(0x01, v);
+  else if (privdata.h_size == 2100)
+	  stp_putc(0x02, v);
+  else if (privdata.h_size == 2434)
+	  stp_putc(0x03, v);
+  else if (privdata.h_size == 2490)
+	  stp_putc(0x04, v);
+  else
+	  stp_putc(0x01, v);
+
   stp_zfwrite((privdata.laminate->seq).data, 1,
 			(privdata.laminate->seq).bytes, v);
   stp_putc(0x00, v);
@@ -2451,12 +2547,24 @@ static const dyesub_pagesize_t mitsu_cpd70x_page[] =
   						DYESUB_LANDSCAPE},
   { "w288h432", "4x6", PT(1228,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
   						DYESUB_LANDSCAPE},
+#ifdef DNPX2
+  { "2x6_x2", "4x6*2", PT(1228,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
+  						DYESUB_LANDSCAPE},
+#endif
   { "w360h504", "5x7", PT(1572,300)+1, PT(2128,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
+  { "w432h432", "6x6", PT(1820,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
+  						DYESUB_LANDSCAPE},
   { "w432h576", "6x8", PT(1864,300)+1, PT(2422,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT},
+  { "w432h612", "6x8.5", PT(1864,300)+1, PT(2564,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
   { "w432h648", "6x9", PT(1864,300)+1, PT(2730,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
+#ifdef DNPX2
+  { "4x6_x2", "4x6*2", PT(1864,300)+1, PT(2730,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT},
+#endif
   { "Custom", NULL, PT(1228,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
   						DYESUB_LANDSCAPE},
 };
@@ -2467,9 +2575,17 @@ static const dyesub_printsize_t mitsu_cpd70x_printsize[] =
 {
   { "300x300", "B7", 1076, 1568},
   { "300x300", "w288h432", 1228, 1864},
+#ifdef DNPX2
+  { "300x300", "2x6_x2", 1228, 1864},
+#endif
   { "300x300", "w360h504", 1572, 2128},
+  { "300x300", "w432h432", 1820, 1864},
   { "300x300", "w432h576", 1864, 2422},
+  { "300x300", "w432h612", 1864, 2564},
   { "300x300", "w432h648", 1864, 2730},
+#ifdef DNPX2
+  { "300x300", "4x6_x2", 1864, 2730},
+#endif
   { "300x300", "Custom", 1220, 1868},
 };
 
@@ -2477,13 +2593,13 @@ LIST(dyesub_printsize_list_t, mitsu_cpd70x_printsize_list, dyesub_printsize_t, m
 
 static const laminate_t mitsu_cpd70x_laminate[] =
 {
+  {"Glossy", N_("Glossy"), {1, "\x00"}},
   {"Matte", N_("Matte"), {1, "\x02"}},
-  {"None",  N_("None"),  {1, "\x00"}},
 };
 
 LIST(laminate_list_t, mitsu_cpd70x_laminate_list, laminate_t, mitsu_cpd70x_laminate);
 
-static void mitsu_cpd70x_printer_init(stp_vars_t *v)
+static void mitsu_cpd70k60_printer_init(stp_vars_t *v, int is_k60)
 {
   /* Printer init */
   stp_putc(0x1b, v);
@@ -2496,40 +2612,69 @@ static void mitsu_cpd70x_printer_init(stp_vars_t *v)
   stp_putc(0x1b, v);
   stp_putc(0x5a, v);
   stp_putc(0x54, v);
-  stp_putc(0x01, v);
+  if (is_k60) {
+    stp_putc(0x0, v);
+  } else {
+    stp_putc(0x01, v);
+  }
   dyesub_nputc(v, 0x00, 12);
 
   stp_put16_be(privdata.w_size, v);
   stp_put16_be(privdata.h_size, v);
-  if (*((const char*)((privdata.laminate->seq).data)) == 0x01) {
+  if (*((const char*)((privdata.laminate->seq).data)) != 0x00) {
     /* Laminate a slightly larger boundary */
     stp_put16_be(privdata.w_size, v);
     stp_put16_be(privdata.h_size + 12, v);
-    stp_putc(0x03, v); /* Trigger Superfine */
+    if (is_k60) {
+      stp_putc(0x04, v); /* Matte Lamination forces UltraFine */
+    } else {
+      stp_putc(0x03, v); /* Matte Lamination forces Superfine (or UltraFine) */
+    }
   } else {
     dyesub_nputc(v, 0x00, 4);  /* Ie no Lamination */
-    stp_putc(0x00, v);
+    stp_putc(0x00, v); /* Fine mode */
   }
   dyesub_nputc(v, 0x00, 7);
 
-  stp_putc(0x00, v);  /* Auto deck selection, or 0x01 for Lower, 0x02 for Upper */
+  if (is_k60) {
+    stp_putc(0x01, v); /* K60 has a single "lower" deck */
+  } else {
+    stp_putc(0x00, v);  /* Auto deck selection, or 0x01 for Lower, 0x02 for Upper */
+  }
   dyesub_nputc(v, 0x00, 8);
 
   stp_zfwrite((privdata.laminate->seq).data, 1,
 	      (privdata.laminate->seq).bytes, v); /* Lamination mode */
   dyesub_nputc(v, 0x00, 6);
 
-  dyesub_nputc(v, 0x00, 464); /* Pad to 512-byte block */
+  /* Multi-cut control */
+  if (strcmp(privdata.pagesize,"4x6_x2") == 0) {
+    stp_putc(0x01, v);
+  } else if (strcmp(privdata.pagesize,"B7_x2") == 0) {
+    stp_putc(0x01, v);
+  } else if (strcmp(privdata.pagesize,"2x6_x2") == 0) {
+    stp_putc(0x05, v);
+  } else {
+    stp_putc(0x00, v);
+  }
+  dyesub_nputc(v, 0x00, 15);
+
+  dyesub_nputc(v, 0x00, 448); /* Pad to 512-byte block */
+}
+
+static void mitsu_cpd70x_printer_init(stp_vars_t *v)
+{
+  mitsu_cpd70k60_printer_init(v, 0);
 }
 
 static void mitsu_cpd70x_printer_end(stp_vars_t *v)
 {
-  /* If lamination is enabled, generate a lamination plane */
-  if (*((const char*)((privdata.laminate->seq).data)) == 0x01) {
+  /* If Matte lamination is enabled, generate a lamination plane */
+  if (*((const char*)((privdata.laminate->seq).data)) != 0x00) {
 
     /* The Windows drivers generate a lamination pattern consisting of
        four values: 0xab58, 0x286a, 0x6c22 */
-    
+
     int r, c;
     unsigned long seed = 1;
 
@@ -2563,12 +2708,24 @@ static const dyesub_pagesize_t mitsu_cpk60_page[] =
   						DYESUB_LANDSCAPE},
   { "w288h432", "4x6", PT(1218,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
   						DYESUB_LANDSCAPE},
+#ifdef DNPX2
+  { "2x6_x2", "2x6*2", PT(1218,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
+  						DYESUB_LANDSCAPE},
+#endif
   { "w360h504", "5x7", PT(1568,300)+1, PT(2128,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
+#ifdef DNPX2
+  { "B7_x2", "3.5x5*2", PT(1568,300)+1, PT(2190,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT},
+#endif
   { "w432h432", "6x6", PT(1864,300)+1, PT(1820,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
   { "w432h576", "6x8", PT(1864,300)+1, PT(2422,300)+1, 0, 0, 0, 0,
   						DYESUB_PORTRAIT},
+#ifdef DNPX2
+  { "4x6_x2", "4x6*2", PT(1864,300)+1, PT(2454,300)+1, 0, 0, 0, 0,
+  						DYESUB_PORTRAIT},
+#endif
   { "Custom", NULL, PT(1218,300)+1, PT(1864,300)+1, 0, 0, 0, 0,
   						DYESUB_LANDSCAPE},
 };
@@ -2579,9 +2736,18 @@ static const dyesub_printsize_t mitsu_cpk60_printsize[] =
 {
   { "300x300", "B7", 1076, 1568},
   { "300x300", "w288h432", 1218, 1864},
+#ifdef DNPX2
+  { "300x300", "2x6_x2", 1218, 1864},
+#endif
   { "300x300", "w360h504", 1568, 2128},
+#ifdef DNPX2
+  { "B7_x2", "3.5x5*24", 1568, 2190},
+#endif
   { "300x300", "w432h432", 1864, 1820},
   { "300x300", "w432h576", 1864, 2422},
+#ifdef DNPX2
+  { "300x300", "4x6_x2", 1864, 2454},
+#endif
   { "300x300", "Custom", 1218, 1864},
 };
 
@@ -2589,46 +2755,8 @@ LIST(dyesub_printsize_list_t, mitsu_cpk60_printsize_list, dyesub_printsize_t, mi
 
 static void mitsu_cpk60_printer_init(stp_vars_t *v)
 {
-  /* Printer init */
-  stp_putc(0x1b, v);
-  stp_putc(0x45, v);
-  stp_putc(0x57, v);
-  stp_putc(0x55, v);
-  dyesub_nputc(v, 0x00, 508);
-
-  /* Each copy gets this.. */
-  stp_putc(0x1b, v);
-  stp_putc(0x5a, v);
-  stp_putc(0x54, v);
-  stp_putc(0x00, v);
-  dyesub_nputc(v, 0x00, 12);
-
-  stp_put16_be(privdata.w_size, v);
-  stp_put16_be(privdata.h_size, v);
-  if (*((const char*)((privdata.laminate->seq).data)) == 0x02) {
-    /* Laminate a slightly larger boundary */
-    stp_put16_be(privdata.w_size, v);
-    stp_put16_be(privdata.h_size + 12, v);  /* XXX this isn't always true.. */
-  } else {
-    dyesub_nputc(v, 0x00, 4);  /* Ie no Lamination */
-  }
-  stp_putc(0x00, v); /* Disable UltraFine for now (0x04 enables it) */
-  dyesub_nputc(v, 0x00, 7);
-
-  stp_putc(0x01, v); /* K60 has a single "lower" deck */
-  dyesub_nputc(v, 0x00, 8);
-
-  stp_zfwrite((privdata.laminate->seq).data, 1,
-	      (privdata.laminate->seq).bytes, v); /* Lamination mode */
-  dyesub_nputc(v, 0x00, 6);
-
-  stp_putc(0x01, v); /* Unknown */
-  dyesub_nputc(v, 0x00, 15);
-
-  dyesub_nputc(v, 0x00, 448); /* Pad to 512-byte block */
+  mitsu_cpd70k60_printer_init(v, 1);
 }
-
-
 
 /* Shinko CHC-S9045 (experimental) */
 static const dyesub_pagesize_t shinko_chcs9045_page[] =
@@ -3420,6 +3548,22 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     cpx00_adj_cyan, cpx00_adj_magenta, cpx00_adj_yellow,
     NULL, NULL,
   },
+  { /* Canon CP820, CP910 */
+    1011,
+    &bgr_ink_list,
+    &res_300dpi_list,
+    &cp910_page_list,
+    &cp910_printsize_list,
+    SHRT_MAX,
+    DYESUB_FEATURE_FULL_WIDTH | DYESUB_FEATURE_FULL_HEIGHT
+      | DYESUB_FEATURE_BORDERLESS | DYESUB_FEATURE_WHITE_BORDER
+      | DYESUB_FEATURE_PLANE_INTERLACE,
+    &cp910_printer_init_func, NULL,
+    NULL, NULL,
+    NULL, NULL,
+    NULL, NULL, NULL, /* Unknown color correction! */
+    NULL, NULL,
+  },
   { /* Sony UP-DP10  */
     2000,
     &cmy_ink_list,
@@ -3583,8 +3727,8 @@ static const dyesub_cap_t dyesub_model_capabilities[] =
     4003,
     &rgb_ink_list,
     &res_300dpi_list,
-    &kodak_6800_page_list,
-    &kodak_6800_printsize_list,
+    &kodak_605_page_list,
+    &kodak_605_printsize_list,
     SHRT_MAX,
     DYESUB_FEATURE_FULL_WIDTH | DYESUB_FEATURE_FULL_HEIGHT,
     &kodak_605_printer_init, NULL,

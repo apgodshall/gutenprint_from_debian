@@ -1,5 +1,5 @@
-Welcome to Gutenprint 5.2.10-pre2, a pre-release of Gutenprint
-5.2.10. Please read these release notes carefully.
+Welcome to Gutenprint 5.2.10, a stable release of Gutenprint
+5.2. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
@@ -9,7 +9,7 @@ Macintosh OS X (10.5 and above) systems.  Gutenprint includes CUPS and
 Foomatic drivers, and an enhanced Print plug-in for GIMP that replaces
 the print plug-in packaged with the GIMP distribution.
 
-Gutenprint 5.2 no longer supports Macintosh OS X 10.2, 10.3, or 10.4.
+Gutenprint 5.2.10 no longer supports Macintosh OS X 10.4 or earlier.
 
 *** NOTE TO PACKAGERS: Please read the file README.package for issues
     that are of interest to distributors and packagers of Gutenprint.
@@ -1105,78 +1105,32 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	*1: We have not confirmed these printers function with the new
 	    backend, but they are presumed to work.
 
-       Known Problematic models:
+       Non-supported models:
 
-        The USB PIDs for the SELPHY CP520 is still unknown, and
-        therefore unsupported by this backend.
+	The SELPHY CP820 and CP910, and possibly newer models in the
+	SELPHY CP series utilize an entirely new print data format,
+	and as such are not compatible with previous models in the 
+	SELPHY CP family.  We anticipate these models will be supported
+	in a subsequent Gutenprint release.
 
-       The following models are completely unsupported:
+     - Citizen Dye-Sublimation printers: 
 
-       Canon SELPHY CP820
-       Canon SELPHY CP910
+       Citizen CX
+       Citizen CX-W
+       Citizen CY
 
-        These utilize a new communications protocol that has not yet
-        been decoded.
+         These models are identical to the DNP DS40, DS80, and DSRX1,
+	 respectively, and for best results should be used with the
+	 intelligent backend.
+       
+       Citizen CW-01
+       Citizen CW-02
+       Citizen OP900
+       Citizen OP900II
 
-     - Mitsubishi Dye-Sublimation printers:
-
-       Mitsubishi CP9810D/DW
-
-	This model has been verified to work
-
-       Mitsubishi CP3020D/DU/DE (EXPERIMENTAL)
-       Mitsubishi CP3020DA/DAE  (EXPERIMENTAL)
-       Mitsubishi CP9550D/DW    (EXPERIMENTAL)
-       Mitsubishi CPD70D/DW     (EXPERIMENTAL)
-       Mitsubishi CPD707D/DW    (EXPERIMENTAL)
-       Mitsubishi CPK60DW       (EXPERIMENTAL)
-       Mitsubishi CP3800DW      (EXPERIMENTAL)
-
-	None of these models have been tested and confirmed to work 
-	(or not), so feedback is welcome.
-
-	NOTE: With the exception of the CP-K60DW-S, all Mitsubishi
-	printers with red faceplates and/or model designations ending with 
-	an '-S' suffix are not supported.
-
-	The CP-D70DW and CP-D707DW (and likely the CP-K60DW) require use of 
-	an intelligent backend,	which is bundled with Gutenprint.
-
-     - Kodak Dye-Sublimation printers:
-
-       Kodak 1400
-       Kodak 805
-       Kodak 6800
-       Kodak 6850
-       Kodak 605
-
-	These Kodak models require an intelligent CUPS backend, 
-	which is bundled with Gutenprint.
-
-       Kodak 8500 (EXPERIMENTAL)	
-       Kodak 9810 (EXPERIMENTAL)
-
-	Neither of these models have been tested and confirmed to work 
-	(or not), so feedback is welcome.
-
-     - Shinko/Sinfonia Dye-Sublimation printers:
-
-       Shinko/Sinfonia CHC-S2145 (aka S2)
-
-	The CHC-S2145 requires an intelligent CUPS backend, which is
-	bundled with Gutenprint.
-
-     - Sony Dye-Sublimation printers:
-
-       Sony UP-DR150
-
-	Support for the Sony UP-DR150 was greatly improved through the
-	addition of an intelligent CUPS backend.  You will need to
-	remove and re-create your printer queue after upgrading.
-
-       Sony UP-DR200
-
-	The Sony UP-DR200 requires the use of an intelligent CUPS backend.
+         Support for these models is considered experimental; they have
+	 not yet been tested.  They are functionally identical to the
+	 Citizen CX.
 
      - Dai Nippon Printing (DNP) printers:
 
@@ -1199,24 +1153,67 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
          This printer is functionally identical to the DS40, except
          it does not support 6x9 prints,
 
-     - Citizen Dye-Sublimation printers: 
+     - Kodak Dye-Sublimation printers:
 
-       Citizen CX
-       Citizen CX-W
-       Citizen CY
+       Kodak 1400
+       Kodak 805
+       Kodak 6800
+       Kodak 6850
+       Kodak 605
 
-         These models are identical to the DNP DS40, DS80, and DSRX1,
-	 respectively, and for best results should be used with the
-	 intelligent backend.
-       
-       Citizen CW-01
-       Citizen CW-02
-       Citizen OP900
-       Citizen OP900II
+	These Kodak models require an intelligent CUPS backend, 
+	which is bundled with Gutenprint.
 
-         Support for these models is considered experimental; they have
-	 not yet been tested.  They are functionally identical to the
-	 Citizen CX.
+       Kodak 8500 (EXPERIMENTAL)	
+       Kodak 9810 (EXPERIMENTAL)
+
+	Neither of these models have been tested and confirmed to work 
+	(or not), so feedback is welcome.
+
+     - Mitsubishi Dye-Sublimation printers:
+
+       Mitsubishi CP9810D/DW
+
+	This model has been verified to work
+
+       Mitsubishi CP3020D/DU/DE (EXPERIMENTAL)
+       Mitsubishi CP3020DA/DAE  (EXPERIMENTAL)
+       Mitsubishi CP9550D/DW    (EXPERIMENTAL)
+       Mitsubishi CPD70D/DW     (EXPERIMENTAL)
+       Mitsubishi CPD707D/DW    (EXPERIMENTAL)
+       Mitsubishi CPK60DW-S     (EXPERIMENTAL)
+       Mitsubishi CP3800DW      (EXPERIMENTAL)
+
+	None of these models have been tested and confirmed to work 
+	(or not), so feedback is welcome.
+
+	NOTE: With the exception of the CP-K60DW-S, all Mitsubishi
+	printers with red faceplates and/or model designations ending with 
+	an '-S' suffix are not currently supported.  These were only sold
+	as part of a Mitsubishi kiosk or lab solution, and were 
+	deliberately made incompatible with the non-S models.
+
+	The CP-D70DW and CP-D707DW (and likely the CP-K60DW) require use of 
+	an intelligent backend,	which is bundled with Gutenprint.
+
+     - Shinko/Sinfonia Dye-Sublimation printers:
+
+       Shinko/Sinfonia CHC-S2145 (aka S2)
+
+	The CHC-S2145 requires an intelligent CUPS backend, which is
+	bundled with Gutenprint.
+
+     - Sony Dye-Sublimation printers:
+
+       Sony UP-DR150
+
+	Support for the Sony UP-DR150 was greatly improved through the
+	addition of an intelligent CUPS backend.  You will need to
+	remove and re-create your printer queue after upgrading.
+
+       Sony UP-DR200
+
+	The Sony UP-DR200 requires the use of an intelligent CUPS backend.
 
   3) The following Canon printer models were not added, as they cannot
      currently be supported, even experimentally, owing to an as-yet
@@ -1237,7 +1234,7 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        *1: protocol is supported but inks used are not yet supported
 
   4) Corrected page dimensions for borderless printing with Canon
-     printers.
+     inkjet printers.
 
   5) Added duplex support for the EPSON WorkForce 630, 635, and 645,
      and NX635
@@ -1246,6 +1243,9 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
      Stylus Pro 3800 and 3880.
 
   7) Added IEEE1284 device IDs for the following printers.
+
+     - Device IDs added for the following Brother printers:
+       Brother HL-2030 series
 
      - Device IDs added for the following Canon printers:
        Canon SELPHY ES1
@@ -1283,15 +1283,19 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        Canon MP280 series (possibly incomplete)
        Canon MP450 series
 
+     - Device IDs added for the following Citizen printers:
+       Citizen CX
+
+     - Device IDs added for the following DNP printers:
+       DNP DS40
+       DNP DS80
+
      - Device IDs added for the following Epson printers:
        Epson Stylus Photo 1270
        Epson Stylus Photo R2400
        Epson Stylus C92
        Epson Stylus D78
        Epson Stylus Color 680
-
-     - Device IDs added for the following Bother printers:
-       Brother HL-2030 series
 
      - Device IDs added for the following Hewlett-Packard printers:
        HP Color LaserJet 2500
@@ -1305,9 +1309,6 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
        HP LaserJet M3035 MFP (corrected)
        HP LaserJet P3005 (corrected)
 
-     - Device IDs added for the following Samsung printers:
-       Samsung ML-1450 (possibly incomplete)
-
      - Device IDs added for the following Kodak printers:
        Kodak 1400
        Kodak 605
@@ -1318,22 +1319,18 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
      - Device IDs added for the following Kyocera printers:
        Kyocera FS-1118MFP
 
+     - Device IDs added for the following Mitsubishi printers:
+       Mitsubishi CP-D70DW
+       Mitsubishi CP-D707DW
+
+     - Device IDs added for the following Samsung printers:
+       Samsung ML-1450 (possibly incomplete)
+
      - Device IDs added for the following Sony printers:
        Sony UP-DR150
 
      - Device IDs added for the following Shinko/Sinfonia printers:
        Shinko/Sinfonia CHC-S2145
-
-     - Device IDs added for the following Mitsubishi printers:
-       Mitsubishi CP-D70DW
-       Mitsubishi CP-D707DW
-
-     - Device IDs added for the following DNP printers:
-       DNP DS40
-       DNP DS80
-
-     - Device IDs added for the following Citizen printers:
-       Citizen CX
 
   8) Added Catalan, Turkish, and Vietnamese translations.
 

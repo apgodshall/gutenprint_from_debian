@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gutenprint 5.2.10-pre1\n"
+"Project-Id-Version: gutenprint 5.2.10-pre2\n"
 "Report-Msgid-Bugs-To: gimp-print-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-07 07:49-0500\n"
-"PO-Revision-Date: 2014-01-21 18:30+0100\n"
+"POT-Creation-Date: 2014-05-17 17:51-0400\n"
+"PO-Revision-Date: 2014-03-27 09:00+0100\n"
 "Last-Translator: Walter Garcia-Fontes <walter.garcia@upf.edu>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
 "Language: ca\n"
@@ -142,37 +142,37 @@ msgid "Dither algorithm"
 msgstr "Algoritme de trama"
 
 #: src/main/print-canon.c:282 src/main/print-escp2.c:176
-#: src/main/print-lexmark.c:266 src/main/print-olympus.c:3831
+#: src/main/print-lexmark.c:266 src/main/print-olympus.c:3975
 #: src/main/print-pcl.c:1346 src/main/print-ps.c:74 src/main/print-raw.c:92
 msgid "Page Size"
 msgstr "Mida de pàgina"
 
 #: src/main/print-canon.c:283 src/main/print-escp2.c:177
-#: src/main/print-lexmark.c:267 src/main/print-olympus.c:3832
+#: src/main/print-lexmark.c:267 src/main/print-olympus.c:3976
 #: src/main/print-pcl.c:1347 src/main/print-ps.c:75 src/main/print-raw.c:93
 msgid "Size of the paper being printed to"
 msgstr "Mida del paper en el qual s'està imprimint"
 
 #: src/main/print-canon.c:288 src/main/print-escp2.c:182
-#: src/main/print-lexmark.c:272 src/main/print-olympus.c:3837
+#: src/main/print-lexmark.c:272 src/main/print-olympus.c:3981
 #: src/main/print-pcl.c:1352 src/cups/genppd.c:2058 src/cups/genppd.c:2526
 msgid "Media Type"
 msgstr "Tipus d'elements multimèdia"
 
 #: src/main/print-canon.c:289 src/main/print-escp2.c:183
-#: src/main/print-lexmark.c:273 src/main/print-olympus.c:3838
+#: src/main/print-lexmark.c:273 src/main/print-olympus.c:3982
 #: src/main/print-pcl.c:1353
 msgid "Type of media (plain paper, photo paper, etc.)"
 msgstr "Tipus de suports (paper senzill, paper color, etc.)"
 
 #: src/main/print-canon.c:294 src/main/print-escp2.c:188
-#: src/main/print-lexmark.c:278 src/main/print-olympus.c:3843
+#: src/main/print-lexmark.c:278 src/main/print-olympus.c:3987
 #: src/main/print-pcl.c:1358 src/cups/genppd.c:2094 src/cups/genppd.c:2546
 msgid "Media Source"
 msgstr "Font del suport"
 
 #: src/main/print-canon.c:295 src/main/print-escp2.c:189
-#: src/main/print-lexmark.c:279 src/main/print-olympus.c:3844
+#: src/main/print-lexmark.c:279 src/main/print-olympus.c:3988
 #: src/main/print-pcl.c:1359
 msgid "Source (input slot) of the media"
 msgstr "Font (lloc d'entrada) del suport"
@@ -215,25 +215,25 @@ msgid "CD Vertical Fine Adjustment"
 msgstr "Ajust vertical fi de CD"
 
 #: src/main/print-canon.c:330 src/main/print-escp2.c:236
-#: src/main/print-lexmark.c:284 src/main/print-olympus.c:3849
+#: src/main/print-lexmark.c:284 src/main/print-olympus.c:3993
 #: src/main/print-pcl.c:1370 src/cups/genppd.c:2186 src/cups/genppd.c:2581
 msgid "Resolution"
 msgstr "Resolució"
 
 #: src/main/print-canon.c:331 src/main/print-lexmark.c:285
-#: src/main/print-olympus.c:3850
+#: src/main/print-olympus.c:3994
 msgid "Resolution and quality of the print"
 msgstr "Resolució i qualitat de la impressió"
 
 #: src/main/print-canon.c:341 src/main/print-escp2.c:247
-#: src/main/print-lexmark.c:290 src/main/print-olympus.c:3855
+#: src/main/print-lexmark.c:290 src/main/print-olympus.c:3999
 #: src/main/print-pcl.c:1376 src/main/print-raw.c:80
 msgid "Ink Type"
 msgstr "Tipus de tinta"
 
 #: src/main/print-canon.c:342 src/main/print-escp2.c:248
 #: src/main/print-escp2.c:260 src/main/print-lexmark.c:291
-#: src/main/print-olympus.c:3856 src/main/print-pcl.c:1377
+#: src/main/print-olympus.c:4000 src/main/print-pcl.c:1377
 #: src/main/print-raw.c:81
 msgid "Type of ink in the printer"
 msgstr "Tipus de tinta a la impressora"
@@ -246,13 +246,13 @@ msgid "Ink Channels"
 msgstr "Canals de tinta"
 
 #: src/main/print-canon.c:358 src/main/print-escp2.c:349
-#: src/main/print-lexmark.c:302 src/main/print-olympus.c:3877
+#: src/main/print-lexmark.c:302 src/main/print-olympus.c:4021
 #: src/main/print-pcl.c:1388 src/main/print-ps.c:86 src/main/print-raw.c:86
 msgid "Printing Mode"
 msgstr "Mode d'impressió"
 
 #: src/main/print-canon.c:359 src/main/print-escp2.c:350
-#: src/main/print-lexmark.c:303 src/main/print-olympus.c:3878
+#: src/main/print-lexmark.c:303 src/main/print-olympus.c:4022
 #: src/main/print-pcl.c:1389 src/main/print-ps.c:87 src/main/print-raw.c:87
 msgid "Printing Output Mode"
 msgstr "Mode de sortida d'impressió"
@@ -266,12 +266,12 @@ msgid "Type of inkset in the printer"
 msgstr "Tipus de conjunt de tinta a la impressora"
 
 #: src/main/print-canon.c:375 src/main/print-escp2.c:271
-#: src/main/print-olympus.c:3871
+#: src/main/print-olympus.c:4015
 msgid "Borderless"
 msgstr "Sense vores"
 
 #: src/main/print-canon.c:376 src/main/print-escp2.c:272
-#: src/main/print-olympus.c:3872
+#: src/main/print-olympus.c:4016
 msgid "Print without borders"
 msgstr "Impressió sense vores"
 
@@ -395,7 +395,7 @@ msgstr "Imprimeix al concentrador"
 #: src/main/print-canon.c:2958 src/main/print-canon.c:2986
 #: src/main/print-canon.c:3018 src/main/print-canon.c:3022
 #: src/main/print-canon.c:3098 src/main/print-escp2.c:2702
-#: src/main/print-lexmark.c:1283 src/main/print-olympus.c:4164
+#: src/main/print-lexmark.c:1283 src/main/print-olympus.c:4308
 #: src/main/print-pcl.c:1997 src/main/print-ps.c:329 src/main/print-raw.c:141
 #: src/gutenprintui2/panel.c:291
 msgid "Color"
@@ -502,13 +502,12 @@ msgid "Photo"
 msgstr "Foto"
 
 #: src/main/print-canon.c:3030 src/main/print-olympus.c:313
-#: src/main/print-olympus.c:1524 src/main/print-olympus.c:1597
-#: src/main/print-olympus.c:1732 src/main/print-olympus.c:1948
-#: src/main/print-olympus.c:2349 src/main/print-olympus.c:2481
-#: src/cups/genppd.c:1578 src/cups/genppd.c:1612 src/cups/genppd.c:1645
-#: src/cups/genppd.c:1700 src/cups/genppd.c:1746 src/cups/genppd.c:1792
-#: src/cups/genppd.c:1805 src/cups/genppd.c:1825 src/cups/genppd.c:1847
-#: src/cups/genppd.c:1864
+#: src/main/print-olympus.c:1586 src/main/print-olympus.c:1693
+#: src/main/print-olympus.c:1828 src/main/print-olympus.c:2044
+#: src/main/print-olympus.c:2445 src/cups/genppd.c:1578 src/cups/genppd.c:1612
+#: src/cups/genppd.c:1645 src/cups/genppd.c:1700 src/cups/genppd.c:1746
+#: src/cups/genppd.c:1792 src/cups/genppd.c:1805 src/cups/genppd.c:1825
+#: src/cups/genppd.c:1847 src/cups/genppd.c:1864
 msgid "None"
 msgstr "Cap"
 
@@ -986,7 +985,7 @@ msgstr "Ajusta el gamma blau"
 msgid "Adjust the black gamma"
 msgstr "Ajusta el gamma negre"
 
-#: src/main/print-color.c:354 src/main/print-olympus.c:3900
+#: src/main/print-color.c:354 src/main/print-olympus.c:4044
 msgid "Cyan Balance"
 msgstr "Balanç cian"
 
@@ -994,7 +993,7 @@ msgstr "Balanç cian"
 msgid "Adjust the cyan gray balance"
 msgstr "Ajusta el balanç gris cian"
 
-#: src/main/print-color.c:362 src/main/print-olympus.c:3908
+#: src/main/print-color.c:362 src/main/print-olympus.c:4052
 msgid "Magenta Balance"
 msgstr "Balanç magenta"
 
@@ -1002,7 +1001,7 @@ msgstr "Balanç magenta"
 msgid "Adjust the magenta gray balance"
 msgstr "Ajusta el balanç gris magenta"
 
-#: src/main/print-color.c:370 src/main/print-olympus.c:3916
+#: src/main/print-color.c:370 src/main/print-olympus.c:4060
 msgid "Yellow Balance"
 msgstr "Balanç groc"
 
@@ -1802,7 +1801,7 @@ msgstr ""
 "Aquesta impressora no suporta sortida en cru d'impressora a la profunditat "
 "%d\n"
 
-#: src/main/print-escp2.c:4413 src/main/print-olympus.c:4668
+#: src/main/print-escp2.c:4413 src/main/print-olympus.c:4812
 #: src/main/print-raw.c:237
 msgid "Print options not verified; cannot print.\n"
 msgstr "Les opcions d'impressió no s'han verificat; no es pot imprimir.\n"
@@ -2250,89 +2249,90 @@ msgstr "Manual amb pausa"
 msgid "Manual without Pause"
 msgstr "Manual sense pausa"
 
-#: src/main/print-olympus.c:312 src/main/print-olympus.c:1523
-#: src/main/print-olympus.c:1596 src/main/print-olympus.c:1731
-#: src/main/print-olympus.c:1947
+#: src/main/print-olympus.c:312 src/main/print-olympus.c:1585
+#: src/main/print-olympus.c:1692 src/main/print-olympus.c:1827
+#: src/main/print-olympus.c:2043
 msgid "Coated"
 msgstr "Recobert"
 
-#: src/main/print-olympus.c:1086 src/main/print-olympus.c:1149
-#: src/main/print-olympus.c:1247 src/main/print-olympus.c:1363
-#: src/main/print-olympus.c:1632 src/main/print-olympus.c:1930
-#: src/main/print-olympus.c:2739 src/main/print-olympus.c:2878
+#: src/main/print-olympus.c:1148 src/main/print-olympus.c:1211
+#: src/main/print-olympus.c:1309 src/main/print-olympus.c:1425
+#: src/main/print-olympus.c:1728 src/main/print-olympus.c:2026
+#: src/main/print-olympus.c:2596 src/main/print-olympus.c:2867
+#: src/main/print-olympus.c:3006
 msgid "Glossy"
 msgstr "Brillant"
 
-#: src/main/print-olympus.c:1087 src/main/print-olympus.c:1150
-#: src/main/print-olympus.c:1248
+#: src/main/print-olympus.c:1149 src/main/print-olympus.c:1212
+#: src/main/print-olympus.c:1310
 msgid "Texture"
 msgstr "Textura"
 
-#: src/main/print-olympus.c:1151 src/main/print-olympus.c:1249
-#: src/main/print-olympus.c:1364 src/main/print-olympus.c:1638
-#: src/main/print-olympus.c:1936 src/main/print-olympus.c:2348
-#: src/main/print-olympus.c:2480 src/main/print-olympus.c:2741
-#: src/main/print-olympus.c:2879
+#: src/main/print-olympus.c:1213 src/main/print-olympus.c:1311
+#: src/main/print-olympus.c:1426 src/main/print-olympus.c:1734
+#: src/main/print-olympus.c:2032 src/main/print-olympus.c:2444
+#: src/main/print-olympus.c:2597 src/main/print-olympus.c:2869
+#: src/main/print-olympus.c:3007
 msgid "Matte"
 msgstr "Mat"
 
-#: src/main/print-olympus.c:1633 src/main/print-olympus.c:1931
+#: src/main/print-olympus.c:1729 src/main/print-olympus.c:2027
 msgid "Matte +5"
 msgstr "Mat +5"
 
-#: src/main/print-olympus.c:1634 src/main/print-olympus.c:1932
+#: src/main/print-olympus.c:1730 src/main/print-olympus.c:2028
 msgid "Matte +4"
 msgstr "Mat +4"
 
-#: src/main/print-olympus.c:1635 src/main/print-olympus.c:1933
+#: src/main/print-olympus.c:1731 src/main/print-olympus.c:2029
 msgid "Matte +3"
 msgstr "Mat +3"
 
-#: src/main/print-olympus.c:1636 src/main/print-olympus.c:1934
+#: src/main/print-olympus.c:1732 src/main/print-olympus.c:2030
 msgid "Matte +2"
 msgstr "Mat +1"
 
-#: src/main/print-olympus.c:1637 src/main/print-olympus.c:1935
+#: src/main/print-olympus.c:1733 src/main/print-olympus.c:2031
 msgid "Matte +1"
 msgstr "Mat +1"
 
-#: src/main/print-olympus.c:1639 src/main/print-olympus.c:1937
+#: src/main/print-olympus.c:1735 src/main/print-olympus.c:2033
 msgid "Matte -1"
 msgstr "Mat -1"
 
-#: src/main/print-olympus.c:1640 src/main/print-olympus.c:1938
+#: src/main/print-olympus.c:1736 src/main/print-olympus.c:2034
 msgid "Matte -2"
 msgstr "Mat -2"
 
-#: src/main/print-olympus.c:1641 src/main/print-olympus.c:1939
+#: src/main/print-olympus.c:1737 src/main/print-olympus.c:2035
 msgid "Matte -3"
 msgstr "Mat -3"
 
-#: src/main/print-olympus.c:1642 src/main/print-olympus.c:1940
+#: src/main/print-olympus.c:1738 src/main/print-olympus.c:2036
 msgid "Matte -4"
 msgstr "Mat -4"
 
-#: src/main/print-olympus.c:1643 src/main/print-olympus.c:1941
+#: src/main/print-olympus.c:1739 src/main/print-olympus.c:2037
 msgid "Matte -5"
 msgstr "Mat -5"
 
-#: src/main/print-olympus.c:2738
+#: src/main/print-olympus.c:2866
 msgid "Printer Default"
 msgstr "Valors predeterminats de la impressora"
 
-#: src/main/print-olympus.c:2740
+#: src/main/print-olympus.c:2868
 msgid "Glossy Fine"
 msgstr "Setinat fi"
 
-#: src/main/print-olympus.c:2742
+#: src/main/print-olympus.c:2870
 msgid "Matte Fine"
 msgstr "Mat fi"
 
-#: src/main/print-olympus.c:2743
+#: src/main/print-olympus.c:2871
 msgid "Extra Glossy"
 msgstr "Extra brillant"
 
-#: src/main/print-olympus.c:2744
+#: src/main/print-olympus.c:2872
 msgid "Extra Glossy Fine"
 msgstr "Film extra setinat"
 
@@ -2340,32 +2340,32 @@ msgstr "Film extra setinat"
 #. better durability of output by covering it with transparent
 #. laminate surface. This surface can be of different patterns:
 #. common are matte, glossy or texture.
-#: src/main/print-olympus.c:3865 src/main/print-olympus.c:3866
+#: src/main/print-olympus.c:4009 src/main/print-olympus.c:4010
 msgid "Laminate Pattern"
 msgstr "Patró laminat"
 
-#: src/main/print-olympus.c:3900 src/main/print-olympus.c:3908
-#: src/main/print-olympus.c:3916 src/main/print-olympus.c:3924
+#: src/main/print-olympus.c:4044 src/main/print-olympus.c:4052
+#: src/main/print-olympus.c:4060 src/main/print-olympus.c:4068
 msgid "Output Level Adjustment"
 msgstr "Ajust de nivell de sortida"
 
-#: src/main/print-olympus.c:3901
+#: src/main/print-olympus.c:4045
 msgid "Adjust the cyan balance"
 msgstr "Ajusta el balanç de cian"
 
-#: src/main/print-olympus.c:3909
+#: src/main/print-olympus.c:4053
 msgid "Adjust the magenta balance"
 msgstr "Ajusta el balanç de magenta"
 
-#: src/main/print-olympus.c:3917
+#: src/main/print-olympus.c:4061
 msgid "Adjust the yellow balance"
 msgstr "Ajusta el balanç de groc"
 
-#: src/main/print-olympus.c:3924
+#: src/main/print-olympus.c:4068
 msgid "Black Balance"
 msgstr "Balance de negre"
 
-#: src/main/print-olympus.c:3925
+#: src/main/print-olympus.c:4069
 msgid "Adjust the black balance"
 msgstr "Ajusta el balanç de negre"
 
@@ -2424,7 +2424,7 @@ msgstr "Safata 2"
 
 #: src/main/print-pcl.c:245
 msgid "Tray 3 - Movable Guides"
-msgstr "Safata 3 - Gujies mòbils"
+msgstr "Safata 3 - Guies mòbils"
 
 #: src/main/print-pcl.c:246
 msgid "Tray 3"
@@ -2510,7 +2510,7 @@ msgstr "Color + Cartutxos de foto"
 
 #: src/main/print-ps.c:68
 msgid "PPDFile"
-msgstr "Fitxer PDF"
+msgstr "Fitxer PPD"
 
 #: src/main/print-ps.c:69 src/gutenprintui2/panel.c:1971
 msgid "PPD File"
@@ -2554,7 +2554,7 @@ msgstr "Error fatal!"
 msgid ""
 "Please report the above information to gimp-print-devel@lists.sourceforge.net"
 msgstr ""
-"Sisplau transmeteu la informació de dalt a gimp-print-devel@lists."
+"Si us plau transmeteu la informació de dalt a gimp-print-devel@lists."
 "sourceforge.net"
 
 #: src/main/generic-options.c:33 src/xml/xmli18n-tmp.h:3298
@@ -2791,7 +2791,7 @@ msgstr "Selecciona un fitxer..."
 
 #: src/gutenprintui2/panel.c:1028
 msgid "Reset"
-msgstr "Reestableix"
+msgstr "Restableix"
 
 #: src/gutenprintui2/panel.c:1383
 #, c-format
@@ -3039,7 +3039,7 @@ msgstr "Cua de la impressora:"
 
 #: src/gutenprintui2/panel.c:1931
 msgid "Enter the correct command to print to your printer. "
-msgstr "Entreu l'ordre correcta per imprimir a la vostra impresora. "
+msgstr "Entreu l'ordre correcta per imprimir a la vostra impressora. "
 
 #: src/gutenprintui2/panel.c:1942
 msgid "Enter the file to print to. "
@@ -3369,7 +3369,7 @@ msgstr "Impressió a dues cares"
 
 #: src/cups/genppd.c:2362 src/cups/genppd.c:2639
 msgid "Shrink Page If Necessary to Fit Borders"
-msgstr "Redueix la pàgina si és necesssari per encaixar els marges"
+msgstr "Redueix la pàgina si és necessari per encaixar els marges"
 
 #: src/cups/genppd.c:2367 src/cups/genppd.c:2640
 msgid "Shrink (print the whole page)"
@@ -3414,8 +3414,8 @@ msgstr ""
 "\n"
 "Aquest programa es distribueix amb l'esperança que serà útil,\n"
 "però SENSE CAP GARANTIA; ni tan sols la garantia de \n"
-"COMERCIALITZABILITAT O APTITUD PER A PROPÒSITS DETERMINATS. Vegeu \n"
-"la LLicència General Pública de  GNU per a més detalls.\n"
+"COMERCIABILITAT O APTITUD PER A PROPÒSITS DETERMINATS. Vegeu \n"
+"la Llicència General Pública de  GNU per a més detalls.\n"
 "\n"
 "Hauríeu d'haver rebut una còpia de la Llicència Pública General de GNU\n"
 "amb aquest programa; si no, escriviu a la Free Software Foundation,\n"
@@ -3497,7 +3497,7 @@ msgstr ""
 "                       fabricant i model. Això requereix accés de\n"
 "                       lectura/escriptura al dispositiu en brut "
 "d'impressió.\n"
-"    -X|--reset-ink     Reestableix els nivlels de tinta.\n"
+"    -X|--reset-ink     Restableix els nivells de tinta.\n"
 "                       Això requereix accés de lectura/escriptura del\n"
 "                       dispositiu en brut d'impressió.\n"
 "    -l|--license       Mostra els terminis de llicència/garantia\n"
@@ -4319,9 +4319,9 @@ msgid ""
 "What do you want to do (s, q, r)?\n"
 msgstr ""
 "Si us plau inspeccioneu la sortida final molt curosament per assegurar\n"
-"que la vostra impressora està alineada adequadament. Hara podeu:\n"
+"que la vostra impressora està alineada adequadament. Ara podeu:\n"
 "  (s) desar els resultats a la impressora,\n"
-"  (q) sortir sens desar els resutats, o\n"
+"  (q) sortir sens desar els resultats, o\n"
 "  (r) repetir el procés sencer des del principi.\n"
 "Després se us demanarà que confirmeu la vostra elecció.\n"
 "Què voleu fer (s, q, r)?\n"
@@ -6422,11 +6422,11 @@ msgstr "CP_L"
 
 #: src/xml/xmli18n-tmp.h:3517
 msgid "Credit Card"
-msgstr ""
+msgstr "Targeta de crèdit"
 
 #: src/xml/xmli18n-tmp.h:3518
 msgid "Japanese Business Card"
-msgstr ""
+msgstr "Targeta empresarial japonesa"
 
 #: src/xml/xmli18n-tmp.h:3519
 msgid "Wide Postcard"
@@ -15925,7 +15925,7 @@ msgstr "RAW DATA 8 bit"
 #~ msgstr "Ajust bàsic d'imatge"
 
 #~ msgid "Advanced Image Control"
-#~ msgstr "Contol avançat d'imatge"
+#~ msgstr "Control avançat d'imatge"
 
 #~ msgid "GrayBalance"
 #~ msgstr "Balance gris"

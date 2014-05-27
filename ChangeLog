@@ -1,3 +1,248 @@
+2014-05-18	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.705) (+1 -6)
+		src/cups/blacklist (1.9) (+1 -1)
+		src/cups/selphy_print.c (1.37) (+2 -2)
+
+	Add Canon SELPHY CP520 USB PID to blacklist and backend.
+
+2014-05-17	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.64) (+2 -2)
+
+	Fix check for no output.
+
+2014-05-17	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.10) (+4526 -4271)
+		po/cs.po (1.68) (+64 -64)
+		po/da.po (1.113) (+64 -64)
+		po/de.po (1.86) (+4622 -4318)
+		po/el.po (1.83) (+64 -64)
+		po/en_GB.po (1.176) (+64 -64)
+		po/es.po (1.81) (+64 -64)
+		po/fi.po (1.13) (+64 -64)
+		po/fr.po (1.109) (+64 -64)
+		po/gl.po (1.8) (+64 -64)
+		po/hu.po (1.41) (+64 -64)
+		po/it.po (1.23) (+64 -64)
+		po/ja.po (1.78) (+64 -64)
+		po/nb.po (1.42) (+64 -64)
+		po/nl.po (1.96) (+64 -64)
+		po/pl.po (1.87) (+64 -64)
+		po/pt.po (1.82) (+64 -64)
+		po/ru.po (1.15) (+64 -64)
+		po/sk.po (1.86) (+64 -64)
+		po/sl.po (1.10) (+64 -64)
+		po/sv.po (1.112) (+65 -65)
+		po/tr.po (1.5) (+64 -64)
+		po/uk.po (1.13) (+64 -64)
+		po/vi.po (1.4) (+64 -64)
+		po/zh_CN.po (1.8) (+64 -64)
+		po/zh_TW.po (1.42) (+64 -64)
+
+	Gutenprint 5.2.10 release
+
+2014-05-17	<rlk@sourceforge.net>
+
+	Files:	AUTHORS (1.27) (+3 -0)
+		NEWS (1.704) (+78 -78)
+		README (1.240) (+5 -5)
+		configure.ac (1.261) (+3 -3)
+
+	Prep for 5.2.10 release
+
+2014-05-08	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.703) (+11 -6)
+		src/xml/printers.xml (1.357) (+3 -3)
+
+	Back out support for Canon CP820 and CP910, as Gutenprint doesn't yet
+	support the YCbCr output format the printers need.
+
+2014-05-07	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.165) (+3 -3)
+
+	SELPHY CP910/820 use BGR inks!
+
+2014-05-07	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.702) (+3 -8)
+		src/xml/printers.xml (1.356) (+3 -1)
+
+	Add the Canon SELPHY CP820 and CP910 to the printer list.
+
+2014-05-07	<speachy@sourceforge.net>
+
+	Files:	src/cups/blacklist (1.8) (+0 -6)
+		src/cups/selphy_print.c (1.36) (+1 -5)
+
+	Remove placeholders for Canon CP820/CP910; they don't need a spooler.
+
+2014-05-06	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.164) (+79 -1)
+
+	Add support for the Canon CP820 and CP910.  Printers.xml to follow.
+
+2014-05-04	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.63) (+3 -3)
+
+	Fix comments.
+
+2014-05-04	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/testpattern.c (1.62) (+15 -25)
+
+	Minor simplifications.
+
+2014-04-25	<speachy@sourceforge.net>
+
+	Files:	README (1.239) (+23 -0)
+
+	Document the unsupportability of the Mitsubishi dyesub models ending in '-S'
+
+2014-04-25	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.701) (+3 -1)
+
+	Further elaborate on the Mitsibuishi '-S' models being unsupported.
+
+2014-04-19	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.163) (+42 -8)
+
+	Add 5x7 support for the Kodak 605, and correct lamination options for
+	the Mitsubishi D70/D707/K60 (it's acually Glossy/Matte vs None/Matte)
+
+2014-03-30	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.162) (+3 -3)
+
+	Don't return something (void value, actually) out of a void function.
+
+2014-03-30	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.45) (+69 -59)
+		src/testpattern/testpattern.c (1.61) (+15 -4)
+
+	Allow other types of checksum computations (default to sha512).
+
+	Don't print anything for skipped test in quiet mode.
+
+	Treat empty output as error (no empties currently exist).
+
+2014-03-27	<speachy@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.148) (+2 -2)
+
+	chmod the backend before installing it, may be responsible for a
+	packaging bug.
+
+2014-03-27	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.9) (+4254 -4509)
+
+	Update Catalan translation
+
+2014-03-26	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.32) (+15 -3)
+
+	Fix a crash when libusb_init() fails.
+
+2014-03-20	<rlk@sourceforge.net>
+
+	Files:	po/de.po (1.85) (+5178 -6351)
+
+	Update German translation
+
+2014-03-13	<speachy@sourceforge.net>
+
+	Files:	src/cups/selphy_print.c (1.35) (+64 -33)
+
+	We don't need to override the Manufacturer string any more.
+
+2014-03-13	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.31) (+167 -40)
+
+	Overhaul the URI generation; now we use the IEEE1284 data whenever possible.
+
+2014-03-13	<speachy@sourceforge.net>
+
+	Files:	src/cups/mitsu70x_print.c (1.4) (+103 -50)
+
+	backend: Updates to Mitsubishi CP-D70/D707/K60 backend.  Still broken.
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.161) (+72 -46)
+
+	Major improvements to Mitsubishi CP-D70/D707/K60 code.
+
+	 * Refactored to common code
+	 * Added additional print sizes for D70/D707
+	 * Added placeholder sizes for 4x6*2, 2x6*2, 3.5x5*2
+	 * Fixed multi-cut on K60
+	 * Fixed matte lamination (more..) on K60
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.160) (+8 -6)
+
+	Mitsubishi CP-D70x -- Add 6x6 and 6x8.5" print sizes.  And it would
+	appear printer does NOT support glossy lamination, only matte..
+
+	(strange, all of the marketing material says it does, but the Windows
+	 drivers don't list that as an option...)
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.159) (+8 -4)
+
+	More lamination fixes for the Mitsubishi CP-D70/D707/K60
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.158) (+4 -4)
+
+	Fix lamination on Mitsubishi CP-D70/D707-K60 printers.
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.147) (+2 -2)
+		src/cups/backend_common.c (1.30) (+13 -8)
+
+	Fix backend build on libusb < 1.0.10 (^@#%!!!)
+
+2014-03-11	<speachy@sourceforge.net>
+
+	Files:	src/cups/blacklist (1.7) (+3 -0)
+		src/cups/mitsu70x_print.c (1.3) (+4 -2)
+
+	backend:  Add USB PID for the Mitsubishi CP-K60DW-S
+
+2014-03-09	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/README (1.5) (+9 -7)
+
+	Clarify make-installer process.
+
+2014-03-09	<jlabovitz@sourceforge.net>
+
+	Files:	macosx/setup-env.sample (1.3) (+1 -1)
+		macosx/src/gutenprint.pkg.src/Resources/ReadMe.html (1.4) (+3 -3)
+		macosx/subversion (1.2) (+0 -1)
+
+	Build from pre2 version.
+	Update release notes with current version & date.
+
+===============================================================================
+Name: gutenprint-5_2_10-pre2
+
 2014-03-07	<speachy@sourceforge.net>
 
 	Files:	README (1.238) (+1 -1)
@@ -236,7 +481,7 @@
 
 2014-02-23	<jlabovitz@sourceforge.net>
 
-	Files:	macosx/subversion (1.1) (added +1 -0)
+	Files:	macosx/subversion (1.1) (added +0 -0)
 
 	Added 'subversion' file to specify (optional) build version that is
 	appended to Gutenprint version string.
@@ -307,7 +552,7 @@
 
 2014-02-17	<jlabovitz@sourceforge.net>
 
-	Files:	macosx/README (1.1) (added +284 -0)
+	Files:	macosx/README (1.1) (added +287 -0)
 		macosx/README.vm-environment (1.1) (added +67 -0)
 		macosx/compare-gutenprint-5 (1.1) (added +173 -0)
 		macosx/gutenprint-version (1.1) (added +30 -0)
@@ -523,7 +768,7 @@ Name: gutenprint-5_2_10-pre1
 
 2014-02-10	<speachy@sourceforge.net>
 
-	Files:	src/cups/mitsu70x_print.c (1.1) (added +532 -0)
+	Files:	src/cups/mitsu70x_print.c (1.1) (added +587 -0)
 		src/cups/selphy_print.c (1.30) (+82 -29)
 
 	backends:   Forgot to commit the Mitsubishi CP-D70/D707 code.
@@ -1450,7 +1695,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.664) (+8 -1)
 		src/cups/Makefile.am (1.140) (+7 -2)
-		src/cups/blacklist (1.1) (added +136 -0)
+		src/cups/blacklist (1.1) (added +133 -0)
 
 	backend:  Add the blacklist file utilized by CUPS >= 1.6.4!
 
@@ -2545,7 +2790,7 @@ Name: gutenprint-5_2_10-pre1
 
 2013-06-30	<speachy@sourceforge.net>
 
-	Files:	src/cups/backend_common.c (1.1) (added +863 -0)
+	Files:	src/cups/backend_common.c (1.1) (added +1007 -0)
 		src/cups/kodak1400_print.c (1.9) (+39 -174)
 		src/cups/selphy_print.c (1.15) (+300 -193)
 
@@ -3526,7 +3771,7 @@ Name: gutenprint-5_2_10-pre1
 
 2012-11-18	<speachy@sourceforge.net>
 
-	Files:	src/cups/selphy_print.c (1.1) (added +1285 -0)
+	Files:	src/cups/selphy_print.c (1.1) (added +1312 -0)
 		src/cups/selphy_print_common.h (1.1) (added)
 
 	[selphy]  Initial commit of the Canon Dyesub (Selphy CP/ES) CUPS backend.
@@ -15041,7 +15286,7 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/model/model_87.xml (1.1) (added +193 -0)
 		src/xml/escp2/model/model_9.xml (1.1) (added +145 -0)
 		src/xml/papers.xml (1.1) (added +1440 -0)
-		src/xml/printers.xml (1.1) (added +2641 -0)
+		src/xml/printers.xml (1.1) (added +2643 -0)
 		test/run-testdither (1.13) (+1 -1)
 		test/run-weavetest (1.25) (+1 -1)
 
@@ -19938,7 +20183,7 @@ Name: gutenprint-5_0_0-rc3
 	Files:	configure.ac (1.139) (+4 -2)
 		src/testpattern/Makefile.am (1.24) (+4 -3)
 		src/testpattern/printer_options.c (1.1) (added +263 -0)
-		src/testpattern/run-testpattern-2.in (1.1) (added +880 -0)
+		src/testpattern/run-testpattern-2.in (1.1) (added +890 -0)
 		test/Makefile.am (1.46) (+1 -5)
 
 	Add improved test based on testpattern generator.
@@ -30429,7 +30674,7 @@ Name: gimp-print-4_3_15
 
 2003-05-21	<m0m@sourceforge.net>
 
-	Files:	src/main/print-olympus.c (1.1) (added +4935 -0)
+	Files:	src/main/print-olympus.c (1.1) (added +5079 -0)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
 
@@ -36863,7 +37108,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +17467 -0)
+	Files:	po/de.po (1.1) (added +16598 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -42014,7 +42259,7 @@ Name: gimp-print-4_1_99-a3
 		src/printdef/Makefile.am (1.7) (+2 -1)
 		src/testpattern/.cvsignore (1.1) (added +13 -0)
 		src/testpattern/Makefile.am (1.1) (added +65 -0)
-		src/testpattern/testpattern.c (1.1) (added +1236 -0)
+		src/testpattern/testpattern.c (1.1) (added +1237 -0)
 		src/testpattern/testpattern.h (1.1) (added +113 -0)
 		src/testpattern/testpattern.sample (1.1) (added +171 -0)
 		src/testpattern/testpatternl.l (1.1) (added +135 -0)
@@ -54975,14 +55220,14 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	AUTHORS (1.1) (added +131 -0)
+	Files:	AUTHORS (1.1) (added +134 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +56037 -0)
+		ChangeLog (1.1) (added +56282 -0)
 		INSTALL (1.1) (added +370 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +3565 -0)
+		NEWS (1.1) (added +3562 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -55613,7 +55858,7 @@ Name: print-3_1_6
 
 1999-11-14	<rlk@sourceforge.net>
 
-	Files:	README (1.1) (added +982 -0)
+	Files:	README (1.1) (added +1005 -0)
 		print-escp2.c (1.26) (+32 -12)
 		print-util.c (1.28) (+59 -41)
 		print.c (1.23) (+5 -2)

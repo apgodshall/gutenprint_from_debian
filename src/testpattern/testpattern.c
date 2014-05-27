@@ -1,7 +1,7 @@
 /*
- * "$Id: testpattern.c,v 1.60 2014/01/04 00:30:27 rlk Exp $"
+ * "$Id: testpattern.c,v 1.64 2014/05/17 21:56:46 rlk Exp $"
  *
- *   Test pattern generator for Gimp-Print
+ *   Test pattern generator for Gutenprint
  *
  *   Copyright 2001 Robert Krawitz <rlk@alum.mit.edu>
  *
@@ -22,7 +22,7 @@
 
 /*
  * This sample program may be used to generate test patterns.  It also
- * serves as an example of how to use the gimp-print API.
+ * serves as an example of how to use the Gutenprint API.
  *
  * As the purpose of this program is to allow fine grained control over
  * the output, it uses the raw CMYK output type.  This feeds 16 bits each
@@ -105,6 +105,7 @@ int end_job = 0;
 int passes = 0;
 int failures = 0;
 int skipped = 0;
+size_t bytes_written = 0;
 
 static testpattern_t *static_testpatterns;
 
@@ -189,13 +190,12 @@ static void
 writefunc(void *file, const char *buf, size_t bytes)
 {
   FILE *prn = (FILE *)file;
+  bytes_written += bytes;
   if (! file)
     return;
   if (file == stderr)
     {
-      if (global_quiet)
-	fputc('-', prn);
-      else
+      if (!global_quiet)
 	fwrite(buf, 1, bytes, prn);
     }
   else if (!global_suppress_output)
@@ -307,6 +307,7 @@ do_print(void)
 	}
       return 2;
     }
+  bytes_written = 0;
   if (global_output)
     {
       if (strcmp(global_output, "-") == 0)
@@ -467,6 +468,7 @@ do_print(void)
   stp_merge_printvars(v, stp_printer_get_defaults(the_printer));
   if (stp_verify(v))
     {
+      bytes_written = 0;
       if (start_job)
 	{
 	  stp_start_job(v, &theImage);
@@ -476,6 +478,15 @@ do_print(void)
 	{
 	  if (!global_quiet)
 	    fputs("FAILED", stderr);
+	  failures++;
+	  status = 2;
+	  if (global_halt_on_error)
+	    return status;
+	}
+      else if (bytes_written == 0)
+	{
+	  if (!global_quiet)
+	    fputs("FAILED: No output", stderr);
 	  failures++;
 	  status = 2;
 	  if (global_halt_on_error)
@@ -503,7 +514,7 @@ do_print(void)
       else
 	{
 	  if (!global_quiet)
-	    fprintf(stderr, "(skipped)");
+	    fputs("(skipped)", stderr);
 	  skipped++;
 	}
     }
@@ -1162,14 +1173,20 @@ Image_get_row(stp_image_t *image, unsigned char *data,
   return STP_IMAGE_STATUS_OK;
 }
 
-static int
-Image_width(stp_image_t *image)
+static void
+check_valid_image(const char *s)
 {
   if (! Image_is_valid)
     {
-      fputs("Calling Image_width with invalid image!\n", stderr);
+      fputs(s, stderr);
       abort();
     }
+}
+
+static int
+Image_width(stp_image_t *image)
+{
+  check_valid_image("Calling Image_width with invalid image!\n");
   if (static_testpatterns[0].type == E_IMAGE)
     return static_testpatterns[0].d.image.x;
   else
@@ -1179,11 +1196,7 @@ Image_width(stp_image_t *image)
 static int
 Image_height(stp_image_t *image)
 {
-  if (! Image_is_valid)
-    {
-      fputs("Calling Image_height with invalid image!\n", stderr);
-      abort();
-    }
+  check_valid_image("Calling Image_height with invalid image!\n");
   if (static_testpatterns[0].type == E_IMAGE)
     return static_testpatterns[0].d.image.y;
   else
@@ -1205,32 +1218,20 @@ Image_init(stp_image_t *image)
 static void
 Image_reset(stp_image_t *image)
 {
-  if (!Image_is_valid)
-    {
-      fputs("Calling Image_reset with invalid image!\n", stderr);
-      abort();
-    }
+  check_valid_image("Calling Image_reset with invalid image!\n");
  /* dummy function */
 }
 
 static void
 Image_conclude(stp_image_t *image)
 {
-  if (! Image_is_valid)
-    {
-      fputs("Calling Image_conclude with invalid image!\n", stderr);
-      abort();
-    }
+  check_valid_image("Calling Image_conclude with invalid image!\n");
   Image_is_valid = 0;
 }
 
 static const char *
 Image_get_appname(stp_image_t *image)
 {
-  if (! Image_is_valid)
-    {
-      fprintf(stderr, "Calling Image_get_appname with invalid image!\n");
-      abort();
-    }
+  check_valid_image("Calling Image_get_appname with invalid image!\n");
   return "Test Pattern";
 }

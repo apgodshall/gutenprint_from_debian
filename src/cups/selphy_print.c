@@ -48,7 +48,7 @@
 #define USB_PID_CANON_CP400 0x30F6
 #define USB_PID_CANON_CP500 0x30F5
 #define USB_PID_CANON_CP510 0x3128
-#define USB_PID_CANON_CP520 520 // XXX 316f? 3172? (related to cp740/cp750)
+#define USB_PID_CANON_CP520 0x3172
 #define USB_PID_CANON_CP530 0x31b1
 #define USB_PID_CANON_CP600 0x310B
 #define USB_PID_CANON_CP710 0x3127
@@ -62,9 +62,7 @@
 #define USB_PID_CANON_CP790 0x31E7
 #define USB_PID_CANON_CP800 0x3214
 #define USB_PID_CANON_CP810 0x3256
-#define USB_PID_CANON_CP820 820 // XXX
 #define USB_PID_CANON_CP900 0x3255
-#define USB_PID_CANON_CP910 910 // XXX
 #define USB_PID_CANON_ES1   0x3141
 #define USB_PID_CANON_ES2   0x3185
 #define USB_PID_CANON_ES20  0x3186
@@ -926,7 +924,7 @@ top:
 
 struct dyesub_backend canonselphy_backend = {
 	.name = "Canon SELPHY CP/ES",
-	.version = "0.81",
+	.version = "0.82.2G",
 	.uri_prefix = "canonselphy",
 	.init = canonselphy_init,
 	.attach = canonselphy_attach,
@@ -935,38 +933,36 @@ struct dyesub_backend canonselphy_backend = {
 	.read_parse = canonselphy_read_parse,
 	.main_loop = canonselphy_main_loop,
 	.devices = {
-	{ USB_VID_CANON, USB_PID_CANON_CP10, P_CP10, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP100, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP200, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP220, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP300, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP330, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP400, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP500, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP510, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP520, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP530, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP600, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP710, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP720, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP730, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP740, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP750, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP760, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP770, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP780, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP790, P_ES40_CP790, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP800, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP810, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP820, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP900, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_CP910, P_CP_XXX, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES1, P_ES1, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES2, P_ES2_20, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES20, P_ES2_20, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES3, P_ES3_30, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES30, P_ES3_30, "Canon"},
-	{ USB_VID_CANON, USB_PID_CANON_ES40, P_ES40_CP790, "Canon"},
+	{ USB_VID_CANON, USB_PID_CANON_CP10, P_CP10, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP100, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP200, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP220, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP300, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP330, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP400, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP500, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP510, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP520, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP530, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP600, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP710, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP720, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP730, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP740, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP750, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP760, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP770, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP780, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP790, P_ES40_CP790, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP800, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP810, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_CP900, P_CP_XXX, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES1, P_ES1, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES2, P_ES2_20, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES20, P_ES2_20, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES3, P_ES3_30, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES30, P_ES3_30, ""},
+	{ USB_VID_CANON, USB_PID_CANON_ES40, P_ES40_CP790, ""},
 	{ 0, 0, 0, ""}
 	}
 };
@@ -1281,5 +1277,36 @@ struct dyesub_backend canonselphy_backend = {
       0x41 if the 'Wide' paper tray is loaded with a 'P' ribbon. A '0' is used
       to signify nothing being loaded.
 
+ ***************************************************************************
+ Selphy CP820/CP910:
+
+  Radically different spool file format!  300dpi, same print sizes, but also
+  adding a 50x50mm sticker and 22x17.3mm ministickers, though I think the
+  driver treats all of those as 'C' sizes for printing purposes.
+
+  32-byte header:
+
+  0f 00 00 40 00 00 00 00  00 00 00 00 00 00 01 00
+  01 00 ?? 00 00 00 00 00  XX 04 00 00 WW ZZ 00 00
+
+  ?? == 50  (P)
+     == 4c  (L)
+     == 43  (C)
+
+  XX == e0  (P)
+        80  (L)
+        40  (C)
+
+  WW == 50  (P)
+        c0  (L)
+        9c  (C)
+
+  ZZ == 07  (P)
+        05  (L)
+        02  (C)
+
+  P == 7008800  == 2336256 * 3 + 32 (4.884% larger than CP)
+  L == 5087264  == 1695744 * 3 + 32 (5.878% larger than CP)
+  C == 2180384  == 726784 * 3 + 32  (3.991% larger than CP)
 
 */

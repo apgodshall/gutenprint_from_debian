@@ -1,3 +1,16 @@
+gutenprint (5.2.10-1) unstable; urgency=medium
+
+  * New 5.2.10 final upstream release
+
+  * Fix drivers listing by re-introduction --libdir as well as the specific
+    dh_makeshlibs and dh_shlibdeps calls, unfortunately dropped in the
+    packaging cleanup
+  * Fix ppd-updater trigger installation
+  * Drop the upstream patch to fix the usb backend crash; was from upstream
+  * Rework the /doc/ directories symlinks
+
+ -- Didier Raboud <odyx@debian.org>  Wed, 28 May 2014 13:45:00 +0200
+
 gutenprint (5.2.10~pre2-2) unstable; urgency=medium
 
   * Fix printer-driver-gutenprint installation of common files on Linux

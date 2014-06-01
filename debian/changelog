@@ -1,3 +1,10 @@
+gutenprint (5.2.10-2) unstable; urgency=medium
+
+  * Add Pre-Depends against dpkg-dev for dir_to_symlink support
+    (Closes: #749931)
+
+ -- Didier Raboud <odyx@debian.org>  Sun, 01 Jun 2014 15:29:31 +0200
+
 gutenprint (5.2.10-1) unstable; urgency=medium
 
   * New 5.2.10 final upstream release

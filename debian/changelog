@@ -1,3 +1,12 @@
+gutenprint (5.2.10-3) unstable; urgency=medium
+
+  * Add autopkgtest suite that tests all drivers using cups-client's
+    test-drivers utility
+  * On upgrade, remove driver update timestamp in cups' trigger cache to
+    ensure all earlier printers are refreshed (Closes: #749600)
+
+ -- Didier Raboud <odyx@debian.org>  Mon, 23 Jun 2014 19:31:46 +0200
+
 gutenprint (5.2.10-2) unstable; urgency=medium
 
   * Add Pre-Depends against dpkg-dev for dir_to_symlink support

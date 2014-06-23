@@ -1,0 +1,3 @@
+Tests: printer-driver-gutenprint
+Restrictions: needs-root
+Depends: printer-driver-gutenprint, cups, cups-client (>= 1.7.3-5~)

@@ -20,6 +20,7 @@ Build-Depends:
  gettext,
  foomatic-db-engine,
  chrpath,
+XS-Testsuite: autopkgtest
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=printing/gutenprint.git
 Vcs-Git: https://alioth.debian.org/anonscm/git/printing/gutenprint.git
 

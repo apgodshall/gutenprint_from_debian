@@ -4,4 +4,6 @@ set -e
 
 . /usr/share/cups/ppd-updaters/printer-driver-gutenprint.ppd-updater
 
+DRIVER_REGEXP=${DRIVER_REGEXP}.*bjc-30/
+
 /usr/share/cups/test-drivers -n adt-test-gutenprint-0 -r $DRIVER_REGEXP

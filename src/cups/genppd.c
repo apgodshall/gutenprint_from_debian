@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.196 2014/02/13 02:30:27 rlk Exp $"
+ * "$Id: genppd.c,v 1.197 2015/06/25 01:48:02 speachy Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -564,9 +564,11 @@ main(int  argc,			    /* I - Number of command-line arguments */
       break;
     }
   }
+#ifdef HAVE_LIBZ  
   if (use_compression)
     gpext = ".gz";
   else
+#endif	  
     gpext = "";
   if (optind < argc) {
     int n, numargs;
@@ -2706,5 +2708,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.196 2014/02/13 02:30:27 rlk Exp $".
+ * End of "$Id: genppd.c,v 1.197 2015/06/25 01:48:02 speachy Exp $".
  */

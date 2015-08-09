@@ -1,7 +1,7 @@
 /*
  *   Shinko/Sinfonia CHC-S2145 CUPS backend -- libusb-1.0 version
  *
- *   (c) 2013-2014 Solomon Peachy <pizza@shaftnet.org>
+ *   (c) 2013-2015 Solomon Peachy <pizza@shaftnet.org>
  *
  *   Development of this backend was sponsored by:
  *
@@ -52,18 +52,18 @@ enum {
 /* Structure of printjob header.  All fields are LITTLE ENDIAN */
 struct s2145_printjob_hdr {
 	uint32_t len1;   /* Fixed at 0x10 */
-	uint32_t model;  /* Fixed at '2145' (decimal) */
-	uint32_t unk2;
-	uint32_t unk3;
+	uint32_t model;  /* Equal to the printer model (eg '2145' or '1245' decimal) */
+	uint32_t med_type;   /* 6145 only, media type */
+	uint32_t unk3;   /* Fixed at 0x01 */
 
 	uint32_t len2;   /* Fixed at 0x64 */
 	uint32_t unk5;
 	uint32_t media;
 	uint32_t unk6;
 
-	uint32_t method;
-	uint32_t mode;
-	uint32_t unk7;
+	uint32_t method; /* Method for 2145, 0x00 for 6245, multicut for 6145 */
+	uint32_t mode;   /* Mode for 2145, 0x00 for 6245, quality for 6145 */
+	uint32_t oc_mode;   /* 6145/6245 only, Matte/Glossy/None */
 	uint32_t unk8;
 
 	uint32_t unk9;
@@ -98,6 +98,8 @@ struct shinkos2145_ctx {
 	uint8_t fast_return;
 
 	struct s2145_printjob_hdr hdr;
+
+	uint32_t model;
 
 	uint8_t *databuf;
 	int datalen;
@@ -359,245 +361,199 @@ struct s2145_status_hdr {
 #define ERROR_PRINTER           0x11
 #define ERROR_BUFFER_FULL       0x21
 
-
-/*
-
-   I have a list of 72 different errors that are displayed on the printer,
-   but it appears the list is incomplete, and there's no mapping between
-   category and major code numbers.  Also, not all of the individual errors
-   have minor codes listed (particularly the "consumables")
-
-   These are the observed error codes to date (via stored error log dumps):
-
-   01/16 [ controller/parameter? ]
-   05/15 [ jam/reloading? ]
-   05/4e [ jam/unknown    ]
-   05/4f [ jam/unknown?   ]
-   05/61 [ jam/cantload?  ]
-   05/62 [ jam/cantload?  ]
-   05/64 [ jam/unknown?   ]
-   06/01 [ "cover open"   ]
-   06/0a [ consumables ?  ]
-   06/0b [ consumables ?  ]
-
-   Errors logged on printer A:
-
-   0x01/0x16 @ 77845
-   0x06/0x0b @ 77822, 70053
-   0x05/0x64 @ 76034
-   0x05/0x61 @ 76034, 75420
-   0x05/0x62 @ 76034
-   0x05/0x4e @ 69824, 69820, 69781
-
-   Errors logged on printer B:
-
-   0x06/0x0b @ 33270
-   0x05/0x4e @ 32952, 27672
-   0x05/0x4f @ 32935, 31834
-   0x05/0x61 @ 30856, 27982
-   0x01/0x16 @ 29132
-   0x05/0x64 @ 27982
-   0x05/0x62 @ 27982
-
-   Errors logged on printer C:
-
-   0x06/0x0a @ 78014, 77948, 77943, 77938 x2, 77937, 77936, 77933, 77919
-   0x05/0x15 @ 77938
-
-
- */
 static char *error_codes(uint8_t major, uint8_t minor)
 {
 	switch(major) {
-	case 0x06:
-		switch (minor) {
-		case 0x01:
-			return "Front Cover Open";
-		default:
-			return "Unknown";
-		}
-#if 0
-	case 9: /* "Controller Error" */
+	case 0x01: /* "Controller Error" */
 		switch(minor) {
 		case 0x01:
-			return "Controller: 01 EEPROM";
+			return "Controller: EEPROM Write Timeout";
 		case 0x02:
-			return "Controller: 02 EEPROM";
+			return "Controller: EEPROM Verify";
 		case 0x04:
-			return "Controller: 04 DSP";
+			return "Controller: DSP Inactive";
 		case 0x05:
-			return "Controller: 05 DSP";
+			return "Controller: DSP Application Inactive";
 		case 0x06:
-			return "Controller: 06 Main FW";
+			return "Controller: Main FW Data";
 		case 0x07:
-			return "Controller: 07 Main FW";
+			return "Controller: Main FW Write";
 		case 0x08:
-			return "Controller: 08 DSP FW";
+			return "Controller: DSP FW Data";
 		case 0x09:
-			return "Controller: 09 DSP FW";
+			return "Controller: DSP FW Write";
 		case 0x0A:
-			return "Controller: 0A ASIC";
+			return "Controller: 0A ASIC??";
 		case 0x0B:
-			return "Controller: 0B FPGA";
+			return "Controller: 0B FPGA??";
 		case 0x0D:
-			return "Controller: 0D Tone Curve";
+			return "Controller: Tone Curve Write";
 		case 0x16:
-			return "Controller: 16 Parameter Table";
+			return "Controller: Invalid Parameter Table";
 		case 0x17:
-			return "Controller: 17 Parameter Table";
+			return "Controller: Parameter Table Data";
 		case 0x18:
-			return "Controller: 18 Parameter Table";
+			return "Controller: Parameter Table Write";
 		case 0x29:
-			return "Controller: 29 DSP Comms";
+			return "Controller: DSP Communication";
 		case 0x2A:
-			return "Controller: 2A DSP Comms";
+			return "Controller: DSP DMA Failure";
 		default:
 			return "Controller: Unknown";
 		}
-	case 8: /* XXXX "Mechanical Error" */
+	case 0x02: /* "Mechanical Error" */
 		switch (minor) {
 		case 0x01:
-			return "Mechanical: 01 Thermal Head";
+			return "Mechanical: Thermal Head (Upper Up)";
 		case 0x02:
-			return "Mechanical: 02 Thermal Head";
+			return "Mechanical: Thermal Head (Head Up)";
 		case 0x03:
-			return "Mechanical: 03 Thermal Head";
+			return "Mechanical: Thermal Head (Head Down)";
 		case 0x04:
-			return "Mechanical: 04 Pinch Roller";
+			return "Mechanical: Pinch Roller (Initialize)";
 		case 0x05:
-			return "Mechanical: 05 Pinch Roller";
+			return "Mechanical: Pinch Roller (Mode1)";
 		case 0x06:
-			return "Mechanical: 06 Pinch Roller";
+			return "Mechanical: Pinch Roller (Mode2)";
 		case 0x07:
-			return "Mechanical: 07 Pinch Roller";
+			return "Mechanical: Pinch Roller (Mode3)";
 		case 0x08:
-			return "Mechanical: 08 Pinch Roller";
+			return "Mechanical: Pinch Roller (Mode4)";
 		case 0x09:
-			return "Mechanical: 09 Cutter";
+			return "Mechanical: Cutter (Right)";
 		case 0x0A:
-			return "Mechanical: 0A Cutter";
+			return "Mechanical: Cutter (Left)";
+		case 0x0B:
+			return "Mechanical: Thermal Head (Head Down Recovery)";
 		default:
 			return "Mechanical: Unknown";
 		}
-	case 2: /* XXXX "Sensor Error" */
+	case 0x03: /* "Sensor Error" */
 		switch (minor) {
 		case 0x01:
-			return "Sensor: 01 Thermal Head";
+			return "Sensor: Thermal Head";
 		case 0x02:
-			return "Sensor: 02 Pinch Roller";
+			return "Sensor: Pinch Roller";
 		case 0x03:
-			return "Sensor: 03 Cutter L";
+			return "Sensor: Cutter Left";
 		case 0x04:
-			return "Sensor: 04 Cutter R";
+			return "Sensor: Cutter Right";
 		case 0x05:
-			return "Sensor: 05 Cutter M";
+			return "Sensor: Cutter Unknown";
+		case 0x08:
+			return "Sensor: Ribbon Encoder (Supply)";
+		case 0x09:
+			return "Sensor: Ribbon Encoder (Takeup)";
+		case 0x13:
+			return "Sensor: Thermal Head";
 		default:
 			return "Sensor: Unknown";
 		}
-	case 3: /* XXXX "Temperature Sensor Error" */
+	case 0x04: /* "Temperature Sensor Error" */
 		switch (minor) {
 		case 0x01:
-			return "Temp Sensor: 01 Thermal Head High";
+			return "Temp Sensor: Thermal Head High";
 		case 0x02:
-			return "Temp Sensor: 02 Thermal Head Low";
+			return "Temp Sensor: Thermal Head Low";
 		case 0x03:
-			return "Temp Sensor: 03 Environment High";
+			return "Temp Sensor: Environment High";
 		case 0x04:
-			return "Temp Sensor: 04 Environment Low";
+			return "Temp Sensor: Environment Low";
 		case 0x05:
-			return "Temp Sensor: 05 Warmup Timed Out";
+			return "Temp Sensor: Warmup Timed Out";
 		default:
 			return "Temp Sensor: Unknown";
 		}
-
-	case 4: /* XXXX "Front Cover Open" */
-		switch (minor) {
-//		case 0x01:
-//			return "Front Cover: 01 Cover Open";
-		case 0x02:
-			return "Front Cover: 02 Cover Open Error";
-		default:
-			return "Front Cover: Unknown";
-		}
-	case 5: /* XXX "Paper Jam" */
+	case 0x5: /* "Paper Jam" */
 		switch (minor) {
 		case 0x01:
-			return "Paper Jam: 01 Loading";
+			return "Paper Jam: Loading Leading Edge Off";
 		case 0x02:
-			return "Paper Jam: 02 Loading";
+			return "Paper Jam: Loading Print Position On";
 		case 0x03:
-			return "Paper Jam: 03 Loading";
+			return "Paper Jam: Loading Print Position Off";
 		case 0x04:
-			return "Paper Jam: 04 Loading";
+			return "Paper Jam: Loading Print Position On";
 		case 0x05:
-			return "Paper Jam: 05 Loading";
+			return "Paper Jam: Loading Leading Edge On";
 		case 0x11:
-			return "Paper Jam: 11 Reloading";
+			return "Paper Jam: Initializing Print Position Off";
 		case 0x12:
-			return "Paper Jam: 12 Reloading";
+			return "Paper Jam: Initializing Print Position On";
 		case 0x13:
-			return "Paper Jam: 13 Reloading";
+			return "Paper Jam: Initializing Leading Edge On";
 		case 0x14:
-			return "Paper Jam: 14 Reloading";
+			return "Paper Jam: Initializing Print Position On";
 		case 0x15:
-			return "Paper Jam: 15 Reloading";
+			return "Paper Jam: Initializing Print Position Off";
 		case 0x16:
-			return "Paper Jam: 16 Reloading";
+			return "Paper Jam: Initializing Print Position On";
 		case 0x21:
-			return "Paper Jam: 21 Takeup";
+			return "Paper Jam: Initializing Print Position On";
 		case 0x22:
-			return "Paper Jam: 22 Takeup";
+			return "Paper Jam: Rewinding Print Position On";
+		case 0x40:
+			return "Paper Jam: Pre-Printing Print Position Off";
 		case 0x41:
-			return "Paper Jam: 41 Printing";
+			return "Paper Jam: Pre-Printing Print Position Off";
 		case 0x42:
-			return "Paper Jam: 42 Printing";
+			return "Paper Jam: Printing Leading Edge Off";
 		case 0x43:
-			return "Paper Jam: 43 Printing";
+			return "Paper Jam: After Returning Lead Edge Off";
 		case 0x44:
-			return "Paper Jam: 44 Printing";
+			return "Paper Jam: After Printing Print Position Off";
 		case 0x45:
-			return "Paper Jam: 45 Printing";
+			return "Paper Jam: After Printing Print Position On";
 		case 0x46:
-			return "Paper Jam: 46 Printing";
+			return "Paper Jam: After Printing Print Position On";
 		case 0x47:
-			return "Paper Jam: 47 Printing";
+			return "Paper Jam: After Printing Print Position Off";
 		case 0x49:
-			return "Paper Jam: 49 Printing";
+			return "Paper Jam: Printing Lost Ribbon Mark";
 		case 0x4A:
-			return "Paper Jam: 4A Ribbon Cut";
+			return "Paper Jam: Printing Ribbon Cut";
+		case 0x4D:
+			return "Paper Jam: Printing Lost M Mark";
+		case 0x4E:
+			return "Paper Jam: Printing Lost C Mark";
+		case 0x4F:
+			return "Paper Jam: Printing Lost OP Mark";
 		case 0x61:
-			return "Paper Jam: 61 Can't Load";
+			return "Paper Jam: Initializing Lead Edge On";
 		case 0x62:
-			return "Paper Jam: 62 Can't Load";
+			return "Paper Jam: Initizlizing Print Position On";
+		case 0x64:
+			return "Paper Jam: Initizlizing Paper Size On";
 		default:
 			return "Paper Jam: Unknown";
 		}
-	case 6: /* XXXX "Consumables" */
+	case 0x06: /* User Error */
 		switch (minor) {
-		case 0x01:  // XXX
-			return "Consumables: XX No Ribbon+Paper";
-		case 0x02:  // XXX
-			return "Consumables: XX No Ribbon";
-		case 0x03:  // XXX
-			return "Consumables: XX Ribbon Empty";
-		case 0x04:  // XXX
-			return "Consumables: XX Ribbon Mismatch";
-		case 0x05:  // XXX
-			return "Consumables: XX 01 Ribbon Incorrect";
-		case 0x06:  // XXX
-			return "Consumables: XX 02 Ribbon Incorrect";
-		case 0x07:  // XXX
-			return "Consumables: XX 03 Ribbon Incorrect";
-		case 0x08:  // XXX
-			return "Consumables: XX No Paper";
-		case 0x09:  // XXX
-			return "Consumables: XX Paper Empty";
-		case 0x0A:  // XXX
-			return "Consumables: XX Paper Mismatch";
+		case 0x01:
+			return "Front Cover Open";
+		case 0x02:
+			return "Incorrect Ribbon";
+		case 0x03:
+			return "No Ribbon";
+		case 0x04:
+			return "Mismatched Ribbon";
+		case 0x05:
+			return "Mismatched Paper";
+		case 0x06:
+			return "Paper Empty";
+		case 0x08:
+			return "No Paper";
+		case 0x09:
+			return "Take Out Paper";
+		case 0x0A:
+			return "Cover Open Error";
+		case 0x0B:
+			return "Thermal Head Damaged";
+		case 0x0C:
+			return "Thermal Head Recovery";
 		default:
-			return "Consumables: Unknown";
+			return "Unknown";
 		}
-#endif
 	default:
 		return "Unknown";
 	}
@@ -1202,6 +1158,10 @@ static int get_tonecurve(struct shinkos2145_ctx *ctx, int type, char *fname)
 	resp->total_size = le16_to_cpu(resp->total_size);
 
 	data = malloc(resp->total_size * 2);
+	if (!data) {
+		ERROR("Memory allocation failure! (%d bytes)\n",
+		      resp->total_size * 2);
+	}
 
 	i = 0;
 	while (i < resp->total_size) {
@@ -1251,6 +1211,11 @@ static int set_tonecurve(struct shinkos2145_ctx *ctx, int target, char *fname)
 	INFO("Set %s Tone Curve from '%s'\n", update_targets(target), fname);
 
 	uint16_t *data = malloc(UPDATE_SIZE);
+
+	if (!data) {
+		ERROR("Memory allocation failure! (%d bytes)\n",
+		      UPDATE_SIZE);
+	}
 
 	/* Read in file */
 	int tc_fd = open(fname, O_RDONLY);
@@ -1445,8 +1410,12 @@ int shinkos2145_cmdline_arg(void *vctx, int argc, char **argv)
 static void *shinkos2145_init(void)
 {
 	struct shinkos2145_ctx *ctx = malloc(sizeof(struct shinkos2145_ctx));
-	if (!ctx)
+	if (!ctx) {
+		ERROR("Memory allocation failure! (%d bytes)\n",
+		      (int)sizeof(struct shinkos2145_ctx));
+		
 		return NULL;
+	}
 	memset(ctx, 0, sizeof(struct shinkos2145_ctx));
 
 	/* Use Fast return by default in CUPS mode */
@@ -1482,24 +1451,18 @@ static void shinkos2145_teardown(void *vctx) {
 	free(ctx);
 }
 
-static int shinkos2145_read_parse(void *vctx, int data_fd) {
+static int shinkos2145_early_parse(void *vctx, int data_fd) {
 	struct shinkos2145_ctx *ctx = vctx;
-	int ret;
-	uint8_t tmpbuf[4];
+	int printer_type, ret;
 
 	if (!ctx)
-		return 1;
-
-	if (ctx->databuf) {
-		free(ctx->databuf);
-		ctx->databuf = NULL;
-	}
+		return -1;
 
 	/* Read in then validate header */
 	ret = read(data_fd, &ctx->hdr, sizeof(ctx->hdr));
 	if (ret < 0 || ret != sizeof(ctx->hdr)) {
 		if (ret == 0)
-			return 1;
+			return -1; /* deliberate */
 		ERROR("Read failed (%d/%d/%d)\n", 
 		      ret, 0, (int)sizeof(ctx->hdr));
 		perror("ERROR: Read failed");
@@ -1507,18 +1470,50 @@ static int shinkos2145_read_parse(void *vctx, int data_fd) {
 	}
 
 	if (le32_to_cpu(ctx->hdr.len1) != 0x10 ||
-	    le32_to_cpu(ctx->hdr.model) != 2145 ||
 	    le32_to_cpu(ctx->hdr.len2) != 0x64 ||
 	    le32_to_cpu(ctx->hdr.dpi) != 300) {
 		ERROR("Unrecognized header data format!\n");
-		return 1;
+		return -1;
 	}
+
+	ctx->model = le32_to_cpu(ctx->hdr.model);
+
+	switch(ctx->model) {
+	case 2145:
+		printer_type = P_SHINKO_S2145;
+		break;
+	case 6145:
+	case 6245:
+	default:
+		ERROR("Unrecognized printer (%d)!\n", le32_to_cpu(ctx->hdr.model));
+
+		return -1;
+	}
+
+	INFO("File intended for an S%d printer\n", ctx->model);
+
+	return printer_type;
+}
+
+static int shinkos2145_read_parse(void *vctx, int data_fd) {
+	struct shinkos2145_ctx *ctx = vctx;
+	int ret;
+	uint8_t tmpbuf[4];
+
+	if (!ctx)
+		return CUPS_BACKEND_FAILED;
+
+	if (ctx->databuf) {
+		free(ctx->databuf);
+		ctx->databuf = NULL;
+	}
+
 
 	ctx->datalen = le32_to_cpu(ctx->hdr.rows) * le32_to_cpu(ctx->hdr.columns) * 3;
 	ctx->databuf = malloc(ctx->datalen);
 	if (!ctx->databuf) {
 		ERROR("Memory allocation failure!\n");
-		return 1;
+		return CUPS_BACKEND_FAILED;
 	}
 
 	{
@@ -1550,10 +1545,10 @@ static int shinkos2145_read_parse(void *vctx, int data_fd) {
 	    tmpbuf[2] != 0x02 ||
 	    tmpbuf[3] != 0x01) {
 		ERROR("Unrecognized footer data format!\n");
-		return 1;
+		return CUPS_BACKEND_FAILED;
 	}
 
-	return 0;
+	return CUPS_BACKEND_OK;
 }
 
 static int shinkos2145_main_loop(void *vctx, int copies) {
@@ -1563,11 +1558,40 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 	uint8_t cmdbuf[CMDBUF_LEN];
 	uint8_t rdbuf2[READBACK_LEN];
 
-	int last_state = -1, state = S_IDLE;
+	int i, last_state = -1, state = S_IDLE;
 
 	struct s2145_cmd_hdr *cmd = (struct s2145_cmd_hdr *) cmdbuf;;
 	struct s2145_print_cmd *print = (struct s2145_print_cmd *) cmdbuf;
 	struct s2145_status_resp *sts = (struct s2145_status_resp *) rdbuf; 
+	struct s2145_mediainfo_resp *media = (struct s2145_mediainfo_resp *) rdbuf;
+
+	/* Send Media Query */
+	memset(cmdbuf, 0, CMDBUF_LEN);
+	cmd->cmd = cpu_to_le16(S2145_CMD_MEDIAINFO);
+	cmd->len = cpu_to_le16(0);
+
+	if ((ret = s2145_do_cmd(ctx,
+				cmdbuf, sizeof(*cmd),
+				sizeof(*media),
+				&num)) < 0) {
+		ERROR("Failed to execute %s command\n", cmd_names(cmd->cmd));
+		return CUPS_BACKEND_FAILED;
+	}
+	
+	if (le16_to_cpu(media->hdr.payload_len) != (sizeof(struct s2145_mediainfo_resp) - sizeof(struct s2145_status_hdr)))
+		return CUPS_BACKEND_FAILED;
+
+	/* Validate print sizes */
+	for (i = 0; i < media->count ; i++) {
+		/* Look for matching media */
+		if (le16_to_cpu(media->items[i].columns) == cpu_to_le16(le32_to_cpu(ctx->hdr.columns)) &&
+		    le16_to_cpu(media->items[i].rows) == cpu_to_le16(le32_to_cpu(ctx->hdr.rows)))
+			break;
+	}
+	if (i == media->count) {
+		ERROR("Incorrect media loaded for print!\n");
+		return CUPS_BACKEND_HOLD;
+	}
 
  top:
 	if (state != last_state) {
@@ -1585,7 +1609,7 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 				sizeof(struct s2145_status_hdr),
 				&num)) < 0) {
 		ERROR("Failed to execute %s command\n", cmd_names(cmd->cmd));
-		return ret;
+		return CUPS_BACKEND_FAILED;
 	}
 
 	if (memcmp(rdbuf, rdbuf2, READBACK_LEN)) {
@@ -1593,13 +1617,13 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 
 		INFO("Printer Status: 0x%02x (%s)\n", 
 		     sts->hdr.status, status_str(sts->hdr.status));
-		if (sts->hdr.error == ERROR_PRINTER) {
-			ERROR("Printer Reported Error: 0x%02x.0x%02x (%s)\n",
-			      sts->hdr.printer_major, sts->hdr.printer_minor,
-			      error_codes(sts->hdr.printer_major, sts->hdr.printer_minor));
-		}
+		if (sts->hdr.result != RESULT_SUCCESS)
+			goto printer_error;		
+		if (sts->hdr.error == ERROR_PRINTER)
+			goto printer_error;
 	} else if (state == last_state) {
 		sleep(1);
+		goto top;
 	}
 	last_state = state;
 
@@ -1608,12 +1632,6 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 	switch (state) {
 	case S_IDLE:
 		INFO("Waiting for printer idle\n");
-		/* Basic error handling */
-		if (sts->hdr.result != RESULT_SUCCESS)
-			goto printer_error;
-		if (sts->hdr.error != ERROR_NONE)
-			goto printer_error;
-
 		/* If either bank is free, continue */
 		if (sts->bank1_status == BANK_STATUS_FREE || 
 		    sts->bank2_status == BANK_STATUS_FREE) 
@@ -1626,13 +1644,20 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 		memset(cmdbuf, 0, CMDBUF_LEN);
 		print->hdr.cmd = cpu_to_le16(S2145_CMD_PRINTJOB);
 		print->hdr.len = cpu_to_le16(sizeof (*print) - sizeof(*cmd));
-		print->id = ctx->jobid;
-		print->count = cpu_to_le16(copies);
-		print->columns = cpu_to_le16(le32_to_cpu(ctx->hdr.columns));
-		print->rows = cpu_to_le16(le32_to_cpu(ctx->hdr.rows));
-		print->media = le32_to_cpu(ctx->hdr.media);
-		print->mode = le32_to_cpu(ctx->hdr.mode);
-		print->method = le32_to_cpu(ctx->hdr.method);
+
+		if (ctx->model == 2145) {
+			print->id = ctx->jobid;
+			print->count = cpu_to_le16(copies);
+			print->columns = cpu_to_le16(le32_to_cpu(ctx->hdr.columns));
+			print->rows = cpu_to_le16(le32_to_cpu(ctx->hdr.rows));
+			print->media = le32_to_cpu(ctx->hdr.media);
+			print->mode = le32_to_cpu(ctx->hdr.mode);
+			print->method = le32_to_cpu(ctx->hdr.method);
+		} else {
+			// s6145, s6245 use different fields
+			ERROR("Don't know how to initiate print on non-2145 models!\n");
+			return CUPS_BACKEND_FAILED;
+		}
 
 		if ((ret = s2145_do_cmd(ctx,
 					cmdbuf, sizeof(*print),
@@ -1653,22 +1678,20 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 		INFO("Sending image data to printer\n");
 		if ((ret = send_data(ctx->dev, ctx->endp_down,
 				     ctx->databuf, ctx->datalen)))
-			return ret;
+			return CUPS_BACKEND_FAILED;
 
 		INFO("Waiting for printer to acknowledge completion\n");
 		sleep(1);
 		state = S_PRINTER_SENT_DATA;
 		break;
 	case S_PRINTER_SENT_DATA:
-		if (sts->hdr.result != RESULT_SUCCESS)
-			goto printer_error;
 		if (ctx->fast_return) {
 			INFO("Fast return mode enabled.\n");
 			state = S_FINISHED;
-		}
-		else if (sts->hdr.status == STATUS_READY ||
-		    sts->hdr.status == STATUS_FINISHED)
+		} else if (sts->hdr.status == STATUS_READY ||
+			   sts->hdr.status == STATUS_FINISHED) {
 			state = S_FINISHED;
+		}
 		break;
 	default:
 		break;
@@ -1691,7 +1714,7 @@ static int shinkos2145_main_loop(void *vctx, int copies) {
 		goto top;
 	}
 
-	return 0;
+	return CUPS_BACKEND_OK;
 
 printer_error:
 	ERROR("Printer reported error: %#x (%s) status: %#x (%s) -> %#x.%#x (%s)\n",
@@ -1701,7 +1724,7 @@ printer_error:
 	      status_str(sts->hdr.status),
 	      sts->hdr.printer_major, sts->hdr.printer_minor,
 	      error_codes(sts->hdr.printer_major, sts->hdr.printer_minor));
-	return 1; /* CUPS_BACKEND_FAILED */
+	return CUPS_BACKEND_FAILED;
 }
 
 static int shinkos2145_query_serno(struct libusb_device_handle *dev, uint8_t endp_up, uint8_t endp_down, char *buf, int buf_len)
@@ -1735,27 +1758,35 @@ static int shinkos2145_query_serno(struct libusb_device_handle *dev, uint8_t end
 	strncpy(buf, (char*)resp->data, buf_len);
 	buf[buf_len-1] = 0; /* ensure it's null terminated */
 
-	return 0;
+	return CUPS_BACKEND_OK;
 }
 
 /* Exported */
 #define USB_VID_SHINKO       0x10CE
 #define USB_PID_SHINKO_S2145 0x000E
+#define USB_PID_SHINKO_S6145 0x0019
+#define USB_PID_SHINKO_S6245 0x001D
+//#define USB_VID_CIAAT        xxxxxx
+//#define USB_PID_CIAAT_BRAVA21 xxxxx
 
 struct dyesub_backend shinkos2145_backend = {
-	.name = "Shinko/Sinfonia CHC-S2145 (S2)",
-	.version = "0.31",
+	.name = "Shinko/Sinfonia CHC-S2145",
+	.version = "0.40",
 	.uri_prefix = "shinkos2145",
 	.cmdline_usage = shinkos2145_cmdline,
 	.cmdline_arg = shinkos2145_cmdline_arg,
 	.init = shinkos2145_init,
 	.attach = shinkos2145_attach,
 	.teardown = shinkos2145_teardown,
+	.early_parse = shinkos2145_early_parse,
 	.read_parse = shinkos2145_read_parse,
 	.main_loop = shinkos2145_main_loop,
 	.query_serno = shinkos2145_query_serno,
 	.devices = {
 	{ USB_VID_SHINKO, USB_PID_SHINKO_S2145, P_SHINKO_S2145, ""},
+//	{ USB_VID_SHINKO, USB_PID_SHINKO_S6145, P_SHINKO_S2145, ""},
+//	{ USB_VID_SHINKO, USB_PID_SHINKO_S6245, P_SHINKO_S2145, ""},
+//	{ USB_VID_CIAAT, USB_PID_CIAAT_BRAVA21, P_SHINKO_S2145, ""},
 	{ 0, 0, 0, ""}
 	}
 };
@@ -1767,8 +1798,8 @@ struct dyesub_backend shinkos2145_backend = {
   4-byte Little Endian words.
 
    10 00 00 00 MM MM 00 00  00 00 00 00 01 00 00 00  MM == Model (ie 2145d)
-   64 00 00 00 00 00 00 00  TT 00 00 00 00 00 00 00  TT == Media Type
-   MM 00 00 00 PP 00 00 00  00 00 00 00 00 00 00 00  PP = Print Mode, MM = Print Method
+   64 00 00 00 00 00 00 00  TT 00 00 00 00 00 00 00  TT == Media/Print Size
+   MM 00 00 00 PP 00 00 00  00 00 00 00 00 00 00 00  MM = Print Method (aka cut control), PP = Print Mode
    00 00 00 00 WW WW 00 00  HH HH 00 00 XX 00 00 00  XX == Copies
    00 00 00 00 00 00 00 00  00 00 00 00 ce ff ff ff
    00 00 00 00 ce ff ff ff  QQ QQ 00 00 ce ff ff ff  QQ == DPI, ie 300.
@@ -1778,5 +1809,68 @@ struct dyesub_backend shinkos2145_backend = {
    [[Packed RGB payload of WW*HH*3 bytes]]
 
    04 03 02 01  [[ footer ]]
+
+ * CHC-S6245 data format
+
+  Spool file consists of an 116-byte header, followed by RGB-packed data,
+  followed by a 4-byte footer.  Header appears to consist of a series of
+  4-byte Little Endian words.
+
+   10 00 00 00 MM MM 00 00  01 00 00 00 01 00 00 00  MM == Model (ie 6245d)
+   64 00 00 00 00 00 00 00  TT 00 00 00 00 00 00 00  TT == 0x20 8x4, 0x21 8x5, 0x22 8x6, 0x23 8x8, 0x10 8x10, 0x11 8x12
+   00 00 00 00 00 00 00 00  XX 00 00 00 00 00 00 00  XX == 0x03 matte, 0x02 glossy, 0x01 no coat
+   00 00 00 00 WW WW 00 00  HH HH 00 00 NN 00 00 00  WW/HH Width, Height (LE), NN == Copies
+   00 00 00 00 00 00 00 00  00 00 00 00 ce ff ff ff
+   00 00 00 00 ce ff ff ff  QQ QQ 00 00 ce ff ff ff  QQ == DPI (300)
+   00 00 00 00 ce ff ff ff  00 00 00 00 00 00 00 00
+   00 00 00 00
+
+   [[Packed RGB payload of WW*HH*3 bytes]]
+
+   04 03 02 01  [[ footer ]]
+
+ * CHC-S6145 data format
+
+  Spool file consists of an 116-byte header, followed by RGB-packed data,
+  followed by a 4-byte footer.  Header appears to consist of a series of
+  4-byte Little Endian words.
+
+   10 00 00 00 MM MM 00 00  HH 00 00 00 01 00 00 00  MM == Model (ie 6145d), HH == 0x02 (5" media), 0x03 (6" media)
+   64 00 00 00 00 00 00 00  TT 00 00 00 00 00 00 00  TT == 0x08 5x5, 0x03 5x7, 0x07 2x6, 0x00 4x6, 0x06 6x6/6x6+6x2/6x8
+   UU 00 00 00 ZZ 00 00 00  XX 00 00 00 00 00 00 00  XX == 0x00 default, 0x02 glossy, 0x03 matte, ZZ == 0x00 default, 0x01 == std qual; UU == 0x00 normal, 0x04 2x6*2, 0x05 6x6+2x6
+   00 00 00 00 WW WW 00 00  HH HH 00 00 NN 00 00 00  WW/HH Width, Height (LE), NN == Copies
+   00 00 00 00 00 00 00 00  00 00 00 00 ce ff ff ff
+   00 00 00 00 ce ff ff ff  QQ QQ 00 00 ce ff ff ff  QQ == DPI (300)
+   00 00 00 00 ce ff ff ff  00 00 00 00 00 00 00 00
+   00 00 00 00
+
+   [[Packed RGB payload of WW*HH*3 bytes]]
+
+   04 03 02 01  [[ footer ]]
+
+ * CIAAT Brava 21 data format  
+
+   This printer is supposed to be a variant of the S6145, but uses a 
+   different spool format -- but seems to use the same command language.
+
+   01 40 12 00  01 NN 00 YY  YY XX XX TT  00 00 00 00  00 00 01 MM  QQ 00
+
+    NN == copies
+    YY YY == Columns (LE)
+    XX XX == Rows (LE)
+    MM == Overcoat (02 = glossy, 03 = matte, 01 = none)
+    QQ == Multicut (00 = normal, 01 = none, 02 = 2*4x6, 
+                    04 = 2*2x6, 80 = 4x6-notrim)
+    TT == Type (00 = 4x6, 03 = 5x7, 06 = 8x6, 07 = 2x6)
+
+    1844*2434  8x6
+    1844*2492  4x6*2
+    1548*2140  5x7
+    1844*1240  4x6 (and 2x6*2)
+    1844*1210  4x6-notrim (WTF?)
+    1844*634   2x6
+
+
+   [[ Followed by XX*YY*3 bytes of image data, RGB ]]
 
 */

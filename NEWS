@@ -1,15 +1,17 @@
-Welcome to Gutenprint 5.2.10, a stable release of Gutenprint
-5.2. Please read these release notes carefully.
+Welcome to Gutenprint 5.2.11-pre1, a pre-release of Gutenprint
+5.2.11. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
 others.  Gutenprint currently supports over 2000 printer models.
 These drivers provide high quality printing for UNIX, Linux, and
-Macintosh OS X (10.5 and above) systems.  Gutenprint includes CUPS and
+Macintosh OS X (10.6 and above) systems.  Gutenprint includes CUPS and
 Foomatic drivers, and an enhanced Print plug-in for GIMP that replaces
 the print plug-in packaged with the GIMP distribution.
 
-Gutenprint 5.2.10 no longer supports Macintosh OS X 10.4 or earlier.
+As of 5.2.10, Gutenprint no longer supports Macintosh OS X 10.4 or
+earlier; as of 5.2.11, Gutenprint no longer supports Macintosh OS X
+10.5.
 
 *** NOTE TO PACKAGERS: Please read the file README.package for issues
     that are of interest to distributors and packagers of Gutenprint.
@@ -20,6 +22,7 @@ These release notes contain the following sections:
 I)    General Requirements
 II)   Critical Upgrade Note
 III)  Changes from Previous Releases
+        * Changes from 5.2.10
         * Changes from 5.2.9
         * Changes from 5.2.8
         * Changes from 5.2.7
@@ -49,7 +52,7 @@ V)    Overall changes from 5.0.2 to 5.2
 I) GENERAL REQUIREMENTS
 
 Gutenprint will run on any reasonably modern computer running Linux,
-Macintosh OS X (10.5 or above), Solaris, or any other UNIX-like
+Macintosh OS X (10.6 or above), Solaris, or any other UNIX-like
 operating system.  If you plan to compile this package from source,
 you will also need an ANSI C compiler, such as gcc (recommended).  A
 compiler is not required if you are installing a pre-compiled package.
@@ -92,7 +95,7 @@ create a driver that may be built much more easily than traditional
 Ghostscript drivers.  This driver should be used in conjunction with
 Foomatic to configure printers.
 
-Users of Macintosh 10.5 (Leopard) and above can use this package.
+Users of Macintosh 10.6 (Snow Leopard) and above can use this package.
 For ease of installation, a pre-built package with installer is
 normally supplied a few days after the release of the source package.
 We strongly recommend that OS X users use the pre-built package rather
@@ -251,6 +254,391 @@ device.  We have determined that the data is in fact written by the
 ================================================================
 
 III) MAJOR CHANGES FROM PREVIOUS RELEASES
+
+* Changes from 5.2.10
+
+  1) Added support for the following dye sublimation printers:
+
+	Canon SELPHY CP820/CP910
+	Ciaat Brava 21		  [experimental]
+	Citizen CW-01 / Olmec OP900
+	DNP DS620
+	Kodak 305		  [experimental]
+	Kodak 8810		  [experimental]
+	Mitsubishi CP-D80DW	  [experimental]
+	Mitsubishi CP3800DW
+	Shinko S1245/S6145/S6245  [experimental]
+	Sony UP-CR10/DNP SL10	  [experimental]
+
+  2) Enhanced support (and bugfixes) for the following dye sublimation
+     printers:
+
+	Canon SELPHY CP900
+	Citizen CX/CX-W/CY
+	DNP DS40/DS80/RX1
+	Kodak 605
+	Kodak 6800/6850
+	Mitsubishi CP-9550 family (including the CP9550DW-S variant)
+	Mitsubishi CP-D70DW/D707DW/K60DW-S [experimental]
+	Sony UP-DR200
+
+  3) Added support for the Datamax-O'Neil PCL printers, the Performance
+     series (p1115, p1115s, p1120n, p1125, p1725, h8308) and the
+     Datamax-O'Neil Workstation printer.
+
+  4) Added common Imperial and Metric label sizes to the Paper Selection
+     menu.
+
+  5) Canon backend enhancements.
+
+     Added support for following models:
+
+	Canon PIXMA P200  (EXPERIMENTAL)
+
+	Canon E400 series   (EXPERIMENTAL)
+	Canon PIXMA E400    (EXPERIMENTAL)(*1)
+	Canon PIXMA E401    (EXPERIMENTAL)(*1)
+	Canon PIXMA E404    (EXPERIMENTAL)(*1)
+	Canon PIXMA E408    (EXPERIMENTAL)(*1)
+	Canon PIXMA E409    (EXPERIMENTAL)(*1)
+
+	Canon E460 series   (EXPERIMENTAL)
+	Canon PIXMA E460    (EXPERIMENTAL)(*1)
+	Canon PIXMA E461    (EXPERIMENTAL)(*1)
+	Canon PIXMA E464    (EXPERIMENTAL)(*1)
+	Canon PIXMA E468    (EXPERIMENTAL)(*1)
+
+	Canon E480 series   (EXPERIMENTAL)
+	Canon PIXMA E480    (EXPERIMENTAL)(*1)
+	Canon PIXMA E481    (EXPERIMENTAL)(*1)
+	Canon PIXMA E484    (EXPERIMENTAL)(*1)
+	Canon PIXMA E488    (EXPERIMENTAL)(*1)
+	Canon PIXMA E489    (EXPERIMENTAL)(*1)
+
+	Canon E560 series   (EXPERIMENTAL)
+	Canon PIXMA E560    (EXPERIMENTAL)(*1)
+	Canon PIXMA E568    (EXPERIMENTAL)(*1)
+	Canon PIXMA E569    (EXPERIMENTAL)(*1)
+
+	Canon iP110 series  (EXPERIMENTAL)
+	Canon PIXMA iP110   (EXPERIMENTAL)(*1)
+	Canon PIXUS iP110   (EXPERIMENTAL)(*1)
+	
+	Canon iP2800 series (EXPERIMENTAL)
+	Canon PIXMA iP2810  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2820  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2840  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2850  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2870  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2872  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2880  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP2890  (EXPERIMENTAL)(*1)
+
+	Canon iP8700 series (EXPERIMENTAL)
+	Canon PIXMA iP8710  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8720  (EXPERIMENTAL)(*1)
+	Canon PIXUS iP8730  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8740  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8750  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8760  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8770  (EXPERIMENTAL)(*1)
+	Canon PIXMA iP8780  (EXPERIMENTAL)(*1)
+
+	Canon iX6700 series (EXPERIMENTAL)
+	Canon PIXMA iX6770  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6780  (EXPERIMENTAL)(*1)
+
+	Canon iX6800 series (EXPERIMENTAL)
+	Canon PIXMA iX6810  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6820  (EXPERIMENTAL)(*1)
+	Canon PIXUS iX6830  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6840  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6850  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6860  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6870  (EXPERIMENTAL)(*1)
+	Canon PIXMA iX6880  (EXPERIMENTAL)(*1)
+
+	Canon MX470 series  (EXPERIMENTAL)
+	Canon PIXMA MX471   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX472   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX474   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX475   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX476   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX477   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX478   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX479   (EXPERIMENTAL)(*1)
+
+	Canon MX490 series  (EXPERIMENTAL)
+	Canon PIXMA MX492   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX494   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX495   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX496   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX497   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX498   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX499   (EXPERIMENTAL)(*1)
+
+	Canon MX530 series  (EXPERIMENTAL)
+	Canon PIXMA MX531   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX532   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX534   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX535   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX536   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX537   (EXPERIMENTAL)(*1)
+	Canon PIXMA MX538   (EXPERIMENTAL)(*1)
+
+	Canon MG2900 series (EXPERIMENTAL)
+	Canon PIXMA MG2910  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2920  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2940  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2950  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2960  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2970  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2980  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG2990  (EXPERIMENTAL)(*1)
+
+	Canon MG5600 series (EXPERIMENTAL)
+	Canon PIXMA MG5610  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5620  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5622  (EXPERIMENTAL)(*1)
+	Canon PIXUS MG5630  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5640  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5650  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5660  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5670  (EXPERIMENTAL)(*1)
+	Canon Mommy Photo MG5670 (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5680  (EXPERIMENTAL)(*1)
+
+	Canon MG6600 series (EXPERIMENTAL)
+	Canon PIXMA MG6610  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6620  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6622  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6640  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6650  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6660  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6670  (EXPERIMENTAL)(*1)
+	Canon Mommy Photo MG6670 (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6680  (EXPERIMENTAL)(*1)
+
+	Canon MG6700 series (EXPERIMENTAL)
+	Canon PIXUS MG6730  (EXPERIMENTAL)(*1)
+
+	Canon MG7500 series (EXPERIMENTAL)
+	Canon PIXMA MG7510  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7520  (EXPERIMENTAL)(*1)
+	Canon PIXUS MG7530  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7540  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7550  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7560  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7570  (EXPERIMENTAL)(*1)
+	Canon Mommy Photo MG7570 (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7580  (EXPERIMENTAL)(*1)
+
+	Canon iB4000 series (EXPERIMENTAL)
+	Canon MAXIFY iB4010 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4020 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4030 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4040 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4050 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4060 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4070 (EXPERIMENTAL)(*1)
+	Canon MAXIFY iB4080 (EXPERIMENTAL)(*1)
+
+	Canon MB2000 series (EXPERIMENTAL)
+	Canon MAXIFY MB2010 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2020 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2030 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2040 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2050 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2060 (EXPERIMENTAL)(*1)
+
+	Canon MB2300 series (EXPERIMENTAL)
+	Canon MAXIFY MB2320 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2330 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2340 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2350 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2360 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB2390 (EXPERIMENTAL)(*1)
+
+	Canon MB5000 series (EXPERIMENTAL)
+	Canon MAXIFY MB5020 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5030 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5040 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5050 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5060 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5070 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5080 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5090 (EXPERIMENTAL)(*1)
+
+	Canon MB5300 series (EXPERIMENTAL)
+	Canon MAXIFY MB5310 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5320 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5330 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5340 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5350 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5360 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5370 (EXPERIMENTAL)(*1)
+	Canon MAXIFY MB5390 (EXPERIMENTAL)(*1)
+
+        Note 1: Added individual family
+                instances, even though the
+                printer identifies itself
+                by a generic family
+                identification string.
+
+     Added following models to existing series:
+
+ 	Canon E510 series:
+	  Canon PIXMA E514
+
+ 	Canon MP620 series:
+	  Canon PIXMA MP620B
+
+ 	Canon MP640 series:
+	  Canon PIXMA MP640R
+
+ 	Canon MX490 series:
+	  Canon PIXMA MX490
+
+ 	Canon MG2400 series:
+	  Canon PIXMA MG2460
+	  Canon PIXMA MG2490
+
+ 	Canon MG2500 series:
+	  Canon PIXMA MG2590
+
+ 	Canon MG2900 series:
+	  Canon PIXMA MG2922
+	  Canon PIXMA MG2924
+
+ 	Canon MG3500 series:
+	  Canon PIXMA MG3522
+
+ 	Canon MG7500 series:
+	  Canon PIXUS MG7530F
+
+ 	Canon MG8100 series:
+	  Canon PIXMA MG8120B
+
+     Added following existing PIXMA models also as PIXUS models:
+
+ 	Canon PIXUS mini220
+	Canon PIXUS mini360
+
+     Added following existing PIXMA models also as PIXUS models,
+     and generic series model:
+
+	Canon iP90 series
+	Canon PIXUS iP90
+	Canon PIXUS ip90v
+	Canon Canon iP100 series
+	Canon PIXUS iP100
+	Canon iP2000 series
+	Canon PIXUS iP2000
+
+     Duplex option added to following printers:
+
+	Canon MP750 series
+	Canon PIXMA MP750
+	Canon MP760 series
+	Canon PIXMA MP760
+	Canon MP770 series
+	Canon PIXMA MP770 (does not exist)
+	Canon PIXUS MP770
+	Canon MP780 series
+	Canon PIXMA MP780
+	Canon MP790 series
+	Canon PIXMA MP790 (does not exist)
+	Canon PIXUS MP790
+
+     Resolution modes corrected for following printers:
+
+	Canon MG5400 series
+	Canon MG6300 series
+
+    Added support for upper/lower tray in cassette for following models:
+
+	Canon MG5400 series
+	Canon MG6200 series
+	Canon MG6300 series
+	Canon MG6500 series
+	Canon MG7100 series
+
+    Added prefix PIXUS to the Japanese i/R/PD models:
+
+	Canon PIXUS 50i
+	Canon PIXUS 80i
+	Canon PIXUS 450i
+	Canon PIXUS 455i
+	Canon PIXUS 470PD
+	Canon PIXUS 475PD
+	Canon PIXUS 550i
+	Canon PIXUS 560i
+	Canon PIXUS 850i
+	Canon PIXUS 860i
+	Canon PIXUS 865R
+	Canon PIXUS 900PD
+	Canon PIXUS 950i
+	Canon PIXUS 960i
+	Canon PIXUS 990i
+	Canon PIXUS 6100i
+	Canon PIXUS 6500i
+	Canon PIXUS 9100i
+	Canon PIXUS 9900i
+
+  6) Canon backend bugfixes:
+
+     A problem with a new ink level compression added in 5.2.7 has
+     affected multiple printer models. The affected models have been
+     modified accordingly, as described below. As a result, media choice
+     has been limited for the MP, iP and Pro series, only draft-quality
+     printing for plain, Hagaki and Envelope media (and monochrome photo
+     printing in some cases) is currently possible.
+
+     The following printer models have had their modes set back to what
+     they were in 5.2.7, namely the same as the BJC-8200. These modes
+     are not detected in the Windows driver; however, they appear to
+     work, while most detected modes are currently not workable owing to
+     unsolved compression of ink levels. Remaining newer workable modes
+     without problematic compression can be used.
+
+	Canon BJC S600
+	Canon BJC S630
+	Canon BJC S800
+
+     The following newer printer models added since 5.2.7 have also had
+     their modes set to those of the BJC-8200, for the same reason as above.
+     Remaining newer modes without problematic compression can be used.
+
+	Canon BJC S820
+	Canon BJC S900
+	Canon BJC S9000
+	Canon BJC i950
+	Canon BJC i960
+	Canon BJC i965
+	Canon BJC i990
+	Canon BJC i9100
+	Canon BJC i9900
+	Canon BJC i9950
+	Canon BJC 950i
+	Canon BJC 960i
+	Canon BJC 990i
+	Canon BJC 9100i
+	Canon BJC 9900i
+
+     The following newer print models added since 5.2.7 have had modes
+     with the problematic ink sets removed. Some of these printers can
+     use monochrome modes to print on photo media.
+
+	Canon MP900
+	Canon iP7100
+	Canon iP8100
+	Canon iP8500
+	Canon iP8600
+	Canon iP9910
+	Canon Pro 9000
+	Canon Pro 9000 Mk.II
+	Canon Pro 9500
+	Canon Pro 9500 Mk.II
 
 * Changes from 5.2.9
 

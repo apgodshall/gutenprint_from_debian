@@ -575,39 +575,11 @@
       <anchor>ga982f8191c84b049cc3ad3cee1558fc23</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_TYPE_LINEAR</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga982f8191c84b049cc3ad3cee1558fc23a46228ddaa2d52a85ccd79c4dc0f76ad3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_TYPE_SPLINE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga982f8191c84b049cc3ad3cee1558fc23afb1ffdc3754f428d8e3a2124e014ff77</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_wrap_mode_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga3ae3af552b490b0ca8b02e442ac9547a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_WRAP_NONE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aad840485ad7df768a06ee4be02d93b97a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_WRAP_AROUND</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aac0361aebddfabfb263dc0205a61f6fbd</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -617,53 +589,11 @@
       <anchor>ga7eddbee28cb1f3c76a19408b86ea142e</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_ADD</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142eac38b0bf09e93edb67c3e5c53035295f3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_MULTIPLY</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ead3bd2cdb63498d5d22686e79e2c0ed95</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_EXPONENTIATE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ea8de151149fdfd4fcca78826e6352246a</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_bounds_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga86d146e483ca1902f973d574f542b85f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_RESCALE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85fa118d303bf7bdf4f00bda71cc6eac49c3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_CLIP</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85faec9e6673edac9d34e3aad376fa711aa5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_ERROR</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85fad699d675d5df223055388cd83d0b362b</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -1582,20 +1512,6 @@
       <anchor>ga58672e1989d582c14328048b207657c8</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_IMAGE_STATUS_OK</name>
-      <anchorfile>group__image.html</anchorfile>
-      <anchor>gga58672e1989d582c14328048b207657c8ab5574da151b93391a337f29b2a7c96cf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_IMAGE_STATUS_ABORT</name>
-      <anchorfile>group__image.html</anchorfile>
-      <anchor>gga58672e1989d582c14328048b207657c8a224b8ac15cf785b24b2f3f53b4fdc274</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
@@ -1668,28 +1584,28 @@
       <type>void(*</type>
       <name>stp_node_freefunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>gac09ea139ad36a6e21f30755439afeab5</anchor>
+      <anchor>gaf19545bca0101fe4bfe4533cbd03e750</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
       <type>void *(*</type>
       <name>stp_node_copyfunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>ga8d8084abc24eb4b00290916d5ff44c1f</anchor>
+      <anchor>gacc52db9cbfb5090120e0ee8a24c396f2</anchor>
       <arglist>)(const void *)</arglist>
     </member>
     <member kind="typedef">
       <type>const char *(*</type>
       <name>stp_node_namefunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>ga815993ed02f7e9c7b5cb4680f0504d97</anchor>
+      <anchor>ga278b6a7d80911974bba5fb3db5bd0146</anchor>
       <arglist>)(const void *)</arglist>
     </member>
     <member kind="typedef">
       <type>int(*</type>
       <name>stp_node_sortfunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>gae5c7167d6fc957fee0b6aff45bc0b126</anchor>
+      <anchor>gacef5292212b80a50b7659578d8128c02</anchor>
       <arglist>)(const void *, const void *)</arglist>
     </member>
     <member kind="function">
@@ -1903,41 +1819,6 @@
       <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MODULE_CLASS_INVALID</name>
-      <anchorfile>module_8h.html</anchorfile>
-      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42adbc54c5b64945a0585177cbfe3cf8e8c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MODULE_CLASS_MISC</name>
-      <anchorfile>module_8h.html</anchorfile>
-      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42ac250fc9ff4abf739d975edcbe4694030</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MODULE_CLASS_FAMILY</name>
-      <anchorfile>module_8h.html</anchorfile>
-      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42ab8bfa675fcede245786ec7eb9a220090</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MODULE_CLASS_COLOR</name>
-      <anchorfile>module_8h.html</anchorfile>
-      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42a00077e69aa7fcad42f21bf58d3d8edaa</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MODULE_CLASS_DITHER</name>
-      <anchorfile>module_8h.html</anchorfile>
-      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42a904bbf21de98c76882970ca29aee8841</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="function">
       <type>int</type>
       <name>stp_module_load</name>
@@ -2137,41 +2018,6 @@
       <anchor>af8b58610b5fb382d0f075cb3bcf3b6ba</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MXML_ELEMENT</name>
-      <anchorfile>mxml_8h.html</anchorfile>
-      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa10846b9327c59bbfee28dd522a0c258e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MXML_INTEGER</name>
-      <anchorfile>mxml_8h.html</anchorfile>
-      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baaeb129c9841502a2f3d095751f4e21a79</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MXML_OPAQUE</name>
-      <anchorfile>mxml_8h.html</anchorfile>
-      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa4ebe16a2dc2aac2531e09b56051eb47a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MXML_REAL</name>
-      <anchorfile>mxml_8h.html</anchorfile>
-      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa9411f902a8e7e839252b7a440ef53790</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_MXML_TEXT</name>
-      <anchorfile>mxml_8h.html</anchorfile>
-      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baaccc874638f0a0d375e1066d8c82c8be9</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_mxmlAdd</name>
@@ -2326,53 +2172,11 @@
       <anchor>ga72e4619e373e38dc02dc452813b7b958</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_ENGLISH_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958adb394159413ade42022509cd3280fef3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_METRIC_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a6d5868bc6707f8801ce4d584428c2ae8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_ENGLISH_EXTENDED</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a00b7e9a18afc172872861b26dbcc8cb8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_METRIC_EXTENDED</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a62e2906a87fa4bcf32913943fd5b225a</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_papersize_type_t</name>
       <anchorfile>group__papersize.html</anchorfile>
       <anchor>ga31255c4eebfaaf5cd319e5638a6a3069</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_TYPE_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a99d27f84f91d583c3e465e56c83fff2f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_TYPE_ENVELOPE</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a660290248a563e7590202afd3ba68fb4</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -2577,6 +2381,13 @@
       <name>stp_printer_get_foomatic_id</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gaac52d241cc86a10965046afc0a8c8a41</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_comment</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>ga04564fc764774143b2e5924c40c6e271</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">
@@ -3495,21 +3306,21 @@
       <type>void(*</type>
       <name>stp_outfunc_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga268c87919653380a22b1f69c78fe6555</anchor>
+      <anchor>ga0883772928dda4b27062f6edc213b039</anchor>
       <arglist>)(void *data, const char *buffer, size_t bytes)</arglist>
     </member>
     <member kind="typedef">
       <type>void *(*</type>
       <name>stp_copy_data_func_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga25e6aec21fd8f8a65c4c4086d0f3dec0</anchor>
+      <anchor>ga785dacfaf459d30c8874f2afc1c90d6d</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
       <type>void(*</type>
       <name>stp_free_data_func_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga1ac9aa4c059fbb52307d8522a5f1dc6d</anchor>
+      <anchor>ga4e9f58863b175928237049b4edfcf460</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
@@ -3526,109 +3337,11 @@
       <anchor>ga9b3d4f47a44c0c8c9b150cddc56d2a91</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a7a6f3e019c8a92ddecd34c71013acde0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_INT</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aae2cac85ef78157b53c7a79706dc0f70</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91af97ef629defc99977bd1cb35daabe0c1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_DOUBLE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ae0dc60c8435ce0b1355bd5a134395f0c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_CURVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a0d283c33f755969ded0751bbfc5d1912</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_FILE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8224a918efbef96fffaa90e31654f7ff</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_RAW</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a33bb02d9ae5b2169d2f75da7684b04e9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_ARRAY</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8789c2b5cc718eafca6d1d0022cfe3f3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_DIMENSION</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aaa6f89008bf237c6f0aa2f0ee176e8b7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ad053047279b4c82034d26c4aa4c818d5</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_class_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga4eba7e712c0e17b76e472f26e202d7b8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_FEATURE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa7ed8b66836057aa58b9a74811057b4a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_OUTPUT</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8affc6ff4bfbf2873ce55dfc03776bb6d9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_CORE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa05ce344ff3338e69638d69f9c120d01</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8a2e17ce7ebc18801c11af7ea0a61e93ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -3638,69 +3351,6 @@
       <anchor>gaaa9c9265ffe70122bd33659cf2983207</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_BASIC</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae9d7192607a6e1ec92dfed3f13a3a46f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3130e7060a3b901ea8dcb37d986d47e0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3d016c9587f698ee400bc7e66071f06c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a59a909a8953b8724d57ce85e2b4306bf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a1241066935e94def6ab6d524ed1fabae</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a6036d5761aa9710a66429c625c334a80</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab2bc3be82f619147d9a45564fd53a4a0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae478f67e409adabc8679d3801604861d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab8bf539d78e56f06f463d00f7a3b56b3</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_activity_t</name>
@@ -3708,53 +3358,11 @@
       <anchor>ga70ebf70dc8e6199d84fc91985c94bae9</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_INACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a6517762c5800eac253f43eeacd96c22f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_DEFAULTED</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a410b7e080ef62fb8896f2f844b1c1e00</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_ACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9adbc7323a015e40652fd256e49c8d5b8c</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_verify_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>gac061852de3627383cd415cd80a979e02</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_BAD</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a326a171221148779ec7df761b3eee967</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_OK</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a2df363618282a9164433c0f212b18616</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_INACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a5cb96da6c2e3ae7187e85a1ef6e41fc6</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -4819,48 +4427,6 @@
       <anchor>a059ef2763c95a5cc47d51dcf38580991</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_ZIGZAG</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991a6077c1fbd3cc6c79a1ac5f23d31bd2b3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_ASCENDING</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991a9b5dcc799a9afed0063f052196fa8d6b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_DESCENDING</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991afaf7b19bfde4be5241cb112835325797</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_ASCENDING_2X</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991a7bfa24511bcbc811272e385372c61936</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_STAGGERED</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991a8e37ffcadb7b41a3276029206a80d5e6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_WEAVE_ASCENDING_3X</name>
-      <anchorfile>weave_8h.html</anchorfile>
-      <anchor>a059ef2763c95a5cc47d51dcf38580991aecb24603379f9f3dd682bf692326a8e1</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_initialize_weave</name>
@@ -4976,7 +4542,7 @@
       <type>int(*</type>
       <name>stp_xml_parse_func</name>
       <anchorfile>xml_8h.html</anchorfile>
-      <anchor>afad8ff906c4248935a93794f1b6f8c1a</anchor>
+      <anchor>a72cd464e175b61a4d1ba5e1171f65931</anchor>
       <arglist>)(stp_mxml_node_t *node, const char *file)</arglist>
     </member>
     <member kind="function">
@@ -5190,6 +4756,1314 @@
       <arglist>(const char *name)</arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>dither_matrix_impl</name>
+    <filename>structdither__matrix__impl.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>base</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a331debb887e076f8b52952ba6cc2b50b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>exp</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>adb0e7fb4b5e5149f0815af448676df8b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>x_size</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a063e3b3617c3a9b4883f3b01cd7dfb48</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>y_size</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a33370af30d4c6cb0e441744c8d1c3686</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>total_size</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a54645c1c4edad222cf3f5aba03cdfae5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>last_x</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>af0728348e6da1cf904204ef88e0a5853</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>last_x_mod</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a16f516218f0c5a31a1eac49e5c57add5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>last_y</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>ac1a83c82c364098dce631ec7174574be</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>last_y_mod</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>ad03881dd78211b5bcb1a62453c060d2e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>index</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>ab744f40c883acc93ad0afbf5f048f27a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>i_own</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a78152fe120c430f6400b731e5c722bd3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>x_offset</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a665c02056a2d046a15aab462492d9dbc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>y_offset</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a844cb19ea61f035bc2a21536f6f392c4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>fast_mask</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>a8c7141e2e35f6cc14896d23d15a81914</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned *</type>
+      <name>matrix</name>
+      <anchorfile>structdither__matrix__impl.html</anchorfile>
+      <anchor>ae28102f9e3d3cfb8eb48d9e69e807f96</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_cached_curve_t</name>
+    <filename>structstp__cached__curve__t.html</filename>
+    <member kind="variable">
+      <type>stp_curve_t *</type>
+      <name>curve</name>
+      <anchorfile>structstp__cached__curve__t.html</anchorfile>
+      <anchor>ae9b4170bfafe7d85b36689cbd8eea41e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const double *</type>
+      <name>d_cache</name>
+      <anchorfile>structstp__cached__curve__t.html</anchorfile>
+      <anchor>a59c26647178724471f383dea6e85f8ae</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned short *</type>
+      <name>s_cache</name>
+      <anchorfile>structstp__cached__curve__t.html</anchorfile>
+      <anchor>ac55d549f6d2f567ba84ecb9e0417f074</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>size_t</type>
+      <name>count</name>
+      <anchorfile>structstp__cached__curve__t.html</anchorfile>
+      <anchor>a99b772c3f4db71d58a4ee2315e712f04</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_color</name>
+    <filename>structstp__color.html</filename>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>short_name</name>
+      <anchorfile>structstp__color.html</anchorfile>
+      <anchor>a23ed4d11629625e2ad24b124c36c7fab</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>long_name</name>
+      <anchorfile>structstp__color.html</anchorfile>
+      <anchor>ab7c0a627b31ebfb97fd1db2677032479</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const stp_colorfuncs_t *</type>
+      <name>colorfuncs</name>
+      <anchorfile>structstp__color.html</anchorfile>
+      <anchor>a4442d36d0bcf746130f82ffe6f90147f</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_colorfuncs_t</name>
+    <filename>structstp__colorfuncs__t.html</filename>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>init</name>
+      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
+      <anchor>aaa24004e6afc4137650cd58bcfe0afab</anchor>
+      <arglist>)(stp_vars_t *v, stp_image_t *image, size_t steps)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>get_row</name>
+      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
+      <anchor>a33125c843618491e7721dcb59bb807bb</anchor>
+      <arglist>)(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_parameter_list_t(*</type>
+      <name>list_parameters</name>
+      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
+      <anchor>a2a1b424499b0cfc7588e03551f3d0d8b</anchor>
+      <arglist>)(const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>describe_parameter</name>
+      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
+      <anchor>a67ad8a808d98eeddd5276508b84cde54</anchor>
+      <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_curve_point_t</name>
+    <filename>structstp__curve__point__t.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>x</name>
+      <anchorfile>structstp__curve__point__t.html</anchorfile>
+      <anchor>a92b13b94109b1270563a1116dc19b926</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>y</name>
+      <anchorfile>structstp__curve__point__t.html</anchorfile>
+      <anchor>a132b1e8be20525667ece971d02f60b9d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_dither_matrix_generic</name>
+    <filename>structstp__dither__matrix__generic.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>x</name>
+      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
+      <anchor>a6b8bd1cc589c2195f055e5a57a05e03a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>y</name>
+      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
+      <anchor>aaaddcac2ca33a3e822ded567bbbecfb9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>bytes</name>
+      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
+      <anchor>ab963ddf7c0826bd3cc316c2375f1205b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>prescaled</name>
+      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
+      <anchor>a478d54ddf9ba50e783ddec1532a0eff6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const void *</type>
+      <name>data</name>
+      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
+      <anchor>a52acbda296a57a6087852eab62bc62db</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_dither_matrix_normal</name>
+    <filename>structstp__dither__matrix__normal.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>x</name>
+      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
+      <anchor>ab9564690be42859d88ea264a29321af3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>y</name>
+      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
+      <anchor>a410560f5186761cb7430f5b0a804b09c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>bytes</name>
+      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
+      <anchor>ad72d088edfe3223c2df8fd4fb6178b98</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>prescaled</name>
+      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
+      <anchor>a042561ad856d67506fe81b1bbbffd966</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned *</type>
+      <name>data</name>
+      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
+      <anchor>ae67cb37136c5e9d9c4b1a44cd2dab87b</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_dither_matrix_short</name>
+    <filename>structstp__dither__matrix__short.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>x</name>
+      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
+      <anchor>a81e0b20e763080b79faa837a00cac832</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>y</name>
+      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
+      <anchor>a2bbc6c72006541250ba23b48bcab60e8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>bytes</name>
+      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
+      <anchor>ad4d85727401505eab74e3e667f4a38f4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>prescaled</name>
+      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
+      <anchor>a755361acae80fa4cba01a1cc71638274</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const unsigned short *</type>
+      <name>data</name>
+      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
+      <anchor>af4f6b5634ea79cf694782e35a8d7607d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_dotsize</name>
+    <filename>structstp__dotsize.html</filename>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>bit_pattern</name>
+      <anchorfile>structstp__dotsize.html</anchorfile>
+      <anchor>a8d5273395d0e27004f779de0ea81ff23</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>value</name>
+      <anchorfile>structstp__dotsize.html</anchorfile>
+      <anchor>ad259e8d169a7d140e4964b80790c7ddd</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_double_bound_t</name>
+    <filename>structstp__double__bound__t.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>lower</name>
+      <anchorfile>structstp__double__bound__t.html</anchorfile>
+      <anchor>aa00903ee6e04e01b6b2bb7033e3c76ce</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>upper</name>
+      <anchorfile>structstp__double__bound__t.html</anchorfile>
+      <anchor>a07d734f8f82f059460cee55927b0216c</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_family</name>
+    <filename>structstp__family.html</filename>
+    <member kind="variable">
+      <type>const stp_printfuncs_t *</type>
+      <name>printfuncs</name>
+      <anchorfile>structstp__family.html</anchorfile>
+      <anchor>ad29f00ba3565e93c138b00e4a48cde77</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_list_t *</type>
+      <name>printer_list</name>
+      <anchorfile>structstp__family.html</anchorfile>
+      <anchor>a6e4f0c216f5ced14a819fbacdb26547d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_image</name>
+    <filename>structstp__image.html</filename>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>init</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a59dbf4b267e4883b14864386a7bb88a0</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>reset</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a7472e5ca54908d9d59d93b7953097971</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>width</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a2e1b0b04d4ab722fe32b3fde6ab537da</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>height</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a9ac621f128e83600cc981baf95a7d0bd</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_image_status_t(*</type>
+      <name>get_row</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a55e08f22ca7450018e4a8fd7479cea01</anchor>
+      <arglist>)(struct stp_image *image, unsigned char *data, size_t byte_limit, int row)</arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *(*</type>
+      <name>get_appname</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>ace1dbc5b42be0242c60635d278b835bb</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>conclude</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>a006dbb0b5d39ca42d9c606b0c660f558</anchor>
+      <arglist>)(struct stp_image *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void *</type>
+      <name>rep</name>
+      <anchorfile>structstp__image.html</anchorfile>
+      <anchor>ab18e6ee35037589bf485213022e2d871</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_int_bound_t</name>
+    <filename>structstp__int__bound__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>lower</name>
+      <anchorfile>structstp__int__bound__t.html</anchorfile>
+      <anchor>ac5ae98fad865ad6d4816016e233f5a53</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>upper</name>
+      <anchorfile>structstp__int__bound__t.html</anchorfile>
+      <anchor>aa71bcebaae24712ee7a66955b345de19</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_lineactive_t</name>
+    <filename>structstp__lineactive__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>ncolors</name>
+      <anchorfile>structstp__lineactive__t.html</anchorfile>
+      <anchor>a266bdeb14e62fb5b17a31746ad511761</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>v</name>
+      <anchorfile>structstp__lineactive__t.html</anchorfile>
+      <anchor>a5bb5843aa2a4817ef84fb83714b200f3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_linebounds_t</name>
+    <filename>structstp__linebounds__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>ncolors</name>
+      <anchorfile>structstp__linebounds__t.html</anchorfile>
+      <anchor>adc4641abb41a9204c258a380aa00b7f4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int *</type>
+      <name>start_pos</name>
+      <anchorfile>structstp__linebounds__t.html</anchorfile>
+      <anchor>ab46a1a4ec130dd043009fb96b0115467</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int *</type>
+      <name>end_pos</name>
+      <anchorfile>structstp__linebounds__t.html</anchorfile>
+      <anchor>a9bc2a60779ccf4ac3d90d47441e883ab</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_linebufs_t</name>
+    <filename>structstp__linebufs__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>ncolors</name>
+      <anchorfile>structstp__linebufs__t.html</anchorfile>
+      <anchor>a5ad1c52050c8d71da5609d2526854696</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char **</type>
+      <name>v</name>
+      <anchorfile>structstp__linebufs__t.html</anchorfile>
+      <anchor>a485ecae7a892476331d31079d33b9891</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_linecount_t</name>
+    <filename>structstp__linecount__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>ncolors</name>
+      <anchorfile>structstp__linecount__t.html</anchorfile>
+      <anchor>a69275ad8687438976d07950fa65a1728</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int *</type>
+      <name>v</name>
+      <anchorfile>structstp__linecount__t.html</anchorfile>
+      <anchor>a2164f4045d892c45105f5780c80489a4</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_lineoff_t</name>
+    <filename>structstp__lineoff__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>ncolors</name>
+      <anchorfile>structstp__lineoff__t.html</anchorfile>
+      <anchor>a97c5a2281b3cddb9c546e8299ea4e2b0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned long *</type>
+      <name>v</name>
+      <anchorfile>structstp__lineoff__t.html</anchorfile>
+      <anchor>a88bbe86454fbda432487952640948328</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_module</name>
+    <filename>structstp__module.html</filename>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>name</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>a32e2db7046f281afd6748afe111aee76</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>version</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>ae2038239913d3ddbece919082501c8d0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>comment</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>ab60ac536d9ec7b3a306cddf4c06e18bb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_module_class_t</type>
+      <name>class</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>a4ebc727be1ec8edaaa1b25415a3932e3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>void *</type>
+      <name>handle</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>a1a96aa2db220972e124717cc6dd03c8e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>init</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>a67281bdb52037d1c00195b9562979c55</anchor>
+      <arglist>)(void)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>fini</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>af7f19d7f91d5e7261b4dfb20fe3b8631</anchor>
+      <arglist>)(void)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void *</type>
+      <name>syms</name>
+      <anchorfile>structstp__module.html</anchorfile>
+      <anchor>a0e7297a93920d8f6849718d0a32fa2ba</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_module_version</name>
+    <filename>structstp__module__version.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>major</name>
+      <anchorfile>structstp__module__version.html</anchorfile>
+      <anchor>a15add43e03d0e1624f40c083fa958692</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>minor</name>
+      <anchorfile>structstp__module__version.html</anchorfile>
+      <anchor>aeced49a93c5e461fa95f809ad077fced</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_mxml_attr_s</name>
+    <filename>structstp__mxml__attr__s.html</filename>
+    <member kind="variable">
+      <type>char *</type>
+      <name>name</name>
+      <anchorfile>structstp__mxml__attr__s.html</anchorfile>
+      <anchor>a4ea32ac1f797cf7722bf3e8638b21dee</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>value</name>
+      <anchorfile>structstp__mxml__attr__s.html</anchorfile>
+      <anchor>a25554324bd8ccf8e9558e4705eda0daa</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_mxml_node_s</name>
+    <filename>structstp__mxml__node__s.html</filename>
+    <member kind="variable">
+      <type>stp_mxml_type_t</type>
+      <name>type</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>ae1bff9adee67699067516eee014a7510</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_node_t *</type>
+      <name>next</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>a8831071db5a4b4df95ea3c5c2e95476b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_node_t *</type>
+      <name>prev</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>a2174125dc205e7c760e4e8c9c9048ddf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_node_t *</type>
+      <name>parent</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>a353df68e26a33380dcacda213a741487</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_node_t *</type>
+      <name>child</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>a44550ea8d68a483ccc130c58b66ddd33</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_node_t *</type>
+      <name>last_child</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>a5fb356e73f91b24211882f42cbbe7a08</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_value_t</type>
+      <name>value</name>
+      <anchorfile>structstp__mxml__node__s.html</anchorfile>
+      <anchor>aad44d6b2fe0842de0bbf1312035372cd</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_mxml_text_s</name>
+    <filename>structstp__mxml__text__s.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>whitespace</name>
+      <anchorfile>structstp__mxml__text__s.html</anchorfile>
+      <anchor>a76bcfbb8c3de4e1c597468d51ef47184</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>string</name>
+      <anchorfile>structstp__mxml__text__s.html</anchorfile>
+      <anchor>aef1865e8cab7d5ab175c6e67f122be15</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_mxml_value_s</name>
+    <filename>structstp__mxml__value__s.html</filename>
+    <member kind="variable">
+      <type>char *</type>
+      <name>name</name>
+      <anchorfile>structstp__mxml__value__s.html</anchorfile>
+      <anchor>a959d5315fd98119aa5d23d2b8d307c58</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>num_attrs</name>
+      <anchorfile>structstp__mxml__value__s.html</anchorfile>
+      <anchor>af29b9bbc769c278dad18ff2cb098ef6a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_attr_t *</type>
+      <name>attrs</name>
+      <anchorfile>structstp__mxml__value__s.html</anchorfile>
+      <anchor>a69974b612f59fd3ef1d5db85db2d1a07</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="union">
+    <name>stp_mxml_value_u</name>
+    <filename>unionstp__mxml__value__u.html</filename>
+    <member kind="variable">
+      <type>stp_mxml_element_t</type>
+      <name>element</name>
+      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
+      <anchor>ad4d8442bb433ac3da208e22ff0eaccf7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>integer</name>
+      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
+      <anchor>a9540870864c06f2bf901024b7cc9048d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>opaque</name>
+      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
+      <anchor>aca8f6bf03f29248dee0b8d364454d051</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>real</name>
+      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
+      <anchor>a3f253397958ad919a1fc97c42a58bc67</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_mxml_text_t</type>
+      <name>text</name>
+      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
+      <anchor>a82c76c9aca350baca3b72723d0a4e99d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_papersize_t</name>
+    <filename>structstp__papersize__t.html</filename>
+    <member kind="variable">
+      <type>char *</type>
+      <name>name</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a660431e579bf100782f7164b45597982</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>text</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a26e8b5d0ce282614f128dd9d4aeaf9f6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>char *</type>
+      <name>comment</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a5cdc973122b8cc2e612d2dee306cbf1d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>width</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>aedcca3776ddeb5ed815df3aa112147dd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>height</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a040d59e39abdef9b12c929734fb7a08c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>top</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a7fc8acdb1d905d6ca4a0b9b247a6c48e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>left</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a9ceb7ef01ea56c990eddbef4140b34a0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>bottom</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a9c7fcf4d0bac23817b6f56996fed4043</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned</type>
+      <name>right</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a6899599f2f940e95e03545ff71e2b4c5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_papersize_unit_t</type>
+      <name>paper_unit</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a5692b27332297abca9e4715e3e9e3ce8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_papersize_type_t</type>
+      <name>paper_size_type</name>
+      <anchorfile>structstp__papersize__t.html</anchorfile>
+      <anchor>a35412f4b1f65ab4697a6b2fb640d4576</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_param_string_t</name>
+    <filename>structstp__param__string__t.html</filename>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>name</name>
+      <anchorfile>structstp__param__string__t.html</anchorfile>
+      <anchor>ac4ccea0dded827b9acdb2d22aa25857b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>text</name>
+      <anchorfile>structstp__param__string__t.html</anchorfile>
+      <anchor>adb032e80e118c233adb9f27544920bd1</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_parameter_t</name>
+    <filename>structstp__parameter__t.html</filename>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>name</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a092430e582e7560fb532f546f78ca70c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>text</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a396e4980926c200e9ce4454f19e7311a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>category</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a2cb67e4324a017746ca9bfda772aa50f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>help</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a9f0637d6b97f0daa3122840eb2bd13db</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_parameter_type_t</type>
+      <name>p_type</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>aebe5dea02843240fe03461abf007f154</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_parameter_class_t</type>
+      <name>p_class</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a410388e541bdb14fbd0af2984e229217</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_parameter_level_t</type>
+      <name>p_level</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a2a4a1195c06243e08acb03475fb1e7cc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char</type>
+      <name>is_mandatory</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>ace4d02e3665f9cdfe83ed7dd559e1c1a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char</type>
+      <name>is_active</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a8b1af01f0874c79b6dbc4d0eca432952</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char</type>
+      <name>channel</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a79bc0b76d5d5e238ddd205aa4a97ebad</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char</type>
+      <name>verify_this_parameter</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a56100203c262c60d4cb18c7a49cde27d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>unsigned char</type>
+      <name>read_only</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a4421135f9985be49d156cbc9aa74c710</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_curve_t *</type>
+      <name>curve</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>ad64f0c31d200d3d413725621b3ef9133</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_double_bound_t</type>
+      <name>dbl</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a12fc8869d3056687e576af63c6fbd675</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_int_bound_t</type>
+      <name>integer</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a32ee2ba322a0b7d16520f52ded591cc5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_int_bound_t</type>
+      <name>dimension</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a29505a2b48cd755e10cedf01f3683d61</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_string_list_t *</type>
+      <name>str</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>abfe1adab94129fefdafe9e64be135fb6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_array_t *</type>
+      <name>array</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a28aef58241d3a500968ca65df099ee3a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>union stp_parameter_t::@0</type>
+      <name>bounds</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>abb297424036e868212f5086d5c5235fe</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>double</type>
+      <name>dbl</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a222137e14dadb05adfbdde061679ce61</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>dimension</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a5d8633772783bb1c66ffa66d7f720a9d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>integer</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a3563548500d3ec917d8e1cf88c34f8cd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>boolean</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a74aaa2515728660657133ca3191e422c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *</type>
+      <name>str</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>ae4409d001a6f1b7f8bbf237016900e48</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>union stp_parameter_t::@1</type>
+      <name>deflt</name>
+      <anchorfile>structstp__parameter__t.html</anchorfile>
+      <anchor>a79042d88fa0ab284a8e3e4ad7b969f90</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_pass_t</name>
+    <filename>structstp__pass__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>pass</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>afdb7d267dad9bfc69e8deb86da07ee7b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>missingstartrows</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>a462d1714bab638212fcae32b869c11d2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>logicalpassstart</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>ae93d9d32f282f62426160626ff6c5ca3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>physpassstart</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>a0da3d73932d6c07aceaf4bce93cf6163</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>physpassend</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>a4d75f7e07ebbffb75c2a7f36f43b3c9e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>subpass</name>
+      <anchorfile>structstp__pass__t.html</anchorfile>
+      <anchor>aa4a3363d8de9121ba3d8bf28076b1c89</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_printfuncs_t</name>
+    <filename>structstp__printfuncs__t.html</filename>
+    <member kind="variable">
+      <type>stp_parameter_list_t(*</type>
+      <name>list_parameters</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a438c4f0f156d342498c82c2191151580</anchor>
+      <arglist>)(const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>parameters</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>aea6987aa2d9be3e580a6beabed9a34ee</anchor>
+      <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>media_size</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a2b9b78f7a2887084932cf7b396d0b3d3</anchor>
+      <arglist>)(const stp_vars_t *v, int *width, int *height)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>imageable_area</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a4f791449ab8b2e77797792fcaf40eeba</anchor>
+      <arglist>)(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>maximum_imageable_area</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>aa8b3762f64a7eaed0dd2d41bb5f10bb1</anchor>
+      <arglist>)(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>limit</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a55aff48ac6f943c37fae2c9c4649576a</anchor>
+      <arglist>)(const stp_vars_t *v, int *max_width, int *max_height, int *min_width, int *min_height)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>print</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>ab589c4683082cfa13a51e112b2a77596</anchor>
+      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>void(*</type>
+      <name>describe_resolution</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a8bc0711182aa988a2d5c53ec97714da7</anchor>
+      <arglist>)(const stp_vars_t *v, int *x, int *y)</arglist>
+    </member>
+    <member kind="variable">
+      <type>const char *(*</type>
+      <name>describe_output</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>aeda58f4d08ee6a2ff380b3a7e7d7288a</anchor>
+      <arglist>)(const stp_vars_t *v)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>verify</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>ab495bc2ed8581a8411ac421739e8728f</anchor>
+      <arglist>)(stp_vars_t *v)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>start_job</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>acd27dd833347b4f3b56bbe4542e0671e</anchor>
+      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>int(*</type>
+      <name>end_job</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>acebe74ffb46376e268b077aebe2c2550</anchor>
+      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
+    </member>
+    <member kind="variable">
+      <type>stp_string_list_t *(*</type>
+      <name>get_external_options</name>
+      <anchorfile>structstp__printfuncs__t.html</anchorfile>
+      <anchor>a6ea914a1153a64fc43acb07fdea40f95</anchor>
+      <arglist>)(const stp_vars_t *v)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_raw_t</name>
+    <filename>structstp__raw__t.html</filename>
+    <member kind="variable">
+      <type>size_t</type>
+      <name>bytes</name>
+      <anchorfile>structstp__raw__t.html</anchorfile>
+      <anchor>a5e4620104d47e7e593d75d1ebc977407</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const void *</type>
+      <name>data</name>
+      <anchorfile>structstp__raw__t.html</anchorfile>
+      <anchor>a36151f67569592aeac5c549a2a0daa2a</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_shade</name>
+    <filename>structstp__shade.html</filename>
+    <member kind="variable">
+      <type>double</type>
+      <name>value</name>
+      <anchorfile>structstp__shade.html</anchorfile>
+      <anchor>a07a72426c7bcbf22f1cc253a97a453d4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>numsizes</name>
+      <anchorfile>structstp__shade.html</anchorfile>
+      <anchor>a8e68774d99e3eecb76f06f7704f1eb90</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const stp_dotsize_t *</type>
+      <name>dot_sizes</name>
+      <anchorfile>structstp__shade.html</anchorfile>
+      <anchor>a5057a856d4a6f7095af66b8cefc3cdc3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>stp_weave_t</name>
+    <filename>structstp__weave__t.html</filename>
+    <member kind="variable">
+      <type>int</type>
+      <name>row</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>a708ad2c7d2f76b864fe92b9e0582eece</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>pass</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>a2536ce303e27f679c4afd6c33eea8d07</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>jet</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>a31163b246a77f7959161edb6dd9ff61e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>missingstartrows</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>af60b909adb3f9efb541be500c08cf87e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>logicalpassstart</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>a1e50ffa910d33a365572ceb93f0197c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>physpassstart</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>aaec693e98c7587da452ac604b675be3c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>physpassend</name>
+      <anchorfile>structstp__weave__t.html</anchorfile>
+      <anchor>a3041aa5f7a90d0d7d82d1b2406044bb3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
   <compound kind="group">
     <name>array</name>
     <title>array</title>
@@ -5396,39 +6270,11 @@
       <anchor>ga982f8191c84b049cc3ad3cee1558fc23</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_TYPE_LINEAR</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga982f8191c84b049cc3ad3cee1558fc23a46228ddaa2d52a85ccd79c4dc0f76ad3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_TYPE_SPLINE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga982f8191c84b049cc3ad3cee1558fc23afb1ffdc3754f428d8e3a2124e014ff77</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_wrap_mode_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga3ae3af552b490b0ca8b02e442ac9547a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_WRAP_NONE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aad840485ad7df768a06ee4be02d93b97a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_WRAP_AROUND</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aac0361aebddfabfb263dc0205a61f6fbd</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -5438,53 +6284,11 @@
       <anchor>ga7eddbee28cb1f3c76a19408b86ea142e</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_ADD</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142eac38b0bf09e93edb67c3e5c53035295f3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_MULTIPLY</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ead3bd2cdb63498d5d22686e79e2c0ed95</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_COMPOSE_EXPONENTIATE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ea8de151149fdfd4fcca78826e6352246a</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_bounds_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga86d146e483ca1902f973d574f542b85f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_RESCALE</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85fa118d303bf7bdf4f00bda71cc6eac49c3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_CLIP</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85faec9e6673edac9d34e3aad376fa711aa5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_CURVE_BOUNDS_ERROR</name>
-      <anchorfile>group__curve.html</anchorfile>
-      <anchor>gga86d146e483ca1902f973d574f542b85fad699d675d5df223055388cd83d0b362b</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -6061,20 +6865,6 @@
       <anchor>ga58672e1989d582c14328048b207657c8</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_IMAGE_STATUS_OK</name>
-      <anchorfile>group__image.html</anchorfile>
-      <anchor>gga58672e1989d582c14328048b207657c8ab5574da151b93391a337f29b2a7c96cf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_IMAGE_STATUS_ABORT</name>
-      <anchorfile>group__image.html</anchorfile>
-      <anchor>gga58672e1989d582c14328048b207657c8a224b8ac15cf785b24b2f3f53b4fdc274</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
@@ -6147,28 +6937,28 @@
       <type>void(*</type>
       <name>stp_node_freefunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>gac09ea139ad36a6e21f30755439afeab5</anchor>
+      <anchor>gaf19545bca0101fe4bfe4533cbd03e750</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
       <type>void *(*</type>
       <name>stp_node_copyfunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>ga8d8084abc24eb4b00290916d5ff44c1f</anchor>
+      <anchor>gacc52db9cbfb5090120e0ee8a24c396f2</anchor>
       <arglist>)(const void *)</arglist>
     </member>
     <member kind="typedef">
       <type>const char *(*</type>
       <name>stp_node_namefunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>ga815993ed02f7e9c7b5cb4680f0504d97</anchor>
+      <anchor>ga278b6a7d80911974bba5fb3db5bd0146</anchor>
       <arglist>)(const void *)</arglist>
     </member>
     <member kind="typedef">
       <type>int(*</type>
       <name>stp_node_sortfunc</name>
       <anchorfile>group__list.html</anchorfile>
-      <anchor>gae5c7167d6fc957fee0b6aff45bc0b126</anchor>
+      <anchor>gacef5292212b80a50b7659578d8128c02</anchor>
       <arglist>)(const void *, const void *)</arglist>
     </member>
     <member kind="function">
@@ -6366,53 +7156,11 @@
       <anchor>ga72e4619e373e38dc02dc452813b7b958</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_ENGLISH_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958adb394159413ade42022509cd3280fef3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_METRIC_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a6d5868bc6707f8801ce4d584428c2ae8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_ENGLISH_EXTENDED</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a00b7e9a18afc172872861b26dbcc8cb8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_METRIC_EXTENDED</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga72e4619e373e38dc02dc452813b7b958a62e2906a87fa4bcf32913943fd5b225a</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_papersize_type_t</name>
       <anchorfile>group__papersize.html</anchorfile>
       <anchor>ga31255c4eebfaaf5cd319e5638a6a3069</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_TYPE_STANDARD</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a99d27f84f91d583c3e465e56c83fff2f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PAPERSIZE_TYPE_ENVELOPE</name>
-      <anchorfile>group__papersize.html</anchorfile>
-      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a660290248a563e7590202afd3ba68fb4</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -6574,6 +7322,13 @@
       <name>stp_printer_get_foomatic_id</name>
       <anchorfile>group__printer.html</anchorfile>
       <anchor>gaac52d241cc86a10965046afc0a8c8a41</anchor>
+      <arglist>(const stp_printer_t *p)</arglist>
+    </member>
+    <member kind="function">
+      <type>const char *</type>
+      <name>stp_printer_get_comment</name>
+      <anchorfile>group__printer.html</anchorfile>
+      <anchor>ga04564fc764774143b2e5924c40c6e271</anchor>
       <arglist>(const stp_printer_t *p)</arglist>
     </member>
     <member kind="function">
@@ -7390,21 +8145,21 @@
       <type>void(*</type>
       <name>stp_outfunc_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga268c87919653380a22b1f69c78fe6555</anchor>
+      <anchor>ga0883772928dda4b27062f6edc213b039</anchor>
       <arglist>)(void *data, const char *buffer, size_t bytes)</arglist>
     </member>
     <member kind="typedef">
       <type>void *(*</type>
       <name>stp_copy_data_func_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga25e6aec21fd8f8a65c4c4086d0f3dec0</anchor>
+      <anchor>ga785dacfaf459d30c8874f2afc1c90d6d</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
       <type>void(*</type>
       <name>stp_free_data_func_t</name>
       <anchorfile>group__vars.html</anchorfile>
-      <anchor>ga1ac9aa4c059fbb52307d8522a5f1dc6d</anchor>
+      <anchor>ga4e9f58863b175928237049b4edfcf460</anchor>
       <arglist>)(void *)</arglist>
     </member>
     <member kind="typedef">
@@ -7421,109 +8176,11 @@
       <anchor>ga9b3d4f47a44c0c8c9b150cddc56d2a91</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a7a6f3e019c8a92ddecd34c71013acde0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_INT</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aae2cac85ef78157b53c7a79706dc0f70</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91af97ef629defc99977bd1cb35daabe0c1</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_DOUBLE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ae0dc60c8435ce0b1355bd5a134395f0c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_CURVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a0d283c33f755969ded0751bbfc5d1912</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_FILE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8224a918efbef96fffaa90e31654f7ff</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_RAW</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a33bb02d9ae5b2169d2f75da7684b04e9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_ARRAY</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8789c2b5cc718eafca6d1d0022cfe3f3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_DIMENSION</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aaa6f89008bf237c6f0aa2f0ee176e8b7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_TYPE_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ad053047279b4c82034d26c4aa4c818d5</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_class_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga4eba7e712c0e17b76e472f26e202d7b8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_FEATURE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa7ed8b66836057aa58b9a74811057b4a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_OUTPUT</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8affc6ff4bfbf2873ce55dfc03776bb6d9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_CORE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa05ce344ff3338e69638d69f9c120d01</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_CLASS_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8a2e17ce7ebc18801c11af7ea0a61e93ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -7533,69 +8190,6 @@
       <anchor>gaaa9c9265ffe70122bd33659cf2983207</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_BASIC</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae9d7192607a6e1ec92dfed3f13a3a46f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3130e7060a3b901ea8dcb37d986d47e0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3d016c9587f698ee400bc7e66071f06c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a59a909a8953b8724d57ce85e2b4306bf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a1241066935e94def6ab6d524ed1fabae</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a6036d5761aa9710a66429c625c334a80</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab2bc3be82f619147d9a45564fd53a4a0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae478f67e409adabc8679d3801604861d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_LEVEL_INVALID</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab8bf539d78e56f06f463d00f7a3b56b3</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_activity_t</name>
@@ -7603,53 +8197,11 @@
       <anchor>ga70ebf70dc8e6199d84fc91985c94bae9</anchor>
       <arglist></arglist>
     </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_INACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a6517762c5800eac253f43eeacd96c22f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_DEFAULTED</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a410b7e080ef62fb8896f2f844b1c1e00</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>STP_PARAMETER_ACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9adbc7323a015e40652fd256e49c8d5b8c</anchor>
-      <arglist></arglist>
-    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_verify_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>gac061852de3627383cd415cd80a979e02</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_BAD</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a326a171221148779ec7df761b3eee967</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_OK</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a2df363618282a9164433c0f212b18616</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="enumvalue">
-      <type>@</type>
-      <name>PARAMETER_INACTIVE</name>
-      <anchorfile>group__vars.html</anchorfile>
-      <anchor>ggac061852de3627383cd415cd80a979e02a5cb96da6c2e3ae7187e85a1ef6e41fc6</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -8660,1272 +9212,5 @@
       <anchor>ga7f2c578ff7ae28a3db502476aa10137e</anchor>
       <arglist>(stp_parameter_t *desc, const stp_parameter_t *param)</arglist>
     </member>
-  </compound>
-  <compound kind="struct">
-    <name>dither_matrix_impl</name>
-    <filename>structdither__matrix__impl.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>base</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a331debb887e076f8b52952ba6cc2b50b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>exp</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>adb0e7fb4b5e5149f0815af448676df8b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>x_size</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a063e3b3617c3a9b4883f3b01cd7dfb48</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>y_size</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a33370af30d4c6cb0e441744c8d1c3686</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>total_size</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a54645c1c4edad222cf3f5aba03cdfae5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>last_x</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>af0728348e6da1cf904204ef88e0a5853</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>last_x_mod</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a16f516218f0c5a31a1eac49e5c57add5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>last_y</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>ac1a83c82c364098dce631ec7174574be</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>last_y_mod</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>ad03881dd78211b5bcb1a62453c060d2e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>index</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>ab744f40c883acc93ad0afbf5f048f27a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>i_own</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a78152fe120c430f6400b731e5c722bd3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>x_offset</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a665c02056a2d046a15aab462492d9dbc</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>y_offset</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a844cb19ea61f035bc2a21536f6f392c4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>fast_mask</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>a8c7141e2e35f6cc14896d23d15a81914</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned *</type>
-      <name>matrix</name>
-      <anchorfile>structdither__matrix__impl.html</anchorfile>
-      <anchor>ae28102f9e3d3cfb8eb48d9e69e807f96</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_cached_curve_t</name>
-    <filename>structstp__cached__curve__t.html</filename>
-    <member kind="variable">
-      <type>stp_curve_t *</type>
-      <name>curve</name>
-      <anchorfile>structstp__cached__curve__t.html</anchorfile>
-      <anchor>ae9b4170bfafe7d85b36689cbd8eea41e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const double *</type>
-      <name>d_cache</name>
-      <anchorfile>structstp__cached__curve__t.html</anchorfile>
-      <anchor>a59c26647178724471f383dea6e85f8ae</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const unsigned short *</type>
-      <name>s_cache</name>
-      <anchorfile>structstp__cached__curve__t.html</anchorfile>
-      <anchor>ac55d549f6d2f567ba84ecb9e0417f074</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>size_t</type>
-      <name>count</name>
-      <anchorfile>structstp__cached__curve__t.html</anchorfile>
-      <anchor>a99b772c3f4db71d58a4ee2315e712f04</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_color</name>
-    <filename>structstp__color.html</filename>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>short_name</name>
-      <anchorfile>structstp__color.html</anchorfile>
-      <anchor>a23ed4d11629625e2ad24b124c36c7fab</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>long_name</name>
-      <anchorfile>structstp__color.html</anchorfile>
-      <anchor>ab7c0a627b31ebfb97fd1db2677032479</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const stp_colorfuncs_t *</type>
-      <name>colorfuncs</name>
-      <anchorfile>structstp__color.html</anchorfile>
-      <anchor>a4442d36d0bcf746130f82ffe6f90147f</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_colorfuncs_t</name>
-    <filename>structstp__colorfuncs__t.html</filename>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>init</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>aa10cf47dc6db374ef209d0d96592b1fe</anchor>
-      <arglist>)(stp_vars_t *v, stp_image_t *image, size_t steps)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>get_row</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>af00aab442da969ffa5c6c1e592bad7cd</anchor>
-      <arglist>)(stp_vars_t *v, stp_image_t *image, int row, unsigned *zero_mask)</arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_parameter_list_t(*</type>
-      <name>list_parameters</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>a14c6ae1a87ba1ba33f88fa71038f9ec9</anchor>
-      <arglist>)(const stp_vars_t *v)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>describe_parameter</name>
-      <anchorfile>structstp__colorfuncs__t.html</anchorfile>
-      <anchor>abf691142b608f4f02f33283dd3e67bae</anchor>
-      <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *description)</arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_curve_point_t</name>
-    <filename>structstp__curve__point__t.html</filename>
-    <member kind="variable">
-      <type>double</type>
-      <name>x</name>
-      <anchorfile>structstp__curve__point__t.html</anchorfile>
-      <anchor>a92b13b94109b1270563a1116dc19b926</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>double</type>
-      <name>y</name>
-      <anchorfile>structstp__curve__point__t.html</anchorfile>
-      <anchor>a132b1e8be20525667ece971d02f60b9d</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_dither_matrix_generic</name>
-    <filename>structstp__dither__matrix__generic.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>x</name>
-      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
-      <anchor>a6b8bd1cc589c2195f055e5a57a05e03a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>y</name>
-      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
-      <anchor>aaaddcac2ca33a3e822ded567bbbecfb9</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>bytes</name>
-      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
-      <anchor>ab963ddf7c0826bd3cc316c2375f1205b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>prescaled</name>
-      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
-      <anchor>a478d54ddf9ba50e783ddec1532a0eff6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const void *</type>
-      <name>data</name>
-      <anchorfile>structstp__dither__matrix__generic.html</anchorfile>
-      <anchor>a52acbda296a57a6087852eab62bc62db</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_dither_matrix_normal</name>
-    <filename>structstp__dither__matrix__normal.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>x</name>
-      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
-      <anchor>ab9564690be42859d88ea264a29321af3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>y</name>
-      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
-      <anchor>a410560f5186761cb7430f5b0a804b09c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>bytes</name>
-      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
-      <anchor>ad72d088edfe3223c2df8fd4fb6178b98</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>prescaled</name>
-      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
-      <anchor>a042561ad856d67506fe81b1bbbffd966</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const unsigned *</type>
-      <name>data</name>
-      <anchorfile>structstp__dither__matrix__normal.html</anchorfile>
-      <anchor>ae67cb37136c5e9d9c4b1a44cd2dab87b</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_dither_matrix_short</name>
-    <filename>structstp__dither__matrix__short.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>x</name>
-      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
-      <anchor>a81e0b20e763080b79faa837a00cac832</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>y</name>
-      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
-      <anchor>a2bbc6c72006541250ba23b48bcab60e8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>bytes</name>
-      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
-      <anchor>ad4d85727401505eab74e3e667f4a38f4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>prescaled</name>
-      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
-      <anchor>a755361acae80fa4cba01a1cc71638274</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const unsigned short *</type>
-      <name>data</name>
-      <anchorfile>structstp__dither__matrix__short.html</anchorfile>
-      <anchor>af4f6b5634ea79cf694782e35a8d7607d</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_dotsize</name>
-    <filename>structstp__dotsize.html</filename>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>bit_pattern</name>
-      <anchorfile>structstp__dotsize.html</anchorfile>
-      <anchor>a8d5273395d0e27004f779de0ea81ff23</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>double</type>
-      <name>value</name>
-      <anchorfile>structstp__dotsize.html</anchorfile>
-      <anchor>ad259e8d169a7d140e4964b80790c7ddd</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_double_bound_t</name>
-    <filename>structstp__double__bound__t.html</filename>
-    <member kind="variable">
-      <type>double</type>
-      <name>lower</name>
-      <anchorfile>structstp__double__bound__t.html</anchorfile>
-      <anchor>aa00903ee6e04e01b6b2bb7033e3c76ce</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>double</type>
-      <name>upper</name>
-      <anchorfile>structstp__double__bound__t.html</anchorfile>
-      <anchor>a07d734f8f82f059460cee55927b0216c</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_family</name>
-    <filename>structstp__family.html</filename>
-    <member kind="variable">
-      <type>const stp_printfuncs_t *</type>
-      <name>printfuncs</name>
-      <anchorfile>structstp__family.html</anchorfile>
-      <anchor>ad29f00ba3565e93c138b00e4a48cde77</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_list_t *</type>
-      <name>printer_list</name>
-      <anchorfile>structstp__family.html</anchorfile>
-      <anchor>a6e4f0c216f5ced14a819fbacdb26547d</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_image</name>
-    <filename>structstp__image.html</filename>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>init</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>ace69bf25344a814cabea38afa4527086</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>reset</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a7bb2244368c6b1e07d27afb3dd249ffd</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>width</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a890033525988e15f4f4a0b4132e5f19b</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>height</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a4977ad211581999a3f3290983929cce9</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_image_status_t(*</type>
-      <name>get_row</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a8f7f8fb5826f52b8bd820f422c583350</anchor>
-      <arglist>)(struct stp_image *image, unsigned char *data, size_t byte_limit, int row)</arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *(*</type>
-      <name>get_appname</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a56636ad7c0dbf0a82284241f796d95cd</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>conclude</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>a5d2385711b303e055258c28f42ab7f4c</anchor>
-      <arglist>)(struct stp_image *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void *</type>
-      <name>rep</name>
-      <anchorfile>structstp__image.html</anchorfile>
-      <anchor>ab18e6ee35037589bf485213022e2d871</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_int_bound_t</name>
-    <filename>structstp__int__bound__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>lower</name>
-      <anchorfile>structstp__int__bound__t.html</anchorfile>
-      <anchor>ac5ae98fad865ad6d4816016e233f5a53</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>upper</name>
-      <anchorfile>structstp__int__bound__t.html</anchorfile>
-      <anchor>aa71bcebaae24712ee7a66955b345de19</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_lineactive_t</name>
-    <filename>structstp__lineactive__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>ncolors</name>
-      <anchorfile>structstp__lineactive__t.html</anchorfile>
-      <anchor>a266bdeb14e62fb5b17a31746ad511761</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>v</name>
-      <anchorfile>structstp__lineactive__t.html</anchorfile>
-      <anchor>a5bb5843aa2a4817ef84fb83714b200f3</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_linebounds_t</name>
-    <filename>structstp__linebounds__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>ncolors</name>
-      <anchorfile>structstp__linebounds__t.html</anchorfile>
-      <anchor>adc4641abb41a9204c258a380aa00b7f4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int *</type>
-      <name>start_pos</name>
-      <anchorfile>structstp__linebounds__t.html</anchorfile>
-      <anchor>ab46a1a4ec130dd043009fb96b0115467</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int *</type>
-      <name>end_pos</name>
-      <anchorfile>structstp__linebounds__t.html</anchorfile>
-      <anchor>a9bc2a60779ccf4ac3d90d47441e883ab</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_linebufs_t</name>
-    <filename>structstp__linebufs__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>ncolors</name>
-      <anchorfile>structstp__linebufs__t.html</anchorfile>
-      <anchor>a5ad1c52050c8d71da5609d2526854696</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char **</type>
-      <name>v</name>
-      <anchorfile>structstp__linebufs__t.html</anchorfile>
-      <anchor>a485ecae7a892476331d31079d33b9891</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_linecount_t</name>
-    <filename>structstp__linecount__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>ncolors</name>
-      <anchorfile>structstp__linecount__t.html</anchorfile>
-      <anchor>a69275ad8687438976d07950fa65a1728</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int *</type>
-      <name>v</name>
-      <anchorfile>structstp__linecount__t.html</anchorfile>
-      <anchor>a2164f4045d892c45105f5780c80489a4</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_lineoff_t</name>
-    <filename>structstp__lineoff__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>ncolors</name>
-      <anchorfile>structstp__lineoff__t.html</anchorfile>
-      <anchor>a97c5a2281b3cddb9c546e8299ea4e2b0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned long *</type>
-      <name>v</name>
-      <anchorfile>structstp__lineoff__t.html</anchorfile>
-      <anchor>a88bbe86454fbda432487952640948328</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_module</name>
-    <filename>structstp__module.html</filename>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>name</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>a32e2db7046f281afd6748afe111aee76</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>version</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>ae2038239913d3ddbece919082501c8d0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>comment</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>ab60ac536d9ec7b3a306cddf4c06e18bb</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_module_class_t</type>
-      <name>class</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>a4ebc727be1ec8edaaa1b25415a3932e3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>void *</type>
-      <name>handle</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>a1a96aa2db220972e124717cc6dd03c8e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>init</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>afa7d4259940b8d42a36f14108f504944</anchor>
-      <arglist>)(void)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>fini</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>ae04ff0565f8ebd56b383917b602ffc4a</anchor>
-      <arglist>)(void)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void *</type>
-      <name>syms</name>
-      <anchorfile>structstp__module.html</anchorfile>
-      <anchor>a0e7297a93920d8f6849718d0a32fa2ba</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_module_version</name>
-    <filename>structstp__module__version.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>major</name>
-      <anchorfile>structstp__module__version.html</anchorfile>
-      <anchor>a15add43e03d0e1624f40c083fa958692</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>minor</name>
-      <anchorfile>structstp__module__version.html</anchorfile>
-      <anchor>aeced49a93c5e461fa95f809ad077fced</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_mxml_attr_s</name>
-    <filename>structstp__mxml__attr__s.html</filename>
-    <member kind="variable">
-      <type>char *</type>
-      <name>name</name>
-      <anchorfile>structstp__mxml__attr__s.html</anchorfile>
-      <anchor>a4ea32ac1f797cf7722bf3e8638b21dee</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>value</name>
-      <anchorfile>structstp__mxml__attr__s.html</anchorfile>
-      <anchor>a25554324bd8ccf8e9558e4705eda0daa</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_mxml_node_s</name>
-    <filename>structstp__mxml__node__s.html</filename>
-    <member kind="variable">
-      <type>stp_mxml_type_t</type>
-      <name>type</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>ae1bff9adee67699067516eee014a7510</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_node_t *</type>
-      <name>next</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>a8831071db5a4b4df95ea3c5c2e95476b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_node_t *</type>
-      <name>prev</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>a2174125dc205e7c760e4e8c9c9048ddf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_node_t *</type>
-      <name>parent</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>a353df68e26a33380dcacda213a741487</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_node_t *</type>
-      <name>child</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>a44550ea8d68a483ccc130c58b66ddd33</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_node_t *</type>
-      <name>last_child</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>a5fb356e73f91b24211882f42cbbe7a08</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_value_t</type>
-      <name>value</name>
-      <anchorfile>structstp__mxml__node__s.html</anchorfile>
-      <anchor>aad44d6b2fe0842de0bbf1312035372cd</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_mxml_text_s</name>
-    <filename>structstp__mxml__text__s.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>whitespace</name>
-      <anchorfile>structstp__mxml__text__s.html</anchorfile>
-      <anchor>a76bcfbb8c3de4e1c597468d51ef47184</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>string</name>
-      <anchorfile>structstp__mxml__text__s.html</anchorfile>
-      <anchor>aef1865e8cab7d5ab175c6e67f122be15</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_mxml_value_s</name>
-    <filename>structstp__mxml__value__s.html</filename>
-    <member kind="variable">
-      <type>char *</type>
-      <name>name</name>
-      <anchorfile>structstp__mxml__value__s.html</anchorfile>
-      <anchor>a959d5315fd98119aa5d23d2b8d307c58</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>num_attrs</name>
-      <anchorfile>structstp__mxml__value__s.html</anchorfile>
-      <anchor>af29b9bbc769c278dad18ff2cb098ef6a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_attr_t *</type>
-      <name>attrs</name>
-      <anchorfile>structstp__mxml__value__s.html</anchorfile>
-      <anchor>a69974b612f59fd3ef1d5db85db2d1a07</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="union">
-    <name>stp_mxml_value_u</name>
-    <filename>unionstp__mxml__value__u.html</filename>
-    <member kind="variable">
-      <type>stp_mxml_element_t</type>
-      <name>element</name>
-      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
-      <anchor>ad4d8442bb433ac3da208e22ff0eaccf7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>integer</name>
-      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
-      <anchor>a9540870864c06f2bf901024b7cc9048d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>opaque</name>
-      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
-      <anchor>aca8f6bf03f29248dee0b8d364454d051</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>double</type>
-      <name>real</name>
-      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
-      <anchor>a3f253397958ad919a1fc97c42a58bc67</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_mxml_text_t</type>
-      <name>text</name>
-      <anchorfile>unionstp__mxml__value__u.html</anchorfile>
-      <anchor>a82c76c9aca350baca3b72723d0a4e99d</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_papersize_t</name>
-    <filename>structstp__papersize__t.html</filename>
-    <member kind="variable">
-      <type>char *</type>
-      <name>name</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a660431e579bf100782f7164b45597982</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>text</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a26e8b5d0ce282614f128dd9d4aeaf9f6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>char *</type>
-      <name>comment</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a5cdc973122b8cc2e612d2dee306cbf1d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>width</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>aedcca3776ddeb5ed815df3aa112147dd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>height</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a040d59e39abdef9b12c929734fb7a08c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>top</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a7fc8acdb1d905d6ca4a0b9b247a6c48e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>left</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a9ceb7ef01ea56c990eddbef4140b34a0</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>bottom</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a9c7fcf4d0bac23817b6f56996fed4043</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned</type>
-      <name>right</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a6899599f2f940e95e03545ff71e2b4c5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_papersize_unit_t</type>
-      <name>paper_unit</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a5692b27332297abca9e4715e3e9e3ce8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_papersize_type_t</type>
-      <name>paper_size_type</name>
-      <anchorfile>structstp__papersize__t.html</anchorfile>
-      <anchor>a35412f4b1f65ab4697a6b2fb640d4576</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_param_string_t</name>
-    <filename>structstp__param__string__t.html</filename>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>name</name>
-      <anchorfile>structstp__param__string__t.html</anchorfile>
-      <anchor>ac4ccea0dded827b9acdb2d22aa25857b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>text</name>
-      <anchorfile>structstp__param__string__t.html</anchorfile>
-      <anchor>adb032e80e118c233adb9f27544920bd1</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_parameter_t</name>
-    <filename>structstp__parameter__t.html</filename>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>name</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a092430e582e7560fb532f546f78ca70c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>text</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a396e4980926c200e9ce4454f19e7311a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>category</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a2cb67e4324a017746ca9bfda772aa50f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *</type>
-      <name>help</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a9f0637d6b97f0daa3122840eb2bd13db</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_parameter_type_t</type>
-      <name>p_type</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>aebe5dea02843240fe03461abf007f154</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_parameter_class_t</type>
-      <name>p_class</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a410388e541bdb14fbd0af2984e229217</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_parameter_level_t</type>
-      <name>p_level</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a2a4a1195c06243e08acb03475fb1e7cc</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char</type>
-      <name>is_mandatory</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>ace4d02e3665f9cdfe83ed7dd559e1c1a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char</type>
-      <name>is_active</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a8b1af01f0874c79b6dbc4d0eca432952</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char</type>
-      <name>channel</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a79bc0b76d5d5e238ddd205aa4a97ebad</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char</type>
-      <name>verify_this_parameter</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a56100203c262c60d4cb18c7a49cde27d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>unsigned char</type>
-      <name>read_only</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a4421135f9985be49d156cbc9aa74c710</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>union stp_parameter_t::@0</type>
-      <name>bounds</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>abb297424036e868212f5086d5c5235fe</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>union stp_parameter_t::@1</type>
-      <name>deflt</name>
-      <anchorfile>structstp__parameter__t.html</anchorfile>
-      <anchor>a79042d88fa0ab284a8e3e4ad7b969f90</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_pass_t</name>
-    <filename>structstp__pass__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>pass</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>afdb7d267dad9bfc69e8deb86da07ee7b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>missingstartrows</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>a462d1714bab638212fcae32b869c11d2</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>logicalpassstart</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>ae93d9d32f282f62426160626ff6c5ca3</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>physpassstart</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>a0da3d73932d6c07aceaf4bce93cf6163</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>physpassend</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>a4d75f7e07ebbffb75c2a7f36f43b3c9e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>subpass</name>
-      <anchorfile>structstp__pass__t.html</anchorfile>
-      <anchor>aa4a3363d8de9121ba3d8bf28076b1c89</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_printfuncs_t</name>
-    <filename>structstp__printfuncs__t.html</filename>
-    <member kind="variable">
-      <type>stp_parameter_list_t(*</type>
-      <name>list_parameters</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a19dc0ba4351a154cf9450ac4fce1ca1a</anchor>
-      <arglist>)(const stp_vars_t *v)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>parameters</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>ac4eab991ca917968e0f264b7105faaa4</anchor>
-      <arglist>)(const stp_vars_t *v, const char *name, stp_parameter_t *)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>media_size</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a102e995ff1ce583f84e38409852bf95f</anchor>
-      <arglist>)(const stp_vars_t *v, int *width, int *height)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>imageable_area</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a68c9339cc1b74382ec07eed78c2bd501</anchor>
-      <arglist>)(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>maximum_imageable_area</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a3661a4612e62e8e5aef31eaab345675c</anchor>
-      <arglist>)(const stp_vars_t *v, int *left, int *right, int *bottom, int *top)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>limit</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a36e471ee24b92cfd67390a025cbc427e</anchor>
-      <arglist>)(const stp_vars_t *v, int *max_width, int *max_height, int *min_width, int *min_height)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>print</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a7704d7a1e997039deedfdf76a353c35d</anchor>
-      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>void(*</type>
-      <name>describe_resolution</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a18e0da9638360173e0d75d839ce72b92</anchor>
-      <arglist>)(const stp_vars_t *v, int *x, int *y)</arglist>
-    </member>
-    <member kind="variable">
-      <type>const char *(*</type>
-      <name>describe_output</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a444ec86f3fe02ac479cbf2fc152d3423</anchor>
-      <arglist>)(const stp_vars_t *v)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>verify</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a948b6d7219dbb30f47a93eef2f85fde2</anchor>
-      <arglist>)(stp_vars_t *v)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>start_job</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a5c99986ad02cbcc4dce313bc7f5293fc</anchor>
-      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>int(*</type>
-      <name>end_job</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a81fa6b507a316a8d6d7404b29920936e</anchor>
-      <arglist>)(const stp_vars_t *v, stp_image_t *image)</arglist>
-    </member>
-    <member kind="variable">
-      <type>stp_string_list_t *(*</type>
-      <name>get_external_options</name>
-      <anchorfile>structstp__printfuncs__t.html</anchorfile>
-      <anchor>a1aee9299429a813e60c7c131ccf93c74</anchor>
-      <arglist>)(const stp_vars_t *v)</arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_raw_t</name>
-    <filename>structstp__raw__t.html</filename>
-    <member kind="variable">
-      <type>size_t</type>
-      <name>bytes</name>
-      <anchorfile>structstp__raw__t.html</anchorfile>
-      <anchor>a5e4620104d47e7e593d75d1ebc977407</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const void *</type>
-      <name>data</name>
-      <anchorfile>structstp__raw__t.html</anchorfile>
-      <anchor>a36151f67569592aeac5c549a2a0daa2a</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_shade</name>
-    <filename>structstp__shade.html</filename>
-    <member kind="variable">
-      <type>double</type>
-      <name>value</name>
-      <anchorfile>structstp__shade.html</anchorfile>
-      <anchor>a07a72426c7bcbf22f1cc253a97a453d4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>numsizes</name>
-      <anchorfile>structstp__shade.html</anchorfile>
-      <anchor>a8e68774d99e3eecb76f06f7704f1eb90</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>const stp_dotsize_t *</type>
-      <name>dot_sizes</name>
-      <anchorfile>structstp__shade.html</anchorfile>
-      <anchor>a5057a856d4a6f7095af66b8cefc3cdc3</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="struct">
-    <name>stp_weave_t</name>
-    <filename>structstp__weave__t.html</filename>
-    <member kind="variable">
-      <type>int</type>
-      <name>row</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>a708ad2c7d2f76b864fe92b9e0582eece</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>pass</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>a2536ce303e27f679c4afd6c33eea8d07</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>jet</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>a31163b246a77f7959161edb6dd9ff61e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>missingstartrows</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>af60b909adb3f9efb541be500c08cf87e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>logicalpassstart</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>a1e50ffa910d33a365572ceb93f0197c6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>physpassstart</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>aaec693e98c7587da452ac604b675be3c</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>int</type>
-      <name>physpassend</name>
-      <anchorfile>structstp__weave__t.html</anchorfile>
-      <anchor>a3041aa5f7a90d0d7d82d1b2406044bb3</anchor>
-      <arglist></arglist>
-    </member>
-  </compound>
-  <compound kind="dir">
-    <name>include/gutenprint</name>
-    <path>/home/rlk/sandbox/print-5.1/include/gutenprint/</path>
-    <filename>dir_1aca62f7c2d1ca2bd7aa79274e259f3c.html</filename>
-    <file>array.h</file>
-    <file>bit-ops.h</file>
-    <file>channel.h</file>
-    <file>color.h</file>
-    <file>curve-cache.h</file>
-    <file>curve.h</file>
-    <file>dither.h</file>
-    <file>gutenprint-intl-internal.h</file>
-    <file>gutenprint-intl.h</file>
-    <file>gutenprint-module.h</file>
-    <file>gutenprint-version.h</file>
-    <file>gutenprint.h</file>
-    <file>image.h</file>
-    <file>list.h</file>
-    <file>module.h</file>
-    <file>mxml.h</file>
-    <file>paper.h</file>
-    <file>path.h</file>
-    <file>printers.h</file>
-    <file>sequence.h</file>
-    <file>string-list.h</file>
-    <file>util.h</file>
-    <file>vars.h</file>
-    <file>weave.h</file>
-    <file>xml.h</file>
-  </compound>
-  <compound kind="dir">
-    <name>include</name>
-    <path>/home/rlk/sandbox/print-5.1/include/</path>
-    <filename>dir_d44c64559bbebec7f509842c48db8b23.html</filename>
-    <dir>include/gutenprint</dir>
   </compound>
 </tagfile>

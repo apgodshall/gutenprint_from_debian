@@ -92,7 +92,8 @@ TESTS = curve$(EXEEXT) run-testdither
 @BUILD_TEST_TRUE@	escp2-weavetest$(EXEEXT) unprint$(EXEEXT) \
 @BUILD_TEST_TRUE@	pcl-unprint$(EXEEXT) bjc-unprint$(EXEEXT) \
 @BUILD_TEST_TRUE@	curve$(EXEEXT) xml-curve$(EXEEXT) \
-@BUILD_TEST_TRUE@	pixma_parse$(EXEEXT)
+@BUILD_TEST_TRUE@	pixma_parse$(EXEEXT) \
+@BUILD_TEST_TRUE@	gen-printer-list$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
@@ -126,6 +127,9 @@ curve_DEPENDENCIES = $(GUTENPRINT_LIBS)
 am_escp2_weavetest_OBJECTS = escp2-weavetest.$(OBJEXT)
 escp2_weavetest_OBJECTS = $(am_escp2_weavetest_OBJECTS)
 escp2_weavetest_DEPENDENCIES = $(GUTENPRINT_LIBS)
+am_gen_printer_list_OBJECTS = gen-printer-list.$(OBJEXT)
+gen_printer_list_OBJECTS = $(am_gen_printer_list_OBJECTS)
+gen_printer_list_DEPENDENCIES = $(GUTENPRINT_LIBS)
 am_pcl_unprint_OBJECTS = pcl-unprint.$(OBJEXT)
 pcl_unprint_OBJECTS = $(am_pcl_unprint_OBJECTS)
 pcl_unprint_DEPENDENCIES = $(GUTENPRINT_LIBS)
@@ -176,13 +180,13 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(bjc_unprint_SOURCES) $(curve_SOURCES) \
-	$(escp2_weavetest_SOURCES) $(pcl_unprint_SOURCES) \
-	$(pixma_parse_SOURCES) $(testdither_SOURCES) \
-	$(unprint_SOURCES) $(xml_curve_SOURCES)
+	$(escp2_weavetest_SOURCES) $(gen_printer_list_SOURCES) \
+	$(pcl_unprint_SOURCES) $(pixma_parse_SOURCES) \
+	$(testdither_SOURCES) $(unprint_SOURCES) $(xml_curve_SOURCES)
 DIST_SOURCES = $(bjc_unprint_SOURCES) $(curve_SOURCES) \
-	$(escp2_weavetest_SOURCES) $(pcl_unprint_SOURCES) \
-	$(pixma_parse_SOURCES) $(testdither_SOURCES) \
-	$(unprint_SOURCES) $(xml_curve_SOURCES)
+	$(escp2_weavetest_SOURCES) $(gen_printer_list_SOURCES) \
+	$(pcl_unprint_SOURCES) $(pixma_parse_SOURCES) \
+	$(testdither_SOURCES) $(unprint_SOURCES) $(xml_curve_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -646,6 +650,8 @@ testdither_SOURCES = testdither.c
 testdither_LDADD = $(GUTENPRINT_LIBS)
 xml_curve_SOURCES = xml-curve.c
 xml_curve_LDADD = $(GUTENPRINT_LIBS)
+gen_printer_list_SOURCES = gen-printer-list.c
+gen_printer_list_LDADD = $(GUTENPRINT_LIBS)
 pixma_parse_SOURCES = pixma_parse.c pixma_parse.h
 
 #run-weavetest: escp2-weavetest
@@ -709,6 +715,10 @@ escp2-weavetest$(EXEEXT): $(escp2_weavetest_OBJECTS) $(escp2_weavetest_DEPENDENC
 	@rm -f escp2-weavetest$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(escp2_weavetest_OBJECTS) $(escp2_weavetest_LDADD) $(LIBS)
 
+gen-printer-list$(EXEEXT): $(gen_printer_list_OBJECTS) $(gen_printer_list_DEPENDENCIES) $(EXTRA_gen_printer_list_DEPENDENCIES) 
+	@rm -f gen-printer-list$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gen_printer_list_OBJECTS) $(gen_printer_list_LDADD) $(LIBS)
+
 pcl-unprint$(EXEEXT): $(pcl_unprint_OBJECTS) $(pcl_unprint_DEPENDENCIES) $(EXTRA_pcl_unprint_DEPENDENCIES) 
 	@rm -f pcl-unprint$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pcl_unprint_OBJECTS) $(pcl_unprint_LDADD) $(LIBS)
@@ -738,6 +748,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bjc-unprint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/curve.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/escp2-weavetest.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gen-printer-list.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pcl-unprint.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pixma_parse.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testdither.Po@am__quote@

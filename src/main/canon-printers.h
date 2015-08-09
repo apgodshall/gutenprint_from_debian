@@ -50,6 +50,7 @@ typedef struct canon_caps {
   unsigned char ESC_r_arg; /* argument used for the ESC (r command during init */
   int ESC_l_len; /* length of ESC (l command, in bytes */
   int ESC_P_len; /* length of ESC (P command, in bytes */
+  int CassetteTray_Opts; /* upper/lower cassette tray option */
   const char** control_cmdlist;
   const canon_modelist_t* modelist;
   const canon_paperlist_t* paperlist;
@@ -245,6 +246,12 @@ static const char* control_cmd_PIXMA_MG3500[] = {
   NULL
 };
 
+static const char* control_cmd_PIXMA_MG5600[] = {
+/*"SetTime=20060722092503", */         /*what is this for?*/
+  "ForcePMDetection=OFF",
+  NULL
+};
+
 static const char iP4500_channel_order[STP_NCOLORS] = {1,2,3,0}; /* CMYK */
 
 static const canon_cap_t canon_model_capabilities[] =
@@ -257,6 +264,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP830_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -273,6 +281,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP800_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -289,6 +298,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP810_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -305,6 +315,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /* features */
     &canon_MULTIPASS_MP950_modelist,
     &canon_MULTIPASS_MP950_paperlist,
@@ -321,6 +332,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /* features */
     &canon_MULTIPASS_MP960_modelist,
     &canon_MULTIPASS_MP960_paperlist,
@@ -337,6 +349,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_P|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP970_modelist,
     &canon_MULTIPASS_MP970_paperlist,
@@ -353,6 +366,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_P|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP980_modelist,
     &canon_MULTIPASS_MP980_paperlist,
@@ -369,6 +383,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP990_modelist,
     &canon_MULTIPASS_MP990_paperlist,
@@ -401,6 +416,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD1 | CANON_CAP_rr,0x61,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_S200_modelist,
     &canon_BJC_S200_paperlist,
@@ -417,6 +433,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_ackshort,
     &canon_BJC_S300_modelist,
     &canon_BJC_S300_paperlist,
@@ -433,6 +450,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_S330_modelist,
     &canon_BJC_S330_paperlist,
@@ -449,6 +467,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_p,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_S500_modelist,
     &canon_BJC_S300_paperlist,
@@ -465,6 +484,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_S520_modelist,
     &canon_BJC_S520_paperlist,
@@ -481,6 +501,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_p,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_S600_modelist,
     &canon_BJC_S300_paperlist,
@@ -497,6 +518,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_S750_modelist,
     &canon_BJC_S750_paperlist,
@@ -513,6 +535,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_BJC_S800_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_p,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_S800_modelist,
     &canon_BJC_S800_paperlist,
@@ -529,6 +552,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px|CANON_CAP_rr,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_S820_modelist,
     &canon_BJC_S800_paperlist,
@@ -545,6 +569,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px|CANON_CAP_rr,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_S820_modelist,
     &canon_BJC_S800_paperlist,
@@ -561,6 +586,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px|CANON_CAP_rr,0,
     2,0,
+    0, /* Upper/Lower Cassette option */    
     control_cmd_PIXMA_iP2700,
     &canon_BJC_S900_modelist,
     &canon_BJC_S800_paperlist,
@@ -577,6 +603,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_30_modelist,
     &canon_default_paperlist,
@@ -593,6 +620,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_85_modelist,
     &canon_default_paperlist,
@@ -610,6 +638,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_cart,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_4300_modelist,
     &canon_default_paperlist,
@@ -627,6 +656,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_4400_modelist,
     &canon_default_paperlist,
@@ -643,6 +673,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a | CANON_CAP_cart,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_4550_modelist,
     &canon_default_paperlist,
@@ -660,6 +691,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1 | CANON_CAP_cart,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_6000_modelist,
     &canon_default_paperlist,
@@ -677,6 +709,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_ackshort,
     &canon_BJC_6000_modelist,
     &canon_default_paperlist,
@@ -694,6 +727,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1 | CANON_CAP_cart,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_6000_modelist,
     &canon_default_paperlist,
@@ -710,6 +744,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1 | CANON_CAP_r,0x61,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_ackshort,
     &canon_BJC_8200_modelist,
     &canon_default_paperlist,
@@ -734,6 +769,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_210_modelist,
     &canon_default_paperlist,
@@ -750,6 +786,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_240_modelist,
     &canon_default_paperlist,
@@ -766,6 +803,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_240_modelist,
     &canon_default_paperlist,
@@ -782,6 +820,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_240_modelist,
     &canon_default_paperlist,
@@ -798,6 +837,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_2000_modelist,
     &canon_default_paperlist,
@@ -814,6 +854,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* cartridge selection option */
     CANON_CAP_STD0 | CANON_CAP_p | CANON_CAP_cart,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100,
     &canon_BJC_3000_modelist,
     &canon_default_paperlist,
@@ -830,6 +871,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1 | CANON_CAP_a | CANON_CAP_r,0x61,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_3000_modelist,
     &canon_default_paperlist,
@@ -846,6 +888,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_7000_modelist,
     &canon_default_paperlist,
@@ -862,6 +905,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_7100_modelist,
     &canon_default_paperlist,
@@ -879,6 +923,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_px|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i50_modelist,
     &canon_BJC_i50_paperlist,
@@ -895,6 +940,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i80_modelist,
     &canon_BJC_i80_paperlist,
@@ -912,6 +958,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i250_modelist,
     &canon_BJC_i250_paperlist,
@@ -928,6 +975,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i320_modelist,
     &canon_BJC_i320_paperlist,
@@ -945,6 +993,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i450_modelist,
     &canon_BJC_i450_paperlist,
@@ -961,6 +1010,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i455_modelist,
     &canon_BJC_i455_paperlist,
@@ -977,6 +1027,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_i550_modelist,
     &canon_BJC_i550_paperlist,
@@ -993,6 +1044,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_i560_modelist,
     &canon_BJC_i560_paperlist,
@@ -1009,6 +1061,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_i850_modelist,
     &canon_BJC_i850_paperlist,
@@ -1025,6 +1078,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_BJC_i860_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_M|CANON_CAP_BORDERLESS,0,/* ESC (M 0x0 0x0 0x0 */
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,
     &canon_BJC_i860_modelist,
     &canon_BJC_i560_paperlist,
@@ -1041,6 +1095,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_M|CANON_CAP_BORDERLESS,0,/* ESC (M 0x0 0x0 0x0 */
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i900_modelist,
     &canon_BJC_i560_paperlist,
@@ -1057,6 +1112,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i950_modelist,
     &canon_BJC_i950_paperlist,
@@ -1073,6 +1129,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_BJC_i860_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_M|CANON_CAP_BORDERLESS,0,/* ESC (M 0x0 0x0 0x0 */
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i960_modelist,
     &canon_BJC_i560_paperlist,
@@ -1089,6 +1146,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_BJC_i860_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_M|CANON_CAP_BORDERLESS,0,/* ESC (M 0x0 0x0 0x0 */
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i990_modelist,
     &canon_BJC_i560_paperlist,
@@ -1105,6 +1163,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i6100, /* 32 times 0x0 before form feed not implemented */
     &canon_BJC_i6100_modelist,
     &canon_BJC_i6100_paperlist,
@@ -1121,6 +1180,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i9100_modelist,
     &canon_BJC_i9100_paperlist,
@@ -1137,6 +1197,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_M|CANON_CAP_BORDERLESS,0,/* ESC (M 0x0 0x0 0x0 */
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,
     &canon_BJC_i9900_modelist,
     &canon_BJC_i9900_paperlist,
@@ -1158,6 +1219,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_PIXMA_mini220_modelist,
     &canon_SELPHY_DS810_paperlist,
@@ -1174,6 +1236,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_PIXMA_mini320_modelist,
     &canon_PIXMA_mini320_paperlist,
@@ -1196,6 +1259,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_SELPHY_DS700_modelist,
     &canon_SELPHY_DS700_paperlist,
@@ -1212,6 +1276,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_SELPHY_DS810_modelist,
     &canon_SELPHY_DS810_paperlist,
@@ -1236,6 +1301,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_3000_modelist,
     &canon_default_paperlist,
@@ -1252,6 +1318,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_5500_modelist,
     &canon_default_paperlist,
@@ -1268,6 +1335,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD1 | CANON_CAP_a,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_3000_modelist,
     &canon_default_paperlist,
@@ -1284,6 +1352,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_default_slotlist,
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     NULL,
     &canon_BJC_8500_modelist,
     &canon_default_paperlist,
@@ -1300,6 +1369,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_NOBLACK|CANON_CAP_S|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP90_modelist,
     &canon_PIXMA_iP90_paperlist,
@@ -1316,10 +1386,31 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_NOBLACK|CANON_CAP_S|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP100_modelist,
     &canon_PIXMA_iP100_paperlist,
     &canon_PIXMA_iP100_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA iP110 */
+    /* 2 ink carts: (1) CMYK (2) pigment black */
+    /* special inksaving options to save ink and/or use only remaining ink: */
+    /* (not exclusive): black-saving mode, composite black, black-saving + composite black both active */
+    "PIXMA iP110", 3,          /*model, model_id*/
+    INCH(17/2), INCH(23),       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_v|CANON_CAP_BORDERLESS,0,
+    2,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,
+    &canon_PIXMA_iP110_modelist,
+    &canon_PIXMA_iP110_paperlist,
+    &canon_PIXMA_iP110_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -1333,6 +1424,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1000_modelist,
     &canon_PIXMA_iP1000_paperlist,
@@ -1349,6 +1441,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1200_modelist,
     &canon_PIXMA_iP1200_paperlist,
@@ -1365,6 +1458,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1500_modelist,
     &canon_PIXMA_iP1500_paperlist,
@@ -1381,6 +1475,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_MULTIPASS_MP150_modelist,
     &canon_PIXMA_iP1500_paperlist,
@@ -1397,6 +1492,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* rear only */
     CANON_CAP_STD0|CANON_CAP_P,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1900_modelist,
     &canon_PIXMA_iP1900_paperlist,
@@ -1414,6 +1510,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP2000_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP2000_modelist,
     &canon_PIXMA_iP2000_paperlist,
@@ -1431,6 +1528,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1900_modelist,
     &canon_PIXMA_iP2200_paperlist,
@@ -1446,6 +1544,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1900_modelist,
     &canon_PIXMA_iP2200_paperlist,/* OHP experimental */
@@ -1462,6 +1561,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* auto sheet feeder only */
     CANON_CAP_STD0,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP1900_modelist,
     &canon_PIXMA_iP2600_paperlist,
@@ -1479,10 +1579,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* rear only */
     CANON_CAP_STD0|CANON_CAP_P|CANON_CAP_I|CANON_CAP_px|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP2700_modelist,
     &canon_PIXMA_iP2700_paperlist,
     &canon_PIXMA_iP2700_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA iP2800 */
+    "PIXMA iP2800", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist, /* rear only */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300,  /*features */
+    &canon_PIXMA_MG2400_modelist,
+    &canon_PIXMA_MG2900_paperlist,
+    &canon_PIXMA_MG2900_modeuselist, /* incorporate new media */
     NULL,
     NULL,
     NULL,
@@ -1495,6 +1613,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP3000_modelist,
     &canon_PIXMA_iP3000_paperlist,
@@ -1511,6 +1630,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP3100_modelist,
     &canon_PIXMA_iP3100_paperlist,
@@ -1527,6 +1647,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3500_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP520_modelist,
     &canon_PIXMA_iP3300_paperlist,
@@ -1543,6 +1664,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3500_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP520_modelist,
     &canon_MULTIPASS_MP520_paperlist,
@@ -1559,6 +1681,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3600_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_r|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP540_modelist,
     &canon_PIXMA_iP3600_paperlist,
@@ -1575,6 +1698,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4000,  /*features */
     &canon_PIXMA_iP4000_modelist,
     &canon_PIXMA_iP4000_paperlist,
@@ -1591,6 +1715,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP4100_modelist,
     &canon_PIXMA_iP4100_paperlist,
@@ -1607,6 +1732,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP4200_modelist,
     &canon_PIXMA_iP4200_paperlist,
@@ -1623,6 +1749,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP4300_modelist, /* slight differences to iP4200 */
     &canon_PIXMA_iP4200_paperlist,
@@ -1639,6 +1766,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4500_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /* features */
     &canon_PIXMA_iP4500_modelist,
     &canon_PIXMA_iP4500_paperlist,
@@ -1655,6 +1783,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist, /* iP4600 uses ESC (r 0x64 at reset followed by 0x65 later for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_P|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP4600_modelist,
     &canon_PIXMA_iP4600_paperlist,
@@ -1671,6 +1800,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist, /* iP4700 uses ESC (r 0x64 at reset followed by 0x65 later for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /* features */
     &canon_PIXMA_iP4700_modelist,
     &canon_PIXMA_iP4700_paperlist,
@@ -1687,6 +1817,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist, /* iP4800 uses ESC (r 0x64 at reset followed by 0x68 later for CD media only */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /* features */
     &canon_PIXMA_iP4700_modelist,/* same for iP4800 */
     &canon_PIXMA_iP4700_paperlist,/* same for iP4800 */
@@ -1703,6 +1834,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4600_slotlist, /* iP4900 uses ESC (r 0x68 command for CD tray only */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Uses ESC (r only for CD media */
     &canon_PIXMA_iP4900_modelist,
     &canon_PIXMA_MG5200_paperlist,
@@ -1719,6 +1851,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP5000_modelist,
     &canon_PIXMA_iP5000_paperlist,
@@ -1735,6 +1868,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP3100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP5300_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -1751,6 +1885,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_px|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP6000_modelist,
     &canon_PIXMA_iP4000_paperlist,
@@ -1767,6 +1902,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_px|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP6000_modelist,
     &canon_PIXMA_iP6100_paperlist,
@@ -1783,6 +1919,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* has ESC (T */
     CANON_CAP_STD0|CANON_CAP_T|CANON_CAP_NOBLACK|CANON_CAP_P|CANON_CAP_I|CANON_CAP_px|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP6210_modelist,
     &canon_PIXMA_iP90_paperlist,
@@ -1799,6 +1936,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_P|CANON_CAP_I|CANON_CAP_r|CANON_CAP_px|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP6600_modelist,
     &canon_PIXMA_iP6600_paperlist,
@@ -1815,6 +1953,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_P|CANON_CAP_I|CANON_CAP_r|CANON_CAP_px|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP6700_modelist,
     &canon_PIXMA_iP6700_paperlist,
@@ -1831,6 +1970,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5400_slotlist, /* iP7200 uses ESC (r 0x68 command for CD tray only */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Uses ESC (r only for CD media */
     &canon_PIXMA_iP7200_modelist,
     &canon_PIXMA_MG5400_paperlist,
@@ -1847,6 +1987,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iX4000_modelist,
     &canon_PIXMA_iP1500_paperlist,
@@ -1863,6 +2004,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iX5000_modelist,
     &canon_PIXMA_iP1500_paperlist,
@@ -1879,10 +2021,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP540_modelist,
     &canon_MULTIPASS_MX880_paperlist,
     &canon_PIXMA_iX6500_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA iX6800 --- with XML */
+    "PIXMA iX6800", 3,          /*model, model_id*/
+    933, 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,  /*features */
+    &canon_PIXMA_iX6800_modelist,
+    &canon_PIXMA_iX6800_paperlist,
+    &canon_PIXMA_iX6800_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -1895,6 +2055,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iX7000_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_r|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iX7000_modelist,
     &canon_PIXMA_iX7000_paperlist,
@@ -1911,6 +2072,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP520_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP520_modelist,
     &canon_MULTIPASS_MP520_paperlist, /* Windows driver lacks PPGgold, but let us try anyway */
@@ -1927,6 +2089,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP520_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP520_modelist,
     &canon_MULTIPASS_MP520_paperlist,
@@ -1943,6 +2106,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP530_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_r|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP530_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -1959,6 +2123,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_r|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP540_modelist,
     &canon_MULTIPASS_MX330_paperlist,
@@ -1975,6 +2140,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_r|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP550_modelist, /* similar to MP540 but fewer modes */
     &canon_MULTIPASS_MP250_paperlist,
@@ -1991,6 +2157,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_r|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP560_modelist, /* like MP550 but has duplex */
     &canon_MULTIPASS_MP250_paperlist,
@@ -2007,6 +2174,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MX850_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_P|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP600_modelist,
     &canon_MULTIPASS_MP600_paperlist,
@@ -2023,6 +2191,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4500_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP610_modelist,
     &canon_MULTIPASS_MP610_paperlist,
@@ -2039,6 +2208,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_r|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP540_modelist,
     &canon_MULTIPASS_MX330_paperlist,
@@ -2055,6 +2225,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_r|CANON_CAP_DUPLEX|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP640_modelist,
     &canon_MULTIPASS_MP630_paperlist,
@@ -2071,6 +2242,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_r|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_MULTIPASS_MP640_modelist,
     &canon_MULTIPASS_MP640_paperlist,
@@ -2089,6 +2261,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,0,
+    0, /* Upper/Lower Cassette option */
     control_cmd_BJC_i550,  /*features */
     &canon_MULTIPASS_MP700_modelist,
     &canon_MULTIPASS_MP700_paperlist,
@@ -2105,6 +2278,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP710_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP710_modelist,
     &canon_MULTIPASS_MP710_paperlist,
@@ -2119,8 +2293,9 @@ static const canon_cap_t canon_model_capabilities[] =
     INCH(17/2), INCH(23),       /* max paper width and height */ /* from MacOSX driver */
     10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
     &canon_PIXMA_iP3100_slotlist,
-    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP4100_modelist,
     &canon_MULTIPASS_MP750_paperlist,
@@ -2137,9 +2312,10 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist, /* auto sheetfeeder amd CD tray only */
     CANON_CAP_STD0|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP900_modelist,
-    &canon_PIXMA_iP3100_paperlist,
+    &canon_MULTIPASS_MP900_paperlist, /* was: &canon_PIXMA_iP3100_paperlist, */
     &canon_MULTIPASS_MP900_modeuselist,
     NULL,
     NULL,
@@ -2153,6 +2329,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_Pro9000_slotlist,
     CANON_CAP_STD0|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_Pro9000_modelist,
     &canon_PIXMA_Pro9000_paperlist,
@@ -2169,6 +2346,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_Pro9000_slotlist,
     CANON_CAP_STD0|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_Pro9000mk2_modelist,
     &canon_PIXMA_Pro9000mk2_paperlist,
@@ -2185,6 +2363,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_Pro9000_slotlist,
     CANON_CAP_STD0|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_Pro9500_modelist,
     &canon_PIXMA_Pro9500_paperlist,
@@ -2201,6 +2380,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_Pro9000_slotlist,
     CANON_CAP_STD0|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_Pro9500mk2_modelist,
     &canon_PIXMA_Pro9500mk2_paperlist,
@@ -2217,9 +2397,10 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP7100_modelist,
-    &canon_PIXMA_iP7100_paperlist,
+    &canon_PIXMA_iP7100_limited_paperlist, /* was: &canon_PIXMA_iP7100_paperlist, */
     &canon_PIXMA_iP7100_modeuselist,
     NULL,
     NULL,
@@ -2233,6 +2414,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP7500_modelist,
     &canon_PIXMA_iP7500_paperlist,
@@ -2249,9 +2431,10 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP8100_modelist,
-    &canon_PIXMA_iP7100_paperlist,
+    &canon_PIXMA_iP7100_limited_paperlist, /* was: &canon_PIXMA_iP7100_paperlist,*/
     &canon_PIXMA_iP8100_modeuselist,
     NULL,
     NULL,
@@ -2265,9 +2448,10 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP8500_modelist,
-    &canon_PIXMA_iP8500_paperlist,
+    &canon_PIXMA_iP8500_limited_paperlist, /* was: &canon_PIXMA_iP8500_paperlist,*/
     &canon_PIXMA_iP8500_modeuselist,
     NULL,
     NULL,
@@ -2281,10 +2465,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_iP4000_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_I|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_P|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200,  /*features */
     &canon_PIXMA_iP8600_modelist,
-    &canon_PIXMA_iP7100_paperlist,
+    &canon_PIXMA_iP7100_limited_paperlist, /* was: &canon_PIXMA_iP7100_paperlist,*/
     &canon_PIXMA_iP8600_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA iP8700 CD-R tray L */
+    "PIXMA iP8700", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_iP8700_slotlist, /* iP7200 uses ESC (r 0x68 command for CD tray only */
+    CANON_CAP_STD0|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,  /* features Uses ESC (r only for CD media */
+    &canon_PIXMA_iP8700_modelist,
+    &canon_PIXMA_iP8700_paperlist,
+    &canon_PIXMA_iP8700_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2297,14 +2499,49 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP900_slotlist,
     CANON_CAP_STD0|CANON_CAP_I|CANON_CAP_rr|CANON_CAP_px|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_PIXMA_iP9910_modelist,
-    &canon_PIXMA_iP9910_paperlist,
+    &canon_PIXMA_iP9910_limited_paperlist, /* was: &canon_PIXMA_iP9910_paperlist,*/
     &canon_PIXMA_iP9910_modeuselist,
     NULL,
     NULL,
     NULL,
     iP4500_channel_order
+  },
+    { /* Canon PIXMA MP5 */
+    "PIXMA MP5", 3,          /*model, model_id*/
+    INCH(17/2), INCH(23),       /* max paper width and height */ /* assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
+    2,0, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_iP2700,  /*features */
+    &canon_MULTIPASS_MP150_modelist,
+    &canon_MULTIPASS_MP150_paperlist,
+    &canon_MULTIPASS_MP150_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    NULL /* KYMC */
+  },
+  { /* Canon PIXMA MP55 */
+    "PIXMA MP55", 3,          /*model, model_id*/
+    INCH(17/2), INCH(23),       /* max paper width and height */ /* assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
+    2,0, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_BJC_i550,  /*features */
+    &canon_MULTIPASS_MP150_modelist,
+    &canon_MULTIPASS_MP150_paperlist,
+    &canon_MULTIPASS_MP150_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    NULL /* KYMC */
   },
   { /* Canon MULTIPASS MP150 */
     "PIXMA MP150", 3,          /*model, model_id*/
@@ -2313,6 +2550,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP150_modelist,
     &canon_MULTIPASS_MP150_paperlist,
@@ -2329,6 +2567,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP190_modelist,
     &canon_MULTIPASS_MP190_paperlist,
@@ -2345,6 +2584,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP210_modelist,
     &canon_MULTIPASS_MP150_paperlist,
@@ -2361,6 +2601,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,2, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP360_modelist,
     &canon_MULTIPASS_MP360_paperlist,
@@ -2377,6 +2618,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP150_modelist,
     &canon_MULTIPASS_MP150_paperlist,
@@ -2393,6 +2635,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP470_modelist,
     &canon_MULTIPASS_MP470_paperlist,
@@ -2409,6 +2652,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP480_modelist,
     &canon_MULTIPASS_MP480_paperlist,
@@ -2425,6 +2669,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP490_modelist,
     &canon_MULTIPASS_MP493_paperlist,
@@ -2441,6 +2686,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP480_modelist,
     &canon_MULTIPASS_MP493_paperlist,
@@ -2457,6 +2703,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP280_modelist,
     &canon_MULTIPASS_MP280_paperlist,
@@ -2473,6 +2720,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0, /* borderless not in Windows driver---untested */
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /*features */
     &canon_MULTIPASS_MP230_modelist,
     &canon_PIXMA_MG3200_paperlist,
@@ -2489,6 +2737,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T  */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP240_modelist,
     &canon_MULTIPASS_MP240_paperlist,
@@ -2505,6 +2754,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T  */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP250_modelist,
     &canon_MULTIPASS_MP250_paperlist,
@@ -2521,6 +2771,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T  */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP250_modelist,
     &canon_MULTIPASS_MP250_paperlist,
@@ -2537,6 +2788,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* these models only have a rear tray. Also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MP280_modelist,
     &canon_MULTIPASS_MP280_paperlist,
@@ -2553,6 +2805,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
     &canon_PIXMA_MG2100_modelist,
     &canon_PIXMA_MG5100_paperlist,
@@ -2569,6 +2822,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
     &canon_PIXMA_MG2100_modelist,
     &canon_PIXMA_MG3200_paperlist,
@@ -2585,10 +2839,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
     &canon_PIXMA_MG2400_modelist,
     &canon_PIXMA_MG2400_paperlist,
     &canon_PIXMA_MG2400_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG2900 */
+    "PIXMA MG2900", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML,0,
+    2,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
+    &canon_PIXMA_MG2400_modelist,
+    &canon_PIXMA_MG2900_paperlist,
+    &canon_PIXMA_MG2900_modeuselist, /* incorporate new media */
     NULL,
     NULL,
     NULL,
@@ -2601,6 +2873,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Also uses CAP_T */
     &canon_PIXMA_MG3100_modelist,
     &canon_PIXMA_MG5100_paperlist,
@@ -2617,6 +2890,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features: also uses CAP_T */
     &canon_PIXMA_MG3100_modelist,
     &canon_PIXMA_MG3200_paperlist,
@@ -2633,6 +2907,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_T|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG3500,  /* features: also uses CAP_T */
     &canon_PIXMA_MG3500_modelist, /* same as MG3100 but try to use inktypes to control use of inks in inksets */
     &canon_PIXMA_MG3200_paperlist, /* Canon Photo Hagaki changed to merely Photo Hagaki in Windows driver */
@@ -2649,6 +2924,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /* features */
     &canon_PIXMA_MG5100_modelist,
     &canon_PIXMA_MG5100_paperlist,
@@ -2665,6 +2941,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /* features */
     &canon_PIXMA_MG5200_modelist,
     &canon_PIXMA_MG5200_paperlist,
@@ -2681,6 +2958,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features */
     &canon_PIXMA_MG5300_modelist,
     &canon_PIXMA_MG5200_paperlist,
@@ -2697,8 +2975,9 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features */
-    &canon_PIXMA_MG5300_modelist,
+    &canon_PIXMA_MG5400_modelist,
     &canon_PIXMA_MG5400_paperlist,
     &canon_PIXMA_MG5400_modeuselist,
     NULL,
@@ -2713,10 +2992,29 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG3500,
     &canon_PIXMA_MG5500_modelist,
     &canon_PIXMA_MG3200_paperlist, /* Canon Photo Hagaki changed to merely Photo Hagaki in Windows driver */
     &canon_PIXMA_MG5500_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG5600 */
+    /* no support for Esc (s and ESC (u commands yet for duplex */
+    "PIXMA MG5600", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MX7600_slotlist,
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5600,
+    &canon_PIXMA_MG5500_modelist,
+    &canon_MAXIFY_iB4000_paperlist, /* Canon Photo Hagaki changed to merely Photo Hagaki in Windows driver */
+    &canon_PIXMA_MG5600_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2729,6 +3027,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /* features */
     &canon_PIXMA_MG6100_modelist,
     &canon_PIXMA_MG6100_paperlist,
@@ -2745,6 +3044,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features */
     &canon_PIXMA_MG6200_modelist,
     &canon_PIXMA_MG6100_paperlist,
@@ -2761,8 +3061,9 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features */
-    &canon_PIXMA_MG6200_modelist,
+    &canon_PIXMA_MG6300_modelist,
     &canon_PIXMA_MG6300_paperlist,
     &canon_PIXMA_MG6300_modeuselist,
     NULL,
@@ -2777,10 +3078,45 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG3500,
     &canon_PIXMA_MG6500_modelist,
     &canon_PIXMA_MG6300_paperlist,
     &canon_PIXMA_MG6500_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG6700 */
+    "PIXMA MG6700", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,
+    &canon_PIXMA_MG6500_modelist,
+    &canon_PIXMA_iP8700_paperlist,
+    &canon_PIXMA_MG6700_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA MG7500 */
+    "PIXMA MG7500", 3,          /*model, model_id*/
+    INCH(17/2), INCH(14),       /* max paper width and height */ /* not confirmed yet */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG5400_slotlist, /* ESC (r only for CD media */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_v|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    1, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5600,
+    &canon_PIXMA_MG6500_modelist,
+    &canon_PIXMA_iP8700_paperlist,
+    &canon_PIXMA_MG6700_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2793,6 +3129,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */    
     control_cmd_PIXMA_iP2700,  /* features */
     &canon_PIXMA_MG8100_modelist,
     &canon_PIXMA_MG6100_paperlist,
@@ -2809,6 +3146,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5200_slotlist, /* ESC (r only for CD media */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_r|CANON_CAP_rr|CANON_CAP_I|CANON_CAP_P|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features */
     &canon_PIXMA_MG8200_modelist,
     &canon_PIXMA_MG6100_paperlist,
@@ -2826,6 +3164,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     2,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MX300_modelist,
     &canon_MULTIPASS_MX300_paperlist,
@@ -2842,6 +3181,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MX330_modelist,
     &canon_MULTIPASS_MX330_paperlist,
@@ -2858,6 +3198,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP150_slotlist, /* these models only have an auto sheet feeder also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MX340_modelist,
     &canon_MULTIPASS_MX340_paperlist,
@@ -2874,6 +3215,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MX360_modelist,
     &canon_MULTIPASS_MX360_paperlist,
@@ -2890,6 +3232,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,8, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_MULTIPASS_MX370_modelist,
     &canon_MULTIPASS_MX420_paperlist,
@@ -2906,6 +3249,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_MULTIPASS_MX370_modelist,
     &canon_PIXMA_MG3200_paperlist,
@@ -2922,6 +3266,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP250_slotlist, /* only rear tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700,  /*features */
     &canon_MULTIPASS_MX420_modelist,
     &canon_MULTIPASS_MX420_paperlist,
@@ -2931,6 +3276,40 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS MX470 --- with XML */
+    "PIXMA MX470", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist, /* only rear tray also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_v|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,  /*features */
+    &canon_MULTIPASS_MX470_modelist,
+    &canon_PIXMA_iX6800_paperlist,
+    &canon_MULTIPASS_MX470_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS MX490 --- with XML */
+    "PIXMA MX490", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MX7600_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5600,
+    &canon_MULTIPASS_E480_modelist,
+    &canon_MULTIPASS_E480_paperlist,
+    &canon_MULTIPASS_E480_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },    
   { /* Canon MULTIPASS MX510 --- with XML */
     "PIXMA MX510", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.70 */
@@ -2938,6 +3317,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,8, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_MULTIPASS_MX510_modelist,
     &canon_MULTIPASS_MX420_paperlist,
@@ -2954,10 +3334,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_MULTIPASS_MX510_modelist,
     &canon_PIXMA_MG3200_paperlist,
     &canon_MULTIPASS_MX520_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS MX530 --- with XML */
+    "PIXMA MX530", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist, /* only front tray also uses CAP_T */
+    CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG3500,
+    &canon_PIXMA_MG3500_modelist,
+    &canon_PIXMA_iX6800_paperlist,
+    &canon_MULTIPASS_MX530_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -2970,6 +3368,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MP520_slotlist, /* front, rear, button, and front/plain-only */
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700, /*features*/
     &canon_MULTIPASS_MP520_modelist,
     &canon_MULTIPASS_MX300_paperlist,
@@ -2986,6 +3385,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,8, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300, /*features*/
     &canon_MULTIPASS_MX710_modelist,
     &canon_MULTIPASS_MX420_paperlist,
@@ -3002,6 +3402,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MX720_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,
     &canon_PIXMA_MX720_modelist,
     &canon_PIXMA_MG3200_paperlist,
@@ -3018,6 +3419,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MX850_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200, /*features*/
     &canon_PIXMA_iP4500_modelist, /* same inksets as iP4500 */
     &canon_MULTIPASS_MX850_paperlist,
@@ -3034,6 +3436,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200, /*features*/
     &canon_MULTIPASS_MX860_modelist,
     &canon_MULTIPASS_MX330_paperlist,
@@ -3050,6 +3453,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0x64,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700, /*features*/
     &canon_MULTIPASS_MX860_modelist,
     &canon_MULTIPASS_MX340_paperlist,
@@ -3066,6 +3470,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5100_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP2700, /*features*/
     &canon_MULTIPASS_MX880_modelist,
     &canon_MULTIPASS_MX880_paperlist,
@@ -3082,6 +3487,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG5400_slotlist, /* iP7200 uses ESC (r 0x68 command for CD tray only */
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300,  /* features Uses ESC (r only for CD media */
     &canon_PIXMA_MX920_modelist,
     &canon_PIXMA_MG5400_paperlist,
@@ -3098,6 +3504,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_MULTIPASS_MX7600_slotlist,
     CANON_CAP_STD0|CANON_CAP_DUPLEX|CANON_CAP_r|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_BORDERLESS,0x64,
     3,4, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_iP4200, /*features*/
     &canon_MULTIPASS_MX7600_modelist,
     &canon_MULTIPASS_MX7600_paperlist,
@@ -3107,6 +3514,57 @@ static const canon_cap_t canon_model_capabilities[] =
     NULL,
     iP4500_channel_order
   },
+  { /* Canon MULTIPASS E400 --- with XML */
+    "PIXMA E400", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300,
+    &canon_PIXMA_P200_modelist,
+    &canon_MULTIPASS_E400_paperlist,
+    &canon_MULTIPASS_E400_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS E460 --- with XML */
+    "PIXMA E460", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML,0,
+    2,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300,
+    &canon_PIXMA_P200_modelist,
+    &canon_MULTIPASS_E400_paperlist,
+    &canon_MULTIPASS_E400_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS E480 --- with XML */
+    "PIXMA E480", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MX7600_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5600,
+    &canon_MULTIPASS_E480_modelist,
+    &canon_MULTIPASS_E480_paperlist,
+    &canon_MULTIPASS_E480_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },  
   { /* Canon MULTIPASS E500 --- with XML */
     "PIXMA E500", 3,          /*model, model_id*/
     INCH(17/2), 1917,       /* max paper width and height */ /* from linux driver v3.60 */
@@ -3114,6 +3572,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,6, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300, /*features*/
     &canon_MULTIPASS_E500_modelist,
     &canon_MULTIPASS_MX880_paperlist,
@@ -3130,10 +3589,28 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300, /*features*/
     &canon_MULTIPASS_E500_modelist,
     &canon_PIXMA_MG3200_paperlist,
     &canon_MULTIPASS_E510_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MULTIPASS E560 --- with XML */
+    "PIXMA E560", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_PIXMA_MG2100_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_DUPLEX|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MULTIPASS_E560_modelist,
+    &canon_PIXMA_iX6800_paperlist,
+    &canon_MULTIPASS_E560_modeuselist,
     NULL,
     NULL,
     NULL,
@@ -3146,6 +3623,7 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,8, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300, /*features*/
     &canon_MULTIPASS_E500_modelist,
     &canon_MULTIPASS_MX880_paperlist,
@@ -3162,10 +3640,84 @@ static const canon_cap_t canon_model_capabilities[] =
     &canon_PIXMA_MG2100_slotlist,
     CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
     3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
     control_cmd_PIXMA_MG5300, /*features*/
     &canon_MULTIPASS_E500_modelist,
     &canon_PIXMA_MG3200_paperlist,
     &canon_MULTIPASS_E510_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon PIXMA P200 --- with XML */
+    "PIXMA P200", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MP250_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_T|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML|CANON_CAP_BORDERLESS,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_PIXMA_P200_modelist,
+    &canon_PIXMA_P200_paperlist,
+    &canon_PIXMA_P200_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MAXIFY iB4000 --- with XML */
+    /* no support for Esc (s and ESC (u commands yet for duplex */
+    "MAXIFY iB4000", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MAXIFY_iB4000_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MAXIFY_iB4000_modelist,
+    &canon_MAXIFY_iB4000_paperlist,
+    &canon_MAXIFY_iB4000_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MAXIFY MB2000 --- with XML */
+    /* Same: MB5000 */
+    /* no support for Esc (s and ESC (u commands yet for duplex */
+    "MAXIFY MB2000", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MULTIPASS_MX7600_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MAXIFY_iB4000_modelist,
+    &canon_MAXIFY_iB4000_paperlist,
+    &canon_MAXIFY_iB4000_modeuselist,
+    NULL,
+    NULL,
+    NULL,
+    iP4500_channel_order
+  },
+  { /* Canon MAXIFY MB2300 --- with XML */
+    /* Same: MB5300 */
+    /* no support for Esc (s and ESC (u commands yet for duplex */
+    "MAXIFY MB2300", 3,          /*model, model_id*/
+    INCH(17/2), 1917,       /* max paper width and height assumed */
+    10, 10, 9, 15,    /*border_left, border_right, border_top, border_bottom */
+    &canon_MAXIFY_iB4000_slotlist,
+    CANON_CAP_STD0|CANON_CAP_px|CANON_CAP_P|CANON_CAP_I|CANON_CAP_v|CANON_CAP_XML,0,
+    3,9, /* ESC (l and (P command lengths */
+    0, /* Upper/Lower Cassette option */
+    control_cmd_PIXMA_MG5300, /*features*/
+    &canon_MAXIFY_iB4000_modelist,
+    &canon_MAXIFY_iB4000_paperlist,
+    &canon_MAXIFY_iB4000_modeuselist,
     NULL,
     NULL,
     NULL,

@@ -1,7 +1,7 @@
 /*
  *   Sony UP-DR150 Photo Printer CUPS backend -- libusb-1.0 version
  *
- *   (c) 2013-2014 Solomon Peachy <pizza@shaftnet.org>
+ *   (c) 2013-2015 Solomon Peachy <pizza@shaftnet.org>
  *
  *   The latest version of this program can be found at:
  *
@@ -37,6 +37,12 @@
 
 #include "backend_common.h"
 
+/* Exported */
+#define USB_VID_SONY         0x054C
+#define USB_PID_SONY_UPDR150 0x01E8
+#define USB_PID_SONY_UPDR200 0x035F
+#define USB_PID_SONY_UPCR10  1234 
+
 /* Private data stucture */
 struct updr150_ctx {
 	struct libusb_device_handle *dev;
@@ -45,13 +51,18 @@ struct updr150_ctx {
 
 	uint8_t *databuf;
 	int datalen;
+
+	uint32_t copies_offset;
+	uint8_t type;
 };
 
 static void* updr150_init(void)
 {
 	struct updr150_ctx *ctx = malloc(sizeof(struct updr150_ctx));
-	if (!ctx)
+	if (!ctx) {
+		ERROR("Memory Allocation Failure!");
 		return NULL;
+	}
 	memset(ctx, 0, sizeof(struct updr150_ctx));
 	return ctx;
 }
@@ -60,12 +71,24 @@ static void updr150_attach(void *vctx, struct libusb_device_handle *dev,
 			   uint8_t endp_up, uint8_t endp_down, uint8_t jobid)
 {
 	struct updr150_ctx *ctx = vctx;
+	struct libusb_device *device;
+	struct libusb_device_descriptor desc;
 
 	UNUSED(jobid);
 
 	ctx->dev = dev;
 	ctx->endp_up = endp_up;
 	ctx->endp_down = endp_down;
+
+	device = libusb_get_device(dev);
+	libusb_get_device_descriptor(device, &desc);
+	if (desc.idProduct == USB_PID_SONY_UPDR150 ||
+	    desc.idProduct == USB_PID_SONY_UPDR200)
+		ctx->type = P_SONY_UPDR150;
+	else
+		ctx->type = P_SONY_UPCR10; // XXX
+
+	ctx->copies_offset = 0;
 }
 
 static void updr150_teardown(void *vctx) {
@@ -85,7 +108,7 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 	int len, run = 1;
 
 	if (!ctx)
-		return 1;
+		return CUPS_BACKEND_FAILED;
 
 	if (ctx->databuf) {
 		free(ctx->databuf);
@@ -96,7 +119,7 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 	ctx->databuf = malloc(MAX_PRINTJOB_LEN);
 	if (!ctx->databuf) {
 		ERROR("Memory allocation failure!\n");
-		return 2;
+		return CUPS_BACKEND_FAILED;
 	}
 
 	while(run) {
@@ -104,7 +127,7 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 		int keep = 0;
 		i = read(data_fd, ctx->databuf + ctx->datalen, 4);
 		if (i < 0)
-			return i;
+			return CUPS_BACKEND_CANCEL;
 		if (i == 0)
 			break;
 
@@ -113,16 +136,18 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 
 		/* Filter out chunks we don't send to the printer */
 		switch (len) {
+		case 0xffffff60:
 		case 0xffffff6a:
-		case 0xfffffffc:
-		case 0xfffffffb:
-		case 0xfffffff4:
-		case 0xffffffed:
-		case 0xfffffff9:
-		case 0xfffffff8:
-		case 0xffffffec:
 		case 0xffffffeb:
+		case 0xffffffec:
+		case 0xffffffed:
+		case 0xfffffff4:
+		case 0xfffffff8:
+		case 0xfffffff9:
 		case 0xfffffffa:
+		case 0xfffffffb:
+		case 0xfffffffc:
+		case 0xffffffff:
 			if(dyesub_debug)
 				DEBUG("Block ID '%08x' (len %d)\n", len, 0);
 			len = 0;
@@ -131,7 +156,15 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 			if(dyesub_debug)
 				DEBUG("Block ID '%08x' (len %d)\n", len, 0);
 			len = 0;
-			run = 0;
+			if (ctx->type == P_SONY_UPDR150)
+				run = 0;
+			break;
+		case 0xfffffff7:
+			if(dyesub_debug)
+				DEBUG("Block ID '%08x' (len %d)\n", len, 0);
+			len = 0;
+			if (ctx->type == P_SONY_UPCR10)
+				run = 0;
 			break;
 		case 0xffffffef:
 		case 0xfffffff5:
@@ -142,7 +175,7 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 		default:
 			if (len & 0xff000000) {
 				ERROR("Unknown block ID '%08x', aborting!\n", len);
-				return 1;
+				return CUPS_BACKEND_CANCEL;
 			} else {
 				/* Only keep these chunks */
 				if(dyesub_debug)
@@ -158,18 +191,27 @@ static int updr150_read_parse(void *vctx, int data_fd) {
 		while(len > 0) {
 			i = read(data_fd, ctx->databuf + ctx->datalen, len);
 			if (i < 0)
-				return i;
+				return CUPS_BACKEND_CANCEL;
 			if (i == 0)
 				break;
+
+			if (ctx->databuf[ctx->datalen] == 0x1b &&
+			    ctx->databuf[ctx->datalen + 1] == 0xee) {
+				if (ctx->type == P_SONY_UPCR10)
+					ctx->copies_offset = ctx->datalen + 8;
+				else
+					ctx->copies_offset = ctx->datalen + 12;
+			}
+
 			if (keep)
 				ctx->datalen += i;
 			len -= i;
 		}
 	}
 	if (!ctx->datalen)
-		return 1;
+		return CUPS_BACKEND_CANCEL;
 
-	return 0;
+	return CUPS_BACKEND_OK;
 }
 
 static int updr150_main_loop(void *vctx, int copies) {
@@ -177,7 +219,13 @@ static int updr150_main_loop(void *vctx, int copies) {
 	int i = 0, ret;
 
 	if (!ctx)
-		return 1;
+		return CUPS_BACKEND_FAILED;
+
+	/* Some models specify copies in the print job */
+	if (ctx->copies_offset) {
+		ctx->databuf[ctx->copies_offset] = copies;
+		copies = 1;
+	}
 
 top:
 	while (i < ctx->datalen) {
@@ -187,11 +235,9 @@ top:
 
 		i += sizeof(uint32_t);
 
-		if (dyesub_debug)
-			DEBUG("Sending %u bytes to printer @ %i\n", len, i);
 		if ((ret = send_data(ctx->dev, ctx->endp_down,
 				     ctx->databuf + i, len)))
-			return ret;
+			return CUPS_BACKEND_FAILED;
 
 		i += len;
 	}
@@ -206,17 +252,12 @@ top:
 		goto top;
 	}
 
-	return 0;
+	return CUPS_BACKEND_OK;
 }
 
-/* Exported */
-#define USB_VID_SONY         0x054C
-#define USB_PID_SONY_UPDR150 0x01E8
-#define USB_PID_SONY_UPDR200 0x035F
-
 struct dyesub_backend updr150_backend = {
-	.name = "Sony UP-DR150/UP-DR200",
-	.version = "0.13",
+	.name = "Sony UP-DR150/UP-DR200/UP-CR10",
+	.version = "0.17",
 	.uri_prefix = "sonyupdr150",
 	.init = updr150_init,
 	.attach = updr150_attach,
@@ -226,6 +267,7 @@ struct dyesub_backend updr150_backend = {
 	.devices = {
 	{ USB_VID_SONY, USB_PID_SONY_UPDR150, P_SONY_UPDR150, ""},
 	{ USB_VID_SONY, USB_PID_SONY_UPDR200, P_SONY_UPDR150, ""},
+	{ USB_VID_SONY, USB_PID_SONY_UPCR10, P_SONY_UPCR10, ""},
 	{ 0, 0, 0, ""}
 	}
 };
@@ -236,10 +278,11 @@ struct dyesub_backend updr150_backend = {
    arguments.  The purpose of the commands is unknown, but they presumably
    instruct the driver to perform certain things.
 
-   If you treat these 4 bytes as a 32-bit little-endian number, if the most significant
-   four bits are bits are non-zero, the value is is to be interpreted as a driver
-   command.  If the most significant bits are zero, the value signifies that the following
-   N bytes of data should be sent to the printer as-is.
+   If you treat these 4 bytes as a 32-bit little-endian number, if the
+   most significant four bits are bits are non-zero, the value is is to
+   be interpreted as a driver command.  If the most significant bits are
+   zero, the value signifies that the following N bytes of data should be
+   sent to the printer as-is.
 
    Known driver "commands":
 
@@ -312,5 +355,33 @@ struct dyesub_backend updr150_backend = {
 <- 1b 17 00 00 00 00 00   ** In spool file
 
 [[fin]]
+
+ **************
+
+  Sony UP-CL10 / DNP SL-10 spool format:
+
+60 ff ff ff 
+f8 ff ff ff
+fd ff ff ff 14 00 00 00   1b 15 00 00 00 0d 00 00  00 00 00 07 00 00 00 00  WW WW HH HH 
+fb ff ff ff
+f4 ff ff ff 0b 00 00 00   1b ea 00 00 00 00 SH SH  SH SH 00 SL SL SL SL
+
+ [[ Data, rows * cols * 3 bytes ]]
+
+f3 ff ff ff 0f 00 00 00   1b e5 00 00 00 08 00 00  00 00 00 00 00 00 00 
+            12 00 00 00   1b e1 00 00 00 0b 00 00  80 00 00 00 00 00 WW WW  HH HH 
+fa ff ff ff 09 00 00 00   1b ee 00 00 00 02 00 00  NN 
+            07 00 00 00   1b 0a 00 00 00 00 00 
+f9 ff ff ff 
+fc ff ff ff 07 00 00 00   1b 17 00 00 00 00 00 
+f7 ff ff ff 
+
+ WW WW == Columns, Big Endian
+ HH HH == Rows, Big Endian
+ SL SL SL SL == Plane size, Little Endian (Rows * Cols * 3)
+ SH SH SH SH == Plane size, Big Endian (Rows * Cols * 3)
+ NN == Copies
+
+
 
 */

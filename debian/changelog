@@ -1,3 +1,12 @@
+gutenprint (5.2.11~pre1-1) experimental; urgency=low
+
+  * New 5.2.11~pre1 upstream release
+  * In autopkgtest, only test the first printer listed in Gutenprint's
+    Supported printers page (Closes: #785648)
+  * Add gbp.conf to cope with the new branch names
+
+ -- Didier Raboud <odyx@debian.org>  Sun, 09 Aug 2015 14:43:08 +0200
+
 gutenprint (5.2.10-3) unstable; urgency=medium
 
   * Add autopkgtest suite that tests all drivers using cups-client's

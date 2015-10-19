@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.197 2015/06/25 01:48:02 speachy Exp $"
+ * "$Id: genppd.c,v 1.204 2015/09/13 14:37:16 speachy Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -579,8 +579,6 @@ main(int  argc,			    /* I - Number of command-line arguments */
 	models[n] = argv[optind+n];
       }
     models[numargs] = (char*)NULL;
-
-    n=0;
   }
 
 /*
@@ -1144,12 +1142,13 @@ print_ppd_header(gpFile fp, ppd_type_t ppd_type, int model, const char *driver,
 }
 
 static void
-print_ppd_header_3(gpFile fp, ppd_type_t ppd_type, int model, const char *driver,
-		 const char *family, const char *long_name,
-		 const char *manufacturer, const char *device_id,
-		 const char *ppd_location,
-		 const char *language, const stp_string_list_t *po,
-		 char **all_langs)
+print_ppd_header_3(gpFile fp, ppd_type_t ppd_type, int model,
+		   const char *driver,
+		   const char *family, const char *long_name,
+		   const char *manufacturer, const char *device_id,
+		   const char *ppd_location,
+		   const char *language, const stp_string_list_t *po,
+		   char **all_langs)
 {
   int i;
   gpputs(fp, "*FileSystem:	False\n");
@@ -1157,7 +1156,7 @@ print_ppd_header_3(gpFile fp, ppd_type_t ppd_type, int model, const char *driver
   gpputs(fp, "*TTRasterizer:	Type42\n");
 
   gpputs(fp, "*cupsVersion:	1.2\n");
-  gpputs(fp, "*cupsManualCopies: True\n");
+  
   gpprintf(fp, "*cupsFilter:	\"application/vnd.cups-raster 100 rastertogutenprint.%s\"\n", GUTENPRINT_RELEASE_VERSION);
   if (strcasecmp(manufacturer, "EPSON") == 0)
     gpputs(fp, "*cupsFilter:	\"application/vnd.cups-command 33 commandtoepson\"\n");
@@ -1946,6 +1945,7 @@ write_ppd(
   const char	*manufacturer;		/* Manufacturer of printer */
   const char	*device_id;		/* IEEE1284 device ID */
   const stp_vars_t *printvars;		/* Printer option names */
+  int           nativecopies = 0;       /* Printer natively generates copies */
   stp_parameter_t desc;
   stp_parameter_list_t param_list;
   const stp_param_string_t *opt;
@@ -2004,9 +2004,21 @@ write_ppd(
     }
   stp_parameter_description_destroy(&desc);
 
-  print_ppd_header_3(fp, ppd_type, model, driver, family, long_name,
-		   manufacturer, device_id, ppd_location, language, po,
-		   all_langs);
+  stp_describe_parameter(v, "NativeCopies", &desc);
+  if (desc.p_type == STP_PARAMETER_TYPE_BOOLEAN)
+    nativecopies = stp_get_boolean_parameter(v, "NativeCopies");
+
+  stp_parameter_description_destroy(&desc);
+
+  if (nativecopies)
+    gpputs(fp, "*cupsManualCopies: False\n");
+  else
+    gpputs(fp, "*cupsManualCopies: True\n");
+
+  print_ppd_header_3(fp, ppd_type, model,
+		     driver, family, long_name,
+		     manufacturer, device_id, ppd_location, language, po,
+		     all_langs);
 
   /* Macintosh color management */
 
@@ -2426,6 +2438,33 @@ write_ppd(
     }
   stp_parameter_description_destroy(&desc);
 
+  /* Constraints */
+  stp_describe_parameter(v, "PPDUIConstraints", &desc);
+  if (desc.is_active && desc.p_type == STP_PARAMETER_TYPE_STRING_LIST)
+    {
+      num_opts = stp_string_list_count(desc.bounds.str);
+      if (num_opts > 0)
+	{
+          gpputs(fp, "*% ===== Constraints ===== \n");
+	  for (i = 0; i < num_opts; i++)
+	    {
+	      char *opt1, *opt2;
+	      opt = stp_string_list_param(desc.bounds.str, i);
+	      opt1 = stp_strdup(opt->text);
+	      opt2 = strrchr(opt1, '*');
+	      if (opt2)
+	        {
+		  opt2[-1] = 0;
+		  gpprintf(fp, "*%s: %s %s\n", opt->name, opt1, opt2);
+		  gpprintf(fp, "*%s: %s %s\n", opt->name, opt2, opt1);
+		}
+	      stp_free(opt1);
+	    }
+	  gpputs(fp, "\n");      
+	}
+    }  
+  stp_parameter_description_destroy(&desc);
+
   if (!language)
     {
       /*
@@ -2554,7 +2593,7 @@ write_ppd(
 		}
 	    }
 	  stp_parameter_description_destroy(&desc);
-
+	  
 	  /*
 	   * Quality settings
 	   */
@@ -2708,5 +2747,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.197 2015/06/25 01:48:02 speachy Exp $".
+ * End of "$Id: genppd.c,v 1.204 2015/09/13 14:37:16 speachy Exp $".
  */

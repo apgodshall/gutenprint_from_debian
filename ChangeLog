@@ -1,3 +1,900 @@
+===============================================================================
+Name: gutenprint-5_2_11-pre2
+
+2015-10-06	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.268) (+4 -4)
+
+	Summary: Fix syntax issue.
+
+2015-10-06	<rlk@sourceforge.net>
+
+	Files:	po/sk.po (1.90) (+6725 -4684)
+
+	Gutenprint 5.2.11-pre2 release
+
+2015-10-05	<speachy@sourceforge.net>
+
+	Files:	src/cups/blacklist (1.14) (+3 -0)
+
+	Add Sony UP-CR10L to the blacklist.
+
+2015-10-05	<speachy@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.151) (+2 -2)
+		src/cups/backend_common.c (1.46) (+2 -2)
+		src/cups/shinko_s1245_print.c (1.1) (added +1621 -0)
+		src/cups/shinko_s6245_print.c (1.1) (added +1863 -0)
+
+	Add WIP backends for the Shinko S1245 and S6245 printers.
+
+	These are *UNTESTED* and may eat your cat.
+
+2015-10-05	<speachy@sourceforge.net>
+
+	Files:	src/cups/sony_updr150_print.c (1.18) (+3 -6)
+
+	Add the USB PID for the Sony UP-CR10L
+
+2015-10-05	<rlk@sourceforge.net>
+
+	Files:	po/sk.po (1.89) (+8023 -11456)
+
+	Update Slovenian translation
+
+2015-10-05	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.762) (+2 -0)
+
+	Added comment regarding new Esc (u command for Canon printer non-tumble duplex support
+
+2015-10-04	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.12) (+3549 -3120)
+		po/cs.po (1.70) (+3558 -3135)
+		po/da.po (1.115) (+3549 -3120)
+		po/de.po (1.88) (+3549 -3120)
+		po/el.po (1.85) (+3564 -3136)
+		po/en_GB.po (1.178) (+3558 -3131)
+		po/es.po (1.83) (+3558 -3135)
+		po/fi.po (1.15) (+3560 -3131)
+		po/fr.po (1.116) (+3551 -3120)
+		po/gl.po (1.10) (+3560 -3131)
+		po/hu.po (1.44) (+3549 -3120)
+		po/it.po (1.25) (+3549 -3120)
+		po/ja.po (1.80) (+3556 -3134)
+		po/nb.po (1.44) (+3563 -3141)
+		po/nl.po (1.99) (+3549 -3120)
+		po/pl.po (1.89) (+3555 -3138)
+		po/pt.po (1.84) (+3558 -3135)
+		po/ru.po (1.17) (+3558 -3130)
+		po/sk.po (1.88) (+3558 -3135)
+		po/sl.po (1.12) (+3560 -3131)
+		po/sv.po (1.114) (+3559 -3132)
+		po/tr.po (1.7) (+3549 -3120)
+		po/uk.po (1.15) (+3549 -3120)
+		po/vi.po (1.6) (+3548 -3120)
+		po/zh_CN.po (1.11) (+6550 -4535)
+		po/zh_TW.po (1.44) (+3552 -3130)
+
+	Update for 5.2.11
+
+2015-10-04	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.267) (+10 -2)
+		src/cups/test-rastertogutenprint.in (1.27) (+20 -11)
+		src/testpattern/run-testpattern-2.in (1.50) (+6 -0)
+
+	Block valgrind if --enable-shared is used (the in-tree "binaries"
+	are shell scripts).
+
+2015-10-04	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.761) (+1 -1)
+		README (1.244) (+11 -11)
+		configure.ac (1.266) (+3 -3)
+
+	Bump to 5.2.11-pre2
+
+2015-10-04	<rlk@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.30) (+1 -2)
+
+	Summary: Remove duplicate comment from w612h864 (causes small memory leak).
+
+2015-10-04	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/printer_options.c (1.7) (+3 -2)
+
+	Summary: Don't ask for the default options for a printer we're not
+	going to use.
+
+2015-10-03	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.427) (+1 -2)
+
+	Summary: Remove duplicate Epson L210 entry.
+
+2015-10-01	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.586) (+28 -2)
+
+	In Canon driver, added Esc (u command for even pages in non-tumble duplex
+
+2015-09-29	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.760) (+7 -2)
+		src/xml/printers.xml (1.426) (+3 -1)
+
+	Add support for Epson L120 and L210
+
+2015-09-26	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.759) (+17 -0)
+		src/main/canon-inks.h (1.132) (+249 -1)
+		src/main/canon-media-mode.h (1.200) (+68 -0)
+		src/main/canon-media.h (1.156) (+12 -11)
+		src/main/canon-modes.h (1.415) (+27 -1)
+		src/main/canon-printers.h (1.358) (+17 -0)
+		src/main/print-canon.c (1.585) (+7 -7)
+		src/xml/printers.xml (1.425) (+32 -15)
+
+	Added experimental support for Canon MG6900 and MG7700 series printers.
+
+2015-09-25	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.758) (+7 -6)
+
+	Summary: Fix wording.
+
+2015-09-25	<rlk@sourceforge.net>
+
+	Files:	po/zh_CN.po (1.10) (+7017 -8296)
+
+	Update translation
+
+2015-09-25	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.424) (+6 -6)
+
+	Summary: Fix a couple of PPD errors.
+
+2015-09-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-modes.h (1.414) (+9 -9)
+
+	Set default resolution modes to same as in 5.2.10 for all Canon printers after reinstating modes with fixed ink compression. For devices where legacy modes were added back (as in 5.2.7), default mode also set to same as in 5.2.10.
+
+2015-09-22	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.757) (+0 -4)
+		src/main/canon-printers.h (1.357) (+7 -2)
+		src/xml/printers.xml (1.423) (+1 -9)
+
+	Removed Canon PIXUS MP5, MP10, SmartBase MPC190, SmartBase MPC200 from supported printers, as they require a special backend.
+
+2015-09-21	<gernot2270@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.422) (+2 -2)
+
+	Added IEEE1284 DeviceID for Canon iP8500
+
+2015-09-21	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.756) (+18 -23)
+		src/foomatic/foomatic-generator.in (1.86) (+1 -0)
+		src/main/canon-media-mode.h (1.199) (+588 -798)
+		src/main/canon-media.h (1.155) (+84 -84)
+		src/main/canon-modes.h (1.413) (+296 -315)
+		src/main/print-canon.c (1.584) (+9 -9)
+
+	For Canon backend, reinstated modes and media depending on previously-broken ink compression. Reinstated legacy modes removed in 5.2.7 for several models (noted in NEWS). Reverted error of InkjetPhotoHagakiK spelling change and changed new media to align with this.
+
+2015-09-15	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.49) (+1 -1)
+
+	Summary: Correct doc for -N
+
+2015-09-14	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.48) (+5 -2)
+
+	Summary: -N controls whether unused options are set.
+
+2015-09-13	<rlk@sourceforge.net>
+
+	Files:	src/testpattern/run-testpattern-2.in (1.47) (+2 -2)
+
+	Summary: Don't set base options for printers that don't use them.
+
+2015-09-13	<speachy@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.421) (+2 -2)
+
+	Revert the mitsu k60dw driver name to its former (technically incorrect) glory.
+
+2015-09-13	<speachy@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.29) (+5 -1)
+
+	Document that a handful of additional sizes are only used by dyesub printers.
+
+2015-09-13	<rlk@sourceforge.net>
+
+	Files:	configure.ac (1.265) (+4 -2)
+		src/testpattern/Makefile.am (1.29) (+3 -3)
+		src/testpattern/compare-checksums.in (1.1) (added +109 -0)
+
+	Add tool to compare run-testpattern2 output.
+
+2015-09-13	<rlk@sourceforge.net>
+
+	Files:	src/cups/test-ppds (1.12) (+1 -1)
+
+	Summary: Ignore missing filters in PPD validation.
+
+2015-09-13	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.45) (+1 -5)
+		src/cups/genppd.c (1.204) (+2 -4)
+		src/cups/kodak6800_print.c (1.29) (+44 -20)
+
+	Fix a couple of bugs in backend code.
+
+2015-09-13	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.218) (+2 -2)
+
+	Fix a potential null pointer dereference.
+
+2015-09-12	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.217) (+2 -2)
+		src/xml/papers.xml (1.28) (+3 -1)
+
+	Fix a typo in the 3.5x4.7 @600dpi definition for the CW-01.
+
+	Also update the paper definitions to show that these 4.7" sizes are
+	unique to this printer, and really shouldn't be in the global list.
+
+2015-09-12	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.216) (+5 -2)
+
+	Fix a compilation warning in strict ISO C mode.
+
+2015-09-11	<rlk@sourceforge.net>
+
+	Files:	macosx/src/gutenprint.pkg.src/Resources/License.txt (1.3) (+2 -3)
+
+	Summary: Update
+
+2015-09-11	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.755) (+6 -0)
+		src/xml/printers.xml (1.420) (+7 -1)
+
+	Added several Canon MG5700 and MG6800 models: *50 black, *51 white, *52 black/silver, *53 white/silver.
+
+2015-09-11	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media-mode.h (1.198) (+7 -7)
+		src/main/canon-modes.h (1.412) (+9 -9)
+
+	In Canon backend, activated resolution modes using 4-bit 5- and 6-level ink compression for Canon Pro9000 (confirmed by test user). Other printers to follow.
+
+2015-09-10	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.583) (+11 -11)
+
+	Canon driver 4-bit 5-level and 6-level compression code fix.
+
+2015-09-10	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.215) (+5 -5)
+
+	Correct a couple more paper descroptions to line up with everything
+	else.
+
+	("4 x 6" => "4x6" and so on -- the latter is what should be used)
+
+2015-09-09	<speachy@sourceforge.net>
+
+	Files:	src/gutenprintui2/panel.c (1.23) (+1 -2)
+		src/main/print-canon.c (1.582) (+9 -1)
+		src/main/print-escp2.c (1.444) (+9 -1)
+		src/main/print-lexmark.c (1.165) (+9 -1)
+		src/main/print-olympus.c (1.214) (+1 -2)
+		src/main/print-pcl.c (1.165) (+9 -1)
+		src/main/print-raw.c (1.47) (+1 -2)
+		src/main/print-util.c (1.122) (+3 -7)
+
+	Don't show 'Density' and 'DitherAlgorithm' parameters if they aren't
+	used by the current family driver.
+
+	Accomplish this by moving their definitions out from global parameter
+	init code into the family drivers that use/need dithering.
+
+	Also, get rid of three spurious sets of the 'Density' parameter that
+	have no effect.
+
+2015-09-09	<speachy@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.27) (+9 -1)
+
+	Added in a special 8x10.5-on-8x10.75" size for the DS80DX
+
+	I'll be quite glad when we can get rid of this global namespace
+	pollution!
+
+2015-09-09	<speachy@sourceforge.net>
+
+	Files:	src/main/print-raw.c (1.46) (+14 -10)
+
+	Update comments to explain how the raw driver should be used.
+
+2015-09-09	<speachy@sourceforge.net>
+
+	Files:	src/gutenprintui2/panel.c (1.22) (+2 -1)
+
+	When rendering the thumbnail, force the raw driver to use the "Custom"
+	PageSize as the dimensions are explicitly set.
+
+2015-09-08	<speachy@sourceforge.net>
+
+	Files:	src/main/print-raw.c (1.45) (+3 -5)
+
+	The raw "family" needs to load all papers without any filtering.
+
+	The gimp plugin validates the paper via this list, for some reason.
+
+2015-09-08	<speachy@sourceforge.net>
+
+	Files:	src/foomatic/printer_options.c (1.55) (+5 -2)
+
+	Fix a memory leak.
+
+2015-09-08	<speachy@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.26) (+5 -1)
+
+	Left out special tags for four of the dyesub sizes.  Bad Solomon.
+
+2015-09-08	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.213) (+11 -11)
+		src/xml/papers.xml (1.25) (+4 -2)
+
+	Correct some media definitions for interface correctness.  And add some
+	comments to indicate unique paper types only used by one or two
+	printers.
+
+2015-09-07	<speachy@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.24) (+8 -1)
+
+	Accidentally left out a multicut paper type (6x4.5 *2)
+
+2015-09-07	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.212) (+207 -207)
+		src/xml/papers.xml (1.23) (+15 -15)
+
+	rename new "multicut" paper types.  new convention is w576h864-div3 or w576h864-w576h576_w576h288
+
+2015-09-07	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.754) (+3 -0)
+
+	Updated list of supported/improved dyesub printers
+
+2015-09-07	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.211) (+263 -355)
+		src/xml/papers.xml (1.22) (+103 -13)
+		src/xml/printers.xml (1.419) (+7 -6)
+
+	 * Add new special multicut paper sizes
+	 * Enable all multicut sizes in dyesub driver
+	 * Fix several errors and omissions in dyesub print sizes
+	 * Eliminate most of the "Custom" paper sizes (from printers I'm responsible for.  IMO they should all be removed entirely)
+	 * Finish up initial support for DNP DS80DX
+	 * Rename "DNP" to "Dai Nippon Printing" in printers.xml (to match naming convention used by other makes/models)
+
+2015-09-07	<speachy@sourceforge.net>
+
+	Files:	include/gutenprint/paper.h (1.5) (+5 -3)
+		src/foomatic/paper_sizes.c (1.10) (+6 -2)
+		src/main/print-papers.c (1.44) (+3 -1)
+
+	Create a new papersize_type, PAPERSIZE_TYPE_SPECIAL, for use of the
+	dyesub driver.  Any size marked as special must be ignored by any
+	user that doesn't specifically care about them.
+
+2015-09-06	<speachy@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.581) (+4 -16)
+		src/main/print-escp2.c (1.443) (+6 -1)
+		src/main/print-lexmark.c (1.164) (+6 -1)
+		src/main/print-pcl.c (1.164) (+8 -1)
+		src/main/print-raw.c (1.44) (+5 -1)
+
+	All drivers chould reject invalid PAPER_TYPEs -- only ENVELOPE and
+	NORMAL are allowed.  Dyesub is a special case and is not included here.
+
+2015-09-06	<gernot2270@sourceforge.net>
+
+	Files:	test/parse-bjc (1.4) (+8 -0)
+
+	Added several known commands to parse-bjc, including ESC (F for graphics.
+
+2015-09-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.154) (+3 -4)
+
+	Adjusted media types intended for Canon MG6900/MG7700.
+
+2015-09-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.580) (+3 -3)
+
+	In Canon backend, renamed upper/lower trays for cassette with two trays to cater for names cassette 1/cassette 2 as well.
+
+2015-09-05	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.753) (+24 -0)
+		src/main/canon-inks.h (1.131) (+16 -0)
+		src/main/canon-media-mode.h (1.197) (+67 -0)
+		src/main/canon-media.h (1.153) (+33 -33)
+		src/main/canon-modes.h (1.411) (+23 -0)
+		src/main/canon-printers.h (1.356) (+19 -0)
+		src/xml/printers.xml (1.418) (+25 -1)
+
+	Added experimental support for Canon MG5700 and MG6800 series.
+
+2015-09-05	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.152) (+1642 -1656)
+		src/main/print-canon.c (1.579) (+44 -22)
+
+	Added support for new ESC (w command to Canon backend. Also modified condition to select between upper and lower trays in cassette, based on published dimensions in Canon MG7700 user manual.
+
+2015-09-05	<speachy@sourceforge.net>
+
+	Files:	src/xml/papers.xml (1.21) (+19 -1)
+
+	Add a few more paper sizes needed by the DS80DX printer.
+
+2015-09-05	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.752) (+11 -0)
+		src/main/canon-media-mode.h (1.196) (+72 -12)
+		src/main/canon-media.h (1.151) (+15 -15)
+		src/main/canon-modes.h (1.410) (+18 -2)
+		src/main/canon-printers.h (1.355) (+17 -0)
+		src/main/print-canon.c (1.578) (+3 -3)
+		src/xml/printers.xml (1.417) (+12 -1)
+
+	Added experimental support for Canon MG3600 series. Added MG2570S, MG2580S to printer list. Fixed names of some internal Canon media types.
+
+2015-09-04	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.210) (+3 -5)
+
+	Fix two compile warnings accidentally introduced in a prior commit.
+
+2015-09-04	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.44) (+6 -6)
+		src/cups/backend_common.h (1.19) (+2 -0)
+
+	Export the current page number to the backends.
+
+2015-09-04	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.150) (+126 -77)
+
+	Added support for new media types for Canon backend (as of September 2015).
+
+2015-09-03	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.209) (+67 -5)
+
+	Handle sheet printing on the DS80DX, including duplex mode.  Aside from
+	a few missing print sizes, it's done.
+
+2015-09-03	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.208) (+66 -146)
+
+	Use 'MediaType' instead of 'InputSlot' for the DS80DX as it's a better
+	fit.  Then eliminate the 'inputslot' option I'd added.
+
+2015-09-03	<speachy@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.203) (+12 -3)
+		src/main/print-olympus.c (1.207) (+2 -3)
+
+	Tweak PPD code to automatically generate reciprocal constraint definitions.
+
+2015-09-03	<speachy@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.202) (+20 -2)
+		src/main/print-olympus.c (1.206) (+217 -19)
+
+	PPD generation:
+	 * Added mechanism to allow drivers to specify PPD UIConstraints
+	Dyesub driver:
+	 * Added duplex support
+	 * Parameterized input slot support
+	 * Parameterized list of PPD UIConstraints
+	 * Added beginnings of DNP DS80DX driver that uses these features
+	 * Added A4 size to Kodak 8810
+
+2015-09-02	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.751) (+1 -1)
+
+	Accdidentally bumped the version
+
+2015-09-02	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.750) (+2 -1)
+		src/main/print-olympus.c (1.205) (+116 -31)
+		src/xml/printers.xml (1.416) (+4 -1)
+
+	Add support for the Kodak 7000/7010/7015 dyesub printers.  Also, a
+	couple of minor improvements for the Kodak 68xx and 605 code.
+
+2015-08-29	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.749) (+4 -0)
+		src/main/canon-printers.h (1.354) (+1 -1)
+
+	Added ESC (a command to capabilitis of Canon BJC 4300, as determined from printjob analysis.
+
+2015-08-29	<rlk@sourceforge.net>
+
+	Files:	src/xml/escp2/model/model_47.xml (1.12) (+1 -1)
+
+	Summary: Fix borderless for Epson 2100/2200
+
+2015-08-28	<speachy@sourceforge.net>
+
+	Files:	src/cups/kodak6800_print.c (1.28) (+113 -134)
+
+	Reworked command/response handling.  Print command generates a response too!
+
+2015-08-26	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.204) (+4 -2)
+
+	The Kodak 8810 supports disabling lamination.  It also, in theory, can
+	handle multicut sizes, but that's not enabled until it can be tested.
+
+2015-08-26	<speachy@sourceforge.net>
+
+	Files:	src/cups/kodak605_print.c (1.14) (+163 -147)
+
+	Significant updates to kodak605 backend, based on lessons learned.
+
+	Needs testing.
+
+2015-08-26	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.43) (+23 -2)
+		src/cups/backend_common.h (1.18) (+2 -0)
+		src/cups/kodak6800_print.c (1.27) (+409 -469)
+
+	Major improvements in kodak68x0 robustness and job pipelining
+
+2015-08-25	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.748) (+3 -2)
+		src/main/canon-inks.h (1.130) (+12 -0)
+		src/main/canon-media-mode.h (1.195) (+89 -0)
+		src/main/canon-media.h (1.149) (+17 -0)
+		src/main/canon-modes.h (1.409) (+28 -0)
+		src/main/canon-printers.h (1.353) (+17 -0)
+		src/main/print-canon.c (1.577) (+2 -1)
+		src/xml/printers.xml (1.415) (+4 -1)
+
+	Added experimental support for Canon SmartBase MPC400 / MPC600F devices
+
+2015-08-25	<speachy@sourceforge.net>
+
+	Files:	src/cups/kodak6800_print.c (1.26) (+123 -41)
+
+	Kodak 6x80 printing more robust -- can now decode current job status,
+	and better idle/busy and error detection.
+
+2015-08-24	<speachy@sourceforge.net>
+
+	Files:	src/cups/citizencw01_print.c (1.8) (+15 -34)
+		src/cups/dnpds40_print.c (1.21) (+57 -76)
+		src/cups/kodak1400_print.c (1.29) (+8 -7)
+		src/cups/kodak605_print.c (1.13) (+180 -198)
+		src/cups/kodak6800_print.c (1.25) (+48 -73)
+		src/cups/mitsu70x_print.c (1.12) (+8 -8)
+		src/cups/mitsu9550_print.c (1.7) (+11 -25)
+		src/cups/selphy_print.c (1.42) (+4 -3)
+		src/cups/shinko_s2145_print.c (1.27) (+44 -140)
+		src/cups/sony_updr150_print.c (1.17) (+4 -3)
+
+	Upstream resync.  Complete last phase of cmdline revamp.  Delete dead
+	code.  Stricter job vs media validation.  And kodak 68x0/605 gets
+	control flow improvements.
+
+2015-08-23	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.747) (+5 -1)
+		src/main/print-canon.c (1.576) (+86 -66)
+
+	Completed addition of CassetteTray option for Canon backend, where cassette input slot has upper and lower trays. Supported models: MG5400, MG6300, MG6500, MG7100, MG7500, iP7200, MX720, MX920 series.
+
+2015-08-23	<speachy@sourceforge.net>
+
+	Files:	src/cups/shinko_s2145_print.c (1.26) (+8 -7)
+
+	A bit more sanity checking from selected print type vs printer-supported
+	types
+
+2015-08-23	<gernot2270@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.201) (+2 -58)
+		src/main/print-canon.c (1.575) (+8 -8)
+
+	Fixed PageSize parameter for CD in the Canon backend (regression from previous commit), removed CassetteTray option from genppd.c.
+
+2015-08-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.574) (+11 -14)
+
+	Exposed several previously hidden CD-related parameters in the Canon backend, plus the new CasseteTray parameter.
+
+2015-08-23	<gernot2270@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.200) (+58 -2)
+		src/main/print-canon.c (1.573) (+12 -4)
+
+	Added CassetteTray PPD parameter for Canon devices with upper / lower tray in a single cassette. Activation conditions for parameter to be fixed.
+
+2015-08-23	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.572) (+27 -4)
+
+	Added length condition of >7in to switch from upper to lower tray for Canon devices having a cassette containing upper and lower trays.
+
+2015-08-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/print-canon.c (1.571) (+27 -11)
+
+	Added default upper/lower trays in cassette selection for selected Canon devices based on media type. Size conditions to be added.
+
+2015-08-22	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-printers.h (1.352) (+4 -4)
+		src/main/print-canon.c (1.570) (+39 -1)
+
+	Corrected list of Canon devices with a cassette containing two trays. Added description in ESC (P command, code to be added.
+
+2015-08-20	<gernot2270@sourceforge.net>
+
+	Files:	NEWS (1.746) (+8 -1)
+		src/main/canon-media-mode.h (1.194) (+160 -0)
+		src/main/canon-media.h (1.148) (+4 -6)
+		src/main/canon-printers.h (1.351) (+9 -9)
+		src/xml/printers.xml (1.414) (+11 -1)
+
+	Completed addition of Canon MP5, MP10, MP55, MPC190, MPC200 printers
+
+2015-08-20	<gernot2270@sourceforge.net>
+
+	Files:	src/main/canon-media.h (1.147) (+36 -0)
+		src/main/canon-modes.h (1.408) (+1 -1)
+
+	Added media definitions for Canon MP5, MP10, MP55, MPC190, MPC200
+
+2015-08-17	<speachy@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.413) (+2 -2)
+
+	Add IEEE1284 info for the Shinko S6145
+
+2015-08-14	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.42) (+170 -197)
+		src/cups/backend_common.h (1.17) (+50 -15)
+		src/cups/citizencw01_print.c (1.7) (+13 -1)
+		src/cups/dnpds40_print.c (1.20) (+13 -11)
+		src/cups/kodak1400_print.c (1.28) (+13 -2)
+		src/cups/kodak605_print.c (1.12) (+8 -2)
+		src/cups/kodak6800_print.c (1.24) (+13 -7)
+		src/cups/mitsu70x_print.c (1.11) (+10 -12)
+		src/cups/mitsu9550_print.c (1.6) (+16 -26)
+		src/cups/selphy_print.c (1.41) (+58 -33)
+		src/cups/shinko_s2145_print.c (1.25) (+15 -14)
+		src/cups/sony_updr150_print.c (1.16) (+28 -6)
+
+	dyesub backend: Significant overhaul of early init and command line handling
+	code.  Fixes some long-standing bugs.
+
+2015-08-11	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.19) (+47 -6)
+
+	More fixes for rewind features on the DS620.
+
+2015-08-02	<rlk@sourceforge.net>
+
+	Files:	src/escputil/d4lib.c (1.17) (+1 -1)
+
+	Summary: Remove isblank, which causes build problems on some systems.
+
+2015-08-02	<rlk@sourceforge.net>
+
+	Files:	src/foomatic/foomatic-generator.in (1.85) (+1 -1)
+		src/foomatic/printer_margins.c (1.22) (+7 -7)
+		src/foomatic/printer_options.c (1.54) (+58 -64)
+
+	Shrink option output a bit; fix problem with saturation
+
+2015-08-01	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.203) (+4 -4)
+
+	dnpds80 had incorrect media size for 8x5*2 and 8x4_8x6.
+
+	And fix CHC-S6145; it used YMC instead of RGB.
+
+2015-08-01	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.18) (+79 -67)
+
+	Fix several bugs in the dnp backend.
+
+2015-07-16	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.202) (+11 -2)
+
+	Fix 3.5x5*2 prints, again, on the DS620, and enable them on the DS40.
+
+2015-07-15	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.201) (+11 -10)
+
+	Fix 3.5x5*2 prints.
+
+2015-07-13	<speachy@sourceforge.net>
+
+	Files:	include/gutenprint/printers.h (1.10) (+2 -9)
+		src/cups/genppd.c (1.199) (+15 -11)
+		src/main/print-olympus.c (1.200) (+7 -2)
+		src/main/printers.c (1.94) (+1 -11)
+		src/xml/printers.xml (1.412) (+69 -66)
+
+	Convert the 'nativecopies' printer attribute (and the API/ABI change it
+	necessitated) into a read-only parameter of the dyesub driver,
+	defaulting to off.  Printers whose backends support native copy
+	generation now override that parameter in printers.xml
+
+2015-07-11	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.17) (+58 -82)
+
+	Status reporting enhancements
+
+2015-07-08	<speachy@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.411) (+66 -66)
+
+	The dyesub backend handles copy generation for its supported printers.
+
+2015-07-08	<speachy@sourceforge.net>
+
+	Files:	include/gutenprint/printers.h (1.9) (+9 -2)
+		src/cups/genppd.c (1.198) (+22 -12)
+		src/main/printers.c (1.93) (+11 -1)
+
+	Add a new attribute to the printer definition, 'nativecopies', that
+	indicates if a printer (and its backend) can handle copy generation.
+
+	It controls the '*cupsManualCopies' PPD attribute.
+
+2015-07-07	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.199) (+12 -3)
+
+	Add 2x6*4 support to the DS40, now that it's confirmed to work.
+
+2015-07-07	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.16) (+4 -5)
+
+	dnpds40:  Fix bugs related to 4.5x6" prints.
+
+2015-07-07	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.198) (+11 -5)
+
+	Fix landscape printing with asymmetric resolutions.
+
+2015-07-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.410) (+6 -6)
+
+	Summary: Change "narrow margin" to "wide margin".
+
+2015-07-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.409) (+6 -1)
+
+	Summary: Add more generic variants (narrow A4 margin, tabloid).
+
+2015-07-05	<rlk@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.408) (+2 -1)
+
+	Summary: Add Brother-HL2250DN
+
+2015-07-05	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.197) (+61 -61)
+
+	Fix up a pile of size errors for DS40, DS620, RX1, CW01:  All sizes
+	6x6 or smaller are actually LANDSCAPE, and mistakenly used A5/6x8
+	paper sizes where 6x8/6x9 should have been listed instead.
+
+	Shinko9045 and Mitsu9550 also got corrections.
+
+2015-07-04	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.41) (+7 -3)
+		src/cups/citizencw01_print.c (1.6) (+1 -1)
+		src/cups/dnpds40_print.c (1.15) (+6 -4)
+		src/cups/kodak6800_print.c (1.23) (+1 -1)
+		src/cups/mitsu70x_print.c (1.10) (+1 -1)
+		src/cups/shinko_s2145_print.c (1.24) (+4 -2)
+
+	Fix a small pile of bugs found via clang-analyzer
+
+2015-07-04	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.40) (+3 -0)
+		src/cups/mitsu70x_print.c (1.9) (+1 -1)
+		src/cups/mitsu9550_print.c (1.5) (+6 -6)
+		src/cups/shinko_s2145_print.c (1.23) (+32 -86)
+
+	Sync with upstream.  Mostly fixing buffer overflows.
+
+2015-07-03	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.196) (+29 -1)
+
+	Add multicut modes to the Shinko S6245
+
+2015-07-02	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.39) (+27 -8)
+
+	Retry attempts to claim the USB interface.
+
+2015-07-01	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.38) (+9 -2)
+		src/cups/citizencw01_print.c (1.5) (+1 -1)
+		src/cups/dnpds40_print.c (1.14) (+113 -25)
+		src/cups/kodak1400_print.c (1.27) (+1 -1)
+		src/cups/kodak605_print.c (1.11) (+1 -1)
+		src/cups/kodak6800_print.c (1.22) (+2 -2)
+		src/cups/shinko_s2145_print.c (1.22) (+7 -7)
+
+	Fix long-standing problems in command line parsing.
+
+===============================================================================
+Name: gutenprint-5_2_11-pre1
+
 2015-06-26	<rlk@sourceforge.net>
 
 	Files:	NEWS (1.745) (+5 -4)
@@ -750,7 +1647,7 @@
 
 	Files:	src/cups/Makefile.am (1.150) (+2 -2)
 		src/cups/backend_common.c (1.36) (+1 -1)
-		src/cups/mitsu9550_print.c (1.1) (added +1013 -0)
+		src/cups/mitsu9550_print.c (1.1) (added +989 -0)
 
 	Add in a backend for the Mitsubishi CP-9550D family (inclduding -S model!)
 
@@ -915,7 +1812,7 @@
 		src/cups/backend_common.c (1.34) (+1 -0)
 		src/cups/backend_common.h (1.14) (+2 -0)
 		src/cups/blacklist (1.11) (+3 -0)
-		src/cups/citizencw01_print.c (1.1) (added +918 -0)
+		src/cups/citizencw01_print.c (1.1) (added +911 -0)
 
 	Add a backend for the Citizen CW-01 printer (and eventually, its relatives)
 
@@ -1685,7 +2582,7 @@ Name: gutenprint-5_2_10-pre2
 		macosx/src/gutenprint.pkg.src/Info.plist (1.1) (added +46 -0)
 		macosx/src/gutenprint.pkg.src/Resources/English.lproj/Description.plist (1.1) (added +10 -0)
 		macosx/src/gutenprint.pkg.src/Resources/English.lproj/Gutenprint 5.info (1.1) (added)
-		macosx/src/gutenprint.pkg.src/Resources/License.txt (1.1) (added +13 -0)
+		macosx/src/gutenprint.pkg.src/Resources/License.txt (1.1) (added +12 -0)
 		macosx/src/gutenprint.pkg.src/Resources/ReadMe.html (1.1) (added +199 -0)
 		macosx/src/gutenprint.pkg.src/Resources/Welcome.rtfd/TXT.rtf (1.1) (added +24 -0)
 		macosx/src/gutenprint.pkg.src/Resources/postinstall (1.1) (added +42 -0)
@@ -1879,7 +2776,7 @@ Name: gutenprint-5_2_10-pre1
 
 2014-02-10	<speachy@sourceforge.net>
 
-	Files:	src/cups/mitsu70x_print.c (1.1) (added +803 -0)
+	Files:	src/cups/mitsu70x_print.c (1.1) (added +801 -0)
 		src/cups/selphy_print.c (1.30) (+82 -29)
 
 	backends:   Forgot to commit the Mitsubishi CP-D70/D707 code.
@@ -2259,7 +3156,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.672) (+1 -1)
 		configure.ac (1.248) (+3 -3)
-		po/vi.po (1.1) (added +17014 -0)
+		po/vi.po (1.1) (added +17442 -0)
 
 	Add Vietnamese translation
 
@@ -2806,7 +3703,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.664) (+8 -1)
 		src/cups/Makefile.am (1.140) (+7 -2)
-		src/cups/blacklist (1.1) (added +160 -0)
+		src/cups/blacklist (1.1) (added +163 -0)
 
 	backend:  Add the blacklist file utilized by CUPS >= 1.6.4!
 
@@ -2853,7 +3750,7 @@ Name: gutenprint-5_2_10-pre1
 		src/cups/Makefile.am (1.138) (+2 -2)
 		src/cups/backend_common.c (1.14) (+1 -0)
 		src/cups/backend_common.h (1.5) (+3 -0)
-		src/cups/dnpds40_print.c (1.1) (added +1587 -0)
+		src/cups/dnpds40_print.c (1.1) (added +1688 -0)
 
 	backends:  Add a backend for the DNP DS40/DS80 printers.
 
@@ -3258,7 +4155,7 @@ Name: gutenprint-5_2_10-pre1
 		po/sk.po (1.82) (+6874 -5619)
 		po/sl.po (1.6) (+6851 -5581)
 		po/sv.po (1.108) (+6935 -5673)
-		po/tr.po (1.1) (added +18021 -0)
+		po/tr.po (1.1) (added +18450 -0)
 		po/uk.po (1.8) (+7004 -5622)
 		po/zh_CN.po (1.4) (+6348 -5558)
 		po/zh_TW.po (1.38) (+6928 -5655)
@@ -3356,7 +4253,7 @@ Name: gutenprint-5_2_10-pre1
 		src/cups/Makefile.am (1.136) (+2 -2)
 		src/cups/backend_common.c (1.11) (+2 -1)
 		src/cups/backend_common.h (1.3) (+2 -0)
-		src/cups/kodak605_print.c (1.1) (added +638 -0)
+		src/cups/kodak605_print.c (1.1) (added +642 -0)
 
 	dyesub: kodak605:  Add a CUPS backend for the Kodak 605 photo printer.
 
@@ -3647,7 +4544,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	src/cups/Makefile.am (1.134) (+10 -29)
 		src/cups/backend_common.c (1.7) (+403 -55)
-		src/cups/backend_common.h (1.1) (added +174 -0)
+		src/cups/backend_common.h (1.1) (added +213 -0)
 		src/cups/kodak1400_print.c (1.16) (+178 -303)
 		src/cups/kodak6800_print.c (1.7) (+381 -291)
 		src/cups/selphy_print.c (1.21) (+260 -435)
@@ -3765,7 +4662,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.640) (+6 -1)
 		src/cups/Makefile.am (1.132) (+6 -2)
-		src/cups/sony_updr150_print.c (1.1) (added +387 -0)
+		src/cups/sony_updr150_print.c (1.1) (added +407 -0)
 
 	backends:  Add a backend for the Sony UP-DR150 printer.
 
@@ -3843,7 +4740,7 @@ Name: gutenprint-5_2_10-pre1
 	Files:	NEWS (1.639) (+8 -1)
 		src/cups/Makefile.am (1.129) (+7 -2)
 		src/cups/backend_common.c (1.3) (+8 -3)
-		src/cups/shinko_s2145_print.c (1.1) (added +1876 -0)
+		src/cups/shinko_s2145_print.c (1.1) (added +1730 -0)
 
 	dyesub: Add a CUPS backend for the Shinko CHC-S2145 printer.
 
@@ -3887,7 +4784,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.638) (+12 -3)
 		src/cups/Makefile.am (1.128) (+7 -2)
-		src/cups/kodak6800_print.c (1.1) (added +1219 -0)
+		src/cups/kodak6800_print.c (1.1) (added +1225 -0)
 
 	kodak6800:  Add a CUPS backend.
 
@@ -3901,7 +4798,7 @@ Name: gutenprint-5_2_10-pre1
 
 2013-06-30	<speachy@sourceforge.net>
 
-	Files:	src/cups/backend_common.c (1.1) (added +1052 -0)
+	Files:	src/cups/backend_common.c (1.1) (added +1075 -0)
 		src/cups/kodak1400_print.c (1.9) (+39 -174)
 		src/cups/selphy_print.c (1.15) (+300 -193)
 
@@ -4561,7 +5458,7 @@ Name: gutenprint-5_2_10-pre1
 2013-02-17	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.240) (+3 -3)
-		po/ca.po (1.1) (added +17341 -0)
+		po/ca.po (1.1) (added +17770 -0)
 
 	Add Catalan translation
 
@@ -4661,7 +5558,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	configure.ac (1.239) (+7 -7)
 		src/cups/Makefile.am (1.127) (+10 -5)
-		src/cups/kodak1400_print.c (1.1) (added +771 -0)
+		src/cups/kodak1400_print.c (1.1) (added +783 -0)
 
 	kodak1400:  Add a CUPS backend to handle this printer.
 
@@ -4882,7 +5779,7 @@ Name: gutenprint-5_2_10-pre1
 
 2012-11-18	<speachy@sourceforge.net>
 
-	Files:	src/cups/selphy_print.c (1.1) (added +1341 -0)
+	Files:	src/cups/selphy_print.c (1.1) (added +1367 -0)
 		src/cups/selphy_print_common.h (1.1) (added)
 
 	[selphy]  Initial commit of the Canon Dyesub (Selphy CP/ES) CUPS backend.
@@ -7098,7 +7995,7 @@ Name: gutenprint-5_2_8
 2012-03-18	<gernot2270@sourceforge.net>
 
 	Files:	src/main/Makefile.am (1.105) (+3 -2)
-		src/main/canon-media-mode.h (1.1) (added +12832 -0)
+		src/main/canon-media-mode.h (1.1) (added +13066 -0)
 		src/main/canon-modes.h (1.274) (+1 -1)
 		src/main/print-canon.c (1.323) (+31 -3)
 
@@ -7776,7 +8673,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.535) (+2 -1)
 		configure.ac (1.230) (+3 -3)
-		po/zh_CN.po (1.1) (added +16691 -0)
+		po/zh_CN.po (1.1) (added +17427 -0)
 
 	Add Chinese Mandarin translation
 
@@ -9316,7 +10213,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.471) (+1 -1)
 		configure.ac (1.229) (+3 -3)
-		po/gl.po (1.1) (added +18260 -0)
+		po/gl.po (1.1) (added +18689 -0)
 
 	Add Galician translation.
 
@@ -10187,7 +11084,7 @@ Name: gutenprint-5_2_7
 
 	Files:	NEWS (1.448) (+4 -0)
 		configure.ac (1.222) (+3 -3)
-		po/sl.po (1.1) (added +18263 -0)
+		po/sl.po (1.1) (added +18692 -0)
 
 	Add Slovenian translation
 
@@ -11473,7 +12370,7 @@ Name: gutenprint-5_2_6
 2010-04-19	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.217) (+3 -3)
-		po/fi.po (1.1) (added +18169 -0)
+		po/fi.po (1.1) (added +18598 -0)
 
 	Add Finnish translation
 
@@ -11811,7 +12708,7 @@ Name: gutenprint-5_2_4
 2009-06-24	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.213) (+3 -3)
-		po/ru.po (1.1) (added +18182 -0)
+		po/ru.po (1.1) (added +18610 -0)
 
 	Add Russian translation
 
@@ -12761,7 +13658,7 @@ Name: gutenprint-5_2_2
 2008-11-11	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.207) (+3 -3)
-		po/it.po (1.1) (added +17363 -0)
+		po/it.po (1.1) (added +17792 -0)
 
 	Add Italian translation
 
@@ -16396,8 +17293,8 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/model/model_86.xml (1.1) (added +122 -0)
 		src/xml/escp2/model/model_87.xml (1.1) (added +193 -0)
 		src/xml/escp2/model/model_9.xml (1.1) (added +145 -0)
-		src/xml/papers.xml (1.1) (added +1730 -0)
-		src/xml/printers.xml (1.1) (added +2876 -0)
+		src/xml/papers.xml (1.1) (added +1864 -0)
+		src/xml/printers.xml (1.1) (added +2953 -0)
 		test/run-testdither (1.13) (+1 -1)
 		test/run-weavetest (1.25) (+1 -1)
 
@@ -17687,7 +18584,7 @@ Name: gutenprint-5_1_5
 		src/cups/Makefile.am (1.94) (+4 -3)
 		src/cups/genppd.c (1.139) (+7 -2)
 		src/cups/rastertoprinter.c (1.114) (+162 -91)
-		src/cups/test-rastertogutenprint.in (1.1) (added +270 -0)
+		src/cups/test-rastertogutenprint.in (1.1) (added +279 -0)
 
 	Add test for CUPS driver
 
@@ -20633,13 +21530,13 @@ Name: gutenprint-5_0-bp
 
 2006-08-28	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-modes.h (1.1) (added +4121 -0)
+	Files:	src/main/canon-modes.h (1.1) (added +4195 -0)
 
 	file canon-modes.h was initially added on branch canon_experimental.
 
 2006-08-07	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-inks.h (1.1) (added +3366 -0)
+	Files:	src/main/canon-inks.h (1.1) (added +3642 -0)
 
 	file canon-inks.h was initially added on branch canon_experimental.
 
@@ -20695,13 +21592,13 @@ Name: gutenprint-5_0_0
 
 2006-07-23	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-printers.h (1.1) (added +3729 -0)
+	Files:	src/main/canon-printers.h (1.1) (added +3804 -0)
 
 	file canon-printers.h was initially added on branch canon_experimental.
 
 2006-07-22	<faust3@sourceforge.net>
 
-	Files:	src/main/canon-media.h (1.1) (added +2293 -0)
+	Files:	src/main/canon-media.h (1.1) (added +2379 -0)
 		src/main/print-canon.c (1.175) (+43 -121)
 		src/main/print-canon.h (1.1) (added +673 -0)
 
@@ -21293,8 +22190,8 @@ Name: gutenprint-5_0_0-rc3
 
 	Files:	configure.ac (1.139) (+4 -2)
 		src/testpattern/Makefile.am (1.24) (+4 -3)
-		src/testpattern/printer_options.c (1.1) (added +263 -0)
-		src/testpattern/run-testpattern-2.in (1.1) (added +890 -0)
+		src/testpattern/printer_options.c (1.1) (added +264 -0)
+		src/testpattern/run-testpattern-2.in (1.1) (added +899 -0)
 		test/Makefile.am (1.46) (+1 -5)
 
 	Add improved test based on testpattern generator.
@@ -22926,7 +23823,7 @@ Name: gutenprint-5_0_0-rc2
 2005-08-10	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.129) (+3 -3)
-		po/zh_TW.po (1.1) (added +19241 -0)
+		po/zh_TW.po (1.1) (added +19663 -0)
 
 	Add zh_TW support
 
@@ -24776,7 +25673,7 @@ Name: gutenprint-5_0_0-beta3
 		include/gutenprint/list.h (1.1) (added +337 -0)
 		include/gutenprint/module.h (1.1) (added +111 -0)
 		include/gutenprint/mxml.h (1.1) (added +182 -0)
-		include/gutenprint/paper.h (1.1) (added +159 -0)
+		include/gutenprint/paper.h (1.1) (added +161 -0)
 		include/gutenprint/path.h (1.1) (added +63 -0)
 		include/gutenprint/printers.h (1.1) (added +296 -0)
 		include/gutenprint/sequence.h (1.1) (added +409 -0)
@@ -26539,7 +27436,7 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-05-01	<rlk@sourceforge.net>
 
-	Files:	po/hu.po (1.1) (added +17344 -0)
+	Files:	po/hu.po (1.1) (added +17773 -0)
 
 	file hu.po was initially added on branch gimp-print-4_2_branch.
 
@@ -26747,13 +27644,13 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/uk.po (1.1) (added +17296 -0)
+	Files:	po/uk.po (1.1) (added +17725 -0)
 
 	file uk.po was initially added on branch gimp-print-4_2_branch.
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/nb.po (1.1) (added +19461 -0)
+	Files:	po/nb.po (1.1) (added +19883 -0)
 
 	file nb.po was initially added on branch gimp-print-4_2_branch.
 
@@ -31785,7 +32682,7 @@ Name: gimp-print-4_3_15
 
 2003-05-21	<m0m@sourceforge.net>
 
-	Files:	src/main/print-olympus.c (1.1) (added +6245 -0)
+	Files:	src/main/print-olympus.c (1.1) (added +6477 -0)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
 
@@ -32130,7 +33027,7 @@ Name: gimp-print-4_3_14
 
 2003-05-04	<rlk@sourceforge.net>
 
-	Files:	po/cs.po (1.1) (added +19724 -0)
+	Files:	po/cs.po (1.1) (added +20147 -0)
 
 	file cs.po was initially added on branch gimp-print-4_2_branch.
 
@@ -35221,7 +36118,7 @@ Name: gimp-print-4_3_9
 		src/gimp/gimp_main_window.c (1.96) (+3 -2)
 		src/main/Makefile.am (1.48) (+2 -1)
 		src/main/print-escp2.c (1.204) (+3 -3)
-		src/main/print-raw.c (1.1) (added +402 -0)
+		src/main/print-raw.c (1.1) (added +407 -0)
 		src/main/printers.c (1.14) (+10 -1)
 		src/main/printers.xml (1.64) (+7 -1)
 		src/main/printlist.h (1.2) (+3 -2)
@@ -36883,7 +37780,7 @@ Name: gimp-print-4_3_6
 
 2002-10-21	<rlk@sourceforge.net>
 
-	Files:	src/main/print-papers.c (1.1) (added +434 -0)
+	Files:	src/main/print-papers.c (1.1) (added +436 -0)
 
 	file print-papers.c was initially added on branch reorg-20021020-branch.
 
@@ -37093,7 +37990,7 @@ Name: gimp-print-4_3_6
 
 2002-10-07	<rlk@sourceforge.net>
 
-	Files:	po/ja.po (1.1) (added +19395 -0)
+	Files:	po/ja.po (1.1) (added +19817 -0)
 
 	file ja.po was initially added on branch gimp-print-4_2_branch.
 
@@ -38219,7 +39116,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +17997 -0)
+	Files:	po/de.po (1.1) (added +18426 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -38308,7 +39205,7 @@ Name: gimp-print-4_3_1
 
 2002-05-11	<rlk@sourceforge.net>
 
-	Files:	po/pt.po (1.1) (added +19835 -0)
+	Files:	po/pt.po (1.1) (added +20258 -0)
 
 	file pt.po was initially added on branch gimp-print-4_2_branch.
 
@@ -38405,7 +39302,7 @@ Name: gimp-print-4_3_1
 
 2002-04-28	<rlk@sourceforge.net>
 
-	Files:	po/es.po (1.1) (added +19877 -0)
+	Files:	po/es.po (1.1) (added +20300 -0)
 
 	Spanish translation
 
@@ -39138,7 +40035,7 @@ Name: gimp-print-4_3_0
 
 	Files:	acconfig.h (1.17) (removed)
 		autogen.sh (1.4) (+1 -1)
-		configure.ac (1.1) (added +1199 -0)
+		configure.ac (1.1) (added +1209 -0)
 		configure.in.in (1.121) (removed)
 		debian/rules (1.35) (+2 -2)
 		doc/README.maintaining (1.12) (+16 -22)
@@ -39305,7 +40202,7 @@ Name: gimp-print-4_3_0
 
 2002-03-16	<rlk@sourceforge.net>
 
-	Files:	po/nl.po (1.1) (added +17361 -0)
+	Files:	po/nl.po (1.1) (added +17790 -0)
 
 	file nl.po was initially added on branch gimp-print-4_2_branch.
 
@@ -39538,7 +40435,7 @@ Name: gimp-print-4_3_0
 
 2002-02-16	<rlk@sourceforge.net>
 
-	Files:	po/el.po (1.1) (added +19446 -0)
+	Files:	po/el.po (1.1) (added +19874 -0)
 
 	file el.po was initially added on branch gimp-print-4_2_branch.
 
@@ -39638,7 +40535,7 @@ Name: gimp-print-4_3_0
 
 2002-02-14	<rlk@sourceforge.net>
 
-	Files:	po/sk.po (1.1) (added +19819 -0)
+	Files:	po/sk.po (1.1) (added +18850 -0)
 
 	file sk.po was initially added on branch gimp-print-4_2_branch.
 
@@ -40731,7 +41628,7 @@ Name: gimp-print-4_1_99-rc1
 2001-11-08	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.94) (+2 -2)
-		po/pl.po (1.1) (added +19062 -0)
+		po/pl.po (1.1) (added +19479 -0)
 
 	Add Polish translation
 
@@ -41281,7 +42178,7 @@ Name: gimp-print-4_1_99-b4
 2001-10-21	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.87) (+2 -2)
-		po/da.po (1.1) (added +17345 -0)
+		po/da.po (1.1) (added +17774 -0)
 		po/en_GB.po (1.65) (+2 -2)
 		po/fr.po (1.8) (+1 -1)
 		po/no.po (1.8) (+1 -1)
@@ -41580,7 +42477,7 @@ Name: gimp-print-4_1_99-b4
 
 	Files:	configure.in.in (1.84) (+3 -3)
 		po/en_GB.po (1.57) (+335 -348)
-		po/fr.po (1.1) (added +17335 -0)
+		po/fr.po (1.1) (added +17766 -0)
 		po/no.po (1.1) (added)
 		po/sv.po (1.10) (+161 -554)
 		src/cups/Makefile.am (1.37) (+2 -2)
@@ -42281,7 +43178,7 @@ Name: gimp-print-4_1_99-b3
 
 	Files:	NEWS.4.2 (1.5) (+33 -24)
 		configure.in.in (1.76) (+2 -2)
-		po/sv.po (1.1) (added +20142 -0)
+		po/sv.po (1.1) (added +20569 -0)
 		src/foomatic/foomatic-printermap (1.13) (+1 -0)
 		src/ghost/gdevstp.c (1.13) (+70 -33)
 		src/main/print-escp2.c (1.121) (+168 -6)
@@ -45695,7 +46592,7 @@ Name: gimp-print-4_1_7
 	Files:	src/foomatic/Makefile.am (1.4) (+11 -3)
 		src/foomatic/foomatic-generator.in (1.3) (+10 -10)
 		src/foomatic/gimp-print-version.c (1.1) (added)
-		src/foomatic/paper_sizes.c (1.1) (added +41 -0)
+		src/foomatic/paper_sizes.c (1.1) (added +45 -0)
 
 	Extract data correctly from the library rather than trying to parse
 	source files.
@@ -46078,7 +46975,7 @@ Name: gimp-print-4_1_6
 		src/Makefile.am (1.2) (+2 -2)
 		src/foomatic/.cvsignore (1.1) (added +13 -0)
 		src/foomatic/Makefile.am (1.1) (added +122 -0)
-		src/foomatic/foomatic-generator.in (1.1) (added +1832 -0)
+		src/foomatic/foomatic-generator.in (1.1) (added +1833 -0)
 		src/foomatic/foomatic-printermap (1.1) (added)
 		src/foomatic/foomatic-templates/Brightness.xml (1.1) (added)
 		src/foomatic/foomatic-templates/Contrast.xml (1.1) (added)
@@ -46099,7 +46996,7 @@ Name: gimp-print-4_1_6
 		src/foomatic/foomatic-templates/Saturation.xml (1.1) (added)
 		src/foomatic/foomatic-templates/Yellow.xml (1.1) (added)
 		src/foomatic/foomatic-templates/stp.xml (1.1) (added)
-		src/foomatic/printer_options.c (1.1) (added +320 -0)
+		src/foomatic/printer_options.c (1.1) (added +317 -0)
 		test/Makefile.am (1.13) (+2 -6)
 		test/printer_options.c (1.7) (removed)
 
@@ -46513,7 +47410,7 @@ Name: gimp-print-4_1_5
 
 2001-02-28	<gandy@sourceforge.net>
 
-	Files:	test/parse-bjc (1.1) (added +145 -0)
+	Files:	test/parse-bjc (1.1) (added +153 -0)
 
 	* Added parse-bjc (a modified parse-escp) to view Canon-BJC print files
 	  As default, only the header and the footer of the printjob are printed,
@@ -47373,7 +48270,7 @@ Name: gimp-print-4_1_4
 2001-02-08	<rleigh@sourceforge.net>
 
 	Files:	configure.in.in (1.5) (+2 -2)
-		po/en_GB.po (1.1) (added +18838 -0)
+		po/en_GB.po (1.1) (added +19265 -0)
 		po/en_TEST.po (1.1) (added)
 
 	Add en_GB and en_TEST translations
@@ -48128,7 +49025,7 @@ Name: print-4_1_3
 		src/cups/commandtocanon.c (1.1) (added +197 -0)
 		src/cups/commandtoepson.c (1.1) (added +234 -0)
 		src/cups/epson.c (1.1) (added)
-		src/cups/genppd.c (1.1) (added +2712 -0)
+		src/cups/genppd.c (1.1) (added +2751 -0)
 		src/cups/rastertoprinter.c (1.1) (added +1714 -0)
 
 	Moved cups/* under src/cups
@@ -48223,14 +49120,14 @@ Name: print-4_1_3
 		quickmatrix257.h (1.5) (removed)
 		ran.367.179.h (1.4) (removed)
 		ran.509.131.h (1.4) (removed)
-		src/main/print-canon.c (1.1) (added +6354 -0)
+		src/main/print-canon.c (1.1) (added +6501 -0)
 		src/main/print-color.c (1.1) (added +1871 -0)
 		src/main/print-dither.c (1.1) (added)
-		src/main/print-escp2.c (1.1) (added +4602 -0)
-		src/main/print-lexmark.c (1.1) (added +3024 -0)
-		src/main/print-pcl.c (1.1) (added +3342 -0)
+		src/main/print-escp2.c (1.1) (added +4615 -0)
+		src/main/print-lexmark.c (1.1) (added +3037 -0)
+		src/main/print-pcl.c (1.1) (added +3357 -0)
 		src/main/print-ps.c (1.1) (added +1380 -0)
-		src/main/print-util.c (1.1) (added +673 -0)
+		src/main/print-util.c (1.1) (added +669 -0)
 		src/main/print-weave.c (1.1) (added +2007 -0)
 		src/main/printers.xml (1.1) (added)
 		src/main/quickmatrix257.h (1.1) (added)
@@ -48584,7 +49481,7 @@ Name: print-4_1_2
 
 2001-01-05	<rlk@sourceforge.net>
 
-	Files:	config.h.in (1.1) (added +216 -0)
+	Files:	config.h.in (1.1) (added +222 -0)
 		configure.in (1.45) (+3 -1)
 		escputil.c (1.25) (+3 -3)
 
@@ -56320,7 +57217,7 @@ Name: print-3_1_6
 
 2000-02-03	<sharkey@sourceforge.net>
 
-	Files:	configure.in (1.1) (added +1199 -0)
+	Files:	configure.in (1.1) (added +1209 -0)
 
 	This is my first attempt at a configuration input file for autoconf.  It's
 	got some cheesy inelegant bits, but, it seems to work for me.  I'll try
@@ -56333,12 +57230,12 @@ Name: print-3_1_6
 
 	Files:	AUTHORS (1.1) (added +134 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +57349 -0)
+		ChangeLog (1.1) (added +58284 -0)
 		INSTALL (1.1) (added +370 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +3950 -0)
+		NEWS (1.1) (added +4027 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -57368,7 +58265,7 @@ Name: print-3_1_6
 
 1999-09-12	<rlk@sourceforge.net>
 
-	Files:	Makefile (1.1) (added +1109 -0)
+	Files:	Makefile (1.1) (added +1111 -0)
 		print-escp2.c (1.2) (+259 -24)
 		print-pcl.c (1.2) (+3 -2)
 		print-ps.c (1.2) (+3 -2)
@@ -57381,7 +58278,7 @@ Name: print-3_1_6
 1999-09-12	<rlk@sourceforge.net>
 
 	Files:	Makefile.am (1.1) (added +214 -0)
-		Makefile.in (1.1) (added +1109 -0)
+		Makefile.in (1.1) (added +1111 -0)
 		print-escp2.c (1.1) (added)
 		print-pcl.c (1.1) (added)
 		print-ps.c (1.1) (added)

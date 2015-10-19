@@ -41,6 +41,8 @@ my $global_printer;
 my $global_messages;
 my $global_page;
 my $global_case;
+my $enable_static = "@ENABLE_STATIC@";
+my $enable_shared = "@ENABLE_SHARED@";
 
 my @extras = ();
 my @job_extras = ();
@@ -62,6 +64,7 @@ my $rerun = 0;
 my $list_printers = 0;
 my $list_options = 0;
 my $verbose = 0;
+my $use_unused_options = 0;
 
 my @default_options = ();
 my %base_settings = ("DitherAlgorithm" => "Fast");
@@ -99,6 +102,7 @@ GetOptions("C=s" => \$csum_type,
 	   "q+"  => \$quiet,
 	   "r!"  => \$skip_resolutions,
 	   "s!"  => \$skip_duplicate_printers,
+	   "N!"  => \$use_unused_options,
 	   "v+"  => \$valgrind,
 	   "x=s" => \@exclude_list,
 	   "y=s" => \@exclude_patterns);
@@ -169,6 +173,7 @@ Usage: run-testpattern-2 [opts] [model ...]
     -RR             Use only the minimum resolution, and do not test other
                     resolutions.
     -X              Repeat specified cases listed on standard input.
+    -N              Supply all requested options, even if unused.
 
   Miscellaneous options:
     -i              Use the installed Gutenprint libraries rather than
@@ -264,6 +269,10 @@ if ("$srcdir" eq "" || "$srcdir" eq ".") {
 
 if (! $run_installed && ! defined $ENV{"STP_DATA_PATH"}) {
     $ENV{"STP_DATA_PATH"} = "${sdir}/../xml";
+}
+
+if ($valgrind && ! $run_installed && $enable_shared ne "no") {
+    die "Valgrind is not compatible with --enable-shared in tree.\nPlease use autogen.sh --disable-shared.\n";
 }
 
 if (! defined $ENV{"STP_MODULE_PATH"}) {
@@ -618,7 +627,7 @@ sub do_printer($$) {
 		}
 		set_opt("PrintingMode", $pmode, $printer);
 		set_opt("Resolution", $resolution, $printer);
-		map { set_opt($_, $base_settings{$_}, $printer)} sort keys %base_settings;
+		map { set_opt($_, $base_settings{$_}, $printer)} grep { $use_unused_options || defined $stpdata{$printer}{$_}} sort keys %base_settings;
 		my ($case) = "${printer}_PrintingMode_${pmode}_Resolution_${resolution}";
 		$global_case = $case;
 		if (! $rerun || $rerun_cases{$case}) {
@@ -687,7 +696,7 @@ sub do_printer($$) {
 				$pages = $duplex_pages;
 			    }
 			}
-		    } keys %base_settings;
+		    }  grep { $use_unused_options || defined $stpdata{$printer}{$_}} (keys %base_settings);
 		    my ($mstring) = join "_", @mvals;
 		    my ($ostring) = join "+", @ovals;
 		    my $case;

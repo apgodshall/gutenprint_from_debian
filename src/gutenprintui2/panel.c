@@ -1,5 +1,5 @@
 /*
- * "$Id: panel.c,v 1.21 2014/01/12 02:06:13 rlk Exp $"
+ * "$Id: panel.c,v 1.23 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Main window code for Print plug-in for the GIMP.
  *
@@ -4589,7 +4589,7 @@ compute_thumbnail(const stp_vars_t *v)
   stp_set_page_height(nv, thumbnail_h);
   stp_set_page_width(nv, thumbnail_w);
   stp_set_driver(nv, "raw-data-8");
-  stp_set_float_parameter(nv, "Density", 1.0);
+  stp_set_string_parameter(nv, "PageSize", "Custom");
   stp_set_float_parameter(nv, "InkLimit", 0);
   stp_set_string_parameter(nv, "InputImageType", "RGB");
   stp_clear_file_parameter(nv, "LUTDumpFile");

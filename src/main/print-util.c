@@ -1,5 +1,5 @@
 /*
- * "$Id: print-util.c,v 1.121 2015/04/11 16:19:46 rlk Exp $"
+ * "$Id: print-util.c,v 1.122 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -639,18 +639,14 @@ stp_merge_printvars(stp_vars_t *user, const stp_vars_t *print)
 stp_parameter_list_t
 stp_get_parameter_list(const stp_vars_t *v)
 {
-  stp_parameter_list_t ret = stp_parameter_list_create();
-  stp_parameter_list_t tmp_list;
+  stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_parameter_list_t *tmp_list;
 
   tmp_list = stp_printer_list_parameters(v);
   stp_parameter_list_append(ret, tmp_list);
   stp_parameter_list_destroy(tmp_list);
 
   tmp_list = stp_color_list_parameters(v);
-  stp_parameter_list_append(ret, tmp_list);
-  stp_parameter_list_destroy(tmp_list);
-
-  tmp_list = stp_dither_list_parameters(v);
   stp_parameter_list_append(ret, tmp_list);
   stp_parameter_list_destroy(tmp_list);
 

@@ -1,4 +1,4 @@
-dnl $Id: configure.ac,v 1.264 2015/06/26 00:09:10 speachy Exp $
+dnl $Id: configure.ac,v 1.268 2015/10/06 23:44:10 rlk Exp $
 dnl Copyright (C) 2001-2004 Roger Leigh
 dnl 
 dnl This program is free software; you can redistribute it and/or modify
@@ -78,7 +78,7 @@ pushdef([GUTENPRINT_NAME],              [gutenprint])
 pushdef([GUTENPRINT_MAJOR_VERSION],     [5])
 pushdef([GUTENPRINT_MINOR_VERSION],     [2])
 pushdef([GUTENPRINT_MICRO_VERSION],     [11])
-pushdef([GUTENPRINT_EXTRA_VERSION],     [-pre1])
+pushdef([GUTENPRINT_EXTRA_VERSION],     [-pre2])
 pushdef([GUTENPRINT_CURRENT_INTERFACE], [6])
 pushdef([GUTENPRINT_BINARY_AGE],        [4])
 pushdef([GUTENPRINTUI2_CURRENT_INTERFACE], [1])
@@ -87,7 +87,7 @@ pushdef([GUTENPRINT_VERSION], GUTENPRINT_MAJOR_VERSION.GUTENPRINT_MINOR_VERSION.
 
 AC_INIT(GUTENPRINT_NAME, GUTENPRINT_VERSION, [gimp-print-devel@lists.sourceforge.net])
 AC_PREREQ(2.53)
-AC_REVISION($Revision: 1.264 $)
+AC_REVISION($Revision: 1.268 $)
 AC_CONFIG_SRCDIR(src/main/print-vars.c)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(scripts)
@@ -335,6 +335,14 @@ STP_ARG_ENABLE([static-genppd],
                [build a statically-linked cups-genppd and rastertogutenprint.  WARNING: Please read the README and NEWS (release notes) CAREFULLY before using --disable-static-genppd!],
 	       [STATIC_GENPPD],
 	       [(automatic)])
+
+ENABLE_STATIC="$enable_static"
+AC_DEFINE_UNQUOTED(ENABLE_STATIC, "${ENABLE_STATIC}", [Static libraries are built.])
+AC_SUBST(ENABLE_STATIC)
+
+ENABLE_SHARED="$enable_shared"
+AC_DEFINE_UNQUOTED(ENABLE_SHARED, "${ENABLE_SHARED}", [Shared libraries are built.])
+AC_SUBST(ENABLE_SHARED)
 
 AC_PATH_PROG(FOOMATIC_CONFIGURE, foomatic-configure)
 if test -z "${FOOMATIC_CONFIGURE}" ; then
@@ -1058,6 +1066,8 @@ AC_CONFIG_FILES([src/foomatic/mk_printerlist],
                 [chmod +x src/foomatic/mk_printerlist])
 AC_CONFIG_FILES([src/testpattern/run-testpattern-2],
                 [chmod +x src/testpattern/run-testpattern-2])
+AC_CONFIG_FILES([src/testpattern/compare-checksums],
+                [chmod +x src/testpattern/compare-checksums])
 AC_CONFIG_FILES([src/cups/test-rastertogutenprint],
                 [chmod +x src/cups/test-rastertogutenprint])
 AC_CONFIG_FILES([src/ghost/Makefile])

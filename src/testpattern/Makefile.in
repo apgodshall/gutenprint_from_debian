@@ -86,9 +86,10 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(top_srcdir)/scripts/global.mk $(srcdir)/Makefile.in \
 	$(srcdir)/Makefile.am $(top_srcdir)/scripts/mkinstalldirs \
-	$(srcdir)/run-testpattern-2.in testpatterny.h testpatterny.c \
-	testpatternl.c $(top_srcdir)/scripts/depcomp \
-	$(top_srcdir)/scripts/ylwrap $(top_srcdir)/scripts/test-driver
+	$(srcdir)/run-testpattern-2.in $(srcdir)/compare-checksums.in \
+	testpatterny.h testpatterny.c testpatternl.c \
+	$(top_srcdir)/scripts/depcomp $(top_srcdir)/scripts/ylwrap \
+	$(top_srcdir)/scripts/test-driver
 @BUILD_TESTPATTERN_TRUE@bin_PROGRAMS = testpattern$(EXEEXT)
 @BUILD_TESTPATTERN_TRUE@noinst_PROGRAMS = printers$(EXEEXT) \
 @BUILD_TESTPATTERN_TRUE@	printer_options$(EXEEXT)
@@ -109,7 +110,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/scripts/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = run-testpattern-2
+CONFIG_CLEAN_FILES = run-testpattern-2 compare-checksums
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgdatadir)"
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
@@ -452,6 +453,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ENABLE_SHARED = @ENABLE_SHARED@
+ENABLE_STATIC = @ENABLE_STATIC@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FIND = @FIND@
@@ -635,7 +638,7 @@ top_srcdir = @top_srcdir@
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_builddir)/include $(LOCAL_CPPFLAGS) $(GNUCFLAGS)
 GUTENPRINTUI_LIBS = $(top_builddir)/src/gutenprintui/libgutenprintui.la
 TESTS = run-testpattern-1 run-testpattern-2
-@BUILD_TESTPATTERN_TRUE@noinst_SCRIPTS = run-testpattern-2
+@BUILD_TESTPATTERN_TRUE@noinst_SCRIPTS = run-testpattern-2 compare-checksums
 AM_LFLAGS = -i
 AM_YFLAGS = -d
 testpattern_SOURCES = testpattern.c testpatterny.y testpatternl.l testpattern.h
@@ -644,7 +647,7 @@ printers_LDADD = $(GUTENPRINT_LIBS)
 printer_options_LDADD = $(GUTENPRINT_LIBS)
 @INSTALL_SAMPLES_TRUE@pkgdata_DATA = testpattern.sample extended.sample
 MAINTAINERCLEANFILES = Makefile.in testpatternl.c testpatterny.c testpatterny.h
-EXTRA_DIST = testpatterny.h $(pkgdata_DATA) run-testpattern run-testpattern-1
+EXTRA_DIST = testpatterny.h $(pkgdata_DATA) run-testpattern run-testpattern-1 compare-checksums.in
 all: all-am
 
 .SUFFIXES:
@@ -681,6 +684,8 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 run-testpattern-2: $(top_builddir)/config.status $(srcdir)/run-testpattern-2.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+compare-checksums: $(top_builddir)/config.status $(srcdir)/compare-checksums.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)

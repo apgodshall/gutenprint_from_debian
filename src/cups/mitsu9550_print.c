@@ -35,6 +35,8 @@
 #include <fcntl.h>
 #include <signal.h>
 
+#define BACKEND mitsu9550_backend
+
 #include "backend_common.h"
 
 #define USB_VID_MITSU       0x06D3
@@ -46,14 +48,13 @@ struct mitsu9550_ctx {
 	struct libusb_device_handle *dev;
 	uint8_t endp_up;
 	uint8_t endp_down;
+	int type;
 
 	uint8_t *databuf;
 	int datalen;
 
 	int is_s_variant;
 
-	int fast_return;
-	
 	uint16_t rows;
 	uint16_t cols;
 };
@@ -149,10 +150,6 @@ static void *mitsu9550_init(void)
 	}
 	memset(ctx, 0, sizeof(struct mitsu9550_ctx));
 
-        /* Use Fast return by default in CUPS mode */
-        if (getenv("DEVICE_URI") || getenv("FAST_RETURN"))
-                ctx->fast_return = 1;
-	
 	return ctx;
 }
 
@@ -172,8 +169,8 @@ static void mitsu9550_attach(void *vctx, struct libusb_device_handle *dev,
 	device = libusb_get_device(dev);
 	libusb_get_device_descriptor(device, &desc);
 
-	if (desc.idProduct == USB_PID_MITSU_9550DS)
-		ctx->is_s_variant = 1;
+	ctx->type = lookup_printer_type(&mitsu9550_backend,
+					desc.idVendor, desc.idProduct);	
 }
 
 
@@ -288,28 +285,28 @@ static int mitsu9550_get_status(struct mitsu9550_ctx *ctx, uint8_t *resp, int st
 static int validate_media(int type, int cols, int rows) {
 	switch(type) {
 	case 0x01: /* 3.5x5 */
- 		if (cols != 1812 || rows != 1240)
+		if (cols != 1812 && rows != 1240)
 			return 1;
 		break;
 	case 0x02: /* 4x6 */
 	case 0x03: /* PC ??? */ 
 		if (cols != 2152)
 			return 1;
-		if (rows != 1416 || rows != 1184 ||
+		if (rows != 1416 && rows != 1184 &&
 		    rows != 1240)
 			return 1;
 		break;
 	case 0x04: /* 5x7 */
 		if (cols != 1812)
 			return 1;
-		if (rows != 1240 || rows != 2452)
+		if (rows != 1240 && rows != 2452)
 			return 1;
 		break;
 	case 0x05: /* 6x9 */
 		if (cols != 2152)
 			return 1;
-		if (rows != 1416 || rows != 2972 ||
-		    rows != 2956 || rows != 3146)
+		if (rows != 1416 && rows != 2972 &&
+		    rows != 2956 && rows != 3146)
 			return 1;
 		break;
 	case 0x06: /* V */
@@ -332,15 +329,15 @@ static int mitsu9550_main_loop(void *vctx, int copies) {
 
 	if (!ctx)
 		return CUPS_BACKEND_FAILED;
-	
-	/* This printer handles copies internally */
+
+	/* Update printjob header to reflect number of requested copies */
 	hdr2 = (struct mitsu9550_hdr2 *) (ctx->databuf + sizeof(struct mitsu9550_hdr1));
 	hdr2->copies = cpu_to_be16(copies);
 
 	ptr = ctx->databuf;
 	
 top:
-	if (ctx->is_s_variant) {
+	if (ctx->type == P_MITSU_9550S) {
 		int num;
 		
 		/* Send "unknown 1" command */
@@ -405,7 +402,7 @@ top:
 
 	/* Now it's time for the actual print job! */
 	
-	if (ctx->is_s_variant) {
+	if (ctx->type == P_MITSU_9550S) {
 		cmd.cmd[0] = 0x1b;
 		cmd.cmd[1] = 0x44;
 		cmd.cmd[2] = 0;
@@ -463,7 +460,7 @@ top:
 			     (uint8_t*) ptr, sizeof(struct mitsu9550_hdr3))))
 		return CUPS_BACKEND_FAILED;
 	ptr += sizeof(struct mitsu9550_hdr3);
-	if (!ctx->is_s_variant) {
+	if (ctx->type != P_MITSU_9550S) {
 		// XXX need to investigate what hdr4 is about
 		if ((ret = send_data(ctx->dev, ctx->endp_down,
 				     (uint8_t*) ptr, sizeof(struct mitsu9550_hdr4))))
@@ -471,7 +468,7 @@ top:
 	}
 	ptr += sizeof(struct mitsu9550_hdr4);
 	
-	if (ctx->is_s_variant) {
+	if (ctx->type == P_MITSU_9550S) {
 		/* Send "start data" command */
 		cmd.cmd[0] = 0x1b;
 		cmd.cmd[1] = 0x5a;
@@ -546,7 +543,7 @@ top:
 		}
 	}
 	
-	if (ctx->is_s_variant) {
+	if (ctx->type == P_MITSU_9550S) {
 		/* Send "end data" command */
 		cmd.cmd[0] = 0x1b;
 		cmd.cmd[1] = 0x50;
@@ -592,12 +589,12 @@ top:
 		if (!sts->sts1) /* If printer transitions to idle */
 			break;
 
-		if (ctx->fast_return && !be16_to_cpu(sts->copies)) { /* No remaining prints */
+		if (fast_return && !be16_to_cpu(sts->copies)) { /* No remaining prints */
                         INFO("Fast return mode enabled.\n");
 			break;
                 }
 
-		if (ctx->fast_return && !sts->sts5) { /* Ready for another job */
+		if (fast_return && !sts->sts5) { /* Ready for another job */
 			INFO("Fast return mode enabled.\n");
 			break;
 		}
@@ -605,18 +602,7 @@ top:
 		sleep(1);
 	}
 	
-        /* This printer handles copies internally */
-	copies = 1;
-
-	/* Clean up */
-	if (terminate)
-		copies = 1;
-
-	INFO("Print complete (%d copies remaining)\n", copies - 1);
-
-	if (copies && --copies) {
-		goto top;
-	}
+	INFO("Print complete\n");
 
 	return CUPS_BACKEND_OK;
 }
@@ -744,7 +730,6 @@ static void mitsu9550_cmdline(void)
 {
 	DEBUG("\t\t[ -m ]           # Query media\n");
 	DEBUG("\t\t[ -s ]           # Query status\n");
-	DEBUG("\t\t[ -f ]           # Enable fast return mode\n");
 }
 
 static int mitsu9550_cmdline_arg(void *vctx, int argc, char **argv)
@@ -752,30 +737,21 @@ static int mitsu9550_cmdline_arg(void *vctx, int argc, char **argv)
 	struct mitsu9550_ctx *ctx = vctx;
 	int i, j = 0;
 
+	if (!ctx)
+		return -1;
+
 	/* Reset arg parsing */
 	optind = 1;
 	opterr = 0;
-	while ((i = getopt(argc, argv, "mfs")) >= 0) {
+	while ((i = getopt(argc, argv, GETOPT_LIST_GLOBAL "ms")) >= 0) {
 		switch(i) {
- 		case 'm':
-			if (ctx) {
-				j = mitsu9550_query_media(ctx);
-				break;
-			}
-			return 1;
+ 		GETOPT_PROCESS_GLOBAL			
+		case 'm':
+			j = mitsu9550_query_media(ctx);
+			break;
 		case 's':
-			if (ctx) {
-				j = mitsu9550_query_status(ctx);
-				break;
-			}
-			return 1;
-
-		case 'f':
-			if (ctx) {
-				ctx->fast_return = 1;
-				break;
-			}
-			return 1;
+			j = mitsu9550_query_status(ctx);
+			break;
 		default:
 			break;  /* Ignore completely */
 		}
@@ -789,7 +765,7 @@ static int mitsu9550_cmdline_arg(void *vctx, int argc, char **argv)
 /* Exported */
 struct dyesub_backend mitsu9550_backend = {
 	.name = "Mitsubishi CP-9550DW-S",
-	.version = "0.12",
+	.version = "0.15",
 	.uri_prefix = "mitsu9550",
 	.cmdline_usage = mitsu9550_cmdline,
 	.cmdline_arg = mitsu9550_cmdline_arg,
@@ -801,7 +777,7 @@ struct dyesub_backend mitsu9550_backend = {
 	.query_serno = mitsu9550_query_serno,
 	.devices = {
 	{ USB_VID_MITSU, USB_PID_MITSU_9550D, P_MITSU_9550, ""},
-	{ USB_VID_MITSU, USB_PID_MITSU_9550DS, P_MITSU_9550, ""},
+	{ USB_VID_MITSU, USB_PID_MITSU_9550DS, P_MITSU_9550S, ""},
 	{ 0, 0, 0, ""}
 	}
 };

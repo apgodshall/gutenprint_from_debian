@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-   "$Id: printers.xml,v 1.407 2015/06/24 15:01:03 gernot2270 Exp $"
+   "$Id: printers.xml,v 1.427 2015/10/03 22:20:34 rlk Exp $"
 
    XML description of printers known to libgutenprint
    You can add additional printers here, but the underlying driver has
@@ -308,7 +308,7 @@
       <printer translate="name" name="Canon PIXMA iP8100" driver="bjc-PIXMA-iP8100" manufacturer="Canon" model="3008100" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXMA-iP8100">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXUS iP8100" driver="bjc-PIXUS-iP8100" manufacturer="Canon" model="3008100" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXUS-iP8100">EXPERIMENTAL</printer>
       <!-- Canon iP8500 -->
-      <printer translate="name" name="Canon PIXMA iP8500" driver="bjc-PIXMA-iP8500" manufacturer="Canon" model="3008500" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXMA-iP8500">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA iP8500" deviceid="MFG:Canon;MDL:iP8500;CMD:BJL,BJRaster3,BSCCe;" driver="bjc-PIXMA-iP8500" manufacturer="Canon" model="3008500" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXMA-iP8500">EXPERIMENTAL</printer>
       <!-- Canon iP8600 (PIXUS only, PIXMA iP8600 does not exist) -->
       <printer translate="name" name="Canon PIXMA iP8600" driver="bjc-PIXMA-iP8600" manufacturer="Canon" model="3008600" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXMA-iP8600">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXUS iP8600" driver="bjc-PIXUS-iP8600" manufacturer="Canon" model="3008600" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXUS-iP8600">EXPERIMENTAL</printer>
@@ -375,6 +375,11 @@
       <printer translate="name" name="Canon Pro9500 Mk.II series" driver="bjc-Pro9500mk2-series" manufacturer="Canon" model="7009502" parameters="PIXMA_iP4000_params" foomaticid="Canon-Pro9500-Mk2-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA Pro9500mk2" driver="bjc-PIXMA-Pro9500mk2" manufacturer="Canon" model="7009502" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXMA-Pro9500- Mk2">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXUS Pro9500mk2" driver="bjc-PIXUS-Pro9500mk2" manufacturer="Canon" model="7009502" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXUS-Pro9500-Mk2">EXPERIMENTAL</printer>
+      <!-- Canon MPC400 family -->
+      <printer translate="name" name="Canon SmartBase MPC400" driver="bjc-SmartBase-MPC400" manufacturer="Canon" model="16000400" parameters="PIXMA_iP4000_params" foomaticid="Canon-SmartBase-MPC400">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon SmartBase MPC600F" driver="bjc-SmartBase-MPC600F" manufacturer="Canon" model="16000400" parameters="PIXMA_iP4000_params" foomaticid="Canon-SmartBase-MPC600F">EXPERIMENTAL</printer>
+      <!-- Canon MP55 family -->
+      <printer translate="name" name="Canon PIXUS MP55" driver="bjc-PIXUS-MP55" manufacturer="Canon" model="5000055" parameters="PIXMA_iP4000_params" foomaticid="Canon-PIXUS-MP55">EXPERIMENTAL</printer>
       <!-- Canon MP140 family -->
       <printer translate="name" name="Canon MP140 series" driver="bjc-MP140-series" manufacturer="Canon" model="5000150" parameters="PIXMA_iP4000_params" foomaticid="Canon-MP140-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MP140" driver="bjc-MULTIPASS-MP140" manufacturer="Canon" model="5000150" parameters="PIXMA_iP4000_params" foomaticid="Canon-MULTIPASS-MP140">EXPERIMENTAL</printer><!-- driver and foomaticid legacy names used -->
@@ -657,7 +662,9 @@
       <printer translate="name" name="Canon PIXMA MG2550" driver="bjc-PIXMA-MG2550" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2550">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
       <printer translate="name" name="Canon PIXMA MG2560" driver="bjc-PIXMA-MG2560" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2560">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
       <printer translate="name" name="Canon PIXMA MG2570" driver="bjc-PIXMA-MG2570" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2570">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
+      <printer translate="name" name="Canon PIXMA MG2570S" driver="bjc-PIXMA-MG2570S" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2570S">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
       <printer translate="name" name="Canon PIXMA MG2580" driver="bjc-PIXMA-MG2580" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2580">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
+      <printer translate="name" name="Canon PIXMA MG2580S" driver="bjc-PIXMA-MG2580S" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2580S">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
       <printer translate="name" name="Canon PIXMA MG2590" driver="bjc-PIXMA-MG2590" manufacturer="Canon" model="8002400" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG2590">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
       <!-- Canon MG2900 family -->
       <printer translate="name" name="Canon MG2900 series" driver="bjc-MG2900-series" manufacturer="Canon" model="8002900" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG2900-series">EXPERIMENTAL; Only supports plain, photo paper gloss gold, photo paper gloss, and envelope; unconfirmed whether other media will work</printer>
@@ -704,6 +711,15 @@
       <printer translate="name" name="Canon PIXMA MG3560" driver="bjc-PIXMA-MG3560" manufacturer="Canon" model="8003500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3560">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG3570" driver="bjc-PIXMA-MG3570" manufacturer="Canon" model="8003500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3570">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG3580" driver="bjc-PIXMA-MG3580" manufacturer="Canon" model="8003500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3580">EXPERIMENTAL</printer>
+      <!-- Canon MG3600 family -->
+      <printer translate="name" name="Canon MG3600 series" driver="bjc-MG3600-series" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG3600-series">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3610" driver="bjc-PIXMA-MG3610" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3610">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3620" driver="bjc-PIXMA-MG3620" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3620">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXUS MG3630" driver="bjc-PIXUS-MG3630" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG3630">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3640" driver="bjc-PIXMA-MG3640" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3640">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3650" driver="bjc-PIXMA-MG3650" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3650">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3670" driver="bjc-PIXMA-MG3670" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3670">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG3680" driver="bjc-PIXMA-MG3680" manufacturer="Canon" model="8003600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG3680">EXPERIMENTAL</printer>
       <!-- Canon MG4100 family -->
       <printer translate="name" name="Canon MG4100 series" driver="bjc-MG4100-series" manufacturer="Canon" model="8003100" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG4100-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG4100" driver="bjc-PIXMA-MG4100" manufacturer="Canon" model="8003100" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG4100">EXPERIMENTAL</printer>
@@ -788,6 +804,23 @@
       <printer translate="name" name="Canon PIXMA MG5670" driver="bjc-PIXMA-MG5670" manufacturer="Canon" model="8005600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5670">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon Mommy Photo MG5670" driver="bjc-Mommy-Photo-MG5670" manufacturer="Canon" model="8005600" parameters="PIXMA_iP4300_params" foomaticid="Canon-Mommy-Photo-MG5670">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG5680" driver="bjc-PIXMA-MG5680" manufacturer="Canon" model="8005600" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5680">EXPERIMENTAL</printer>
+      <!-- Canon MG5700 family -->
+      <printer translate="name" name="Canon MG5700 series" driver="bjc-MG5700-series" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG5700-series">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5710" driver="bjc-PIXMA-MG5710" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5710">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5720" driver="bjc-PIXMA-MG5720" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5720">EXPERIMENTAL</printer><!-- black model -->
+      <printer translate="name" name="Canon PIXMA MG5721" driver="bjc-PIXMA-MG5721" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5721">EXPERIMENTAL</printer><!-- silver/black model -->
+      <printer translate="name" name="Canon PIXMA MG5722" driver="bjc-PIXMA-MG5722" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5722">EXPERIMENTAL</printer><!-- silver/white model -->
+      <printer translate="name" name="Canon PIXUS MG5730" driver="bjc-PIXUS-MG5730" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG5730">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5740" driver="bjc-PIXMA-MG5740" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5740">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5750" driver="bjc-PIXMA-MG5750" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5750">EXPERIMENTAL</printer><!-- black model -->
+      <printer translate="name" name="Canon PIXMA MG5751" driver="bjc-PIXMA-MG5751" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5751">EXPERIMENTAL</printer><!-- white model -->
+      <printer translate="name" name="Canon PIXMA MG5752" driver="bjc-PIXMA-MG5752" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5752">EXPERIMENTAL</printer><!-- silver/black model -->
+      <printer translate="name" name="Canon PIXMA MG5753" driver="bjc-PIXMA-MG5753" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5753">EXPERIMENTAL</printer><!-- silver/white model -->
+      <printer translate="name" name="Canon PIXMA MG5770" driver="bjc-PIXMA-MG5770" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5770">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5780" driver="bjc-PIXMA-MG5780" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5780">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5790" driver="bjc-PIXMA-MG5790" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5790">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon Mommy Photo MG5790" driver="bjc-Mommy-Photo-MG5790" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-Mommy-Photo-MG5790">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG5795" driver="bjc-PIXMA-MG5795" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG5795">EXPERIMENTAL</printer>
       <!-- Canon MG6100 family -->
       <printer translate="name" name="Canon MG6100 series" driver="bjc-MG6100-series" manufacturer="Canon" model="8006100" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG6100-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG6100" driver="bjc-PIXMA-MG6100" manufacturer="Canon" model="8006100" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6100">EXPERIMENTAL</printer>
@@ -843,6 +876,22 @@
       <!-- Canon MG6700 family -->
       <printer translate="name" name="Canon MG6700 series" driver="bjc-MG6700-series" manufacturer="Canon" model="8006700" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG6700-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXUS MG6730" driver="bjc-PIXUS-MG6730" manufacturer="Canon" model="8006700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG6730">EXPERIMENTAL</printer>
+      <!-- Canon MG6800 family -->
+      <printer translate="name" name="Canon MG6800 series" driver="bjc-MG6800-series" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG6800-series">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG6810" driver="bjc-PIXMA-MG6810" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6810">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG6820" driver="bjc-PIXMA-MG6820" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6820">EXPERIMENTAL</printer><!-- black model -->
+      <printer translate="name" name="Canon PIXMA MG6821" driver="bjc-PIXMA-MG6821" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6821">EXPERIMENTAL</printer><!-- silver/black model -->
+      <printer translate="name" name="Canon PIXMA MG6822" driver="bjc-PIXMA-MG6822" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6822">EXPERIMENTAL</printer><!-- silver/white model -->
+      <printer translate="name" name="Canon PIXMA MG6840" driver="bjc-PIXMA-MG6840" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6840">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG6850" driver="bjc-PIXMA-MG6850" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6850">EXPERIMENTAL</printer><!-- black model -->
+      <printer translate="name" name="Canon PIXMA MG6851" driver="bjc-PIXMA-MG6851" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6851">EXPERIMENTAL</printer><!-- white model -->
+      <printer translate="name" name="Canon PIXMA MG6852" driver="bjc-PIXMA-MG6852" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6852">EXPERIMENTAL</printer><!-- silver/black model -->
+      <printer translate="name" name="Canon PIXMA MG6853" driver="bjc-PIXMA-MG6853" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6853">EXPERIMENTAL</printer><!-- silver/white model -->
+      <printer translate="name" name="Canon PIXMA MG6870" driver="bjc-PIXMA-MG6870" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6870">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG6880" driver="bjc-PIXMA-MG6880" manufacturer="Canon" model="8005700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG6880">EXPERIMENTAL</printer>
+      <!-- Canon MG6900 family -->
+      <printer translate="name" name="Canon MG6900 series" driver="bjc-MG6900-series" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG6900-series">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXUS MG6930" driver="bjc-PIXUS-MG6930" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG6930">EXPERIMENTAL</printer>
       <!-- Canon MG7100 family -->
       <printer translate="name" name="Canon MG7100 series" driver="bjc-MG7100-series" manufacturer="Canon" model="8006500" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG7100-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG7110" driver="bjc-PIXMA-MG7110" manufacturer="Canon" model="8006500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7110">EXPERIMENTAL</printer>
@@ -864,6 +913,20 @@
       <printer translate="name" name="Canon PIXMA MG7570" driver="bjc-PIXMA-MG7570" manufacturer="Canon" model="8007500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7570">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon Mommy Photo MG7570" driver="bjc-Mommy-Photo-MG7570" manufacturer="Canon" model="8007500" parameters="PIXMA_iP4300_params" foomaticid="Canon-Mommy-Photo-MG7570">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG7580" driver="bjc-PIXMA-MG7580" manufacturer="Canon" model="8007500" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7580">EXPERIMENTAL</printer>
+      <!-- Canon MG7700 family -->
+      <printer translate="name" name="Canon MG7700 series" driver="bjc-MG7700-series" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG7700-series">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7710" driver="bjc-PIXMA-MG7710" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7710">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7720" driver="bjc-PIXMA-MG7720" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7720">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXUS MG7730" driver="bjc-PIXUS-MG7730" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG7730">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXUS MG7730F" driver="bjc-PIXUS-MG7730F" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXUS-MG7730F">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7740" driver="bjc-PIXMA-MG7740" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7740">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7750" driver="bjc-PIXMA-MG7750" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7750">EXPERIMENTAL</printer><!-- black model -->
+      <printer translate="name" name="Canon PIXMA MG7751" driver="bjc-PIXMA-MG7751" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7751">EXPERIMENTAL</printer><!-- white model -->
+      <printer translate="name" name="Canon PIXMA MG7752" driver="bjc-PIXMA-MG7752" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7752">EXPERIMENTAL</printer><!-- red model -->
+      <printer translate="name" name="Canon PIXMA MG7753" driver="bjc-PIXMA-MG7753" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7753">EXPERIMENTAL</printer><!-- gold model -->
+      <printer translate="name" name="Canon PIXMA MG7770" driver="bjc-PIXMA-MG7770" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7770">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7780" driver="bjc-PIXMA-MG7780" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7780">EXPERIMENTAL</printer>
+      <printer translate="name" name="Canon PIXMA MG7790" driver="bjc-PIXMA-MG7790" manufacturer="Canon" model="8007700" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG7790">EXPERIMENTAL</printer>
       <!-- Canon MG8100 family -->
       <printer translate="name" name="Canon MG8100 series" driver="bjc-MG8100-series" manufacturer="Canon" model="8008100" parameters="PIXMA_iP4300_params" foomaticid="Canon-MG8100-series">EXPERIMENTAL</printer>
       <printer translate="name" name="Canon PIXMA MG8100" driver="bjc-PIXMA-MG8100" manufacturer="Canon" model="8008100" parameters="PIXMA_iP4300_params" foomaticid="Canon-PIXMA-MG8100">EXPERIMENTAL</printer>
@@ -1254,6 +1317,8 @@
       <printer translate="name" name="Epson B-500DN" driver="escp2-b500dn" manufacturer="Epson" model="87" parameters="standard_params" foomaticid="Epson-B500DN" />
       <printer translate="name" name="Epson B-508DN" driver="escp2-b508dn" manufacturer="Epson" model="87" parameters="standard_params" foomaticid="Epson-B508DN" />
       <printer translate="name" name="Epson B-510DN" driver="escp2-b510dn" manufacturer="Epson" model="87" parameters="standard_params" foomaticid="Epson-B510DN" />
+      <printer translate="name" name="Epson L120" driver="escp2-l120" manufacturer="Epson" model="80" parameters="cx3500_params" foomaticid="Epson-L120" />
+      <printer translate="name" name="Epson L210" driver="escp2-l210" manufacturer="Epson" model="80" parameters="cx3500_params" foomaticid="Epson-L210" />
       <printer translate="name" name="Epson Stylus C20" deviceid="MFG:EPSON;MDL:Stylus C20;DES:EPSON Stylus C20;CMD:ESCPL2,BDC,D4;" driver="escp2-c20" manufacturer="Epson" model="42" parameters="480_params" foomaticid="Epson-Stylus_C20" />
       <printer translate="name" name="Epson Stylus C20SX" driver="escp2-c20sx" manufacturer="Epson" model="42" parameters="480_params" foomaticid="Epson-Stylus_C20SX" />
       <printer translate="name" name="Epson Stylus C20UX" deviceid="MFG:EPSON;MDL:Stylus C20;DES:EPSON Stylus C20;CMD:ESCPL2,BDC,D4;" driver="escp2-c20ux" manufacturer="Epson" model="42" parameters="480_params" foomaticid="Epson-Stylus_C20UX" />
@@ -1677,7 +1742,6 @@
       <printer translate="name" name="Epson EP 801A" driver="escp2-ep801a" manufacturer="Epson" model="96" parameters="standard_params" foomaticid="Epson-EP_801A" />
       <printer translate="name" name="Epson EP 901A" driver="escp2-ep901a" manufacturer="Epson" model="96" parameters="standard_params" foomaticid="Epson-EP_901A" />
       <printer translate="name" name="Epson EP 901F" driver="escp2-ep901f" manufacturer="Epson" model="96" parameters="standard_params" foomaticid="Epson-EP_801F" />
-      <printer translate="name" name="Epson L210" driver="escp2-l210" manufacturer="Epson" model="80" parameters="cx3500_params" foomaticid="Epson-L210" />
       <printer translate="name" name="Epson MC 2000" driver="escp2-mc2000" manufacturer="Epson" model="26" parameters="standard_params" foomaticid="Epson-MC_2000" />
       <printer translate="name" name="Epson MC 5000" driver="escp2-mc5000" manufacturer="Epson" model="40" parameters="pro_5500_params" foomaticid="Epson-MC_5000" />
       <printer translate="name" name="Epson MC 7000" driver="escp2-mc7000" manufacturer="Epson" model="29" parameters="pro_5500_params" foomaticid="Epson-MC_7000" />
@@ -1821,6 +1885,7 @@
       <printer translate="name" name="Brother HL-2035" driver="brother-hl-2035" manufacturer="Brother" model="6" parameters="pcl_laser_params" foomaticid="Brother-HL-2035" />
       <!-- -->
       <printer translate="name" name="Brother HL-2060" driver="brother-hl-2060" manufacturer="Brother" model="6" parameters="pcl_laser_params" foomaticid="Brother-HL-2060" />
+      <printer translate="name" name="Brother HL-2250DN" driver="brother-hl-2250dn" manufacturer="Brother" model="62" parameters="pcl_laser_params" foomaticid="Brother-HL-2250DN" />
       <printer translate="name" name="Brother HL-2460" deviceid="MFG:Brother;MDL:Brother HL-2460 series;" driver="brother-hl-2460" manufacturer="Brother" model="6" parameters="pcl_laser_params" foomaticid="Brother-HL-2460" />
       <printer translate="name" name="Brother HL-2460N" driver="brother-hl-2460n" manufacturer="Brother" model="6" parameters="pcl_laser_params" foomaticid="Brother-HL-2460N" />
       <printer translate="name" name="Brother HL-4Ve" driver="brother-hl-4ve" manufacturer="Brother" model="2" parameters="pcl_laser_params" foomaticid="Brother-HL-4Ve" />
@@ -1892,8 +1957,10 @@
       <printer translate="name" name="Fujitsu PrintPartner 20W" driver="fujitsu-pp_20w" manufacturer="Fujitsu" model="6" parameters="pcl_laser_params" foomaticid="Fujitsu-PrintPartner_20W" />
       <printer translate="name" name="Fujitsu PrintPartner 8000" driver="fujitsu-pp_8000" manufacturer="Fujitsu" model="3" parameters="pcl_laser_params" foomaticid="Fujitsu-PrintPartner_8000" />
       <printer translate="name" name="Generic PCL 4 Printer" driver="pcl-g_4" manufacturer="Generic" model="2" parameters="pcl_laser_params" foomaticid="Generic-PCL_4_Printer" />
+      <printer translate="name" name="Generic PCL 4 Printer wide margin" driver="pcl-g_4_a4" manufacturer="Generic" model="22" parameters="pcl_laser_params" foomaticid="Generic-PCL_4_Printer_wide_margin" />
       <printer translate="name" name="Generic PCL 4 LF Printer" driver="pcl-g_4_l" manufacturer="Generic" model="23" parameters="pcl_laser_params" foomaticid="Generic-PCL_4_LF_Printer" />
       <printer translate="name" name="Generic PCL 5 Printer" driver="pcl-g_5" manufacturer="Generic" model="3" parameters="pcl_laser_params" foomaticid="Generic-PCL_5_Printer" />
+      <printer translate="name" name="Generic PCL 5 Printer wide margin" driver="pcl-g_5_a4" manufacturer="Generic" model="32" parameters="pcl_laser_params" foomaticid="Generic-PCL_5_Printer_wide_margin" />
       <printer translate="name" name="Generic PCL 5 LF Printer" driver="pcl-g_5_l" manufacturer="Generic" model="33" parameters="pcl_laser_params" foomaticid="Generic-PCL_5_LF_Printer" />
       <printer translate="name" name="Generic PCL 5c Printer" driver="pcl-g_5c" manufacturer="Generic" model="6" parameters="pcl_laser_params" foomaticid="Generic-PCL_5c_Printer" />
       <printer translate="name" name="Generic PCL 5c LF Printer" driver="pcl-g_5c_l" manufacturer="Generic" model="61" parameters="pcl_laser_params" foomaticid="Generic-PCL_5c_LF_Printer" />
@@ -1901,6 +1968,9 @@
       <printer translate="name" name="Generic PCL 5e LF Printer" driver="pcl-g_5e_l" manufacturer="Generic" model="61" parameters="pcl_laser_params" foomaticid="Generic-PCL_5e_LF_Printer" />
       <printer translate="name" name="Generic PCL 6/PCL XL Printer" driver="pcl-g_6" manufacturer="Generic" model="6" parameters="pcl_laser_params" foomaticid="Generic-PCL_6_PCL_XL_Printer" />
       <printer translate="name" name="Generic PCL 6/PCL XL LF Printer" driver="pcl-g_6_l" manufacturer="Generic" model="61" parameters="pcl_laser_params" foomaticid="Generic-PCL_6_PCL_XL_LF_Printer" />
+      <printer translate="name" name="Generic PCL 6 Printer wide margin" driver="pcl-g_6_a4" manufacturer="Generic" model="62" parameters="pcl_laser_params" foomaticid="Generic-PCL_6_Printer_wide_margin" />
+      <printer translate="name" name="Generic PCL 6 LF Printer wide margin" driver="pcl-g_6_lf_a4" manufacturer="Generic" model="63" parameters="pcl_laser_params" foomaticid="Generic-PCL_6_LF_Printer_wide_margin" />
+      <printer translate="name" name="Generic PCL 6 Tabl Printer wide margin" driver="pcl-g_6_tabloid_a4" manufacturer="Generic" model="64" parameters="pcl_laser_params" foomaticid="Generic-PCL_6_Tabloid_Printer_wide_margin" />
       <printer translate="name" name="Gestetner 10512" driver="gestetner-10512" manufacturer="Gestetner" model="61" parameters="pcl_laser_params" foomaticid="Gestetner-10512" />
       <printer translate="name" name="Gestetner 2212" driver="gestetner-2212" manufacturer="Gestetner" model="61" parameters="pcl_laser_params" foomaticid="Gestetner-2212" />
       <printer translate="name" name="Gestetner 2712" driver="gestetner-2712" manufacturer="Gestetner" model="61" parameters="pcl_laser_params" foomaticid="Gestetner-2712" />
@@ -2759,6 +2829,9 @@
       <printer translate="name" name="Lexmark Z53" driver="lexmark-z53" manufacturer="Lexmark" model="10052" parameters="standard_params" foomaticid="Lexmark-Z53" />
     </family>
     <family name="dyesub">
+      <parameters name="nativecopies">
+        <parameter type="boolean" name="NativeCopies">1</parameter>
+      </parameters>      
       <printer translate="name" name="Olympus P-10" driver="olympus-p10" manufacturer="Olympus" model="2" foomaticid="Olympus-P-10" />
       <printer translate="name" name="Olympus P-11" driver="olympus-p11" manufacturer="Olympus" model="2" foomaticid="Olympus-P-11" />
       <printer translate="name" name="Olympus P-200" driver="olympus-p200" manufacturer="Olympus" model="4" foomaticid="Olympus-P-200" />
@@ -2770,46 +2843,46 @@
       <printer translate="name" name="Olympus P-400" driver="olympus-p400" manufacturer="Olympus" model="1" foomaticid="Olympus-P-400" />
       <printer translate="name" name="Olympus P-440" driver="olympus-p440" manufacturer="Olympus" model="3" foomaticid="Olympus-P-440" />
       <printer translate="name" name="Olympus P-S100" driver="olympus-ps100" manufacturer="Olympus" model="20" foomaticid="Olympus-P-S100" />
-      <printer translate="name" name="Canon CP-10" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-10;CLS:PRINTER;DES:Canon CP-10;VER:1.00;" driver="canon-cp10" manufacturer="Canon" model="1002" foomaticid="Canon-CP-10" />
-      <printer translate="name" name="Canon CP-100" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-100;CLS:PRINTER;DES:Canon CP-100;VER:1.00;" driver="canon-cp100" manufacturer="Canon" model="1000" foomaticid="Canon-CP-100" />
-      <printer translate="name" name="Canon CP-200" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-200;CLS:PRINTER;DES:Canon CP-200;VER:1.00;" driver="canon-cp200" manufacturer="Canon" model="1000" foomaticid="Canon-CP-200" />
-      <printer translate="name" name="Canon CP-220" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-220;CLS:PRINTER;DES:Canon CP-220;VER:1.00;" driver="canon-cp220" manufacturer="Canon" model="1001" foomaticid="Canon-CP-220" />
-      <printer translate="name" name="Canon CP-300" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-300;CLS:PRINTER;DES:Canon CP-300;VER:1.00;" driver="canon-cp300" manufacturer="Canon" model="1000" foomaticid="Canon-CP-300" />
-      <printer translate="name" name="Canon CP-330" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-330;CLS:PRINTER;DES:Canon CP-330;VER:1.00;" driver="canon-cp330" manufacturer="Canon" model="1001" foomaticid="Canon-CP-330" />
-      <printer translate="name" name="Canon SELPHY CP400" deviceid="MFG:Canon;CMD:Raster3;MDL:CP400;CLS:PRINTER;DES:Canon CP400;VER:1.00;" driver="canon-cp400" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP400" />
-      <printer translate="name" name="Canon SELPHY CP500" deviceid="MFG:Canon;CMD:Raster3;MDL:CP500;CLS:PRINTER;DES:Canon CP500;VER:1.00;" driver="canon-cp500" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP500" />
-      <printer translate="name" name="Canon SELPHY CP510" deviceid="MFG:Canon;CMD:Raster3;MDL:CP510;CLS:PRINTER;DES:Canon CP510;VER:1.00;" driver="canon-cp510" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP510" />
-      <printer translate="name" name="Canon SELPHY CP520" driver="canon-cp520" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP520" />
-      <printer translate="name" name="Canon SELPHY CP530" deviceid="MFG:Canon;CMD:Raster3;MDL:CP530;CLS:PRINTER;DES:Canon CP530;VER:1.00;" driver="canon-cp530" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP530" />
-      <printer translate="name" name="Canon SELPHY CP600" deviceid="MFG:Canon;CMD:Raster3;MDL:CP600;CLS:PRINTER;DES:Canon CP600;VER:1.00;" driver="canon-cp600" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP600" />
-      <printer translate="name" name="Canon SELPHY CP710" deviceid="MFG:Canon;CMD:Raster3;MDL:CP710;CLS:PRINTER;DES:Canon CP710;VER:1.00;" driver="canon-cp710" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP710" />
-      <printer translate="name" name="Canon SELPHY CP720" deviceid="MFG:Canon;CMD:Raster3;MDL:CP720;CLS:PRINTER;DES:Canon CP720;VER:1.00;" driver="canon-cp720" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP720" />
-      <printer translate="name" name="Canon SELPHY CP730" deviceid="MFG:Canon;CMD:Raster3;MDL:CP730;CLS:PRINTER;DES:Canon CP730;VER:1.00;" driver="canon-cp730" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP730" />
-      <printer translate="name" name="Canon SELPHY CP740" driver="canon-cp740" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP740" />
-      <printer translate="name" name="Canon SELPHY CP750" deviceid="MFG:Canon;CMD:Raster3;MDL:CP750;CLS:PRINTER;DES:Canon CP750;VER:1.00;" driver="canon-cp750" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP750" />
-      <printer translate="name" name="Canon SELPHY CP760" deviceid="MFG:Canon;CMD:Raster3;MDL:CP760;CLS:PRINTER;DES:Canon CP760;VER:1.00;" driver="canon-cp760" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP760" />
-      <printer translate="name" name="Canon SELPHY CP770" driver="canon-cp770" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP770" />
-      <printer translate="name" name="Canon SELPHY CP780" deviceid="MFG:Canon;CMD:Raster3;MDL:CP780;CLS:PRINTER;DES:Canon CP780;VER:1.00;" driver="canon-cp780" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP780" />
-      <printer translate="name" name="Canon SELPHY CP790" deviceid="MFG:Canon;CMD:Raster3;MDL:CP790;CLS:PRINTER;DES:Canon CP790;VER:1.00;" driver="canon-cp790" manufacturer="Canon" model="1008" foomaticid="Canon-SELPHY-CP790" />
-      <printer translate="name" name="Canon SELPHY CP800" deviceid="MFG:Canon;CMD:Raster3;MDL:CP800;CLS:PRINTER;DES:Canon CP800;VER:1.00;" driver="canon-cp800" manufacturer="Canon" model="1009" foomaticid="Canon-SELPHY-CP800" />
-      <printer translate="name" name="Canon SELPHY CP810" deviceid="MFG:Canon;CMD:Raster3;MDL:CP810;CLS:PRINTER;DES:Canon CP810;VER:3.05;" driver="canon-cp810" manufacturer="Canon" model="1009" foomaticid="Canon-SELPHY-CP810" />
+      <printer translate="name" name="Canon CP-10" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-10;CLS:PRINTER;DES:Canon CP-10;VER:1.00;" driver="canon-cp10" manufacturer="Canon" model="1002" foomaticid="Canon-CP-10" parameters="nativecopies" />
+      <printer translate="name" name="Canon CP-100" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-100;CLS:PRINTER;DES:Canon CP-100;VER:1.00;" driver="canon-cp100" manufacturer="Canon" model="1000" foomaticid="Canon-CP-100" parameters="nativecopies" />
+      <printer translate="name" name="Canon CP-200" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-200;CLS:PRINTER;DES:Canon CP-200;VER:1.00;" driver="canon-cp200" manufacturer="Canon" model="1000" foomaticid="Canon-CP-200" parameters="nativecopies" />
+      <printer translate="name" name="Canon CP-220" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-220;CLS:PRINTER;DES:Canon CP-220;VER:1.00;" driver="canon-cp220" manufacturer="Canon" model="1001" foomaticid="Canon-CP-220" parameters="nativecopies" />
+      <printer translate="name" name="Canon CP-300" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-300;CLS:PRINTER;DES:Canon CP-300;VER:1.00;" driver="canon-cp300" manufacturer="Canon" model="1000" foomaticid="Canon-CP-300" parameters="nativecopies" />
+      <printer translate="name" name="Canon CP-330" deviceid="MFG:Canon;CMD:Raster3;MDL:CP-330;CLS:PRINTER;DES:Canon CP-330;VER:1.00;" driver="canon-cp330" manufacturer="Canon" model="1001" foomaticid="Canon-CP-330" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP400" deviceid="MFG:Canon;CMD:Raster3;MDL:CP400;CLS:PRINTER;DES:Canon CP400;VER:1.00;" driver="canon-cp400" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP400" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP500" deviceid="MFG:Canon;CMD:Raster3;MDL:CP500;CLS:PRINTER;DES:Canon CP500;VER:1.00;" driver="canon-cp500" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP500" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP510" deviceid="MFG:Canon;CMD:Raster3;MDL:CP510;CLS:PRINTER;DES:Canon CP510;VER:1.00;" driver="canon-cp510" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP510" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP520" driver="canon-cp520" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP520" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP530" deviceid="MFG:Canon;CMD:Raster3;MDL:CP530;CLS:PRINTER;DES:Canon CP530;VER:1.00;" driver="canon-cp530" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP530" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP600" deviceid="MFG:Canon;CMD:Raster3;MDL:CP600;CLS:PRINTER;DES:Canon CP600;VER:1.00;" driver="canon-cp600" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP600" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP710" deviceid="MFG:Canon;CMD:Raster3;MDL:CP710;CLS:PRINTER;DES:Canon CP710;VER:1.00;" driver="canon-cp710" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP710" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP720" deviceid="MFG:Canon;CMD:Raster3;MDL:CP720;CLS:PRINTER;DES:Canon CP720;VER:1.00;" driver="canon-cp720" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP720" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP730" deviceid="MFG:Canon;CMD:Raster3;MDL:CP730;CLS:PRINTER;DES:Canon CP730;VER:1.00;" driver="canon-cp730" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP730" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP740" driver="canon-cp740" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP740" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP750" deviceid="MFG:Canon;CMD:Raster3;MDL:CP750;CLS:PRINTER;DES:Canon CP750;VER:1.00;" driver="canon-cp750" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP750" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP760" deviceid="MFG:Canon;CMD:Raster3;MDL:CP760;CLS:PRINTER;DES:Canon CP760;VER:1.00;" driver="canon-cp760" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP760" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP770" driver="canon-cp770" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP770" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP780" deviceid="MFG:Canon;CMD:Raster3;MDL:CP780;CLS:PRINTER;DES:Canon CP780;VER:1.00;" driver="canon-cp780" manufacturer="Canon" model="1001" foomaticid="Canon-SELPHY-CP780" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP790" deviceid="MFG:Canon;CMD:Raster3;MDL:CP790;CLS:PRINTER;DES:Canon CP790;VER:1.00;" driver="canon-cp790" manufacturer="Canon" model="1008" foomaticid="Canon-SELPHY-CP790" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP800" deviceid="MFG:Canon;CMD:Raster3;MDL:CP800;CLS:PRINTER;DES:Canon CP800;VER:1.00;" driver="canon-cp800" manufacturer="Canon" model="1009" foomaticid="Canon-SELPHY-CP800" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY CP810" deviceid="MFG:Canon;CMD:Raster3;MDL:CP810;CLS:PRINTER;DES:Canon CP810;VER:3.05;" driver="canon-cp810" manufacturer="Canon" model="1009" foomaticid="Canon-SELPHY-CP810" parameters="nativecopies" />
       <printer translate="name" name="Canon SELPHY CP820" driver="canon-cp820" manufacturer="Canon" model="1011" foomaticid="Canon-SELPHY-CP820" />
-      <printer translate="name" name="Canon SELPHY CP900" deviceid="MFG:Canon;CMD:Raster3;MDL:CP900;CLS:PRINTER;DES:Canon CP900;VER:5.77;" driver="canon-cp900" manufacturer="Canon" model="1010" foomaticid="Canon-SELPHY-CP900" />
+      <printer translate="name" name="Canon SELPHY CP900" deviceid="MFG:Canon;CMD:Raster3;MDL:CP900;CLS:PRINTER;DES:Canon CP900;VER:5.77;" driver="canon-cp900" manufacturer="Canon" model="1010" foomaticid="Canon-SELPHY-CP900" parameters="nativecopies" />
       <printer translate="name" name="Canon SELPHY CP910" deviceid="MFG:Canon;CMD:Raster3;MDL:CP910;CLS:PRINTER;DES:Canon CP910;VER:1.00;CID:CA_YCC_ICP;" driver="canon-cp910" manufacturer="Canon" model="1011" foomaticid="Canon-SELPHY-CP910" />
-      <printer translate="name" name="Canon SELPHY ES1" deviceid="MFG:Canon;CMD:Raster3;MDL:ES1;CLS:PRINTER;DES:Canon SELPHY ES1;VER:1.00;" driver="canon-es1" manufacturer="Canon" model="1003" foomaticid="Canon-SELPHY-ES1" />
-      <printer translate="name" name="Canon SELPHY ES2" deviceid="MFG:Canon;CMD:Raster3;MDL:ES2;CLS:PRINTER;DES:Canon SELPHY ES2;VER:1.00;" driver="canon-es2" manufacturer="Canon" model="1005" foomaticid="Canon-SELPHY-ES2" />
-      <printer translate="name" name="Canon SELPHY ES3" deviceid="MFG:Canon;CMD:Raster3;MDL:ES3;CLS:PRINTER;DES:Canon SELPHY ES3;VER:1.00;" driver="canon-es3" manufacturer="Canon" model="1006" foomaticid="Canon-SELPHY-ES3" />
-      <printer translate="name" name="Canon SELPHY ES20" driver="canon-es20" manufacturer="Canon" model="1005" foomaticid="Canon-SELPHY-ES20" />
-      <printer translate="name" name="Canon SELPHY ES30" deviceid="MFG:Canon;CMD:Raster3;MDL:ES30;CLS:PRINTER;DES:Canon SELPHY ES30;VER:1.00;" driver="canon-es30" manufacturer="Canon" model="1006" foomaticid="Canon-SELPHY-ES30" />
-      <printer translate="name" name="Canon SELPHY ES40" deviceid="MFG:Canon;CMD:Raster3;MDL:ES40;CLS:PRINTER;DES:Canon SELPHY ES40;VER:1.00;" driver="canon-es40" manufacturer="Canon" model="1007" foomaticid="Canon-SELPHY-ES40" />
+      <printer translate="name" name="Canon SELPHY ES1" deviceid="MFG:Canon;CMD:Raster3;MDL:ES1;CLS:PRINTER;DES:Canon SELPHY ES1;VER:1.00;" driver="canon-es1" manufacturer="Canon" model="1003" foomaticid="Canon-SELPHY-ES1" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY ES2" deviceid="MFG:Canon;CMD:Raster3;MDL:ES2;CLS:PRINTER;DES:Canon SELPHY ES2;VER:1.00;" driver="canon-es2" manufacturer="Canon" model="1005" foomaticid="Canon-SELPHY-ES2" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY ES3" deviceid="MFG:Canon;CMD:Raster3;MDL:ES3;CLS:PRINTER;DES:Canon SELPHY ES3;VER:1.00;" driver="canon-es3" manufacturer="Canon" model="1006" foomaticid="Canon-SELPHY-ES3" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY ES20" driver="canon-es20" manufacturer="Canon" model="1005" foomaticid="Canon-SELPHY-ES20" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY ES30" deviceid="MFG:Canon;CMD:Raster3;MDL:ES30;CLS:PRINTER;DES:Canon SELPHY ES30;VER:1.00;" driver="canon-es30" manufacturer="Canon" model="1006" foomaticid="Canon-SELPHY-ES30" parameters="nativecopies" />
+      <printer translate="name" name="Canon SELPHY ES40" deviceid="MFG:Canon;CMD:Raster3;MDL:ES40;CLS:PRINTER;DES:Canon SELPHY ES40;VER:1.00;" driver="canon-es40" manufacturer="Canon" model="1007" foomaticid="Canon-SELPHY-ES40" parameters="nativecopies" />
       <printer translate="name" name="Sony UP-DP10" driver="sony-updp10" manufacturer="Sony" model="2000" foomaticid="Sony-UP-DP10" />
-      <printer translate="name" name="Sony UP-DR150" deviceid="MFG:Sony;MDL:UP-DR150;DES:Sony UP-DR150;CMD:SONY-Original;CLS:PRINTER" driver="sony-updr150" manufacturer="Sony" model="2001" foomaticid="Sony-UP-DR150" />
+      <printer translate="name" name="Sony UP-DR150" deviceid="MFG:Sony;MDL:UP-DR150;DES:Sony UP-DR150;CMD:SONY-Original;CLS:PRINTER" driver="sony-updr150" manufacturer="Sony" model="2001" foomaticid="Sony-UP-DR150" parameters="nativecopies" />
       <printer translate="name" name="Sony DPP-EX5" driver="sony-dppex5" manufacturer="Sony" model="2002" foomaticid="Sony-DPP-EX5" />
       <printer translate="name" name="Sony DPP-EX7" driver="sony-dppex7" manufacturer="Sony" model="2002" foomaticid="Sony-DPP-EX7" />
       <printer translate="name" name="Sony UP-DR100" driver="sony-updr100" manufacturer="Sony" model="2003" foomaticid="Sony-UP-DR100" />
-      <printer translate="name" name="Sony UP-DR200" driver="sony-updr200" manufacturer="Sony" model="2004" foomaticid="Sony-UP-DR200" />
-      <printer translate="name" name="Sony UP-CR10L" driver="sony-upcr10l" manufacturer="Sony" model="2005" foomaticid="Sony-UP-CR10L" />
-      <printer translate="name" name="DNP SL10" driver="dnp-sl10" manufacturer="DNP" model="2005" foomaticid="DNP-SL10" />
+      <printer translate="name" name="Sony UP-DR200" driver="sony-updr200" manufacturer="Sony" model="2004" foomaticid="Sony-UP-DR200" parameters="nativecopies" />
+      <printer translate="name" name="Sony UP-CR10L" driver="sony-upcr10l" manufacturer="Sony" model="2005" foomaticid="Sony-UP-CR10L" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Dai Nippon Printing SL10" driver="dnp-sl10" manufacturer="Dai Nippon Printing" model="2005" foomaticid="DNP-SL10" parameters="nativecopies">EXPERIMENTAL</printer>
       <printer translate="name" name="Fujifilm Printpix-CX-400" driver="fujifilm-cx400" manufacturer="Fujifilm" model="3000" foomaticid="Fujifilm-Printpix-CX-400" />
       <printer translate="name" name="Fujifilm Printpix-CX-550" driver="fujifilm-cx550" manufacturer="Fujifilm" model="3001" foomaticid="Fujifilm-Printpix-CX-550" />
       <printer translate="name" name="Fujifilm FinePix-NX-500" driver="fujifilm-nx500" manufacturer="Fujifilm" model="3002" foomaticid="Fujifilm-FinePix-NX-500" />
@@ -2821,52 +2894,56 @@
       <printer translate="name" name="Kodak Photo-Printer-500" driver="kodak-photo-printer-500" manufacturer="Kodak" model="4000" foomaticid="Kodak-Photo-Printer-500" />
       <printer translate="name" name="Kodak Printer-Dock-Plus" driver="kodak-dock-plus" manufacturer="Kodak" model="4000" foomaticid="Kodak-Printer-Dock-Plus" />
       <printer translate="name" name="Kodak Printer-Dock-Plus-S3" driver="kodak-dock-plus-s3" manufacturer="Kodak" model="4000" foomaticid="Kodak-Printer-Dock-Plus-S3" />
-      <printer translate="name" name="Kodak 6800" deviceid="MFG:Eastman Kodak Company;CMD:ESC;MDL:Photo Printer 6800;CLS:PRINTER;DES:KODAK Photo Printer 6800;" driver="kodak-6800" manufacturer="Kodak" model="4001" foomaticid="Kodak-6800" />
-      <printer translate="name" name="Kodak 6850" deviceid="MFG:Eastman Kodak Company;CMD:ESC;MDL:Photo Printer 6850;CLS:PRINTER;DES:KODAK Photo Printer 6850;" driver="kodak-6850" manufacturer="Kodak" model="4002" foomaticid="Kodak-6850" />
-      <printer translate="name" name="Kodak 605" deviceid="MFG:Eastman Kodak Company;CMD:SUPCC;MCL:KODAK 605 Photo Printer;CLS:PRINTER;DES:Thermal Dye Photo Printer;" driver="kodak-605" manufacturer="Kodak" model="4003" foomaticid="Kodak-605" />
-      <printer translate="name" name="Kodak 1400" deviceid="MFG:Eastman Kodak Company;CMD:EK1;MDL: 1400 Printer;CLS:Printer;DES:Kodak 1400 Printer;`" driver="kodak-1400" manufacturer="Kodak" model="4004" foomaticid="Kodak-1400" />
-      <printer translate="name" name="Kodak 805" deviceid="MFG:Eastman Kodak Company;CMD:EK2;MDL: KODAK 805 Photo Printer;CLS:Printer;DES:Kodak 805 Photo Printer;" driver="kodak-805" manufacturer="Kodak" model="4005" foomaticid="Kodak-805" />
+      <printer translate="name" name="Kodak 6800" deviceid="MFG:Eastman Kodak Company;CMD:ESC;MDL:Photo Printer 6800;CLS:PRINTER;DES:KODAK Photo Printer 6800;" driver="kodak-6800" manufacturer="Kodak" model="4001" foomaticid="Kodak-6800" parameters="nativecopies" />
+      <printer translate="name" name="Kodak 6850" deviceid="MFG:Eastman Kodak Company;CMD:ESC;MDL:Photo Printer 6850;CLS:PRINTER;DES:KODAK Photo Printer 6850;" driver="kodak-6850" manufacturer="Kodak" model="4002" foomaticid="Kodak-6850" parameters="nativecopies" />
+      <printer translate="name" name="Kodak 605" deviceid="MFG:Eastman Kodak Company;CMD:SUPCC;MCL:KODAK 605 Photo Printer;CLS:PRINTER;DES:Thermal Dye Photo Printer;" driver="kodak-605" manufacturer="Kodak" model="4003" foomaticid="Kodak-605" parameters="nativecopies" />
+      <printer translate="name" name="Kodak 1400" deviceid="MFG:Eastman Kodak Company;CMD:EK1;MDL: 1400 Printer;CLS:Printer;DES:Kodak 1400 Printer;`" driver="kodak-1400" manufacturer="Kodak" model="4004" foomaticid="Kodak-1400" parameters="nativecopies" />
+      <printer translate="name" name="Kodak 805" deviceid="MFG:Eastman Kodak Company;CMD:EK2;MDL: KODAK 805 Photo Printer;CLS:Printer;DES:Kodak 805 Photo Printer;" driver="kodak-805" manufacturer="Kodak" model="4005" foomaticid="Kodak-805" parameters="nativecopies" />
       <printer translate="name" name="Kodak 8500" driver="kodak-8500" manufacturer="Kodak" model="4100" foomaticid="Kodak-8500">EXPERIMENTAL</printer>
       <printer translate="name" name="Kodak 9810" driver="kodak-9810" manufacturer="Kodak" model="4006" foomaticid="Kodak-9810">EXPERIMENTAL</printer>
       <printer translate="name" name="Kodak 8810" driver="kodak-8810" manufacturer="Kodak" model="4007" foomaticid="Kodak-8810">EXPERIMENTAL</printer>
+      <printer translate="name" name="Kodak 7000" driver="kodak-7000" manufacturer="Kodak" model="4008" foomaticid="Kodak-7000">EXPERIMENTAL</printer>
+      <printer translate="name" name="Kodak 7010" driver="kodak-7010" manufacturer="Kodak" model="4008" foomaticid="Kodak-7010">EXPERIMENTAL</printer>
+      <printer translate="name" name="Kodak 7015" driver="kodak-7015" manufacturer="Kodak" model="4009" foomaticid="Kodak-7015">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-3020D" driver="mitsubishi-3020d" manufacturer="Mitsubishi" model="4101" foomaticid="Mitsubishi-3020D">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-3020DU" driver="mitsubishi-3020du" manufacturer="Mitsubishi" model="4101" foomaticid="Mitsubishi-3020DU">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-3020DE" driver="mitsubishi-3020de" manufacturer="Mitsubishi" model="4101" foomaticid="Mitsubishi-3020DE">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-3020DA" driver="mitsubishi-3020da" manufacturer="Mitsubishi" model="4102" foomaticid="Mitsubishi-3020DA">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-3020DAE" driver="mitsubishi-3020dae" manufacturer="Mitsubishi" model="4102" foomaticid="Mitsubishi-3020DAE">EXPERIMENTAL</printer>
-      <printer translate="name" name="Mitsubishi CP-9550D" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP9550D ;CLS:PRINTER;DES:MITSUBISHI CP9550D" driver="mitsubishi-9550d" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550D" />
-      <printer translate="name" name="Mitsubishi CP-9550DW" driver="mitsubishi-9550dw" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550DW" />
-      <printer translate="name" name="Mitsubishi CP-9550DZ" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP9550DZ;CLS:PRINTER;DES:MITSUBISHI CP9550DZ;" driver="mitsubishi-9550dz" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550DZ">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-9550D" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP9550D ;CLS:PRINTER;DES:MITSUBISHI CP9550D" driver="mitsubishi-9550d" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550D" parameters="nativecopies" />
+      <printer translate="name" name="Mitsubishi CP-9550DW" driver="mitsubishi-9550dw" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550DW" parameters="nativecopies" />
+      <printer translate="name" name="Mitsubishi CP-9550DZ" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP9550DZ;CLS:PRINTER;DES:MITSUBISHI CP9550DZ;" driver="mitsubishi-9550dz" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550DZ" parameters="nativecopies">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-9550DW-S" driver="mitsubishi-9550dw-s" manufacturer="Mitsubishi" model="4103" foomaticid="Mitsubishi-9550DW-S">EXPERIMENTAL</printer>
       <printer translate="name" name="Mitsubishi CP-9810D" driver="mitsubishi-9810d" manufacturer="Mitsubishi" model="4104" foomaticid="Mitsubishi-9810D" />
       <printer translate="name" name="Mitsubishi CP-9810DW" driver="mitsubishi-9810dw" manufacturer="Mitsubishi" model="4104" foomaticid="Mitsubishi-9810DW" />
-      <printer translate="name" name="Mitsubishi CP-D70DW" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP60D70D707D;CLS:PRINTER;DES:MITSUBISHI CP60D70D707D" driver="mitsubishi-d70dw" manufacturer="Mitsubishi" model="4105" foomaticid="Mitsubishi-D70DW">EXPERIMENTAL</printer>
-      <printer translate="name" name="Mitsubishi CP-D707DW" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP60D70D707D;CLS:PRINTER;DES:MITSUBISHI CP60D70D707D" driver="mitsubishi-d707dw" manufacturer="Mitsubishi" model="4105" foomaticid="Mitsubishi-D707DW">EXPERIMENTAL</printer>
-      <printer translate="name" name="Mitsubishi CP-K60DW-S" driver="mitsubishi-k60dw-s" manufacturer="Mitsubishi" model="4106" foomaticid="Mitsubishi-K60DW-S">EXPERIMENTAL</printer>
-      <printer translate="name" name="Mitsubishi CP-D80DW" driver="mitsubishi-d80dw" manufacturer="Mitsubishi" model="4107" foomaticid="Mitsubishi-D80DW">EXPERIMENTAL</printer>
-      <printer translate="name" name="Kodak 305" deviceid="MFG:KODAK;CMD:KODAK305;MDL:305 Photo Printer;CLS:PRINTER;DES:KODAK 305 Photo Printer" driver="kodak-305" manufacturer="Kodak" model="4108" foomaticid="Kodak-305">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-D70DW" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP60D70D707D;CLS:PRINTER;DES:MITSUBISHI CP60D70D707D" driver="mitsubishi-d70dw" manufacturer="Mitsubishi" model="4105" foomaticid="Mitsubishi-D70DW" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-D707DW" deviceid="MFG:MITSUBISHI;CMD:MEL;MDL:CP60D70D707D;CLS:PRINTER;DES:MITSUBISHI CP60D70D707D" driver="mitsubishi-d707dw" manufacturer="Mitsubishi" model="4105" foomaticid="Mitsubishi-D707DW" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-K60DW-S" driver="mitsubishi-k60dw" manufacturer="Mitsubishi" model="4106" foomaticid="Mitsubishi-K60DW-S" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-D80DW" driver="mitsubishi-d80dw" manufacturer="Mitsubishi" model="4107" foomaticid="Mitsubishi-D80DW" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Kodak 305" deviceid="MFG:KODAK;CMD:KODAK305;MDL:305 Photo Printer;CLS:PRINTER;DES:KODAK 305 Photo Printer" driver="kodak-305" manufacturer="Kodak" model="4108" foomaticid="Kodak-305" parameters="nativecopies">EXPERIMENTAL</printer>
       <printer translate="name" name="Shinko CHC-S9045" driver="shinko-chcs9045" manufacturer="Shinko" model="5000" foomaticid="Shinko-CHC-S9045" />
-      <printer translate="name" name="Shinko CHC-S2145" deviceid="MFG:SHINKO;CMD:SUPCC;MDL:CHC-S2145;CLS:PRINTER;DES:SHINKO CHC-S2145;" driver="shinko-chcs2145" manufacturer="Shinko" model="5001" foomaticid="Shinko-CHC-S2145" />
-      <printer translate="name" name="Sinfonia S2145/S2" driver="sinfonia-chcs2145" manufacturer="Sinfonia" model="5001" foomaticid="Sinfonia-CHC-S2145" />
-      <printer translate="name" name="Shinko CHC-S1245" driver="shinko-chcs1245" manufacturer="Shinko" model="5002" foomaticid="Shinko-CHC-S1245">EXPERIMENTAL</printer>
-      <printer translate="name" name="Sinfonia CHC-S1245/E1" driver="sinfonia-chcs1245" manufacturer="Sinfonia" model="5002" foomaticid="Sinfonia-CHC-S1245">EXPERIMENTAL</printer>
-      <printer translate="name" name="Shinko CHC-S6245" driver="shinko-chcs6245" manufacturer="Shinko" model="5003" foomaticid="Shinko-CHC-S6245">EXPERIMENTAL</printer>
-      <printer translate="name" name="Sinfonia CHC-S6245/CE1" driver="sinfonia-chcs6245" manufacturer="Sinfonia" model="5003" foomaticid="Sinfonia-CHC-S6245">EXPERIMENTAL</printer>
-      <printer translate="name" name="Shinko CHC-S6145" driver="shinko-chcs6145" manufacturer="Shinko" model="5004" foomaticid="Shinko-CHC-S6145">EXPERIMENTAL</printer>
+      <printer translate="name" name="Shinko CHC-S2145" deviceid="MFG:SHINKO;CMD:SUPCC;MDL:CHC-S2145;CLS:PRINTER;DES:SHINKO CHC-S2145;" driver="shinko-chcs2145" manufacturer="Shinko" model="5001" foomaticid="Shinko-CHC-S2145" parameters="nativecopies" />
+      <printer translate="name" name="Sinfonia S2145/S2" driver="sinfonia-chcs2145" manufacturer="Sinfonia" model="5001" foomaticid="Sinfonia-CHC-S2145" parameters="nativecopies" />
+      <printer translate="name" name="Shinko CHC-S1245" driver="shinko-chcs1245" manufacturer="Shinko" model="5002" foomaticid="Shinko-CHC-S1245" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Sinfonia CHC-S1245/E1" driver="sinfonia-chcs1245" manufacturer="Sinfonia" model="5002" foomaticid="Sinfonia-CHC-S1245" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Shinko CHC-S6245" driver="shinko-chcs6245" manufacturer="Shinko" model="5003" foomaticid="Shinko-CHC-S6245" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Sinfonia CHC-S6245/CE1" driver="sinfonia-chcs6245" manufacturer="Sinfonia" model="5003" foomaticid="Sinfonia-CHC-S6245" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Shinko CHC-S6145" deviceid="MFG:SINFONIA;CMD:SUPCC;MDL:CHC-S6145;CLS:PRINTER;DES:Thermal Dye Photo Printer;" driver="shinko-chcs6145" manufacturer="Shinko" model="5004" foomaticid="Shinko-CHC-S6145">EXPERIMENTAL</printer>
       <printer translate="name" name="Sinfonia CHC-S6145/CS2" driver="sinfonia-chcs6145" manufacturer="Sinfonia" model="5004" foomaticid="Sinfonia-CHC-S6145">EXPERIMENTAL</printer>
       <printer translate="name" name="CIAAT Brava 21" driver="ciaat-brava-21" manufacturer="CIAAT" model="5005" foomaticid="CIAAT-Brava-21">EXPERIMENTAL</printer>
-      <printer translate="name" name="Dai Nippon Printing DS40" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS40;" driver="dnp-ds40" manufacturer="DNP" model="6000" foomaticid="DNP-DS40" />
-      <printer translate="name" name="Dai Nippon Printing DS80" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS80;" driver="dnp-ds80" manufacturer="DNP" model="6001" foomaticid="DNP-DS80" />
-      <printer translate="name" name="Dai Nippon Printing DSRX1" driver="dnp-dsrx1" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS-RX1;" manufacturer="DNP" model="6002" foomaticid="DNP-DSRX1" />
-      <printer translate="name" name="Dai Nippon Printing DS620" driver="dnp-ds620" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DP-DS620;" manufacturer="DNP" model="6003" foomaticid="DNP-DS620" />
-      <printer translate="name" name="Citizen CX" driver="citizen-cx" deviceid="MANUFACTURER:CITIZEN SYSTEMS ;MODEL:CX;" manufacturer="Citizen" model="6000" foomaticid="Citizen-CX" />
-      <printer translate="name" name="Citizen CX-W" driver="citizen-cx-w" manufacturer="Citizen" model="6001" foomaticid="Citizen-CX-W" />
-      <printer translate="name" name="Citizen CY" driver="citizen-cy" manufacturer="Citizen" model="6002" foomaticid="Citizen-CY" />
-      <printer translate="name" name="Citizen CW-01" driver="citizen-cw-01" manufacturer="Citizen" model="6005" foomaticid="Citizen-CW-01">EXPERIMENTAL</printer>
-      <printer translate="name" name="Citizen OP900" driver="citizen-op900" manufacturer="Citizen" model="6005" foomaticid="Citizen-OP900">EXPERIMENTAL</printer>
-      <printer translate="name" name="Citizen CW-02" driver="citizen-cw-02" manufacturer="Citizen" model="6000" foomaticid="Citizen-CW-02">EXPERIMENTAL</printer>
-      <printer translate="name" name="Citizen OP900II" driver="citizen-op900ii" manufacturer="Citizen" model="6000" foomaticid="Citizen-OP900II">EXPERIMENTAL</printer>
-      <printer translate="name" name="Mitsubishi CP-3800DW" driver="mitsubishi-cp-3800dw" manufacturer="Mitsubishi" model="6001" foomaticid="Mitsubishi-CP-3800DW" />
+      <printer translate="name" name="Dai Nippon Printing DS40" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS40;" driver="dnp-ds40" manufacturer="Dai Nippon Printing" model="6000" foomaticid="DNP-DS40" parameters="nativecopies" />
+      <printer translate="name" name="Dai Nippon Printing DS80" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS80;" driver="dnp-ds80" manufacturer="Dai Nippon Printing" model="6001" foomaticid="DNP-DS80" parameters="nativecopies" />
+      <printer translate="name" name="Dai Nippon Printing DSRX1" driver="dnp-dsrx1" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DS-RX1;" manufacturer="Dai Nippon Printing" model="6002" foomaticid="DNP-DSRX1" parameters="nativecopies" />
+      <printer translate="name" name="Dai Nippon Printing DS620" driver="dnp-ds620" deviceid="MANUFACTURER:Dai Nippon Printing ;MODEL:DP-DS620;" manufacturer="Dai Nippon Printing" model="6003" foomaticid="DNP-DS620" parameters="nativecopies" />
+      <printer translate="name" name="Citizen CX" driver="citizen-cx" deviceid="MANUFACTURER:CITIZEN SYSTEMS ;MODEL:CX;" manufacturer="Citizen" model="6000" foomaticid="Citizen-CX" parameters="nativecopies" />
+      <printer translate="name" name="Citizen CX-W" driver="citizen-cx-w" manufacturer="Citizen" model="6001" foomaticid="Citizen-CX-W" parameters="nativecopies" />
+      <printer translate="name" name="Citizen CY" driver="citizen-cy" manufacturer="Citizen" model="6002" foomaticid="Citizen-CY" parameters="nativecopies" />
+      <printer translate="name" name="Citizen CW-01" driver="citizen-cw-01" manufacturer="Citizen" model="6005" foomaticid="Citizen-CW-01" parameters="nativecopies" />
+      <printer translate="name" name="Citizen OP900" driver="citizen-op900" manufacturer="Citizen" model="6005" foomaticid="Citizen-OP900" parameters="nativecopies" />
+      <printer translate="name" name="Citizen CW-02" driver="citizen-cw-02" manufacturer="Citizen" model="6000" foomaticid="Citizen-CW-02" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Citizen OP900II" driver="citizen-op900ii" manufacturer="Citizen" model="6000" foomaticid="Citizen-OP900II" parameters="nativecopies">EXPERIMENTAL</printer>
+      <printer translate="name" name="Mitsubishi CP-3800DW" driver="mitsubishi-cp-3800dw" manufacturer="Mitsubishi" model="6001" foomaticid="Mitsubishi-CP-3800DW" parameters="nativecopies" />
+      <printer translate="name" name="Dai Nippon Printing DS80DX" driver="dnp-ds80dx" manufacturer="Dai Nippon Printing" model="6006" foomaticid="DNP-DS80DX" parameters="nativecopies">EXPERIMENTAL</printer>
     </family>
     <family name="raw">
       <printer translate="name" name="RAW DATA 16 bit" driver="raw-data-16" manufacturer="" model="0" />

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-raw.c,v 1.43 2013/09/08 15:35:18 rlk Exp $"
+ * "$Id: print-raw.c,v 1.47 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Print plug-in RAW driver for the GIMP.
  *
@@ -24,6 +24,17 @@
 /*
  * This file must include only standard C header files.  The core code must
  * compile on generic platforms that don't support glib, gimp, gtk, etc.
+ */
+
+/*
+ * To use this driver, we recommend this:
+ *
+ *   stp_set_driver(v, "raw-data-8");  // or raw_data-16 
+ *   stp_set_string_parameter(v, "PageSize", "Custom");
+ *   stp_set_page_height(v, HEIGHT);
+ *   stp_set_page_width(v, WIDTH);
+ *
+ * For further details, see  compute_thumbnail() in gutenprintui2/panel.c
  */
 
 #ifdef HAVE_CONFIG_H
@@ -150,6 +161,8 @@ raw_parameters(const stp_vars_t *v, const char *name,
       description->bounds.str = stp_string_list_create();
       for (i = 0; i < papersizes; i++)
 	{
+	  /* All users of the raw drivers should use "Custom" PageSize
+	     and manually set page height/width! */
 	  const stp_papersize_t *pt = stp_get_papersize_by_index(i);
 	  stp_string_list_add_string(description->bounds.str,
 				     pt->name, gettext(pt->text));
@@ -160,10 +173,6 @@ raw_parameters(const stp_vars_t *v, const char *name,
   else
     description->is_active = 0;
 }
-
-/*
- * 'escp2_imageable_area()' - Return the imageable area of the page.
- */
 
 static void
 raw_imageable_area(const stp_vars_t *v,
@@ -210,9 +219,6 @@ raw_describe_output(const stp_vars_t *v)
   return "RGB";
 }
 
-/*
- * 'escp2_print()' - Print an image to an EPSON printer.
- */
 static int
 raw_print(const stp_vars_t *v, stp_image_t *image)
 {
@@ -258,7 +264,6 @@ raw_print(const stp_vars_t *v, stp_image_t *image)
 	  }
     }
 
-  stp_set_float_parameter(nv, "Density", 1.0);
   stp_set_boolean_parameter(nv, "SimpleGamma", 1);
   stp_channel_reset(nv);
   for (i = 0; i < ink_channels; i++)

@@ -1,5 +1,5 @@
 /*
- * "$Id: paper.h,v 1.4 2008/07/12 15:05:54 rlk Exp $"
+ * "$Id: paper.h,v 1.5 2015/09/07 21:57:37 speachy Exp $"
  *
  *   libgimpprint paper functions.
  *
@@ -64,7 +64,9 @@ typedef enum
   /** Standard paper size */
   PAPERSIZE_TYPE_STANDARD = 0,
   /** Envelope */
-  PAPERSIZE_TYPE_ENVELOPE
+  PAPERSIZE_TYPE_ENVELOPE,
+  /** Special (not normally displayed) */
+  PAPERSIZE_TYPE_SPECIAL
 } stp_papersize_type_t;
 
 /** The papersize data type. */
@@ -155,5 +157,5 @@ extern void stp_default_media_size(const stp_vars_t *v,
 
 #endif /* GUTENPRINT_PAPER_H */
 /*
- * End of "$Id: paper.h,v 1.4 2008/07/12 15:05:54 rlk Exp $".
+ * End of "$Id: paper.h,v 1.5 2015/09/07 21:57:37 speachy Exp $".
  */

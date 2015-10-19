@@ -3,7 +3,6 @@ install
 *.log
 *.substvars
 *.debhelper
-cups-driver-gutenprint
 escputil
 files
 foomatic-db-gutenprint

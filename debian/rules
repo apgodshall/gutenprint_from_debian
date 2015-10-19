@@ -41,7 +41,6 @@ override_dh_installdocs:
 	dh_installdocs -pescputil --link-doc=libgutenprint2
 	dh_installdocs -pijsgutenprint --link-doc=libgutenprint2
 	dh_installdocs -plibgutenprintui2-dev --link-doc=libgutenprintui2-1
-	dh_installdocs -pcups-driver-gutenprint --link-doc=printer-driver-gutenprint
 	dh_installdocs --remaining-packages
 
 override_dh_clean:

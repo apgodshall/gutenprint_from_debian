@@ -43,25 +43,6 @@ Description: print plugin for the GIMP
  many cases, and can be used for many of the most demanding printing
  tasks.  Gutenprint was formerly known as Gimp-Print.
 
-Package: cups-driver-gutenprint
-Architecture: all
-Section: oldlibs
-Priority: extra
-Depends:
- ${misc:Depends}, ${shlibs:Depends},
- printer-driver-gutenprint (>= ${binary:Version}~)
-Pre-Depends: dpkg (>= 1.17.5)
-Description: transitional dummy package for gutenprint printer driver
- This is a transitional package to install the CUPS driver based on
- Gutenprint, which has been renamed to printer-driver-gutenprint.
- .
- Gutenprint is the print facility for the GIMP, and in addition a
- suite of drivers that may be used with common UNIX spooling systems
- using GhostScript or CUPS.  These drivers provide printing quality
- for UNIX/Linux on a par with proprietary vendor-supplied drivers in
- many cases, and can be used for many of the most demanding printing
- tasks.  Gutenprint was formerly known as Gimp-Print.
-
 Package: printer-driver-gutenprint
 Architecture: any
 Depends:
@@ -74,9 +55,6 @@ Depends:
 Suggests:
  gutenprint-doc (>= ${source:Version}),
  gutenprint-locales (>= ${source:Version})
-Provides: cups-driver-gutenprint
-Conflicts: cups-driver-gutenprint (<< 5.2.7-3)
-Replaces: cups-driver-gutenprint (<< 5.2.7-3)
 Description: printer drivers for CUPS
  This package includes a CUPS driver based on Gutenprint.
  .

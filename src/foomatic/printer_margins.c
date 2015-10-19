@@ -1,5 +1,5 @@
 /*
- * "$Id: printer_margins.c,v 1.21 2007/05/06 19:38:10 rlk Exp $"
+ * "$Id: printer_margins.c,v 1.22 2015/08/02 03:09:40 rlk Exp $"
  *
  *   Dump the per-printer margins for the OpenPrinting database
  *
@@ -111,12 +111,12 @@ main(int argc, char **argv) {
 	     driver, opt->name, opt->text);
       printf("$imageableareas{'%s'}{'%s'} = {",
 	     driver, opt->name);
-      printf("  'left' => '%d',", left);
-      printf("  'right' => '%d',", right);
-      printf("  'top' => '%d',", top);
-      printf("  'bottom' => '%d',", bottom);
-      printf("  'width' => '%d',", width);
-      printf("  'height' => '%d'", height);
+      printf("'left'=>'%d',", left);
+      printf("'right'=>'%d',", right);
+      printf("'top'=>'%d',", top);
+      printf("'bottom'=>'%d',", bottom);
+      printf("'width'=>'%d',", width);
+      printf("'height'=>'%d'", height);
       printf("};\n");
     }
     stp_parameter_description_destroy(&desc);

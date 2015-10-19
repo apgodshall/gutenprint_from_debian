@@ -1,5 +1,5 @@
 /*
- * "$Id: print-papers.c,v 1.43 2014/01/12 01:30:44 rlk Exp $"
+ * "$Id: print-papers.c,v 1.44 2015/09/07 21:57:37 speachy Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *
@@ -386,6 +386,8 @@ stp_xml_process_paper(stp_mxml_node_t *paper) /* The paper node */
 		{
 		  if (!strcmp(stmp, "envelope"))
 		    outpaper->paper_size_type = PAPERSIZE_TYPE_ENVELOPE;
+		  else if (!strcmp(stmp, "special"))
+		    outpaper->paper_size_type = PAPERSIZE_TYPE_SPECIAL;
 		  else
 		    outpaper->paper_size_type = PAPERSIZE_TYPE_STANDARD;
 		}

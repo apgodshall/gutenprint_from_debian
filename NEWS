@@ -1,4 +1,4 @@
-Welcome to Gutenprint 5.2.11-pre1, a pre-release of Gutenprint
+Welcome to Gutenprint 5.2.11-pre2, a pre-release of Gutenprint
 5.2.11. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
@@ -263,8 +263,10 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Ciaat Brava 21		  [experimental]
 	Citizen CW-01 / Olmec OP900
 	DNP DS620
+	DNP DS80DX                [experimental]
 	Kodak 305		  [experimental]
 	Kodak 8810		  [experimental]
+	Kodak 7000/7010/7015	  [experimental]
 	Mitsubishi CP-D80DW	  [experimental]
 	Mitsubishi CP3800DW
 	Shinko S1245/S6145/S6245  [experimental]
@@ -278,22 +280,33 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	DNP DS40/DS80/RX1
 	Kodak 605
 	Kodak 6800/6850
+	Kodak 1400/805
 	Mitsubishi CP-9550 family (including the CP9550DW-S variant)
 	Mitsubishi CP-D70DW/D707DW/K60DW-S [experimental]
 	Sony UP-DR200
+	Shinko S2145
 
   3) Added support for the Datamax-O'Neil PCL printers, the Performance
      series (p1115, p1115s, p1120n, p1125, p1725, h8308) and the
      Datamax-O'Neil Workstation printer.
 
-  4) Added common Imperial and Metric label sizes to the Paper Selection
-     menu.
+     Also added common Imperial and Metric label sizes to the Paper
+     Selection menu.
 
-  5) Canon backend enhancements.
+  4) Added support for the following Epson inkjet printers:
+
+     EPSON L120
+     EPSON L210
+
+  5) Canon inkjet driver enhancements:
 
      Added support for following models:
 
-	Canon PIXMA P200  (EXPERIMENTAL)
+	Canon PIXMA P200    (EXPERIMENTAL)
+
+	Canon PIXUS MP55    (EXPERIMENTAL)
+	Canon SmartBase MPC400 (EXPERIMENTAL)
+	Canon SmartBase MPC600F (EXPERIMENTAL)
 
 	Canon E400 series   (EXPERIMENTAL)
 	Canon PIXMA E400    (EXPERIMENTAL)(*1)
@@ -396,6 +409,15 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon PIXMA MG2980  (EXPERIMENTAL)(*1)
 	Canon PIXMA MG2990  (EXPERIMENTAL)(*1)
 
+	Canon MG3600 series (EXPERIMENTAL)
+	Canon PIXMA MG3610  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3620  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3630  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3640  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3650  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3670  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG3680  (EXPERIMENTAL)(*1)
+
 	Canon MG5600 series (EXPERIMENTAL)
 	Canon PIXMA MG5610  (EXPERIMENTAL)(*1)
 	Canon PIXMA MG5620  (EXPERIMENTAL)(*1)
@@ -407,6 +429,23 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon PIXMA MG5670  (EXPERIMENTAL)(*1)
 	Canon Mommy Photo MG5670 (EXPERIMENTAL)(*1)
 	Canon PIXMA MG5680  (EXPERIMENTAL)(*1)
+
+	Canon MG5700 series (EXPERIMENTAL)
+	Canon PIXMA MG5710  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5720  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5721  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5722  (EXPERIMENTAL)(*1)
+	Canon PIXUS MG5730  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5740  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5750  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5751  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5752  (EXPERIMENTAL)(*1)	
+	Canon PIXMA MG5753  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5770  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5780  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5790  (EXPERIMENTAL)(*1)
+	Canon Mommy Photo MG5790 (EXPERIMENTAL)(*1)
+	Canon PIXMA MG5795  (EXPERIMENTAL)(*1)
 
 	Canon MG6600 series (EXPERIMENTAL)
 	Canon PIXMA MG6610  (EXPERIMENTAL)(*1)
@@ -422,6 +461,22 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon MG6700 series (EXPERIMENTAL)
 	Canon PIXUS MG6730  (EXPERIMENTAL)(*1)
 
+	Canon MG6800 series (EXPERIMENTAL)
+	Canon PIXMA MG6810  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6820  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6821  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6822  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6840  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6850  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6851  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6852  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6853  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6870  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG6880  (EXPERIMENTAL)(*1)
+
+	Canon MG6900 series (EXPERIMENTAL)
+	Canon PIXUS MG6930  (EXPERIMENTAL)(*1)
+
 	Canon MG7500 series (EXPERIMENTAL)
 	Canon PIXMA MG7510  (EXPERIMENTAL)(*1)
 	Canon PIXMA MG7520  (EXPERIMENTAL)(*1)
@@ -432,6 +487,20 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon PIXMA MG7570  (EXPERIMENTAL)(*1)
 	Canon Mommy Photo MG7570 (EXPERIMENTAL)(*1)
 	Canon PIXMA MG7580  (EXPERIMENTAL)(*1)
+
+	Canon MG7700 series (EXPERIMENTAL)
+	Canon PIXMA MG7710  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7720  (EXPERIMENTAL)(*1)
+	Canon PIXUS MG7730  (EXPERIMENTAL)(*1)
+	Canon PIXUS MG7730F (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7740  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7750  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7751  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7752  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7753  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7770  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7780  (EXPERIMENTAL)(*1)
+	Canon PIXMA MG7790  (EXPERIMENTAL)(*1)
 
 	Canon iB4000 series (EXPERIMENTAL)
 	Canon MAXIFY iB4010 (EXPERIMENTAL)(*1)
@@ -504,6 +573,8 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	  Canon PIXMA MG2490
 
  	Canon MG2500 series:
+	  Canon PIXMA MG2570S
+	  Canon PIXMA MG2580S
 	  Canon PIXMA MG2590
 
  	Canon MG2900 series:
@@ -535,6 +606,8 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon iP2000 series
 	Canon PIXUS iP2000
 
+     Duplex support improved (non-tumble).
+
      Duplex option added to following printers:
 
 	Canon MP750 series
@@ -558,10 +631,14 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
     Added support for upper/lower tray in cassette for following models:
 
 	Canon MG5400 series
-	Canon MG6200 series
 	Canon MG6300 series
 	Canon MG6500 series
+	Canon MG6700 series
 	Canon MG7100 series
+	Canon MG7500 series
+	Canon iP7200 series
+	Canon MX720 series
+	Canon MX920 series
 
     Added prefix PIXUS to the Japanese i/R/PD models:
 
@@ -585,30 +662,24 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon PIXUS 9100i
 	Canon PIXUS 9900i
 
-  6) Canon backend bugfixes:
+    Improved support for following models:
 
-     A problem with a new ink level compression added in 5.2.7 has
-     affected multiple printer models. The affected models have been
-     modified accordingly, as described below. As a result, media choice
-     has been limited for the MP, iP and Pro series, only draft-quality
-     printing for plain, Hagaki and Envelope media (and monochrome photo
-     printing in some cases) is currently possible.
+	Canon BJC 4300
 
-     The following printer models have had their modes set back to what
-     they were in 5.2.7, namely the same as the BJC-8200. These modes
-     are not detected in the Windows driver; however, they appear to
-     work, while most detected modes are currently not workable owing to
-     unsolved compression of ink levels. Remaining newer workable modes
-     without problematic compression can be used.
+  6) Canon inkjet driver bugfixes:
+
+     6.1 Ink compression fixed
+
+     A problem with a new ink level compression added in 5.2.7 had
+     affected multiple printer models. The bug has been fixed in the
+     present release, thus all modes previously affected should work
+     normally.
+
+     The list of models to which this applies is as follows:
 
 	Canon BJC S600
 	Canon BJC S630
 	Canon BJC S800
-
-     The following newer printer models added since 5.2.7 have also had
-     their modes set to those of the BJC-8200, for the same reason as above.
-     Remaining newer modes without problematic compression can be used.
-
 	Canon BJC S820
 	Canon BJC S900
 	Canon BJC S9000
@@ -624,11 +695,6 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon BJC 990i
 	Canon BJC 9100i
 	Canon BJC 9900i
-
-     The following newer print models added since 5.2.7 have had modes
-     with the problematic ink sets removed. Some of these printers can
-     use monochrome modes to print on photo media.
-
 	Canon MP900
 	Canon iP7100
 	Canon iP8100
@@ -639,6 +705,17 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 	Canon Pro 9000 Mk.II
 	Canon Pro 9500
 	Canon Pro 9500 Mk.II
+
+     6.2 Legacy modes reinstated
+
+     Modes removed in 5.2.7 were reinstated marked as legacy modes for
+     the following models:
+
+        Canon BJC S300
+	Canon BJC S600
+	Canon BJC S630
+	Canon BJC S800
+
 
 * Changes from 5.2.9
 

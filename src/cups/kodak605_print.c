@@ -35,37 +35,115 @@
 #include <fcntl.h>
 #include <signal.h>
 
+#define BACKEND kodak605_backend
+
 #include "backend_common.h"
 
 #define USB_VID_KODAK       0x040A
 #define USB_PID_KODAK_605   0x402E
+
+/* Command Header */
+struct kodak605_cmd {
+	uint16_t cmd; /* LE */
+	uint16_t len; /* LE, not counting this header */
+} __attribute__((packed));
+
+struct kodak605_sts_hdr {
+	uint8_t  result;    /* RESULT_* */
+        uint8_t  unk_1[5];  /* 00 00 00 00 00 */
+        uint8_t  sts_1;     /* 01/02 */
+        uint8_t  sts_2;     /* 00/61->6b ?? temperature? */
+        uint16_t length;    /* LE, not counting this header */
+} __attribute__((packed));
+
+#define RESULT_SUCCESS 0x01
+#define RESULT_FAIL    0x02
 
 /* Media structure */
 struct kodak605_medium {
 	uint8_t  index;
 	uint16_t cols;   /* LE */
 	uint16_t rows;   /* LE */
-	uint8_t  unk[5]; /* 01 00 00 00 00 */
+	uint8_t  type;   /* MEDIA_TYPE_* */
+	uint8_t  unk[4]; /* 00 00 00 00 */
 }  __attribute__((packed));
 
+#define MEDIA_TYPE_UNKNOWN 0x00
+#define MEDIA_TYPE_PAPER   0x01
+
 struct kodak605_media_list {
-	uint8_t  unk[12]; /* 01 00 00 00 00 00 02 00 67 00 02 0b */
+	struct kodak605_sts_hdr hdr;
+	uint8_t  unk;  /* always seen 02 */
+	uint8_t  type; /* KODAK_MEDIA_* */
 	uint8_t  count;
 	struct kodak605_medium entries[];
+} __attribute__((packed));
+
+#define KODAK_MEDIA_6R   0x0b
+#define KODAK_MEDIA_NONE 0x00
+
+#define MAX_MEDIA_LEN 128
+
+/* Status response */
+struct kodak605_status {
+	struct kodak605_sts_hdr hdr;
+/*@10*/	uint32_t ctr_life;  /* Lifetime Prints */
+	uint32_t ctr_maint; /* Prints since last maintainence */
+	uint32_t ctr_media; /* Prints on current media */
+	uint32_t ctr_cut;   /* Cutter Actuations */
+	uint32_t ctr_head;  /* Prints on current head */
+/*@30*/	uint8_t  donor;     /* Donor Percentage remaining */
+/*@31*/	uint8_t  null_1[7]; /* 00 00 00 00 00 00 00 */
+/*@38*/	uint8_t  b1_id;     /* 00/01/02 */
+	uint16_t b1_remain;
+	uint16_t b1_complete;
+	uint16_t b1_total;
+/*@45*/	uint8_t  b1_sts;    /* See BANK_STATUS_* */
+	uint8_t  b2_id;     /* 00/01/02 */
+	uint16_t b2_remain;
+	uint16_t b2_complete;
+	uint16_t b2_total;
+/*@53*/	uint8_t  b2_sts;    /* see BANK_STATUS_* */
+/*@54*/	uint8_t  id;        /* current job id ( 00/01/02 seen ) */
+/*@55*/ uint16_t remain;    /* in current job */
+/*@57*/	uint16_t complete;  /* in current job */
+/*@59*/	uint16_t total;     /* in current job */
+/*@61*/	uint8_t  null_2[9]; /* 00 00 00 00 00 00 00 00 00 */
+/*@70*/	uint8_t  unk_12[6]; /* 01 00 00 00 00 00 */
 } __attribute__((packed));
 
 /* File header */
 struct kodak605_hdr {
 	uint8_t  hdr[4];   /* 01 40 0a 00 */
-	uint8_t  unk1;     /* 01 or 02 */
-	uint8_t  copies;   /* 01 or more */
-	uint8_t  unk2;     /* always 00 */
-	uint16_t columns;  /* BE always 0x0734 */
-	uint16_t rows;     /* BE */
+	uint8_t  jobid;
+	uint16_t copies;   /* LE, 0x0001 or more */
+	uint16_t columns;  /* LE, always 0x0734 */
+	uint16_t rows;     /* LE */
 	uint8_t  media;    /* 0x03 for 6x8, 0x01 for 6x4 */
 	uint8_t  laminate; /* 0x02 to laminate, 0x01 for not */
-	uint8_t  unk3;     /* 0x00, 0x01 [may be print mode] */
+	uint8_t  mode;     /* Print mode -- 0x00, 0x01 seen */
 } __attribute__((packed));
+
+#define BANK_STATUS_FREE      0x00
+#define BANK_STATUS_XFER      0x01
+#define BANK_STATUS_FULL      0x02
+#define BANK_STATUS_PRINTING  0x12
+
+static char *bank_statuses(uint8_t v)
+{
+        switch (v) {
+        case BANK_STATUS_FREE:
+                return "Free";
+        case BANK_STATUS_XFER:
+                return "Xfer";
+        case BANK_STATUS_FULL:
+                return "Full";
+        case BANK_STATUS_PRINTING:
+                return "Printing";
+        default:
+                return "Unknown";
+        }
+}
 
 #define CMDBUF_LEN 4
 
@@ -74,23 +152,50 @@ struct kodak605_ctx {
 	struct libusb_device_handle *dev;
 	uint8_t endp_up;
 	uint8_t endp_down;
+	int type;
+	uint8_t jobid;
 
 	struct kodak605_hdr hdr;
+
+	struct kodak605_media_list *media;
+
 	uint8_t *databuf;
 	int datalen;
 };
 
-/* Program states */
-enum {
-	S_IDLE = 0,
-	S_READY,
-	S_STARTED,
-	S_SENT_HDR,
-	S_SENT_DATA,
-	S_FINISHED,
-};
+static int kodak605_get_media(struct kodak605_ctx *ctx, struct kodak605_media_list *media)
+{
+	uint8_t cmdbuf[4];
 
-#define READBACK_LEN 120
+	int ret, num = 0;
+
+	/* Send Media Query */
+	cmdbuf[0] = 0x02;
+	cmdbuf[1] = 0x00;
+	cmdbuf[2] = 0x00;
+	cmdbuf[3] = 0x00;
+	if ((ret = send_data(ctx->dev, ctx->endp_down,
+			     cmdbuf, sizeof(cmdbuf))))
+		return ret;
+
+	/* Read in the printer status */
+	ret = read_data(ctx->dev, ctx->endp_up,
+			(uint8_t*) media, MAX_MEDIA_LEN, &num);
+	if (ret < 0)
+		return ret;
+
+	if (num < (int)sizeof(*media)) {
+		ERROR("Short Read! (%d/%d)\n", num, (int)sizeof(*media));
+		return CUPS_BACKEND_FAILED;
+	}
+
+        if (media->hdr.result != RESULT_SUCCESS) {
+                ERROR("Unexpected response from media query (%x)!\n", media->hdr.result);
+                return CUPS_BACKEND_FAILED;
+        }
+
+	return 0;
+}
 
 static void *kodak605_init(void)
 {
@@ -100,6 +205,10 @@ static void *kodak605_init(void)
 		return NULL;
 	}
 	memset(ctx, 0, sizeof(struct kodak605_ctx));
+
+	ctx->media = malloc(MAX_MEDIA_LEN);
+
+	ctx->type = P_ANY;
 
 	return ctx;
 }
@@ -111,15 +220,23 @@ static void kodak605_attach(void *vctx, struct libusb_device_handle *dev,
 	struct libusb_device *device;
 	struct libusb_device_descriptor desc;
 
-	UNUSED(jobid);
-
-	ctx->dev = dev;	
+	ctx->dev = dev;
 	ctx->endp_up = endp_up;
 	ctx->endp_down = endp_down;
 
 	device = libusb_get_device(dev);
 	libusb_get_device_descriptor(device, &desc);
 
+	ctx->type = lookup_printer_type(&kodak605_backend,
+					desc.idVendor, desc.idProduct);
+
+	/* Make sure jobid is sane */
+        ctx->jobid = (jobid & 0x7f) + 1;
+
+	/* Query media info */
+	if (kodak605_get_media(ctx, ctx->media)) {
+		ERROR("Can't query media\n");
+	}
 }
 
 static void kodak605_teardown(void *vctx) {
@@ -190,162 +307,11 @@ static int kodak605_read_parse(void *vctx, int data_fd) {
 	return CUPS_BACKEND_OK;
 }
 
-static int kodak605_main_loop(void *vctx, int copies) {
-	struct kodak605_ctx *ctx = vctx;
-
-	uint8_t rdbuf[READBACK_LEN];
-	uint8_t rdbuf2[READBACK_LEN];
-	uint8_t cmdbuf[CMDBUF_LEN];
-
-	int last_state = -1, state = S_IDLE;
-	int num, ret;
-	int pending = 0;
-
-	if (!ctx)
-		return CUPS_BACKEND_FAILED;
-
-	/* Printer handles generating copies.. */
-	if (ctx->hdr.copies < copies)
-		ctx->hdr.copies = copies;
-	copies = 1;
-
-top:
-	if (state != last_state) {
-		if (dyesub_debug)
-			DEBUG("last_state %d new %d\n", last_state, state);
-	}
-
-	if (pending)
-		goto skip_query;
-
-	/* Send Status Query */
-	cmdbuf[0] = 0x01;
-	cmdbuf[1] = 0x00;
-	cmdbuf[2] = 0x00;
-	cmdbuf[3] = 0x00;
-
-	if ((ret = send_data(ctx->dev, ctx->endp_down,
-			     cmdbuf, CMDBUF_LEN)))
-		return CUPS_BACKEND_FAILED;
-
-skip_query:
-	/* Read in the printer status */
-	ret = read_data(ctx->dev, ctx->endp_up,
-			rdbuf, READBACK_LEN, &num);
-	if (ret < 0)
-		return ret;
-
-	if (num < 10) {
-		ERROR("Short read! (%d/%d)\n", num, 10);
-		return CUPS_BACKEND_FAILED;
-	}
-
-	if (num != 10 && num != 76 && num != 113) {
-		ERROR("Unexpected readback from printer (%d/%d from 0x%02x))\n",
-		      num, READBACK_LEN, ctx->endp_up);
-		return CUPS_BACKEND_FAILED;
-	}
-
-	if (memcmp(rdbuf, rdbuf2, READBACK_LEN)) {
-		memcpy(rdbuf2, rdbuf, READBACK_LEN);
-	} else if (state == last_state) {
-		sleep(1);
-	}
-	last_state = state;
-
-	fflush(stderr);
-
-	pending = 0;
-
-	switch (state) {
-	case S_IDLE:
-		INFO("Waiting for printer idle\n");
-#if 0
-		if (rdbuf[0] != 0x01 ||
-		    rdbuf[1] != 0x02 ||
-		    rdbuf[2] != 0x01) {
-			break;
-		}
-#endif
-		// XXX detect media type based on readback!
-
-		INFO("Printing started; Sending init sequence\n");
-		state = S_STARTED;
-
-		break;
-	case S_STARTED:
-#if 0
-		if (rdbuf[0] != 0x01 ||
-		    rdbuf[2] != 0x00)
-			break;
-
-		/* Aappears to depend on media */
-		if (rdbuf[1] != 0x0b &&
-		    rdbuf[1] != 0x03)
-			break;
-#endif
-
-		INFO("Sending image header\n");
-		if ((ret = send_data(ctx->dev, ctx->endp_down,
-				     (uint8_t*)&ctx->hdr, sizeof(ctx->hdr))))
-			return CUPS_BACKEND_FAILED;
-		pending = 1;
-		state = S_SENT_HDR;
-		break;
-	case S_SENT_HDR:
-		INFO("Waiting for printer to accept data\n");
-		if (rdbuf[0] != 0x01 ||
-		    rdbuf[6] == 0x00 ||
-		    num != 10) {
-			break;
-		}
-		INFO("Sending image data\n");
-		if ((ret = send_data(ctx->dev, ctx->endp_down,
-				     ctx->databuf, ctx->datalen)))
-			return CUPS_BACKEND_FAILED;
-
-		INFO("Image data sent\n");
-		sleep(1);  /* An experiment */
-		state = S_SENT_DATA;
-		break;
-	case S_SENT_DATA:
-		INFO("Waiting for printer to acknowledge completion\n");
-#if 0
-		if (rdbuf[0] != 0x01 ||
-		    rdbuf[1] != 0x02 ||
-		    rdbuf[2] != 0x01) {
-			break;
-		}
-#endif
-		state = S_FINISHED;
-		break;
-	default:
-		break;
-	};
-
-	if (state != S_FINISHED)
-		goto top;
-
-	/* Clean up */
-	if (terminate)
-		copies = 1;
-
-	INFO("Print complete (%d copies remaining)\n", copies - 1);
-
-	if (copies && --copies) {
-		state = S_IDLE;
-		goto top;
-	}
-
-	return CUPS_BACKEND_OK;
-}
-
-static int kodak605_get_status(struct kodak605_ctx *ctx)
+static int kodak605_get_status(struct kodak605_ctx *ctx, struct kodak605_status *sts)
 {
 	uint8_t cmdbuf[4];
-	uint8_t rdbuf[76];
 
-	int ret, i, num = 0;
+	int ret, num = 0;
 
 	/* Send Status Query */
 	cmdbuf[0] = 0x01;
@@ -358,66 +324,157 @@ static int kodak605_get_status(struct kodak605_ctx *ctx)
 
 	/* Read in the printer status */
 	ret = read_data(ctx->dev, ctx->endp_up,
-			rdbuf, READBACK_LEN, &num);
+			(uint8_t*) sts, sizeof(*sts), &num);
 	if (ret < 0)
 		return ret;
 
-	if (num < (int)sizeof(rdbuf)) {
-		ERROR("Short Read! (%d/%d)\n", num, (int)sizeof(rdbuf));
-		return 4;
+	if (num < (int)sizeof(*sts)) {
+		ERROR("Short Read! (%d/%d)\n", num, (int)sizeof(*sts));
+		return CUPS_BACKEND_FAILED;
 	}
 
-	DEBUG("status: ");
-	for (i = 0 ; i < num ; i++) {
-		DEBUG2("%02x ", rdbuf[i]);
+	if (sts->hdr.result != RESULT_SUCCESS) {
+		ERROR("Unexpected response from status query (%x)!\n", sts->hdr.result);
+		return CUPS_BACKEND_FAILED;
 	}
 
 	return 0;
+}
+
+static int kodak605_main_loop(void *vctx, int copies) {
+	struct kodak605_ctx *ctx = vctx;
+
+	struct kodak605_status sts;
+
+	int num, ret;
+
+	if (!ctx)
+		return CUPS_BACKEND_FAILED;
+
+	/* Printer handles generating copies.. */
+	if (le16_to_cpu(ctx->hdr.copies) < copies)
+		ctx->hdr.copies = cpu_to_le16(copies);
+
+	/* Validate against supported media list */
+	for (num = 0 ; num < ctx->media->count; num++) {
+		if (ctx->media->entries[num].rows == ctx->hdr.rows &&
+		    ctx->media->entries[num].cols == ctx->hdr.columns)
+			break;
+	}
+	if (num == ctx->media->count) {
+		ERROR("Print size unsupported by media!\n");
+		return CUPS_BACKEND_HOLD;
+	}
+
+	/* Use specified jobid */
+	ctx->hdr.jobid = ctx->jobid;
+
+	INFO("Waiting for printer idle\n");
+
+	while(1) {
+		if ((ret = kodak605_get_status(ctx, &sts)))
+			return CUPS_BACKEND_FAILED;
+
+		// XXX check for errors
+
+		/* Wait for a free buffer */
+		if (sts.b1_sts == BANK_STATUS_FREE ||
+		    sts.b2_sts == BANK_STATUS_FREE) {
+			break;
+		}
+
+		sleep(1);
+	}
+
+	{
+		INFO("Sending image header\n");
+		if ((ret = send_data(ctx->dev, ctx->endp_down,
+				     (uint8_t*)&ctx->hdr, sizeof(ctx->hdr))))
+			return CUPS_BACKEND_FAILED;
+
+		struct kodak605_sts_hdr resp;
+		if ((ret = read_data(ctx->dev, ctx->endp_up,
+				     (uint8_t*) &resp, sizeof(resp), &num)))
+			return CUPS_BACKEND_FAILED;
+
+		if (resp.result != RESULT_SUCCESS) {
+			ERROR("Unexpected response from print command (%x)!\n", resp.result);
+			return CUPS_BACKEND_FAILED;
+		}
+		// XXX what about resp.sts1 or resp.sts2?
+	}
+	sleep(1);
+
+	INFO("Sending image data\n");
+	if ((ret = send_data(ctx->dev, ctx->endp_down,
+			     ctx->databuf, ctx->datalen)))
+		return CUPS_BACKEND_FAILED;
+
+	INFO("Image data sent\n");
+
+	INFO("Waiting for printer to acknowledge completion\n");
+	do {
+		sleep(1);
+		if ((ret = kodak605_get_status(ctx, &sts)))
+			return CUPS_BACKEND_FAILED;
+
+		// XXX check for errors ?
+
+		/* Wait for completion */
+		if (sts.b1_id == ctx->jobid && sts.b1_complete == sts.b1_total)
+			break;
+		if (sts.b2_id == ctx->jobid && sts.b2_complete == sts.b2_total)
+			break;
+
+		if (fast_return) {
+			INFO("Fast return mode enabled.\n");
+			break;
+		}
+	} while(1);
+
+	INFO("Print complete\n");
+
+	return CUPS_BACKEND_OK;
+}
+
+static void kodak605_dump_status(struct kodak605_status *sts)
+{
+	INFO("Bank 1: %s Job %03u @ %03u/%03u\n",
+	     bank_statuses(sts->b1_sts), sts->b1_id,
+	     le16_to_cpu(sts->b1_complete), le16_to_cpu(sts->b1_complete));
+	INFO("Bank 2: %s Job %03u @ %03u/%03u\n",
+	     bank_statuses(sts->b2_sts), sts->b2_id,
+	     le16_to_cpu(sts->b2_complete), le16_to_cpu(sts->b2_complete));
+
+	INFO("Lifetime prints   : %d\n", be32_to_cpu(sts->ctr_life));
+	INFO("Cutter actuations : %d\n", be32_to_cpu(sts->ctr_cut));
+	INFO("Head prints       : %d\n", be32_to_cpu(sts->ctr_head));
+	INFO("Media prints      : %d\n", be32_to_cpu(sts->ctr_media));
+	INFO("Donor             : %d%%\n", sts->donor);
 }
 
 static void kodak605_dump_mediainfo(struct kodak605_media_list *media)
 {
 	int i;
 
+        if (media->type == KODAK_MEDIA_NONE) {
+                DEBUG("No Media Loaded\n");
+                return;
+        }
+
+        if (media->type == KODAK_MEDIA_6R) {
+                DEBUG("Media type: 6R (Kodak 197-4096 or equivalent)\n");
+        } else {
+                DEBUG("Media type %02x (unknown, please report!)\n", media->type);
+        }
+
 	DEBUG("Legal print sizes:\n");
 	for (i = 0 ; i < media->count ; i++) {
-		DEBUG("\t%d: %dx%d\n", i, 
+		DEBUG("\t%d: %dx%d\n", i,
 		      le16_to_cpu(media->entries[i].cols),
 		      le16_to_cpu(media->entries[i].rows));
 	}
 	DEBUG("\n");
-}
-
-static int kodak605_get_media(struct kodak605_ctx *ctx)
-{
-	uint8_t cmdbuf[4];
-	uint8_t rdbuf[113];
-
-	int ret, num = 0;
-
-	/* Send Media Query */
-	cmdbuf[0] = 0x02;
-	cmdbuf[1] = 0x00;
-	cmdbuf[2] = 0x00;
-	cmdbuf[3] = 0x00;
-	if ((ret = send_data(ctx->dev, ctx->endp_down,
-			     cmdbuf, sizeof(cmdbuf))))
-		return ret;
-
-	/* Read in the printer status */
-	ret = read_data(ctx->dev, ctx->endp_up,
-			rdbuf, READBACK_LEN, &num);
-	if (ret < 0)
-		return ret;
-
-	if (num < (int)sizeof(rdbuf)) {
-		ERROR("Short Read! (%d/%d)\n", num, (int)sizeof(rdbuf));
-		return 4;
-	}
-
-	kodak605_dump_mediainfo((struct kodak605_media_list *)rdbuf);
-
-	return 0;
 }
 
 #define UPDATE_SIZE 1536
@@ -507,29 +564,29 @@ static int kodak605_cmdline_arg(void *vctx, int argc, char **argv)
 	struct kodak605_ctx *ctx = vctx;
 	int i, j = 0;
 
+	if (!ctx)
+		return -1;
+
 	/* Reset arg parsing */
 	optind = 1;
 	opterr = 0;
-	while ((i = getopt(argc, argv, "C:ms")) >= 0) {
+	while ((i = getopt(argc, argv, GETOPT_LIST_GLOBAL "C:ms")) >= 0) {
 		switch(i) {
+		GETOPT_PROCESS_GLOBAL
 		case 'C':
-			if (ctx) {
-				j = kodak605_set_tonecurve(ctx, optarg);
-				break;
-			}
-			return 1;
+			j = kodak605_set_tonecurve(ctx, optarg);
+			break;
 		case 'm':
-			if (ctx) {
-				j = kodak605_get_media(ctx);
-				break;
-			}
-			return 1;
-		case 's':
-			if (ctx) {
-				j = kodak605_get_status(ctx);
-				break;
-			}
-			return 1;
+			kodak605_dump_mediainfo(ctx->media);
+			break;
+		case 's': {
+			struct kodak605_status sts;
+
+			j = kodak605_get_status(ctx, &sts);
+			if (!j)
+				kodak605_dump_status(&sts);
+			break;
+		}
 		default:
 			break;  /* Ignore completely */
 		}
@@ -543,7 +600,7 @@ static int kodak605_cmdline_arg(void *vctx, int argc, char **argv)
 /* Exported */
 struct dyesub_backend kodak605_backend = {
 	.name = "Kodak 605",
-	.version = "0.21",
+	.version = "0.24",
 	.uri_prefix = "kodak605",
 	.cmdline_usage = kodak605_cmdline,
 	.cmdline_arg = kodak605_cmdline_arg,
@@ -563,76 +620,23 @@ struct dyesub_backend kodak605_backend = {
   Spool file consists of 14-byte header followed by plane-interleaved BGR data.
   Native printer resolution is 1844 pixels per row, and 1240 or 2434 rows.
 
+  All fields are LITTLE ENDIAN unless otherwise specified
+
   Header:
 
   01 40 0a 00                    Fixed header
-  XX                             Unknown, always 01 in file, but 02 seen in sniffs sometimes
-  CC                             Number of copies (1-255)
-  00                             Always 0x00
-  WW WW                          Number of columns, little endian. (Fixed at 1844)
-  HH HH                          Number of rows, little endian. (1240 or 2434)
+  XX                             Job ID
+  CC CC                          Number of copies (1-???)
+  WW WW                          Number of columns (Fixed at 1844)
+  HH HH                          Number of rows (1240 or 2434)
   DD                             0x01 (4x6) 0x03 (8x6)
   LL                             Laminate, 0x01 (off) or 0x02 (on)
-  00
+  00                             Print Mode (???)
 
   ************************************************************************
 
-   Kodak 605 Printer Comms:
+  Note:  Kodak 605 is actually a Shinko CHC-S1545-5A
 
-   [[file header]] 01 40 0a 00 01 CC 00 WW WW HH HH MT LL 00
-
--> 01 00 00 00
-<- [76 bytes -- status ]
-
-   01 00 00 00  00 00 02 00  42 00 30 00  00 00 30 00
-   00 00 13 00  00 00 75 00  00 00 30 00  00 00 5d 00
-   00 00 00 00  00 00 01 01  00 00 00 01  00 20 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 01 00  00 00 00 00
-
--> 01 00 00 00
-<- [76 bytes -- status ]
-
-   01 00 00 00  00 00 02 00  42 00 30 00  00 00 30 00
-   00 00 13 00  00 00 75 00  00 00 30 00  00 00 5d 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 01 00  00 00 00 00
-
-
--> 02 00 00 00
-<- [113 bytes -- supported media/sizes? Always seems to be identical ]
-
-   [ 13-byte header, plus 10 slots for 10-byte media definitions, see above ]
-
-   01 00 00 00  00 00 02 00  67 00 02 0b  04 01 34 07
-   d8 04 01 00  00 00 00 02  dc 05 34 08  01 00 00 00
-   00 03 34 07  82 09 01 00  00 00 00 04  34 07 ba 09
-   01 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00
-
--> 01 40 0a 00  01 01 00 34  07 d8 04 01  02 00  [[ unmodified header ]]
-<- 01 00 00 00  00 00 XX 00  00 00  [[ Seen 0x01 and 0x02 ]
--> image data!
--> image data!
-
--> 01 00 00 00
-<- [76 bytes -- status ?? ]
-
-   01 00 00 00  00 00 01 00  42 00 31 00  00 00 31 00
-   00 00 14 00  00 00 77 00  00 00 31 00  00 00 5d 00
-   00 00 00 00  00 00 01 00  00 01 00 01  00 00 00 00
-   00 00 00 00  00 00 00 00  00 00 00 00  00 00 00 00
-   00 00 00 00  00 00 01 00  00 00 00 00
-
-  Write tone curve data:
-
-->  04 c0 0a 00  03 01 00 00  00 00 LL LL  00 00  [[ LL LL == 0x0600 in LE ]]
-<-  01 00 00 00  00 00 XX 00  00 00  [[ Seen 0x01 and 0x02 ]
-
-->  [[ 1536 bytes of LE tone curve data ]]
+  ************************************************************************
 
 */

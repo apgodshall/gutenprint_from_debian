@@ -1,5 +1,5 @@
 /*
- * "$Id: printer_options.c,v 1.6 2012/05/26 15:56:03 rlk Exp $"
+ * "$Id: printer_options.c,v 1.7 2015/10/04 15:09:54 rlk Exp $"
  *
  *   Dump the per-printer options for the OpenPrinting database
  *
@@ -57,7 +57,7 @@ main(int argc, char **argv)
       const stp_printer_t *printer = stp_get_printer_by_index(i);
       const char *driver = stp_printer_get_driver(printer);
       const char *family = stp_printer_get_family(printer);
-      stp_vars_t *pv = stp_vars_create_copy(stp_printer_get_defaults(printer));
+      stp_vars_t *pv;
       int tcount = 0;
       size_t count;
       int printer_is_color = 0;
@@ -66,6 +66,7 @@ main(int argc, char **argv)
       if (printer_list && !stp_string_list_is_present(printer_list, driver))
 	continue;
 
+      pv = stp_vars_create_copy(stp_printer_get_defaults(printer));
       /* Set Job Mode to "Job" as this enables the Duplex option */
       stp_set_string_parameter(pv, "JobMode", "Job");
 

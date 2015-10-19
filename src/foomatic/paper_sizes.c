@@ -1,5 +1,5 @@
 /*
- * "$Id: paper_sizes.c,v 1.9 2007/03/05 00:04:00 tillkamppeter Exp $"
+ * "$Id: paper_sizes.c,v 1.10 2015/09/07 21:57:37 speachy Exp $"
  *
  *   Dump the per-printer options for the OpenPrinting database
  *
@@ -35,7 +35,11 @@ main(int argc, char **argv)
   for (i = 0; i < stp_known_papersizes(); i++)
     {
       const stp_papersize_t *p = stp_get_papersize_by_index(i);
-      printf("%s %d %d\n", p->name, p->width, p->height);
+      if (p->paper_size_type == PAPERSIZE_TYPE_ENVELOPE ||
+	  p->paper_size_type == PAPERSIZE_TYPE_STANDARD)
+        {
+	  printf("%s %d %d\n", p->name, p->width, p->height);
+	}
     }
   return 0;
 }

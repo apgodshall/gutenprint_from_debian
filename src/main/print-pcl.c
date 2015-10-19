@@ -1,5 +1,5 @@
 /*
- * "$Id: print-pcl.c,v 1.163 2015/05/05 02:13:14 rlk Exp $"
+ * "$Id: print-pcl.c,v 1.165 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Print plug-in HP PCL driver for the GIMP.
  *
@@ -1875,6 +1875,13 @@ pcl_papersize_valid(const stp_papersize_t *pt,
     return(0);
 
 /*
+ * Is it a valid type?
+ */  
+  if (pt->paper_size_type != PAPERSIZE_TYPE_STANDARD &&
+      pt->paper_size_type != PAPERSIZE_TYPE_ENVELOPE)
+    return(0);
+  
+/*
  * Is it a recognized supported name?
  */
 
@@ -1926,7 +1933,15 @@ static stp_parameter_list_t
 pcl_list_parameters(const stp_vars_t *v)
 {
   stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_parameter_list_t *tmp_list;
+
   int i;
+
+  /* Set up dithering */
+  tmp_list = stp_dither_list_parameters(v);
+  stp_parameter_list_append(ret, tmp_list);
+  stp_parameter_list_destroy(tmp_list);
+  
   for (i = 0; i < the_parameter_count; i++)
     stp_parameter_list_add_param(ret, &(the_parameters[i]));
   for (i = 0; i < float_parameter_count; i++)

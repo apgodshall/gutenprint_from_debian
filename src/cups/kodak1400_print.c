@@ -35,6 +35,8 @@
 #include <fcntl.h>
 #include <signal.h>
 
+#define BACKEND kodak1400_backend
+
 #include "backend_common.h"
 
 /* Program states */
@@ -77,6 +79,7 @@ struct kodak1400_ctx {
 	struct libusb_device_handle *dev;
 	uint8_t endp_up;
 	uint8_t endp_down;
+	int type;
 
 	struct kodak1400_hdr hdr;
 	uint8_t *plane_r;
@@ -258,17 +261,18 @@ int kodak1400_cmdline_arg(void *vctx, int argc, char **argv)
 	struct kodak1400_ctx *ctx = vctx;
 	int i, j = 0;
 
+	if (!ctx)
+		return -1;
+
 	/* Reset arg parsing */
 	optind = 1;
 	opterr = 0;
-	while ((i = getopt(argc, argv, "C:")) >= 0) {
+	while ((i = getopt(argc, argv, GETOPT_LIST_GLOBAL "C:")) >= 0) {
 		switch(i) {
+		GETOPT_PROCESS_GLOBAL
 		case 'C':
-			if (ctx) {
-				j = kodak1400_set_tonecurve(ctx, optarg);
-				break;
-			}
-			return 1;
+			j = kodak1400_set_tonecurve(ctx, optarg);
+			break;
 		default:
 			break;  /* Ignore completely */
 		}
@@ -295,14 +299,21 @@ static void kodak1400_attach(void *vctx, struct libusb_device_handle *dev,
 			     uint8_t endp_up, uint8_t endp_down, uint8_t jobid)
 {
 	struct kodak1400_ctx *ctx = vctx;
+	struct libusb_device *device;
+	struct libusb_device_descriptor desc;
 
 	UNUSED(jobid);
 
 	ctx->dev = dev;
 	ctx->endp_up = endp_up;
 	ctx->endp_down = endp_down;
-}
 
+	device = libusb_get_device(dev);
+	libusb_get_device_descriptor(device, &desc);
+
+	ctx->type = lookup_printer_type(&kodak1400_backend,
+					desc.idVendor, desc.idProduct);
+}
 
 static void kodak1400_teardown(void *vctx) {
 	struct kodak1400_ctx *ctx = vctx;
@@ -603,7 +614,7 @@ top:
 
 struct dyesub_backend kodak1400_backend = {
 	.name = "Kodak 1400/805",
-	.version = "0.33",
+	.version = "0.34",
 	.uri_prefix = "kodak1400",
 	.cmdline_usage = kodak1400_cmdline,
 	.cmdline_arg = kodak1400_cmdline_arg,
@@ -739,7 +750,8 @@ struct dyesub_backend kodak1400_backend = {
 
  Other readback codes seen:
 
- e4 72 00 00  10 00 50 59  -- ???
+ e4 72 00 00  40 00 50 59  -- ?? paper jam?
+ e4 72 00 00  10 00 50 59  -- media red blink, error red blink, [media mismatch]]
  e4 72 00 00  10 01 50 59  -- ???
  e4 72 00 00  00 04 50 59  -- media red blink, error red  [media too small for image ?]
  e4 72 00 00  02 00 50 59  -- media off, error red. [out of paper]

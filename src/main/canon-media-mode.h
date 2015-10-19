@@ -802,7 +802,9 @@ static const char* canon_BJC_S300_modeuses_plain[] = {
   "600x600dpi_high",
   "600x600dpi_std2",
   "600x600dpi",/*untested*/
+  "600x00dpi_std4", /* legacy */
   "300x300dpi",
+  "300x300dpi_std2", /* legacy */
   NULL
   };
 
@@ -829,6 +831,8 @@ static const char* canon_BJC_S300_modeuses_Envelope[] = {
   "600x600dpi_high3",
   "600x600dpi_std3",
   "600x600dpi_draft3",
+  "600x600dpi_std4", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
@@ -1072,80 +1076,80 @@ DECLARE_MODEUSES(canon_BJC_S520);
 
 /* ----------------------------------- Canon BJC S600 ----------------------------------- */
 static const char* canon_BJC_S600_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_high",
   "600x600dpi",
+  "600x600dpi_std2", /* legacy */
   "600x600dpi_draft",/*untested*/
   "300x300dpi",
   "300x300dpi_draft",
+  "300x300dpi_std2", /* legacy */
   NULL
   };
 
 static const char* canon_BJC_S600_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh2",
   "600x600dpi_photo2",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh3",
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   "600x600dpi_photodraft",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh3",
   "600x600dpi_photohigh",
   "600x600dpi_photo",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photo3",
   "600x600dpi_photodraft3",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_Envelope[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_high3",
   "600x600dpi_std3",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_tshirt",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S600_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh5",
   "600x600dpi_photohigh4",
   "600x600dpi_photo4",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
@@ -1243,88 +1247,88 @@ DECLARE_MODEUSES(canon_BJC_S750);
 
 /* ----------------------------------- Canon BJC S800 ----------------------------------- */
 static const char* canon_BJC_S800_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_high2",
-/*  "600x600dpi_high",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi",
+  "600x600dpi_std3", /* legacy */
   "600x600dpi_draft",
+  "300x300dpi", /* legacy */
   /* Mono */
   "600x600dpi_highmono2",
-/*  "600x600dpi_highmono",*/
-/*  "600x600dpi_mono",*/
+  "600x600dpi_highmono",
+  "600x600dpi_mono",
   "600x600dpi_draftmono",
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh4",
-/*  "600x600dpi_photohigh",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh2",
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photo", /*untested*/
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo2",*/
+  "1200x1200dpi", /* legacy */
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo2",
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_glossFilm[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh2",
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photo", /*untested*/
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
+  "1200x1200dpi", /* legacy */
   "600x600dpi_photohigh4",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
   "600x600dpi_photodraft",
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   /* Mono */
   "600x600dpi_photomonohigh2",
-/*  "600x600dpi_photomonohigh",*/
-/*  "600x600dpi_photomono",*/
+  "600x600dpi_photomonohigh",
+  "600x600dpi_photomono",
   "600x600dpi_photomonodraft",
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "1200x1200dpi", /* legacy */
+  "600x600dpi_tshirt",
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
 static const char* canon_BJC_S800_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std2",*/
-/*  "600x600dpi_draft2",*/
+  "1200x1200dpi", /* legacy */
+  "600x600dpi_std2",
+  "600x600dpi_draft2",
+  "600x600dpi_std3", /* legacy */
+  "300x300dpi", /* legacy */
   NULL
 };
 
@@ -1350,72 +1354,51 @@ DECLARE_MODEUSES(canon_BJC_S800);
 
 /* ----------------------------------- Canon BJC S820 ----------------------------------- */
 static const char* canon_BJC_S820_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
   "600x600dpi_high2",
-/*  "600x600dpi_high",*/ /*untested*/
-/*  "600x600dpi",*/
+  "600x600dpi_high", /*untested*/
+  "600x600dpi",
   "600x600dpi_draft",
   /* Mono */
   "600x600dpi_highmono2",/*untested*/
-/*  "600x600dpi_highmono",*/ /*untested*/
-/*  "600x600dpi_mono",*/ /*untested*/
+  "600x600dpi_highmono", /*untested*/
+  "600x600dpi_mono", /*untested*/
   "600x600dpi_draftmono",
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
   "600x600dpi_photohigh4",
-/*  "600x600dpi_photohigh",*/
+  "600x600dpi_photohigh",
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
   "600x600dpi_photohigh2",
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photo", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_glossFilm[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
   "600x600dpi_photohigh2",
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photo", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_S820_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std2",*/
-/*  "600x600dpi_draft2",*/
+  "600x600dpi_std2",
+  "600x600dpi_draft2",
   NULL
 };
 
@@ -1441,80 +1424,56 @@ DECLARE_MODEUSES(canon_BJC_S820);
 
 /* ----------------------------------- Canon BJC S900 ----------------------------------- */
 static const char* canon_BJC_S900_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi",
   "600x600dpi_draft",
   /* Mono */
   "600x600dpi_highmono2",/*untested*/
-/*  "600x600dpi_highmono",*/ /*untested*/
-/*  "600x600dpi_mono",*/ /*untested*/
+  "600x600dpi_highmono", /*untested*/
+  "600x600dpi_mono", /*untested*/
   "600x600dpi_draftmono",
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh5",*/
-/*  "600x600dpi_photohigh",*/
+  "600x600dpi_photohigh5",
+  "600x600dpi_photohigh",
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photo2",*/ /*untested*/
+  "600x600dpi_photohigh3",
+  "600x600dpi_photo2", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh4",*/
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh4",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_glossFilm[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_S900_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std2",*/
-/*  "600x600dpi_draft2",*/
+  "600x600dpi_std2",
+  "600x600dpi_draft2",
   NULL
 };
 
@@ -1619,8 +1578,10 @@ static const char* canon_BJC_i80_modeuses_plain[] = {
   "600x600dpi_high",
   "600x600dpi_high2",/*mono*/
   "600x600dpi",
+  "600x600dpi_std2", /* legacy */
   "300x300dpi",
   "300x300dpi_draft",
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
@@ -1661,6 +1622,8 @@ static const char* canon_BJC_i80_modeuses_Hagaki[] = {
   "600x600dpi_high4",/*mono*/
   "600x600dpi_std3",
   "600x600dpi_draft3",
+  "600x600dpi_std2", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
@@ -1963,9 +1926,11 @@ DECLARE_MODEUSES(canon_BJC_i550);
 static const char* canon_BJC_i560_modeuses_plain[] = {
   "600x600dpi_high",
   "600x600dpi",
+  "600x600dpi_high3", /* legacy */
   "300x300dpi_high",/*untested*/
   "300x300dpi",
   "300x300dpi_draft",
+  "300x300dpi_std2", /* legacy */
   NULL
   };
 
@@ -2006,6 +1971,8 @@ static const char* canon_BJC_i560_modeuses_inkjetHagaki[] = {
 static const char* canon_BJC_i560_modeuses_Hagaki[] = {
   "600x600dpi_high2",
   "600x600dpi_std2",
+  "600x600dpi_high3", /* legacy */
+  "300x300dpi_std2", /* legacy */
   NULL
 };
 
@@ -2320,12 +2287,9 @@ DECLARE_MODEUSES(canon_BJC_i900);
 
 /* ----------------------------------- Canon i950  ----------------------------------- */
 static const char* canon_BJC_i950_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi_high",*/ /*untested*/
-/*  "600x600dpi",*/
+  "600x600dpi_high2",
+  "600x600dpi_high", /*untested*/
+  "600x600dpi",
   "600x600dpi_draft",/*untested*/
   "600x600dpi_draft2",
   "600x600dpi_draftmono",/* mono --- untested*/
@@ -2334,84 +2298,57 @@ static const char* canon_BJC_i950_modeuses_plain[] = {
 };
 
 static const char* canon_BJC_i950_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo3",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo3",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/ /*untested*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_PPmatte[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo3",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo3",
+  "600x600dpi_photo",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_GlossyFilm[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
+  "600x600dpi_photohigh",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh4",*/
-/*  "600x600dpi_photo4",*/
-/*  "600x600dpi_photodraft4",*/
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  "600x600dpi_photodraft4",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_disc[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo5",*/
-/*  "600x600dpi_photodraft5",*/
+  "600x600dpi_photo5",
+  "600x600dpi_photodraft5",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_Hagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high4",*/
-/*  "600x600dpi_high5",*/ /*untested*/
+  "600x600dpi_high4",
+  "600x600dpi_high5", /*untested*/
   "600x600dpi_std4",/*untested*/
   "600x600dpi_std5",
   "600x600dpi_draftmono4",/* mono---untested*/
@@ -2420,28 +2357,19 @@ static const char* canon_BJC_i950_modeuses_Hagaki[] = {
 };
 
 static const char* canon_BJC_i950_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std3",*/
-/*  "600x600dpi_draft3",*/
-/*  "600x600dpi_draft4",*/
+  "600x600dpi_std3",
+  "600x600dpi_draft3",
+  "600x600dpi_draft4",
   NULL
 };
 
 static const char* canon_BJC_i950_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo2",*/ /*untested*/
+  "600x600dpi_photo2", /*untested*/
   NULL
   };
 
@@ -2468,13 +2396,10 @@ DECLARE_MODEUSES(canon_BJC_i950);
 
 /* ----------------------------------- Canon i960  ----------------------------------- */
 static const char* canon_BJC_i960_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi_high3",*/ /* duplex */
-/*  "600x600dpi_high",*/
-/*  "600x600dpi",*/ /*untested*/
+  "600x600dpi_high2",
+  "600x600dpi_high3", /* duplex */
+  "600x600dpi_high",
+  "600x600dpi", /*untested*/
   "600x600dpi_draft",
   "600x600dpi_draft2",
   "600x600dpi_draftmono",/* mono */
@@ -2483,76 +2408,52 @@ static const char* canon_BJC_i960_modeuses_plain[] = {
 };
 
 static const char* canon_BJC_i960_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo5",*/ /*untested*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo5", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_PPmatte[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo",*/
-/*  "600x600dpi_photo5",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo",
+  "600x600dpi_photo5",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photo3",*/
+  "600x600dpi_photohigh3",
+  "600x600dpi_photo3",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_disc[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo4",*/
-/*  "600x600dpi_photodraft4",*/
+  "600x600dpi_photo4",
+  "600x600dpi_photodraft4",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_Hagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high4",*/
-/*  "600x600dpi_high5",*/
-/*  "600x600dpi_std4",*/ /*untested*/
+  "600x600dpi_high4",
+  "600x600dpi_high5",
+  "600x600dpi_std4", /*untested*/
   "600x600dpi_std5",
   "600x600dpi_draft5",
   "600x600dpi_draftmono4",
@@ -2561,28 +2462,19 @@ static const char* canon_BJC_i960_modeuses_Hagaki[] = {
 };
 
 static const char* canon_BJC_i960_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std3",*/
-/*  "600x600dpi_draft3",*/
-/*  "600x600dpi_draft4",*/ /*untested*/
+  "600x600dpi_std3",
+  "600x600dpi_draft3",
+  "600x600dpi_draft4", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_i960_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo2",*/ /*untested*/
+  "600x600dpi_photo2", /*untested*/
   NULL
   };
 
@@ -2608,12 +2500,9 @@ DECLARE_MODEUSES(canon_BJC_i960);
 
 /* ----------------------------------- Canon i990 ----------------------------------- */
 static const char* canon_BJC_i990_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi_high3",*/ /*duplex*/
-/*  "600x600dpi",*/
+  "600x600dpi_high2",
+  "600x600dpi_high3", /*duplex*/
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   "600x600dpi_draftmono",/*mono*/
@@ -2624,76 +2513,52 @@ static const char* canon_BJC_i990_modeuses_plain[] = {
 /* most photo modes use R ink and therefore unsupported */
 /* unsupported */
 static const char* canon_BJC_i990_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
+  "600x600dpi_photohigh", /*stand-in*/
   NULL
 };
 
 /* highest mode not yet supported */
 static const char* canon_BJC_i990_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
-/*  "600x600dpi_photodraft",*/
+  "600x600dpi_photohigh", /*stand-in*/
+  "600x600dpi_photodraft",
   NULL
 };
 
 /* unsupported */
 static const char* canon_BJC_i990_modeuses_PPmatte[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
+  "600x600dpi_photohigh", /*stand-in*/
   NULL
 };
 
 /* highest mode not yet supported */
 static const char* canon_BJC_i990_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
-/*  "600x600dpi_photodraft2",*/
+  "600x600dpi_photohigh", /*stand-in*/
+  "600x600dpi_photodraft2",
   NULL
 };
 
 static const char* canon_BJC_i990_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photomed",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photomed",
+  "600x600dpi_photo",
   NULL
 };
 
 /* high mode not yet supported */
 static const char* canon_BJC_i990_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i990_modeuses_disc[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo3",*/
-/*  "600x600dpi_photodraft3",*/
+  "600x600dpi_photo3",
+  "600x600dpi_photodraft3",
   NULL
 };
 
 static const char* canon_BJC_i990_modeuses_Hagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high4",*/
-/*  "600x600dpi_std4",*/
+  "600x600dpi_high4",
+  "600x600dpi_std4",
   "600x600dpi_draft5",
   "600x600dpi_draft4",
   "600x600dpi_draftmono4",/*mono*/
@@ -2702,28 +2567,19 @@ static const char* canon_BJC_i990_modeuses_Hagaki[] = {
 };
 
 static const char* canon_BJC_i990_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_i990_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std3",*/
-/*  "600x600dpi_draft3",*/
+  "600x600dpi_std3",
+  "600x600dpi_draft3",
   NULL
 };
 
 /* untested */
 static const char* canon_BJC_i990_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   NULL
   };
 
@@ -2832,11 +2688,8 @@ DECLARE_MODEUSES(canon_BJC_i6100);
 
 /* ----------------------------------- Canon i9100  ----------------------------------- */
 static const char* canon_BJC_i9100_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi_high",*/
+  "600x600dpi_high2",
+  "600x600dpi_high",
   "600x600dpi",
   "600x600dpi_draft",/*untested*/
   "600x600dpi_mono",/*untested*/
@@ -2845,87 +2698,60 @@ static const char* canon_BJC_i9100_modeuses_plain[] = {
 };
 
 static const char* canon_BJC_i9100_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photo2",*/ /*untested*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2", /*untested*/
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_PPmatte[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo2",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo2",
+  "600x600dpi_photo",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh4",*/
-/*  "600x600dpi_photo4",*/
-/*  "600x600dpi_photodraft4",*/
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  "600x600dpi_photodraft4",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_Hagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   "600x600dpi_draftmono2",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photo3",*/ /*untested*/
-/*  "600x600dpi_photodraft3",*/
+  "600x600dpi_photohigh3",
+  "600x600dpi_photo3", /*untested*/
+  "600x600dpi_photodraft3",
   NULL
 };
 
 static const char* canon_BJC_i9100_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo2",*/ /*untested*/
-/*  "600x600dpi_photo",*/ /*untested*/
+  "600x600dpi_photo2", /*untested*/
+  "600x600dpi_photo", /*untested*/
   NULL
 };
 
@@ -2949,11 +2775,8 @@ DECLARE_MODEUSES(canon_BJC_i9100);
 
 /* ----------------------------------- Canon i9900  ----------------------------------- */
 static const char* canon_BJC_i9900_modeuses_plain[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high2",
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   "600x600dpi_draftmono",/*mono*/
@@ -2964,76 +2787,52 @@ static const char* canon_BJC_i9900_modeuses_plain[] = {
 /* most photo modes use R,G inks and therefore unsupported */
 /* unsupported */
 static const char* canon_BJC_i9900_modeuses_PPpro[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
+  "600x600dpi_photohigh", /*stand-in*/
   NULL
 };
 
 /* highest mode not yet supported */
 static const char* canon_BJC_i9900_modeuses_PPplus[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
-/*  "600x600dpi_photodraft",*/
+  "600x600dpi_photohigh", /*stand-in*/
+  "600x600dpi_photodraft",
   NULL
 };
 
 /* unsupported */
 static const char* canon_BJC_i9900_modeuses_PPmatte[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
+  "600x600dpi_photohigh", /*stand-in*/
   NULL
 };
 
 /* highest mode not yet supported */
 static const char* canon_BJC_i9900_modeuses_PPgloss[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/ /*stand-in*/
-/*  "600x600dpi_photodraft",*/
+  "600x600dpi_photohigh", /*stand-in*/
+  "600x600dpi_photodraft",
   NULL
 };
 
 static const char* canon_BJC_i9900_modeuses_coated[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photomed",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photomed",
+  "600x600dpi_photo",
   NULL
 };
 
 /* high mode not yet supported */
 static const char* canon_BJC_i9900_modeuses_inkjetHagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo2",*/
+  "600x600dpi_photo2",
   NULL
 };
 
 static const char* canon_BJC_i9900_modeuses_disc[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo3",*/
-/*  "600x600dpi_photodraft3",*/
+  "600x600dpi_photo3",
+  "600x600dpi_photodraft3",
   NULL
 };
 
 static const char* canon_BJC_i9900_modeuses_Hagaki[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_high4",*/
-/*  "600x600dpi_std4",*/
+  "600x600dpi_high4",
+  "600x600dpi_std4",
   "600x600dpi_draft5",
   "600x600dpi_draft4",
   "600x600dpi_draftmono4",/*mono*/
@@ -3042,27 +2841,18 @@ static const char* canon_BJC_i9900_modeuses_Hagaki[] = {
 };
 
 static const char* canon_BJC_i9900_modeuses_TShirt[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_tshirt",*/
+  "600x600dpi_tshirt",
   NULL
 };
 
 static const char* canon_BJC_i9900_modeuses_Transparency[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_std3",*/
-/*  "600x600dpi_draft3",*/
+  "600x600dpi_std3",
+  "600x600dpi_draft3",
   NULL
 };
 
 static const char* canon_BJC_i9900_modeuses_PPother[] = {
-  "1200x1200dpi_legacy",
-  "600x600dpi_legacy",
-  "300x300dpi_legacy",
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   NULL
 };
 
@@ -4971,9 +4761,9 @@ DECLARE_MODEUSES(canon_PIXMA_iP6700);
 
 /* ----------------------------------- Canon iP7100  ----------------------------------- */
 static const char* canon_PIXMA_iP7100_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi_high2",*/ /* duplex */
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi_high2", /* duplex */
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
@@ -4982,86 +4772,86 @@ static const char* canon_PIXMA_iP7100_modeuses_plain[] = {
   NULL
   };
 
-/*static const char* canon_PIXMA_iP7100_modeuses_PPpro[] = {
+static const char* canon_PIXMA_iP7100_modeuses_PPpro[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_PPplus[] = {
+static const char* canon_PIXMA_iP7100_modeuses_PPplus[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_PPplusDS[] = {
+static const char* canon_PIXMA_iP7100_modeuses_PPplusDS[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_PPmatte[] = {
+static const char* canon_PIXMA_iP7100_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
 static const char* canon_PIXMA_iP7100_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   /* Mono */
   "600x600dpi_mono",
   NULL
 };
 
-/*static const char* canon_PIXMA_iP7100_modeuses_FA[] = {
+static const char* canon_PIXMA_iP7100_modeuses_FA[] = {
   "600x600dpi_photohigh3",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_disc[] = {
+static const char* canon_PIXMA_iP7100_modeuses_disc[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_TShirt[] = {
+static const char* canon_PIXMA_iP7100_modeuses_TShirt[] = {
   "600x600dpi",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP7100_modeuses_Transparency[] = {
+static const char* canon_PIXMA_iP7100_modeuses_Transparency[] = {
   "600x600dpi_std4",
   "600x600dpi_draft4",
   NULL
-};*/
+};
 
 /*untested*/
-/*static const char* canon_PIXMA_iP7100_modeuses_PPother[] = {
+static const char* canon_PIXMA_iP7100_modeuses_PPother[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft",
   NULL
-  };*/
+  };
 
 static const canon_modeuse_t canon_PIXMA_iP7100_modeuses[] = {
  { "Plain",             canon_PIXMA_iP7100_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
-/* { "GlossyPro",	        canon_PIXMA_iP7100_modeuses_PPpro, 0 },*/
-/* { "PhotopaperPlus",	canon_PIXMA_iP7100_modeuses_PPplus, 0 },*/
-/* { "PhotopaperPlusDouble", canon_PIXMA_iP7100_modeuses_PPplusDS, 0 },*/
-/* { "PhotopaperMatte",	canon_PIXMA_iP7100_modeuses_PPmatte, 0 },*/
-/* { "GlossyPaper",	canon_PIXMA_iP7100_modeuses_PPplusDS, 0 },*/
-/* { "Coated",		canon_PIXMA_iP7100_modeuses_PPmatte, 0 },*/
-/* { "InkJetHagaki", 	canon_PIXMA_iP7100_modeuses_PPplus, 0 },*/
+ { "GlossyPro",	        canon_PIXMA_iP7100_modeuses_PPpro, 0 },
+ { "PhotopaperPlus",	canon_PIXMA_iP7100_modeuses_PPplus, 0 },
+ { "PhotopaperPlusDouble", canon_PIXMA_iP7100_modeuses_PPplusDS, 0 },
+ { "PhotopaperMatte",	canon_PIXMA_iP7100_modeuses_PPmatte, 0 },
+ { "GlossyPaper",	canon_PIXMA_iP7100_modeuses_PPplusDS, 0 },
+ { "Coated",		canon_PIXMA_iP7100_modeuses_PPmatte, 0 },
+ { "InkJetHagaki", 	canon_PIXMA_iP7100_modeuses_PPplus, 0 },
  { "Hagaki", 	        canon_PIXMA_iP7100_modeuses_Hagaki, DUPLEX_SUPPORT },
-/* { "FineArtPhotoRag", 	canon_PIXMA_iP7100_modeuses_FA, 0 },*/
-/* { "FineArtOther", 	canon_PIXMA_iP7100_modeuses_FA, 0 },*/
-/* { "DiscCompat",	canon_PIXMA_iP7100_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_PIXMA_iP7100_modeuses_disc, 0 },*/
-/* { "TShirt",		canon_PIXMA_iP7100_modeuses_TShirt, 0 },*/
+ { "FineArtPhotoRag", 	canon_PIXMA_iP7100_modeuses_FA, 0 },
+ { "FineArtOther", 	canon_PIXMA_iP7100_modeuses_FA, 0 },
+ { "DiscCompat",	canon_PIXMA_iP7100_modeuses_disc, 0 },
+ { "DiscOthers",	canon_PIXMA_iP7100_modeuses_disc, 0 },
+ { "TShirt",		canon_PIXMA_iP7100_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_iP7100_modeuses_Hagaki, 0 },
-/* { "Transparency",	canon_PIXMA_iP7100_modeuses_Transparency, 0 },*/
-/* { "PhotopaperOther",	canon_PIXMA_iP7100_modeuses_PPother, 0 },*/ /*untested*/
+ { "Transparency",	canon_PIXMA_iP7100_modeuses_Transparency, 0 },
+ { "PhotopaperOther",	canon_PIXMA_iP7100_modeuses_PPother, 0 }, /*untested*/
  };
 
 DECLARE_MODEUSES(canon_PIXMA_iP7100);
@@ -5234,9 +5024,9 @@ DECLARE_MODEUSES(canon_PIXMA_iP7500);
 
 /* ----------------------------------- Canon iP8100  ----------------------------------- */
 static const char* canon_PIXMA_iP8100_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi_high2",*/ /* duplex */
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi_high2", /* duplex */
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
@@ -5246,109 +5036,109 @@ static const char* canon_PIXMA_iP8100_modeuses_plain[] = {
   };
 
 /* no support for modes using R yet */
-/*static const char* canon_PIXMA_iP8100_modeuses_PPpro[] = {
-  "600x600dpi_photohigh",*/ /*untested*/
-/*  "600x600dpi_photo",
+static const char* canon_PIXMA_iP8100_modeuses_PPpro[] = {
+  "600x600dpi_photohigh", /*untested*/
+  "600x600dpi_photo",
   NULL
-};*/
+};
 
 
-/*static const char* canon_PIXMA_iP8100_modeuses_PPplus[] = {
+static const char* canon_PIXMA_iP8100_modeuses_PPplus[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   "600x600dpi_photodraft2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_PPplusDS[] = {
+static const char* canon_PIXMA_iP8100_modeuses_PPplusDS[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_PPmatte[] = {
+static const char* canon_PIXMA_iP8100_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_PPgloss[] = {
+static const char* canon_PIXMA_iP8100_modeuses_PPgloss[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_inkjetHagaki[] = {
+static const char* canon_PIXMA_iP8100_modeuses_inkjetHagaki[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
 static const char* canon_PIXMA_iP8100_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   /* Mono */
   "600x600dpi_mono",
   NULL
 };
 
-/*static const char* canon_PIXMA_iP8100_modeuses_FA[] = {
+static const char* canon_PIXMA_iP8100_modeuses_FA[] = {
   "600x600dpi_photohigh3",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_disc[] = {
+static const char* canon_PIXMA_iP8100_modeuses_disc[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_TShirt[] = {
+static const char* canon_PIXMA_iP8100_modeuses_TShirt[] = {
   "600x600dpi",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8100_modeuses_Transparency[] = {
+static const char* canon_PIXMA_iP8100_modeuses_Transparency[] = {
   "600x600dpi_std4",
   "600x600dpi_draft4",
   NULL
-};*/
+};
 
 /*untested*/
-/*static const char* canon_PIXMA_iP8100_modeuses_PPother[] = {
+static const char* canon_PIXMA_iP8100_modeuses_PPother[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft2",
   NULL
-  };*/
+  };
 
 static const canon_modeuse_t canon_PIXMA_iP8100_modeuses[] = {
  { "Plain",             canon_PIXMA_iP8100_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
-/* { "GlossyPro",	        canon_PIXMA_iP8100_modeuses_PPpro, 0 },*/
-/* { "PhotopaperPlus",	canon_PIXMA_iP8100_modeuses_PPplus, 0 },*/
-/* { "PhotopaperPlusDouble", canon_PIXMA_iP8100_modeuses_PPplusDS, 0 },*/
-/* { "PhotopaperMatte",	canon_PIXMA_iP8100_modeuses_PPmatte, 0 },*/
-/* { "GlossyPaper",	canon_PIXMA_iP8100_modeuses_PPgloss, 0 },*/
-/* { "Coated",		canon_PIXMA_iP8100_modeuses_PPmatte, 0 },*/
-/* { "InkJetHagaki", 	canon_PIXMA_iP8100_modeuses_inkjetHagaki, 0 },*/
+ { "GlossyPro",	        canon_PIXMA_iP8100_modeuses_PPpro, 0 },
+ { "PhotopaperPlus",	canon_PIXMA_iP8100_modeuses_PPplus, 0 },
+ { "PhotopaperPlusDouble", canon_PIXMA_iP8100_modeuses_PPplusDS, 0 },
+ { "PhotopaperMatte",	canon_PIXMA_iP8100_modeuses_PPmatte, 0 },
+ { "GlossyPaper",	canon_PIXMA_iP8100_modeuses_PPgloss, 0 },
+ { "Coated",		canon_PIXMA_iP8100_modeuses_PPmatte, 0 },
+ { "InkJetHagaki", 	canon_PIXMA_iP8100_modeuses_inkjetHagaki, 0 },
  { "Hagaki", 	        canon_PIXMA_iP8100_modeuses_Hagaki, DUPLEX_SUPPORT },
-/* { "FineArtPhotoRag", 	canon_PIXMA_iP8100_modeuses_FA, 0 },*/
-/* { "FineArtOther", 	canon_PIXMA_iP8100_modeuses_FA, 0 },*/
-/* { "DiscCompat",	canon_PIXMA_iP8100_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_PIXMA_iP8100_modeuses_disc, 0 },*/
-/* { "TShirt",		canon_PIXMA_iP8100_modeuses_TShirt, 0 },*/
+ { "FineArtPhotoRag", 	canon_PIXMA_iP8100_modeuses_FA, 0 },
+ { "FineArtOther", 	canon_PIXMA_iP8100_modeuses_FA, 0 },
+ { "DiscCompat",	canon_PIXMA_iP8100_modeuses_disc, 0 },
+ { "DiscOthers",	canon_PIXMA_iP8100_modeuses_disc, 0 },
+ { "TShirt",		canon_PIXMA_iP8100_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_iP8100_modeuses_Hagaki, 0 },
-/* { "Transparency",	canon_PIXMA_iP8100_modeuses_Transparency, 0 },*/
-/* { "PhotopaperOther",	canon_PIXMA_iP8100_modeuses_PPother, 0 },*/ /*untested*/
+ { "Transparency",	canon_PIXMA_iP8100_modeuses_Transparency, 0 },
+ { "PhotopaperOther",	canon_PIXMA_iP8100_modeuses_PPother, 0 }, /*untested*/
  };
 
 DECLARE_MODEUSES(canon_PIXMA_iP8100);
 
 /* ----------------------------------- Canon iP8500  ----------------------------------- */
 static const char* canon_PIXMA_iP8500_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi_high2",
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   "600x600dpi_mono",
@@ -5357,93 +5147,93 @@ static const char* canon_PIXMA_iP8500_modeuses_plain[] = {
   };
 
 /* modes not yet supported */
-/*static const char* canon_PIXMA_iP8500_modeuses_PPpro[] = {
-  "600x600dpi_photodraft", */ /*temporary stand-in: untested*/
-/*  NULL
-};*/
+static const char* canon_PIXMA_iP8500_modeuses_PPpro[] = {
+  "600x600dpi_photodraft", /*temporary stand-in: untested*/
+  NULL
+};
 
 /* most modes unsupported */
-/*static const char* canon_PIXMA_iP8500_modeuses_PPplus[] = {
+static const char* canon_PIXMA_iP8500_modeuses_PPplus[] = {
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
 /* most modes unsupported */
-/*static const char* canon_PIXMA_iP8500_modeuses_PPplusDS[] = {
+static const char* canon_PIXMA_iP8500_modeuses_PPplusDS[] = {
   "600x600dpi_photodraft2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8500_modeuses_PPhires[] = {
+static const char* canon_PIXMA_iP8500_modeuses_PPhires[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
 /* US driver does not support this media: untested */
-/*static const char* canon_PIXMA_iP8500_modeuses_inkjetHagaki[] = {
+static const char* canon_PIXMA_iP8500_modeuses_inkjetHagaki[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
 /* US driver does not support this media */
 static const char* canon_PIXMA_iP8500_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   "600x600dpi_mono",
   "600x600dpi_draftmono",
   NULL
 };
 
-/*static const char* canon_PIXMA_iP8500_modeuses_disc[] = {
+static const char* canon_PIXMA_iP8500_modeuses_disc[] = {
   "600x600dpi_photo3",
   "600x600dpi_photodraft3",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8500_modeuses_TShirt[] = {
+static const char* canon_PIXMA_iP8500_modeuses_TShirt[] = {
   "600x600dpi_tshirt",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8500_modeuses_Transparency[] = {
+static const char* canon_PIXMA_iP8500_modeuses_Transparency[] = {
   "600x600dpi_photo4",
   "600x600dpi_photodraft4",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8500_modeuses_PPother[] = {
+static const char* canon_PIXMA_iP8500_modeuses_PPother[] = {
   "600x600dpi_photo3",
   NULL
-};*/
+};
 
 static const canon_modeuse_t canon_PIXMA_iP8500_modeuses[] = {
   { "Plain",            canon_PIXMA_iP8500_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
-/*  { "GlossyPro",	canon_PIXMA_iP8500_modeuses_PPpro, 0 },*/ /*unsupported*/
-/*  { "PhotopaperPlus",	canon_PIXMA_iP8500_modeuses_PPplus, 0 },*/
-/*  { "PhotopaperPlusDouble", canon_PIXMA_iP8500_modeuses_PPplusDS, 0 },*/
-/*  { "PhotopaperMatte",	canon_PIXMA_iP8500_modeuses_PPpro, 0 },*/ /*unsupported*/
-/*  { "GlossyPaper",	canon_PIXMA_iP8500_modeuses_PPplusDS, 0 },*/
-/*  { "Coated",		canon_PIXMA_iP8500_modeuses_PPhires, 0 },*/
-/*  { "InkJetHagaki", 	canon_PIXMA_iP8500_modeuses_inkjetHagaki, 0 },*/ /*untested*/
+  { "GlossyPro",	canon_PIXMA_iP8500_modeuses_PPpro, 0 }, /*unsupported*/
+  { "PhotopaperPlus",	canon_PIXMA_iP8500_modeuses_PPplus, 0 },
+  { "PhotopaperPlusDouble", canon_PIXMA_iP8500_modeuses_PPplusDS, 0 },
+  { "PhotopaperMatte",	canon_PIXMA_iP8500_modeuses_PPpro, 0 }, /*unsupported*/
+  { "GlossyPaper",	canon_PIXMA_iP8500_modeuses_PPplusDS, 0 },
+  { "Coated",		canon_PIXMA_iP8500_modeuses_PPhires, 0 },
+  { "InkJetHagaki", 	canon_PIXMA_iP8500_modeuses_inkjetHagaki, 0 }, /*untested*/
   { "Hagaki", 	        canon_PIXMA_iP8500_modeuses_Hagaki, DUPLEX_SUPPORT },/*untested*/
-/*  { "DiscCompat",	canon_PIXMA_iP8500_modeuses_disc, 0 },*/
-/*  { "DiscOthers",	canon_PIXMA_iP8500_modeuses_disc, 0 },*/
-/*  { "TShirt",		canon_PIXMA_iP8500_modeuses_TShirt, 0 },*/
+  { "DiscCompat",	canon_PIXMA_iP8500_modeuses_disc, 0 },
+  { "DiscOthers",	canon_PIXMA_iP8500_modeuses_disc, 0 },
+  { "TShirt",		canon_PIXMA_iP8500_modeuses_TShirt, 0 },
   { "Envelope",		canon_PIXMA_iP8500_modeuses_Hagaki, 0 },
-/*  { "Transparency",	canon_PIXMA_iP8500_modeuses_Transparency, 0 },*/
-/*  { "PhotopaperOther",	canon_PIXMA_iP8500_modeuses_PPother, 0 },*/
+  { "Transparency",	canon_PIXMA_iP8500_modeuses_Transparency, 0 },
+  { "PhotopaperOther",	canon_PIXMA_iP8500_modeuses_PPother, 0 },
 };
 
 DECLARE_MODEUSES(canon_PIXMA_iP8500);
 
 /* ----------------------------------- Canon iP8600  ----------------------------------- */
 static const char* canon_PIXMA_iP8600_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi_high2",*/ /* duplex */
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi_high2", /* duplex */
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
@@ -5453,94 +5243,94 @@ static const char* canon_PIXMA_iP8600_modeuses_plain[] = {
   };
 
 /* modes using R not yet supported */
-/*static const char* canon_PIXMA_iP8600_modeuses_PPpro[] = {
-  "600x600dpi_photohigh2",*/ /*untested*/
-/*  "600x600dpi_photo",
+static const char* canon_PIXMA_iP8600_modeuses_PPpro[] = {
+  "600x600dpi_photohigh2", /*untested*/
+  "600x600dpi_photo",
   NULL
-};*/
+};
 
 /* highest mode using R not supported yet */
-/*static const char* canon_PIXMA_iP8600_modeuses_PPplus[] = {
-  "600x600dpi_photohigh2",*/ /*untested*/
-/*  "600x600dpi_photo",
+static const char* canon_PIXMA_iP8600_modeuses_PPplus[] = {
+  "600x600dpi_photohigh2", /*untested*/
+  "600x600dpi_photo",
   "600x600dpi_photodraft2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_PPplusDS[] = {
+static const char* canon_PIXMA_iP8600_modeuses_PPplusDS[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_PPmatte[] = {
+static const char* canon_PIXMA_iP8600_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_inkjetHagaki[] = {
+static const char* canon_PIXMA_iP8600_modeuses_inkjetHagaki[] = {
   "600x600dpi_photohigh3",
   "600x600dpi_photo3",
   NULL
-};*/
+};
 
 static const char* canon_PIXMA_iP8600_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   /* Mono */
   "600x600dpi_mono",
   NULL
 };
 
-/*static const char* canon_PIXMA_iP8600_modeuses_FA[] = {
+static const char* canon_PIXMA_iP8600_modeuses_FA[] = {
   "600x600dpi_photohigh4",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_disc[] = {
+static const char* canon_PIXMA_iP8600_modeuses_disc[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_TShirt[] = {
+static const char* canon_PIXMA_iP8600_modeuses_TShirt[] = {
   "600x600dpi",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP8600_modeuses_Transparency[] = {
+static const char* canon_PIXMA_iP8600_modeuses_Transparency[] = {
   "600x600dpi_std4",
   "600x600dpi_draft4",
   NULL
-};*/
+};
 
 /*untested*/
-/*static const char* canon_PIXMA_iP8600_modeuses_PPother[] = {
+static const char* canon_PIXMA_iP8600_modeuses_PPother[] = {
   "600x600dpi_photo",
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
 static const canon_modeuse_t canon_PIXMA_iP8600_modeuses[] = {
  { "Plain",             canon_PIXMA_iP8600_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
-/* { "GlossyPro",	        canon_PIXMA_iP8600_modeuses_PPpro, 0 },*/
-/* { "PhotopaperPlus",	canon_PIXMA_iP8600_modeuses_PPplus, 0 },*/
-/* { "PhotopaperPlusDouble", canon_PIXMA_iP8600_modeuses_PPplusDS, 0 },*/
-/* { "PhotopaperMatte",	canon_PIXMA_iP8600_modeuses_PPmatte, 0 },*/
-/* { "GlossyPaper",	canon_PIXMA_iP8600_modeuses_PPplusDS, 0 },*/
-/* { "Coated",		canon_PIXMA_iP8600_modeuses_PPmatte, 0 },*/
-/* { "InkJetHagaki", 	canon_PIXMA_iP8600_modeuses_inkjetHagaki, 0 },*/
+ { "GlossyPro",	        canon_PIXMA_iP8600_modeuses_PPpro, 0 },
+ { "PhotopaperPlus",	canon_PIXMA_iP8600_modeuses_PPplus, 0 },
+ { "PhotopaperPlusDouble", canon_PIXMA_iP8600_modeuses_PPplusDS, 0 },
+ { "PhotopaperMatte",	canon_PIXMA_iP8600_modeuses_PPmatte, 0 },
+ { "GlossyPaper",	canon_PIXMA_iP8600_modeuses_PPplusDS, 0 },
+ { "Coated",		canon_PIXMA_iP8600_modeuses_PPmatte, 0 },
+ { "InkJetHagaki", 	canon_PIXMA_iP8600_modeuses_inkjetHagaki, 0 },
  { "Hagaki", 	        canon_PIXMA_iP8600_modeuses_Hagaki, DUPLEX_SUPPORT },
-/* { "FineArtPhotoRag", 	canon_PIXMA_iP8600_modeuses_FA, 0 },*/
-/* { "FineArtOther", 	canon_PIXMA_iP8600_modeuses_FA, 0 },*/
-/* { "DiscCompat",	canon_PIXMA_iP8600_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_PIXMA_iP8600_modeuses_disc, 0 },*/
-/* { "TShirt",		canon_PIXMA_iP8600_modeuses_TShirt, 0 },*/
+ { "FineArtPhotoRag", 	canon_PIXMA_iP8600_modeuses_FA, 0 },
+ { "FineArtOther", 	canon_PIXMA_iP8600_modeuses_FA, 0 },
+ { "DiscCompat",	canon_PIXMA_iP8600_modeuses_disc, 0 },
+ { "DiscOthers",	canon_PIXMA_iP8600_modeuses_disc, 0 },
+ { "TShirt",		canon_PIXMA_iP8600_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_iP8600_modeuses_Hagaki, 0 },
-/* { "Transparency",	canon_PIXMA_iP8600_modeuses_Transparency, 0 },*/
-/* { "PhotopaperOther",	canon_PIXMA_iP8600_modeuses_PPother, 0 },*/ /*untested*/
+ { "Transparency",	canon_PIXMA_iP8600_modeuses_Transparency, 0 },
+ { "PhotopaperOther",	canon_PIXMA_iP8600_modeuses_PPother, 0 }, /*untested*/
  };
 
 DECLARE_MODEUSES(canon_PIXMA_iP8600);
@@ -5640,9 +5430,9 @@ DECLARE_MODEUSES(canon_PIXMA_iP8700);
 
 /* ----------------------------------- Canon iP9910  ----------------------------------- */
 static const char* canon_PIXMA_iP9910_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi_high2",*/ /*duplex*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi_high2", /*duplex*/
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
@@ -5652,92 +5442,92 @@ static const char* canon_PIXMA_iP9910_modeuses_plain[] = {
   };
 
 /* highest mode using R not yet supported */
-/*static const char* canon_PIXMA_iP9910_modeuses_PPpro[] = {
+static const char* canon_PIXMA_iP9910_modeuses_PPpro[] = {
   "600x600dpi_photo",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
 /* highest mode using R not supported yet */
-/*static const char* canon_PIXMA_iP9910_modeuses_PPplus[] = {
+static const char* canon_PIXMA_iP9910_modeuses_PPplus[] = {
   "600x600dpi_photo2",
   "600x600dpi_photodraft2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_PPplusDS[] = {
+static const char* canon_PIXMA_iP9910_modeuses_PPplusDS[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_PPmatte[] = {
+static const char* canon_PIXMA_iP9910_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_inkjetHagaki[] = {
+static const char* canon_PIXMA_iP9910_modeuses_inkjetHagaki[] = {
   "600x600dpi_photohigh3",
   "600x600dpi_photo3",
   NULL
-};*/
+};
 
 static const char* canon_PIXMA_iP9910_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/
+  "600x600dpi_high3",
+  "600x600dpi_std3",
   "600x600dpi_draft3",
   /* Mono */
   "600x600dpi_mono",
   NULL
 };
 
-/*static const char* canon_PIXMA_iP9910_modeuses_FA[] = {
+static const char* canon_PIXMA_iP9910_modeuses_FA[] = {
   "600x600dpi_photohigh4",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_disc[] = {
+static const char* canon_PIXMA_iP9910_modeuses_disc[] = {
   "600x600dpi_photo2",
   "600x600dpi_photodraft",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_TShirt[] = {
+static const char* canon_PIXMA_iP9910_modeuses_TShirt[] = {
   "600x600dpi",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_iP9910_modeuses_Transparency[] = {
+static const char* canon_PIXMA_iP9910_modeuses_Transparency[] = {
   "600x600dpi_std4",
   "600x600dpi_draft4",
   NULL
-};*/
+};
 
 /*untested*/
-/*static const char* canon_PIXMA_iP9910_modeuses_PPother[] = {
+static const char* canon_PIXMA_iP9910_modeuses_PPother[] = {
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
 static const canon_modeuse_t canon_PIXMA_iP9910_modeuses[] = {
  { "Plain",             canon_PIXMA_iP9910_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
-/* { "GlossyPro",	        canon_PIXMA_iP9910_modeuses_PPpro, 0 },*/
-/* { "PhotopaperPlus",	canon_PIXMA_iP9910_modeuses_PPplus, 0 },*/
-/* { "PhotopaperPlusDouble", canon_PIXMA_iP9910_modeuses_PPplusDS, 0 },*/
-/* { "PhotopaperMatte",	canon_PIXMA_iP9910_modeuses_PPmatte, 0 },*/
-/* { "GlossyPaper",	canon_PIXMA_iP9910_modeuses_PPplusDS, 0 },*/
-/* { "Coated",		canon_PIXMA_iP9910_modeuses_PPmatte, 0 },*/
-/* { "InkJetHagaki", 	canon_PIXMA_iP9910_modeuses_inkjetHagaki, 0 },*/
+ { "GlossyPro",	        canon_PIXMA_iP9910_modeuses_PPpro, 0 },
+ { "PhotopaperPlus",	canon_PIXMA_iP9910_modeuses_PPplus, 0 },
+ { "PhotopaperPlusDouble", canon_PIXMA_iP9910_modeuses_PPplusDS, 0 },
+ { "PhotopaperMatte",	canon_PIXMA_iP9910_modeuses_PPmatte, 0 },
+ { "GlossyPaper",	canon_PIXMA_iP9910_modeuses_PPplusDS, 0 },
+ { "Coated",		canon_PIXMA_iP9910_modeuses_PPmatte, 0 },
+ { "InkJetHagaki", 	canon_PIXMA_iP9910_modeuses_inkjetHagaki, 0 },
  { "Hagaki", 	        canon_PIXMA_iP9910_modeuses_Hagaki, 0 },
-/* { "FineArtPhotoRag", 	canon_PIXMA_iP9910_modeuses_FA, 0 },*/
-/* { "FineArtOther", 	canon_PIXMA_iP9910_modeuses_FA, 0 },*/
-/* { "DiscCompat",	canon_PIXMA_iP9910_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_PIXMA_iP9910_modeuses_disc, 0 },*/
-/* { "TShirt",		canon_PIXMA_iP9910_modeuses_TShirt, 0 },*/
+ { "FineArtPhotoRag", 	canon_PIXMA_iP9910_modeuses_FA, 0 },
+ { "FineArtOther", 	canon_PIXMA_iP9910_modeuses_FA, 0 },
+ { "DiscCompat",	canon_PIXMA_iP9910_modeuses_disc, 0 },
+ { "DiscOthers",	canon_PIXMA_iP9910_modeuses_disc, 0 },
+ { "TShirt",		canon_PIXMA_iP9910_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_iP9910_modeuses_Hagaki, 0 },
-/* { "Transparency",	canon_PIXMA_iP9910_modeuses_Transparency, 0 },*/
-/* { "PhotopaperOther",	canon_PIXMA_iP9910_modeuses_PPother, 0 },*/
+ { "Transparency",	canon_PIXMA_iP9910_modeuses_Transparency, 0 },
+ { "PhotopaperOther",	canon_PIXMA_iP9910_modeuses_PPother, 0 },
  };
 
 DECLARE_MODEUSES(canon_PIXMA_iP9910);
@@ -6096,6 +5886,255 @@ static const canon_modeuse_t canon_PIXMA_iX7000_modeuses[] = {
 };
 
 DECLARE_MODEUSES(canon_PIXMA_iX7000);
+
+/* ----------------------------------- Canon MP5  ----------------------------------- */
+static const char* canon_PIXMA_MP5_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi",
+  "300x300dpi",/*untested*/
+  "300x300dpi_draft",
+  NULL
+  };
+
+static const char* canon_PIXMA_MP5_modeuses_PPpro[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_PPmatte[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_inkjetHagaki[] = {
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_Transparency[] = {
+  "600x600dpi_ohphigh",
+  "600x600dpi_ohp",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_TShirt[] = {
+  "600x600dpi_tshirt",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_Hagaki[] = {
+  "600x600dpi_high2",
+  "600x600dpi_std2",
+  "600x600dpi_stdmono2",
+  "600x600dpi_draft2",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_PPgloss[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MP5_modeuses_PPother[] = {
+  "600x600dpi_photohigh2",/*untested*/
+  "600x600dpi_photo",/*untested*/
+  NULL
+};
+
+static const canon_modeuse_t canon_PIXMA_MP5_modeuses[] = {
+  { "Plain",            canon_PIXMA_MP5_modeuses_plain, 0 },
+  { "GlossyPro",	canon_PIXMA_MP5_modeuses_PPpro, 0 },
+  { "PhotopaperPlus",	canon_PIXMA_MP5_modeuses_PPpro, 0 },
+  { "PhotopaperMatte",	canon_PIXMA_MP5_modeuses_PPmatte, 0 },
+  { "GlossyPaper",	canon_PIXMA_MP5_modeuses_PPgloss, 0 },
+  { "Coated",		canon_PIXMA_MP5_modeuses_PPmatte, 0 },
+  { "InkJetHagaki", 	canon_PIXMA_MP5_modeuses_inkjetHagaki, 0 },
+  { "Hagaki", 	        canon_PIXMA_MP5_modeuses_Hagaki, 0 },
+  { "GlossyFilm", 	canon_PIXMA_MP5_modeuses_PPmatte, 0 },
+  { "TShirt",		canon_PIXMA_MP5_modeuses_TShirt, 0 },
+  { "Transparency",	canon_PIXMA_MP5_modeuses_Transparency, 0 },
+  { "Envelope",		canon_PIXMA_MP5_modeuses_Hagaki, 0 },
+  { "PhotopaperOther",	canon_PIXMA_MP5_modeuses_PPother, 0 },
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MP5);
+
+/* ----------------------------------- Canon MP55  ----------------------------------- */
+static const char* canon_PIXMA_MP55_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi_medium",
+  "600x600dpi",
+  "300x300dpi",/*untested*/
+  "300x300dpi_draft",
+  NULL
+  };
+
+static const char* canon_PIXMA_MP55_modeuses_PPpro[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_PPmatte[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_PPgloss[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_HiRes[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  "600x600dpi_photodraft",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_inkjetHagaki[] = {
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_Transparency[] = {
+  "600x600dpi_ohphigh",
+  "600x600dpi_ohp",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_TShirt[] = {
+  "600x600dpi_tshirt",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_Hagaki[] = {
+  "600x600dpi_high2",
+  "600x600dpi_std2",
+  NULL
+};
+
+static const char* canon_PIXMA_MP55_modeuses_PPother[] = {
+  "600x600dpi_photohigh",/*untested*/
+  "600x600dpi_photo",/*untested*/
+  NULL
+};
+
+static const canon_modeuse_t canon_PIXMA_MP55_modeuses[] = {
+  { "Plain",            canon_PIXMA_MP55_modeuses_plain, 0 },
+  { "GlossyPro",	canon_PIXMA_MP55_modeuses_PPpro, 0 },
+  { "PhotopaperPlus",	canon_PIXMA_MP55_modeuses_PPpro, 0 },
+  { "PhotopaperMatte",	canon_PIXMA_MP55_modeuses_PPmatte, 0 },
+  { "GlossyPaper",	canon_PIXMA_MP55_modeuses_PPgloss, 0 },
+  { "Coated",		canon_PIXMA_MP55_modeuses_HiRes, 0 },
+  { "InkJetHagaki", 	canon_PIXMA_MP55_modeuses_inkjetHagaki, 0 },
+  { "Hagaki", 	        canon_PIXMA_MP55_modeuses_Hagaki, 0 },
+  { "GlossyFilm", 	canon_PIXMA_MP55_modeuses_PPpro, 0 },
+  { "TShirt",		canon_PIXMA_MP55_modeuses_TShirt, 0 },
+  { "Transparency",	canon_PIXMA_MP55_modeuses_Transparency, 0 },
+  { "Envelope",		canon_PIXMA_MP55_modeuses_Hagaki, 0 },
+  { "PhotopaperOther",	canon_PIXMA_MP55_modeuses_PPother, 0 },
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MP55);
+
+/* ----------------------------------- Canon MPC400  ----------------------------------- */
+static const char* canon_PIXMA_MPC400_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi",
+  "600x600dpi_draft",
+  "300x300dpi",/*untested*/
+  "300x300dpi_draft",
+  NULL
+  };
+
+static const char* canon_PIXMA_MPC400_modeuses_PPpro[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo2",
+  NULL
+};
+
+/* experimental */
+static const char* canon_PIXMA_MPC400_modeuses_PPmatte[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  "600x600dpi_photodraft",
+  NULL
+};
+
+static const char* canon_PIXMA_MPC400_modeuses_PPgloss[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MPC400_modeuses_HiRes[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  "600x600dpi_photodraft",
+  NULL
+};
+
+/* experimental */
+static const char* canon_PIXMA_MPC400_modeuses_inkjetHagaki[] = {
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  NULL
+};
+
+static const char* canon_PIXMA_MPC400_modeuses_Transparency[] = {
+  "600x600dpi_ohphigh",
+  "600x600dpi_ohp",
+  NULL
+};
+
+static const char* canon_PIXMA_MPC400_modeuses_TShirt[] = {
+  "600x600dpi_tshirt",
+  NULL
+};
+
+static const char* canon_PIXMA_MPC400_modeuses_Env[] = {
+  "600x600dpi_high2",
+  "600x600dpi_std2",
+  NULL
+};
+
+/* experimental */
+static const char* canon_PIXMA_MPC400_modeuses_PPother[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const canon_modeuse_t canon_PIXMA_MPC400_modeuses[] = {
+  { "Plain",            canon_PIXMA_MPC400_modeuses_plain, 0 },
+  { "GlossyPro",	canon_PIXMA_MPC400_modeuses_PPpro, 0 },
+  { "PhotopaperMatte",	canon_PIXMA_MPC400_modeuses_PPmatte, 0 },
+  { "GlossyPaper",	canon_PIXMA_MPC400_modeuses_PPgloss, 0 },
+  { "Coated",		canon_PIXMA_MPC400_modeuses_HiRes, 0 },
+  { "InkJetHagaki", 	canon_PIXMA_MPC400_modeuses_inkjetHagaki, 0 },
+  { "Hagaki", 	        canon_PIXMA_MPC400_modeuses_Env, 0 },
+  { "GlossyFilm", 	canon_PIXMA_MPC400_modeuses_PPpro, 0 },
+  { "GlossyCard", 	canon_PIXMA_MPC400_modeuses_PPgloss, 0 },
+  { "TShirt",		canon_PIXMA_MPC400_modeuses_TShirt, 0 },
+  { "Transparency",	canon_PIXMA_MPC400_modeuses_Transparency, 0 },
+  { "Envelope",		canon_PIXMA_MPC400_modeuses_Env, 0 },
+  { "PhotopaperOther",	canon_PIXMA_MPC400_modeuses_PPother, 0 },
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MPC400);
 
 /* ----------------------------------- Canon MP150  ----------------------------------- */
 static const char* canon_MULTIPASS_MP150_modeuses_plain[] = {
@@ -8387,8 +8426,8 @@ DECLARE_MODEUSES(canon_MULTIPASS_MP830);
 
 /* ----------------------------------- Canon MP900  ----------------------------------- */
 static const char* canon_MULTIPASS_MP900_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
@@ -8397,92 +8436,92 @@ static const char* canon_MULTIPASS_MP900_modeuses_plain[] = {
   NULL
   };
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_PPpro[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_PPpro[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo",
-  "600x600dpi_photo2",*/ /*untested*/
-/*  NULL
-};*/
+  "600x600dpi_photo2", /*untested*/
+  NULL
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_PPplus[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_PPplus[] = {
   "600x600dpi_photohigh",
-  "600x600dpi_photo2",*/ /*untested*/
-/*  NULL
-};*/
+  "600x600dpi_photo2", /*untested*/
+  NULL
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_PPplusDS[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_PPplusDS[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_PPmatte[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_coated[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_coated[] = {
   "600x600dpi_photohigh2",
   "600x600dpi_photo",
   "600x600dpi_photo2",
   NULL
-};*/
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_inkjetHagaki[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_inkjetHagaki[] = {
   "600x600dpi_photohigh3",
   "600x600dpi_photo3",
   NULL
-};*/
+};
 
 static const char* canon_MULTIPASS_MP900_modeuses_Hagaki[] = {
-/*  "600x600dpi_high4",*/
-/*  "600x600dpi_std4",*/
+  "600x600dpi_high4",
+  "600x600dpi_std4",
   "600x600dpi_draft4",
   "600x600dpi_draftmono4",/* Mono */
   NULL
 };
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_disc[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_disc[] = {
   "600x600dpi_photo4",
   "600x600dpi_photodraft4",
   NULL
-};*/
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_TShirt[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_TShirt[] = {
   "600x600dpi_tshirt",
   NULL
-};*/
+};
 
-/*static const char* canon_MULTIPASS_MP900_modeuses_Transparency[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_Transparency[] = {
   "600x600dpi_std3",
   "600x600dpi_draft3",
   NULL
-};*/
+};
 
 /*untested*/
-/*static const char* canon_MULTIPASS_MP900_modeuses_PPother[] = {
+static const char* canon_MULTIPASS_MP900_modeuses_PPother[] = {
   "600x600dpi_photohigh",
   "600x600dpi_photo2",
   NULL
-  };*/
+  };
 
 static const canon_modeuse_t canon_MULTIPASS_MP900_modeuses[] = {
  { "Plain",             canon_MULTIPASS_MP900_modeuses_plain, 0 },
-/* { "GlossyPro",	        canon_MULTIPASS_MP900_modeuses_PPpro, 0 },*/
-/* { "PhotopaperPlus",	canon_MULTIPASS_MP900_modeuses_PPplus, 0 },*/
-/* { "PhotopaperPlusDouble", canon_MULTIPASS_MP900_modeuses_PPplusDS, 0 },*/
-/* { "GlossyPaper",	canon_MULTIPASS_MP900_modeuses_PPplusDS, 0 },*/
-/* { "PhotopaperMatte",	canon_MULTIPASS_MP900_modeuses_PPmatte, 0 },*/
-/* { "Coated",		canon_MULTIPASS_MP900_modeuses_coated, 0 },*/
-/* { "InkJetHagaki", 	canon_MULTIPASS_MP900_modeuses_inkjetHagaki, 0 },*/
+ { "GlossyPro",	        canon_MULTIPASS_MP900_modeuses_PPpro, 0 },
+ { "PhotopaperPlus",	canon_MULTIPASS_MP900_modeuses_PPplus, 0 },
+ { "PhotopaperPlusDouble", canon_MULTIPASS_MP900_modeuses_PPplusDS, 0 },
+ { "GlossyPaper",	canon_MULTIPASS_MP900_modeuses_PPplusDS, 0 },
+ { "PhotopaperMatte",	canon_MULTIPASS_MP900_modeuses_PPmatte, 0 },
+ { "Coated",		canon_MULTIPASS_MP900_modeuses_coated, 0 },
+ { "InkJetHagaki", 	canon_MULTIPASS_MP900_modeuses_inkjetHagaki, 0 },
  { "Hagaki", 	        canon_MULTIPASS_MP900_modeuses_Hagaki, 0 },
-/* { "DiscCompat",	canon_MULTIPASS_MP900_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_MULTIPASS_MP900_modeuses_disc, 0 },*/
-/* { "TShirt",		canon_MULTIPASS_MP900_modeuses_TShirt, 0 },*/
+ { "DiscCompat",	canon_MULTIPASS_MP900_modeuses_disc, 0 },
+ { "DiscOthers",	canon_MULTIPASS_MP900_modeuses_disc, 0 },
+ { "TShirt",		canon_MULTIPASS_MP900_modeuses_TShirt, 0 },
  { "Envelope",		canon_MULTIPASS_MP900_modeuses_Hagaki, 0 },
-/* { "Transparency",	canon_MULTIPASS_MP900_modeuses_Transparency, 0 },*/
-/* { "PhotopaperOther",	canon_MULTIPASS_MP900_modeuses_PPother, 0 },*/ /*untested*/
+ { "Transparency",	canon_MULTIPASS_MP900_modeuses_Transparency, 0 },
+ { "PhotopaperOther",	canon_MULTIPASS_MP900_modeuses_PPother, 0 }, /*untested*/
  };
 
 DECLARE_MODEUSES(canon_MULTIPASS_MP900);
@@ -11148,6 +11187,66 @@ static const canon_modeuse_t canon_PIXMA_MG3500_modeuses[] = {
 
 DECLARE_MODEUSES(canon_PIXMA_MG3500);
 
+/* ----------------------------------- Canon MG3600  ----------------------------------- */
+static const char* canon_PIXMA_MG3600_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi_high5",/* color */
+  "600x600dpi",
+  "300x300dpi",
+  NULL
+  };
+
+static const char* canon_PIXMA_MG3600_modeuses_PPplusG2[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG3600_modeuses_PPpro[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG3600_modeuses_Hagaki[] = {
+  "600x600dpi_high3",
+  "600x600dpi_std3",
+  NULL
+};
+
+static const char* canon_PIXMA_MG3600_modeuses_TShirt[] = {
+  "600x600dpi_photohigh",
+  NULL
+};
+
+static const char* canon_PIXMA_MG3600_modeuses_PPother[] = {
+  "600x600dpi_photohigh",
+  NULL
+};
+
+static const canon_modeuse_t canon_PIXMA_MG3600_modeuses[] = {
+  { "Plain",            canon_PIXMA_MG3600_modeuses_plain, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL | DUPLEX_SUPPORT | DUPLEX_MODEREPL },
+  { "PhotoPlusGloss2",  canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "PhotoProPlat",     canon_PIXMA_MG3600_modeuses_PPpro, INKSET_COLOR_SUPPORT },
+  { "PhotoProLuster",   canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "PhotoProSemiGloss",canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "PhotopaperMatte",	canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "GlossyPaperStandard",canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "Coated",		canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "HagakiA", 	        canon_PIXMA_MG3600_modeuses_Hagaki, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL },
+  { "InkJetHagaki", 	canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "InkJetHagakiaddr", canon_PIXMA_MG3600_modeuses_Hagaki, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL },
+  { "InkjetPhotoHagakiK",canon_PIXMA_MG3600_modeuses_PPplusG2, INKSET_COLOR_SUPPORT },
+  { "InkjetPhotoHagakiKaddr",canon_PIXMA_MG3600_modeuses_Hagaki, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL },
+  { "Hagaki", 	        canon_PIXMA_MG3600_modeuses_Hagaki, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL },
+  { "TShirt",		canon_PIXMA_MG3600_modeuses_TShirt, INKSET_COLOR_SUPPORT },
+  { "Envelope",		canon_PIXMA_MG3600_modeuses_Hagaki, INKSET_BLACK_SUPPORT | INKSET_COLOR_SUPPORT | INKSET_BLACK_MODEREPL | INKSET_COLOR_MODEREPL }, 
+  { "PhotopaperOther",	canon_PIXMA_MG3600_modeuses_PPother, INKSET_COLOR_SUPPORT },
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MG3600);
+
 /* ----------------------------------- Canon MG5100  ----------------------------------- */
 static const char* canon_PIXMA_MG5100_modeuses_plain[] = {
   "600x600dpi_high",
@@ -11584,6 +11683,73 @@ static const canon_modeuse_t canon_PIXMA_MG5600_modeuses[] = {
 };
 
 DECLARE_MODEUSES(canon_PIXMA_MG5600);
+
+/* ----------------------------------- Canon MG5700  ----------------------------------- */
+static const char* canon_PIXMA_MG5700_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi_high2",/* duplex */
+  "600x600dpi",
+  "600x600dpi_std2",/* duplex */
+  "600x600dpi_draft",
+  NULL
+  };
+
+static const char* canon_PIXMA_MG5700_modeuses_PPplusG2[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG5700_modeuses_PPpro[] = {
+  /*ud1 not supported */
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG5700_modeuses_Hagaki[] = {
+  "600x600dpi_high3",
+  "600x600dpi_std3",
+  NULL
+};
+
+static const char* canon_PIXMA_MG5700_modeuses_inkjetHagaki[] = {
+  "600x600dpi_photohigh2",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG5700_modeuses_TShirt[] = {
+  "600x600dpi_tshirt",
+  NULL
+};
+
+static const char* canon_PIXMA_MG5700_modeuses_PPother[] = {
+  "600x600dpi_photohigh",
+  NULL
+};
+
+static const canon_modeuse_t canon_PIXMA_MG5700_modeuses[] = {
+  { "Plain",            canon_PIXMA_MG5700_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
+  { "PhotoPlusGloss2",  canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "PhotoProPlat",     canon_PIXMA_MG5700_modeuses_PPpro, 0 },
+  { "PhotoProLuster",   canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "PhotoProSemiGloss",canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "PhotopaperMatte",	canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "GlossyPaperStandard",canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "Coated",		canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "InkJetHagakiaddr", canon_PIXMA_MG5700_modeuses_Hagaki, 0 },
+  { "InkJetHagaki", 	canon_PIXMA_MG5700_modeuses_inkjetHagaki, 0 },
+  { "InkjetPhotoHagakiKaddr",canon_PIXMA_MG5700_modeuses_Hagaki, 0 },
+  { "InkjetPhotoHagakiK",canon_PIXMA_MG5700_modeuses_PPplusG2, 0 },
+  { "HagakiA", 	        canon_PIXMA_MG5700_modeuses_Hagaki, 0 },
+  { "Hagaki", 	        canon_PIXMA_MG5700_modeuses_Hagaki, 0 },
+  { "TShirt",		canon_PIXMA_MG5700_modeuses_TShirt, 0 },
+  { "Envelope",		canon_PIXMA_MG5700_modeuses_Hagaki, 0 }, 
+  { "PhotopaperOther",	canon_PIXMA_MG5700_modeuses_PPother, 0 },
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MG5700);
 
 /* ----------------------------------- Canon MG6100  ----------------------------------- */
 /* most photo modes use gray ink which is unsupported */
@@ -12052,6 +12218,74 @@ static const canon_modeuse_t canon_PIXMA_MG6700_modeuses[] = {
 
 DECLARE_MODEUSES(canon_PIXMA_MG6700);
 
+/* ----------------------------------- Canon MG7700  ----------------------------------- */
+/* most photo modes use gray ink which is unsupported */
+/* TODO: mono modes for photo media */
+static const char* canon_PIXMA_MG7700_modeuses_plain[] = {
+  "600x600dpi_high",
+  "600x600dpi_high2",/* duplex */
+  "600x600dpi",
+  "600x600dpi_std2",/* duplex */
+  "600x600dpi_draft",
+  NULL
+  };
+
+static const char* canon_PIXMA_MG7700_modeuses_PPmatte[] = {
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
+  NULL
+};
+
+static const char* canon_PIXMA_MG7700_modeuses_Hagaki[] = {
+  "600x600dpi_high3",
+  "600x600dpi_std3",
+  NULL
+};
+
+static const char* canon_PIXMA_MG7700_modeuses_inkjetHagaki[] = {
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
+  NULL
+};
+
+static const char* canon_PIXMA_MG7700_modeuses_disc[] = {
+  "600x600dpi_photohigh3",
+  "600x600dpi_photo3",
+  NULL
+};
+
+static const char* canon_PIXMA_MG7700_modeuses_TShirt[] = {
+  "600x600dpi_photohigh",
+  NULL
+};
+
+/* media using modes requiring H ink are commented out */
+static const canon_modeuse_t canon_PIXMA_MG7700_modeuses[] = {
+  { "Plain",            canon_PIXMA_MG7700_modeuses_plain, DUPLEX_SUPPORT | DUPLEX_MODEREPL },
+  /*  { "PhotoPlusGloss2",  canon_PIXMA_MG7700_modeuses_PPplusG2, 0 },
+  { "PhotoProPlat",     canon_PIXMA_MG7700_modeuses_PPpro, 0 },
+  { "PhotoProLuster",   canon_PIXMA_MG7700_modeuses_PPplusG2, 0 },
+  { "PhotoProSemiGloss",canon_PIXMA_MG7700_modeuses_PPplusG2, 0 },
+  { "GlossyPaper",	canon_PIXMA_MG7700_modeuses_PPplusG2, 0 },*/
+  { "PhotopaperMatte",	canon_PIXMA_MG7700_modeuses_PPmatte, 0 },
+  { "Coated",		canon_PIXMA_MG7700_modeuses_PPmatte, 0 },
+  { "InkJetHagakiaddr", canon_PIXMA_MG7700_modeuses_Hagaki, DUPLEX_SUPPORT },
+  { "InkJetHagaki", 	canon_PIXMA_MG7700_modeuses_inkjetHagaki, 0 },
+  { "InkjetPhotoHagakiKaddr",canon_PIXMA_MG7700_modeuses_Hagaki, DUPLEX_SUPPORT },
+  /*{ "InkjetPhotoHagakiK",canon_PIXMA_MG7700_modeuses_PPplusG2, 0 },*/
+  { "HagakiA", 	        canon_PIXMA_MG7700_modeuses_Hagaki, DUPLEX_SUPPORT },
+  { "Hagaki", 	        canon_PIXMA_MG7700_modeuses_Hagaki, DUPLEX_SUPPORT },
+  { "DiscCompat",	canon_PIXMA_MG7700_modeuses_disc, 0 },
+  { "DiscOthers",	canon_PIXMA_MG7700_modeuses_disc, 0 },
+  { "TShirt",		canon_PIXMA_MG7700_modeuses_TShirt, 0 },
+  { "Envelope",		canon_PIXMA_MG7700_modeuses_Hagaki, 0 }, 
+  /*{ "FineArtPhotoRag",  canon_PIXMA_MG7700_modeuses_photorag, 0 },
+  { "FineArtOther",     canon_PIXMA_MG7700_modeuses_photorag, 0 },
+  { "PhotopaperOther",	canon_PIXMA_MG7700_modeuses_PPother, 0 },*/
+};
+
+DECLARE_MODEUSES(canon_PIXMA_MG7700);
+
 /* ----------------------------------- Canon MG8100 ----------------------------------- */
 /* most photo modes use gray ink which is unsupported */
 /* TODO: mono modes for photo media */
@@ -12241,155 +12475,155 @@ DECLARE_MODEUSES(canon_PIXMA_MG8200);
 /* ----------------------------------- Canon Pro9000 ----------------------------------- */
 
 static const char* canon_PIXMA_Pro9000_modeuses_plain[] = {
-/*  "600x600dpi_high2",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high2",/* exp */
+  "600x600dpi",/* exp */
   "600x600dpi_std2",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
-/*  "600x600dpi_highmono",*/
-/*  "600x600dpi_mono",*/
+  "600x600dpi_highmono",/* exp */
+  "600x600dpi_mono",/* exp */
   "600x600dpi_draftmono",
   "600x600dpi_draftmono2",
   NULL
   };
 
 /* highest mode not yet supported (R,G inks) */
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPplusG2[] = {
-  "600x600dpi_photo",*/
-  /* Mono */
-/*  "600x600dpi_photomonohigh",
-  "600x600dpi_photomono",
-  NULL
-};*/
-
-/* highest mode not yet supported (R,G inks) */
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPplus[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_PPplusG2[] = {
   "600x600dpi_photo",
-  "600x600dpi_photodraft2",*/
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
+  "600x600dpi_photomono",
+  NULL
+};
+
+/* highest mode not yet supported (R,G inks) */
+static const char* canon_PIXMA_Pro9000_modeuses_PPplus[] = {
+  "600x600dpi_photo",
+  "600x600dpi_photodraft2",
+  /* Mono */
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   "600x600dpi_photomonodraft",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPgloss[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_PPgloss[] = {
   "600x600dpi_photohigh3",
-  "600x600dpi_photodraft",*/
+  "600x600dpi_photodraft",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomonodraft",
   NULL
-};*/
+};
 
 /* highest mode not yet supported (R,G inks) */
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPpro[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_PPpro[] = {
   "600x600dpi_photohigh",
-  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomonomed",
   "600x600dpi_photomono",
   NULL
-};*/
+};
 
 /* highest mode not yet supported (R,G inks) */
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPproPlat[] = {
-  "600x600dpi_photohigh",*/
+static const char* canon_PIXMA_Pro9000_modeuses_PPproPlat[] = {
+  "600x600dpi_photohigh",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomonomed",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPmatte[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_PPmatte[] = {
   "600x600dpi_photohigh2",
-  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_inkjetHagaki[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_inkjetHagaki[] = {
   "600x600dpi_photomed2",
-  "600x600dpi_photomed",*/
+  "600x600dpi_photomed",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   NULL
-};*/
+};
 
 static const char* canon_PIXMA_Pro9000_modeuses_Hagaki[] = {
-/*  "600x600dpi_high3",*/
-/*  "600x600dpi_std3",*/ /*Mono High*/
-/*  "600x600dpi_std4",*/ /* bw=2 for mono */
+  "600x600dpi_high3",/* exp */
+  "600x600dpi_std3",/* exp */ /*Mono High*/
+  "600x600dpi_std4",/* exp */ /* bw=2 for mono */
   "600x600dpi_draft3",/* bw=2 for mono */
   NULL
 };
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_disc[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_disc[] = {
   "600x600dpi_photohigh4",
-  "600x600dpi_photo2",*/
+  "600x600dpi_photo2",
   /* Mono */
-/*  "600x600dpi_photomonohigh",
+  "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_board[] = {
-  "600x600dpi_photohigh5",*/
-  /* Mono */
-/*  "600x600dpi_photomono",
-  NULL
-};*/
-
-/*static const char* canon_PIXMA_Pro9000_modeuses_photorag[] = {
+static const char* canon_PIXMA_Pro9000_modeuses_board[] = {
   "600x600dpi_photohigh5",
-  "600x600dpi_photo",*/
   /* Mono */
-/*  "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   NULL
-};*/
+};
 
-/*static const char* canon_PIXMA_Pro9000_modeuses_TShirt[] = {
-  "600x600dpi_tshirt",*/ /* bw=2 for mono */
-/*  NULL
-};*/
-
-/*static const char* canon_PIXMA_Pro9000_modeuses_PPother[] = {
-  "600x600dpi_photo",*/
+static const char* canon_PIXMA_Pro9000_modeuses_photorag[] = {
+  "600x600dpi_photohigh5",
+  "600x600dpi_photo",
   /* Mono */
-/*  "600x600dpi_photomono",
+  "600x600dpi_photomonohigh",
+  "600x600dpi_photomono",
   NULL
-};*/
+};
+
+static const char* canon_PIXMA_Pro9000_modeuses_TShirt[] = {
+  "600x600dpi_tshirt", /* bw=2 for mono */
+  NULL
+};
+
+static const char* canon_PIXMA_Pro9000_modeuses_PPother[] = {
+  "600x600dpi_photo",
+  /* Mono */
+  "600x600dpi_photomono",
+  NULL
+};
 
 static const canon_modeuse_t canon_PIXMA_Pro9000_modeuses[] = {
  { "Plain",             canon_PIXMA_Pro9000_modeuses_plain, 0 },
-/* { "PhotopaperPlus",    canon_PIXMA_Pro9000_modeuses_PPplus, 0 },*/
-/* { "PhotoPlusGloss2",   canon_PIXMA_Pro9000_modeuses_PPplusG2, 0 },*/
-/* { "GlossyPaper",	canon_PIXMA_Pro9000_modeuses_PPgloss, 0 },*/
-/* { "PhotoProSemiGloss", canon_PIXMA_Pro9000_modeuses_PPplusG2, 0 },*/
-/* { "GlossyPro",         canon_PIXMA_Pro9000_modeuses_PPpro, 0 },*/
-/* { "PhotoPro2",  	canon_PIXMA_Pro9000_modeuses_PPpro, 0 },*/
-/* { "PhotoProPlat",	canon_PIXMA_Pro9000_modeuses_PPproPlat, 0 },*/
-/* { "PhotopaperMatte",	canon_PIXMA_Pro9000_modeuses_PPmatte, 0 },*/
-/* { "Coated",		canon_PIXMA_Pro9000_modeuses_PPmatte, 0 },*/
-/* { "InkJetHagaki", 	canon_PIXMA_Pro9000_modeuses_inkjetHagaki, 0 },*/
+ { "PhotopaperPlus",    canon_PIXMA_Pro9000_modeuses_PPplus, 0 },
+ { "PhotoPlusGloss2",   canon_PIXMA_Pro9000_modeuses_PPplusG2, 0 },
+ { "GlossyPaper",	canon_PIXMA_Pro9000_modeuses_PPgloss, 0 },
+ { "PhotoProSemiGloss", canon_PIXMA_Pro9000_modeuses_PPplusG2, 0 },
+ { "GlossyPro",         canon_PIXMA_Pro9000_modeuses_PPpro, 0 },
+ { "PhotoPro2",  	canon_PIXMA_Pro9000_modeuses_PPpro, 0 },
+ { "PhotoProPlat",	canon_PIXMA_Pro9000_modeuses_PPproPlat, 0 },
+ { "PhotopaperMatte",	canon_PIXMA_Pro9000_modeuses_PPmatte, 0 },
+ { "Coated",		canon_PIXMA_Pro9000_modeuses_PPmatte, 0 },
+ { "InkJetHagaki", 	canon_PIXMA_Pro9000_modeuses_inkjetHagaki, 0 },
  { "Hagaki", 	        canon_PIXMA_Pro9000_modeuses_Hagaki, 0 },
-/* { "DiscCompat",	canon_PIXMA_Pro9000_modeuses_disc, 0 },*/
-/* { "DiscOthers",	canon_PIXMA_Pro9000_modeuses_disc, 0 },*/
-/* { "Boardpaper",	canon_PIXMA_Pro9000_modeuses_board, 0 },*/
-/* { "Canvas",	        canon_PIXMA_Pro9000_modeuses_board, 0 },*/
-/* { "FineArtPhotoRag",   canon_PIXMA_Pro9000_modeuses_photorag, 0 },*/
-/* { "FineArtOther",      canon_PIXMA_Pro9000_modeuses_board, 0 },*/
-/* { "FineArtPremiumMatte",canon_PIXMA_Pro9000_modeuses_board, 0 },*/
-/* { "FineArtMuseumEtching",canon_PIXMA_Pro9000_modeuses_photorag, 0 },*/
-/* { "TShirt",		canon_PIXMA_Pro9000_modeuses_TShirt, 0 },*/
+ { "DiscCompat",	canon_PIXMA_Pro9000_modeuses_disc, 0 },
+ { "DiscOthers",	canon_PIXMA_Pro9000_modeuses_disc, 0 },
+ { "Boardpaper",	canon_PIXMA_Pro9000_modeuses_board, 0 },
+ { "Canvas",	        canon_PIXMA_Pro9000_modeuses_board, 0 },
+ { "FineArtPhotoRag",   canon_PIXMA_Pro9000_modeuses_photorag, 0 },
+ { "FineArtOther",      canon_PIXMA_Pro9000_modeuses_board, 0 },
+ { "FineArtPremiumMatte",canon_PIXMA_Pro9000_modeuses_board, 0 },
+ { "FineArtMuseumEtching",canon_PIXMA_Pro9000_modeuses_photorag, 0 },
+ { "TShirt",		canon_PIXMA_Pro9000_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_Pro9000_modeuses_Hagaki, 0 },
-/* { "PhotopaperOther",	canon_PIXMA_Pro9000_modeuses_PPother, 0 },*/
+ { "PhotopaperOther",	canon_PIXMA_Pro9000_modeuses_PPother, 0 },
  };
 
 DECLARE_MODEUSES(canon_PIXMA_Pro9000);
@@ -12397,13 +12631,13 @@ DECLARE_MODEUSES(canon_PIXMA_Pro9000);
 /* ----------------------------------- Canon Pro9000mk2 ----------------------------------- */
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_plain[] = {
-/*  "600x600dpi_high",*/
-/*  "600x600dpi",*/
+  "600x600dpi_high",
+  "600x600dpi",
   "600x600dpi_draft",
   "600x600dpi_draft2",
   /* Mono */
-/*  "600x600dpi_highmono",*/
-/*  "600x600dpi_mono",*/
+  "600x600dpi_highmono",
+  "600x600dpi_mono",
   "600x600dpi_draftmono",
   "600x600dpi_draftmono2",
   NULL
@@ -12411,7 +12645,7 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_plain[] = {
 
 /* highest mode not yet supported (R,G inks) */
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPplusG2[] = {
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
@@ -12419,8 +12653,8 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_PPplusG2[] = {
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPgloss[] = {
-/*  "600x600dpi_photohigh2",*/
-/*  "600x600dpi_photodraft",*/
+  "600x600dpi_photohigh2",
+  "600x600dpi_photodraft",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomonodraft",
@@ -12429,8 +12663,8 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_PPgloss[] = {
 
 /* highest mode not yet supported (R,G inks) */
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPpro2[] = {
-/*  "600x600dpi_photomed",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photomed",
+  "600x600dpi_photo",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomonomed",/*untested: quality setting uncertain*/
@@ -12440,7 +12674,7 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_PPpro2[] = {
 
 /* highest mode not yet supported (R,G inks) */
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPproPlat[] = {
-/*  "600x600dpi_photomed",*/
+  "600x600dpi_photomed",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomonomed",
@@ -12448,8 +12682,8 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_PPproPlat[] = {
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPmatte[] = {
-/*  "600x600dpi_photohigh",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh",
+  "600x600dpi_photo",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
@@ -12457,8 +12691,8 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_PPmatte[] = {
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_inkjetHagaki[] = {
-/*  "600x600dpi_photohigh3",*/
-/*  "600x600dpi_photo3",*/
+  "600x600dpi_photohigh3",
+  "600x600dpi_photo3",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
@@ -12466,17 +12700,17 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_inkjetHagaki[] = {
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_Hagaki[] = {
-/*  "600x600dpi_high2",*/ /* bw=2 for mono */
-/*  "600x600dpi_std2",*/ /* bw=2 for mono */
+  "600x600dpi_high2", /* bw=2 for mono */
+  "600x600dpi_std2", /* bw=2 for mono */
   "600x600dpi_draft2",/* bw=2 for mono */
   /* Mono */
-/*  "600x600dpi_high3",*/
+  "600x600dpi_high3",
   NULL
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_disc[] = {
-/*  "600x600dpi_photohigh4",*/
-/*  "600x600dpi_photo4",*/
+  "600x600dpi_photohigh4",
+  "600x600dpi_photo4",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
@@ -12484,28 +12718,28 @@ static const char* canon_PIXMA_Pro9000mk2_modeuses_disc[] = {
 };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_board[] = {
-/*  "600x600dpi_photohigh5",*/
+  "600x600dpi_photohigh5",
   /* Mono */
   "600x600dpi_photomonohigh",
   NULL
   };
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_photorag[] = {
-/*  "600x600dpi_photohigh5",*/
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photohigh5",
+  "600x600dpi_photo",
   /* Mono */
   "600x600dpi_photomonohigh",
   "600x600dpi_photomono",
   NULL
   };
 
-/*static const char* canon_PIXMA_Pro9000mk2_modeuses_TShirt[] = {
-  "600x600dpi_tshirt",*/ /* bw=2 for mono */
-/*  NULL
-};*/
+static const char* canon_PIXMA_Pro9000mk2_modeuses_TShirt[] = {
+  "600x600dpi_tshirt", /* bw=2 for mono */
+  NULL
+};
 
 static const char* canon_PIXMA_Pro9000mk2_modeuses_PPother[] = {
-/*  "600x600dpi_photo",*/
+  "600x600dpi_photo",
   /* Mono */
   "600x600dpi_photomono",
   NULL
@@ -12530,7 +12764,7 @@ static const canon_modeuse_t canon_PIXMA_Pro9000mk2_modeuses[] = {
  { "FineArtOther",      canon_PIXMA_Pro9000mk2_modeuses_board, 0 },
  { "FineArtPremiumMatte",canon_PIXMA_Pro9000mk2_modeuses_board, 0 },
  { "FineArtMuseumEtching",canon_PIXMA_Pro9000mk2_modeuses_photorag, 0 },
-/* { "TShirt",		canon_PIXMA_Pro9000mk2_modeuses_TShirt, 0 },*/
+ { "TShirt",		canon_PIXMA_Pro9000mk2_modeuses_TShirt, 0 },
  { "Envelope",		canon_PIXMA_Pro9000mk2_modeuses_Hagaki, 0 },
  { "PhotopaperOther",	canon_PIXMA_Pro9000mk2_modeuses_PPother, 0 },
  };
@@ -12544,9 +12778,9 @@ static const char* canon_PIXMA_Pro9500_modeuses_plain[] = {
   "600x600dpi",
   "600x600dpi_draft",
   /* Mono */
-/*  "600x600dpi_highmono2",*/
-/*  "600x600dpi_highmono",*/ /*untested*/
-/*  "600x600dpi_mono",*/
+  "600x600dpi_highmono2",
+  "600x600dpi_highmono", /*untested*/
+  "600x600dpi_mono",
   "600x600dpi_draftmono",
   "600x600dpi_draftmono2",/*untested*/
   NULL
@@ -12599,9 +12833,9 @@ static const char* canon_PIXMA_Pro9500_modeuses_inkjetHagaki[] = {
 /* modes not yet supported (R,G inks) */
 static const char* canon_PIXMA_Pro9500_modeuses_Hagaki[] = {
    /* Mono */
-/*  "600x600dpi_highmono2",*/
-/*  "600x600dpi_highmono",*/
-/*  "600x600dpi_mono",*/ /*untested*/
+  "600x600dpi_highmono2",
+  "600x600dpi_highmono",
+  "600x600dpi_mono", /*untested*/
   "600x600dpi_draftmono",/*untested*/
   "600x600dpi_draftmono2",/*untested*/
   NULL
@@ -12674,9 +12908,9 @@ static const char* canon_PIXMA_Pro9500mk2_modeuses_plain[] = {
   "600x600dpi",
   "600x600dpi_draft",
   /* Mono */
-/*  "600x600dpi_highmono2",*/
-/*  "600x600dpi_highmono",*/ /*untested*/
-/*  "600x600dpi_mono",*/
+  "600x600dpi_highmono2",
+  "600x600dpi_highmono", /*untested*/
+  "600x600dpi_mono",
   "600x600dpi_draftmono",
   "600x600dpi_draftmono2",/*untested*/
   NULL
@@ -12721,9 +12955,9 @@ static const char* canon_PIXMA_Pro9500mk2_modeuses_inkjetHagaki[] = {
 /* modes not yet supported (R,G inks) */
 static const char* canon_PIXMA_Pro9500mk2_modeuses_Hagaki[] = {
    /* Mono */
-/*  "600x600dpi_highmono2",*/
-/*  "600x600dpi_highmono",*/
-/*  "600x600dpi_mono",*/ /*untested*/
+  "600x600dpi_highmono2",
+  "600x600dpi_highmono",
+  "600x600dpi_mono", /*untested*/
   "600x600dpi_draftmono",/*untested*/
   "600x600dpi_draftmono2",/*untested*/
   NULL

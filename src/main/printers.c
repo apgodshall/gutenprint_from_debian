@@ -1,5 +1,5 @@
 /*
- * "$Id: printers.c,v 1.92 2014/05/22 02:08:20 rlk Exp $"
+ * "$Id: printers.c,v 1.94 2015/07/13 02:18:20 speachy Exp $"
  *
  *   Print plug-in driver utility functions for the GIMP.
  *

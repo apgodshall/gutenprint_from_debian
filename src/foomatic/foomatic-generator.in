@@ -608,7 +608,7 @@ for $drivertype (@drivertypes) {
 	    if ($tmpl eq 'gutenprint.xml');
 
 	open NEWF, "> $dbfilename" or die "Cannot create $dbfilename: $!";
-	print STDERR "writing $dbfilename...";
+#	print STDERR "writing $dbfilename...";
 	print NEWF $template;
 	print STDERR "done.\n";
 	close NEWF;
@@ -1334,6 +1334,7 @@ sub qualityorder {
 		    "dpi_photomonodraft2",
                     "dpi_ohphigh",
                     "dpi_ohp",
+                    "dpi_ohpdraft",
 		    );
     my ($a, $b) = @_;
     # Bring the suffixes to lower case

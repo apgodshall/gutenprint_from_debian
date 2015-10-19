@@ -575,11 +575,35 @@
       <anchor>ga982f8191c84b049cc3ad3cee1558fc23</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_TYPE_LINEAR</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga982f8191c84b049cc3ad3cee1558fc23a46228ddaa2d52a85ccd79c4dc0f76ad3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_TYPE_SPLINE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga982f8191c84b049cc3ad3cee1558fc23afb1ffdc3754f428d8e3a2124e014ff77</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_wrap_mode_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga3ae3af552b490b0ca8b02e442ac9547a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_WRAP_NONE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aad840485ad7df768a06ee4be02d93b97a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_WRAP_AROUND</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aac0361aebddfabfb263dc0205a61f6fbd</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -589,11 +613,47 @@
       <anchor>ga7eddbee28cb1f3c76a19408b86ea142e</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_ADD</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142eac38b0bf09e93edb67c3e5c53035295f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_MULTIPLY</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ead3bd2cdb63498d5d22686e79e2c0ed95</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_EXPONENTIATE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ea8de151149fdfd4fcca78826e6352246a</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_bounds_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga86d146e483ca1902f973d574f542b85f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_RESCALE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85fa118d303bf7bdf4f00bda71cc6eac49c3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_CLIP</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85faec9e6673edac9d34e3aad376fa711aa5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_ERROR</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85fad699d675d5df223055388cd83d0b362b</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -1512,6 +1572,18 @@
       <anchor>ga58672e1989d582c14328048b207657c8</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_IMAGE_STATUS_OK</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>gga58672e1989d582c14328048b207657c8ab5574da151b93391a337f29b2a7c96cf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_IMAGE_STATUS_ABORT</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>gga58672e1989d582c14328048b207657c8a224b8ac15cf785b24b2f3f53b4fdc274</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
@@ -1819,6 +1891,36 @@
       <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_MODULE_CLASS_INVALID</name>
+      <anchorfile>module_8h.html</anchorfile>
+      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42adbc54c5b64945a0585177cbfe3cf8e8c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MODULE_CLASS_MISC</name>
+      <anchorfile>module_8h.html</anchorfile>
+      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42ac250fc9ff4abf739d975edcbe4694030</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MODULE_CLASS_FAMILY</name>
+      <anchorfile>module_8h.html</anchorfile>
+      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42ab8bfa675fcede245786ec7eb9a220090</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MODULE_CLASS_COLOR</name>
+      <anchorfile>module_8h.html</anchorfile>
+      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42a00077e69aa7fcad42f21bf58d3d8edaa</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MODULE_CLASS_DITHER</name>
+      <anchorfile>module_8h.html</anchorfile>
+      <anchor>ab3da7c3525c26e1d63d7fe1f95da5a42a904bbf21de98c76882970ca29aee8841</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>int</type>
       <name>stp_module_load</name>
@@ -2018,6 +2120,36 @@
       <anchor>af8b58610b5fb382d0f075cb3bcf3b6ba</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_MXML_ELEMENT</name>
+      <anchorfile>mxml_8h.html</anchorfile>
+      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa10846b9327c59bbfee28dd522a0c258e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MXML_INTEGER</name>
+      <anchorfile>mxml_8h.html</anchorfile>
+      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baaeb129c9841502a2f3d095751f4e21a79</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MXML_OPAQUE</name>
+      <anchorfile>mxml_8h.html</anchorfile>
+      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa4ebe16a2dc2aac2531e09b56051eb47a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MXML_REAL</name>
+      <anchorfile>mxml_8h.html</anchorfile>
+      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baa9411f902a8e7e839252b7a440ef53790</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_MXML_TEXT</name>
+      <anchorfile>mxml_8h.html</anchorfile>
+      <anchor>af8b58610b5fb382d0f075cb3bcf3b6baaccc874638f0a0d375e1066d8c82c8be9</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_mxmlAdd</name>
@@ -2172,11 +2304,53 @@
       <anchor>ga72e4619e373e38dc02dc452813b7b958</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_ENGLISH_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958adb394159413ade42022509cd3280fef3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_METRIC_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a6d5868bc6707f8801ce4d584428c2ae8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_ENGLISH_EXTENDED</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a00b7e9a18afc172872861b26dbcc8cb8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_METRIC_EXTENDED</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a62e2906a87fa4bcf32913943fd5b225a</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_papersize_type_t</name>
       <anchorfile>group__papersize.html</anchorfile>
       <anchor>ga31255c4eebfaaf5cd319e5638a6a3069</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a99d27f84f91d583c3e465e56c83fff2f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_ENVELOPE</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a660290248a563e7590202afd3ba68fb4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_SPECIAL</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a7f5ebb4b034dda5137ff6296d9dc67ac</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3337,11 +3511,95 @@
       <anchor>ga9b3d4f47a44c0c8c9b150cddc56d2a91</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a7a6f3e019c8a92ddecd34c71013acde0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INT</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aae2cac85ef78157b53c7a79706dc0f70</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91af97ef629defc99977bd1cb35daabe0c1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DOUBLE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ae0dc60c8435ce0b1355bd5a134395f0c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_CURVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a0d283c33f755969ded0751bbfc5d1912</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_FILE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8224a918efbef96fffaa90e31654f7ff</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_RAW</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a33bb02d9ae5b2169d2f75da7684b04e9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_ARRAY</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8789c2b5cc718eafca6d1d0022cfe3f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DIMENSION</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aaa6f89008bf237c6f0aa2f0ee176e8b7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ad053047279b4c82034d26c4aa4c818d5</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_class_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga4eba7e712c0e17b76e472f26e202d7b8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_FEATURE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa7ed8b66836057aa58b9a74811057b4a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_OUTPUT</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8affc6ff4bfbf2873ce55dfc03776bb6d9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_CORE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa05ce344ff3338e69638d69f9c120d01</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8a2e17ce7ebc18801c11af7ea0a61e93ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -3351,6 +3609,60 @@
       <anchor>gaaa9c9265ffe70122bd33659cf2983207</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_BASIC</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae9d7192607a6e1ec92dfed3f13a3a46f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3130e7060a3b901ea8dcb37d986d47e0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3d016c9587f698ee400bc7e66071f06c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a59a909a8953b8724d57ce85e2b4306bf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a1241066935e94def6ab6d524ed1fabae</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a6036d5761aa9710a66429c625c334a80</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab2bc3be82f619147d9a45564fd53a4a0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae478f67e409adabc8679d3801604861d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab8bf539d78e56f06f463d00f7a3b56b3</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_activity_t</name>
@@ -3358,11 +3670,47 @@
       <anchor>ga70ebf70dc8e6199d84fc91985c94bae9</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_INACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a6517762c5800eac253f43eeacd96c22f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_DEFAULTED</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a410b7e080ef62fb8896f2f844b1c1e00</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_ACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9adbc7323a015e40652fd256e49c8d5b8c</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_verify_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>gac061852de3627383cd415cd80a979e02</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_BAD</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a326a171221148779ec7df761b3eee967</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_OK</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a2df363618282a9164433c0f212b18616</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_INACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a5cb96da6c2e3ae7187e85a1ef6e41fc6</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -4425,6 +4773,42 @@
       <name>stp_weave_strategy_t</name>
       <anchorfile>weave_8h.html</anchorfile>
       <anchor>a059ef2763c95a5cc47d51dcf38580991</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_ZIGZAG</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991a6077c1fbd3cc6c79a1ac5f23d31bd2b3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_ASCENDING</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991a9b5dcc799a9afed0063f052196fa8d6b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_DESCENDING</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991afaf7b19bfde4be5241cb112835325797</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_ASCENDING_2X</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991a7bfa24511bcbc811272e385372c61936</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_STAGGERED</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991a8e37ffcadb7b41a3276029206a80d5e6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_WEAVE_ASCENDING_3X</name>
+      <anchorfile>weave_8h.html</anchorfile>
+      <anchor>a059ef2763c95a5cc47d51dcf38580991aecb24603379f9f3dd682bf692326a8e1</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -6270,11 +6654,35 @@
       <anchor>ga982f8191c84b049cc3ad3cee1558fc23</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_TYPE_LINEAR</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga982f8191c84b049cc3ad3cee1558fc23a46228ddaa2d52a85ccd79c4dc0f76ad3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_TYPE_SPLINE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga982f8191c84b049cc3ad3cee1558fc23afb1ffdc3754f428d8e3a2124e014ff77</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_wrap_mode_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga3ae3af552b490b0ca8b02e442ac9547a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_WRAP_NONE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aad840485ad7df768a06ee4be02d93b97a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_WRAP_AROUND</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga3ae3af552b490b0ca8b02e442ac9547aac0361aebddfabfb263dc0205a61f6fbd</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -6284,11 +6692,47 @@
       <anchor>ga7eddbee28cb1f3c76a19408b86ea142e</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_ADD</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142eac38b0bf09e93edb67c3e5c53035295f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_MULTIPLY</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ead3bd2cdb63498d5d22686e79e2c0ed95</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_COMPOSE_EXPONENTIATE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga7eddbee28cb1f3c76a19408b86ea142ea8de151149fdfd4fcca78826e6352246a</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_curve_bounds_t</name>
       <anchorfile>group__curve.html</anchorfile>
       <anchor>ga86d146e483ca1902f973d574f542b85f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_RESCALE</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85fa118d303bf7bdf4f00bda71cc6eac49c3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_CLIP</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85faec9e6673edac9d34e3aad376fa711aa5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_CURVE_BOUNDS_ERROR</name>
+      <anchorfile>group__curve.html</anchorfile>
+      <anchor>gga86d146e483ca1902f973d574f542b85fad699d675d5df223055388cd83d0b362b</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -6865,6 +7309,18 @@
       <anchor>ga58672e1989d582c14328048b207657c8</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_IMAGE_STATUS_OK</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>gga58672e1989d582c14328048b207657c8ab5574da151b93391a337f29b2a7c96cf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_IMAGE_STATUS_ABORT</name>
+      <anchorfile>group__image.html</anchorfile>
+      <anchor>gga58672e1989d582c14328048b207657c8a224b8ac15cf785b24b2f3f53b4fdc274</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="function">
       <type>void</type>
       <name>stp_image_init</name>
@@ -7156,11 +7612,53 @@
       <anchor>ga72e4619e373e38dc02dc452813b7b958</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_ENGLISH_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958adb394159413ade42022509cd3280fef3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_METRIC_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a6d5868bc6707f8801ce4d584428c2ae8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_ENGLISH_EXTENDED</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a00b7e9a18afc172872861b26dbcc8cb8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_METRIC_EXTENDED</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga72e4619e373e38dc02dc452813b7b958a62e2906a87fa4bcf32913943fd5b225a</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_papersize_type_t</name>
       <anchorfile>group__papersize.html</anchorfile>
       <anchor>ga31255c4eebfaaf5cd319e5638a6a3069</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_STANDARD</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a99d27f84f91d583c3e465e56c83fff2f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_ENVELOPE</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a660290248a563e7590202afd3ba68fb4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PAPERSIZE_TYPE_SPECIAL</name>
+      <anchorfile>group__papersize.html</anchorfile>
+      <anchor>gga31255c4eebfaaf5cd319e5638a6a3069a7f5ebb4b034dda5137ff6296d9dc67ac</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -8176,11 +8674,95 @@
       <anchor>ga9b3d4f47a44c0c8c9b150cddc56d2a91</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_STRING_LIST</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a7a6f3e019c8a92ddecd34c71013acde0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INT</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aae2cac85ef78157b53c7a79706dc0f70</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_BOOLEAN</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91af97ef629defc99977bd1cb35daabe0c1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DOUBLE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ae0dc60c8435ce0b1355bd5a134395f0c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_CURVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a0d283c33f755969ded0751bbfc5d1912</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_FILE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8224a918efbef96fffaa90e31654f7ff</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_RAW</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a33bb02d9ae5b2169d2f75da7684b04e9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_ARRAY</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91a8789c2b5cc718eafca6d1d0022cfe3f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_DIMENSION</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91aaa6f89008bf237c6f0aa2f0ee176e8b7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_TYPE_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga9b3d4f47a44c0c8c9b150cddc56d2a91ad053047279b4c82034d26c4aa4c818d5</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_class_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>ga4eba7e712c0e17b76e472f26e202d7b8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_FEATURE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa7ed8b66836057aa58b9a74811057b4a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_OUTPUT</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8affc6ff4bfbf2873ce55dfc03776bb6d9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_CORE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8aa05ce344ff3338e69638d69f9c120d01</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_CLASS_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga4eba7e712c0e17b76e472f26e202d7b8a2e17ce7ebc18801c11af7ea0a61e93ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="enumeration">
@@ -8190,6 +8772,60 @@
       <anchor>gaaa9c9265ffe70122bd33659cf2983207</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_BASIC</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae9d7192607a6e1ec92dfed3f13a3a46f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3130e7060a3b901ea8dcb37d986d47e0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED1</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a3d016c9587f698ee400bc7e66071f06c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED2</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a59a909a8953b8724d57ce85e2b4306bf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED3</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a1241066935e94def6ab6d524ed1fabae</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_ADVANCED4</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207a6036d5761aa9710a66429c625c334a80</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INTERNAL</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab2bc3be82f619147d9a45564fd53a4a0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_EXTERNAL</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ae478f67e409adabc8679d3801604861d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_LEVEL_INVALID</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggaaa9c9265ffe70122bd33659cf2983207ab8bf539d78e56f06f463d00f7a3b56b3</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_activity_t</name>
@@ -8197,11 +8833,47 @@
       <anchor>ga70ebf70dc8e6199d84fc91985c94bae9</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_INACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a6517762c5800eac253f43eeacd96c22f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_DEFAULTED</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9a410b7e080ef62fb8896f2f844b1c1e00</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STP_PARAMETER_ACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>gga70ebf70dc8e6199d84fc91985c94bae9adbc7323a015e40652fd256e49c8d5b8c</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>stp_parameter_verify_t</name>
       <anchorfile>group__vars.html</anchorfile>
       <anchor>gac061852de3627383cd415cd80a979e02</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_BAD</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a326a171221148779ec7df761b3eee967</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_OK</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a2df363618282a9164433c0f212b18616</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>PARAMETER_INACTIVE</name>
+      <anchorfile>group__vars.html</anchorfile>
+      <anchor>ggac061852de3627383cd415cd80a979e02a5cb96da6c2e3ae7187e85a1ef6e41fc6</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">

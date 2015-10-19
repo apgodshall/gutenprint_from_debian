@@ -27,19 +27,41 @@
 
 #include "backend_common.h"
 
-#define BACKEND_VERSION "0.54G"
+#define BACKEND_VERSION "0.62G"
 #ifndef URI_PREFIX
 #error "Must Define URI_PREFIX"
 #endif
 
-/* Global variables */
+#define NUM_CLAIM_ATTEMPTS 10
+
+/* Global Variables */
 int dyesub_debug = 0;
+int terminate = 0;
+int fast_return = 0;
 int extra_vid = -1;
 int extra_pid = -1;
 int extra_type = -1;
+int copies = 1;
 char *use_serno = NULL;
+int current_page = 0;
 
 /* Support Functions */
+static int backend_claim_interface(struct libusb_device_handle *dev, int iface)
+{
+	int attempts = NUM_CLAIM_ATTEMPTS;
+	int ret;
+	do {
+		ret = libusb_claim_interface(dev, iface);
+		if (!ret)
+			break;
+		sleep(1);
+	} while (--attempts > 0);
+
+	if (ret)
+		ERROR("Printer open failure (Could not claim printer interface after %d attempts) (%d)\n", NUM_CLAIM_ATTEMPTS, ret);
+
+	return ret;
+}
 
 #define ID_BUF_SIZE 2048
 static char *get_device_id(struct libusb_device_handle *dev)
@@ -56,7 +78,8 @@ static char *get_device_id(struct libusb_device_handle *dev)
 	if (libusb_kernel_driver_active(dev, iface))
 		libusb_detach_kernel_driver(dev, iface);
 
-	libusb_claim_interface(dev, iface);
+	if (backend_claim_interface(dev, iface))
+		return NULL;
 
 	if (libusb_control_transfer(dev,
 				    LIBUSB_REQUEST_TYPE_CLASS | LIBUSB_ENDPOINT_IN |
@@ -97,7 +120,6 @@ done:
 }
 
 /* Used with the IEEE1284 deviceid string parsing */
-
 struct deviceid_dict {
 	char *key;
 	char *val;
@@ -111,6 +133,9 @@ static int parse1284_data(const char *device_id, struct deviceid_dict* dict)
 	char key[256];
 	char val[256];
 	int num = 0;
+
+	if (!device_id)
+		return 0;
 
 	//[whitespace]key[whitespace]:[whitespace]value[whitespace];
 	while (*device_id && num < MAX_DICT) {
@@ -165,7 +190,6 @@ static char *dict_find(const char *key, int dlen, struct deviceid_dict* dict)
 }
 
 /* I/O functions */
-
 int read_data(struct libusb_device_handle *dev, uint8_t endp,
 	      uint8_t *buf, int buflen, int *readlen)
 {
@@ -254,8 +278,6 @@ int send_data(struct libusb_device_handle *dev, uint8_t endp,
 }
 
 /* More stuff */
-int terminate = 0;
-
 static void sigterm_handler(int signum) {
 	UNUSED(signum);
 
@@ -339,7 +361,7 @@ static char *url_decode(char *str) {
 static int print_scan_output(struct libusb_device *device,
 			     struct libusb_device_descriptor *desc,
 			     char *prefix, char *manuf2,
-			     int found, int match,
+			     int found,
 			     int scan_only, char *match_serno,
 			     struct dyesub_backend *backend)
 {
@@ -411,7 +433,11 @@ static int print_scan_output(struct libusb_device *device,
 		descr = malloc(256);
 		if (!descr) {
 			ERROR("Memory allocation failure (%d bytes)\n", 256);
-			return found;
+			if (manuf3)
+				free(manuf3);
+			if (product2)
+				free(product2);
+			return -1;
 		}
 		
 		sprintf(descr, "%s %s", manuf3, product2);
@@ -434,17 +460,16 @@ static int print_scan_output(struct libusb_device *device,
 		serial = url_encode(buf);
 	} else if (backend->query_serno) { /* Get from backend hook */
 		int iface = 0;
+
 		struct libusb_config_descriptor *config;
 
 		if (libusb_kernel_driver_active(dev, iface))
 			libusb_detach_kernel_driver(dev, iface);
 
-		/* If we fail to claim the printer, it's already in use
-		   so we should just skip over it... */
-		buf[0] = 0;
-		if (!libusb_claim_interface(dev, iface)) {
+		/* Try to claim the printer, and handle transient failures */
+		if (!backend_claim_interface(dev, iface)) {
 			int i;
-			uint8_t endp_up, endp_down;
+			uint8_t endp_up = 0, endp_down = 0;
 			libusb_get_active_config_descriptor(device, &config);
 			for (i = 0 ; i < config->interface[0].altsetting[0].bNumEndpoints ; i++) {
 				if ((config->interface[0].altsetting[0].endpoint[i].bmAttributes & 3) == LIBUSB_TRANSFER_TYPE_BULK) {
@@ -455,6 +480,7 @@ static int print_scan_output(struct libusb_device *device,
 				}
 			}
 
+			buf[0] = 0;
 			/* Ignore result since a failure isn't critical here */
 			backend->query_serno(dev, endp_up, endp_down, buf, STR_LEN_MAX);
 			libusb_release_interface(dev, iface);
@@ -471,8 +497,7 @@ static int print_scan_output(struct libusb_device *device,
 	}
 
 	if (dyesub_debug)
-		DEBUG("%sVID: %04X PID: %04X Manuf: '%s' Product: '%s' Serial: '%s'\n",
-		      match ? "MATCH: " : "",
+		DEBUG("VID: %04X PID: %04X Manuf: '%s' Product: '%s' Serial: '%s'\n",
 		      desc->idVendor, desc->idProduct, manuf, product, serial);
 	
 	if (scan_only) {
@@ -518,12 +543,29 @@ abort:
 	return found;
 }
 
+extern struct dyesub_backend updr150_backend;
+extern struct dyesub_backend kodak6800_backend;
+extern struct dyesub_backend kodak605_backend;
+extern struct dyesub_backend kodak1400_backend;
+extern struct dyesub_backend shinkos1245_backend;
+extern struct dyesub_backend shinkos2145_backend;
+extern struct dyesub_backend shinkos6145_backend;
+extern struct dyesub_backend shinkos6245_backend;
+extern struct dyesub_backend canonselphy_backend;
+extern struct dyesub_backend mitsu70x_backend;
+extern struct dyesub_backend mitsu9550_backend;
+extern struct dyesub_backend dnpds40_backend;
+extern struct dyesub_backend cw01_backend;
+
 static struct dyesub_backend *backends[] = {
 	&canonselphy_backend,
 	&kodak6800_backend,
 	&kodak605_backend,
 	&kodak1400_backend,
+	&shinkos1245_backend,
 	&shinkos2145_backend,
+//	&shinkos6145_backend,
+	&shinkos6245_backend,
 	&updr150_backend,
 	&mitsu70x_backend,
 	&mitsu9550_backend,
@@ -536,11 +578,10 @@ static int find_and_enumerate(struct libusb_context *ctx,
 			      struct libusb_device ***list,
 			      struct dyesub_backend *backend,
 			      char *match_serno,
-			      int printer_type,
 			      int scan_only)
 {
 	int num;
-	int i, j, k;
+	int i, j = 0, k;
 	int found = -1;
 
 	/* Enumerate and find suitable device */
@@ -548,45 +589,36 @@ static int find_and_enumerate(struct libusb_context *ctx,
 
 	for (i = 0 ; i < num ; i++) {
 		struct libusb_device_descriptor desc;
-		int match = 0;
 		libusb_get_device_descriptor((*list)[i], &desc);
 
 		for (k = 0 ; backends[k] ; k++) {
 			if (backend && backend != backends[k])
 				continue;
 			for (j = 0 ; backends[k]->devices[j].vid ; j++) {
+				if (extra_pid != -1 &&
+				    extra_vid != -1 &&
+				    extra_type != -1) {
+					if (backends[k]->devices[j].type == extra_type &&
+					    extra_vid == desc.idVendor &&
+					    extra_pid == desc.idProduct) {
+						found = i;
+						goto match;
+					}
+				}
 				if (desc.idVendor == backends[k]->devices[j].vid &&
 				    desc.idProduct == backends[k]->devices[j].pid) {
-					match = 1;
-					if (printer_type == P_ANY ||
-					    printer_type == backends[k]->devices[j].type)
-						found = i;
+					found = i;
 					goto match;
 				}
 			}
 		}
 
+		continue;
+
 	match:
-		if (!match) {
-			if (extra_pid != -1 &&
-			    extra_vid != -1 &&
-			    extra_type != -1) {
-				if (extra_vid == desc.idVendor &&
-				    extra_pid == desc.idProduct) {
-					match = 1;
-					if (printer_type == P_ANY ||
-					    printer_type == extra_type)
-						found = i;
-				}
-			}
-		}
-
-		if (!match)
-			continue;
-
 		found = print_scan_output((*list)[i], &desc,
 					  URI_PREFIX, backends[k]->devices[j].manuf_str,
-					  found, (found == i),
+					  found,
 					  scan_only, match_serno,
 					  backends[k]);
 
@@ -615,7 +647,7 @@ static struct dyesub_backend *find_backend(char *uri_prefix)
 	return NULL;
 }
 
-static void print_license_blurb(void)
+void print_license_blurb(void)
 {
 	const char *license = "\n\
 Copyright 2007-2015 Solomon Peachy <pizza AT shaftnet DOT org>\n\
@@ -638,7 +670,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n\
 	fprintf(stderr, "%s", license);
 }
 
-static void print_help(char *argv0, struct dyesub_backend *backend)
+void print_help(char *argv0, struct dyesub_backend *backend)
 {
 	struct libusb_context *ctx = NULL;
 	struct libusb_device **list = NULL;
@@ -655,21 +687,24 @@ static void print_help(char *argv0, struct dyesub_backend *backend)
 	
 	if (!backend) {
 		int i;
+		DEBUG("Environment variables:\n");
+		DEBUG(" DYESUB_DEBUG EXTRA_PID EXTRA_VID EXTRA_TYPE BACKEND SERIAL\n");
 		DEBUG("CUPS Usage:\n");
 		DEBUG("\tDEVICE_URI=someuri %s job user title num-copies options [ filename ]\n", URI_PREFIX);
 		DEBUG("\n");
 		DEBUG("Standalone Usage:\n");
 		DEBUG("\t%s\n", URI_PREFIX);
-		DEBUG("  [ -D ] [ -G ]\n");
-		DEBUG("  [ -S serialnum ] [ -B backendname ] \n");
+		DEBUG("  [ -D ] [ -G ] [ -f ]\n");
+		DEBUG("  [ -S serialnum ] \n");
 		DEBUG("  [ -V extra_vid ] [ -P extra_pid ] [ -T extra_type ] \n");
 		DEBUG("  [ backend_specific_args ] \n");
-		DEBUG("  [ -d copies ] [ - | infile ] \n");
+		DEBUG("  [ -d copies ] \n");
+		DEBUG("  [ - | infile ] \n");
 		for (i = 0; ; i++) {
 			backend = backends[i];
 			if (!backend)
 				break;
-			DEBUG("  -B %s\t# %s version %s\n",
+			DEBUG("  BACKEND=%s\t# %s version %s\n",
 			      backend->uri_prefix, backend->name, backend->version);
 			if (backend->cmdline_usage)
 				backend->cmdline_usage();
@@ -685,12 +720,13 @@ static void print_help(char *argv0, struct dyesub_backend *backend)
 		DEBUG("\t[ -d copies ] [ infile | - ]\n");
 	}
 
+	/* Probe for printers */
 	i = libusb_init(&ctx);
 	if (i) {
 		ERROR("Failed to initialize libusb (%d)\n", i);
 		exit(CUPS_BACKEND_STOP);
 	}
-	find_and_enumerate(ctx, &list, backend, NULL, P_ANY, 1);
+	find_and_enumerate(ctx, &list, backend, NULL, 1);
 	libusb_free_device_list(list, 1);
 	libusb_exit(ctx);
 }
@@ -712,18 +748,14 @@ int main (int argc, char **argv)
 
 	int i;
 	int claimed;
-	int backend_cmd = 0;
 
 	int ret = CUPS_BACKEND_OK;
 	int iface = 0;
 	int found = -1;
-	int copies = 1;
 	int jobid = 0;
-	int pages = 0;
 
 	char *uri;
 	char *fname = NULL;
-	int printer_type = P_ANY;
 
 	DEBUG("Multi-Call Dye-sublimation CUPS Backend version %s\n",
 	      BACKEND_VERSION);
@@ -734,7 +766,7 @@ int main (int argc, char **argv)
 
 	/* First pass at cmdline parsing */
 	if (getenv("DYESUB_DEBUG"))
-		dyesub_debug++;
+		dyesub_debug = atoi(getenv("DYESUB_DEBUG"));
 	if (getenv("EXTRA_PID"))
 		extra_pid = strtol(getenv("EXTRA_PID"), NULL, 16);
 	if (getenv("EXTRA_VID"))
@@ -743,114 +775,26 @@ int main (int argc, char **argv)
 		extra_type = atoi(getenv("EXTRA_TYPE"));
 	if (getenv("BACKEND"))
 		backend = find_backend(getenv("BACKEND"));
-	use_serno = getenv("DEVICE");
-	uri = getenv("DEVICE_URI");  /* For CUPS */
+	if (getenv("FAST_RETURN"))
+		fast_return++;
+	use_serno = getenv("SERIAL");
+	uri = getenv("DEVICE_URI");  /* CUPS backend mode? */
 
-	/* Try to ensure we have a sane backend for standalone mode.
-	   CUPS mode uses 'uri' later on. */
-	if (!backend) {
-		char *ptr = strrchr(argv[0], '/');
-		if (ptr)
-			ptr++;
-		else
-			ptr = argv[0];
-		backend = find_backend(ptr);
-	}
-
-	/* Reset arg parsing */
-	optind = 1;
-	opterr = 0;
-	while ((i = getopt(argc, argv, "B:d:DGhP:S:T:V:")) >= 0) {
-		switch(i) {
-		case 'B':
-			backend = find_backend(optarg);
-			if (!backend) {
-				fprintf(stderr, "ERROR:  Unknown backend '%s'\n", optarg);
-			}
-			break;
-		case 'd':
-			copies = atoi(optarg);
-			break;
-		case 'D':
-			dyesub_debug++;
-			break;
-		case 'G':
-			print_license_blurb();
-			exit(0);
-		case 'h':
-			print_help(argv[0], backend);
-			exit(0);
-			break;
-		case 'P':
-			extra_pid = strtol(optarg, NULL, 16);
-			break;
-		case 'S':
-			use_serno = optarg;
-			break;
-		case 'T':
-			extra_type = atoi(optarg);
-			break;
-		case 'V':
-			extra_pid = strtol(optarg, NULL, 16);
-			break;
-		case '?': 
-		default: {
-			/* Check to see if it is claimed by the backend */
-			if (backend && backend->cmdline_arg) {
-				int keep = optind;
-				backend_cmd += backend->cmdline_arg(NULL, argc, argv);
-				optind = keep;
-			}
-			break;
-		}
-		}
-	}
-
-#ifndef LIBUSB_PRE_1_0_10
-	if (dyesub_debug) {
-		const struct libusb_version *ver;
-		ver = libusb_get_version();
-		DEBUG(" ** running with libusb %d.%d.%d%s (%d)\n",
-		      ver->major, ver->minor, ver->micro, (ver->rc? ver->rc : ""), ver->nano );
-	}
-#endif
-
-	/* Make sure a filename was specified */
-	if (!backend_cmd && (optind == argc || !argv[optind])) {
-		print_help(argv[0], backend);
-		exit(0);
-	}
-
-	/* Are we running as a CUPS backend? */
 	if (uri) {
-		int base = optind; // XXX aka 1.
-		fname = argv[base + 5];
+		/* CUPS backend mode */
+		int base = optind; /* ie 1 */
+		if (argc < 6) {
+			ERROR("Insufficient arguments\n");
+			exit(1);
+		}
 		if (argv[base])
 			jobid = atoi(argv[base]);
 		if (argv[base + 3])
 			copies = atoi(argv[base + 3]);
-		if (fname) {  /* IOW, is it specified? */
-			data_fd = open(fname, O_RDONLY);
-			if (data_fd < 0) {
-				perror("ERROR:Can't open input file");
-				exit(1);
-			}
-		} else {
+		if (argc > 6)
+			fname = argv[base + 5];
+		else
 			fname = "-";
-		}
-
-		/* Ensure we're using BLOCKING I/O */
-		i = fcntl(data_fd, F_GETFL, 0);
-		if (i < 0) {
-			perror("ERROR:Can't open input");
-			exit(1);
-		}
-		i &= ~O_NONBLOCK;
-		i = fcntl(data_fd, F_SETFL, 0);
-		if (i < 0) {
-			perror("ERROR:Can't open input");
-			exit(1);
-		}
 
 		/* Figure out backend based on URI */
 		{
@@ -884,46 +828,34 @@ int main (int argc, char **argv)
 			if (ptr)
 				*ptr = 0;
 		}
+
+		/* Always enable fast return in CUPS mode */
+		fast_return++;
 	} else {
+		/* Standalone mode */		
+
+		/* Try to guess backend from executable name */
+		if (!backend) {
+			char *ptr = strrchr(argv[0], '/');
+			if (ptr)
+				ptr++;
+			else
+				ptr = argv[0];
+			backend = find_backend(ptr);
+		}
+	
 		srand(getpid());
 		jobid = rand();
-
-		/* Grab the filename */
-		fname = argv[optind];
-
-		if (!fname && !backend_cmd) {
-			perror("ERROR:No input file");
-			exit(1);
-		}
-		if (fname) {
-			/* Open Input File */
-			if (strcmp("-", fname)) {
-				data_fd = open(fname, O_RDONLY);
-				if (data_fd < 0) {
-					perror("ERROR:Can't open input file");
-					exit(1);
-				}
-			}
-		}
 	}
 
-	/* Ignore SIGPIPE */
-	signal(SIGPIPE, SIG_IGN);
-	signal(SIGTERM, sigterm_handler);
-
-	/* Initialize backend */
-	DEBUG("Initializing '%s' backend (version %s)\n",
-	      backend->name, backend->version);
-	backend_ctx = backend->init();
-
-	/* Parse printjob if necessary */
-	if (fname && backend->early_parse) {
-		printer_type = backend->early_parse(backend_ctx, data_fd);
-		if (printer_type < 0) {
-			ret = CUPS_BACKEND_CANCEL;
-			goto done;
-		}
+#ifndef LIBUSB_PRE_1_0_10
+	if (dyesub_debug) {
+		const struct libusb_version *ver;
+		ver = libusb_get_version();
+		DEBUG(" ** running with libusb %d.%d.%d%s (%d)\n",
+		      ver->major, ver->minor, ver->micro, (ver->rc? ver->rc : ""), ver->nano );
 	}
+#endif
 
 	/* Libusb setup */
 	ret = libusb_init(&ctx);
@@ -933,16 +865,30 @@ int main (int argc, char **argv)
 		goto done;
 	}
 
-	/* Enumerate devices */
-	found = find_and_enumerate(ctx, &list, backend, use_serno, printer_type, 0);
+	/* If we don't have a valid backend, print help and terminate */
+	if (!backend) {
+		print_help(argv[0], NULL); // probes all devices
+		exit(1);
+	}
 
-#if 1
+	/* If we're in standalone mode, print help only if no args */
+	if (!uri) {
+		if (argc < 2) {
+			print_help(argv[0], backend); // probes all devices
+			exit(1);
+		}
+	}
+
+	/* Enumerate devices */
+	found = find_and_enumerate(ctx, &list, backend, use_serno, 0);
+
 	if (found == -1) {
-		ERROR("Printer open failure (No suitable printers found!)\n");
+		ERROR("Printer open failure (No matching printers found!)\n");
 		ret = CUPS_BACKEND_HOLD;
 		goto done;
 	}
 
+	/* Open an appropriate device */
 	ret = libusb_open(list[found], &dev);
 	if (ret) {
 		ERROR("Printer open failure (Need to be root?) (%d)\n", ret);
@@ -960,9 +906,8 @@ int main (int argc, char **argv)
 		}
 	}
 
-	ret = libusb_claim_interface(dev, iface);
+	ret = backend_claim_interface(dev, iface);
 	if (ret) {
-		ERROR("Printer open failure (Could not claim printer interface) (%d)\n", ret);
 		ret = CUPS_BACKEND_STOP;
 		goto done_close;
 	}
@@ -982,35 +927,69 @@ int main (int argc, char **argv)
 				endp_down = config->interface[0].altsetting[0].endpoint[i].bEndpointAddress;				
 		}
 	}
-#endif
+
+	/* Initialize backend */
+	DEBUG("Initializing '%s' backend (version %s)\n",
+	      backend->name, backend->version);
+	backend_ctx = backend->init();
+
 	/* Attach backend to device */
 	backend->attach(backend_ctx, dev, endp_up, endp_down, jobid);
 
-	if (backend_cmd && !uri) {
-		if (backend->cmdline_arg(backend_ctx, argc, argv))
+	if (!uri) {
+		if (backend->cmdline_arg(backend_ctx, argc, argv) < 0)
 			goto done_claimed;
-		if (!fname)
-			goto done_claimed;
+
+		/* Grab the filename */
+		fname = argv[optind]; // XXX do this a smarter way?
 	}
+
+	if (!fname) {
+		if (uri)
+			fprintf(stderr, "ERROR: No input file specified\n");
+		goto done_claimed;
+	}
+
+	/* Open file if not STDIN */
+	if (strcmp("-", fname)) {
+		data_fd = open(fname, O_RDONLY);
+		if (data_fd < 0) {
+			perror("ERROR:Can't open input file");
+			exit(1);
+		}
+	}
+
+	/* Ensure we're using BLOCKING I/O */
+	i = fcntl(data_fd, F_GETFL, 0);
+	if (i < 0) {
+		perror("ERROR:Can't open input");
+		exit(1);
+	}
+	i &= ~O_NONBLOCK;
+	i = fcntl(data_fd, F_SETFL, i);
+	if (i < 0) {
+		perror("ERROR:Can't open input");
+		exit(1);
+	}
+
+	/* Ignore SIGPIPE */
+	signal(SIGPIPE, SIG_IGN);
+	signal(SIGTERM, sigterm_handler);
 
 	/* Time for the main processing loop */
 	INFO("Printing started (%d copies)\n", copies);
 
 newpage:
-	/* Do early parsing if needed for subsequent pages */
-	if (pages && backend->early_parse &&
-	    backend->early_parse(backend_ctx, data_fd) < 0)
-			goto done_multiple;
 
 	/* Read in data */
 	if ((ret = backend->read_parse(backend_ctx, data_fd))) {
-		if (pages)
+		if (current_page)
 			goto done_multiple;
 		else
 			goto done_claimed;
 	}
 
-	INFO("Printing page %d\n", ++pages);
+	INFO("Printing page %d\n", ++current_page);
 
 	ret = backend->main_loop(backend_ctx, copies);
 	if (ret)
@@ -1025,7 +1004,7 @@ done_multiple:
 	close(data_fd);
 
 	/* Done printing */
-	INFO("All printing done (%d pages * %d copies)\n", pages, copies);
+	INFO("All printing done (%d pages * %d copies)\n", current_page, copies);
 	ret = CUPS_BACKEND_OK;
 
 done_claimed:
@@ -1050,3 +1029,47 @@ done:
 	return ret;
 }
 
+int lookup_printer_type(struct dyesub_backend *backend, uint16_t idVendor, uint16_t idProduct)
+{
+	int i;
+	int type = -1;
+
+	for (i = 0 ; backend->devices[i].vid ; i++) {
+		if (extra_pid != -1 &&
+		    extra_vid != -1 &&
+		    extra_type != -1) {
+			if (backend->devices[i].type == extra_type &&
+			    extra_vid == idVendor &&
+			    extra_pid == idProduct) {
+				return extra_type;
+			}
+		}
+		if (idVendor == backend->devices[i].vid &&
+		    idProduct == backend->devices[i].pid) {
+			return backend->devices[i].type;
+		}
+	}
+
+	return type;
+}
+
+uint16_t uint16_to_packed_bcd(uint16_t val)
+{
+        uint16_t bcd;
+        uint16_t i;
+
+        /* Handle from 0-9999 */
+        i = val % 10;
+        bcd = i;
+        val /= 10;
+        i = val % 10;
+        bcd |= (i << 4);
+        val /= 10;
+        i = val % 10;
+        bcd |= (i << 8);
+        val /= 10;
+        i = val % 10;
+        bcd |= (i << 12);
+
+        return bcd;
+}

@@ -1,5 +1,5 @@
 /*
- * "$Id: print-canon.c,v 1.569 2015/05/26 16:33:07 gernot2270 Exp $"
+ * "$Id: print-canon.c,v 1.586 2015/10/01 15:22:29 gernot2270 Exp $"
  *
  *   Print plug-in CANON BJL driver for the GIMP.
  *
@@ -105,26 +105,26 @@ pack_pixels3_5(unsigned char* buf,int len)
 {
   int read_pos = 0;
   int write_pos = 0;
-  int shift = 7;
+  int shift = 4;
   while(read_pos < len)
   {
-    /* read 3pixels at 3 bit */
+    /* read 3pixels at 4 bit */
     unsigned short value = buf[read_pos] << 8;
     if(read_pos+1 < len)
       value += buf[read_pos + 1];
-    if(shift)
+    if(shift)       /*4,0*/
       value >>= shift;
     /* write 8bit value representing the 12 bit pixel combination */
-    buf[write_pos] = twelve2eight[value & 1023];
+    buf[write_pos] = twelve2eight[value & 4095];
     ++write_pos;
     if(shift == 0)
     {
-      shift = 7;
+      shift = 4;
       read_pos += 2;
     }
     else
     {
-      shift -= 1;
+      shift -= 4;
       ++read_pos;
     }
   }
@@ -137,26 +137,26 @@ pack_pixels3_6(unsigned char* buf,int len)
 {
   int read_pos = 0;
   int write_pos = 0;
-  int shift = 7;
+  int shift = 4;
   while(read_pos < len)
   {
-    /* read 3pixels at 3 bit */
+    /* read 3pixels at 4 bit */
     unsigned short value = buf[read_pos] << 8;
     if(read_pos+1 < len)
       value += buf[read_pos + 1];
-    if(shift)
+    if(shift)       /*4,0*/
       value >>= shift;
     /* write 8bit value representing the 12 bit pixel combination */
-    buf[write_pos] = twelve2eight2[value & 1023];
+    buf[write_pos] = twelve2eight2[value & 4095];
     ++write_pos;
     if(shift == 0)
     {
-      shift = 7;
+      shift = 4;
       read_pos += 2;
     }
     else
     {
-      shift -= 1;
+      shift -= 4;
       ++read_pos;
     }
   }
@@ -179,17 +179,18 @@ pack_pixels3_6(unsigned char* buf,int len)
 #define CANON_CAP_px         0x2000ul
 #define CANON_CAP_rr         0x4000ul
 #define CANON_CAP_I          0x8000ul
-#define CANON_CAP_T          0x10000ul /* not sure of this yet! */
-#define CANON_CAP_P          0x20000ul
-#define CANON_CAP_DUPLEX     0x40000ul
-#define CANON_CAP_XML        0x80000ul /* not sure of this yet */
+#define CANON_CAP_T          0x10000ul /* cartridge selection for PIXMA printers with Black and Color carts */
+#define CANON_CAP_P          0x20000ul /* related to media type selection */
+#define CANON_CAP_DUPLEX     0x40000ul /* duplex printing */
+#define CANON_CAP_XML        0x80000ul /* use of XML at start and end of print data */
 #define CANON_CAP_CARTRIDGE  0x100000ul /* not sure of this yet */
 #define CANON_CAP_M          0x200000ul /* not sure of this yet */
 #define CANON_CAP_S          0x400000ul /* not sure of this yet */
 #define CANON_CAP_cart       0x800000ul /* BJC printers with Color, Black, Photo options */
-#define CANON_CAP_BORDERLESS 0x1000000ul /* borderless printing */
+#define CANON_CAP_BORDERLESS 0x1000000ul /* borderless (fullbleed) printing */
 #define CANON_CAP_NOBLACK    0x2000000ul /* no Black cartridge selection */
 #define CANON_CAP_v          0x4000000ul /* not sure of this yet */
+#define CANON_CAP_w          0x8000000ul /* related to media type selection */
 
 #define CANON_CAP_STD0 (CANON_CAP_b|CANON_CAP_c|CANON_CAP_d|\
                         CANON_CAP_l|CANON_CAP_q|CANON_CAP_t)
@@ -520,6 +521,7 @@ static const char* canon_families[] = {
  "PIXMA P",   /* 13 */
  "MAXIFY iB", /* 14 */
  "MAXIFY MB", /* 15 */
+ "PIXMA MPC", /* 16 */
 };
 
 /* canon model ids look like the following
@@ -2605,7 +2607,7 @@ canon_size_type(const stp_vars_t *v, const canon_cap_t * caps)
       /* if (!strcmp(name,"CD5Inch"))  return 0x57; */ /* CD Tray H */
 
       /* Fine Art paper codes */
-      /* MG6300, MG6500, MG6700, MG7100, MG7500 (only A4)  */
+      /* MG6300, MG6500, MG6700, MG7100, MG7500 (only A4), MG6900, MG7700  */
       /* iP8700, iX6800 (A3  */
       /* if (!strcmp(name,"A4"))       return 0x58; */ /* FineArt A4 35mm border */
       /* if (!strcmp(name,"Letter"))   return 0x5a; */ /* FineArt Letter 35mm border */
@@ -2667,7 +2669,15 @@ static stp_parameter_list_t
 canon_list_parameters(const stp_vars_t *v)
 {
   stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_parameter_list_t *tmp_list;
+  
   int i;
+
+  /* Set up dithering */
+  tmp_list = stp_dither_list_parameters(v);
+  stp_parameter_list_append(ret, tmp_list);
+  stp_parameter_list_destroy(tmp_list);
+
   for (i = 0; i < the_parameter_count; i++)
     stp_parameter_list_add_param(ret, &(the_parameters[i]));
   for (i = 0; i < float_parameter_count; i++)
@@ -2732,27 +2742,15 @@ canon_parameters(const stp_vars_t *v, const char *name,
       }else{
         for (i = 0; i < papersizes; i++) {
           const stp_papersize_t *pt = stp_get_papersize_by_index(i);
+	  if (pt->paper_size_type != PAPERSIZE_TYPE_STANDARD &&
+	      pt->paper_size_type != PAPERSIZE_TYPE_ENVELOPE)
+	    continue;
           if (strlen(pt->name) > 0 &&
 	      pt->width <= width_limit && pt->height <= height_limit){
 	    stp_string_list_add_string(description->bounds.str,
 				     pt->name, gettext(pt->text));
            }
         }
-	/*
-	{
-	  for (i = 0; i < papersizes; i++)
-	    {
-	      const stp_papersize_t *pt = stp_get_papersize_by_index(i);
-	      if (verify_papersize(v, pt))
-		stp_string_list_add_string(description->bounds.str,
-					   pt->name, gettext(pt->text));
-	    }
-	}
-
-
-	 */
-
-
       }
       description->deflt.str =
         stp_string_list_param(description->bounds.str, 0)->name;
@@ -2761,9 +2759,9 @@ canon_parameters(const stp_vars_t *v, const char *name,
     {
       const char* input_slot = stp_get_string_parameter(v, "InputSlot");
       description->bounds.str = stp_string_list_create();
-      if (input_slot && !strcmp(input_slot,"CD") &&
+      if ( (!input_slot || !strcmp(input_slot,"CD")) &&
          (!stp_get_string_parameter(v, "PageSize") ||
-          strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") != 0))
+          strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") != 0) )	
 	{
 	  stp_string_list_add_string
 	    (description->bounds.str, "None", _("Normal"));
@@ -2781,9 +2779,9 @@ canon_parameters(const stp_vars_t *v, const char *name,
       description->bounds.dimension.lower = 16 * 10 * 72 / 254;
       description->bounds.dimension.upper = 43 * 10 * 72 / 254;
       description->deflt.dimension = 43 * 10 * 72 / 254;
-      if (input_slot && !strcmp(input_slot,"CD") &&
+      if ( (!input_slot || !strcmp(input_slot,"CD")) &&
          (!stp_get_string_parameter(v, "PageSize") ||
-         strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") == 0))
+         strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") == 0) )
 	description->is_active = 1;
       else
 	description->is_active = 0;
@@ -2794,9 +2792,9 @@ canon_parameters(const stp_vars_t *v, const char *name,
       description->bounds.dimension.lower = 65 * 10 * 72 / 254;
       description->bounds.dimension.upper = 120 * 10 * 72 / 254;
       description->deflt.dimension = 329;
-      if (input_slot && !strcmp(input_slot,"CD") &&
+      if ( (!input_slot || !strcmp(input_slot,"CD")) &&
          (!stp_get_string_parameter(v, "PageSize") ||
-          strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") == 0))
+          strcmp(stp_get_string_parameter(v, "PageSize"), "CDCustom") == 0) )
 	description->is_active = 1;
       else
 	description->is_active = 0;
@@ -2808,7 +2806,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
       description->bounds.dimension.lower = -15;
       description->bounds.dimension.upper = 15;
       description->deflt.dimension = 0;
-      if (input_slot && !strcmp(input_slot,"CD"))
+      if (!input_slot || !strcmp(input_slot,"CD"))
 	description->is_active = 1;
       else
 	description->is_active = 0;
@@ -2822,7 +2820,7 @@ canon_parameters(const stp_vars_t *v, const char *name,
     description->deflt.str = NULL;
     for(i=0;i<caps->modelist->count;i++){
 #if 0
-	if(!(input_slot && !strcmp(input_slot,"CD") && !(caps->modelist->modes[i].flags & MODE_FLAG_CD)))
+      if(!((!input_slot || !strcmp(input_slot,"CD")) && !(caps->modelist->modes[i].flags & MODE_FLAG_CD)))
 #endif
           stp_string_list_add_string(description->bounds.str,
 				     caps->modelist->modes[i].name, gettext(caps->modelist->modes[i].text));
@@ -2905,28 +2903,30 @@ canon_parameters(const stp_vars_t *v, const char *name,
     int count = caps->slotlist->count;
     description->bounds.str= stp_string_list_create();
     description->deflt.str= canon_slot_list[0].name;
-
+    
     for (i = 0; i < count; i ++)
       stp_string_list_add_string(description->bounds.str,
-				canon_slot_list[i].name,
-				gettext(canon_slot_list[i].text));
+				 canon_slot_list[i].name,
+				 gettext(canon_slot_list[i].text));
   }
   else if (strcmp(name, "CassetteTray") == 0)
-    {
-      description->bounds.str= stp_string_list_create();
-      if (caps->CassetteTray_Opts == 1) {
-	stp_string_list_add_string
-	  (description->bounds.str, "Upper", _("Upper Tray"));
-	stp_string_list_add_string
-	  (description->bounds.str, "Lower", _("Lower Tray"));
-      } else {
-	/* make sure to have at least a default value: no choice */
-	stp_string_list_add_string
-	  (description->bounds.str, "None", _("None"));
-      }
+  {
+    description->bounds.str= stp_string_list_create();
+    description->is_active = 0;
+    if (caps->CassetteTray_Opts) {
+      const char* input_slot = stp_get_string_parameter(v, "InputSlot");
+      stp_string_list_add_string
+	(description->bounds.str, "Default", _("Driver-Controlled"));
+      stp_string_list_add_string
+	(description->bounds.str, "Upper", _("Upper Tray/Cassette 1"));
+      stp_string_list_add_string
+	(description->bounds.str, "Lower", _("Lower Tray/Cassette 2"));
       description->deflt.str =
 	stp_string_list_param(description->bounds.str, 0)->name;
+      if (!input_slot || !strcmp(input_slot,"Cassette"))
+	description->is_active = 1;
     }
+  }
   else if (strcmp(name, "PrintingMode") == 0)
   {
     int found_color, found_mono;
@@ -4049,7 +4049,7 @@ canon_init_setPageMargins2(const stp_vars_t *v, canon_privdata_t *init)
 
   if ((init->caps->features & CANON_CAP_px) ) {
     /* workaround for CD writing that uses CANON_CAP_px --- fix with capabilities */
-    if ( !( input_slot && !(strcmp(input_slot,"CD")) ) || !(strcmp(init->caps->name,"PIXMA iP4500")) || !(strcmp(init->caps->name,"PIXMA iP4600")) || !(strcmp(init->caps->name,"PIXMA iP4700")) || !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA MP710")) || !(strcmp(init->caps->name,"PIXMA iP3000")) || !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) )
+    if ( !( input_slot && !(strcmp(input_slot,"CD")) ) || !(strcmp(init->caps->name,"PIXMA iP4500")) || !(strcmp(init->caps->name,"PIXMA iP4600")) || !(strcmp(init->caps->name,"PIXMA iP4700")) || !(strcmp(init->caps->name,"PIXMA iP4800")) || !(strcmp(init->caps->name,"PIXMA iP4900")) || !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MP980")) || !(strcmp(init->caps->name,"PIXMA MP990")) || !(strcmp(init->caps->name,"PIXMA MG5200")) || !(strcmp(init->caps->name,"PIXMA MG5300")) || !(strcmp(init->caps->name,"PIXMA MG6100")) || !(strcmp(init->caps->name,"PIXMA MG6200")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MG7700")) || !(strcmp(init->caps->name,"PIXMA MG8100")) || !(strcmp(init->caps->name,"PIXMA MG8200")) || !(strcmp(init->caps->name,"PIXMA iP9910")) || !(strcmp(init->caps->name,"PIXMA MP710")) || !(strcmp(init->caps->name,"PIXMA iP3000")) || !(strcmp(init->caps->name,"PIXMA Pro9000")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) )
       /* need to check if iP9910, MP710, iP3000, Pro9000 use Esc (p */
       {
 
@@ -4228,15 +4228,86 @@ static void
 canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
 {
   unsigned char arg_ESCP_1, arg_ESCP_2, arg_ESCP_9;
+
+  int width, length;
+  /*  const char *media_size = stp_get_string_parameter(v, "PageSize");
+      const stp_papersize_t *pt = NULL; */
+  const char* input_slot = stp_get_string_parameter(v, "InputSlot");
+  const char* input_tray = stp_get_string_parameter(v, "CassetteTray");
+  /* const canon_cap_t * caps= canon_get_model_capabilities(v); */
+  int print_cd = (input_slot && (!strcmp(input_slot, "CD")));
+  int tray_upper = (input_tray && (!strcmp(input_tray, "Upper")));
+  int tray_lower = (input_tray && (!strcmp(input_tray, "Lower")));
+  int tray_user_select;
+  unsigned char user_ESCP_9;
+  
   if(!(init->caps->features & CANON_CAP_P))
     return;
 
+  /*  if (media_size)
+      pt = stp_get_papersize_by_name(media_size); */
+  stp_default_media_size(v, &width, &length);
+  if (tray_upper || tray_lower)
+    tray_user_select=1;
+  else
+    tray_user_select=0;
+  if (tray_upper)
+    user_ESCP_9=0x01;
+  else if (tray_lower)
+    user_ESCP_9=0x02;
+  else
+    user_ESCP_9=0x00; /* fall-through setting, but this value is not used */
+  
   arg_ESCP_1 = (init->pt) ? canon_size_type(v,init->caps): 0x03;
   arg_ESCP_2 = (init->pt) ? init->pt->media_code_P: 0x00;
-  if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) ) {
-    arg_ESCP_9 = 0x02;
+
+  /* Code for last argument in 9-byte ESC (P printers with and upper and lower tray included in the cassette input source 
+     The intention appears to be to allow printing of photos and non-photo paper without needing to change trays.
+     Note, envelopes are printed from the lower tray.
+
+     Upper tray specification from MG7700 user manual:
+     Min width:  3.5  inches /  89.0 mm  (L size)
+     Min height: 5    inches / 127.0 mm  (L size)
+     Max width:  7.87 inches / 200.0 mm  (marked up to 5 inches)
+     Max height: 7.28 inches / 184.9 mm
+
+     Lower tray specification:
+     Min width:  3.54 inches /  90.0 mm (takes business envelopes)
+     Min height: 7.29 inches / 185.0 mm 
+     Max width:  8.5  inches / 215.9 mm 
+     Max height: 14   inches / 355.6 mm 
+
+     Conditions:
+     Init:  Upper tray
+     Media: 
+            Hagaki, Photo media --> upper tray
+	    Envelopes  (argESCP_2 == 0x08) --> lower tray
+	    Other --> lower tray
+     Size:  Length:
+            < 7.29 inches (524 pt = 184.85 mm; 525 pt = 185.2 mm ) --> upper tray
+            >=7.29 inches (524 pt = 184.85 mm; 525 pt = 185.2 mm ) --> lower tray
+
+     Printers with this capability:
+     Code 0xd for cassette (standard cassette code is 0x8)
+
+     MG5400
+     MG6300
+     MG6500
+     MG6700
+     MG6900 - same as MG7700
+     MG7500
+     MG7700
+     iP7200
+     MX720
+     MX920
+   */
+  
+  
+  if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MG7700")) || !(strcmp(init->caps->name,"PIXMA MX720")) || !(strcmp(init->caps->name,"PIXMA MX920")) ) {
+    /* default: use upper tray of cassette with two trays, condition check later */
+    arg_ESCP_9 = 0x01;
   }
-  else if ( !(strcmp(init->caps->name,"PIXMA E400")) || !(strcmp(init->caps->name,"PIXMA E460")) || !(strcmp(init->caps->name,"PIXMA E480")) || !(strcmp(init->caps->name,"PIXMA E560")) || !(strcmp(init->caps->name,"PIXMA MG2900")) || !(strcmp(init->caps->name,"PIXMA MG3500")) || !(strcmp(init->caps->name,"PIXMA MG5500")) || !(strcmp(init->caps->name,"PIXMA MG5600")) || !(strcmp(init->caps->name,"PIXMA iP110")) || !(strcmp(init->caps->name,"PIXMA iP2800")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) || !(strcmp(init->caps->name,"MAXIFY iB4000")) || !(strcmp(init->caps->name,"MAXIFY MB2000")) || !(strcmp(init->caps->name,"MAXIFY MB2300")) || !(strcmp(init->caps->name,"PIXMA MX470")) || !(strcmp(init->caps->name,"PIXMA MX490")) ) {
+  else if ( !(strcmp(init->caps->name,"PIXMA E400")) || !(strcmp(init->caps->name,"PIXMA E460")) || !(strcmp(init->caps->name,"PIXMA E480")) || !(strcmp(init->caps->name,"PIXMA E560")) || !(strcmp(init->caps->name,"PIXMA MG2900")) || !(strcmp(init->caps->name,"PIXMA MG3500")) || !(strcmp(init->caps->name,"PIXMA MG3600")) || !(strcmp(init->caps->name,"PIXMA MG5500")) || !(strcmp(init->caps->name,"PIXMA MG5600")) || !(strcmp(init->caps->name,"PIXMA iP110")) || !(strcmp(init->caps->name,"PIXMA iP2800")) || !(strcmp(init->caps->name,"PIXMA iP8700")) || !(strcmp(init->caps->name,"PIXMA iX6800")) || !(strcmp(init->caps->name,"MAXIFY iB4000")) || !(strcmp(init->caps->name,"MAXIFY MB2000")) || !(strcmp(init->caps->name,"MAXIFY MB2300")) || !(strcmp(init->caps->name,"PIXMA MX470")) || !(strcmp(init->caps->name,"PIXMA MX490")) ) {
     arg_ESCP_9 = 0xff;
   }
 
@@ -4284,7 +4355,7 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
 	arg_ESCP_1 = 0x56;
       }
       /* Tray J from iP7200 onwards */
-      if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300"))  || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MX920")) ) {
+      if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300"))  || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MG7700")) || !(strcmp(init->caps->name,"PIXMA MX920")) ) {
 	arg_ESCP_1 = 0x5b;
 	arg_ESCP_9 = 0x00;
       }
@@ -4355,7 +4426,9 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
       /* MG6300: CD Tray J     : 0x5b               */
       /* MG6500: CD Tray J     : 0x5b               */
       /* MG6700: CD Tray J     : 0x5b               */
+      /* MG6900: CD Tray J     : 0x5b               */
       /* MG7500: CD Tray J     : 0x5b               */
+      /* MG7700: CD Tray J     : 0x5b               */
       /* MG8100: CD Tray G     : 0x56               */
       /* MG8200: CD Tray G     : 0x56               */
       /* pro9000:CD Tray E     : 0x4c               */
@@ -4471,33 +4544,67 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
   }
 
   /* workaround for media type based differences in 9-parameter ESC (P commands */
-  /* MX720, MX920, MG6500 uses 2 usually, 1 with various Hagaki media, and 0 with CD media */
-  /* Note: issue is use of upper (1)/lower tray(2) wth cassette media source, 0 for CD media */
-  if (  !(strcmp(init->caps->name,"PIXMA MX720")) || !(strcmp(init->caps->name,"PIXMA MX920")) || !(strcmp(init->caps->name,"PIXMA MG6500")) ) {
-    switch(arg_ESCP_2)
-      {
-	/* Hagaki media */
-      case 0x07: arg_ESCP_9=0x01; break;;
-      case 0x14: arg_ESCP_9=0x01; break;;
-      case 0x1b: arg_ESCP_9=0x01; break;;
-      case 0x36: arg_ESCP_9=0x01; break;;
-      case 0x38: arg_ESCP_9=0x01; break;;
-	/* CD media */
-      case 0x1f: arg_ESCP_9=0x00; break;;
-      case 0x20: arg_ESCP_9=0x00; break;;
-	/* other media */
-      default:   arg_ESCP_9=0x02; break;;
+  /* These printers use 0x02 (lower tray) usually and for envelopes, 0x01 (upper tray) with various Hagaki/Photo media, and 0x00 with CD media */
+  if ( !(strcmp(init->caps->name,"PIXMA iP7200")) || !(strcmp(init->caps->name,"PIXMA MG5400")) || !(strcmp(init->caps->name,"PIXMA MG6300")) || !(strcmp(init->caps->name,"PIXMA MG6500")) || !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) || !(strcmp(init->caps->name,"PIXMA MG7700")) || !(strcmp(init->caps->name,"PIXMA MX720")) || !(strcmp(init->caps->name,"PIXMA MX920")) ) {
+    if (tray_user_select && !print_cd)
+      arg_ESCP_9=user_ESCP_9;
+    else {
+      switch(arg_ESCP_2)
+	{
+	  /* Hagaki media */
+	case 0x07: arg_ESCP_9=0x01; break;;
+	case 0x14: arg_ESCP_9=0x01; break;; /* not used with any of these models */
+	case 0x1b: arg_ESCP_9=0x01; break;;
+	case 0x36: arg_ESCP_9=0x01; break;;
+	case 0x38: arg_ESCP_9=0x01; break;;
+	case 0x46: arg_ESCP_9=0x01; break;;
+	case 0x47: arg_ESCP_9=0x01; break;;
+	case 0x48: arg_ESCP_9=0x01; break;;
+	  /* Photo media here */
+	case 0x32: arg_ESCP_9=0x01; break;;
+	case 0x33: arg_ESCP_9=0x01; break;;
+	case 0x3f: arg_ESCP_9=0x01; break;;
+	case 0x2a: arg_ESCP_9=0x01; break;;
+	case 0x16: arg_ESCP_9=0x01; break;;
+	case 0x44: arg_ESCP_9=0x01; break;; /* MG6700, MG7500 only, instead of 0x16 */
+	case 0x1c: arg_ESCP_9=0x01; break;;
+	case 0x24: arg_ESCP_9=0x01; break;;
+	  /* Envelope media */
+	case 0x08: arg_ESCP_9=0x02; break;;
+	  /* CD media */
+	case 0x1f: arg_ESCP_9=0x00; break;;
+	case 0x20: arg_ESCP_9=0x00; break;;
+	  /* other media default to lower tray */
+	default:   arg_ESCP_9=0x02; break;;
+	}
+      
+      /* condition for length to use lower tray: 7.29 in equals 524-525 points */
+      if ( (arg_ESCP_9 == 0x01) && ( length > 524 ) ) {
+	arg_ESCP_9=0x02; 
       }
+
+      /* even if user does not select correct CD media type, set appropriately */
+      if (print_cd)
+	arg_ESCP_9=0x00;
+    }
   }
 
   /* MG6700, MG7500 uses 0xff with CD media tray */
   if (   !(strcmp(init->caps->name,"PIXMA MG6700")) || !(strcmp(init->caps->name,"PIXMA MG7500")) ) {
-    switch(arg_ESCP_2)
-      {
-	/* CD media */
-      case 0x1f: arg_ESCP_9=0x00; break;;
-      case 0x20: arg_ESCP_9=0x00; break;;
-      }
+    if (tray_user_select && !print_cd)
+      arg_ESCP_9=user_ESCP_9;
+    else {
+      switch(arg_ESCP_2)
+	{
+	  /* CD media */
+	case 0x1f: arg_ESCP_9=0xff; break;;
+	case 0x20: arg_ESCP_9=0xff; break;;
+	}
+      
+      /* even if user does not select correct CD media type, set appropriately */
+      if (print_cd)
+	arg_ESCP_9=0x00;
+    }
   }
   
   if ( init->caps->ESC_P_len == 9 ) /* support for new devices from October 2012. */
@@ -4536,6 +4643,21 @@ canon_init_setESC_P(const stp_vars_t *v, const canon_privdata_t *init)
     stp_deprintf(STP_DBG_CANON,"SEVERE BUG IN print-canon.c::canon_init_setESC_P() "
 		 "ESC_P_len=%d!!\n",init->caps->ESC_P_len);
 }
+
+#if 0
+/* ESC (s -- 0x73 -- used in some newer printers for duplex pages except last one -- */
+/* When capability available, used for non-tumble and tumble (unlike Esc (u which is non-tumble only) */
+static void
+canon_init_setESC_s(const stp_vars_t *v, const canon_privdata_t *init)
+{
+  if (!(init->caps->features & CANON_CAP_DUPLEX))
+    return;
+  if (!(init->caps->features & CANON_CAP_s))
+    return;
+
+  canon_cmd(v,ESC28,0x73, 1, 0x00);
+}
+#endif
 
 /* ESC (S -- 0x53 -- unknown -- :
    Required by iP90/iP90v and iP100 printers.
@@ -4606,7 +4728,6 @@ canon_init_setESC_S(const stp_vars_t *v, const canon_privdata_t *init)
       canon_cmd(v,ESC28,0x53,54,arg_ESCS_01,0x02,0xff,arg_ESCS_04,0x41,0x02,0x00,0x01,arg_ESCS_09,0x00,arg_ESCS_11,0x00,0x01,0x01,0x03,0x02,0x01,0x01,0x01,0x03,0x02,0x00,0x07,0x06,0x02,0x01,0x02,0x04,0x04,0x04,0x05,0x06,0x08,0x08,0x08,0x0a,0x0a,0x09,0x00,0x03,0x02,0x01,0x01,0x01,0x01,0x01,0x06,0x02,0x02,0x02,0x03,0x04,0x05,0x06);
 
 }
-
 
 /* ESC (T -- 0x54 -- setCartridge -- :
  */
@@ -4873,7 +4994,7 @@ canon_init_setMultiRaster(const stp_vars_t *v, const canon_privdata_t *init){
   stp_put16_le(init->num_channels, v);
   /* add an exception here to add 0x60 of cmy channels for those printers/modes that require it */
   raster_channel_order=init->channel_order;
-  if ( !(strcmp(init->caps->name,"PIXMA MP140")) || !(strcmp(init->caps->name,"PIXMA MP150")) || !(strcmp(init->caps->name,"PIXMA MP160")) || !(strcmp(init->caps->name,"PIXMA MP170")) || !(strcmp(init->caps->name,"PIXMA MP180")) || !(strcmp(init->caps->name,"PIXMA MP190")) || !(strcmp(init->caps->name,"PIXMA MP210")) || !(strcmp(init->caps->name,"PIXMA MP220")) || !(strcmp(init->caps->name,"PIXMA MP240")) || !(strcmp(init->caps->name,"PIXMA MP250")) || !(strcmp(init->caps->name,"PIXMA MP270")) || !(strcmp(init->caps->name,"PIXMA MP280")) || !(strcmp(init->caps->name,"PIXMA MP450")) || !(strcmp(init->caps->name,"PIXMA MP460")) || !(strcmp(init->caps->name,"PIXMA MP470")) || !(strcmp(init->caps->name,"PIXMA MP480")) || !(strcmp(init->caps->name,"PIXMA MP490")) || !(strcmp(init->caps->name,"PIXMA MP495")) || !(strcmp(init->caps->name,"PIXMA MX300")) || !(strcmp(init->caps->name,"PIXMA MX310")) || !(strcmp(init->caps->name,"PIXMA MX330")) || !(strcmp(init->caps->name,"PIXMA MX340")) || !(strcmp(init->caps->name,"PIXMA MX350")) || !(strcmp(init->caps->name,"PIXMA MX360"))  || !(strcmp(init->caps->name,"PIXMA MX370")) || !(strcmp(init->caps->name,"PIXMA MX410")) || !(strcmp(init->caps->name,"PIXMA MX510")) || !(strcmp(init->caps->name,"PIXMA MX520")) || !(strcmp(init->caps->name,"PIXMA iP2700")) || !(strcmp(init->caps->name,"PIXMA MG2100")) || !(strcmp(init->caps->name,"PIXMA MG2400")) || !(strcmp(init->caps->name,"PIXMA MG2500")) || !(strcmp(init->caps->name,"PIXMA MG3500")) )
+  if ( !(strcmp(init->caps->name,"PIXMA MP140")) || !(strcmp(init->caps->name,"PIXMA MP150")) || !(strcmp(init->caps->name,"PIXMA MP160")) || !(strcmp(init->caps->name,"PIXMA MP170")) || !(strcmp(init->caps->name,"PIXMA MP180")) || !(strcmp(init->caps->name,"PIXMA MP190")) || !(strcmp(init->caps->name,"PIXMA MP210")) || !(strcmp(init->caps->name,"PIXMA MP220")) || !(strcmp(init->caps->name,"PIXMA MP240")) || !(strcmp(init->caps->name,"PIXMA MP250")) || !(strcmp(init->caps->name,"PIXMA MP270")) || !(strcmp(init->caps->name,"PIXMA MP280")) || !(strcmp(init->caps->name,"PIXMA MP450")) || !(strcmp(init->caps->name,"PIXMA MP460")) || !(strcmp(init->caps->name,"PIXMA MP470")) || !(strcmp(init->caps->name,"PIXMA MP480")) || !(strcmp(init->caps->name,"PIXMA MP490")) || !(strcmp(init->caps->name,"PIXMA MP495")) || !(strcmp(init->caps->name,"PIXMA MX300")) || !(strcmp(init->caps->name,"PIXMA MX310")) || !(strcmp(init->caps->name,"PIXMA MX330")) || !(strcmp(init->caps->name,"PIXMA MX340")) || !(strcmp(init->caps->name,"PIXMA MX350")) || !(strcmp(init->caps->name,"PIXMA MX360"))  || !(strcmp(init->caps->name,"PIXMA MX370")) || !(strcmp(init->caps->name,"PIXMA MX410")) || !(strcmp(init->caps->name,"PIXMA MX510")) || !(strcmp(init->caps->name,"PIXMA MX520")) || !(strcmp(init->caps->name,"PIXMA iP2700")) || !(strcmp(init->caps->name,"PIXMA MG2100")) || !(strcmp(init->caps->name,"PIXMA MG2400")) || !(strcmp(init->caps->name,"PIXMA MG2500")) || !(strcmp(init->caps->name,"PIXMA MG3500")) || !(strcmp(init->caps->name,"PIXMA MG3600")) )
     {
       /* if cmy there, add 0x60 to each --- all modes using cmy require it */
       for(i=0;i<init->num_channels;i++){
@@ -4938,7 +5059,15 @@ canon_init_setMultiRaster(const stp_vars_t *v, const canon_privdata_t *init){
     }
 }
 
+/* ESC (u -- 0x75 -- even pages duplex for long side only -- */
+static void
+canon_init_setESC_u(const stp_vars_t *v, const canon_privdata_t *init)
+{
+  if (!(init->caps->features & CANON_CAP_DUPLEX))
+    return;
 
+  canon_cmd(v,ESC28,0x75, 1, 0x01);
+}
 
 /* ESC (v -- 0x76 -- */
 static void
@@ -4950,12 +5079,27 @@ canon_init_setESC_v(const stp_vars_t *v, const canon_privdata_t *init)
   canon_cmd(v,ESC28,0x76, 1, 0x00);
 }
 
+/* ESC (w -- 0x77 -- */
+static void
+canon_init_setESC_w(const stp_vars_t *v, const canon_privdata_t *init)
+{
+  unsigned char arg_ESCw_1;
 
+  /* new September 2015, currently only 1 byte */
+  if (!(init->caps->features & CANON_CAP_w))
+    return;
+
+  arg_ESCw_1 = (init->pt) ? init->pt->media_code_w: 0x00;
+  
+  canon_cmd(v,ESC28,0x77, 1, arg_ESCw_1);
+}
 
 static void
 canon_init_printer(const stp_vars_t *v, canon_privdata_t *init)
 {
   unsigned int mytop;
+  int          page_number = stp_get_int_parameter(v, "PageNumber");
+  const char  *duplex_mode =stp_get_string_parameter(v, "Duplex");
   /* init printer */
   if (init->is_first_page) {
     canon_init_resetPrinter(v,init);       /* ESC [K */
@@ -4977,6 +5121,9 @@ canon_init_printer(const stp_vars_t *v, canon_privdata_t *init)
   canon_init_setTray(v,init);            /* ESC (l */
   canon_init_setX72(v,init);             /* ESC (r */
   canon_init_setESC_v(v,init);           /* ESC (v */
+  canon_init_setESC_w(v,init);           /* ESC (w */
+  if((page_number & 1) && duplex_mode && !strcmp(duplex_mode,"DuplexNoTumble"))
+    canon_init_setESC_u(v,init);       /* ESC (u 0x1 */
   canon_init_setMultiRaster(v,init);     /* ESC (I (J (L */
 
   /* some linefeeds */

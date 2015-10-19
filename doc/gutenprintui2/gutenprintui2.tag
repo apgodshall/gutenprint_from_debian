@@ -17,36 +17,36 @@
       <type>#define</type>
       <name>STPUI_CURVE</name>
       <anchorfile>curve_8h.html</anchorfile>
-      <anchor>a03272c56621cf16c2caa378231c7fa43</anchor>
-      <arglist>(obj)</arglist>
+      <anchor>a442f8215d2359e8661e2651925ba7471</anchor>
+      <arglist>(obj)                                </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_CURVE_CLASS</name>
       <anchorfile>curve_8h.html</anchorfile>
-      <anchor>ad788bc4e6a85701756b28d972a64b7f8</anchor>
-      <arglist>(klass)</arglist>
+      <anchor>a2fc0e4f3d33fe947b707889fbf8d31f1</anchor>
+      <arglist>(klass)                </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_IS_CURVE</name>
       <anchorfile>curve_8h.html</anchorfile>
-      <anchor>a92f2038dd52d2b3af7c03bdeb5918567</anchor>
-      <arglist>(obj)</arglist>
+      <anchor>aa3405636ab6701d26a67fc1d73aab795</anchor>
+      <arglist>(obj)                          </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_IS_CURVE_CLASS</name>
       <anchorfile>curve_8h.html</anchorfile>
-      <anchor>aee626496df16d25159b91982478b0df9</anchor>
-      <arglist>(klass)</arglist>
+      <anchor>a256ddc0ab7385854896b3ada2950432a</anchor>
+      <arglist>(klass)          </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_CURVE_GET_CLASS</name>
       <anchorfile>curve_8h.html</anchorfile>
-      <anchor>a41b32938b1bfc087ca93b3655ef03ab6</anchor>
-      <arglist>(obj)</arglist>
+      <anchor>ae835c9645bacb7502b738bb6f63634e3</anchor>
+      <arglist>(obj)            </arglist>
     </member>
     <member kind="typedef">
       <type>struct _StpuiCurve</type>
@@ -67,6 +67,24 @@
       <name>StpuiCurveType</name>
       <anchorfile>curve_8h.html</anchorfile>
       <anchor>a59cb8817385039367325d6dbb4a0996b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STPUI_CURVE_TYPE_LINEAR</name>
+      <anchorfile>curve_8h.html</anchorfile>
+      <anchor>a59cb8817385039367325d6dbb4a0996ba741f86dc6dfb50a67dd621a287014de1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STPUI_CURVE_TYPE_SPLINE</name>
+      <anchorfile>curve_8h.html</anchorfile>
+      <anchor>a59cb8817385039367325d6dbb4a0996ba6cef8a118ee2829db63f812874a412c1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>STPUI_CURVE_TYPE_FREE</name>
+      <anchorfile>curve_8h.html</anchorfile>
+      <anchor>a59cb8817385039367325d6dbb4a0996ba1a204ef2d450d762415a1c0c1c77db89</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -143,22 +161,22 @@
       <type>#define</type>
       <name>STPUI_GAMMA_CURVE</name>
       <anchorfile>gammacurve_8h.html</anchorfile>
-      <anchor>a1799655d0ba34bbf0f856411399f222e</anchor>
-      <arglist>(obj)</arglist>
+      <anchor>a5fb979c4c2104df2b57c1740ffe0940d</anchor>
+      <arglist>(obj)                    </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_GAMMA_CURVE_CLASS</name>
       <anchorfile>gammacurve_8h.html</anchorfile>
-      <anchor>a45aa6ff6c9db14c6de371c1c9662483b</anchor>
-      <arglist>(klass)</arglist>
+      <anchor>a347906d7906c9e1e774fef68e0f31a1c</anchor>
+      <arglist>(klass)    </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
       <name>STPUI_IS_GAMMA_CURVE</name>
       <anchorfile>gammacurve_8h.html</anchorfile>
-      <anchor>a9a10e0a1241d9f042e2e1a2cf14b70c3</anchor>
-      <arglist>(obj)</arglist>
+      <anchor>a9a3235b14c588ad59919cecd0530b835</anchor>
+      <arglist>(obj)              </arglist>
     </member>
     <member kind="define">
       <type>#define</type>
@@ -233,11 +251,59 @@
       <anchor>ac33232f845969eb04b32e1006c8240a0</anchor>
       <arglist></arglist>
     </member>
+    <member kind="enumvalue">
+      <name>ORIENT_AUTO</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ac33232f845969eb04b32e1006c8240a0a06af5eabe5d18a247c02641283fe4481</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ORIENT_PORTRAIT</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ac33232f845969eb04b32e1006c8240a0af81c23cf1763365fba8e36db87131ff5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ORIENT_LANDSCAPE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ac33232f845969eb04b32e1006c8240a0a4dc9735e5b3e4c86b60141acc08e5db1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ORIENT_UPSIDEDOWN</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ac33232f845969eb04b32e1006c8240a0a3ca76babc9953cc92305856ac00a2350</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>ORIENT_SEASCAPE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ac33232f845969eb04b32e1006c8240a0a7de33495add2d66cc743f2edcbb548e3</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="enumeration">
       <type></type>
       <name>command_t</name>
       <anchorfile>gutenprintui_8h.html</anchorfile>
       <anchor>ab31350eb38b009cbd282027630a1ee10</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>COMMAND_TYPE_DEFAULT</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ab31350eb38b009cbd282027630a1ee10aa6a7840c2276bfe38dd68b4fe3a8babf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>COMMAND_TYPE_CUSTOM</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ab31350eb38b009cbd282027630a1ee10acb7cf14821d9fcbaa983ee33d7b8e926</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumvalue">
+      <name>COMMAND_TYPE_FILE</name>
+      <anchorfile>gutenprintui_8h.html</anchorfile>
+      <anchor>ab31350eb38b009cbd282027630a1ee10a5e9a887a5dab88a425cb52c8b1e49a7f</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">

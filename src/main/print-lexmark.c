@@ -1,6 +1,6 @@
 
 /*
- * "$Id: print-lexmark.c,v 1.163 2014/01/04 23:07:22 rlk Exp $"
+ * "$Id: print-lexmark.c,v 1.165 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Print plug-in Lexmark driver for the GIMP.
  *
@@ -1128,7 +1128,15 @@ static stp_parameter_list_t
 lexmark_list_parameters(const stp_vars_t *v)
 {
   stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_parameter_list_t *tmp_list;
+
   int i;
+  
+  /* Set up dithering */
+  tmp_list = stp_dither_list_parameters(v);
+  stp_parameter_list_append(ret, tmp_list);
+  stp_parameter_list_destroy(tmp_list);
+
   for (i = 0; i < the_parameter_count; i++)
     stp_parameter_list_add_param(ret, &(the_parameters[i]));
   for (i = 0; i < float_parameter_count; i++)
@@ -1204,6 +1212,11 @@ lexmark_parameters(const stp_vars_t *v, const char *name,
 
     for (i = 0; i < papersizes; i++) {
       const stp_papersize_t *pt = stp_get_papersize_by_index(i);
+
+      if (pt->paper_size_type != PAPERSIZE_TYPE_STANDARD &&
+	  pt->paper_size_type != PAPERSIZE_TYPE_ENVELOPE)
+        continue;
+
       if (strlen(pt->name) > 0 &&
 	  pt->width <= width_limit && pt->height <= height_limit &&
 	  (pt->height >= min_height_limit || pt->height == 0) &&

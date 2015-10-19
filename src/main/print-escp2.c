@@ -1,5 +1,5 @@
 /*
- * "$Id: print-escp2.c,v 1.442 2014/01/23 13:22:41 rlk Exp $"
+ * "$Id: print-escp2.c,v 1.444 2015/09/09 23:57:32 speachy Exp $"
  *
  *   Print plug-in EPSON ESC/P2 driver for the GIMP.
  *
@@ -1626,6 +1626,11 @@ verify_papersize(const stp_vars_t *v, const stp_papersize_t *pt)
   height_limit = escp2_max_paper_height(v);
   min_width_limit = escp2_min_paper_width(v);
   min_height_limit = escp2_min_paper_height(v);
+  
+  if (pt->paper_size_type != PAPERSIZE_TYPE_STANDARD &&
+      pt->paper_size_type != PAPERSIZE_TYPE_ENVELOPE)
+    return 0;
+  
   if (strlen(pt->name) > 0 &&
       (pt->paper_size_type != PAPERSIZE_TYPE_ENVELOPE ||
        envelope_landscape || pt->height > pt->width) &&
@@ -1769,7 +1774,15 @@ static stp_parameter_list_t
 escp2_list_parameters(const stp_vars_t *v)
 {
   stp_parameter_list_t *ret = stp_parameter_list_create();
+  stp_parameter_list_t *tmp_list;
+
   int i;
+
+  /* Set up dithering */
+  tmp_list = stp_dither_list_parameters(v);
+  stp_parameter_list_append(ret, tmp_list);
+  stp_parameter_list_destroy(tmp_list);
+  
   for (i = 0; i < the_parameter_count; i++)
     stp_parameter_list_add_param(ret, &(the_parameters[i]));
   for (i = 0; i < float_parameter_count; i++)

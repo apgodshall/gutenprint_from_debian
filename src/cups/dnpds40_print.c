@@ -44,6 +44,8 @@
 #include <fcntl.h>
 #include <signal.h>
 
+#define BACKEND dnpds40_backend
+
 #include "backend_common.h"
 
 #define USB_VID_CITIZEN   0x1343
@@ -82,6 +84,7 @@ struct dnpds40_ctx {
 	int cutter;
 	int can_rewind;
 
+	int manual_copies;
 	int supports_6x9;
 	int supports_2x6;
 	int supports_3x5x2;
@@ -90,6 +93,8 @@ struct dnpds40_ctx {
 	int supports_rewind;
 	int supports_standby;
 	int supports_6x4_5;
+	int supports_mqty_default;
+	int supports_iserial;
 
 	uint8_t *qty_offset;
 	uint8_t *buffctrl_offset;
@@ -328,6 +333,9 @@ static void dnpds40_attach(void *vctx, struct libusb_device_handle *dev,
 	device = libusb_get_device(dev);
 	libusb_get_device_descriptor(device, &desc);
 
+	ctx->type = lookup_printer_type(&dnpds40_backend,
+					desc.idVendor, desc.idProduct);
+
 	{
 		/* Get Firmware Version */
 		struct dnpds40_cmd cmd;
@@ -343,7 +351,7 @@ static void dnpds40_attach(void *vctx, struct libusb_device_handle *dev,
 			ctx->version = strdup((char*) resp);
 
 			/* Parse version */
-			ptr = strtok((char*)resp, " .");
+			/* ptr = */ strtok((char*)resp, " .");
 			ptr = strtok(NULL, ".");
 			ctx->ver_major = atoi(ptr);
 			ptr = strtok(NULL, ".");
@@ -397,9 +405,8 @@ static void dnpds40_attach(void *vctx, struct libusb_device_handle *dev,
 #endif
 
 	/* Per-printer options */
-	switch (desc.idProduct) {
-	case USB_PID_DNP_DS40:
-		ctx->type = P_DNP_DS40;
+	switch (ctx->type) {
+	case P_DNP_DS40:
 		ctx->supports_6x9 = 1;
 		if (FW_VER_CHECK(1,30))
 			ctx->supports_matte = 1;
@@ -410,31 +417,31 @@ static void dnpds40_attach(void *vctx, struct libusb_device_handle *dev,
 		if (FW_VER_CHECK(1,51))
 			ctx->supports_fullcut = 1;
 		break;
-	case USB_PID_DNP_DS80:
-		ctx->type = P_DNP_DS80;
+	case P_DNP_DS80:
 		if (FW_VER_CHECK(1,30))
 			ctx->supports_matte = 1;
 		break;
-	case USB_PID_DNP_DSRX1:
-		ctx->type = P_DNP_DSRX1;
+	case P_DNP_DSRX1:
 		ctx->supports_matte = 1;
+		ctx->supports_mqty_default = 1; // 1.10 does. Maybe older too?
 		if (FW_VER_CHECK(1,10))
 			ctx->supports_2x6 = 1;
 		break;
-	case USB_PID_DNP_DS620:
-		ctx->type = P_DNP_DS620;
+	case P_DNP_DS620:
 		ctx->supports_matte = 1;
 		ctx->supports_2x6 = 1;
 		ctx->supports_fullcut = 1;
-		ctx->supports_rewind = 1;  // XXX DS620 only, 620A does not.
+		ctx->supports_mqty_default = 1;
+		ctx->supports_rewind = 1;
 		ctx->supports_standby = 1;
+		ctx->supports_iserial = 1;
 		if (FW_VER_CHECK(0,30))
 			ctx->supports_3x5x2 = 1;
 		if (FW_VER_CHECK(1,10))
 			ctx->supports_6x9 = ctx->supports_6x4_5 = 1;
 		break;
 	default:
-		ERROR("Unknown USB PID...\n");
+		ERROR("Unknown vid/pid %04x/%04x (%d)\n", desc.idVendor, desc.idProduct, ctx->type);
 		return;
 	}
 }
@@ -491,6 +498,7 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 	matte = 0;
 	dpi = 0;
 	cutter = 0;
+	ctx->manual_copies = 0;
 	ctx->multicut = 0;
 	ctx->buffctrl_offset = ctx->qty_offset = ctx->multicut_offset = 0;
 
@@ -603,7 +611,7 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 				if (y_ppm != 1920) {
 					ERROR("Incorrect horizontal resolution (%d), aborting!\n", y_ppm);
 					return CUPS_BACKEND_CANCEL;
-				}				
+				}
 			}
 		}
 
@@ -616,8 +624,8 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 	}
 
 	if (!ctx->datalen)
-		return CUPS_BACKEND_CANCEL;	
-	
+		return CUPS_BACKEND_CANCEL;
+
 	/* Figure out the number of buffers we need. Most only need one. */
 	if (ctx->multicut) {
 		ctx->buf_needed = 1;
@@ -668,12 +676,14 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 			}
 			break;
 		case 210: //"5x7 (2L)"
-			ctx->can_rewind = 1;
 			if (ctx->multicut != 1 && ctx->multicut != 3 &&
 			    ctx->multicut != 22 && ctx->multicut != 29) {
 				ERROR("Incorrect media for job loaded (%d vs %d)\n", ctx->media, ctx->multicut);
 				return CUPS_BACKEND_CANCEL;
 			}
+			/* Only 3.5x5 on 7x5 media can be rewound */
+			if (ctx->multicut == 1)
+				ctx->can_rewind = 1;
 			break;
 		case 300: //"6x4 (PC)"
 			if (ctx->multicut != 2) {
@@ -682,21 +692,27 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 			}
 			break;
 		case 310: //"6x8 (A5)"
-			ctx->can_rewind = 1;
 			if (ctx->multicut != 2 && ctx->multicut != 4 &&
-			    ctx->multicut != 27) {
+			    ctx->multicut != 12 &&
+			    ctx->multicut != 27 && ctx->multicut != 30) {
 				ERROR("Incorrect media for job loaded (%d vs %d)\n", ctx->media, ctx->multicut);
 				return CUPS_BACKEND_CANCEL;
 			}
+			/* Only 6x4 on 6x8 media can be rewound */
+			if (ctx->multicut == 2)
+				ctx->can_rewind = 1;
 			break;
 		case 400: //"6x9 (A5W)"
-			ctx->can_rewind = 1;
 			if (ctx->multicut != 2 && ctx->multicut != 4 &&
-			    ctx->multicut != 5 && ctx->multicut != 27 &&
+			    ctx->multicut != 5 &&  ctx->multicut != 12 &&
+			    ctx->multicut != 27 &&
 			    ctx->multicut != 30 && ctx->multicut != 31) {
 				ERROR("Incorrect media for job loaded (%d vs %d)\n", ctx->media, ctx->multicut);
 				return CUPS_BACKEND_CANCEL;
 			}
+			/* Only 6x4 or 6x4.5 on 6x9 media can be rewound */
+			if (ctx->multicut == 2 || ctx->multicut == 30)
+				ctx->can_rewind = 1;
 			break;
 		case 500: //"8x10"
 			if (ctx->multicut < 6 || ctx->multicut == 7 ||
@@ -749,6 +765,11 @@ static int dnpds40_read_parse(void *vctx, int data_fd) {
 			ERROR("Printer only supports 2-inch cuts on 4x6 or 8x6 jobs!");
 			return CUPS_BACKEND_CANCEL;
 		}
+
+		/* Work around firmware bug on DS40 where if we run out
+		   of media, we can't resume the job without losing the
+		   cutter setting. XXX add version test? */
+		ctx->manual_copies = 1;
 	}
 
 	if (ctx->matte && !ctx->supports_matte) {
@@ -768,65 +789,15 @@ static int dnpds40_main_loop(void *vctx, int copies) {
 	uint8_t *ptr;
 	char buf[9];
 	int status;
+	int buf_needed;
 
 	if (!ctx)
 		return CUPS_BACKEND_FAILED;
 
-	/* Verify we have sufficient media for prints */
-	{
-		int i = 0;
-
-		/* See if we can rewind to save media */
-		if (ctx->can_rewind && ctx->supports_rewind &&
-		    (ctx->multicut == 1 || ctx->multicut == 2)) {
-
-			/* Get Media remaining */
-			dnpds40_build_cmd(&cmd, "INFO", "RQTY", 0);
-
-			if (resp) free(resp);
-			resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-			if (!resp)
-				return CUPS_BACKEND_FAILED;
-
-			dnpds40_cleanup_string((char*)resp, len);
-			i = atoi((char*)resp);
-
-			/* If the count is odd, we can rewind. */
-			if (i & 1) {
-				snprintf(buf, sizeof(buf), "%08d", ctx->multicut + 400);
-				memcpy(ctx->multicut_offset, buf, 8);
-			}
-		}
-
-		/* If we didn't succeed with RQTY, try MQTY */
-		if (i == 0) {
-			dnpds40_build_cmd(&cmd, "INFO", "MQTY", 0);
-
-			if (resp) free(resp);
-			resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-			if (!resp)
-				return CUPS_BACKEND_FAILED;
-
-			dnpds40_cleanup_string((char*)resp, len);
-
-			i = atoi((char*)resp+4);
-
-			/* For some reason all but the DS620 report 50 too high */
-			if (ctx->type != P_DNP_DS620 && i > 0)
-				i -= 50;
-		}
-
-		if (i < 1) {
-			ERROR("Printer out of media, please correct!\n");
-			return CUPS_BACKEND_STOP;
-		}
-		if (i < copies) {
-			WARNING("Printer does not have sufficient remaining media to complete job..\n");
-		}
-	}
-
 	/* Update quantity offset with count */
-	if (copies > 1) {
+	// XXX this breaks if ctx->manual_copies is set, but the job
+	// has a CNTRL QTY != 1
+	if (!ctx->manual_copies && copies > 1) {
 		snprintf(buf, sizeof(buf), "%07d\r", copies);
 		if (ctx->qty_offset) {
 			memcpy(ctx->qty_offset, buf, 8);
@@ -843,7 +814,7 @@ static int dnpds40_main_loop(void *vctx, int copies) {
 	if (ctx->supports_matte) {
 		snprintf(buf, sizeof(buf), "%08d", 1);
 		if (ctx->buffctrl_offset) {
-			memcpy(ctx->qty_offset, buf, 8);
+			memcpy(ctx->buffctrl_offset, buf, 8);
 		} else {
 			dnpds40_build_cmd(&cmd, "CNTRL", "BUFFCNTRL", 8);
 			if ((ret = dnpds40_do_cmd(ctx, &cmd, (uint8_t*)buf, 8)))
@@ -866,9 +837,11 @@ static int dnpds40_main_loop(void *vctx, int copies) {
 	}
 #endif
 
+	buf_needed = ctx->buf_needed;
+
 #ifdef MATTE_GLOSSY_2BUF
 	if (ctx->matte != ctx->last_matte)
-		ctx->buf_needed = 2; /* Switching needs both buffers */
+		buf_needed = 2; /* Switching needs both buffers */
 #endif
 
 	ctx->last_matte = ctx->matte;
@@ -888,25 +861,23 @@ static int dnpds40_main_loop(void *vctx, int copies) {
 
 top:
 
-	if (resp) free(resp);
-
 	/* Query status */
 	dnpds40_build_cmd(&cmd, "STATUS", "", 0);
+	if (resp) free(resp);
 	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
 	if (!resp)
 		return CUPS_BACKEND_FAILED;
 	dnpds40_cleanup_string((char*)resp, len);
 	status = atoi((char*)resp);
-	free(resp);
 
 	/* Figure out what's going on */
 	switch(status) {
 	case 0:	/* Idle; we can continue! */
-		break;
 	case 1: /* Printing */
 	{
 		int bufs;
 
+		if (resp) free(resp);
 		/* Query buffer state */
 		dnpds40_build_cmd(&cmd, "INFO", "FREE_PBUFFER", 0);
 		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
@@ -917,8 +888,8 @@ top:
 		dnpds40_cleanup_string((char*)resp, len);
 		/* Check to see if we have sufficient buffers */
 		bufs = atoi(((char*)resp)+3);
-		if (bufs < ctx->buf_needed) {
-			INFO("Insufficient printer buffers (%d vs %d), retrying...\n", bufs, ctx->buf_needed);
+		if (bufs < buf_needed) {
+			INFO("Insufficient printer buffers (%d vs %d), retrying...\n", bufs, buf_needed);
 			sleep(1);
 			goto top;
 		}
@@ -952,7 +923,56 @@ top:
 		ERROR("Fatal Printer Error: %d => %s, halting queue!\n", status, dnpds40_statuses(status));
 		return CUPS_BACKEND_HOLD;
 	}
-	
+
+	/* Verify we have sufficient media for prints */
+	{
+		int i = 0;
+
+		/* See if we can rewind to save media */
+		if (ctx->can_rewind && ctx->supports_rewind) {
+			/* Tell the printer we want to rewind, if possible. */
+			snprintf(buf, sizeof(buf), "%08d", ctx->multicut + 400);
+			memcpy(ctx->multicut_offset, buf, 8);
+
+			/* Get Media remaining */
+			dnpds40_build_cmd(&cmd, "INFO", "RQTY", 0);
+
+			if (resp) free(resp);
+			resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+			if (!resp)
+				return CUPS_BACKEND_FAILED;
+
+			dnpds40_cleanup_string((char*)resp, len);
+			i = atoi((char*)resp+4);
+		}
+
+		/* If we didn't succeed with RQTY, try MQTY */
+		if (i == 0) {
+			dnpds40_build_cmd(&cmd, "INFO", "MQTY", 0);
+
+			if (resp) free(resp);
+			resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+			if (!resp)
+				return CUPS_BACKEND_FAILED;
+
+			dnpds40_cleanup_string((char*)resp, len);
+
+			i = atoi((char*)resp+4);
+
+			/* For some reason all but the DS620 report 50 too high */
+			if (ctx->type != P_DNP_DS620 && i > 0)
+				i -= 50;
+		}
+
+		if (i < 1) {
+			ERROR("Printer out of media, please correct!\n");
+			return CUPS_BACKEND_STOP;
+		}
+		if (i < copies) {
+			WARNING("Printer does not have sufficient remaining media to complete job..\n");
+		}
+	}
+
 	/* Send the stream over as individual data chunks */
 	ptr = ctx->databuf;
 
@@ -961,7 +981,6 @@ top:
 		buf[8] = 0;
 		memcpy(buf, ptr + 24, 8);
 		i = atoi(buf) + 32;
-
 
 		if ((ret = send_data(ctx->dev, ctx->endp_down,
 				     ptr, i)))
@@ -973,12 +992,83 @@ top:
 	/* Clean up */
 	if (terminate)
 		copies = 1;
-	
+
 	INFO("Print complete (%d copies remaining)\n", copies - 1);
 
 	if (copies && --copies) {
+#ifdef MATTE_GLOSSY_2BUF
+		/* No need to wait on buffers due to matte switching */
+		buf_needed = ctx->buf_needed;
+#endif
 		goto top;
 	}
+
+	return CUPS_BACKEND_OK;
+}
+
+static int dnpds40_get_sensors(struct dnpds40_ctx *ctx)
+{
+	struct dnpds40_cmd cmd;
+	uint8_t *resp;
+	int len = 0;
+	char *tok;
+
+	/* Get Sensor Info */
+	dnpds40_build_cmd(&cmd, "INFO", "SENSOR", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	tok = strtok((char*)resp, "; -");
+	do {
+		char *val = strtok(NULL, "; -");
+
+		if (!strcmp("HDT", tok)) {
+			INFO("Head Temperature   : %s\n", val);
+		} else if (!strcmp("MDT", tok)) {
+			INFO("Media Temperature  : %s\n", val);
+		} else if (!strcmp("PMK", tok)) {
+			INFO("Paper Mark         : %s\n", val);
+		} else if (!strcmp("RML", tok)) {
+			INFO("Ribbon Mark Left   : %s\n", val);
+		} else if (!strcmp("RMC", tok)) {
+			INFO("Ribbon Mark Right  : %s\n", val);
+		} else if (!strcmp("RMR", tok)) {
+			INFO("Ribbon Mark Center : %s\n", val);
+		} else if (!strcmp("PSZ", tok)) {
+			INFO("Paper Size         : %s\n", val);
+		} else if (!strcmp("PNT", tok)) {
+			INFO("Paper Notch        : %s\n", val);
+		} else if (!strcmp("PJM", tok)) {
+			INFO("Paper Jam          : %s\n", val);
+		} else if (!strcmp("PED", tok)) {
+			INFO("Paper End          : %s\n", val);
+		} else if (!strcmp("PET", tok)) {
+			INFO("Paper Empty        : %s\n", val);
+		} else if (!strcmp("HDV", tok)) {
+			INFO("Head Voltage       : %s\n", val);
+		} else if (!strcmp("HMD", tok)) {
+			INFO("Humidity           : %s\n", val);
+		} else if (!strcmp("RP1", tok)) {
+			INFO("Roll Paper End 1   : %s\n", val);
+		} else if (!strcmp("RP2", tok)) {
+			INFO("Roll Paper End 2   : %s\n", val);
+		} else if (!strcmp("GSR", tok)) {
+			INFO("Color Sensor Red   : %s\n", val);
+		} else if (!strcmp("GSG", tok)) {
+			INFO("Color Sensor Green : %s\n", val);
+		} else if (!strcmp("GSB", tok)) {
+			INFO("Color Sensor Blue  : %s\n", val);
+		} else {
+			INFO("Unknown Sensor: '%s' '%s'\n",
+			     tok, val);
+		}
+	} while ((tok = strtok(NULL, "; -")) != NULL);
+
+	free(resp);
 
 	return CUPS_BACKEND_OK;
 }
@@ -995,52 +1085,6 @@ static int dnpds40_get_info(struct dnpds40_ctx *ctx)
 	/* Firmware version already queried */
 	INFO("Firmware Version: '%s'\n", ctx->version);
 
-	/* Get Sensor Info */
-	dnpds40_build_cmd(&cmd, "INFO", "SENSOR", 0);
-
-	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-	if (!resp)
-		return CUPS_BACKEND_FAILED;
-
-	dnpds40_cleanup_string((char*)resp, len);
-	INFO("Sensor Info:\n");
-	{
-		char *tmp;
-		tmp = strtok((char*)resp, "; ");
-		do {
-			// XXX parse the components?
-			INFO("  %s\n", tmp);
-		} while ((tmp = strtok(NULL, "; ")) != NULL);
-	}
-
-	free(resp);
-
-	/* Get Horizonal resolution */
-	dnpds40_build_cmd(&cmd, "INFO", "RESOLUTION_H", 0);
-
-	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-	if (!resp)
-		return CUPS_BACKEND_FAILED;
-
-	dnpds40_cleanup_string((char*)resp, len);
-
-	INFO("Horizontal Resolution: '%s' dpi\n", (char*)resp + 3);
-
-	free(resp);
-
-	/* Get Vertical resolution */
-	dnpds40_build_cmd(&cmd, "INFO", "RESOLUTION_V", 0);
-
-	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-	if (!resp)
-		return CUPS_BACKEND_FAILED;
-
-	dnpds40_cleanup_string((char*)resp, len);
-
-	INFO("Vertical Resolution: '%s' dpi\n", (char*)resp + 3);
-
-	free(resp);
-
 	/* Get Media Color offset */
 	dnpds40_build_cmd(&cmd, "INFO", "MCOLOR", 0);
 
@@ -1052,6 +1096,19 @@ static int dnpds40_get_info(struct dnpds40_ctx *ctx)
 
 	INFO("Media Color Offset: '%02x%02x%02x%02x'\n", *(resp+2), *(resp+3),
 	     *(resp+4), *(resp+5));
+
+	free(resp);
+
+	/* Get Media Class */
+	dnpds40_build_cmd(&cmd, "INFO", "MEDIA_CLASS", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	INFO("Media Class: '%s'\n", (char*)resp);
 
 	free(resp);
 
@@ -1085,59 +1142,72 @@ static int dnpds40_get_info(struct dnpds40_ctx *ctx)
 
 	free(resp);
 
+	/* Get Ribbon ID code (?) */
+	dnpds40_build_cmd(&cmd, "MNT_RD", "RIBBON_ID_CODE", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	INFO("Ribbon ID(?): '%s'\n", (char*)resp+4);
+
+	free(resp);
+
+	/* Figure out control data and checksums */
+
+	/* 300 DPI */
+	dnpds40_build_cmd(&cmd, "TBL_RD", "CWD300_Version", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	INFO("300 DPI Color Data Version: '%s' ", (char*)resp);
+
+	free(resp);
+
+	dnpds40_build_cmd(&cmd, "TBL_RD", "CWD300_Checksum", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	DEBUG2("Checksum: '%s'\n", (char*)resp);
+
+	free(resp);
+
+	/* 600 DPI */
+	dnpds40_build_cmd(&cmd, "TBL_RD", "CWD600_Version", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	INFO("600 DPI Color Data Version: '%s' ", (char*)resp);
+
+	free(resp);
+
+	dnpds40_build_cmd(&cmd, "TBL_RD", "CWD600_Checksum", 0);
+
+	resp = dnpds40_resp_cmd(ctx, &cmd, &len);
+	if (!resp)
+		return CUPS_BACKEND_FAILED;
+
+	dnpds40_cleanup_string((char*)resp, len);
+
+	DEBUG2("Checksum: '%s'\n", (char*)resp);
+
+	free(resp);
+
 	if (ctx->type == P_DNP_DS620) {
-		/* Loop through control data versions and checksums */
-
-		/* 300 DPI */
-		dnpds40_build_cmd(&cmd, "TBL_RD", "CWD300_Version", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("300 DPI Color Data Version: '%s' ", (char*)resp);
-
-		free(resp);
-
-		dnpds40_build_cmd(&cmd, "TBL_RD", "CWD300_Checksum", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("Checksum: '%s'\n", (char*)resp);
-
-		free(resp);
-
-		/* 600 DPI */
-		dnpds40_build_cmd(&cmd, "TBL_RD", "CWD600_Version", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("600 DPI Color Data Version: '%s' ", (char*)resp);
-
-		free(resp);
-
-		dnpds40_build_cmd(&cmd, "TBL_RD", "CWD600_Checksum", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("Checksum: '%s'\n", (char*)resp);
-
-		free(resp);
-
 		/* "Low Speed" */
 		dnpds40_build_cmd(&cmd, "TBL_RD", "CWD610_Version", 0);
 
@@ -1159,34 +1229,7 @@ static int dnpds40_get_info(struct dnpds40_ctx *ctx)
 
 		dnpds40_cleanup_string((char*)resp, len);
 
-		INFO("Checksum: '%s'\n", (char*)resp);
-
-		free(resp);
-
-	} else {
-		/* Get Color Control Data Version */
-		dnpds40_build_cmd(&cmd, "TBL_RD", "Version", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("Color Data Version: '%s'\n", (char*)resp);
-
-		free(resp);
-
-		/* Get Color Control Data Checksum */
-		dnpds40_build_cmd(&cmd, "MNT_RD", "CTRLD_CHKSUM", 0);
-
-		resp = dnpds40_resp_cmd(ctx, &cmd, &len);
-		if (!resp)
-			return CUPS_BACKEND_FAILED;
-
-		dnpds40_cleanup_string((char*)resp, len);
-
-		INFO("Color Data Checksum: '%s'\n", (char*)resp);
+		DEBUG2("Checksum: '%s'\n", (char*)resp);
 
 		free(resp);
 	}
@@ -1217,7 +1260,9 @@ static int dnpds40_get_info(struct dnpds40_ctx *ctx)
 		INFO("Media End kept across power cycles: '%s'\n", (char*)resp);
 
 		free(resp);
+	}
 
+	if (ctx->supports_iserial) {
 		/* Get USB serial descriptor status */
 		dnpds40_build_cmd(&cmd, "MNT_RD", "USB_ISERI_SET", 0);
 
@@ -1284,7 +1329,7 @@ static int dnpds40_get_status(struct dnpds40_ctx *ctx)
 	/* Report media */
 	INFO("Media Type: '%s'\n", dnpds40_media_types(ctx->media));
 
-	if (ctx->supports_rewind) {
+	if (ctx->supports_mqty_default) {
 		/* Get Media remaining */
 		dnpds40_build_cmd(&cmd, "INFO", "MQTY_DEFAULT", 0);
 
@@ -1460,6 +1505,38 @@ static int dnpds620_standby_mode(struct dnpds40_ctx *ctx, int delay)
 	return 0;
 }
 
+static int dnpds620_media_keep_mode(struct dnpds40_ctx *ctx, int delay)
+{
+	struct dnpds40_cmd cmd;
+	char msg[9];
+	int ret;
+
+	/* Generate command */
+	dnpds40_build_cmd(&cmd, "MNT_WT", "END_KEEP_MODE", 4);
+	snprintf(msg, sizeof(msg), "%02d\r", delay);
+
+	if ((ret = dnpds40_do_cmd(ctx, &cmd, (uint8_t*)msg, 4)))
+		return ret;
+
+	return 0;
+}
+
+static int dnpds620_iserial_mode(struct dnpds40_ctx *ctx, int enable)
+{
+	struct dnpds40_cmd cmd;
+	char msg[9];
+	int ret;
+
+	/* Generate command */
+	dnpds40_build_cmd(&cmd, "MNT_WT", "USB_ISERI_SET", 4);
+	snprintf(msg, sizeof(msg), "%02d\r", enable);
+
+	if ((ret = dnpds40_do_cmd(ctx, &cmd, (uint8_t*)msg, 8)))
+		return ret;
+
+	return 0;
+}
+
 static int dnpds40_set_counter_p(struct dnpds40_ctx *ctx, char *arg)
 {
 	struct dnpds40_cmd cmd;
@@ -1480,12 +1557,14 @@ static int dnpds40_set_counter_p(struct dnpds40_ctx *ctx, char *arg)
 static void dnpds40_cmdline(void)
 {
 	DEBUG("\t\t[ -i ]           # Query printer info\n");
+	DEBUG("\t\t[ -I ]           # Query sensor  info\n");
 	DEBUG("\t\t[ -s ]           # Query status\n");
 	DEBUG("\t\t[ -n ]           # Query counters\n");
 	DEBUG("\t\t[ -N A|B|M ]     # Clear counter A/B/M\n");
 	DEBUG("\t\t[ -p num ]       # Set counter P\n");
-	DEBUG("\t\t[ -S num ]       # Set standby time (1-99 minutes, 0 disables)\n");	
-
+	DEBUG("\t\t[ -k num ]       # Set standby time (1-99 minutes, 0 disables)\n");
+	DEBUG("\t\t[ -K num ]       # Keep Media Status Across Power Cycles (1 on, 0 off)\n");
+	DEBUG("\t\t[ -x num ]       # Set USB iSerialNumber Reporting (1 on, 0 off)\n");
 }
 
 static int dnpds40_cmdline_arg(void *vctx, int argc, char **argv)
@@ -1493,64 +1572,86 @@ static int dnpds40_cmdline_arg(void *vctx, int argc, char **argv)
 	struct dnpds40_ctx *ctx = vctx;
 	int i, j = 0;
 
+	if (!ctx)
+		return -1;
+
 	/* Reset arg parsing */
 	optind = 1;
 	opterr = 0;
-	while ((i = getopt(argc, argv, "inN:p:sS:")) >= 0) {
+	while ((i = getopt(argc, argv, GETOPT_LIST_GLOBAL "iInN:p:sK:k:")) >= 0) {
 		switch(i) {
+		GETOPT_PROCESS_GLOBAL			
 		case 'i':
-			if (ctx) {
-				j = dnpds40_get_info(ctx);
-				break;
-			}
-			return 1;
+			j = dnpds40_get_info(ctx);
+			break;
+		case 'I':
+			j = dnpds40_get_sensors(ctx);
+			break;
 		case 'n':
-			if (ctx) {
-				j = dnpds40_get_counters(ctx);
-				break;
-			}
-			return 1;
+			j = dnpds40_get_counters(ctx);
+			break;
 		case 'N':
 			if (optarg[0] != 'A' &&
 			    optarg[0] != 'B' &&
 			    optarg[0] != 'M')
 				return CUPS_BACKEND_FAILED;
-			if (ctx) {
-				if (!ctx->supports_matte) {
-					ERROR("Printer FW does not support matte functions, please update!\n");
-					return CUPS_BACKEND_FAILED;
-				}
-				j = dnpds40_clear_counter(ctx, optarg[0]);
-				break;
+			if (!ctx->supports_matte) {
+				ERROR("Printer FW does not support matte functions, please update!\n");
+				return CUPS_BACKEND_FAILED;
 			}
-			return 1;
+			j = dnpds40_clear_counter(ctx, optarg[0]);
+			break;
 		case 'p':
-			if (ctx) {
-				j = dnpds40_set_counter_p(ctx, optarg);
-				break;
-			}
-			return 1;
+			j = dnpds40_set_counter_p(ctx, optarg);
+			break;
 		case 's':
-			if (ctx) {
-				j = dnpds40_get_status(ctx);
+			j = dnpds40_get_status(ctx);
+			break;
+		case 'k': {
+			int time = atoi(optarg);
+			if (!ctx->supports_standby) {
+				ERROR("Printer does not support standby\n");
+				j = -1;
 				break;
 			}
-			return 1;
-		case 'S':
-			if (ctx) {
-				int time = atoi(optarg);
-				if (!ctx->supports_standby) {
-					ERROR("Printer does not support standby\n");
-					j = -1;
-					break;
-				}
-				if (time < 0 || time > 99) {
-					ERROR("Value out of range (0-99)");
-					j = -1;
-					break;
-				}
-				j = dnpds620_standby_mode(ctx, time);
+			if (time < 0 || time > 99) {
+				ERROR("Value out of range (0-99)");
+				j = -1;
+				break;
 			}
+			j = dnpds620_standby_mode(ctx, time);
+			break;
+		}
+		case 'K': {
+			int keep = atoi(optarg);
+			if (!ctx->supports_standby) {
+				ERROR("Printer does not support media keep mode\n");
+				j = -1;
+				break;
+			}
+			if (keep < 0 || keep > 1) {
+				ERROR("Value out of range (0-1)");
+				j = -1;
+				break;
+			}
+			j = dnpds620_media_keep_mode(ctx, keep);
+			break;
+		}
+		case 'x': {
+			int enable = atoi(optarg);
+			if (!ctx->supports_iserial) {
+				ERROR("Printer does not support USB iSerialNumber reporting\n");
+				j = -1;
+				break;
+			}
+			if (enable < 0 || enable > 1) {
+				ERROR("Value out of range (0-1)");
+				j = -1;
+				break;
+			}
+			j = dnpds620_iserial_mode(ctx, enable);
+			break;
+		}
 		default:
 			break;  /* Ignore completely */
 		}
@@ -1564,7 +1665,7 @@ static int dnpds40_cmdline_arg(void *vctx, int argc, char **argv)
 /* Exported */
 struct dyesub_backend dnpds40_backend = {
 	.name = "DNP DS40/DS80/DSRX1/DS620",
-	.version = "0.51",
+	.version = "0.61",
 	.uri_prefix = "dnpds40",
 	.cmdline_usage = dnpds40_cmdline,
 	.cmdline_arg = dnpds40_cmdline_arg,

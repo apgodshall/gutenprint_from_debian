@@ -1,3 +1,13 @@
+gutenprint (5.2.11~pre2-1) experimental; urgency=medium
+
+  * New 5.2.11~pre2 upstream release
+  * Bump Standards-Version to 3.9.6 without changes needed
+  * Drop cups-driver-gutenprint transitional package, that was transitional in
+    oldstable
+  * Fix 'find' call to use the new '-perm /xxx' syntax (Closes: #803025)
+
+ -- Didier Raboud <odyx@debian.org>  Tue, 27 Oct 2015 18:43:03 +0100
+
 gutenprint (5.2.11~pre1-1) experimental; urgency=low
 
   * New 5.2.11~pre1 upstream release

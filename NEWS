@@ -1,9 +1,9 @@
-Welcome to Gutenprint 5.2.11-pre2, a pre-release of Gutenprint
-5.2.11. Please read these release notes carefully.
+Welcome to Gutenprint 5.2.11, a stable release of Gutenprint
+5.2. Please read these release notes carefully.
 
 Gutenprint is a suite of printer drivers that may be used with most
 common UNIX print spooling systems, including CUPS, lpr, LPRng, or
-others.  Gutenprint currently supports over 2000 printer models.
+others.  Gutenprint currently supports over 2500 printer models.
 These drivers provide high quality printing for UNIX, Linux, and
 Macintosh OS X (10.6 and above) systems.  Gutenprint includes CUPS and
 Foomatic drivers, and an enhanced Print plug-in for GIMP that replaces
@@ -260,32 +260,62 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
   1) Added support for the following dye sublimation printers:
 
 	Canon SELPHY CP820/CP910
-	Ciaat Brava 21		  [experimental]
-	Citizen CW-01 / Olmec OP900
 	DNP DS620
-	DNP DS80DX                [experimental]
-	Kodak 305		  [experimental]
+	Citizen CW-01 / Olmec OP900
+	Mitsubishi CP3800DW
+	Mitsubishi CP-9550DW-S
 	Kodak 8810		  [experimental]
 	Kodak 7000/7010/7015	  [experimental]
-	Mitsubishi CP-D80DW	  [experimental]
-	Mitsubishi CP3800DW
-	Shinko S1245/S6145/S6245  [experimental]
 	Sony UP-CR10/DNP SL10	  [experimental]
+	DNP DS80DX                [experimental]
+	Sinfonia S1245/CE	  [experimental]
+	Sinfonia S6245/CE2	  [experimental]
+	Kodak 305		  [experimental] [*1]
+	Ciaat Brava 21		  [experimental] [*1]
+	Mitsubishi CP-D80DW	  [experimental] [*1]
+	Sinfonia S6145/CS2	  [experimental] [*1]
+
+     [*1] Please note that these models utilize a print engine that 
+	  requires the host system to process the print data using 
+	  unknown algorithms.  Until these algorithms can be determined
+	  and re-implemented, these models are unsuitable for general
+	  use due to very poor output quality.
 
   2) Enhanced support (and bugfixes) for the following dye sublimation
      printers:
 
-	Canon SELPHY CP900
+      Added multicut (eg 2*2x6) support:
+
 	Citizen CX/CX-W/CY
+	DNP DS40/DS80/RX1
+	Sony UP-DR200
+	Sinfonia S2145/CS
+	Mitsubishi CP-9550 family
+	Mitsubishi CP-D70DW/D707DW/K60DW-S [experimental] [*1]
+
+      Improved 5x7 support:
+
+	Citizen CX/CY
+	DNP DS40/RX1
+
+      General backend stability and robustness:
+
+	Canon SELPHY CP900
+	Citizen CX/CX-WCY
 	DNP DS40/DS80/RX1
 	Kodak 605
 	Kodak 6800/6850
 	Kodak 1400/805
-	Mitsubishi CP-9550 family (including the CP9550DW-S variant)
-	Mitsubishi CP-D70DW/D707DW/K60DW-S [experimental]
+	Mitsubishi CP-9550 family 
 	Sony UP-DR200
-	Shinko S2145
+	Mitsubishi CP-D70DW/D707DW/K60DW-S [experimental] [*1]
 
+     [*1] Please note that these models utilize a print engine that 
+	  requires the host system to process the print data using 
+	  unknown algorithms.  Until these algorithms can be determined
+	  and re-implemented, these models are unsuitable for general
+	  use due to very poor output quality.
+		
   3) Added support for the Datamax-O'Neil PCL printers, the Performance
      series (p1115, p1115s, p1120n, p1125, p1725, h8308) and the
      Datamax-O'Neil Workstation printer.
@@ -297,8 +327,13 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 
      EPSON L120
      EPSON L210
+     EPSON L1800 (preliminary)
 
-  5) Canon inkjet driver enhancements:
+  5) Add support for the following laser printer:
+
+     Kyocera FS-1135MFP
+
+  6) Canon inkjet driver enhancements:
 
      Added support for following models:
 
@@ -666,7 +701,7 @@ III) MAJOR CHANGES FROM PREVIOUS RELEASES
 
 	Canon BJC 4300
 
-  6) Canon inkjet driver bugfixes:
+  7) Canon inkjet driver bugfixes:
 
      6.1 Ink compression fixed
 
@@ -2997,8 +3032,7 @@ A) GENERAL USER-VISIBLE CHANGES
       ensure that you are using GIMP 2.0 or above.
 
    2) Gutenprint 5.2 no longer supports Macintosh OS X 10.2; it now
-      requires 10.3 (Panther) or higher.  This is due to a new library
-      requirement (for the iconv library) that is not present in 10.2.
+      requires 10.6 (Snow Leopard) or higher.
 
    3) Color Correction is now shown on the basic output adjustment
       menu rather than the advanced menu.
@@ -3088,6 +3122,7 @@ D) CHANGES TO THE CUPS INTERFACE
 	list of languages accepted is as follows:
 
 	C	English (US)
+	ca	Catalan
 	cs	Czech
 	da	Danish
 	de	German
@@ -3096,15 +3131,23 @@ D) CHANGES TO THE CUPS INTERFACE
 	es	Spanish
 	fi	Finnish
 	fr	French
+	gl	Galician
 	hu	Hungarian
+	it	Italian
 	ja	Japanese
 	nb	Norwegian
 	nl	Dutch
 	pl	Polish
 	pt	Portuguese
+	ru	Russian
 	sk	Slovak
+	sl	Slovenian
 	sv	Swedish
-	zh_TW	Simplified Chinese
+	tr	Turkish
+	uk	Ukrainian
+	vi	Vietnamese
+	zh_CN	Simplified Chinese
+	zh_TW	Traditional Chinese
 
       - If -loriginal is passed, the original language of the PPD file
 	will be honored.

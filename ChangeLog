@@ -1,4 +1,302 @@
 ===============================================================================
+Name: gutenprint-5_2_11
+
+2016-01-16	<rlk@sourceforge.net>
+
+	Files:	macosx/Gutenprint Utility for EPSON Inkjet Printers/Gutenprint Utility for EPSON Inkjet Printers.command (1.1) (added)
+		macosx/Gutenprint Utility for EPSON Inkjet Printers/Utility Read Me.rtf (1.1) (added)
+		macosx/makegutenpkg.sh (1.1) (added +256 -0)
+		makegutenpkg.sh (1.2) (removed)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/.DS_Store (1.2) (removed)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/Gutenprint Utility for EPSON Inkjet Printers.command (1.2) (removed)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/Utility Read Me.rtf (1.2) (removed)
+
+	New Macintosh build scripts and uninstaller from Steve Letter
+
+2016-01-15	<sletter1@sourceforge.net>
+
+	Files:	makegutenpkg.sh (1.1) (added)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/.DS_Store (1.1) (added)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/Gutenprint Utility for EPSON Inkjet Printers.command (1.1) (added)
+		scripts/Gutenprint Utility for EPSON Inkjet Printers/Utility Read Me.rtf (1.1) (added)
+		scripts/uninstall-gutenprint.command (1.1) (added +171 -0)
+
+	Check in of the new Macintosh build scripts and uninstaller for Michael Sweet
+
+2016-01-15	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.14) (+43 -46)
+		po/cs.po (1.72) (+43 -46)
+		po/da.po (1.117) (+43 -46)
+		po/de.po (1.90) (+43 -46)
+		po/el.po (1.87) (+43 -46)
+		po/en_GB.po (1.180) (+43 -46)
+		po/es.po (1.85) (+43 -46)
+		po/fi.po (1.17) (+43 -46)
+		po/fr.po (1.118) (+43 -46)
+		po/gl.po (1.12) (+43 -46)
+		po/hu.po (1.46) (+43 -46)
+		po/it.po (1.27) (+43 -46)
+		po/ja.po (1.82) (+43 -46)
+		po/nb.po (1.46) (+43 -46)
+		po/nl.po (1.101) (+43 -46)
+		po/pl.po (1.91) (+43 -46)
+		po/pt.po (1.86) (+43 -46)
+		po/ru.po (1.19) (+43 -46)
+		po/sk.po (1.93) (+43 -46)
+		po/sl.po (1.14) (+43 -46)
+		po/sv.po (1.116) (+44 -47)
+		po/tr.po (1.10) (+43 -46)
+		po/uk.po (1.17) (+43 -46)
+		po/vi.po (1.8) (+43 -46)
+		po/zh_CN.po (1.14) (+43 -46)
+		po/zh_TW.po (1.46) (+43 -46)
+
+	Gutenprint 5.2.11 release
+
+2016-01-14	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.227) (+2 -2)
+
+	Fix a missing footer in the Brava21 code.
+
+2016-01-14	<speachy@sourceforge.net>
+
+	Files:	src/cups/shinko_s6145_print.c (1.5) (+64 -22)
+
+	Sync the CHC-S6145 backend code, fixes a few bugs.
+
+2016-01-14	<rlk@sourceforge.net>
+
+	Files:	po/ca.po (1.13) (+3577 -3526)
+		po/cs.po (1.71) (+3574 -3526)
+		po/da.po (1.116) (+3577 -3526)
+		po/de.po (1.89) (+3577 -3526)
+		po/el.po (1.86) (+3576 -3526)
+		po/en_GB.po (1.179) (+3577 -3526)
+		po/es.po (1.84) (+3575 -3526)
+		po/fi.po (1.16) (+3576 -3526)
+		po/fr.po (1.117) (+3577 -3526)
+		po/gl.po (1.11) (+3577 -3526)
+		po/hu.po (1.45) (+3577 -3526)
+		po/it.po (1.26) (+3577 -3526)
+		po/ja.po (1.81) (+3577 -3526)
+		po/nb.po (1.45) (+3575 -3526)
+		po/nl.po (1.100) (+3577 -3526)
+		po/pl.po (1.90) (+3575 -3526)
+		po/pt.po (1.85) (+3575 -3526)
+		po/ru.po (1.18) (+3575 -3526)
+		po/sk.po (1.92) (+6792 -4668)
+		po/sl.po (1.13) (+3577 -3526)
+		po/sv.po (1.115) (+3577 -3527)
+		po/tr.po (1.9) (+6760 -4698)
+		po/uk.po (1.16) (+3577 -3526)
+		po/vi.po (1.7) (+3576 -3526)
+		po/zh_CN.po (1.13) (+6624 -4548)
+		po/zh_TW.po (1.45) (+3575 -3526)
+
+	Gutenprint 5.2.11 release
+
+2016-01-14	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.226) (+4 -59)
+
+	The Brava 21 is a variation of the Sinfonia S6145 with a smaller set of
+	print sizes, so use the S6145's spool format for both and let the
+	backend handle the few remaining differences.
+
+2016-01-14	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.767) (+13 -5)
+		README (1.246) (+11 -11)
+		configure.ac (1.269) (+3 -3)
+
+	Bump version
+
+2016-01-14	<rlk@sourceforge.net>
+
+	Files:	include/gutenprintui2/gutenprintui.h (1.4) (+2 -1)
+
+	Summary: Shut up some compiler warnings we have no control over.
+
+2016-01-14	<rlk@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.225) (+2 -2)
+
+	Summary: Fix comment syntax.
+
+2016-01-14	<speachy@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.431) (+2 -2)
+
+	Add IEEE1284 ID for Brava 21
+
+2016-01-12	<speachy@sourceforge.net>
+
+	Files:	src/xml/printers.xml (1.430) (+4 -4)
+
+	The Sinfonia S6145 and Brava 21 handle copies natively in their backend.
+
+	Also correct an IEEE1284 definition.
+
+2016-01-12	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.224) (+27 -38)
+
+	Clean up the printer init code for the Mitsubishi D70 family.  Should be no functional difference.
+
+2016-01-08	<speachy@sourceforge.net>
+
+	Files:	src/cups/shinko_s6145_print.c (1.4) (+41 -35)
+
+	Upstream sync with s6145 backend -- primarily endianness corrections.
+
+	The code that sanity-checks the correction parameters still needs work.
+
+2015-12-29	<speachy@sourceforge.net>
+
+	Files:	src/cups/mitsu70x_print.c (1.13) (+1 -1)
+
+
+	Mark the Mitsu 70x backend as WIP, because it truly is.
+
+2015-12-26	<speachy@sourceforge.net>
+
+	Files:	src/cups/shinko_s6145_print.c (1.3) (+4 -4)
+
+	Sinfonia 6145:  Properly detect errors when waiting for print complete.
+
+2015-12-21	<speachy@sourceforge.net>
+
+	Files:	NEWS (1.766) (+41 -11)
+
+	Rearrange the new/improved dyesub section a little bit.
+
+2015-12-21	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.h (1.20) (+1 -0)
+		src/cups/shinko_s6145_print.c (1.2) (+212 -60)
+
+	Sync the S6145 backend with upstream; add initial Brava 21 support.
+
+2015-12-21	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.765) (+1 -1)
+		README (1.245) (+27 -20)
+
+	Minor cleanup
+
+2015-12-21	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.764) (+6 -2)
+		src/xml/printers.xml (1.429) (+2 -1)
+
+	Add support for Kyocera FS-1118MFP
+
+2015-12-21	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.223) (+37 -52)
+
+	Add multicut support to the Sony UP-DR200.  2x6*2, 4x6*2, 3.5x5*2
+
+2015-12-18	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.222) (+3 -1)
+
+	Missed a chunk in the last commit (S6145 6x9 support)
+
+2015-12-18	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.221) (+12 -2)
+
+	Add in a couple of missing print sizes for the CHC-S6145 (6x9 and 6x4*2)
+
+2015-12-17	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.220) (+97 -7)
+
+	add start/endjob hooks into the dyesub driver.  No committed users yet.
+
+2015-11-23	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.23) (+7 -6)
+
+	Fix three bugs in the DNP backend -- missing break causing malfunctions
+	with 8x10 prints on the DS80; Sensor decode bugs in DS620, and a typo in
+	an error message.
+
+2015-11-18	<speachy@sourceforge.net>
+
+	Files:	src/cups/Makefile.am (1.152) (+2 -2)
+		src/cups/backend_common.c (1.48) (+1 -1)
+		src/cups/shinko_s6145_print.c (1.1) (added +2392 -0)
+
+	Add in the first version of the Shinko/Sinfonia CHC-S6145/CS2 backend.
+
+	 *NOTE:  This includes a crude re-implementation of the proprietary
+	         image processing library, sufficient to generate prints of
+	         poor quality.
+
+2015-11-18	<speachy@sourceforge.net>
+
+	Files:	src/main/print-olympus.c (1.219) (+4 -3)
+
+	Correct a couple of bugs with the Shinko S6145.
+
+2015-11-18	<speachy@sourceforge.net>
+
+	Files:	src/cups/backend_common.c (1.47) (+3 -4)
+
+	Fix a memory leak.
+
+2015-10-30	<rlk@sourceforge.net>
+
+	Files:	po/zh_CN.po (1.12) (+5072 -7055)
+
+	Update zh_CN
+
+2015-10-26	<sletter1@sourceforge.net>
+
+	Files:	src/main/print-pcl.c (1.166) (+86 -4)
+
+	Add Darkness, horizontal offset, vertical offset to Datamax-ONeil printers
+
+2015-10-19	<rlk@sourceforge.net>
+
+	Files:	NEWS (1.763) (+1 -0)
+		src/xml/escp2/model/Makefile.am (1.34) (+3 -2)
+		src/xml/escp2/model/model_122.xml (1.1) (added +188 -0)
+		src/xml/printers.xml (1.428) (+2 -1)
+
+	Preliminary support for Epson L1800
+
+2015-10-17	<rlk@sourceforge.net>
+
+	Files:	src/cups/genppd.c (1.205) (+8 -13)
+
+	Summary: Don't offer a Custom option for integer types.
+
+2015-10-14	<speachy@sourceforge.net>
+
+	Files:	src/cups/dnpds40_print.c (1.22) (+3 -2)
+
+	On DNP models, don't check to see if the media is empty; instead go
+	ahead and submit the job and let the printer display an error on its
+	panel so the user can immediately tell something's wrong.
+
+2015-10-10	<rlk@sourceforge.net>
+
+	Files:	po/sk.po (1.91) (+4809 -6999)
+
+	Update Slovak translation
+
+2015-10-08	<rlk@sourceforge.net>
+
+	Files:	po/tr.po (1.8) (+5465 -8208)
+
+	Update Turkish translation
+
+===============================================================================
 Name: gutenprint-5_2_11-pre2
 
 2015-10-06	<rlk@sourceforge.net>
@@ -3156,7 +3454,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	NEWS (1.672) (+1 -1)
 		configure.ac (1.248) (+3 -3)
-		po/vi.po (1.1) (added +17442 -0)
+		po/vi.po (1.1) (added +17489 -0)
 
 	Add Vietnamese translation
 
@@ -3750,7 +4048,7 @@ Name: gutenprint-5_2_10-pre1
 		src/cups/Makefile.am (1.138) (+2 -2)
 		src/cups/backend_common.c (1.14) (+1 -0)
 		src/cups/backend_common.h (1.5) (+3 -0)
-		src/cups/dnpds40_print.c (1.1) (added +1688 -0)
+		src/cups/dnpds40_print.c (1.1) (added +1690 -0)
 
 	backends:  Add a backend for the DNP DS40/DS80 printers.
 
@@ -4155,7 +4453,7 @@ Name: gutenprint-5_2_10-pre1
 		po/sk.po (1.82) (+6874 -5619)
 		po/sl.po (1.6) (+6851 -5581)
 		po/sv.po (1.108) (+6935 -5673)
-		po/tr.po (1.1) (added +18450 -0)
+		po/tr.po (1.1) (added +17766 -0)
 		po/uk.po (1.8) (+7004 -5622)
 		po/zh_CN.po (1.4) (+6348 -5558)
 		po/zh_TW.po (1.38) (+6928 -5655)
@@ -4544,7 +4842,7 @@ Name: gutenprint-5_2_10-pre1
 
 	Files:	src/cups/Makefile.am (1.134) (+10 -29)
 		src/cups/backend_common.c (1.7) (+403 -55)
-		src/cups/backend_common.h (1.1) (added +213 -0)
+		src/cups/backend_common.h (1.1) (added +214 -0)
 		src/cups/kodak1400_print.c (1.16) (+178 -303)
 		src/cups/kodak6800_print.c (1.7) (+381 -291)
 		src/cups/selphy_print.c (1.21) (+260 -435)
@@ -4798,7 +5096,7 @@ Name: gutenprint-5_2_10-pre1
 
 2013-06-30	<speachy@sourceforge.net>
 
-	Files:	src/cups/backend_common.c (1.1) (added +1075 -0)
+	Files:	src/cups/backend_common.c (1.1) (added +1074 -0)
 		src/cups/kodak1400_print.c (1.9) (+39 -174)
 		src/cups/selphy_print.c (1.15) (+300 -193)
 
@@ -5458,7 +5756,7 @@ Name: gutenprint-5_2_10-pre1
 2013-02-17	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.240) (+3 -3)
-		po/ca.po (1.1) (added +17770 -0)
+		po/ca.po (1.1) (added +17818 -0)
 
 	Add Catalan translation
 
@@ -8673,7 +8971,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.535) (+2 -1)
 		configure.ac (1.230) (+3 -3)
-		po/zh_CN.po (1.1) (added +17427 -0)
+		po/zh_CN.po (1.1) (added +17517 -0)
 
 	Add Chinese Mandarin translation
 
@@ -10213,7 +10511,7 @@ Name: gutenprint-5_2_8-pre1
 
 	Files:	NEWS (1.471) (+1 -1)
 		configure.ac (1.229) (+3 -3)
-		po/gl.po (1.1) (added +18689 -0)
+		po/gl.po (1.1) (added +18737 -0)
 
 	Add Galician translation.
 
@@ -11084,7 +11382,7 @@ Name: gutenprint-5_2_7
 
 	Files:	NEWS (1.448) (+4 -0)
 		configure.ac (1.222) (+3 -3)
-		po/sl.po (1.1) (added +18692 -0)
+		po/sl.po (1.1) (added +18740 -0)
 
 	Add Slovenian translation
 
@@ -12370,7 +12668,7 @@ Name: gutenprint-5_2_6
 2010-04-19	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.217) (+3 -3)
-		po/fi.po (1.1) (added +18598 -0)
+		po/fi.po (1.1) (added +18645 -0)
 
 	Add Finnish translation
 
@@ -12708,7 +13006,7 @@ Name: gutenprint-5_2_4
 2009-06-24	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.213) (+3 -3)
-		po/ru.po (1.1) (added +18610 -0)
+		po/ru.po (1.1) (added +18656 -0)
 
 	Add Russian translation
 
@@ -13658,7 +13956,7 @@ Name: gutenprint-5_2_2
 2008-11-11	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.207) (+3 -3)
-		po/it.po (1.1) (added +17792 -0)
+		po/it.po (1.1) (added +17840 -0)
 
 	Add Italian translation
 
@@ -17204,7 +17502,7 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/media/ultrachrome.xml (1.1) (added +918 -0)
 		src/xml/escp2/media/x80.xml (1.1) (added +465 -0)
 		src/xml/escp2/model/.cvsignore (1.1) (added +3 -0)
-		src/xml/escp2/model/Makefile.am (1.1) (added +163 -0)
+		src/xml/escp2/model/Makefile.am (1.1) (added +164 -0)
 		src/xml/escp2/model/model_0.xml (1.1) (added +126 -0)
 		src/xml/escp2/model/model_1.xml (1.1) (added +144 -0)
 		src/xml/escp2/model/model_10.xml (1.1) (added +146 -0)
@@ -17294,7 +17592,7 @@ Name: gutenprint-5_2_0-beta3
 		src/xml/escp2/model/model_87.xml (1.1) (added +193 -0)
 		src/xml/escp2/model/model_9.xml (1.1) (added +145 -0)
 		src/xml/papers.xml (1.1) (added +1864 -0)
-		src/xml/printers.xml (1.1) (added +2953 -0)
+		src/xml/printers.xml (1.1) (added +2955 -0)
 		test/run-testdither (1.13) (+1 -1)
 		test/run-weavetest (1.25) (+1 -1)
 
@@ -23823,7 +24121,7 @@ Name: gutenprint-5_0_0-rc2
 2005-08-10	<rlk@sourceforge.net>
 
 	Files:	configure.ac (1.129) (+3 -3)
-		po/zh_TW.po (1.1) (added +19663 -0)
+		po/zh_TW.po (1.1) (added +19709 -0)
 
 	Add zh_TW support
 
@@ -25689,7 +25987,7 @@ Name: gutenprint-5_0_0-beta3
 		include/gutenprintui2/Makefile.am (1.1) (added +62 -0)
 		include/gutenprintui2/curve.h (1.1) (added +127 -0)
 		include/gutenprintui2/gammacurve.h (1.1) (added +85 -0)
-		include/gutenprintui2/gutenprintui.h (1.1) (added +188 -0)
+		include/gutenprintui2/gutenprintui.h (1.1) (added +189 -0)
 		m4/stp.m4 (1.6) (+3 -3)
 		m4/stp_cups.m4 (1.9) (+1 -1)
 		m4/stp_gimp.m4 (1.9) (+1 -1)
@@ -27436,7 +27734,7 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-05-01	<rlk@sourceforge.net>
 
-	Files:	po/hu.po (1.1) (added +17773 -0)
+	Files:	po/hu.po (1.1) (added +17821 -0)
 
 	file hu.po was initially added on branch gimp-print-4_2_branch.
 
@@ -27644,13 +27942,13 @@ Name: gimp-print-5_0_0-alpha3
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/uk.po (1.1) (added +17725 -0)
+	Files:	po/uk.po (1.1) (added +17773 -0)
 
 	file uk.po was initially added on branch gimp-print-4_2_branch.
 
 2004-04-17	<rlk@sourceforge.net>
 
-	Files:	po/nb.po (1.1) (added +19883 -0)
+	Files:	po/nb.po (1.1) (added +19929 -0)
 
 	file nb.po was initially added on branch gimp-print-4_2_branch.
 
@@ -32682,7 +32980,7 @@ Name: gimp-print-4_3_15
 
 2003-05-21	<m0m@sourceforge.net>
 
-	Files:	src/main/print-olympus.c (1.1) (added +6477 -0)
+	Files:	src/main/print-olympus.c (1.1) (added +6499 -0)
 
 	file print-olympus.c was initially added on branch olympus-driver-branch.
 
@@ -33027,7 +33325,7 @@ Name: gimp-print-4_3_14
 
 2003-05-04	<rlk@sourceforge.net>
 
-	Files:	po/cs.po (1.1) (added +20147 -0)
+	Files:	po/cs.po (1.1) (added +20192 -0)
 
 	file cs.po was initially added on branch gimp-print-4_2_branch.
 
@@ -37990,7 +38288,7 @@ Name: gimp-print-4_3_6
 
 2002-10-07	<rlk@sourceforge.net>
 
-	Files:	po/ja.po (1.1) (added +19817 -0)
+	Files:	po/ja.po (1.1) (added +19865 -0)
 
 	file ja.po was initially added on branch gimp-print-4_2_branch.
 
@@ -39116,7 +39414,7 @@ Name: gimp-print-4_3_1
 
 2002-06-01	<rlk@sourceforge.net>
 
-	Files:	po/de.po (1.1) (added +18426 -0)
+	Files:	po/de.po (1.1) (added +18474 -0)
 
 	file de.po was initially added on branch gimp-print-4_2_branch.
 
@@ -39205,7 +39503,7 @@ Name: gimp-print-4_3_1
 
 2002-05-11	<rlk@sourceforge.net>
 
-	Files:	po/pt.po (1.1) (added +20258 -0)
+	Files:	po/pt.po (1.1) (added +20304 -0)
 
 	file pt.po was initially added on branch gimp-print-4_2_branch.
 
@@ -39302,7 +39600,7 @@ Name: gimp-print-4_3_1
 
 2002-04-28	<rlk@sourceforge.net>
 
-	Files:	po/es.po (1.1) (added +20300 -0)
+	Files:	po/es.po (1.1) (added +20346 -0)
 
 	Spanish translation
 
@@ -40202,7 +40500,7 @@ Name: gimp-print-4_3_0
 
 2002-03-16	<rlk@sourceforge.net>
 
-	Files:	po/nl.po (1.1) (added +17790 -0)
+	Files:	po/nl.po (1.1) (added +17838 -0)
 
 	file nl.po was initially added on branch gimp-print-4_2_branch.
 
@@ -40435,7 +40733,7 @@ Name: gimp-print-4_3_0
 
 2002-02-16	<rlk@sourceforge.net>
 
-	Files:	po/el.po (1.1) (added +19874 -0)
+	Files:	po/el.po (1.1) (added +19921 -0)
 
 	file el.po was initially added on branch gimp-print-4_2_branch.
 
@@ -40535,7 +40833,7 @@ Name: gimp-print-4_3_0
 
 2002-02-14	<rlk@sourceforge.net>
 
-	Files:	po/sk.po (1.1) (added +18850 -0)
+	Files:	po/sk.po (1.1) (added +18781 -0)
 
 	file sk.po was initially added on branch gimp-print-4_2_branch.
 
@@ -41628,7 +41926,7 @@ Name: gimp-print-4_1_99-rc1
 2001-11-08	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.94) (+2 -2)
-		po/pl.po (1.1) (added +19479 -0)
+		po/pl.po (1.1) (added +19525 -0)
 
 	Add Polish translation
 
@@ -42178,7 +42476,7 @@ Name: gimp-print-4_1_99-b4
 2001-10-21	<rlk@sourceforge.net>
 
 	Files:	configure.in.in (1.87) (+2 -2)
-		po/da.po (1.1) (added +17774 -0)
+		po/da.po (1.1) (added +17822 -0)
 		po/en_GB.po (1.65) (+2 -2)
 		po/fr.po (1.8) (+1 -1)
 		po/no.po (1.8) (+1 -1)
@@ -42477,7 +42775,7 @@ Name: gimp-print-4_1_99-b4
 
 	Files:	configure.in.in (1.84) (+3 -3)
 		po/en_GB.po (1.57) (+335 -348)
-		po/fr.po (1.1) (added +17766 -0)
+		po/fr.po (1.1) (added +17814 -0)
 		po/no.po (1.1) (added)
 		po/sv.po (1.10) (+161 -554)
 		src/cups/Makefile.am (1.37) (+2 -2)
@@ -43178,7 +43476,7 @@ Name: gimp-print-4_1_99-b3
 
 	Files:	NEWS.4.2 (1.5) (+33 -24)
 		configure.in.in (1.76) (+2 -2)
-		po/sv.po (1.1) (added +20569 -0)
+		po/sv.po (1.1) (added +20616 -0)
 		src/foomatic/foomatic-printermap (1.13) (+1 -0)
 		src/ghost/gdevstp.c (1.13) (+70 -33)
 		src/main/print-escp2.c (1.121) (+168 -6)
@@ -48270,7 +48568,7 @@ Name: gimp-print-4_1_4
 2001-02-08	<rleigh@sourceforge.net>
 
 	Files:	configure.in.in (1.5) (+2 -2)
-		po/en_GB.po (1.1) (added +19265 -0)
+		po/en_GB.po (1.1) (added +19313 -0)
 		po/en_TEST.po (1.1) (added)
 
 	Add en_GB and en_TEST translations
@@ -49025,7 +49323,7 @@ Name: print-4_1_3
 		src/cups/commandtocanon.c (1.1) (added +197 -0)
 		src/cups/commandtoepson.c (1.1) (added +234 -0)
 		src/cups/epson.c (1.1) (added)
-		src/cups/genppd.c (1.1) (added +2751 -0)
+		src/cups/genppd.c (1.1) (added +2746 -0)
 		src/cups/rastertoprinter.c (1.1) (added +1714 -0)
 
 	Moved cups/* under src/cups
@@ -49125,7 +49423,7 @@ Name: print-4_1_3
 		src/main/print-dither.c (1.1) (added)
 		src/main/print-escp2.c (1.1) (added +4615 -0)
 		src/main/print-lexmark.c (1.1) (added +3037 -0)
-		src/main/print-pcl.c (1.1) (added +3357 -0)
+		src/main/print-pcl.c (1.1) (added +3439 -0)
 		src/main/print-ps.c (1.1) (added +1380 -0)
 		src/main/print-util.c (1.1) (added +669 -0)
 		src/main/print-weave.c (1.1) (added +2007 -0)
@@ -57230,12 +57528,12 @@ Name: print-3_1_6
 
 	Files:	AUTHORS (1.1) (added +134 -0)
 		COPYING (1.1) (added +340 -0)
-		ChangeLog (1.1) (added +58284 -0)
+		ChangeLog (1.1) (added +58576 -0)
 		INSTALL (1.1) (added +370 -0)
 		Makefile (1.12) (+196 -240)
 		Makefile.am (1.3) (+11 -5)
 		Makefile.in (1.2) (+174 -189)
-		NEWS (1.1) (added +4027 -0)
+		NEWS (1.1) (added +4070 -0)
 
 	These files are required documentation files for applications using
 	autoconf for configuration.  The current versions of these files
@@ -57866,7 +58164,7 @@ Name: print-3_1_6
 
 1999-11-14	<rlk@sourceforge.net>
 
-	Files:	README (1.1) (added +1013 -0)
+	Files:	README (1.1) (added +1020 -0)
 		print-escp2.c (1.26) (+32 -12)
 		print-util.c (1.28) (+59 -41)
 		print.c (1.23) (+5 -2)

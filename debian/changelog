@@ -1,3 +1,11 @@
+gutenprint (5.2.11-1) unstable; urgency=medium
+
+  * New 5.2.11 upstream release
+  * Update uversionmangle in debian/watch to take -pre* account numbers
+  * Bump Standards-Version to 3.9.7 without changes needed
+
+ -- Didier Raboud <odyx@debian.org>  Tue, 16 Feb 2016 15:18:51 +0100
+
 gutenprint (5.2.11~pre2-1) experimental; urgency=medium
 
   * New 5.2.11~pre2 upstream release

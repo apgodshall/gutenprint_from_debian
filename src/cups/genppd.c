@@ -1,5 +1,5 @@
 /*
- * "$Id: genppd.c,v 1.204 2015/09/13 14:37:16 speachy Exp $"
+ * "$Id: genppd.c,v 1.205 2015/10/17 16:27:18 rlk Exp $"
  *
  *   PPD file generation program for the CUPS drivers.
  *
@@ -1714,6 +1714,8 @@ print_one_option(gpFile fp, stp_vars_t *v, const stp_string_list_t *po,
       print_close_ui = 0;
       gpprintf(fp, "*CloseUI: *Stp%s\n\n", desc->name);
 
+#if 0
+      /* This needs to be enabled if/when dimensions become floating point */
       /*
        * Add custom option code and value parameter...
        */
@@ -1722,6 +1724,7 @@ print_one_option(gpFile fp, stp_vars_t *v, const stp_string_list_t *po,
       gpprintf(fp, "*ParamCustomStp%s Value/%s: 1 points %d %d\n\n",
 	       desc->name, _("Value"), desc->bounds.dimension.lower,
 	       desc->bounds.dimension.upper);
+#endif
 
       break;
     case STP_PARAMETER_TYPE_INT:
@@ -1754,15 +1757,6 @@ print_one_option(gpFile fp, stp_vars_t *v, const stp_string_list_t *po,
 
       print_close_ui = 0;
       gpprintf(fp, "*CloseUI: *Stp%s\n\n", desc->name);
-
-      /*
-       * Add custom option code and value parameter...
-       */
-
-      gpprintf(fp, "*CustomStp%s True: \"pop\"\n", desc->name);
-      gpprintf(fp, "*ParamCustomStp%s Value/%s: 1 int %d %d\n\n", desc->name,
-	       _("Value"), desc->bounds.dimension.lower,
-	       desc->bounds.dimension.upper);
 
       break;
     default:
@@ -1855,8 +1849,11 @@ print_one_localization(gpFile fp, const stp_string_list_t *po,
 	  gpprintf(fp, "*%s.Stp%s %d/%s: \"\"\n", lang,
 		   desc->name, i, dimstr);
 	}
+#if 0
+      /* This needs to be enabled if/when dimensions are floating point */
       gpprintf(fp, "*%s.ParamCustomStp%s Value/%s: \"\"\n", lang,
 	       desc->name, _("Value"));
+#endif
       break;
 
     case STP_PARAMETER_TYPE_INT:
@@ -1871,8 +1868,6 @@ print_one_localization(gpFile fp, const stp_string_list_t *po,
 	      gpprintf(fp, "*%s.Stp%s %d/%d: \"\"\n", lang, desc->name, i, i);
 	    }
 	}
-      gpprintf(fp, "*%s.ParamCustomStp%s Value/%s: \"\"\n", lang,
-	       desc->name, _("Value"));
       break;
 
     default:
@@ -2747,5 +2742,5 @@ write_ppd(
 
 
 /*
- * End of "$Id: genppd.c,v 1.204 2015/09/13 14:37:16 speachy Exp $".
+ * End of "$Id: genppd.c,v 1.205 2015/10/17 16:27:18 rlk Exp $".
  */

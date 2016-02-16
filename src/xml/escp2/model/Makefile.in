@@ -498,7 +498,8 @@ pkgxmldata_DATA = \
 	model_118.xml				\
 	model_119.xml				\
 	model_120.xml				\
-	model_121.xml
+	model_121.xml				\
+	model_122.xml
 
 CLEANFILES = xmli18n-tmp.h xml-stamp xml-stamp.tmp
 EXTRA_DIST = $(pkgxmldata_DATA)
